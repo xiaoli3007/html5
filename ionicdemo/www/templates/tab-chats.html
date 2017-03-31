@@ -1,0 +1,44 @@
+
+<style>
+    /* 栅格grid */
+    .col-33{display:flex;justify-content:center;align-items: center;}
+</style>
+
+<ion-header-bar align-title="center" class="bar-dark">
+
+    <div class="h1 title" >相册</div>
+
+</ion-header-bar>
+
+
+<ion-view view-title="Chats">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
+
+
+<!--
+<div class="row">
+          <div class="col"   ng-repeat="chatimage in chat.item_result" ><img ng-src="http://192.168.1.100:8001{{chatimage}}" style="width: 100%;"></div>
+
+      </div>
+-->
+
+
+          <div class="row row-wrap">
+              <div class="col col-33" ng-repeat="chatimage in chat.item_result">
+                  <img ng-src="http://192.168.1.100:8001{{chatimage}}" style="width: 100%;">
+              </div>
+          </div>
+
+
+
+      </ion-item>
+    </ion-list>
+
+      <ion-infinite-scroll   on-infinite="load_more();" icon="ion-load-a" distance="1%" immediate-check="true">
+      </ion-infinite-scroll>
+
+
+  </ion-content>
+</ion-view>
