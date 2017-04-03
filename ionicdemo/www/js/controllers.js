@@ -1,7 +1,15 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope,$ionicTabsDelegate) {
 
+
+  $scope.$on('$ionicView.enter', function() {
+    //关闭tab选项卡
+    console.log('进来之前');
+    $ionicTabsDelegate.showBar(true);
+  });
+
+  console.log('1111');
   $scope.images = [];
   for (var i = 0; i < 5; i++) {
     $scope.images.push('http://192.168.1.100:8001/media/photo/lisi/774/8c824c103c5d0dadfac52b976251c225.jpg');
