@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Ionic Image Loader
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <p padding>
+    Welcome to this demo application. Pick one of the options below to see different use cases of ionic-image-loader:
+  </p>
+  <ion-list>
+    <button ion-item (click)="openPage(cards)">
+      Cards
+    </button>
+    <button ion-item (click)="openPage(avatars)">
+      Avatars
+    </button>
+    <button ion-item (click)="openPage(slider)">
+      Sliders
+    </button>
+    <button ion-item (click)="openPage(concurrency)">
+      Concurrency test
+    </button>
+    <button ion-item (click)="openPage(virtualSroll)">
+      Virtual Scroll
+    </button>
+  </ion-list>
+
+  <div padding>
+    <button ion-button large block outline (click)="clearCache()">Clear Cache</button>
+  </div>
+
+</ion-content>
