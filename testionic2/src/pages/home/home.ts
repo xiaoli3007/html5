@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController , NavParams , Events} from 'ionic-angular';
 import {IonicService} from "../../services/IonicService";
 import {ConfigService} from "../../services/ConfigService";
-import { ItemDetailsPage } from '../item-details/item-details';
+import { ItemDetailsPage } from './item-details/item-details';
 
 @Component({
   selector: 'page-home',

@@ -1,10 +1,10 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { CoursePage } from '../pages/course/course';
+import { ListPage } from '../pages/course/list/list';
+import { MyPage } from '../pages/my/my';
 import { HomePage } from '../pages/home/home';
-import { ItemDetailsPage } from '../pages/home/item-details/item-details';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -13,25 +13,22 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    CoursePage,
+    ListPage,
+    MyPage,
     HomePage,
-    ItemDetailsPage,
     TabsPage
   ],
   imports: [
-    //IonicModule.forRoot(MyApp)
-    IonicModule.forRoot(MyApp,{
-      tabsHideOnSubPages: 'true'         //隐藏全部子页面tabs
-    })
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    CoursePage,
+    ListPage,
+    MyPage,
     HomePage,
-    ItemDetailsPage,
     TabsPage
   ],
   providers: [

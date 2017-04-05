@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      个人中心
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="more">
+
+  <ion-item>
+    <ion-avatar item-left>
+      <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
+    </ion-avatar>
+    <h2> 个人信息</h2>
+    <ion-badge name="ios-share-outline" item-right></ion-badge>
+  </ion-item>
+
+
+
+
+  <ion-list>
+
+
+
+    <button ion-item (click)="openBookmarksPage()">
+      <h2>我的收藏</h2>
+      <ion-icon name="ios-bookmark-outline" item-left></ion-icon>
+      <ion-badge item-right></ion-badge>
+    </button>
+
+  </ion-list>
+
+  <ion-list>
+    <button ion-item (click)="openAboutUsPage()">
+      <ion-icon name="ios-information-circle-outline" item-left></ion-icon>
+      <h2>关于</h2>
+    </button>
+
+    <button ion-item (click)="shareIt()">
+      <ion-icon name="ios-share-outline" item-left></ion-icon>
+      <h2>分享给好友</h2>
+    </button>
+
+    <button ion-item (click)="openUrl('https://jinshuju.net/f/aZ4CAS')">
+      <h2>反馈</h2>
+      <ion-icon name="ios-paper-plane-outline" item-left></ion-icon>
+    </button>
+  </ion-list>
+
+
+
+</ion-content>
+
