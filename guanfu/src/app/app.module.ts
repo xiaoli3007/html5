@@ -3,7 +3,12 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { CoursePage } from '../pages/course/course';
 import { ListPage } from '../pages/course/list/list';
+
 import { MyPage } from '../pages/my/my';
+
+import { LoginPage } from '../pages/my/login/login';
+
+import { RegPage } from '../pages/my/reg/reg';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -16,11 +21,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CoursePage,
     ListPage,
     MyPage,
+    LoginPage,
+    RegPage,
     HomePage,
     TabsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      tabbarPlacement: "bottom",
+      backButtonText: "后退",
+      tabsHideOnSubPages: true,
+      tabsHighlight: true
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -28,6 +40,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CoursePage,
     ListPage,
     MyPage,
+    LoginPage,
+    RegPage,
     HomePage,
     TabsPage
   ],

@@ -15,12 +15,7 @@
     <h2> 个人信息</h2>
     <ion-badge name="ios-share-outline" item-right></ion-badge>
   </ion-item>
-
-
-
-
   <ion-list>
-
 
 
     <button ion-item (click)="openBookmarksPage()">
@@ -29,7 +24,14 @@
       <ion-badge item-right></ion-badge>
     </button>
 
+    <button ion-item (click)="openBookmarksPage()">
+      <h2>我的点播</h2>
+      <ion-icon name="ios-easel-outline" item-left></ion-icon>
+      <ion-badge item-right></ion-badge>
+    </button>
+
   </ion-list>
+
 
   <ion-list>
     <button ion-item (click)="openAboutUsPage()">
@@ -48,6 +50,15 @@
     </button>
   </ion-list>
 
+
+  <ion-list>
+    <button ion-item (click)="openLoginPage()">
+      登录
+    </button>
+    <button ion-item (click)="openRegPage()">
+      注册
+    </button>
+  </ion-list>
 
 
 </ion-content>

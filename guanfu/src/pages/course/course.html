@@ -9,19 +9,21 @@
 <ion-content>
 
 
-
-  <ion-list>
-    <ion-item>
-      <ion-note item-left>
-        Left Note
-      </ion-note>
-      My Item
-      <ion-note item-right>
-        Right Note
-      </ion-note>
-    </ion-item>
-  </ion-list>
+  <ion-item>
+    <ion-label color="primary" stacked>关键词</ion-label>
+    <ion-input type="text" #keyword placeholder="请输入"></ion-input>
+  </ion-item>
 
 
+  <ion-item>
+    <ion-label>栏目选择</ion-label>
+    <ion-select [(ngModel)]="catid">
+      <ion-option value="f" selected="true">Female</ion-option>
+      <ion-option value="m">Male</ion-option>
+    </ion-select>
+  </ion-item>
+
+
+  <button ion-button round full class="search_button" (click)="search(keyword.value,catid)">检索</button>
 
 </ion-content>
