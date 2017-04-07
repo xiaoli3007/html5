@@ -1,16 +1,12 @@
 import { Component , Inject} from '@angular/core';
-
-import { NavController,NavParams , LoadingController,AlertController} from 'ionic-angular';
-
+import { App, NavController,NavParams , LoadingController,AlertController, ViewController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-
 import { emailValidator, nicknameValidator } from '../../../providers/validator';
 import { IonicService } from '../../../services/IonicService';
 import {ConfigService} from "../../../services/ConfigService";
 import {Common} from "../../../utils/common";
-
 import {MyPage} from "../my";
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-login',
@@ -29,7 +25,7 @@ export class LoginPage {
     act: 'userverify',
   };
 
-  constructor(private alertCtrl: AlertController,private loadingCtrl: LoadingController, private ionicService:IonicService,public navCtrl: NavController, public navParams: NavParams,@Inject(FormBuilder) fb: FormBuilder, public common: Common) {
+  constructor( public storage:Storage,public appCtrl: App ,private viewCtrl:ViewController, private alertCtrl: AlertController,private loadingCtrl: LoadingController, private ionicService:IonicService,public navCtrl: NavController, public navParams: NavParams,@Inject(FormBuilder) fb: FormBuilder, public common: Common) {
 
     this.form = fb.group({
       username: ['',[Validators.required, Validators.minLength(4)]],
@@ -44,13 +40,13 @@ export class LoginPage {
     loading.present();
       this.params.user = this.form.value.username
       this.params.pwd = this.form.value.password
-    console.log(this.params);
 
-    this.ionicService.user_login(this.params).subscribe(
+
+    this.ionicService.getServerData(this.params).subscribe(
         data => {
           this.user_info = data['userinfo'];
           var result = data['result'];
-          console.log(this.user_info);
+          //console.log(this.user_info);
           loading.dismiss();
 
           if(result=='success'){
@@ -63,14 +59,30 @@ export class LoginPage {
                 {
                   text: 'OK',
                   handler: () => {
-                    this.navCtrl.push(MyPage,{});
+                    //this.navCtrl.push(MyPage,{});
+
+                    //this.navCtrl.push(MyPage).then(()=> {
+                    //  let index = this.viewCtrl.index;
+                    //  this.navCtrl.remove(index);
+                    //});
+                    this.storage.set('storage_user_info', this.user_info);
+
+                    this.viewCtrl.dismiss({
+                        item: this.user_info
+                      },{},MyPage);
+                    //this.appCtrl.getRootNav().push(MyPage,{
+                    //  item: this.user_info
+                    //});
+
+
                   }
+
                 }
               ]
             });
             alert.present();
 
-
+            //this.navCtrl.present(alert);
 
           }else{
 

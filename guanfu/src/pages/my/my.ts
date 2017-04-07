@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-
-import { NavController } from 'ionic-angular';
-
-
+import { NavController ,NavParams } from 'ionic-angular';
 import { LoginPage } from './login/login';
 import { RegPage } from './reg/reg';
-
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-contact',
@@ -13,7 +10,20 @@ import { RegPage } from './reg/reg';
 })
 export class MyPage {
 
-  constructor(public navCtrl: NavController) {
+  selectedItem: any;
+
+  constructor( public storage:Storage,public navCtrl: NavController, public navParams: NavParams) {
+
+
+    this.selectedItem = navParams.get('item');
+
+    console.log(this.selectedItem);
+
+
+    this.storage.get("storage_user_info").then((value) => {
+      console.log(value);
+    })
+
 
   }
 
@@ -31,5 +41,9 @@ export class MyPage {
     });
   }
 
+
+  logout() {
+    this.storage.remove("storage_user_info");
+  }
 
 }

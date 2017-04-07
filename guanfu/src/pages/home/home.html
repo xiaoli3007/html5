@@ -11,120 +11,32 @@
   <ion-row >
     <ion-col>
       <ion-slides [pager]="true">
-        <ion-slide>
-          <img src="https://static.pexels.com/photos/90807/pexels-photo-90807-large.jpeg" style="width: 100%;">
+        <ion-slide  *ngFor="let slideitem of slideimages">
+          <img src="{{slideitem.picurl}}" >
         </ion-slide>
-        <ion-slide>
-          <img src="https://static.pexels.com/photos/36990/pexels-photo-large.jpg" style="width: 100%;">
-        </ion-slide>
-        <ion-slide>
-          <img src="https://static.pexels.com/photos/7114/laptop-mobile-large.jpg" style="width: 100%;">
-        </ion-slide>
-        <ion-slide>
-          <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg" style="width: 100%;">
-        </ion-slide>
+
       </ion-slides>
     </ion-col>
 
   </ion-row>
 
-  <ion-row  class="image-row">
-
-
+  <ion-row  class="image-row"  *ngFor="let categoryitem of category">
   <ion-item-divider light class="sub-title">
-
-    <h1  item-left>Item Divider</h1>
-    <button ion-button item-right>更多</button>
-
+    <h1  item-left>{{categoryitem.name}}</h1>
+    <button ion-button item-right (click)="openList(categoryitem.catid)">更多</button>
   </ion-item-divider>
 
-  <ion-col col-4 class="online-read">
-    <ion-card (click)="openEbook()">
+  <ion-col col-4 class="online-read"   *ngFor="let showitem of categoryitem.result">
+    <ion-card (click)="openShow(showitem.catid,showitem.id)">
       <button ion-item>
-        <img src="https://static.pexels.com/photos/7114/laptop-mobile-large.jpg"/>
-        <div class="card-title card-title-above">《Growth：全栈增长工程师实战》</div>
+        <img src="{{showitem.thumb}}"/>
+        <div class="card-title card-title-above">{{showitem.title}}</div>
       </button>
     </ion-card>
   </ion-col>
 
-  <ion-col col-4 class="online-read">
-    <ion-card (click)="openEbook()">
-      <button ion-item>
-        <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg"/>
-        <div class="card-title card-title-above">《Ideabook：练手项目集》</div>
-      </button>
-    </ion-card>
-  </ion-col>
-
-    <ion-col col-4 class="online-read">
-      <ion-card (click)="openEbook()">
-        <button ion-item>
-          <img src="https://static.pexels.com/photos/7114/laptop-mobile-large.jpg"/>
-          <div class="card-title card-title-above">《Growth：全栈增长工程师实战》</div>
-        </button>
-      </ion-card>
-    </ion-col>
-
-    <ion-col col-4 class="online-read">
-      <ion-card (click)="openEbook()">
-        <button ion-item>
-          <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg"/>
-          <div class="card-title card-title-above">《Ideabook：练手项目集》</div>
-        </button>
-      </ion-card>
-    </ion-col>
-
   </ion-row>
 
-
-
-  <ion-row  class="image-row">
-
-
-    <ion-item-divider light class="sub-title">
-
-      <h1  item-left>Item Divider</h1>
-      <button ion-button item-right>更多</button>
-
-    </ion-item-divider>
-
-    <ion-col col-4 class="online-read">
-      <ion-card (click)="openEbook()">
-        <button ion-item>
-          <img src="https://static.pexels.com/photos/7114/laptop-mobile-large.jpg"/>
-          <div class="card-title card-title-above">《Growth：全栈增长工程师实战》</div>
-        </button>
-      </ion-card>
-    </ion-col>
-
-    <ion-col col-4 class="online-read">
-      <ion-card (click)="openEbook()">
-        <button ion-item>
-          <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg"/>
-          <div class="card-title card-title-above">《Ideabook：练手项目集》</div>
-        </button>
-      </ion-card>
-    </ion-col>
-
-    <ion-col col-4 class="online-read">
-      <ion-card (click)="openEbook()">
-        <button ion-item>
-          <img src="https://static.pexels.com/photos/7114/laptop-mobile-large.jpg"/>
-          <div class="card-title card-title-above">《Growth：全栈增长工程师实战》</div>
-        </button>
-      </ion-card>
-    </ion-col>
-
-    <ion-col col-4 class="online-read">
-      <ion-card (click)="openEbook()">
-        <button ion-item>
-          <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg"/>
-          <div class="card-title card-title-above">《Ideabook：练手项目集》</div>
-        </button>
-      </ion-card>
-    </ion-col>
-
-  </ion-row>
 
 
 

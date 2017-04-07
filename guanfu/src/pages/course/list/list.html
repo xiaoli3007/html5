@@ -8,56 +8,34 @@
 
 <ion-content>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="正在加载...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
   <ion-list>
-    <ion-item>
+
+    <ion-item *ngFor="let item of listinfos" (click)="itemTapped($event, item)">
       <ion-thumbnail item-left>
-        <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
+        <img src="{{item.thumb}}">
       </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-right>View</button>
+      <h2>{{item.title}}</h2>
+      <p>{{item.description}}</p>
+      <button ion-button clear item-right>查看</button>
     </ion-item>
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
-      </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-right>View</button>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
-      </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-right>View</button>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
-      </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-right>View</button>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
-      </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-right>View</button>
-    </ion-item>
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
-      </ion-thumbnail>
-      <h2>My Neighbor Totoro</h2>
-      <p>Hayao Miyazaki • 1988</p>
-      <button ion-button clear item-right>View</button>
-    </ion-item>
+
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                 loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 
 
 </ion-content>

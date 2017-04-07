@@ -18,8 +18,7 @@
   <ion-item>
     <ion-label>栏目选择</ion-label>
     <ion-select [(ngModel)]="catid">
-      <ion-option value="f" selected="true">Female</ion-option>
-      <ion-option value="m">Male</ion-option>
+      <ion-option  *ngFor="let item of category" value="{{item.catid}}"> {{item.name}} </ion-option>
     </ion-select>
   </ion-item>
 

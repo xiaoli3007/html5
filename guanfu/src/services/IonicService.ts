@@ -12,48 +12,21 @@ export class IonicService {
 
   }
 
-  // 登录验证
-  user_login(data) {
-    //let url = this.configService.getHost() +"?act=userverify&user="+username+"&pwd="+passwd+"";
-    let url = this.configService.getHost() +helper.toQueryString(data);
-    return this.http.get(url).map(
-        res=>res.json()
-    ).catch(this.handleError);
-  }
-
 
   // 获取主题
-  getTopics(data) {
+  getServerData(data) {
     //let url = this.configService.getHost() +"/applist/?page="+page+"&callback=JSON_CALLBACK";
-    let url = this.configService.getHost() +"/applist/";
+    let url = this.configService.getHost();
     return this.http.get(url + helper.toQueryString(data)).map(
         res=>res.json()
     ).catch(this.handleError);
   }
 
-  // 通过ID获取主题详情
-  getTopicById(id) {
-    let url = this.configService.getHost() +"/app_photo_show/?id="+id+"&callback=JSON_CALLBACK";
-    return this.http.get(url).map(
-        res=>res.json()
-    ).catch(this.handleError);
-  }
 
   // 新增主题
-  postTopic(data) {
+  postServerData(data) {
     let url = this.configService.getHost() + "/api/v1/topics";
     let body = helper.toBodyString(data);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post(url,body,{headers: headers}).map(
-        res=>res.json()
-    ).catch(this.handleError);
-  }
-
-  // 为评论点赞
-  postReplieUps(reply_id, accesstoken) {
-    let url = this.configService.getHost() + "/api/v1/reply/" + reply_id + "/ups";
-    let body = 'accesstoken=' + accesstoken;
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     return this.http.post(url,body,{headers: headers}).map(
