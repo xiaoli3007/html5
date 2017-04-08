@@ -40,9 +40,14 @@ export class ListPage {
 
   }
 
-  itemTapped(event, item) {
+  openShow(catid, id) {
+
+    var params = {
+      id: id,
+      catid: catid,
+    };
     this.navCtrl.push(ShowPage, {
-      item: item
+      item: params
     });
   }
 
@@ -91,6 +96,8 @@ export class ListPage {
           buttons: ['OK']
         });
         alert.present();
+
+        infiniteScroll.enabled(false);
       }
 
       infiniteScroll.complete();

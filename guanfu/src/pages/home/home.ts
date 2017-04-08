@@ -5,6 +5,10 @@ import { App, NavController,NavParams , LoadingController,AlertController, ViewC
 import { IonicService } from '../../services/IonicService';
 import {ConfigService} from "../../services/ConfigService";
 import {Common} from "../../utils/common";
+
+import { ListPage } from '../course/list/list';
+import { ShowPage } from '../course/show/show';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -20,6 +24,12 @@ export class HomePage {
   //homeinfos=[];
   slideimages=[];
   category=[];
+    //检索参数
+    private searchparams = {
+        keyword: '',
+        catid: 0,
+    };
+
   constructor(public navCtrl: NavController,  private alertCtrl: AlertController,private loadingCtrl: LoadingController, private ionicService:IonicService, public navParams: NavParams, public common: Common) {
 
   }
@@ -44,6 +54,25 @@ export class HomePage {
     );
 
   }
+
+
+    openList(catid) {
+        this.searchparams.catid = catid;
+        this.navCtrl.push(ListPage,{
+            search_files:  this.searchparams
+        });
+    }
+
+    openShow(catid, id) {
+
+        var params = {
+            id: id,
+            catid: catid,
+        };
+        this.navCtrl.push(ShowPage, {
+            item: params
+        });
+    }
 
 
 }
