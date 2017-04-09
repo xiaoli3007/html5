@@ -9,11 +9,15 @@
 <ion-content text-center>
 
 
-  <ion-list class="login-forms">
+  <ion-img class="login-logo" [width]="imgWidth" [height]="imgHeight" src="../../../assets/images/logo.png">
+
+  </ion-img>
+
+  <ion-list class="login-logo">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <ion-item>
           <ion-label color="primary">用户名</ion-label>
-          <ion-input formControlName="username" placeholder="xxx"></ion-input>
+          <ion-input formControlName="username" placeholder="请输入"></ion-input>
 
 
 
@@ -26,7 +30,7 @@
 
         <ion-item>
           <ion-label color="primary">密码</ion-label>
-          <ion-input type="password" formControlName="password"  placeholder="xxx"></ion-input>
+          <ion-input type="password" formControlName="password"  placeholder="请输入"></ion-input>
         </ion-item>
 
       <ion-item *ngIf="!form.controls.password.valid && form.controls.password.touched">

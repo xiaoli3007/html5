@@ -67,23 +67,19 @@ export class LoginPage {
                     //});
                     this.storage.set('storage_user_info', this.user_info);
 
-                    this.viewCtrl.dismiss({
-                        item: this.user_info
-                      },{},MyPage);
-                    //this.appCtrl.getRootNav().push(MyPage,{
-                    //  item: this.user_info
-                    //});
-
-
+                    //this.viewCtrl.dismiss({
+                    //    item: this.user_info
+                    //  },{},MyPage);
+                    this.navCtrl.setRoot(MyPage,{
+                      item: this.user_info
+                    });
                   }
 
                 }
               ]
             });
             alert.present();
-
             //this.navCtrl.present(alert);
-
           }else{
 
             let alert = this.alertCtrl.create({

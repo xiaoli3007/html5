@@ -49,8 +49,11 @@ export class ShowPage {
 
             this.showinfos = data;
             this.videolist = data['serial'];
-            this.default_video = this.videolist[0]['url']['play']
-            console.log(this.default_video);
+            if(this.videolist != null){
+              this.default_video = encodeURI(this.videolist[0]['url']['play']);
+            }
+
+            console.log(data);
 
           }else{
             let alert = this.alertCtrl.create({
@@ -68,6 +71,8 @@ export class ShowPage {
   }
 
   openthisvideo(url){
+
+    this.default_video = url;
     console.log(url);
   }
 

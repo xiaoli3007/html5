@@ -6,6 +6,13 @@ import { ListPage } from '../pages/course/list/list';
 import { ShowPage } from '../pages/course/show/show';
 import { MyPage } from '../pages/my/my';
 import { LoginPage } from '../pages/my/login/login';
+
+import { UsercenterPage } from '../pages/my/usercenter/usercenter';
+import { AboutUsPage } from '../pages/my/aboutus/about-us';
+import { FavoritePage } from '../pages/my/favorite/favorite';
+import { FeedbackPage } from '../pages/my/feedback/feedback';
+import { FrequencyPage} from '../pages/my/frequency/frequency';
+
 import { RegPage } from '../pages/my/reg/reg';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -22,6 +29,11 @@ import { IonicStorageModule } from '@ionic/storage';
     MyPage,
     LoginPage,
     RegPage,
+    UsercenterPage,
+    AboutUsPage,
+    FavoritePage,
+    FeedbackPage,
+    FrequencyPage,
     HomePage,
     TabsPage
   ],
@@ -43,6 +55,11 @@ import { IonicStorageModule } from '@ionic/storage';
     MyPage,
     LoginPage,
     RegPage,
+    UsercenterPage,
+    AboutUsPage,
+    FavoritePage,
+    FeedbackPage,
+    FrequencyPage,
     HomePage,
     TabsPage
   ],

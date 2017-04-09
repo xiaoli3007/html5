@@ -8,23 +8,23 @@
 
 <ion-content class="more">
 
-  <ion-item>
+  <ion-item (click)="openUsercenterPage()">
     <ion-avatar item-left>
-      <img src="https://static.pexels.com/photos/7059/man-people-space-desk-large.jpg">
+      <img src="{{user_info.photo}}">
     </ion-avatar>
-    <h2> 个人信息</h2>
+    <h2> {{user_info.username}}</h2>
     <ion-badge name="ios-share-outline" item-right></ion-badge>
   </ion-item>
+
+
   <ion-list>
-
-
-    <button ion-item (click)="openBookmarksPage()">
+    <button ion-item (click)="openFavoritePage()">
       <h2>我的收藏</h2>
-      <ion-icon name="ios-bookmark-outline" item-left></ion-icon>
+      <ion-icon name="ios-star-outline" item-left></ion-icon>
       <ion-badge item-right></ion-badge>
     </button>
 
-    <button ion-item (click)="openBookmarksPage()">
+    <button ion-item (click)="openFrequencyPage()">
       <h2>我的点播</h2>
       <ion-icon name="ios-easel-outline" item-left></ion-icon>
       <ion-badge item-right></ion-badge>
@@ -44,7 +44,7 @@
       <h2>分享给好友</h2>
     </button>
 
-    <button ion-item (click)="openUrl('https://jinshuju.net/f/aZ4CAS')">
+    <button ion-item (click)="openFeedbackPage()">
       <h2>反馈</h2>
       <ion-icon name="ios-paper-plane-outline" item-left></ion-icon>
     </button>
@@ -53,19 +53,17 @@
 
 
 
-  <button ion-item  (click)="logout()">
+  <button ion-item  (click)="logout()"  *ngIf="user_info.userid">
     退出
   </button>
 
-
-
-  <ion-list>
+  <ion-list  *ngIf="!user_info.userid">
     <button ion-item (click)="openLoginPage()">
       登录
     </button>
-    <button ion-item (click)="openRegPage()">
-      注册
-    </button>
+    <!--<button ion-item (click)="openRegPage()">-->
+      <!--注册-->
+    <!--</button>-->
   </ion-list>
 
 
