@@ -9,10 +9,12 @@ import {AppRate, SocialSharing} from "ionic-native";
 import { FavoritePage } from './favorite/favorite';
 import { FeedbackPage} from './feedback/feedback';
 import { FrequencyPage } from './frequency/frequency';
+import {Common} from "../../utils/common";
 
 @Component({
   selector: 'page-contact',
-  templateUrl: 'my.html'
+  templateUrl: 'my.html',
+  providers: [Common],
 })
 export class MyPage {
 
@@ -26,17 +28,24 @@ export class MyPage {
     truename: "游客"
   };
 
-  constructor( private alertCtrl: AlertController, public storage:Storage,public navCtrl: NavController, public navParams: NavParams) {
+  constructor( public common: Common, private alertCtrl: AlertController, public storage:Storage,public navCtrl: NavController, public navParams: NavParams) {
 
     this.storage.get("storage_user_info").then((value) => {
       if(value){
-        //console.log(value);
+        console.log(value);
         this.user_info = value;
       }
     });
 
+    //if(common.getUserinfo()){
+    //  //this.user_info = JSON.parse(common.getUserinfo());
+    //  this.user_info = common.getUserinfo();
+    //  console.log(this.user_info);
+    //}
+
     if(navParams.get('item') != null){
       this.user_info = navParams.get('item');
+      this.storage.set('storage_user_info', this.user_info);
       console.log(this.user_info);
     }
 
@@ -100,7 +109,6 @@ export class MyPage {
 
   logout() {
     this.storage.remove("storage_user_info");
-
     let alert = this.alertCtrl.create({
       title: '退出成功！',
       subTitle: '',

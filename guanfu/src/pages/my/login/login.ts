@@ -59,13 +59,10 @@ export class LoginPage {
                 {
                   text: 'OK',
                   handler: () => {
-                    //this.navCtrl.push(MyPage,{});
 
-                    //this.navCtrl.push(MyPage).then(()=> {
-                    //  let index = this.viewCtrl.index;
-                    //  this.navCtrl.remove(index);
-                    //});
-                    this.storage.set('storage_user_info', this.user_info);
+
+                    //this.storage.set('storage_user_info', JSON.stringify(this.user_info));
+                    //this.storage.set('storage_user_info', this.user_info);
 
                     //this.viewCtrl.dismiss({
                     //    item: this.user_info

@@ -1,10 +1,35 @@
 import {Injectable} from "@angular/core";
+import { Storage } from '@ionic/storage';
+
+
+
 
 @Injectable()
+//var user_info = {
+//  userid: 0,
+//  username: '',
+//  email: '',
+//  groupid: '',
+//  groupids: '',
+//  photo: '',
+//  truename: '',
+//}
 export class Common {
 
 
+  constructor( public storage:Storage) {
+    this.storage = storage;
+  }
 
+
+//: Promise<string>
+  getUserinfo() {
+
+    return  this.storage.get("storage_user_info").then((value) => {
+       return value;
+      //return JSON.parse(value);
+    });
+  }
 
 
   getSpinnerConfig() {

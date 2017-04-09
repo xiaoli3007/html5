@@ -7,9 +7,9 @@
     </ion-title>
 
     <ion-buttons end>
-      <button ion-button icon-only (click)="openModal()">
-        <ion-icon name="ios-star-outline"></ion-icon>
-        <!--<ion-icon name="star"></ion-icon>-->
+      <button ion-button icon-only (click)="favorite_save()">
+        <ion-icon name="ios-star-outline" *ngIf="!is_favorite"></ion-icon>
+        <ion-icon name="star"  *ngIf="is_favorite"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -75,7 +75,7 @@
 
 
 
-      <ion-list *ngSwitchCase="'list'">
+      <ion-list *ngSwitchCase="'list'"  >
           <ion-item *ngFor="let v of videolist">
             <a (click)="openthisvideo(v.url.play)">{{v.name}}</a>
           </ion-item>

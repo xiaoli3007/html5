@@ -61,6 +61,7 @@ export class ListPage {
               this.listinfos = [];
               this.listinfos = data;
               this.params.page++;
+              this.hasnomany = false;
             }
           }
       );
@@ -74,6 +75,7 @@ export class ListPage {
     setTimeout(() => {
 
       if(!this.hasnomany){
+
           this.ionicService.getServerData(this.params)
               .subscribe(
                   data => {
@@ -83,11 +85,12 @@ export class ListPage {
                       this.params.page++;
                     }else{
                       this.hasnomany = true;
+
                     }
                   }
               );
           console.log('加载完毕准备更新');
-
+        infiniteScroll.complete();
       }else{
         console.log('没有数据！');
         let alert = this.alertCtrl.create({
@@ -96,11 +99,10 @@ export class ListPage {
           buttons: ['OK']
         });
         alert.present();
-
-        infiniteScroll.enabled(false);
+        infiniteScroll.enable(0);
       }
 
-      infiniteScroll.complete();
+
 
     }, 500); // 延迟500ms
   }
