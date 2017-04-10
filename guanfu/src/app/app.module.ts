@@ -6,7 +6,6 @@ import { ListPage } from '../pages/course/list/list';
 import { ShowPage } from '../pages/course/show/show';
 import { MyPage } from '../pages/my/my';
 import { LoginPage } from '../pages/my/login/login';
-
 import { UsercenterPage } from '../pages/my/usercenter/usercenter';
 import { AboutUsPage } from '../pages/my/aboutus/about-us';
 import { FavoritePage } from '../pages/my/favorite/favorite';
@@ -19,6 +18,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
+import { IonicAudioModule } from 'ionic-audio';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,8 @@ import { IonicStorageModule } from '@ionic/storage';
       tabsHideOnSubPages: true,
       tabsHighlight: true
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicAudioModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -5,7 +5,6 @@
     <ion-title>
       {{showinfos.title}}
     </ion-title>
-
     <ion-buttons end>
       <button ion-button icon-only (click)="favorite_save()">
         <ion-icon name="ios-star-outline" *ngIf="!is_favorite"></ion-icon>
@@ -13,20 +12,41 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
   </ion-header>
+<ion-content>
 
-<ion-content >
+
+  <ion-row  *ngIf="template=='show_audio'">
+    <ion-col>
+  <ion-list>
+    <audio-track #audio *ngFor="let track of show_audios;let i = index;"  [track]="track" (onFinish)="onTrackFinished($event)">
+
+      <ion-item *ngIf="selectedTrack==i">
+        <ion-thumbnail item-left>
+          <img src="{{audio.art}}">
+          <audio-track-play dark [audioTrack]="audio"><ion-spinner></ion-spinner></audio-track-play>
+        </ion-thumbnail>
+        <div item-content style="width:100%">
+          <p style="margin-top:10px;"><strong>{{audio.title}}</strong> </p>
+          <audio-track-progress-bar dark duration progress [audioTrack]="audio" [ngStyle]="{visibility: audio.completed > 0 ? 'visible' : 'hidden'}"></audio-track-progress-bar>
+        </div>
+      </ion-item>
+    </audio-track>
 
 
-  <ion-row >
+  </ion-list>
+    </ion-col>
+  </ion-row>
+
+
+
+  <ion-row *ngIf="template=='show'">
     <ion-col>
       <video   controls="controls"  autoplay="autoplay" width="100%" height="100%">
-        <source src="{{default_video}}" type="video/mp4">
+        <source src="{{default_media_play}}" type="video/mp4">
         <!--<source src="http://guanfumaster.com/appapi/blg.mp4" type="video/mp4">-->
       </video>
     </ion-col>
-
   </ion-row>
 
 
@@ -73,9 +93,11 @@
 
 
       <ion-list *ngSwitchCase="'list'"  >
-          <ion-item *ngFor="let v of videolist">
-            <a (click)="openthisvideo(v.url.play)">{{v.name}}</a>
-          </ion-item>
+          <ion-item *ngFor="let v of videolist; let i =index;" >
+            <a (click)="openthisvideo(v.url.play)" *ngIf="template=='show'">{{v.name}}</a>
+          <a (click)="playSelectedTrack(i)" *ngIf=" template=='show_audio' ">{{v.name}}</a>
+        </ion-item>
+
       </ion-list>
 
 
