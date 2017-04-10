@@ -16,10 +16,7 @@
 
   </ion-header>
 
-<ion-content>
-
-
-
+<ion-content >
 
 
   <ion-row >
@@ -86,23 +83,16 @@
       <ion-list *ngSwitchCase="'commont'">
 
 
-          <ion-item>
-            <ion-avatar item-left>
-              <img src="../../../assets/images/graphic.png">
-            </ion-avatar>
-            <h2>Finn</h2>
-            <p>I've had a pretty messed up day. If we just...</p>
-            <ion-note item-right>3:43 pm</ion-note>
-          </ion-item>
-        <ion-item>
-          <ion-avatar item-left>
-            <img src="../../../assets/images/graphic.png">
-          </ion-avatar>
-          <h2>Finn</h2>
-          <p>I've had a pretty messed up day. If we just...</p>
-          <ion-note item-right>3:43 pm</ion-note>
-        </ion-item>
 
+
+          <ion-item *ngFor="let comment of comment_infos">
+            <ion-avatar item-left>
+              <img src="{{comment.photo}}">
+            </ion-avatar>
+            <h2 class="commenttitle">{{comment.name}}</h2>
+            <p style="white-space:normal;">{{comment.comment}}</p>
+            <div class="note">{{comment.time}}</div>
+          </ion-item>
 
 
       </ion-list>

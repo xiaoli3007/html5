@@ -18,12 +18,19 @@ export class ShowPage {
   videolist = [];
   default_video ='';
   is_favorite = false ;
+  comment_infos = [];
   private params = {
     act: 'program',
     userid:0,
     id: 0,
     catid: 0,
   };
+  private comment_params = {
+    act: 'comment',
+    id: 0,
+    catid: 0,
+  };
+
 
   private favorite_save_params = {
     act: 'favorite_save',
@@ -50,15 +57,21 @@ export class ShowPage {
 
       this.params.catid = this.selectedItem.catid;
       this.favorite_save_params.catid = this.selectedItem.catid;
+      this.comment_params.catid = this.selectedItem.catid;
     }
     if(this.selectedItem.id){
 
       this.params.id = this.selectedItem.id;
       this.favorite_save_params.id = this.selectedItem.id;
+      this.comment_params.id = this.selectedItem.id;
     }
     //this.viewCtrl._didEnter().subsc ;
 
 
+    storage.ready().then(() => {
+
+       console.log('reday sssss');
+    });
 
   }
 
@@ -79,33 +92,58 @@ export class ShowPage {
       }
     });
 
-    console.log(11111);
-    console.log(this.params);
-    this.ionicService.getServerData(this.params).subscribe(
-        data => {
-          if(data != null){
+    setTimeout(() => {
 
-            this.showinfos = data;
-            this.videolist = data['serial'];
-            this.is_favorite = data['is_favorite'] ;
-            if(this.videolist != null){
-              this.default_video = this.videolist[0]['url']['play'];
+      //获取资源信息
+        this.ionicService.getServerData(this.params).subscribe(
+          data => {
+            if(data != null){
+
+              this.showinfos = data;
+              this.videolist = data['serial'];
+              this.is_favorite = data['is_favorite'] ;
+              if(this.videolist != null){
+                this.default_video = this.videolist[0]['url']['play'];
+              }
+
+              //console.log(data);
+
+            }else{
+
+              let alert = this.alertCtrl.create({
+                title: '请求数据失败',
+                subTitle: '',
+                buttons: ['OK']
+              });
+              alert.present();
+
+            }
+          }
+
+      );
+      //获取资源评论信息
+      this.ionicService.getServerData(this.comment_params).subscribe(
+          data => {
+            if(data != null){
+              this.comment_infos = data;
+              //console.log(data);
+            }else{
+
+              let alert = this.alertCtrl.create({
+                title: '请求数据失败',
+                subTitle: '',
+                buttons: ['OK']
+              });
+              alert.present();
             }
 
-            //console.log(data);
-
-          }else{
-            let alert = this.alertCtrl.create({
-              title: '请求数据失败',
-              subTitle: '',
-              buttons: ['OK']
-            });
-            alert.present();
           }
-          loading.dismiss();
-        }
 
-    );
+      );
+
+    }, 1000);// 延迟
+
+    loading.dismiss();
 
   }
 

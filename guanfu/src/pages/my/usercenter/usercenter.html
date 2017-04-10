@@ -10,5 +10,20 @@
 
 
 
+  <ion-item (click)="openPhonephoto()">
+    <ion-thumbnail item-left>
+      <img src="{{user_info.photo}}">
+    </ion-thumbnail>
+    <h2>修改头像</h2>
+
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label color="dark">用户名</ion-label>
+    <ion-label item-right> {{user_info.username}}</ion-label>
+  </ion-item>
+
 
 </ion-content>
