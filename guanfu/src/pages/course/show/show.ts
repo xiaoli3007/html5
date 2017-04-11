@@ -7,6 +7,10 @@ import {Common} from "../../../utils/common";
 import { Storage } from '@ionic/storage';
 import { AudioProvider } from 'ionic-audio';
 
+
+import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import {Audio} from '../../../data/audio';
+
 @Component({
   selector: 'page-show',
   templateUrl: 'show.html',
@@ -15,6 +19,7 @@ import { AudioProvider } from 'ionic-audio';
 export class ShowPage {
 
   selectedItem: any;
+  showtemplates =['show','show_audio','show_image'];
   showinfos =[];
   videolist = [];
   default_media_play ='';
@@ -22,13 +27,16 @@ export class ShowPage {
   is_favorite = false ;
   template = '';
   comment_infos = [];
+  show_audios: any[];
+  allTracks: any[];
+  selectedTrack = 0 ;
+  selectedvideo = 0 ;
   private params = {
     act: 'program',
     userid:0,
     id: 0,
     catid: 0,
   };
-
 
   private comment_params = {
     act: 'comment',
@@ -44,22 +52,9 @@ export class ShowPage {
     catid: 0,
   };
 
-  //user_info = {
-  //  userid: 0,
-  //  username: "游客",
-  //  email: "",
-  //  groupid: "",
-  //  groupids: "",
-  //  photo: "../../assets/images/graphic.png",
-  //  truename: "游客"
-  //};
 
-  myTracks: any[];
-  show_audios: any[];
-  allTracks: any[];
-  selectedTrack = 0 ;
 
-  constructor(private _audioProvider: AudioProvider, private viewCtrl:ViewController,public storage:Storage, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,private loadingCtrl: LoadingController,public common: Common, private ionicService:IonicService) {
+  constructor(private sanitizer: DomSanitizer,private _audioProvider: AudioProvider, private viewCtrl:ViewController,public storage:Storage, public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController,private loadingCtrl: LoadingController,public common: Common, private ionicService:IonicService) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
     if(this.selectedItem.catid){
@@ -92,6 +87,8 @@ export class ShowPage {
   ngAfterContentInit() {
     // get all tracks managed by AudioProvider so we can control playback via the API
     this.allTracks = this._audioProvider.tracks;
+
+    console.log('-----',  this.allTracks);
   }
 
   playSelectedTrack(selectedTrack) {
@@ -102,7 +99,7 @@ export class ShowPage {
     console.log('开始播放第几个歌',  selectedTrack);
     this._audioProvider.play( selectedTrack);
     this.selectedTrack =  selectedTrack;
-    
+
   }
 
   pauseSelectedTrack(selectedTrack) {
@@ -113,7 +110,9 @@ export class ShowPage {
   }
 
   onTrackFinished(track: any) {
-    console.log('Track finished', track)
+
+    console.log('Track finished', track);
+    console.log(this.selectedTrack+'歌播放完毕');
   }
   //音频结束
 
@@ -152,9 +151,14 @@ export class ShowPage {
 
                 var Array=[];
                 for (var i = 0; i < this.videolist.length; i++) {
-                    var  show_audio = { title: '', src: '', art: '', preload: '' };
-
+                    //var  show_audio = { title: '', src: '', art: '', preload: '' };
+                    var  show_audio = new Audio('','','','');
                     show_audio.title = this.videolist[i]['name'];
+
+                   //var beausrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.videolist[i]['url']['play']);
+                   // console.log('数据类型'+typeof(beausrc.toString()));
+                   // show_audio.src = beausrc.toString();
+
                     show_audio.src = this.videolist[i]['url']['play'];
                     //show_audio.art = this.videolist[i]['url']['stage'];
                     show_audio.art = '../../../assets/images/graphic.png';
@@ -164,7 +168,9 @@ export class ShowPage {
                   }
 
                 this.show_audios=Array;
-                //console.log(this.show_audios);
+
+               //var  show_audiosrc = this.sanitizer.bypassSecurityTrustUrl('https://medium.com/m/');
+               // console.log(show_audiosrc);
 
               }
 
@@ -209,10 +215,16 @@ export class ShowPage {
 
   }
 
-  openthisvideo(url){
+  openthisvideo(selectedvideo){
 
-    this.default_media_play = url;
+    this.selectedvideo = selectedvideo ;
+    //this.default_media_play = url;
     //console.log(url);
+  }
+
+  playthisimage(selectedimage){
+
+    //console.log(selectedimage);
   }
 
   favorite_save(){

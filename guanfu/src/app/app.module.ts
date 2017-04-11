@@ -20,6 +20,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicAudioModule } from 'ionic-audio';
 
+import { SafePipe } from '../pipes/Safepipe';
+import { AudioSafepipe } from '../pipes/AudioSafepipe';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -35,6 +38,8 @@ import { IonicAudioModule } from 'ionic-audio';
     FeedbackPage,
     FrequencyPage,
     HomePage,
+    SafePipe,
+    AudioSafepipe,
     TabsPage
   ],
   imports: [
