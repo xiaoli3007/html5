@@ -8,6 +8,24 @@
 
 <ion-content>
 
+  <ion-list>
+
+    <ion-item *ngFor="let item of listinfos" (click)="openShow(item.catid,item.id)">
+      <ion-thumbnail item-left>
+        <img [src]="item.thumb | safe">
+      </ion-thumbnail>
+      <h2>{{item.title}}</h2>
+      <p>{{item.description}}</p>
+      <button ion-button clear item-right>查看</button>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                 loadingText="正在加载..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 
 
 

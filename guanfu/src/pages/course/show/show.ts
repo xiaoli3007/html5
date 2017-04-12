@@ -31,6 +31,7 @@ export class ShowPage {
   allTracks: any[];
   selectedTrack = 0 ;
   selectedvideo = 0 ;
+  relationship ='list'; //默认按钮
   private params = {
     act: 'program',
     userid:0,

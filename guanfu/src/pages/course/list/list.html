@@ -22,7 +22,7 @@
 
     <ion-item *ngFor="let item of listinfos" (click)="openShow(item.catid,item.id)">
       <ion-thumbnail item-left>
-        <img src="{{item.thumb}}">
+        <img [src]="item.thumb | safe">
       </ion-thumbnail>
       <h2>{{item.title}}</h2>
       <p>{{item.description}}</p>

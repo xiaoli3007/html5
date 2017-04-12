@@ -13,7 +13,7 @@ export class IonicService {
   }
 
 
-  // 获取主题
+  // get请求
   getServerData(data) {
     //let url = this.configService.getHost() +"/applist/?page="+page+"&callback=JSON_CALLBACK";
     let url = this.configService.getHost();
@@ -23,9 +23,9 @@ export class IonicService {
   }
 
 
-  // 新增主题
+  // post请求
   postServerData(data) {
-    let url = this.configService.getHost() + "/api/v1/topics";
+    let url = this.configService.getHost();
     let body = helper.toBodyString(data);
     let headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -33,7 +33,6 @@ export class IonicService {
         res=>res.json()
     ).catch(this.handleError);
   }
-
 
 
   private handleError(error:Response) {

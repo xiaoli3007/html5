@@ -50,23 +50,14 @@
   </ion-row>
 </ion-grid>
 
-  <!--<ion-grid  *ngIf="template=='show_image'">-->
-    <!--<ion-list [virtualScroll]="videolist">-->
 
-      <!--<ion-item *virtualItem="let image">-->
-
-        <!--<ion-img [width]="imgWidth" [height]="imgHeight" [src]="image.url.play | safe"></ion-img>-->
-      <!--</ion-item>-->
-
-    <!--</ion-list>-->
-  <!--</ion-grid>-->
 
 
   <ion-grid *ngIf="  showtemplates.indexOf(template)==-1 ">
     <ion-row>
       <ion-col>
         <ion-item-divider>
-          暂不支持的模板
+          模板加载中或暂不支持的资源格式
         </ion-item-divider>
 
       </ion-col>
@@ -77,11 +68,11 @@
 
   <ion-row >
   <!-- Segment in a header -->
-    <ion-segment [(ngModel)]="relationship" color="primary">
+    <ion-segment [(ngModel)]="relationship" color="dark">
       <ion-segment-button value="jianjie">
         简介
       </ion-segment-button>
-      <ion-segment-button value="list" class="segment-activated" >
+      <ion-segment-button value="list" >
         节目列表
       </ion-segment-button>
       <ion-segment-button value="commont">

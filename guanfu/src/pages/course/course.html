@@ -17,7 +17,8 @@
 
   <ion-item>
     <ion-label>栏目选择</ion-label>
-    <ion-select [(ngModel)]="catid">
+    <ion-select [(ngModel)]="catid"  okText="确定" cancelText="取消" >
+      <ion-option value="0" selected="true">不限</ion-option>
       <ion-option  *ngFor="let item of category" value="{{item.catid}}"> {{item.name}} </ion-option>
     </ion-select>
   </ion-item>

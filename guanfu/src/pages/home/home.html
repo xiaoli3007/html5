@@ -12,7 +12,7 @@
     <ion-col>
       <ion-slides [pager]="true">
         <ion-slide  *ngFor="let slideitem of slideimages">
-          <img src="{{slideitem.picurl}}" >
+          <img [src]="slideitem.picurl | safe" >
         </ion-slide>
 
       </ion-slides>
@@ -29,7 +29,7 @@
   <ion-col col-4 class="online-read"   *ngFor="let showitem of categoryitem.result">
     <ion-card (click)="openShow(showitem.catid,showitem.id)">
       <button ion-item>
-        <img src="{{showitem.thumb}}"/>
+        <img [src]="showitem.thumb | safe"/>
         <div class="card-title card-title-above">{{showitem.title}}</div>
       </button>
     </ion-card>

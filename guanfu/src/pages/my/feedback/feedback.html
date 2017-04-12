@@ -9,6 +9,13 @@
 <ion-content>
 
 
+  <form (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-textarea placeholder="请输入意见建议" max="200" [(ngModel)]="jianyi" name="jianyi" ></ion-textarea>
+  </ion-item>
+
+  <button ion-button color="dark" round full type="submit">提交</button>
+  </form>
 
 
 </ion-content>
