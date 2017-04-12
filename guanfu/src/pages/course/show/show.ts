@@ -125,6 +125,10 @@ export class ShowPage {
   }
   //音频结束
 
+  ngOnDestroy() {
+    this._audioProvider.pause( this.selectedTrack);
+    console.log('ngOnDestroy');
+  }
 
   ngOnInit() {
 
@@ -165,7 +169,7 @@ export class ShowPage {
                     show_audio.title = this.videolist[i]['name'];
                     show_audio.src = this.videolist[i]['url']['play'];
                     //show_audio.art = this.videolist[i]['url']['stage'];
-                    show_audio.art = '../../../assets/images/graphic.png';
+                    show_audio.art = 'assets/images/graphic.png';
                     show_audio.preload = 'metadata';
 
                     Array.push(show_audio);
