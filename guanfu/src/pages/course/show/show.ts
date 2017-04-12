@@ -113,7 +113,15 @@ export class ShowPage {
   onTrackFinished(track: any) {
 
     console.log('Track finished', track);
-    console.log(this.selectedTrack+'歌播放完毕');
+    console.log(this.selectedTrack+'歌播放完毕'+'一共多少'+ this.show_audios.length);
+
+   if(this.selectedTrack<this.show_audios.length){
+      this.selectedTrack++ ;
+      this._audioProvider.play( this.selectedTrack);
+   }else{
+      this.selectedTrack = 0;
+   }
+
   }
   //音频结束
 
@@ -155,11 +163,6 @@ export class ShowPage {
                     //var  show_audio = { title: '', src: '', art: '', preload: '' };
                     var  show_audio = new Audio('','','','');
                     show_audio.title = this.videolist[i]['name'];
-
-                   //var beausrc = this.sanitizer.bypassSecurityTrustResourceUrl(this.videolist[i]['url']['play']);
-                   // console.log('数据类型'+typeof(beausrc.toString()));
-                   // show_audio.src = beausrc.toString();
-
                     show_audio.src = this.videolist[i]['url']['play'];
                     //show_audio.art = this.videolist[i]['url']['stage'];
                     show_audio.art = '../../../assets/images/graphic.png';

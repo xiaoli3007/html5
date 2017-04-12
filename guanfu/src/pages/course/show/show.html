@@ -39,6 +39,7 @@
   </ion-row>
 
 
+
   <ion-grid  *ngIf="template=='show'">
   <ion-row *ngFor="let media_video of videolist;let i = index;">
     <ion-col  *ngIf="selectedvideo==i" >
@@ -106,22 +107,25 @@
       </ion-list>
 
 
-
-      <ion-list *ngSwitchDefault >
+      <ion-grid *ngSwitchDefault>
+        <ion-list  >
           <ion-item *ngFor="let v of videolist; let i =index;" >
             <a (click)="openthisvideo(i)" *ngIf="template=='show'">{{v.name}}</a>
-          <a (click)="playSelectedTrack(i)" *ngIf=" template=='show_audio' ">{{v.name}}</a>
+            <a (click)="playSelectedTrack(i)" *ngIf=" template=='show_audio' ">{{v.name}}</a>
 
 
-          <a (click)="playthisimage(i)" *ngIf=" template=='show_image' ">
-            <img [src]="v.url.play | safe">
-            <br>{{v.name}}
-          </a>
+            <a (click)="playthisimage(i)" *ngIf=" template=='show_image' ">
+              <img [src]="v.url.play | safe">
+              <br>{{v.name}}
+            </a>
 
-          <a   *ngIf="  showtemplates.indexOf(template)==-1 ">{{v.name}}</a>
+            <a   *ngIf="  showtemplates.indexOf(template)==-1 ">{{v.name}}</a>
 
-        </ion-item>
-      </ion-list>
+          </ion-item>
+        </ion-list>
+      </ion-grid>
+
+
 
 
 

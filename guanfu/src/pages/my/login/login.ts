@@ -1,5 +1,5 @@
 import { Component , Inject} from '@angular/core';
-import { App, NavController,NavParams , LoadingController,AlertController, ViewController} from 'ionic-angular';
+import {  NavController,NavParams , LoadingController,AlertController, ViewController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { emailValidator, nicknameValidator } from '../../../providers/validator';
 import { IonicService } from '../../../services/IonicService';
@@ -25,7 +25,7 @@ export class LoginPage {
     act: 'userverify',
   };
 
-  constructor( public storage:Storage,public appCtrl: App ,private viewCtrl:ViewController, private alertCtrl: AlertController,private loadingCtrl: LoadingController, private ionicService:IonicService,public navCtrl: NavController, public navParams: NavParams,@Inject(FormBuilder) fb: FormBuilder, public common: Common) {
+  constructor( public storage:Storage,private viewCtrl:ViewController, private alertCtrl: AlertController,private loadingCtrl: LoadingController, private ionicService:IonicService,public navCtrl: NavController, public navParams: NavParams,@Inject(FormBuilder) fb: FormBuilder, public common: Common) {
 
     this.form = fb.group({
       username: ['',[Validators.required, Validators.minLength(4)]],
