@@ -24,7 +24,7 @@ export class MyPage {
     email: "",
     groupid: "",
     groupids: "",
-    photo: "../../assets/images/graphic.png",
+    photo: "assets/images/graphic.png",
     truename: "游客"
   };
 
@@ -71,14 +71,36 @@ export class MyPage {
   //收藏列表
   openFavoritePage() {
 
-    this.navCtrl.push(FavoritePage,{
-    });
+    if(this.user_info.userid==0){
+
+      this.navCtrl.push(LoginPage,{
+      });
+
+    }else {
+
+      this.navCtrl.push(FavoritePage,{
+      });
+
+    }
+
+
   }
   //点播列表
   openFrequencyPage() {
 
-    this.navCtrl.push(FrequencyPage,{
-    });
+    if(this.user_info.userid==0){
+
+      this.navCtrl.push(LoginPage,{
+      });
+
+    }else {
+
+      this.navCtrl.push(FrequencyPage,{
+      });
+
+    }
+
+
   }
   //反馈留言
   openFeedbackPage() {
