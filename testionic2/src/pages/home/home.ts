@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-
-import { NavController , NavParams , Events} from 'ionic-angular';
+import { NavController  , Events , IonicPage } from 'ionic-angular';
 import {IonicService} from "../../services/IonicService";
-import {ConfigService} from "../../services/ConfigService";
-import { ItemDetailsPage } from './item-details/item-details';
+
+@IonicPage({
+    name: 'home-page',
+    segment: 'home-path'
+})
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-    providers: [IonicService, ConfigService],
 })
 export class HomePage {
     private topics = [];
@@ -19,7 +20,7 @@ export class HomePage {
         page: 1,
     };
 
-  constructor(private ionicService:IonicService,public navCtrl: NavController, public navParams: NavParams, private events:Events) {
+  constructor(private ionicService:IonicService,public navCtrl: NavController, private events:Events) {
 
       //icons: string[];
       //items: Array<{title: string, note: string, icon: string}>;
@@ -59,7 +60,7 @@ export class HomePage {
 
 
     itemTapped(event, item) {
-        this.navCtrl.push(ItemDetailsPage, {
+        this.navCtrl.push('ItemDetails', {
             item: item
         });
     }
@@ -99,7 +100,12 @@ export class HomePage {
         }, 500); // 延迟500ms
     }
 
-    ngOnInit() {
+
+    ionViewDidLoad() {
+        this.getCountries();
+    }
+
+    getCountries() {
 
 
         this.ionicService.getTopics(this.params).subscribe(
