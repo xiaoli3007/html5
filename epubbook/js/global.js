@@ -267,7 +267,7 @@ function cfitotext(cfi) {
 				link = document.createElement("a");
 				removelink = document.createElement("a");
 
-		listitem.id = "bookmark-"+counter;
+		listitem.id = "bookmark-"+biaoqian_id;
 		listitem.classList.add('list_item');
 	
 		link.textContent =	cfitotext(cfi);
@@ -281,9 +281,22 @@ function cfitotext(cfi) {
 				event.preventDefault();
 		}, false);
 		
-	  
-		removelink='<a href="javascript:;" class="bookmark_link_delete" onClick="removeBookmark('+cfi+','+biaoqian_id+')" >移除</a>';
+	  	
+		removelink.textContent="移除";
+		removelink.href = "javascript:;";
+		//removelink.cfi = cfi;
+		removelink.classList.add('bookmark_link_delete');
+		 
+		removelink.onclick = function() { removeBookmark("'"+cfi+"'",biaoqian_id); }
+		/*removelink.addEventListener("click", function(event){
+				var cfi = this.getAttribute('cfi');
+				removeBookmark("'"+cfi+"'",biaoqian_id);
+				//event.preventDefault();
+		}, false);*/
 		
+		//var removelink='<a href="javascript:;" class="bookmark_link_delete" onClick="removeBookmark("'+cfi+'",'+biaoqian_id+')" >移除</a>';
+		
+		//alert(removelink);
 		listitem.appendChild(link);
 		listitem.appendChild(removelink);
 	 
@@ -310,9 +323,12 @@ function addBookmark_mysql(cfi){
 	 
 	  var bol=0;
 		$.ajax({
-			type: "post",
+			type: "get",
 			async:false,
 			url: "/index.php?m=content&c=epub&a=join_maked&cfi="+cfi+"&media_id="+global_media_id+"&page="+0+"&title="+title+"&r="+Math.random(),
+			
+			//url: "index.php?m=content&c=epub&a=join_maked",
+       		// data: "cfi="+cfi+"&media_id="+global_media_id+"&page="+0+"&title="+title,
 			dataType: "json",
 			success: function(savedata){
 				if(savedata['status']==1){
@@ -334,16 +350,21 @@ function addBookmark(cfi) {
 	var docfrag = document.createDocumentFragment();
 	
 	var biaoqian_id = addBookmark_mysql(cfi);
-	var bookmark = createBookmarkItem(cfi,biaoqian_id);
+	if(biaoqian_id){
+		//alert(biaoqian_id);
+		var bookmark = createBookmarkItem(cfi,biaoqian_id);
+		docfrag.appendChild(bookmark);
+		$list.append(docfrag);
+	}else{
+		alert('添加失败');	
+	}
 	
- 	docfrag.appendChild(bookmark);
-	$list.append(docfrag);
 };
 
 
 //移除标签
 
-function removeBookmark_mysql(cfi){
+function removeBookmark_mysql(biaoqian_id){
 	 
   
 	  var bol=0;
@@ -361,13 +382,16 @@ function removeBookmark_mysql(cfi){
 }
 
 function removeBookmark(cfi,biaoqian_id) {
-	var bookmark = isBookmarked(cfi);
-	if( bookmark === -1 ) return;
+	//alert(biaoqian_id);
+	//var bookmark = isBookmarked(cfi);
+	//if( bookmark === -1 ) return;
 	
 	if(removeBookmark_mysql(biaoqian_id)){
 		all_bookmarks.splice(bookmark, 1);
 		var $item = $("#bookmark-"+biaoqian_id);
 		$item.remove();
+	}else{
+		alert('添加失败');	
 	}
 	
 };
