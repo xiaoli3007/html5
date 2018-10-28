@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{$play_title}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+
+        <link rel="stylesheet" href="{STATICS_PATH}epub_js/css/basic.css">
+        <script type="text/javascript" src="{STYLE_PATH}{BASE_STYLE}/js/jquery-1.11.2.min.js"></script>
+<style>
+span.theme2{  color:#F00;}
+.colorcontent {
+    width: 200px;
+    height: 205px;
+    position: absolute; left:200px; top:100px;
+    font-size: 17px;
+    color: #7E7E7E; background:#fff; border: 1px solid #D4D0D0;
+}
+.colorBs {
+    float: left;
+    margin-top: 0px;
+    margin-left: 15px;
+    width: 20px;
+    height: 20px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px solid #D4D0D0;
+    cursor: pointer;
+}
+.colorBs:hover {
+    border: 1px solid #ffffff;
+}
+.selectitem {
+    height: 40px;
+    line-height: 40px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    cursor: pointer;
+}
+.noteinput {
+    position: absolute;
+    left: 420px;
+    top: 270px;
+    width: 350px;
+    height: 230px;
+    background-color: #ffffff;
+    z-index: 1000;
+}
+.noteheader2 {
+    padding-left: 10px;
+    color: #ffffff;
+    line-height: 30px;
+    font-size: 10px;
+    background-color: #858585;
+    height: 30px;
+    cursor: move;
+ 
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.noteheader2:hover {
+    background-color: #707070;
+}
+.noteinput-close {
+    font-size: 14px;
+    margin-left: 250px;
+    cursor: pointer;
+}
+.noteinput-close:hover {
+    color: #A7A7A7;
+}
+.notecontainer {
+    border: 1px solid #A0A0A0;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    height: 130px;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 20px;
+    overflow-y: auto;
+}
+.notecontainer:empty:before {
+    content: attr(placeholder);
+    color: #989898;
+}
+.notecontainer:focus {
+    content: none;
+    color: #464646;
+}
+/**
+ * 自定义滚动条
+ * @type {[type]}
+ */
+.notecontainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+.notecontainer::-webkit-scrollbar {
+    width: 4px;
+    background-color: #ffffff;
+}
+.notecontainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #8F8E8E;
+}
+.notefooter {
+    margin-top: 8px;
+    height: 30px;
+    line-height: 30px;
+}
+.savebut {
+    float: left;
+    border: 1px solid #00C4BE;
+    color: #00C4BE;
+    margin-left: 240px;
+    text-align: center;
+    width: 50px;
+    height: 23px;
+    line-height: 23px;
+    cursor: pointer;
+}
+.giveupbut {
+    float: left;
+    text-align: center;
+    width: 50px;
+    height: 23px;
+    line-height: 23px;
+    cursor: pointer;
+}
+
+
+</style>
+        <!-- EPUBJS Renderer -->
+        <script src="{STATICS_PATH}epub_js/build/epub.min.js"></script>
+        <script src="{STATICS_PATH}epub_js/build/libs/zip.min.js"></script>
+  <script src="{STATICS_PATH}epub_js/highlight-range.js"></script>
+       
+    </head>
+    <body>
+        <div id="main">
+          <div id="prev" onclick="Book.prevPage();" class="arrow">‹</div>
+          <div id="area"></div>
+          <div id="next" onclick="Book.nextPage();" class="arrow">›</div>
+          <div id="loader"><img src="{STATICS_PATH}epub_js/reader/img/loader.gif"></div>
+          <select id="toc"></select>
+        </div>
+        
+        
+        <div  class="colorcontent">
+    <div  class="clearfix">
+        <div class="colorBs" id="theme1" style="background-color: #A4B401"></div>
+        <div class="colorBs" id="theme2" style="background-color: #D32802"></div>
+        <div class="colorBs" id="theme3" style="background-color: #0383B3"></div>
+        <div class="colorBs" id="theme4" style="background-color: #04B91E"></div>
+        <div class="colorBs" id="theme5" style="background-color: #F634F8"></div>
+    </div>
+    <div class="addnote">
+        <div class="colorb" v-bind:style="colorB"></div>添加笔记
+    </div>
+    <div class="selectitem">
+        翻译
+    </div>
+    <div class="selectitem">
+        网络搜索
+    </div>
+    <div class="selectitem">
+        复制内容
+    </div>
+</div>
+
+
+<div v-if="noteselected" class="noteinput">
+    <div class="noteheader2">
+        ┆┆ 添加笔记<i class="fa fa-close noteinput-close" @click="noteselected=!noteselected"></i>
+    </div>
+    <div contenteditable="true" class="notecontainer" placeholder="请输入笔记">
+    </div>
+    <div class="notefooter">
+        <div class="savebut" @click="savenote">保存</div>
+        <div class="giveupbut" @click="noteselected=!noteselected">放弃</div>
+    </div>
+</div>
+
+  
+
+        <script>
+			
+			   "use strict";
+
+			/*/data/demo/isadmin/sunli/4/2016/03-01/图片导出测试/wanmei/*/
+            var Book = ePub("{$play_filepath}", { restore: false });
+
+
+
+            Book.getMetadata().then(function(meta){
+
+                document.title = meta.bookTitle+" – "+meta.creator;
+
+            });
+
+            Book.getToc().then(function(toc){
+
+              var $select = document.getElementById("toc"),
+                  docfrag = document.createDocumentFragment();
+
+              toc.forEach(function(chapter) {
+                var option = document.createElement("option");
+                option.textContent = chapter.label;
+                option.ref = chapter.href;
+
+                docfrag.appendChild(option);
+              });
+
+              $select.appendChild(docfrag);
+
+              $select.onchange = function(){
+                  var index = $select.selectedIndex,
+                      url = $select.options[index].ref;
+
+                  Book.goto(url);
+                  return false;
+              }
+
+            });
+
+            Book.ready.all.then(function(){
+              document.getElementById("loader").style.display = "none";
+            });
+
+           var rendition = Book.renderTo("area");
+			
+			//全局变量
+			var selected=false; var selection='';   var  isDraging = false;  var noteselected = false; var selectedContent ;
+			
+			//epub.js能捕获用户在书籍上的鼠标释放事件，使用self.selected是为了防止用户重复选中。
+				Book.on('renderer:mouseup', function(event) {
+					
+					
+					 
+					//释放后检测用户选中的文字 
+					var render = Book.renderer.render;
+					 selectedContent = render.window.getSelection();
+					selection = selectedContent;
+					
+					 console.log(selectedContent);
+					 
+					//若当前用户不在选中状态，并且选中文字不为空
+					if (selected == false) {
+						if (selectedContent.toString() && (selectedContent.toString() != "")) {
+							selected = true;
+							//alert(selectedContent.toString());
+						}
+					}
+				});
+ 
+ 
+
+ 
+ $('.addnote').click(function(event) {
+    //记录标记，使得用户在编写笔记时，无法再次选中其他文字。
+    noteselected = true;
+    highlightAndSaveSelected(); ////高亮（下面将贴出代码）
+    selectedContent.empty(); //清空选中文字
+    
+});
+
+ 
+ 
+/*   rendition.hooks.content.register(function(contents){
+
+        var loaded = Promise.all([
+            contents.addScript("https://code.jquery.com/jquery-2.1.4.min.js"),
+            contents.addStylesheet("http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.css")
+        ]);
+
+        // return loaded promise
+        return loaded;
+    });
+	
+rendition.hooks.content.register(function(contents){
+
+    
+    var s = document.createElement("style");
+    s.innerHTML =".highlight { background: yellow; font-weight: normal; }";
+    
+    renderer.render.document.head.appendChild(s);
+    
+   
+
+});
+*/
+ 
+ 
+function highlightAndSaveSelected() {
+     selected = false;
+    var range = selection.getRangeAt(0);
+    var epubcfi = new EPUBJS.EpubCFI();
+    var chapter = Book.currentChapter;
+    var cfiBase = chapter.cfiBase;
+    var cfi = epubcfi.generateCfiFromRange(range, cfiBase);
+    //对CFI进行存储
+   var note = new Object();
+	note.color = 'copyright';
+	note.cfi = cfi;
+    note.text = selection.toString();
+	 
+
+    selection.empty();
+ 
+    highlightRange(range, note.color);
+}
+
+
+
+  
+        </script>
+    </body>
+</html>
