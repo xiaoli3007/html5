@@ -1,4 +1,22 @@
+
+
+    var rendition = book.renderTo("viewer", {
+      width: "100%",
+      height: 600,
+      ignoreClass: 'annotator-hl',
+      manager: "continuous"
+    });
+
+     var displayed = rendition.display(0);
 	
+	var  Locations = book.locations;
+	
+	var  Contents = book.contents;
+	 var notes = document.getElementById('notes');
+	 
+	 
+	 
+	 	
     book.ready.then(() => {
 		 document.getElementById("loader").style.display = "none";
 		  var next = document.getElementById("next");
@@ -36,7 +54,7 @@
 				TocController(navigation);
 		 });
 
-    })
+    });
 	
 
   //目录相关===========================================================================================
@@ -192,6 +210,11 @@
 		sidebarOpen = false;
 		$main.removeClass("closed");
 		$sidebar.removeClass("open");
+		
+		//隐藏笔记相关
+		$('#static-note-form').hide();
+		//切换到 目录 标签页
+		changePanelTo('Toc','tocView');
 	}		
 			
 	//菜单控制 向右滑动		
@@ -234,14 +257,38 @@
 
 //总的标签  包括数据库中的  和 当前加入的
 if(!all_bookmarks) {
-	var all_bookmarks = [];
+	 all_bookmarks = [];
 }
 //当前的cfi位置 
 var currentLocationCfi ;	
 var $bookmarks = $("#bookmarksView");
  
+  
+function cfitotext(cfi) {
+  
+	var textContent = '';
+	var spineItem = book.spine.get(cfi);
+	//alert(Locations.percentageFromCfi(cfi));
+	var tocItem;
+	if (spineItem.index in book.navigation.toc) {
+		tocItem = book.navigation.toc[spineItem.index];
+		
+		textContent = tocItem.label;
+	} else {
+		textContent = cfi;
+	}
+	
+	return textContent;
+};
+	
 	
 	//生成标签==================================
+	function GotoBookmarkItem(cfi) {
+		
+		rendition.display(cfi);
+		
+	}
+	
  function createBookmarkItem(cfi,biaoqian_id) {
 	  
 		
@@ -249,22 +296,10 @@ var $bookmarks = $("#bookmarksView");
 				link = document.createElement("a");
 				removelink = document.createElement("a");
 
-		listitem.id = "bookmark-"+counter;
+		listitem.id = "bookmark-"+biaoqian_id;
 		listitem.classList.add('list_item');
-		
-		
-		
-		var spineItem = book.spine.get(cfi);
-		//alert(Locations.percentageFromCfi(cfi));
-		var tocItem;
-		if (spineItem.index in book.navigation.toc) {
-			tocItem = book.navigation.toc[spineItem.index];
-			
-			link.textContent = tocItem.label;
-		} else {
-			link.textContent = cfi;
-		}
-
+	
+		link.textContent =	cfitotext(cfi);
 		link.href = cfi;
 
 		link.classList.add('bookmark_link');
@@ -275,9 +310,22 @@ var $bookmarks = $("#bookmarksView");
 				event.preventDefault();
 		}, false);
 		
-	  
-		removelink='<a href="javascript:;" class="bookmark_link_delete" onClick="removeBookmark('+cfi+','+biaoqian_id+')" >移除</a>';
+	  	
+		removelink.textContent="移除";
+		removelink.href = "javascript:;";
+		//removelink.cfi = cfi;
+		removelink.classList.add('bookmark_link_delete');
+		 
+		removelink.onclick = function() { removeBookmark("'"+cfi+"'",biaoqian_id); }
+		/*removelink.addEventListener("click", function(event){
+				var cfi = this.getAttribute('cfi');
+				removeBookmark("'"+cfi+"'",biaoqian_id);
+				//event.preventDefault();
+		}, false);*/
 		
+		//var removelink='<a href="javascript:;" class="bookmark_link_delete" onClick="removeBookmark("'+cfi+'",'+biaoqian_id+')" >移除</a>';
+		
+		//alert(removelink);
 		listitem.appendChild(link);
 		listitem.appendChild(removelink);
 	 
@@ -300,46 +348,92 @@ var $bookmarks = $("#bookmarksView");
 
 function addBookmark_mysql(cfi){
 	 
+	var title = cfitotext(cfi);
+	 var status=0;
 	  var bol=0;
+	  var msg='';
 		$.ajax({
-			type: "post",
+			type: "get",
 			async:false,
-			url: "reg.php?type=email_yz&cfi="+cfi+"&r="+Math.random(),
+			url: "/index.php?m=content&c=epub&a=join_maked&cfi="+cfi+"&media_id="+global_media_id+"&page="+0+"&title="+title+"&r="+Math.random(),
+			
+			//url: "index.php?m=content&c=epub&a=join_maked",
+       		// data: "cfi="+cfi+"&media_id="+global_media_id+"&page="+0+"&title="+title,
 			dataType: "json",
 			success: function(savedata){
-				if(savedata['info']==1){
+				if(savedata['status']==1){
 					bol=savedata['id']; 
 				}
+				status=savedata['status'];
+				msg=savedata['msg'];
 			}
 		});
-		return bol;
+		if(status>0){
+			return bol;
+		}else{
+			alert(msg);	
+			return false;
+		}
+		
 }
+
 function addBookmark(cfi) {
-	var present = isBookmarked(cfi);
+	/*var present = isBookmarked(cfi);
 	if(present > -1 ) return;
 
-	all_bookmarks.push(cfi);
-
+	all_bookmarks.push(cfi);*/
+  
     $list = $bookmarks.find("#bookmarks");
 
 	var docfrag = document.createDocumentFragment();
 	
+	var biaoqian_id = addBookmark_mysql(cfi);
+	if(biaoqian_id){
+		//alert(biaoqian_id);
+		var bookmark = createBookmarkItem(cfi,biaoqian_id);
+		docfrag.appendChild(bookmark);
+		$list.append(docfrag);
+		all_bookmarks.push(cfi);//加入临时数据  
+	}else{
+		return false;
+		alert('添加失败');	
+	}
 	
-	var bookmark = createBookmarkItem(cfi,biaoqian_id);
- 	docfrag.appendChild(bookmark);
-	$list.append(docfrag);
 };
 
 
 //移除标签
+
+function removeBookmark_mysql(biaoqian_id){
+	 
+  
+	  var bol=0;
+		$.ajax({
+			type: "post",
+			async:false,
+			url: "/index.php?m=content&c=epub&a=remove_maked&biaoqian_id="+biaoqian_id+"&r="+Math.random(),
+			dataType: "json",
+			success: function(savedata){
+				 
+				bol=savedata['status'];
+			}
+		});
+		return bol;
+}
+
 function removeBookmark(cfi,biaoqian_id) {
-	var bookmark = isBookmarked(cfi);
-	if( bookmark === -1 ) return;
-
-	all_bookmarks.splice(bookmark, 1);
-
-	var $item = $("#bookmark-"+biaoqian_id);
-	$item.remove();
+	//alert(biaoqian_id);
+	//var bookmark = isBookmarked(cfi);
+	//if( bookmark === -1 ) return;
+	
+	if(removeBookmark_mysql(biaoqian_id)){
+		all_bookmarks.splice(bookmark, 1);
+		var $item = $("#bookmark-"+biaoqian_id);
+		$item.remove();
+	}else{
+		alert('添加失败');	
+	}
+	
 };
 
 $bookmark.on("click", function() {
@@ -351,9 +445,14 @@ $bookmark.on("click", function() {
 	
 	//var currentPage = Locations.locationFromCfi(cfi);		
 	 
-	var bookmarked = isBookmarked(cfi);
-
-	if(bookmarked === -1) { //-- Add bookmark
+	//var bookmarked = isBookmarked(cfi);
+//alert(111);
+	addBookmark(cfi);
+		$bookmark
+			.addClass("icon-bookmark")
+			.removeClass("icon-bookmark-empty");
+			return true;
+	/*if(bookmarked === -1) { //-- Add bookmark
 		addBookmark(cfi);
 		$bookmark
 			.addClass("icon-bookmark")
@@ -363,8 +462,8 @@ $bookmark.on("click", function() {
 		$bookmark
 			.removeClass("icon-bookmark")
 			.addClass("icon-bookmark-empty");
-	}
-	/**/
+	}*/
+	 
 
 });
 
@@ -385,8 +484,150 @@ rendition.on('relocated', function(location){
 	}
 
 	currentLocationCfi = cfi;
-
+notediv.style.display = "none";
 	 
 });/**/
+
+
+
+//笔记==================================================================================================
+
+$addnotes = $('.addnotes');
+
+$addnotes.on("click", function() {
+		 
+//alert(111);
+
+		if(!sidebarOpen) {
+			sidebarOpenshow();
+			$slider.addClass("icon-right");
+			$slider.removeClass("icon-menu");
+		}
+		 $('#static-note-form').show();
+		changePanelTo('Notes','notesView');
+		notediv.style.display = "none";
+		
+});
+
+//环境变量 总的 标记文字
+ var global_text='';
+ 
+function addnote(cfiRange, contents){
+	
+	  book.getRange(cfiRange).then(function (range) {
+       
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        var remove = document.createElement('a');
+       
+		//alert( range.toString());
+		
+        if (range) {
+		
+			 //获取书中选中位置的位置  进行自定义的高亮=======	
+			  var aaa= contents.window.getSelection();
+			  var rangeaaa = aaa.getRangeAt(0);
+			 // console.log(rangeaaa);
+			/*  highlightRange(rangeaaa, 'highlight');*/
+			 //拼接笔记===================================	
+			  text = range.toString();
+			  
+			 /* a.textContent = text;
+			  a.href = "#" + cfiRange;
+			  a.onclick = function () {
+				rendition.display(cfiRange);
+			  };
+	
+			  remove.textContent = "移除";
+			  remove.href = "#" + cfiRange;
+			  remove.onclick = function () {
+				rendition.annotations.remove(cfiRange);
+				return false;
+			  };
+	
+			  li.appendChild(a);
+			  li.appendChild(remove);
+			  notes.appendChild(li);*/
+			  
+			  $('#note-cfi').val(cfiRange);
+			  $('#note-content').val(text);
+			  $('#static-note-content').html(text);
+			  
+        }
+
+      });
+}
+
+
+rendition.on("selected", function(cfiRange, contents) {
+  //  
+	   
+	 //  alert(contents.window.event.clientX);
+//addnote(cfiRange, contents);
+
+
+ addnote(cfiRange, contents);
+
+});
+
+rendition.on("mouseup", function(cfiRange, contents) {
+ 
+  
+	 var txt = contents.window.getSelection();
+	   
+ 	 e =   contents.window.event;
+	
+	 left = e.screenX; 
+	 topss =  e.screenY -100  ;
+	  console.log(txt.toString());
+	// var aaa= contents.window.getSelection();
+	/* console.log(e);
+	
+	  console.log("left"+left);
+	  console.log(topss);*/
+	if (txt.toString()!='') {
+		if(txt!=global_text){
+			notediv.style.display = "inline";
+			notediv.style.left = left + "px";
+			notediv.style.top = topss + "px";
+			global_text = txt.toString();
+			//txt.empty();
+		}
+		
+	} else {
+		notediv.style.display = "none";
+	}
+	
+ 
+});
+    
+function highlight(cfiRange){
+	
+			 rendition.annotations.highlight(cfiRange, {}, (e) => {
+		   // console.log("highlight clicked", e.target);
+			
+			//alert(11);
+			 
+		  });	
+}	
+
+var notediv = document.getElementById("notediv"); 
+/*
+浏览器 鼠标停止跟随显示div
+var eleContainer =  document;
+
+eleContainer.onmouseup = function(e) {
+   //alert(11);
+	e = e || window.event;
+	var txt = 'aaa', sh = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+	var left = (e.clientX - 40 < 0) ? e.clientX + 20 : e.clientX - 40, top = (e.clientY - 40 < 0) ? e.clientY + sh + 20 : e.clientY + sh - 40;
+	if (txt) {
+		notediv.style.display = "inline";
+		notediv.style.left = left + "px";
+		notediv.style.top = top + "px";
+	} else {
+		notediv.style.display = "none";
+	}
+};*/
 
  
