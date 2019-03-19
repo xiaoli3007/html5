@@ -1,17 +1,14 @@
 <template>
-	<ol>
-		<li v-bind:todo="item" v-for="item in tableData3">
-			{{ item.title }}
-		</li>
-	</ol>
+	<div class="blog-post">
+  <h3>{{ post.name }}</h3>
+  <button v-on:click="$emit('enlarge-text', 0.1)">放大</button>
+  <div v-html="post.address"></div>
+</div>
 </template>
 <script>
 	
 	export default {
-		data() {
-			return {
-				activeIndex: '1'
-			};
-		}
+		 props: ['post'],
+		 
 	}
 </script>

@@ -50,7 +50,7 @@
 			fetchData() {
 				
 				getList(this.listQuery).then(response => {
-				  console.log(response)
+				  // console.log(response)
 				  this.tableData2 = response
 				})
 				
