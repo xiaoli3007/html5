@@ -52,7 +52,7 @@
 </template>
 <script>
 	import {
-		insertContent
+		insertContent,getContentOne
 	} from '@/api/content.js'
 
 	export default {
@@ -118,11 +118,23 @@
 				 fullscreenLoading: false
 			};
 		},
+		created() {
+			// console.log(this.tableData3)
+			this.id = {id:this.$route.params.id}
+			this.fetchOneData()
+		},
 		methods: {
+			 fetchOneData() {
+				getContentOne(this.id).then(response => {
+					console.log(response)
+					this.ruleForm = response['data']
+				})
+			
+			},
 			submitForm(formName) {
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
-						// console.log(this.ruleForm.date1);
+						console.log(this.ruleForm);
 						// alert('submit!');
 						  this.fullscreenLoading = true;
 						insertContent(this.ruleForm).then(response => {
@@ -131,7 +143,7 @@
 							if(response.result=='success'){
 								this.$notify({
 								  title: '成功',
-								  message: '添加成功',
+								  message: '修改成功',
 								  type: 'success'
 								});
 								 this.fullscreenLoading = false; 

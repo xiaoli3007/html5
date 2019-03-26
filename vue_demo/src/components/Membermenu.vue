@@ -21,6 +21,10 @@
 				activeIndex: ''
 			};
 		},
+		created() {
+		  // this.activeIndex = this.$route.meta.menu
+		  this.activeIndex = this.$route.name
+		},
 		methods: {
 			handleSelect(key, keyPath) {
 				console.log(key, keyPath);

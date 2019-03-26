@@ -8,6 +8,8 @@ import Login from './views/Login.vue'
 import Member from './views/Member.vue'
 import Contentlist from './views/Contentlist.vue'
 import Contentadd from './views/Contentadd.vue'
+import Contentedit from './views/Contentedit.vue'
+import refresh from './components/refresh.vue'
 
 Vue.use(Router)
 
@@ -30,6 +32,10 @@ export default new Router({
 				auth: false,
 				menu: 'login'
 			}
+		}, {
+			path: '/refresh',
+			component: refresh,
+			name: 'refresh'
 		},
 		{
 			path: '/',
@@ -71,15 +77,21 @@ export default new Router({
 					meta: {
 						menu: 'contentlist'
 					}
-				},{
+				}, {
 					path: 'contentadd',
 					component: Contentadd,
 					name: 'contentadd',
 					meta: {
 						menu: 'contentadd'
 					}
-				}
-				]
+				}, {
+					path: 'contentedit/:id',
+					component: Contentedit,
+					name: 'contentedit',
+					meta: {
+						menu: 'contentedit'
+					}
+				}]
 			}]
 		}
 	]

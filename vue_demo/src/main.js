@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
+import _g from './utils/global.js'
 import axios from 'axios'
 import '@/permission'
 
@@ -24,7 +25,11 @@ Vue.config.productionTip = false
 //     }
 //     next()
 // })
-
+window._g = _g
+const bus = new Vue()
+window.bus = bus
+window.router = router
+window.store = store
 		
 new Vue({
   router,
