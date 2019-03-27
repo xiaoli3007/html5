@@ -17,7 +17,10 @@
 			<el-row style="margin-top: 15px;">
 				<el-col :span="24">
 					
-					<router-view v-loading="showLoading"></router-view>
+					<transition name="fade" mode="out-in" appear>
+						<router-view ></router-view>
+					</transition>
+					
 				</el-col>
 			</el-row>
 		</el-col>
