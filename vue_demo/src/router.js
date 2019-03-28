@@ -25,14 +25,6 @@ export default new Router({
 				menu: 'index'
 			},
 		}, {
-			path: '/login',
-			component: Login,
-			name: 'login',
-			meta: {
-				auth: false,
-				menu: 'login'
-			}
-		}, {
 			path: '/refresh',
 			component: refresh,
 			name: 'refresh'
@@ -56,7 +48,15 @@ export default new Router({
 						auth: false,
 						menu: 'demo'
 					}
-				},
+				}, {
+			path: '/login',
+			component: Login,
+			name: 'login',
+			meta: {
+				auth: false,
+				menu: 'login'
+			}
+		}
 
 			]
 		},

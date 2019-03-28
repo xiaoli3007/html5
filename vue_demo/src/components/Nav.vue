@@ -3,7 +3,7 @@
 	 text-color="#fff" active-text-color="#ffd04b">
 		<el-menu-item index="index">首页</el-menu-item>
 		<el-menu-item index="about">关于我们</el-menu-item>
-		<el-menu-item index="member">个人中心</el-menu-item>
+		<el-menu-item index="contentlist">个人中心</el-menu-item>
 		<el-menu-item index="demo" >测试页面</el-menu-item>
 		<el-menu-item index="login" v-if="!name">
 			登录  

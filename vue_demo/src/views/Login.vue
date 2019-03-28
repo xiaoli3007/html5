@@ -68,7 +68,7 @@
 						// console.log(this.ruleForm2);
 						this.$store.dispatch('Login', this.ruleForm2).then(() => {
 							this.fullscreenLoading = false
-						  this.$router.replace({ path: 'member/' })
+						  this.$router.replace({ name: 'contentlist' })
 						}).catch(() => {
 						  this.fullscreenLoading = false
 						})

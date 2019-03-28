@@ -10,7 +10,7 @@
 					<el-breadcrumb separator-class="el-icon-arrow-right" >
 						<el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
 						<el-breadcrumb-item>活动管理</el-breadcrumb-item>
-						<el-breadcrumb-item>活动列表{{globalLoading}}</el-breadcrumb-item>
+						<el-breadcrumb-item>活动列表</el-breadcrumb-item>
 					</el-breadcrumb>
 				</el-col>
 			</el-row>
@@ -18,7 +18,7 @@
 				<el-col :span="24">
 					
 					<transition name="fade" mode="out-in" appear>
-						<router-view ></router-view>
+						<router-view v-loading="showLoading"></router-view>
 					</transition>
 					
 				</el-col>
@@ -28,6 +28,17 @@
 
 
 </template>
+<style>
+	.fade-enter-active,
+	.fade-leave-active {
+		transition: opacity .5s
+	}
+	
+	.fade-enter,
+	.fade-leave-active {
+		opacity: 0
+	}	
+</style>
 <script>
 	import Membermenu from '@/components/Membermenu.vue'
 	import {
@@ -37,8 +48,12 @@
 		data() {
 			return {
 				tableData3: '11',
-				postFontSize: 2
+				postFontSize: 2,
+				// mactiveIndex:""
 			}
+		},
+		created() {
+		  // this.mactiveIndex = this.$route.name
 		},
 		computed: {
 			...mapGetters([
@@ -47,7 +62,7 @@
 				'globalLoading',
 			]),
 			showLoading() {
-				return this.$store.state.globalLoading
+				return this.$store.state.app.globalLoading
 			}
 		},
 		components: {

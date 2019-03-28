@@ -12,7 +12,7 @@
 	</div>
 	
 
-	<el-table :data="tableData" stripe style="width: 100%" v-loading="loading">
+	<el-table :data="tableData" stripe style="width: 100%" >
 		<el-table-column prop="title" label="标题" width="280">
 		</el-table-column>
 		<el-table-column prop="date" label="时间" width="280">
@@ -23,6 +23,7 @@
 			<template slot-scope="scope">
 				<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
 				<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+				<el-button size="mini" type="success" @click="handlestaus()">状态改变</el-button>
 			</template>
 
 
@@ -77,15 +78,15 @@
 			  router.push({ path: this.$route.path, query: { keywords: this.keywords, page: page }})
 			},
 			fetchData() {
-				this.loading = true
+				_g.openGlobalLoading()
 				const params = {
 				    keywords: this.keywords,
 				    page: this.currentPage,
 				    max: this.max
 				}
 				getContentList(params).then(response => {
-					console.log(response)
-					this.loading = false
+					// console.log(response)
+					_g.closeGlobalLoading()
 					this.tableData = response['data']
 					this.dataCount = parseInt(response['dataCount'])
 				})
@@ -119,6 +120,9 @@
 			handleEdit(index, row) {
 				console.log(index, row);
 				this.$router.push({ name: 'contentedit', params: { id: row.id }})
+			},
+			handlestaus(){
+				
 			},
 			handleDelete(index, row) {
 				this.$confirm('确认删除该用户?', '提示', {

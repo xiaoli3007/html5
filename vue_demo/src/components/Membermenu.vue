@@ -1,5 +1,6 @@
 <template>
-	<el-menu default-active="activeIndex" class="el-menu-vertical-demo" @select="handleSelect"  @open="handleOpen" @close="handleClose" background-color="#545c64"
+	<div>
+	<el-menu :default-active="mactiveIndex" class="el-menu-vertical-demo" @select="handleSelect"  @open="handleOpen" @close="handleClose" background-color="#545c64"
 	 text-color="#fff" active-text-color="#ffd04b">
 
 		<el-menu-item index="contentlist">
@@ -13,21 +14,26 @@
 		</el-menu-item>
 
 	</el-menu>
+	
+	
+	</div>
+	
 </template>
 <script>
 	export default {
+		props: ['mactiveIndex'],
 		data() {
 			return {
-				activeIndex: ''
+				mactiveIndex: ''
 			};
 		},
 		created() {
 		  // this.activeIndex = this.$route.meta.menu
-		  this.activeIndex = this.$route.name
+		  this.mactiveIndex = this.$route.name
 		},
 		methods: {
 			handleSelect(key, keyPath) {
-				console.log(key, keyPath);
+				// console.log(key, keyPath);
 				this.$router.push({
 					name: key
 				})

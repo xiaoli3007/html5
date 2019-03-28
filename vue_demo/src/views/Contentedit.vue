@@ -125,8 +125,10 @@
 		},
 		methods: {
 			 fetchOneData() {
+				 _g.openGlobalLoading()
 				getContentOne(this.id).then(response => {
-					console.log(response)
+					// console.log(response)
+					_g.closeGlobalLoading()
 					this.ruleForm = response['data']
 				})
 			
