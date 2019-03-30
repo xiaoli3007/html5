@@ -11,7 +11,7 @@
 
 		<el-form-item>
 			<el-button type="primary" @click="submitForm('ruleForm2')"  v-loading.fullscreen.lock="fullscreenLoading">提交</el-button>
-			<el-button @click="resetForm('ruleForm2')">重置</el-button>
+			<el-button @click="resetForm('ruleForm2')">重置{{aaa}}</el-button>
 		</el-form-item>
 	</el-form>
 </template>
@@ -57,8 +57,13 @@
 					}]
 				},
 				fullscreenLoading: false,
-				loadingtext:"请求中。。。"
+				loadingtext:"请求中。。。",
+				aaa:process.env.VUE_APP_BASE_API
 			};
+		},
+		created() {
+			// console.log(this.tableData3)
+			console.log(process.env.VUE_APP_BASE_API)
 		},
 		methods: {
 			submitForm(formName) {

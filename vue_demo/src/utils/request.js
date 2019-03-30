@@ -8,7 +8,8 @@ import qs from 'qs'
 // 创建axios实例
 const service = axios.create({
 	// baseURL: process.env.BASE_API, // api的base_url
-	baseURL: 'http://vuesunapi.com/appapi', // api的base_url
+	baseURL: process.env.VUE_APP_BASE_API, // api的base_url
+	// baseURL: 'http://vuesunapi.com/appapi', // api的base_url
 	timeout: 15000, // 请求超时时间
 	transformRequest: [function(data) {
 		// 对 data 进行任意转换处理
