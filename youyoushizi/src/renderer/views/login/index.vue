@@ -76,7 +76,7 @@ export default {
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ name: 'Dashboard' })
+            this.$router.push({ path: '/' })
           }).catch(() => {
             this.loading = false
           })

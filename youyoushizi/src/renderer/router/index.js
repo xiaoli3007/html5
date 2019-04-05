@@ -12,10 +12,10 @@ export const constantRouterMap = [
   {
     path: '/',
     component: Layout,
-     redirect: { name: 'Dashboard' },
+    redirect: '/dashboard',
+		name: 'Dashboard',
     hidden: true,
     children: [{
-			name: 'Dashboard',
       path: 'dashboard',
       component:  require('@/views/dashboard/index').default,
 			

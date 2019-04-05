@@ -85,17 +85,19 @@ let rendererConfig = {
           }
         }
       },
-// 			{
-// 			  test: /\.svg$/,
-// 			  loader: 'svg-sprite-loader',
-// 			  include: [path.join(__dirname, '../src/renderer/icons')],
-// 			  options: {
-// 			    symbolId: 'icon-[name]'
-// 			  }
-// 			},
+			{
+			  test: /\.svg$/,
+			  loader: 'svg-sprite-loader',
+			  include: [path.join(__dirname, '../src/renderer/icons')],
+			  // include: [resolve('../src/renderer/icons')],
+			  options: {
+			    symbolId: 'icon-[name]'
+			  }
+			},
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-				// exclude: [path.join(__dirname, '../src/renderer/icons')],
+				exclude: [path.join(__dirname, '../src/renderer/icons')],
+				// exclude: [resolve('../src/renderer/icons')],
         use: {
           loader: 'url-loader',
           query: {
