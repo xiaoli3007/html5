@@ -22,7 +22,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "youyoushizi",
+    "productName": "优优识字",
     "appId": "com.example.yourapp",
     "directories": {
       "output": "build"

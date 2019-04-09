@@ -8,7 +8,6 @@ import Layout from '../views/layout/Layout'
 export const constantRouterMap = [
   { path: '/login', component:  require('@/views/login/index').default, hidden: true },
   { path: '/404', component:  require('@/views/404').default, hidden: true },
-
   {
     path: '/',
     component: Layout,
@@ -20,49 +19,64 @@ export const constantRouterMap = [
       component:  require('@/views/dashboard/index').default,
 			
     }]
-  }
-// 	{
-// 		path: '/',
-// 		component: Layout,
-// 			children: [{
-// 			path: 'dashboard',
-// 			component: require('@/views/dashboard/index'),
-// 			name: 'Dashboard',
-// 			hidden: true,
-// 		}]
-// 	}
-,
+  },
   {
-    path: '/example',
+    path: '/study',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: '学习', icon: 'example' },
+    redirect: '/study/jiaocai',
+    name: 'Study',
+    meta: { title: '学习', icon: 'study' },
     children: [
+			 {
+			  path: 'task',
+			  name: 'Task',
+			  component:  require('@/views/study/list/task').default,
+			  meta: { title: '历史任务', icon: 'tasklist' }
+			},
       {
-        path: 'table',
-        name: 'Table',
-        component:  require('@/views/table/index').default,
-        meta: { title: '课程列表', icon: 'table' }
+        path: 'jiaocai',
+        name: 'Jiaocai',
+        component:  require('@/views/study/list/jiaocai').default,
+        meta: { title: '教材', icon: 'jiaocai' }
       },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component:  require('@/views/tree/index').default,
-        meta: { title: '课程分类', icon: 'tree' }
-      }
+			{
+			  path: 'book',
+			  name: 'Book',
+			  component:  require('@/views/study/list/book').default,
+			  meta: { title: '课外读物', icon: 'book' }
+			},
+//       {
+//         path: 'cat',
+//         name: 'Cat',
+//         component:  require('@/views/study/list/cat').default,
+//         meta: { title: '分类', icon: 'tree' }
+//       }
     ]
   },
-
   {
-    path: '/form',
+    path: '/serve',
     component: Layout,
+		redirect: '/serve/help',
+		name: 'Serve',
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component:  require('@/views/form/index').default,
-        meta: { title: '表单', icon: 'form' }
+        path: 'help',
+        name: 'Help',
+        component:  require('@/views/help/help').default,
+        meta: { title: '帮助', icon: 'help' }
+      }
+    ]
+  }, {
+    path: '/serve',
+    component: Layout,
+		redirect: '/serve/proposal',
+		name: 'Serve',
+    children: [
+       {
+        path: 'proposal',
+        name: 'Proposal',
+        component:  require('@/views/help/proposal').default,
+        meta: { title: '建议', icon: 'proposal' }
       }
     ]
   },

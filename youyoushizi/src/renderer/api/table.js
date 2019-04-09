@@ -7,3 +7,10 @@ export function getList(params) {
     params
   })
 }
+export function getjiaocaiList(params) {
+  return request({
+    url: '/table/jiaocaiList',
+    method: 'get',
+    params
+  })
+}
