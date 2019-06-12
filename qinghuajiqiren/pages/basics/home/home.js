@@ -5,7 +5,7 @@ Component({
     addGlobalClass: true,
   },
   data: {
-    InputBottom: 50,
+    InputBottom: 55,
     msgdata: '',
     toView: '',
     scrollTop: 100,
@@ -14,8 +14,9 @@ Component({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     msgList: [{
       speaker: 'server',
-        contentType: 'text',
-      content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能：'
+      contentType: 'text',
+      content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能：',
+      time: '',
       }
     ]
     
@@ -118,12 +119,12 @@ Component({
     InputFocus(e) {
       console.log(e.detail.height)
       this.setData({
-        // InputBottom: e.detail.height
+        InputBottom: e.detail.height
       })
     },
     InputBlur(e) {
       this.setData({
-        InputBottom: 50
+        InputBottom: 55
       })
     },
     upper: function(e) {
