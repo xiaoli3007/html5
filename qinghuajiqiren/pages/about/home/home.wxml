@@ -1,0 +1,41 @@
+<cu-custom bgColor="bg-blue">
+  <view slot="content">我的</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}}" class="png" mode="widthFix"></image>
+    <view class="text-xl">{{userInfo.nickName?userInfo.nickName:'xx'}}
+      <text class="text-df"> </text>
+    </view>
+<view class="text-xl">
+     <button wx:if="{{!userInfo.avatarUrl}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-btn"> 登录 </button>
+  </view>
+    <view class="margin-top-sm">
+      <text></text>
+    </view>
+    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+ 
+
+ 
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+ 
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+        <image src="/images/logo.png" class="png" mode="aspectFit"></image>
+        <text class="text-grey">关于我们</text>
+      </navigator>
+    </view>
+
+  
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-writefill text-cyan"></text>
+        <text class="text-grey">意见反馈</text>
+      </button>
+    </view>
+  
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>

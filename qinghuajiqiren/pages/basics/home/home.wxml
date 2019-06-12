@@ -1,0 +1,77 @@
+
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">诗小图</view>
+</cu-custom>
+
+  <view class="cu-bar bg-blue  solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-white "></text> 相关知识
+    </view>
+  </view>
+ 
+   <view class="cu-list menu sm-border">
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-grey">图书馆开馆时间</text>
+      </view>
+    </view>
+   
+    <view class="cu-item">
+      <view class="content">
+        <text class="text-grey">有关图书馆的问题向谁咨询</text>
+      </view>
+    </view>
+     <view class="cu-item">
+      <view class="content">
+        <text class="text-grey">如何向图书馆推荐购买新书和增订期刊</text>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="cu-bar bg-blue   solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-white "></text> 聊天
+    </view>
+  </view>
+  <scroll-view scroll-y style="height: 290px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+<view class="cu-chat">
+
+ <block wx:key wx:for='{{msgList}}' wx:for-index="index">
+
+        <view class="cu-item self" wx:if='{{item.speaker=="self"}}' id='msg-{{index}}'>
+    <view class="main">
+      <view class="content bg-green shadow">
+       {{item.content}}
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{userInfo.avatarUrl}});"></view>
+    <view class="date">13:23</view>
+  </view>
+
+  <view class="cu-item" wx:if='{{item.speaker=="server"}}' id='msg-{{index}}'>
+    <view class="cu-avatar radius shixiaotu-bg"></view>
+    <view class="main">
+      <view class="content shadow">
+      {{item.content}}
+      </view>      
+    </view>
+    <view class="date">13:23</view>
+  </view>
+   
+
+    </block>
+
+
+
+  
+</view>
+
+  </scroll-view>
+
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+ 
+  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10"  bindinput="bindKeyInput" value='{{msgdata}}'></input>
+
+  <button class="cu-btn bg-green shadow" bindtap="sendmsg">发送</button>
+</view>
