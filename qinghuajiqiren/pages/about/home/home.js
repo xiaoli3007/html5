@@ -42,7 +42,7 @@ Component({
         })
       }
 
-      console.log(this.data.userInfo);
+      // console.log(this.data.userInfo);
     },
     detached: function () {
       // 在组件实例被从页面节点树移除时执行

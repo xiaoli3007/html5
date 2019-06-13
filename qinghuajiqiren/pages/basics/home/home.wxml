@@ -1,4 +1,6 @@
 
+ <view id='home_main'>
+
 <cu-custom bgColor="bg-gradual-blue">
   <view slot="content">诗小图</view>
 </cu-custom>
@@ -34,7 +36,7 @@
       <text class="cuIcon-title text-white "></text> 聊天
     </view>
   </view>
-  <scroll-view scroll-y style="height: 290px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+  <scroll-view scroll-y style="height: 290px;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" >
 <view class="cu-chat">
 
  <block wx:key wx:for='{{msgList}}' wx:for-index="index">
@@ -45,7 +47,12 @@
        {{item.content}}
       </view>
     </view>
-    <view class="cu-avatar radius" style="background-image:url({{userInfo.avatarUrl}});"></view>
+    <view class="cu-avatar radius" wx:if='{{hasUserInfo}}' style="background-image:url({{userInfo.avatarUrl}});"></view>
+
+    <view class="cu-avatar radius" wx:if='{{!hasUserInfo}}'>
+    <text class="cuIcon-people"></text>
+    </view>
+
     <view class="date">{{item.time}}</view>
   </view>
 
@@ -74,4 +81,6 @@
   <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10"  bindinput="bindKeyInput" value='{{msgdata}}'></input>
 
   <button class="cu-btn bg-green shadow" bindtap="sendmsg">发送</button>
+</view>
+
 </view>
