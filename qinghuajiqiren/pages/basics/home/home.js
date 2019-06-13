@@ -1,5 +1,5 @@
 const app = getApp()
-
+var util = require('../../../utils/util.js')
 Component({
   options: {
     addGlobalClass: true,
@@ -15,8 +15,8 @@ Component({
     msgList: [{
       speaker: 'server',
       contentType: 'text',
-      content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能：',
-      time: '',
+      content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能',
+      time: util.timestampToString(),
       }
     ]
     
@@ -24,6 +24,8 @@ Component({
   },
   lifetimes: {
     attached: function() {
+
+      // console.log(util.timestampToString());
       // 在组件实例进入页面节点树时执行
       if (app.globalData.userInfo) {
         this.setData({
@@ -76,7 +78,8 @@ Component({
       tempdatamsglist.push({
         speaker: 'self',
         contentType: 'text',
-        content: this.data.msgdata
+        content: this.data.msgdata,
+        time: util.timestampToString(),
       }) 
 
       
@@ -103,7 +106,8 @@ Component({
             tempdatamsglist.push({
               speaker: 'server',
               contentType: 'text',
-              content: res.data.data.text
+              content: res.data.data.text,
+              time: util.timestampToString(),
             })
             that.setData({
               msgList: tempdatamsglist,

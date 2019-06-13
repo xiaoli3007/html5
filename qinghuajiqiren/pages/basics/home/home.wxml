@@ -46,7 +46,7 @@
       </view>
     </view>
     <view class="cu-avatar radius" style="background-image:url({{userInfo.avatarUrl}});"></view>
-    <view class="date">13:23</view>
+    <view class="date">{{item.time}}</view>
   </view>
 
   <view class="cu-item" wx:if='{{item.speaker=="server"}}' id='msg-{{index}}'>
@@ -56,7 +56,7 @@
       {{item.content}}
       </view>      
     </view>
-    <view class="date">13:23</view>
+    <view class="date">{{item.time}}</view>
   </view>
    
 
