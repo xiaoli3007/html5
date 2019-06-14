@@ -8,8 +8,8 @@ App({
         let custom = wx.getMenuButtonBoundingClientRect();
         this.globalData.Custom = custom;
         this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
-        this.globalData.foottabbarheight = e.windowHeight * (750 / e.windowWidth);
-        console.log(e);
+        // this.globalData.foottabbarheight = e.windowHeight * (750 / e.windowWidth);
+        // console.log(e);
       }
     })
    

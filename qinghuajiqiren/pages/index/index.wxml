@@ -1,6 +1,6 @@
 
 
-<basics wx:if="{{PageCur=='basics'}}" aaa="{{footheight}}"></basics>
+<basics wx:if="{{PageCur=='basics'}}" ></basics>
 <atlas wx:if="{{PageCur=='atlas'}}"></atlas>
 <about wx:if="{{PageCur=='about'}}"></about>
 

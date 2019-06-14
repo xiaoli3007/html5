@@ -7,17 +7,12 @@ Component({
       value: 0
     }
   },
-  queryMultipleNodes() {
-    const query = this.createSelectorQuery()
-    query.select('#home_main').boundingClientRect(function (res) {
-       console.log(res)
-    }).exec()
-  },
+
   options: {
     addGlobalClass: true,
   },
   data: {
-    InputBottom: 55,
+    InputBottom: 0,
     msgdata: '',
     toView: '',
     scrollTop: 100,
@@ -28,22 +23,20 @@ Component({
       contentType: 'text',
       content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能',
       time: util.timestampToString(),
-      }
-    ]
-    
+    }]
+
 
   },
   lifetimes: {
     attached: function() {
 
-      console.log(app.globalData.foottabbarheight);
       // 在组件实例进入页面节点树时执行
       if (app.globalData.userInfo) {
         this.setData({
           userInfo: app.globalData.userInfo,
           hasUserInfo: true
         })
-      } 
+      }
 
       // console.log(this.data.userInfo);
       //滚动到底部消息
@@ -64,16 +57,16 @@ Component({
     },
     sendmsg: function(e) {
       // console.log(e)
-      console.log(this.data.msgdata) 
+      console.log(this.data.msgdata)
       var tempdatamsglist = this.data.msgList
       tempdatamsglist.push({
         speaker: 'self',
         contentType: 'text',
         content: this.data.msgdata,
         time: util.timestampToString(),
-      }) 
+      })
 
-      
+
 
       this.setData({
         msgList: tempdatamsglist,
@@ -112,14 +105,14 @@ Component({
 
     },
     InputFocus(e) {
-      console.log(e.detail.height)
+      // console.log(e.detail.height)
       this.setData({
         InputBottom: e.detail.height
       })
     },
     InputBlur(e) {
       this.setData({
-        InputBottom: 55
+        InputBottom: 0
       })
     },
     upper: function(e) {
@@ -144,6 +137,13 @@ Component({
     tapMove(e) {
       this.setData({
         scrollTop: this.data.scrollTop + 10
+      })
+    },
+
+
+    gotoPage1: function (e) {
+      wx.navigateTo({
+        url: '/pages/basics/atlas/atlas',
       })
     }
 

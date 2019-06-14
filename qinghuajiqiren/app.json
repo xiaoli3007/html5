@@ -1,5 +1,8 @@
 {
   "pages": [
+
+    "pages/basics/home/home",
+
     "pages/index/index",
 
     "pages/about/about/about",
