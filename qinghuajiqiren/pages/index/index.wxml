@@ -4,7 +4,7 @@
 <atlas wx:if="{{PageCur=='atlas'}}"></atlas>
 <about wx:if="{{PageCur=='about'}}"></about>
 
-<view class="cu-bar tabbar bg-white shadow foot" id='tabbar'>
+<!-- <view class="cu-bar tabbar bg-white shadow foot" id='tabbar'>
   <view class="action" bindtap="NavChange" data-cur="basics">
     <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">主页</view>
   </view>
@@ -16,4 +16,4 @@
   <view class="action" bindtap="NavChange" data-cur="about">
     <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
   </view>
-</view>
+</view> -->

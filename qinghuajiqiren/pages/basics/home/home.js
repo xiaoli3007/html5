@@ -1,6 +1,8 @@
 const app = getApp()
 var util = require('../../../utils/util.js')
 Component({
+
+  
   properties: {
     aaa: { // 属性名
       type: Number,
@@ -13,6 +15,9 @@ Component({
   },
   data: {
     InputBottom: 0,
+    Inputdisabled: false,
+    useheight: 0,
+    scrollheight: 300,
     msgdata: '',
     toView: '',
     scrollTop: 100,
@@ -30,6 +35,7 @@ Component({
   lifetimes: {
     attached: function() {
 
+       
       // 在组件实例进入页面节点树时执行
       if (app.globalData.userInfo) {
         this.setData({
@@ -48,6 +54,33 @@ Component({
     detached: function() {
       // 在组件实例被从页面节点树移除时执行
     },
+    ready: function () {
+      // 在组件实例被从页面节点树移除时执行
+      const query = wx.createSelectorQuery().in(this)
+      var that = this 
+      //useheight
+     
+
+      query.select('#top_main').boundingClientRect(function (res) {
+        // 这个组件内 #the-id 节点的上边界坐标
+        // console.log(res.height)
+        that.setData({
+          useheight:  res.height
+        })
+      }).exec()
+
+      query.select('#foot').boundingClientRect(function (res) {
+        console.log(app.globalData.windowHeight)  // 这个组件内 #the-id 节点的上边界坐标
+
+        that.setData({
+          scrollheight: app.globalData.windowHeight-(that.data.useheight + res.height)-15
+        })
+        console.log(that.data.scrollheight) 
+      }).exec()
+
+      // console.log(111) 
+
+    },
   },
   methods: {
     bindKeyInput: function(e) {
@@ -58,26 +91,39 @@ Component({
     sendmsg: function(e) {
       // console.log(e)
       console.log(this.data.msgdata)
+      if (this.data.msgdata==''){
+
+        return false;
+
+      }
       var tempdatamsglist = this.data.msgList
+
+      var tempmsgdata = this.data.msgdata
+
+      this.setData({
+        msgdata: '',
+      })
+
       tempdatamsglist.push({
         speaker: 'self',
         contentType: 'text',
-        content: this.data.msgdata,
+        content: tempmsgdata,
         time: util.timestampToString(),
       })
-
-
 
       this.setData({
         msgList: tempdatamsglist,
         toView: 'msg-' + (this.data.msgList.length - 1),
       })
 
+      this.setData({
+        Inputdisabled: !this.data.Inputdisabled
+      })
       var that = this
       wx.request({
         url: app.globalData.url + '/Response', //仅为示例，并非真实的接口地址
         data: {
-          text: this.data.msgdata,
+          text: tempmsgdata,
         },
         header: {
           'content-type': 'application/json' // 默认值
@@ -95,8 +141,11 @@ Component({
             })
             that.setData({
               msgList: tempdatamsglist,
-              msgdata: '',
               toView: 'msg-' + (tempdatamsglist.length - 1),
+            })
+
+            that.setData({
+              Inputdisabled: !that.data.Inputdisabled
             })
 
           }
