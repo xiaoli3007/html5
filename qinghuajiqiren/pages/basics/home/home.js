@@ -143,7 +143,17 @@ Component({
 
           if (res.data.message == 'success') {
             console.log(res.data)
-            console.log(res.data.data.person[0].desc)
+           console.log(res.data.data.person[0])
+
+            var tempdatapersondesc = ''
+            var tempdatapersonname = ''
+            var tempdatapersonrel = []
+            if (res.data.data.person[0] ){
+               tempdatapersondesc = res.data.data.person[0].desc
+               tempdatapersonname = res.data.data.person[0].name
+               tempdatapersonrel = res.data.data.person[0].rel
+            } 
+             
             tempdatamsglist.push({
               speaker: 'server',
               contentType: 'text',
@@ -153,9 +163,9 @@ Component({
             that.setData({
               msgList: tempdatamsglist,
               toView: 'msg-' + (tempdatamsglist.length - 1),
-              person_desc: res.data.data.person[0].desc,
-              person_name: res.data.data.person[0].name,
-              relList: res.data.data.person[0].rel,
+              person_desc: tempdatapersondesc,
+              person_name: tempdatapersonname,
+              relList: tempdatapersonrel,
             })
    
           }
@@ -213,7 +223,16 @@ Component({
 
           if (res.data.message == 'success') {
             console.log(res.data)
-            console.log(res.data.data.person[0].desc)
+            
+            var tempdatapersondesc = ''
+            var tempdatapersonname = ''
+            var tempdatapersonrel = []
+            if (res.data.data.person[0]) {
+              tempdatapersondesc = res.data.data.person[0].desc
+              tempdatapersonname = res.data.data.person[0].name
+              tempdatapersonrel = res.data.data.person[0].rel
+            } 
+
             tempdatamsglist.push({
               speaker: 'server',
               contentType: 'text',
@@ -223,9 +242,9 @@ Component({
             that.setData({
               msgList: tempdatamsglist,
               toView: 'msg-' + (tempdatamsglist.length - 1),
-              person_desc: res.data.data.person[0].desc,
-              person_name: res.data.data.person[0].name,
-              relList: res.data.data.person[0].rel,
+              person_desc: tempdatapersondesc,
+              person_name: tempdatapersonname,
+              relList: tempdatapersonrel,
             })
 
           }

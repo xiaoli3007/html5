@@ -26,7 +26,7 @@
         <view class="text-yellow fr" bindtap="showModal" data-target="Modal"> 更多</view>     
       </view> 
     </view>
-
+ 
     <view class="cu-modal {{modalName=='Modal'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
