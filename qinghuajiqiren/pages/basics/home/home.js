@@ -173,10 +173,26 @@ Component({
           }
         } ,
         complete(res) {
-          that.setData({
-            Inputdisabled: !that.data.Inputdisabled,
-            loading_top: false,
-          })
+          console.log(res.statusCode)
+          if (res.statusCode==500){
+            that.setData({
+              
+              person_desc: '',
+              person_name: '',
+              relList: [],
+              Inputdisabled: !that.data.Inputdisabled,
+              loading_top: false,
+            })
+
+          }else{
+            
+            that.setData({
+              Inputdisabled: !that.data.Inputdisabled,
+              loading_top: false,
+            })
+
+          }
+         
           
         }
       })
@@ -255,10 +271,26 @@ Component({
           }
         },
         complete(res) {
-          that.setData({
-            Inputdisabled: !that.data.Inputdisabled,
-            loading_top: false,
-          })
+
+          if (res.statusCode == 500) {
+            that.setData({
+
+              person_desc: '',
+              person_name: '',
+              relList: [],
+              Inputdisabled: !that.data.Inputdisabled,
+              loading_top: false,
+            })
+
+          } else {
+
+            that.setData({
+              Inputdisabled: !that.data.Inputdisabled,
+              loading_top: false,
+            })
+
+          }
+          
         }
       })
 
