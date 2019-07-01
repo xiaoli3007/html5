@@ -1,6 +1,7 @@
 page{
   padding-bottom: 100rpx;
 } 
+.cu-bar-title{min-height:60rpx;}
 .chatscroll{  height:300px; }
 .cu-chat .cu-item>.main .content{word-break:break-all;}
 .fasong{ bottom:calc(100rpx + env(safe-area-inset-bottom) / 2);}

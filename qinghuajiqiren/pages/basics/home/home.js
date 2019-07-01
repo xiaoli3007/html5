@@ -15,6 +15,8 @@ Component({
   },
   data: {
     InputBottom: 0,
+    person_name:'李白',
+    person_desc:'李白 (701-762), 男, 文人, [為官者：文], 工於文, 書法家, 詩人, 籍贯：唐朝-河南道-兖州-任城, 行第：李十二, 规范名：李白, 字：太白, 曾任：翰林供奉(742), 王东巡幕中(759), 詩作為Y所稱道：陆游, 九世祖;太高曾祖：李皓',
     Inputdisabled: false,
     useheight: 0,
     scrollheight: 300,
@@ -28,9 +30,18 @@ Component({
       contentType: 'text',
       content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能',
       time: util.timestampToString(),
-    }]
+    }],
+    relList: [{
+      name: '陆游',
+      relationType: '詩作為Y所稱道',
+      uri: 'http://data.library.sh.cn/entity/person/hz8kvfmism0v0wz8',  
+    }, {
+        name: '李皓',
+        relationType: '九世祖;太高曾祖',
+        uri: 'http://data.library.sh.cn/entity/person/2oah45t4ulk6sgac',
+      }]
 
-
+ 
   },
   lifetimes: {
     attached: function() {
@@ -131,8 +142,8 @@ Component({
         success(res) {
 
           if (res.data.message == 'success') {
-            console.log(res.data.data.text)
-
+            console.log(res.data)
+            console.log(res.data.data.person[0].desc)
             tempdatamsglist.push({
               speaker: 'server',
               contentType: 'text',
@@ -142,10 +153,11 @@ Component({
             that.setData({
               msgList: tempdatamsglist,
               toView: 'msg-' + (tempdatamsglist.length - 1),
+              person_desc: res.data.data.person[0].desc,
+              person_name: res.data.data.person[0].name,
+              relList: res.data.data.person[0].rel,
             })
-
-           
-
+   
           }
         } ,
         complete(res) {
@@ -155,6 +167,86 @@ Component({
         }
       })
 
+    },
+    btnsendmsg: function (e) {
+      console.log(e.currentTarget.dataset.val)
+      console.log(this.data.msgdata)
+      if (e.currentTarget.dataset.val == '') {
+        return false;
+      }
+      this.setData({
+        msgdata: e.currentTarget.dataset.val,
+      })
+      if (this.data.msgdata == '') {
+        return false;
+      }
+      var tempdatamsglist = this.data.msgList
+      var tempmsgdata = this.data.msgdata
+      this.setData({
+        msgdata: '',
+      })
+      tempdatamsglist.push({
+        speaker: 'self',
+        contentType: 'text',
+        content: tempmsgdata,
+        time: util.timestampToString(),
+      })
+
+      this.setData({
+        msgList: tempdatamsglist,
+        toView: 'msg-' + (this.data.msgList.length - 1),
+      })
+
+      this.setData({
+        Inputdisabled: !this.data.Inputdisabled
+      })
+      var that = this
+      wx.request({
+        url: app.globalData.url + '/Response', //仅为示例，并非真实的接口地址
+        data: {
+          text: tempmsgdata,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success(res) {
+
+          if (res.data.message == 'success') {
+            console.log(res.data)
+            console.log(res.data.data.person[0].desc)
+            tempdatamsglist.push({
+              speaker: 'server',
+              contentType: 'text',
+              content: res.data.data.text,
+              time: util.timestampToString(),
+            })
+            that.setData({
+              msgList: tempdatamsglist,
+              toView: 'msg-' + (tempdatamsglist.length - 1),
+              person_desc: res.data.data.person[0].desc,
+              person_name: res.data.data.person[0].name,
+              relList: res.data.data.person[0].rel,
+            })
+
+          }
+        },
+        complete(res) {
+          that.setData({
+            Inputdisabled: !that.data.Inputdisabled
+          })
+        }
+      })
+
+    },
+    showModal(e) {
+      this.setData({
+        modalName: e.currentTarget.dataset.target
+      })
+    },
+    hideModal(e) {
+      this.setData({
+        modalName: null
+      })
     },
     InputFocus(e) {
       // console.log(e.detail.height)

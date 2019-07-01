@@ -1,41 +1,66 @@
+<wxs module="util">
 
+    var sub = function(val) {
+
+        return val.substring(0, 60)+"..."
+
+    }
+
+    module.exports.sub = sub;
+
+</wxs>
 <view id='top_main'>
 <cu-custom bgColor="bg-gradual-blue">
   <view slot="content">诗小图</view>
 </cu-custom>
 
-<view class="cu-bar bg-blue  solid-bottom">
+<view class="cu-bar bg-blue  solid-bottom cu-bar-title">
   <view class="action">
     <text class="cuIcon-title text-white "></text> 相关知识
   </view>
 </view>
 
-<view class="flex  p-xs margin-bottom-sm mb-sm">
+    <view class="flex  p-xs  mb-sm" wx:if='{{person_desc}}'>
       <view class="bg-grey padding-sm margin-xs radius">     
-       <view class="fl">李白：  我于杀戮之中绽放 ,亦如黎明中的花朵绽放 。。  </view> <view class="text-yellow fr"> 更多</view>     
+       <view class="fl"> {{util.sub(person_desc)}} </view>
+        <view class="text-yellow fr" bindtap="showModal" data-target="Modal"> 更多</view>     
       </view> 
     </view>
 
-<view class="padding-sm flex flex-wrap">
- 
-  <view class="padding-xs">
-    <view class="cu-tag bg-blue light">杜甫</view>
-  </view>
-  <view class="padding-xs">
-    <view class="cu-tag bg-blue light">白居易</view>
-  </view>
-  <view class="padding-xs">
-    <view class="cu-tag bg-blue light">成都</view>
-  </view>
+    <view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">{{person_name}}</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
 
+    <scroll-view scroll-y  style="height:{{scrollheight}}px">
+    <view class="padding-xl text-left">
+   {{person_desc}}
+    </view>
+</scroll-view>
+
+  </view>
+</view>
+
+
+<view class="flex flex-wrap">
+ <block wx:key wx:for='{{relList}}' wx:for-index="index" wx:if='{{index<5}}'>
   <view class="padding-xs">
+    <view class="cu-tag bg-blue light " bindtap="btnsendmsg" data-val="{{item.name}}">{{item.name}}    </view>
+  </view>
+  </block>
+
+  <view class="padding-xs" wx:if='{{relList[0].name}}'>
     <view class="cu-tag bg-orange " bindtap="gotoPage1">生成图谱</view>
   </view>
 
 </view>
 
-
-<view class="cu-bar bg-blue   solid-bottom">
+ 
+<view class="cu-bar bg-blue   solid-bottom cu-bar-title">
   <view class="action">
     <text class="cuIcon-title text-white "></text> 聊天
   </view>
