@@ -10,10 +10,14 @@
   </view>
 </view>
 
+<view class="flex  p-xs margin-bottom-sm mb-sm">
+      <view class="bg-grey padding-sm margin-xs radius">     
+       <view class="fl">李白：  我于杀戮之中绽放 ,亦如黎明中的花朵绽放 。。  </view> <view class="text-yellow fr"> 更多</view>     
+      </view> 
+    </view>
+
 <view class="padding-sm flex flex-wrap">
-  <view class="padding-xs">
-    <view class="cu-tag bg-blue light">李白</view>
-  </view>
+ 
   <view class="padding-xs">
     <view class="cu-tag bg-blue light">杜甫</view>
   </view>
@@ -23,13 +27,13 @@
   <view class="padding-xs">
     <view class="cu-tag bg-blue light">成都</view>
   </view>
+
+  <view class="padding-xs">
+    <view class="cu-tag bg-orange " bindtap="gotoPage1">生成图谱</view>
+  </view>
+
 </view>
 
-<view class="padding flex flex-direction">
-
-  <button class="cu-btn bg-grey lg" bindtap="gotoPage1">生成图谱</button>
-
-</view>
 
 <view class="cu-bar bg-blue   solid-bottom">
   <view class="action">

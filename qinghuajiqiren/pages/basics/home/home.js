@@ -144,11 +144,14 @@ Component({
               toView: 'msg-' + (tempdatamsglist.length - 1),
             })
 
-            that.setData({
-              Inputdisabled: !that.data.Inputdisabled
-            })
+           
 
           }
+        } ,
+        complete(res) {
+          that.setData({
+            Inputdisabled: !that.data.Inputdisabled
+          })
         }
       })
 
@@ -160,6 +163,7 @@ Component({
       })
     },
     InputBlur(e) {
+      // console.log(222)
       this.setData({
         InputBottom: 0
       })
