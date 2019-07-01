@@ -1,70 +1,72 @@
 <wxs module="util">
+  var sub = function(val) {
 
-    var sub = function(val) {
+    return val.substring(0, 60) + "..."
 
-        return val.substring(0, 60)+"..."
+  }
 
-    }
-
-    module.exports.sub = sub;
-
+  module.exports.sub = sub;
 </wxs>
 <view id='top_main'>
-<cu-custom bgColor="bg-gradual-blue">
-  <view slot="content">诗小图</view>
-</cu-custom>
+  <cu-custom bgColor="bg-gradual-blue">
+    <view slot="content">诗小图</view>
+  </cu-custom>
 
-<view class="cu-bar bg-blue  solid-bottom cu-bar-title">
-  <view class="action">
-    <text class="cuIcon-title text-white "></text> 相关知识
-  </view>
-</view>
-
-    <view class="flex  p-xs  mb-sm" wx:if='{{person_desc}}'>
-      <view class="bg-grey padding-sm margin-xs radius">     
-       <view class="fl"> {{util.sub(person_desc)}} </view>
-        <view class="text-yellow fr" bindtap="showModal" data-target="Modal"> 更多</view>     
-      </view> 
+  <view class="cu-bar bg-blue  solid-bottom cu-bar-title">
+    <view class="action">
+      <text class="cuIcon-title text-white "></text> 相关知识
     </view>
- 
-    <view class="cu-modal {{modalName=='Modal'?'show':''}}">
-  <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
-      <view class="content">{{person_name}}</view>
-      <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
+  </view>
+
+  <view class=" radius bg-gradual-blue shadow-blur" wx:if='{{loading_top}}'>
+    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-black response" style="height:100rpx"></image>
+  </view>
+
+  <view class="flex  p-xs  mb-sm" wx:if='{{person_desc && !loading_top}}' >
+    <view class="bg-grey padding-sm margin-xs radius">
+      <view class="fl"> {{util.sub(person_desc)}} </view>
+      <view class="text-yellow fr" bindtap="showModal" data-target="Modal"> 更多</view>
+    </view>
+  </view>
+
+  <view class="cu-modal {{modalName=='Modal'?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">{{person_name}}</view>
+        <view class="action" bindtap="hideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
       </view>
+
+      <scroll-view scroll-y style="height:{{scrollheight}}px">
+        <view class="padding-xl text-left">
+          {{person_desc}}
+        </view>
+      </scroll-view>
+
+    </view>
+  </view>
+
+
+  <view class="flex flex-wrap" wx:if='{{!loading_top}}'>
+    <block wx:key wx:for='{{relList}}' wx:for-index="index" wx:if='{{index<5}}'>
+      <view class="padding-xs">
+        <view class="cu-tag bg-blue light " bindtap="btnsendmsg" data-val="{{item.name}}">{{item.name}} </view>
+      </view>
+    </block>
+
+    <view class="padding-xs" wx:if='{{relList[0].name}}'>
+      <view class="cu-tag bg-orange " bindtap="gotoPage1">生成图谱</view>
     </view>
 
-    <scroll-view scroll-y  style="height:{{scrollheight}}px">
-    <view class="padding-xl text-left">
-   {{person_desc}}
+  </view>
+
+
+  <view class="cu-bar bg-blue   solid-bottom cu-bar-title">
+    <view class="action">
+      <text class="cuIcon-title text-white "></text> 聊天
     </view>
-</scroll-view>
-
   </view>
-</view>
-
-
-<view class="flex flex-wrap">
- <block wx:key wx:for='{{relList}}' wx:for-index="index" wx:if='{{index<5}}'>
-  <view class="padding-xs">
-    <view class="cu-tag bg-blue light " bindtap="btnsendmsg" data-val="{{item.name}}">{{item.name}}    </view>
-  </view>
-  </block>
-
-  <view class="padding-xs" wx:if='{{relList[0].name}}'>
-    <view class="cu-tag bg-orange " bindtap="gotoPage1">生成图谱</view>
-  </view>
-
-</view>
-
- 
-<view class="cu-bar bg-blue   solid-bottom cu-bar-title">
-  <view class="action">
-    <text class="cuIcon-title text-white "></text> 聊天
-  </view>
-</view>
 
 </view>
 

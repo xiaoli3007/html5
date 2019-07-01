@@ -14,6 +14,7 @@ Component({
     addGlobalClass: true,
   },
   data: {
+    loading_top: false,
     InputBottom: 0,
     person_name:'李白',
     person_desc:'李白 (701-762), 男, 文人, [為官者：文], 工於文, 書法家, 詩人, 籍贯：唐朝-河南道-兖州-任城, 行第：李十二, 规范名：李白, 字：太白, 曾任：翰林供奉(742), 王东巡幕中(759), 詩作為Y所稱道：陆游, 九世祖;太高曾祖：李皓',
@@ -113,6 +114,7 @@ Component({
 
       this.setData({
         msgdata: '',
+        loading_top: true,
       })
 
       tempdatamsglist.push({
@@ -172,8 +174,10 @@ Component({
         } ,
         complete(res) {
           that.setData({
-            Inputdisabled: !that.data.Inputdisabled
+            Inputdisabled: !that.data.Inputdisabled,
+            loading_top: false,
           })
+          
         }
       })
 
@@ -194,6 +198,7 @@ Component({
       var tempmsgdata = this.data.msgdata
       this.setData({
         msgdata: '',
+        loading_top: true,
       })
       tempdatamsglist.push({
         speaker: 'self',
@@ -251,7 +256,8 @@ Component({
         },
         complete(res) {
           that.setData({
-            Inputdisabled: !that.data.Inputdisabled
+            Inputdisabled: !that.data.Inputdisabled,
+            loading_top: false,
           })
         }
       })

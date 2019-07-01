@@ -1,6 +1,12 @@
 page{
   padding-bottom: 100rpx;
 } 
+@import "../../../colorui/animation.wxss";
+
+image[class*="gif-"] {
+  border-radius: 6rpx;
+  display: block;
+}
 .cu-bar-title{min-height:60rpx;}
 .chatscroll{  height:300px; }
 .cu-chat .cu-item>.main .content{word-break:break-all;}
