@@ -40,7 +40,8 @@ Component({
         name: '李皓',
         relationType: '九世祖;太高曾祖',
         uri: 'http://data.library.sh.cn/entity/person/2oah45t4ulk6sgac',
-      }]
+      }],
+    canvasList:[]
 
  
   },
@@ -102,7 +103,7 @@ Component({
     },
     sendmsg: function(e) {
       // console.log(e)
-      console.log(this.data.msgdata)
+      console.log(this.data.canvasList)
       if (this.data.msgdata==''){
 
         return false;
@@ -111,6 +112,8 @@ Component({
       var tempdatamsglist = this.data.msgList
 
       var tempmsgdata = this.data.msgdata
+
+      var temp_canvars_list = this.data.canvasList
 
       this.setData({
         msgdata: '',
@@ -144,8 +147,8 @@ Component({
         success(res) {
 
           if (res.data.message == 'success') {
-            console.log(res.data)
-           console.log(res.data.data.person[0])
+            // console.log(res.data)
+          //  console.log(res.data.data.person[0])
 
             var tempdatapersondesc = ''
             var tempdatapersonname = ''
@@ -154,8 +157,14 @@ Component({
                tempdatapersondesc = res.data.data.person[0].desc
                tempdatapersonname = res.data.data.person[0].name
                tempdatapersonrel = res.data.data.person[0].rel
+
+                
+                temp_canvars_list.push({
+                  name: tempdatapersonname,
+                  rel: tempdatapersonrel,
+                 })
             } 
-             
+            console.log(temp_canvars_list)
             tempdatamsglist.push({
               speaker: 'server',
               contentType: 'text',
@@ -168,6 +177,7 @@ Component({
               person_desc: tempdatapersondesc,
               person_name: tempdatapersonname,
               relList: tempdatapersonrel,
+              canvasList: temp_canvars_list,
             })
    
           }
@@ -344,6 +354,8 @@ Component({
 
 
     gotoPage1: function (e) {
+
+      console.log(this.data.canvasList)
       wx.navigateTo({
         url: '/pages/basics/atlas/atlas',
       })

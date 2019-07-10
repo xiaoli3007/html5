@@ -2,7 +2,7 @@
   "pages": [
 
     "pages/basics/home/home",
-
+    "pages/basics/atlas/atlas",
     "pages/index/index",
 
     "pages/about/about/about",
