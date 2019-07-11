@@ -374,17 +374,15 @@ Component({
           tmp_set_canvasList = this.data.canvasList
         }
         console.log(tmp_set_canvasList)
-        // wx.setStorage({
-        //   key: "canvasList",
-        //   data: this.data.canvasList
-        // })
+        wx.setStorage({
+          key: "canvasList",
+          data: tmp_set_canvasList
+        })
       }
-
-
-
-      // wx.navigateTo({
-      //   url: '/pages/basics/atlas/atlas',
-      // })
+ 
+      wx.navigateTo({
+        url: '/pages/basics/atlas/atlas',
+      })
     }
 
   }
