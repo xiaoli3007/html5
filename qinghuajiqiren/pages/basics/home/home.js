@@ -222,6 +222,9 @@ Component({
       }
       var tempdatamsglist = this.data.msgList
       var tempmsgdata = this.data.msgdata
+
+      var temp_canvars_list = this.data.canvasList
+
       this.setData({
         msgdata: '',
         loading_top: true,
@@ -262,6 +265,10 @@ Component({
               tempdatapersondesc = res.data.data.person[0].desc
               tempdatapersonname = res.data.data.person[0].name
               tempdatapersonrel = res.data.data.person[0].rel
+              temp_canvars_list.push({
+                name: tempdatapersonname,
+                rel: tempdatapersonrel,
+              })
             } 
 
             tempdatamsglist.push({
@@ -276,6 +283,7 @@ Component({
               person_desc: tempdatapersondesc,
               person_name: tempdatapersonname,
               relList: tempdatapersonrel,
+              canvasList: temp_canvars_list,
             })
 
           }
@@ -355,10 +363,28 @@ Component({
 
     gotoPage1: function (e) {
 
-      console.log(this.data.canvasList)
-      wx.navigateTo({
-        url: '/pages/basics/atlas/atlas',
-      })
+      
+      var tmp_set_canvasList = []
+
+      if (this.data.canvasList.length>0){
+        if (this.data.canvasList.length > 2) {
+
+          tmp_set_canvasList = this.data.canvasList.slice(-3, this.data.canvasList.length)
+        }else{
+          tmp_set_canvasList = this.data.canvasList
+        }
+        console.log(tmp_set_canvasList)
+        // wx.setStorage({
+        //   key: "canvasList",
+        //   data: this.data.canvasList
+        // })
+      }
+
+
+
+      // wx.navigateTo({
+      //   url: '/pages/basics/atlas/atlas',
+      // })
     }
 
   }
