@@ -4,8 +4,30 @@
   <view slot="content">图谱</view>
 </cu-custom>
 
+
+
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <view class="cu-list menu text-left">
+      <view class="cu-item arrow" wx:for="{{all_data}}" wx:for-index="index"  wx:key>
+        <view class="content">
+          <view bindtap="show_canvars" data-target="{{index}}">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
 <!--index.wxml-->
 <view class="container">
+
+<view class="padding flex flex-wrap justify-between align-center">
+  <button class="bg-green shadow light" bindtap="showModal" data-target="DrawerModalL">查看其他</button>
+</view>
+
   <!-- <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas> -->
 
     <!-- <ec-canvas wx:if="{{!isDisposed}}" id="mychart-dom-pie" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas> -->
