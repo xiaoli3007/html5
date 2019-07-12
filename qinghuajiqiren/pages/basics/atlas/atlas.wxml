@@ -10,11 +10,17 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <view class="cu-list menu text-left">
-      <view class="cu-item arrow" wx:for="{{all_data}}" wx:for-index="index"  wx:key>
+     
+     <block  wx:for="{{all_data}}" wx:for-index="index"  wx:key>
+      <view class="cu-item arrow" catchtap='showcanvars' data-target="{{index}}" >
         <view class="content">
-          <view bindtap="show_canvars" data-target="{{index}}">{{item.name}}</view>
+          <view>
+          {{item.name}}
+          </view>
         </view>
       </view>
+      </block>
+
     </view>
   </view>
 </view>

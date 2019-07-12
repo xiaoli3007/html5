@@ -76,7 +76,10 @@ Page({
       modalName: null
     })
   },
-  show_canvars(e) {
+  aaaText(e) {
+    console.log(111)
+  },
+  showcanvars(e) {
     console.log(e.currentTarget.dataset.target)
     var inde = e.currentTarget.dataset.target
     var tempname = this.data.all_data[inde].name;
@@ -105,8 +108,8 @@ Page({
       //console.log( value);
     })
 
-         console.log(datatmep);
-         console.log(linktemp);
+       //  console.log(datatmep);
+         //console.log(linktemp);
 
     this.setData({
       datatmep_m: datatmep,
@@ -135,6 +138,7 @@ Page({
         // 注意这里一定要返回 chart 实例，否则会影响事件处理等
         return chart;
       });
+      
   },
   onLoad: function () {
     
