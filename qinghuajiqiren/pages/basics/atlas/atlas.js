@@ -1,5 +1,5 @@
 import * as echarts from '../../../ec-canvas/echarts';
-
+var util = require('../../../utils/util.js')
 const app = getApp();
 
 function setOption(chart, data_list, link_list) {
@@ -68,17 +68,20 @@ Page({
   showModal(e) {
    // console.log(111)
     this.setData({
-      modalName: e.currentTarget.dataset.target
+      modalName: e.currentTarget.dataset.target,
+       isDisposed: true
     })
   },
   hideModal(e) {
+    console.log(111)
     this.setData({
-      modalName: null
+      modalName: null,
+       isDisposed: false
     })
   },
   aaaText(e) {
     console.log(111)
-  },
+  }, 
   showcanvars(e) {
     console.log(e.currentTarget.dataset.target)
     var inde = e.currentTarget.dataset.target
@@ -130,7 +133,7 @@ Page({
         this.chart = chart;
 
         this.setData({
-          isLoaded: true,
+          // isLoaded: true,
           isDisposed: false,
           modalName: null
         });
@@ -154,6 +157,11 @@ Page({
         var datatmeplist = res.data[leng].rel ;
         var datatmep = [];
         var linktemp = [];
+
+        console.log(datatmeplist)
+        datatmeplist = util.deteleObject_key(datatmeplist,'name')
+        //datatmeplist = util.deteleObject(datatmeplist)
+        console.log(datatmeplist)
 
         datatmep.push({ name: tempname});
         datatmeplist.forEach(function (value, i) {

@@ -135,7 +135,7 @@ Component({
       // console.log(111) 
 
     },
-  },
+  }, 
   methods: {
     bindKeyInput: function(e) {
       this.setData({

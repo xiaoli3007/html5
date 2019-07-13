@@ -25,10 +25,43 @@ function timestampToString() {
   return moment().format('h:mm');
 }
 
+function deteleObject(obj) {
+  var uniques = [];
+  var stringify = {};
+  for (var i = 0; i < obj.length; i++) {
+    var keys = Object.keys(obj[i]);
+    keys.sort(function (a, b) {
+      return (Number(a) - Number(b));
+    });
+    var str = '';
+    for (var j = 0; j < keys.length; j++) {
+      str += JSON.stringify(keys[j]);
+      str += JSON.stringify(obj[i][keys[j]]);
+    }
+    if (!stringify.hasOwnProperty(str)) {
+      uniques.push(obj[i]);
+      stringify[str] = true;
+    }
+  }
+  uniques = uniques;
+  return uniques;
+}
+
+function deteleObject_key(aa,keyname) {
+    var obj = {};
+    aa = aa.reduce(function (item, next) {
+      obj[next.name] ? '' : obj[next.name] = true && item.push(next);
+      return item;
+    }, []);
+  console.log(aa);
+  return aa;
+}
 
 module.exports = {
   formatTime: formatTime,
-  timestampToString: timestampToString
+  timestampToString: timestampToString,
+  deteleObject: deteleObject,
+  deteleObject_key: deteleObject_key
 }
 
 

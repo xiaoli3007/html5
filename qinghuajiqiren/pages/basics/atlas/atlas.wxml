@@ -5,9 +5,9 @@
 </cu-custom>
 
 
-
-
-<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal">
+ 
+ 
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal" style='z-index:9999999999;'>
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <view class="cu-list menu text-left">
      
@@ -26,10 +26,10 @@
 </view>
 
 
-
 <!--index.wxml-->
-<view class="container">
+<view class="container" style="{{!isDisposed ? '' : 'right:100000rpx'}}">
 
+ 
 <view class="padding flex flex-wrap justify-between align-center">
   <button class="bg-green shadow light" bindtap="showModal" data-target="DrawerModalL">查看其他</button>
 </view>
@@ -37,9 +37,9 @@
   <!-- <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas> -->
 
     <!-- <ec-canvas wx:if="{{!isDisposed}}" id="mychart-dom-pie" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas> -->
-
-      <ec-canvas wx:if="{{!isDisposed}}" id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
-
+    <!-- <view  hidden="{{!isDisposed}}"></view> -->
+      <ec-canvas  id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+    
 </view>
 
 
