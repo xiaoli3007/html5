@@ -1,3 +1,17 @@
+const date = new Date()
+const years = []
+const months = []
+
+
+for (let i = 1990; i <= date.getFullYear(); i++) {
+  years.push(i)
+}
+
+for (let i = 1; i <= 12; i++) {
+  months.push(i)
+}
+
+
 const app = getApp()
 var util = require('../../../utils/util.js')
 Component({
@@ -14,6 +28,11 @@ Component({
     addGlobalClass: true,
   },
   data: {
+    years: years,
+    year: date.getFullYear(),
+    months: months,
+    month: 2,
+    valueaa: [9999, 1],
     TabCur: 0,
     scrollLeft: 0,
     loading_top: false,
@@ -85,7 +104,44 @@ Component({
           "relationType": "相唱和",
           "uri": "http://data.library.sh.cn/entity/person/r393vc52fbc9vrmg"
         }]}]
-
+      ,
+    multiArray: [
+      ['无脊柱动物', '脊柱动物'],
+      ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'],
+    ],
+    objectMultiArray: [
+      [{
+        id: 0,
+        name: '无脊柱动物'
+      },
+      {
+        id: 1,
+        name: '脊柱动物'
+      }
+      ],
+      [{
+        id: 0,
+        name: '扁性动物'
+      },
+      {
+        id: 1,
+        name: '线形动物'
+      },
+      {
+        id: 2,
+        name: '环节动物'
+      },
+      {
+        id: 3,
+        name: '软体动物'
+      },
+      {
+        id: 3,
+        name: '节肢动物'
+      }
+      ]
+    ],
+    multiIndex: [0, 0],
  
   },
   lifetimes: {
@@ -264,111 +320,6 @@ Component({
       })
 
     },
-    // btnsendmsg: function (e) {
-    //   console.log(e.currentTarget.dataset.val)
-    //   console.log(this.data.msgdata)
-    //   if (e.currentTarget.dataset.val == '') {
-    //     return false;
-    //   }
-    //   this.setData({
-    //     msgdata: e.currentTarget.dataset.val,
-    //   })
-    //   if (this.data.msgdata == '') {
-    //     return false;
-    //   }
-    //   var tempdatamsglist = this.data.msgList
-    //   var tempmsgdata = this.data.msgdata
-
-    //   var temp_canvars_list = this.data.canvasList
-
-    //   this.setData({
-    //     msgdata: '',
-    //     loading_top: true,
-    //   })
-    //   tempdatamsglist.push({
-    //     speaker: 'self',
-    //     contentType: 'text',
-    //     content: tempmsgdata,
-    //     time: util.timestampToString(),
-    //   })
-
-    //   this.setData({
-    //     msgList: tempdatamsglist,
-    //     toView: 'msg-' + (this.data.msgList.length - 1),
-    //   })
-
-    //   this.setData({
-    //     Inputdisabled: !this.data.Inputdisabled
-    //   })
-    //   var that = this
-    //   wx.request({
-    //     url: app.globalData.url + '/Response', //仅为示例，并非真实的接口地址
-    //     data: {
-    //       text: tempmsgdata,
-    //     },
-    //     header: {
-    //       'content-type': 'application/json' // 默认值
-    //     },
-    //     success(res) {
-
-    //       if (res.data.message == 'success') {
-    //         console.log(res.data)
-            
-    //         var tempdatapersondesc = ''
-    //         var tempdatapersonname = ''
-    //         var tempdatapersonrel = []
-    //         if (res.data.data.person[0]) {
-    //           tempdatapersondesc = res.data.data.person[0].desc
-    //           tempdatapersonname = res.data.data.person[0].name
-    //           tempdatapersonrel = res.data.data.person[0].rel
-    //           temp_canvars_list.push({
-    //             name: tempdatapersonname,
-    //             rel: tempdatapersonrel,
-    //           })
-    //         } 
-
-    //         tempdatamsglist.push({
-    //           speaker: 'server',
-    //           contentType: 'text',
-    //           content: res.data.data.text,
-    //           time: util.timestampToString(),
-    //         })
-    //         that.setData({
-    //           msgList: tempdatamsglist,
-    //           toView: 'msg-' + (tempdatamsglist.length - 1),
-    //           person_desc: tempdatapersondesc,
-    //           person_name: tempdatapersonname,
-    //           relList: tempdatapersonrel,
-    //           canvasList: temp_canvars_list,
-    //         })
-
-    //       }
-    //     },
-    //     complete(res) {
-
-    //       if (res.statusCode == 500) {
-    //         that.setData({
-
-    //           person_desc: '',
-    //           person_name: '',
-    //           relList: [],
-    //           Inputdisabled: !that.data.Inputdisabled,
-    //           loading_top: false,
-    //         })
-
-    //       } else {
-
-    //         that.setData({
-    //           Inputdisabled: !that.data.Inputdisabled,
-    //           loading_top: false,
-    //         })
-
-    //       }
-          
-    //     }
-    //   })
-
-    // },
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
@@ -407,23 +358,11 @@ Component({
     scroll: function(e) {
       // console.log(e)
     },
-    //  tap (e) {
-    //   for (var i = 0; i < order.length; ++i) {
-    //     if (order[i] === this.data.toView) {
-    //       this.setData({
-    //         toView: order[i + 1]
-    //       })
-    //       break
-    //     }
-    //   }
-    // },
     tapMove(e) {
       this.setData({
         scrollTop: this.data.scrollTop + 10
       })
     },
-
-
     gotoPage1: function (e) {
 
       
@@ -445,6 +384,48 @@ Component({
  
       wx.navigateTo({
         url: '/pages/basics/atlas/atlas',
+      })
+    }
+    ,
+    MultiChange(e) {
+      this.setData({
+        multiIndex: e.detail.value
+      })
+    },
+    MultiColumnChange(e) {
+      console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+      let data = {
+        multiArray: this.data.multiArray,
+        multiIndex: this.data.multiIndex
+      };
+      data.multiIndex[e.detail.column] = e.detail.value;
+      switch (e.detail.column) {
+        case 0:
+          switch (data.multiIndex[0]) {
+            case 0:
+              data.multiArray[1] = ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'];
+             
+              break;
+            case 1:
+              data.multiArray[1] = ['鱼', '两栖动物', '爬行动物'];
+            
+              break;
+          }
+          data.multiIndex[1] = 0;
+         
+          break;
+        case 1:
+          
+          // data.multiIndex[2] = 0;
+          break;
+      }
+      this.setData(data);
+    },
+    bindChange: function (e) {
+      const val = e.detail.value
+      this.setData({
+        year: this.data.years[val[0]],
+        month: this.data.months[val[1]],
       })
     }
 

@@ -124,8 +124,43 @@
 </scroll-view>
 
 <view id='foot' class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+  
+  <picker mode="multiSelector" bindchange="MultiChange" bindcolumnchange="MultiColumnChange" value="{{multiIndex}}"
+		 range="{{multiArray}}">
+  <view class="action">
+    <text class="cuIcon-roundaddfill text-grey"></text>
+  </view>
+</picker>
 
   <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" bindinput="bindKeyInput" value='{{msgdata}}'></input>
 
+<view class="action" bindtap="showModal" data-target="bottomModal">
+    <text class="cuIcon-roundaddfill text-grey"></text>
+  </view>
+
   <button class="cu-btn bg-green shadow" bindtap="sendmsg" disabled="{{Inputdisabled}}">发送</button>
+</view>
+
+
+
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-green">确定</view>
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+    </view>
+    <view class="">
+
+         <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{valueaa}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{years}}" style="line-height: 50px">{{item}}年</view>
+          </picker-view-column>
+          <picker-view-column>
+            <view wx:for="{{months}}" style="line-height: 50px">{{item}}月</view>
+          </picker-view-column>
+          
+        </picker-view>
+
+    </view>
+  </view>
 </view>
