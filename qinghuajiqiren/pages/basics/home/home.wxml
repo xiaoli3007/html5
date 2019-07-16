@@ -125,18 +125,18 @@
 
 <view id='foot' class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
   
-  <picker mode="multiSelector" bindchange="MultiChange" bindcolumnchange="MultiColumnChange" value="{{multiIndex}}"
+  <!-- <picker mode="multiSelector" bindchange="MultiChange" bindcolumnchange="MultiColumnChange" value="{{multiIndex}}"
 		 range="{{multiArray}}">
   <view class="action">
     <text class="cuIcon-roundaddfill text-grey"></text>
   </view>
-</picker>
+</picker> -->
 
   <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" bindinput="bindKeyInput" value='{{msgdata}}'></input>
 
-<view class="action" bindtap="showModal" data-target="bottomModal">
+<!-- <view class="action" bindtap="showModal" data-target="bottomModal">
     <text class="cuIcon-roundaddfill text-grey"></text>
-  </view>
+  </view> -->
 
   <button class="cu-btn bg-green shadow" bindtap="sendmsg" disabled="{{Inputdisabled}}">发送</button>
 </view>
