@@ -1,0 +1,23 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">优优识字</view>
+</cu-custom>
+
+<basics wx:if="{{PageCur=='basics'}}"></basics>
+
+<about wx:if="{{PageCur=='about'}}"></about>
+
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="basics">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">听写</view>
+  </view>
+
+  <view class="action" bindtap="NavChange" data-cur="about">
+    <view class='cuIcon-cu-image'>
+      <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
+    </view>
+    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
+  </view>
+</view>

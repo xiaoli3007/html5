@@ -1,0 +1,47 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">听写任务</view>
+  </cu-custom>
+
+ <view class="cu-bar bg-white solid-bottom ">
+    <view class="action  justify-center align-center">
+      <text class="cuIcon-title text-orange">一年级语文上册 第一课</text> 
+    </view>
+    <view class="action">
+      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
+    </view>
+  </view>
+
+  <swiper bindchange="change"
+  indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}"
+  interval="{{interval}}"
+  duration="{{duration}}"
+  current="{{current}}"
+>
+  <block wx:for="{{taskdata.word1}}" wx:key>
+    <swiper-item>
+
+       <view class="justify-center align-center task_sw_view text-center">
+      <text class='task_sw text-center'>{{item.sw}}</text>
+     </view>
+    </swiper-item>
+  </block>
+</swiper>
+
+<view class="padding flex flex-wrap justify-between align-center bg-white">
+  <button class="cu-btn round" bindtap="prev">上一个</button>
+  <view class="cu-tag bg-cyan">{{current+1}}/{{taskdata.word1.length}}</view>
+  <button class="cu-btn round" bindtap="next">下一个</button>
+ 
+</view>
+
+
+<view class="padding flex flex-wrap justify-between align-center bg-white">
+  <button class="cu-btn round bg-green shadow" bindtap="audioPlay">语音播放</button>
+<!-- <button class="cu-btn round bg-green shadow" bindtap="audioPause">暂停</button> -->
+</view>
+
+
+<!-- <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button>
+<button type="primary" bindtap="audioStart">回到开头</button> -->

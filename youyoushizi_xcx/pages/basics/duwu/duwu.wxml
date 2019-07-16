@@ -1,0 +1,85 @@
+<!-- <view class='cu-custom'>
+  <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='cuIcon-back'></text> 返回
+    </navigator>
+    <view class='content' style='top:{{StatusBar}}px;'>课外读物</view>
+  </view>
+</view> -->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">课外读物</view>
+  </cu-custom>
+
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{tabNav}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{tabNav[index]}}
+    </view>
+  </view>
+</scroll-view>
+
+<block wx:if="{{TabCur==0}}">
+
+
+
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange ">课外读物</text> 
+    </view>
+    <view class="action">
+      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
+    </view>
+  </view>
+
+  <view class="cu-list grid col-3">
+    <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
+      <cover-image src='/images/IMG_1574.jpg'>
+      </cover-image>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+</block>
+
+<block wx:if="{{TabCur==1}}">
+
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange ">课外读物2</text> 
+    </view>
+    <view class="action">
+      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
+    </view>
+  </view>
+
+  <view class="cu-list grid col-3">
+    <view class="cu-item justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
+       <cover-image src='/images/IMG_1574.jpg'>
+      </cover-image>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+</block>
+
+<block wx:if="{{TabCur==2}}">
+
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange ">课外读物3</text> 
+    </view>
+    <view class="action">
+      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
+    </view>
+  </view>
+
+  <view class="cu-list grid col-3">
+    <view class="cu-item justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
+       <cover-image src='/images/IMG_1574.jpg'>
+      </cover-image>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+</block>

@@ -1,0 +1,27 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">详细页</view>
+  </cu-custom>
+
+ <view class="cu-bar bg-white solid-bottom ">
+    <view class="action">
+      <text class="cuIcon-title text-orange ">一年级语文上册</text> 
+    </view>
+    <view class="action">
+      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
+    </view>
+  </view>
+
+ <view class="cu-list menu">
+  
+    <view class="cu-item" wx:for="{{jiaocaiList}}" wx:key>
+      <navigator class="content" hover-class="none" url="/pages/basics/task/task" open-type="redirect">
+        <text class="cuIcon-circlefill text-orange"></text>
+        <text class="text-grey">{{item.name}}</text>
+      </navigator>
+    </view>
+
+
+  
+  
+  </view>
