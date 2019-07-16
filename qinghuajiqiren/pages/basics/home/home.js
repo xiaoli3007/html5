@@ -152,7 +152,7 @@ Component({
       //按钮过来的文字
       if (e.currentTarget.dataset.hasOwnProperty('val')){
         if (e.currentTarget.dataset.val != '') {
-          console.log(1111111111)
+          //console.log(1111111111)
           this.setData({
             msgdata: e.currentTarget.dataset.val,
           })
@@ -215,8 +215,8 @@ Component({
                 tempdatapersonname.push( res.data.data.person[i].name)
                 tempdatapersonrel.push(res.data.data.person[i].rel)
                temp_canvars_list.push({
-                  name: tempdatapersonname,
-                  rel: tempdatapersonrel,
+                  name: tempdatapersonname[i],
+                 rel: tempdatapersonrel[i],
                  })
               } 
             } 
