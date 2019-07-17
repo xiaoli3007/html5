@@ -105,43 +105,10 @@ Component({
           "uri": "http://data.library.sh.cn/entity/person/r393vc52fbc9vrmg"
         }]}]
       ,
-    multiArray: [
-      ['无脊柱动物', '脊柱动物'],
-      ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'],
-    ],
-    objectMultiArray: [
-      [{
-        id: 0,
-        name: '无脊柱动物'
-      },
-      {
-        id: 1,
-        name: '脊柱动物'
-      }
-      ],
-      [{
-        id: 0,
-        name: '扁性动物'
-      },
-      {
-        id: 1,
-        name: '线形动物'
-      },
-      {
-        id: 2,
-        name: '环节动物'
-      },
-      {
-        id: 3,
-        name: '软体动物'
-      },
-      {
-        id: 3,
-        name: '节肢动物'
-      }
-      ]
-    ],
+    multiArray: [],
+    objectMultiArray: [],
     multiIndex: [0, 0],
+    categoryArray: [],
  
   },
   lifetimes: {
@@ -160,6 +127,63 @@ Component({
       //滚动到底部消息
       this.setData({
         toView: 'msg-' + (this.data.msgList.length - 1),
+      })
+      var that = this 
+      //加载分类
+      wx.request({
+        url: app.globalData.url + '/category', //仅为示例，并非真实的接口地址
+        data: {
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success(res) {
+
+          if (res.data.length!=0) {
+             console.log(res.data)
+            //  console.log(res.data.data.person[0])
+            var temp_categoryall = []
+            var temp_category1= []
+            //var temp_category2= []
+            var temp_category_obj = {}
+
+            if (res.data.length > 0) {
+              var t_o = []
+
+              for (var i = 0; i < res.data.length; i++) {
+                temp_category1.push(res.data[i].name)
+                
+                t_o[i] = { "name": res.data[i].name ,"sub":[]}
+                for (var j = 0; j < res.data[i].nodes.length; j++) {
+                  
+                  t_o[i].sub.push(res.data[i].nodes[j].name)
+                }
+               // { 'name': res.data[i].name,sub:}
+              }
+            }
+
+            temp_categoryall.push(temp_category1)
+            temp_categoryall.push(t_o[0].sub)
+
+            console.log(t_o)
+
+            that.setData({
+              
+              multiArray: temp_categoryall,
+              categoryArray: t_o,
+            })
+            //categoryArray
+          }
+        },
+        complete(res) {
+          console.log(res.statusCode)
+          if (res.statusCode == 500) {
+          
+          } else {
+
+          }
+
+        }
       })
 
     },
@@ -388,6 +412,7 @@ Component({
     }
     ,
     MultiChange(e) {
+      console.log(e.detail.value);
       this.setData({
         multiIndex: e.detail.value
       })
@@ -403,16 +428,15 @@ Component({
         case 0:
           switch (data.multiIndex[0]) {
             case 0:
-              data.multiArray[1] = ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'];
+              data.multiArray[1] = this.data.categoryArray[0].sub;
              
               break;
             case 1:
-              data.multiArray[1] = ['鱼', '两栖动物', '爬行动物'];
+              data.multiArray[1] = this.data.categoryArray[1].sub;
             
-              break;
+              break; 
           }
           data.multiIndex[1] = 0;
-         
           break;
         case 1:
           
