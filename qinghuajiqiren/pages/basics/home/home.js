@@ -151,12 +151,13 @@ Component({
               var t_o = []
 
               for (var i = 0; i < res.data.length; i++) {
-                temp_category1.push(res.data[i].name)
-                
-                t_o[i] = { "name": res.data[i].name ,"sub":[]}
+                temp_category1.push(res.data[i].name) 
+                  
+                t_o[i] = { "name": res.data[i].name, "sub": [], "prefix": []}
                 for (var j = 0; j < res.data[i].nodes.length; j++) {
                   
                   t_o[i].sub.push(res.data[i].nodes[j].name)
+                  t_o[i].prefix.push(res.data[i].nodes[j].prefix)
                 }
                // { 'name': res.data[i].name,sub:}
               }
@@ -413,6 +414,9 @@ Component({
     ,
     MultiChange(e) {
       console.log(e.detail.value);
+      console.log(this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]]);
+      
+
       this.setData({
         multiIndex: e.detail.value
       })
