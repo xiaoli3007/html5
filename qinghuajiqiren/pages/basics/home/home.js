@@ -1,114 +1,44 @@
-const date = new Date()
-const years = []
-const months = []
-
-
-for (let i = 1990; i <= date.getFullYear(); i++) {
-  years.push(i)
-}
-
-for (let i = 1; i <= 12; i++) {
-  months.push(i)
-}
-
 
 const app = getApp()
 var util = require('../../../utils/util.js')
 Component({
-
-  
+ 
   properties: {
     aaa: { // 属性名
       type: Number,
       value: 0
     }
   },
-
   options: {
     addGlobalClass: true,
   },
   data: {
-    years: years,
-    year: date.getFullYear(),
-    months: months,
+    years: [],
+    year: 2019,
+    months: [],
     month: 2,
     valueaa: [9999, 1],
-    TabCur: 0,
-    scrollLeft: 0,
-    loading_top: false,
-    InputBottom: 0,
-    person_name: ['白居易'],
-    person_desc: ['白居易 (772-846), 男, 文人, 僧人, [為官者：文], 工於文, 書法家, 詩人, 籍贯：唐朝-河东道-太原-太谷, 字：乐天, 行第：白二十二, 规范名：白居易, 諡號：文, 未詳：醉吟先生, 未詳：白文公, 未詳：白傅, 室名、別號：香山居士, 曾任：府戸曹参军(0), 府尹(0), 翰林学士(807), 翰林学士(0), 翰林学士(0), 秘书监(827), 秘书省校书郎(803), 司门员外郎(820), 太子宾客(0), 太子宾客分司东都(829), 太子少傅(0), 太子左庶子分司东都(824), 太子左赞善大夫(0), 县尉(0), 刑部尚书(0), 刑部尚书(0), 刑部侍郎(930), 右仆射(0), 知制诰(820), 中书舍人(821), 州刺史(0), 州刺史(822), 州刺史(0), 州刺史(835), 州刺史(830), 州刺史(825), 州刺史(822), 州刺史(818), 主客郎中(0), 左拾遗(0), 司马(0), 為Y作墓誌銘：郑太郡, 文風為Y所效法：李宗易, 女兒：白金銮, 為Y作墓誌銘：皇甫镛, 相唱和：关盼盼, 姻親：皇甫曙, 子：白景受, 祖父：白锽, 父：白季庚, 父：白季庚, 墓誌銘由Y所作：李商隐, 從兄弟;堂兄弟：白敏中, 弟：白行简, 為Y作墓誌銘：元稹'],
-    Inputdisabled: false,
-    useheight: 0,
-    scrollheight: 300,
-    msgdata: '',
-    toView: '',
-    scrollTop: 100,
-    userInfo: {},
-    hasUserInfo: false,
-    msgList: [{
-      speaker: 'server',
-      contentType: 'text',
-      content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能',
-      time: util.timestampToString(),
-    }],
-    relList: [[{
-      "name": "郑太郡",
-      "relationType": "為Y作墓誌銘",
-      "uri": "http://data.library.sh.cn/entity/person/yq66vpyttor3aktl"
-    },
-      {
-        "name": "李宗易",
-        "relationType": "文風為Y所效法",
-        "uri": "http://data.library.sh.cn/entity/person/1eo922b4k2avwyqc"
-      },
-      {
-        "name": "白金銮",
-        "relationType": "女兒",
-        "uri": "http://data.library.sh.cn/entity/person/7iua3blpb7u584mb"
-      },
-      {
-        "name": "皇甫镛",
-        "relationType": "為Y作墓誌銘",
-        "uri": "http://data.library.sh.cn/entity/person/7j9cy2ne9yuq7k14"
-      },
-      {
-        "name": "关盼盼",
-        "relationType": "相唱和",
-        "uri": "http://data.library.sh.cn/entity/person/r393vc52fbc9vrmg"
-      }]],
-    canvasList: [{
-      name: '白居易', rel: [{
-        "name": "郑太郡",
-        "relationType": "為Y作墓誌銘",
-        "uri": "http://data.library.sh.cn/entity/person/yq66vpyttor3aktl"
-      },
-        {
-          "name": "李宗易",
-          "relationType": "文風為Y所效法",
-          "uri": "http://data.library.sh.cn/entity/person/1eo922b4k2avwyqc"
-        },
-        {
-          "name": "白金銮",
-          "relationType": "女兒",
-          "uri": "http://data.library.sh.cn/entity/person/7iua3blpb7u584mb"
-        },
-        {
-          "name": "皇甫镛",
-          "relationType": "為Y作墓誌銘",
-          "uri": "http://data.library.sh.cn/entity/person/7j9cy2ne9yuq7k14"
-        },
-        {
-          "name": "关盼盼",
-          "relationType": "相唱和",
-          "uri": "http://data.library.sh.cn/entity/person/r393vc52fbc9vrmg"
-        }]}]
-      ,
-    multiArray: [],
+    TabCur: 0,  //tab人名菜单
+    scrollLeft: 0,  //tab人名菜单
+    loading_top: false, //海浪loading
+    InputBottom: 0, //底部发送消息定位高度
+    person_name: app.globalData.person_name,  //初始相关知识 人名
+    person_desc: app.globalData.person_desc, //初始相关知识 简介
+    Inputdisabled: false,  //发送按钮的  置灰状态
+    useheight: 0,   //聊天滚动 上面的高度计算 
+    scrollheight: 300, //聊天滚动高度
+    msgdata: '',  //消息内容
+    toView: '',  //消息最底部的view
+    scrollTop: 100, //无
+    userInfo: {}, //无 以后可以授权用户消息
+    hasUserInfo: false, //无 以后可以授权用户消息
+    msgList: app.globalData.msgList, //聊天记录
+    relList: app.globalData.relList,  //相关知识的 相关人物
+    canvasList: app.globalData.canvasList, //相关知识的 相关人物 图谱划线
+    multiArray: [], //底部二级联动菜单
     objectMultiArray: [],
-    multiIndex: [0, 0],
-    categoryArray: [],
+    multiIndex: [0, 0], //底部二级联动菜单 值
+    categoryArray: [], //底部二级联动菜单 详细
  
   },
   lifetimes: {
@@ -200,7 +130,7 @@ Component({
 
       query.select('#top_main').boundingClientRect(function (res) {
         // 这个组件内 #the-id 节点的上边界坐标
-        // console.log(res.height)
+         console.log(res.height)
         that.setData({
           useheight:  res.height
         })
@@ -212,7 +142,7 @@ Component({
         that.setData({
           scrollheight: app.globalData.windowHeight-(that.data.useheight + res.height)-15
         })
-       // console.log(that.data.scrollheight) 
+        console.log(that.data.scrollheight) 
       }).exec()
 
       // console.log(111) 
@@ -327,7 +257,7 @@ Component({
           }
         } ,
         complete(res) {
-          that.scrollheight()
+          
           console.log(res.statusCode)
           if (res.statusCode==500){
             that.setData({
@@ -347,11 +277,15 @@ Component({
             })
 
           }
-         
+          
+          setTimeout(() => {
+            that.scrollheight()
+          }, 200)
+          
           
         }
       })
-
+ 
     },
     tabSelect(e) {
       this.setData({
@@ -369,6 +303,16 @@ Component({
       this.setData({
         modalName: null
       })
+    },
+    loadModal() {
+      this.setData({
+        loadModal: true
+      })
+      setTimeout(() => {
+        this.setData({
+          loadModal: false
+        })
+      }, 2000)
     },
     InputFocus(e) {
       // console.log(e.detail.height)
@@ -415,9 +359,16 @@ Component({
           console.log(app.globalData.windowHeight)  // 这个组件内 #the-id 节点的上边界坐标
 
           that.setData({
-            scrollheight: app.globalData.windowHeight - (that.data.useheight) - 15
+            scrollheight: app.globalData.windowHeight - (that.data.useheight + res.height) - 15
           })
           console.log(that.data.scrollheight)
+          console.log(that.data.toView)
+          // that.setData({
+            
+          //   toView: 'msg-' + (that.msgList.length - 1),
+            
+          // })
+
         }).exec()
 
         // console.log(111) 
