@@ -43,7 +43,8 @@ Component({
     top_main_height: 0, //头部加相关知识的高度
     foot_height: 0, //底部的高度
     top_main_head_title_height:0, //标题栏的高度
-    sync:1
+    sync:1,
+    input_focus:false
   },
   lifetimes: {
     attached: function() {
@@ -418,10 +419,11 @@ Component({
     MultiChange(e) {
       //console.log(e.detail.value);
       //console.log(this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]]);
-      let c = this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]] ;
+      let c = this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]]+" ";
       if(c!=''){
         this.setData({
-          msgdata: c
+          msgdata: c,
+         // input_focus:true
         })
       }
 

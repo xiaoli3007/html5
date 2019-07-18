@@ -133,7 +133,7 @@
     </view>
   </picker> 
 
-  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" bindinput="bindKeyInput" value='{{msgdata}}'></input>
+  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{input_focus}}" maxlength="300" cursor-spacing="10" bindinput="bindKeyInput" value='{{msgdata}}'></input>
 
   <view class="action" bindtap="showModal" data-target="bottomModal">
     <text class="cuIcon-roundaddfill text-grey"></text>
