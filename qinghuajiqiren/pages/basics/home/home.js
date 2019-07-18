@@ -302,12 +302,19 @@ Component({
               } 
             } 
             console.log(temp_canvars_list)
-            tempdatamsglist.push({
-              speaker: 'server',
-              contentType: 'text',
-              content: res.data.data.text,
-              time: util.timestampToString(),
-            })
+
+            for (i = 0; i < res.data.data.text.length;i++){
+                if(i<2){
+                  tempdatamsglist.push({
+                    speaker: 'server',
+                    contentType: 'text',
+                    content: res.data.data.text[i],
+                    time: util.timestampToString(),
+                  })
+                }
+            }
+            
+
             that.setData({
               msgList: tempdatamsglist,
               toView: 'msg-' + (tempdatamsglist.length - 1),
