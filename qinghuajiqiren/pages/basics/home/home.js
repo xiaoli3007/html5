@@ -35,8 +35,7 @@ Component({
     msgList: app.globalData.msgList, //聊天记录
     relList: app.globalData.relList,  //相关知识的 相关人物
     canvasList: app.globalData.canvasList, //相关知识的 相关人物 图谱划线
-    multiArray: [], //底部二级联动菜单
-    objectMultiArray: [],
+    multiArray: [], //底部二级联动菜单  
     multiIndex: [0, 0], //底部二级联动菜单 值
     categoryArray: [], //底部二级联动菜单 详细
     top_main_head_height:0, //头部加相关知识表头的高度
@@ -44,7 +43,9 @@ Component({
     foot_height: 0, //底部的高度
     top_main_head_title_height:0, //标题栏的高度
     sync:1,
-    input_focus:false
+    input_focus:false,
+    isAnnual: 0,
+    objectMultiArray: [],
   },
   lifetimes: {
     attached: function() {
@@ -452,11 +453,13 @@ Component({
     },
     bindChange: function (e) {
       const val = e.detail.value
-      this.setData({
-        year: this.data.years[val[0]],
-        month: this.data.months[val[1]],
-      })
-    }
+      console.log(e.detail)
+      // this.setData({
+      //   year: this.data.years[val[0]],
+      //   month: this.data.months[val[1]],
+      // })
+    },
+    
 
   }
 
