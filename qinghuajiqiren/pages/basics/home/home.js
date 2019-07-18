@@ -177,7 +177,7 @@ Component({
           }
         },
         complete(res) {
-          console.log(res.statusCode)
+          //console.log(res.statusCode)
           if (res.statusCode == 500) {
           
           } else {
@@ -207,12 +207,12 @@ Component({
       }).exec()
 
       query.select('#foot').boundingClientRect(function (res) {
-        console.log(app.globalData.windowHeight)  // 这个组件内 #the-id 节点的上边界坐标
+        //console.log(app.globalData.windowHeight)  // 这个组件内 #the-id 节点的上边界坐标
 
         that.setData({
           scrollheight: app.globalData.windowHeight-(that.data.useheight + res.height)-15
         })
-        console.log(that.data.scrollheight) 
+       // console.log(that.data.scrollheight) 
       }).exec()
 
       // console.log(111) 
@@ -320,6 +320,7 @@ Component({
           }
         } ,
         complete(res) {
+          that.scrollheight()
           console.log(res.statusCode)
           if (res.statusCode==500){
             that.setData({
@@ -388,6 +389,32 @@ Component({
         scrollTop: this.data.scrollTop + 10
       })
     },
+    scrollheight(){
+        // 在组件实例被从页面节点树移除时执行
+        const query = wx.createSelectorQuery().in(this)
+        var that = this
+        //useheight
+
+
+        query.select('#top_main').boundingClientRect(function (res) {
+          // 这个组件内 #the-id 节点的上边界坐标
+           console.log(res.height)
+          that.setData({
+            useheight: res.height
+          })
+        }).exec()
+
+        query.select('#foot').boundingClientRect(function (res) {
+          console.log(app.globalData.windowHeight)  // 这个组件内 #the-id 节点的上边界坐标
+
+          that.setData({
+            scrollheight: app.globalData.windowHeight - (that.data.useheight) - 15
+          })
+          console.log(that.data.scrollheight)
+        }).exec()
+
+        // console.log(111) 
+    },
     gotoPage1: function (e) {
 
       
@@ -413,16 +440,21 @@ Component({
     }
     ,
     MultiChange(e) {
-      console.log(e.detail.value);
-      console.log(this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]]);
-      
+      //console.log(e.detail.value);
+      //console.log(this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]]);
+      let c = this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]] ;
+      if(c!=''){
+        this.setData({
+          msgdata: c
+        })
+      }
 
       this.setData({
         multiIndex: e.detail.value
       })
     },
     MultiColumnChange(e) {
-      console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+      //console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
       let data = {
         multiArray: this.data.multiArray,
         multiIndex: this.data.multiIndex
@@ -430,16 +462,7 @@ Component({
       data.multiIndex[e.detail.column] = e.detail.value;
       switch (e.detail.column) {
         case 0:
-          switch (data.multiIndex[0]) {
-            case 0:
-              data.multiArray[1] = this.data.categoryArray[0].sub;
-             
-              break;
-            case 1:
-              data.multiArray[1] = this.data.categoryArray[1].sub;
-            
-              break; 
-          }
+          data.multiArray[1] = this.data.categoryArray[data.multiIndex[0]].sub;
           data.multiIndex[1] = 0;
           break;
         case 1:
