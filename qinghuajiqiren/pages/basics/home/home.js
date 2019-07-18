@@ -39,7 +39,10 @@ Component({
     objectMultiArray: [],
     multiIndex: [0, 0], //底部二级联动菜单 值
     categoryArray: [], //底部二级联动菜单 详细
- 
+    top_main_head_height:0, //头部加相关知识表头的高度
+    top_main_height: 0, //头部加相关知识的高度
+    foot_height: 0, //底部的高度
+    top_main_head_title_height:0 //标题栏的高度
   },
   lifetimes: {
     attached: function() {
@@ -70,7 +73,7 @@ Component({
         success(res) {
 
           if (res.data.length!=0) {
-             console.log(res.data)
+            // console.log(res.data)
             //  console.log(res.data.data.person[0])
             var temp_categoryall = []
             var temp_category1= []
@@ -96,7 +99,7 @@ Component({
             temp_categoryall.push(temp_category1)
             temp_categoryall.push(t_o[0].sub)
 
-            console.log(t_o)
+            //console.log(t_o)
 
             that.setData({
               
@@ -128,11 +131,29 @@ Component({
       //useheight
      
 
+      query.select('#top_main_head').boundingClientRect(function (res) {
+        // 这个组件内 #the-id 节点的上边界坐标
+       // console.log(res.height)
+        that.setData({
+          top_main_head_height: res.height,
+        })
+      }).exec()
+
+      query.select('#top_main_head_title').boundingClientRect(function (res) {
+        // 这个组件内 #the-id 节点的上边界坐标
+        //console.log(res.height)
+        that.setData({
+          top_main_head_title_height: res.height,
+        })
+      }).exec()
+
+      
       query.select('#top_main').boundingClientRect(function (res) {
         // 这个组件内 #the-id 节点的上边界坐标
-         console.log(res.height)
+        // console.log(res.height)
         that.setData({
-          useheight:  res.height
+          useheight:  res.height,
+          top_main_height: res.height,
         })
       }).exec()
 
@@ -140,9 +161,10 @@ Component({
         //console.log(app.globalData.windowHeight)  // 这个组件内 #the-id 节点的上边界坐标
 
         that.setData({
+          foot_height: res.height,
           scrollheight: app.globalData.windowHeight-(that.data.useheight + res.height)-15
         })
-        console.log(that.data.scrollheight) 
+       // console.log(that.data.scrollheight) 
       }).exec()
 
       // console.log(111) 
@@ -156,8 +178,8 @@ Component({
       })
     },
     sendmsg: function(e) {
-       console.log(e)
-      console.log(this.data.canvasList)
+       //console.log(e)
+      //console.log(this.data.canvasList)
 
       console.log(e.currentTarget.dataset.hasOwnProperty('val') )
       //按钮过来的文字
@@ -247,7 +269,7 @@ Component({
 
             that.setData({
               msgList: tempdatamsglist,
-              toView: 'msg-' + (tempdatamsglist.length - 1),
+              //toView: 'msg-' + (tempdatamsglist.length - 1),
               person_desc: tempdatapersondesc,
               person_name: tempdatapersonname,
               relList: tempdatapersonrel,
@@ -341,37 +363,31 @@ Component({
       })
     },
     scrollheight(){
-        // 在组件实例被从页面节点树移除时执行
-        const query = wx.createSelectorQuery().in(this)
-        var that = this
-        //useheight
-
-
-        query.select('#top_main').boundingClientRect(function (res) {
-          // 这个组件内 #the-id 节点的上边界坐标
-           console.log(res.height)
-          that.setData({
-            useheight: res.height
+        // 三种情况  一种为没有 tab 和介绍 和相关人物  一种为啥信息也没有  一种为 没有相关人物
+        //
+      //toView: 'msg-' + (tempdatamsglist.length - 1),
+      console.log(this.data.toView) 
+      if (this.data.person_name.length>0){
+        
+          this.setData({
+            scrollheight: app.globalData.windowHeight - (this.data.foot_height + this.data.top_main_height) - 15
           })
-        }).exec()
-
-        query.select('#foot').boundingClientRect(function (res) {
-          console.log(app.globalData.windowHeight)  // 这个组件内 #the-id 节点的上边界坐标
-
-          that.setData({
-            scrollheight: app.globalData.windowHeight - (that.data.useheight + res.height) - 15
+        }else{
+         // console.log(222) 
+          this.setData({
+            scrollheight: app.globalData.windowHeight - (this.data.foot_height + this.data.top_main_head_height + this.data.top_main_head_title_height) - 15
+            
           })
-          console.log(that.data.scrollheight)
-          console.log(that.data.toView)
-          // that.setData({
-            
-          //   toView: 'msg-' + (that.msgList.length - 1),
-            
-          // })
-
-        }).exec()
-
+        }
         // console.log(111) 
+
+      setTimeout(() => {
+        this.setData({
+           toView: 'msg-' + (this.data.msgList.length - 1),
+        })
+      }, 200)
+
+      console.log(this.data.toView) 
     },
     gotoPage1: function (e) {
 

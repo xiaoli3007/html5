@@ -8,16 +8,18 @@
   module.exports.sub = sub;
 </wxs>
 <view id='top_main'>
-  <cu-custom bgColor="bg-gradual-blue">
-    <view slot="content">诗小图</view>
-  </cu-custom>
 
-  <view class="cu-bar bg-blue  solid-bottom cu-bar-title">
-    <view class="action">
-      <text class="cuIcon-title text-white "></text> 相关知识
+  <view id='top_main_head'>
+    <cu-custom bgColor="bg-gradual-blue">
+      <view slot="content">诗小图</view>
+    </cu-custom>
+
+    <view class="cu-bar bg-blue  solid-bottom cu-bar-title" id='top_main_head_title'>
+      <view class="action">
+        <text class="cuIcon-title text-white "></text> 相关知识
+      </view>
     </view>
   </view>
-
 
 
   <view class=" radius bg-gradual-blue shadow-blur" wx:if='{{loading_top}}'>
@@ -83,7 +85,7 @@
 
 </view>
 
-<scroll-view scroll-y class="flex flex-wrap" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" style="height:{{scrollheight}}px">
+<scroll-view scroll-y class="flex flex-wrap" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-with-animation="{{true}}" style="height:{{scrollheight}}px">
   <view class="cu-chat">
 
     <block wx:key wx:for='{{msgList}}' wx:for-index="index">
@@ -129,7 +131,7 @@
     <view class="action">
       <text class="cuIcon-roundaddfill text-grey"></text>
     </view>
-  </picker>
+  </picker> 
 
   <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" bindinput="bindKeyInput" value='{{msgdata}}'></input>
 
