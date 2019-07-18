@@ -42,7 +42,8 @@ Component({
     top_main_head_height:0, //头部加相关知识表头的高度
     top_main_height: 0, //头部加相关知识的高度
     foot_height: 0, //底部的高度
-    top_main_head_title_height:0 //标题栏的高度
+    top_main_head_title_height:0, //标题栏的高度
+    sync:1
   },
   lifetimes: {
     attached: function() {
@@ -228,6 +229,7 @@ Component({
         url: app.globalData.url + '/Response', //仅为示例，并非真实的接口地址
         data: {
           text: tempmsgdata,
+          sync:that.data.sync
         },
         header: {
           'content-type': 'application/json' // 默认值
