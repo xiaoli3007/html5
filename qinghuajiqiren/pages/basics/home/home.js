@@ -42,7 +42,7 @@ Component({
     top_main_height: 0, //头部加相关知识的高度
     foot_height: 0, //底部的高度
     top_main_head_title_height:0, //标题栏的高度
-    sync:1,
+    sync:0,
     input_focus:false,
     isAnnual: 0,
     objectMultiArray: [],
@@ -110,6 +110,8 @@ Component({
               categoryArray: t_o,
             })
             //categoryArray
+
+            //console.log(that.data.categoryArray[1]['prefix'])
           }
         },
         complete(res) {
@@ -184,7 +186,7 @@ Component({
        //console.log(e)
       //console.log(this.data.canvasList)
 
-      console.log(e.currentTarget.dataset.hasOwnProperty('val') )
+      //console.log(e.currentTarget.dataset.hasOwnProperty('val') )
       //按钮过来的文字
       if (e.currentTarget.dataset.hasOwnProperty('val')){
         if (e.currentTarget.dataset.val != '') {
@@ -200,6 +202,18 @@ Component({
         return false;
 
       }
+      //看看是不是九歌
+      if (this.data.categoryArray.length>0){
+        //console.log(util.search_string_start(this.data.msgdata, this.data.categoryArray[1]['prefix']))
+        if (util.search_string_start(this.data.msgdata, this.data.categoryArray[1]['prefix'])){
+
+          this.setData({
+            sync: 1,
+            loadModal: true,
+          })
+        }
+      }
+
       var tempdatamsglist = this.data.msgList
 
       var tempmsgdata = this.data.msgdata
@@ -257,7 +271,7 @@ Component({
                  })
               } 
             } 
-            console.log(temp_canvars_list)
+           // console.log(temp_canvars_list)
 
             for (i = 0; i < res.data.data.text.length;i++){
                 if(i<2){
@@ -284,7 +298,7 @@ Component({
         } ,
         complete(res) {
           
-          console.log(res.statusCode)
+          //console.log(res.statusCode)
           if (res.statusCode==500){
             that.setData({
               
@@ -293,6 +307,7 @@ Component({
               relList: [],
               Inputdisabled: !that.data.Inputdisabled,
               loading_top: false,
+              loadModal: false,
             })
 
           }else{
@@ -300,6 +315,7 @@ Component({
             that.setData({
               Inputdisabled: !that.data.Inputdisabled,
               loading_top: false,
+              loadModal: false,
             })
 
           }
@@ -370,7 +386,7 @@ Component({
         // 三种情况  一种为没有 tab 和介绍 和相关人物  一种为啥信息也没有  一种为 没有相关人物
         //
       //toView: 'msg-' + (tempdatamsglist.length - 1),
-      console.log(this.data.toView) 
+      //console.log(this.data.toView) 
       if (this.data.person_name.length>0){
         
           this.setData({
@@ -391,7 +407,7 @@ Component({
         })
       }, 200)
 
-      console.log(this.data.toView) 
+     // console.log(this.data.toView) 
     },
     gotoPage1: function (e) {
 

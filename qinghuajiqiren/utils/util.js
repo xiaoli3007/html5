@@ -57,11 +57,36 @@ function deteleObject_key(aa,keyname) {
   return aa;
 }
 
+function search_string_start(string_m, array) {
+   
+  //console.log(string_m)
+  //console.log(array)
+  for(var i=0;i<array.length;i++){
+   // console.log(array[i])
+    var fdStart = string_m.indexOf(array[i]);
+
+    if (fdStart == 0) {
+      //document.getElementById("demo").innerHTML = '是开头'
+      return true;
+    } else if (fdStart == -1) {
+      //document.getElementById("demo").innerHTML = '不存在'
+      //return false;
+    } else {
+      //document.getElementById("demo").innerHTML = '有 但不是开头'
+      //return false;
+    }
+
+  } 
+   return false;
+}
+
+
 module.exports = {
   formatTime: formatTime,
   timestampToString: timestampToString,
   deteleObject: deteleObject,
-  deteleObject_key: deteleObject_key
+  deteleObject_key: deteleObject_key,
+  search_string_start: search_string_start
 }
 
 
