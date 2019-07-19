@@ -308,6 +308,7 @@ Component({
               Inputdisabled: !that.data.Inputdisabled,
               loading_top: false,
               loadModal: false,
+              sync: 0
             })
 
           }else{
@@ -316,6 +317,7 @@ Component({
               Inputdisabled: !that.data.Inputdisabled,
               loading_top: false,
               loadModal: false,
+              sync: 0
             })
 
           }
