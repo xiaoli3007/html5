@@ -274,7 +274,7 @@ Component({
            // console.log(temp_canvars_list)
 
             for (i = 0; i < res.data.data.text.length;i++){
-                if(i<2){
+                if(i<3){
                   tempdatamsglist.push({
                     speaker: 'server',
                     contentType: 'text',

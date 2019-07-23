@@ -9,7 +9,7 @@ image[class*="gif-"] {
 }
 .cu-bar-title{min-height:60rpx;}
 .chatscroll{  height:300px; }
-.cu-chat .cu-item>.main .content{word-break:break-all;}
+.cu-chat .cu-item>.main .content{word-break:break-all; display: inline;}
 .cu-bar .action:last-child{ margin-right: 0;}
 .fasong{ bottom:calc(100rpx + env(safe-area-inset-bottom) / 2);}
 .shixiaotu-bg {
