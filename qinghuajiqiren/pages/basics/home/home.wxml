@@ -109,7 +109,7 @@
         <view class="cu-avatar radius shixiaotu-bg"></view>
         <view class="main">
           <view class="content shadow">
-            {{item.content}}
+           <text> {{item.content}}</text>
           </view>
         </view>
         <view class="date">{{item.time}}</view>

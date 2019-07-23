@@ -413,7 +413,10 @@ Component({
     },
     gotoPage1: function (e) {
 
-      
+      // wx.navigateTo({
+      //   url: '/pages/basics/ceshi/ceshi',
+      // })
+       
       var tmp_set_canvasList = []
 
       if (this.data.canvasList.length>0){
