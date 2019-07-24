@@ -52,8 +52,8 @@ App({
     userInfo: null,
     url: 'https://sxt.gfusoft.com',
     foottabbar: null,
-    person_name: ['白居易'],
-    person_desc: ['白居易 (772-846), 男, 文人, 僧人, [為官者：文], 工於文, 書法家, 詩人, 籍贯：唐朝-河东道-太原-太谷, 字：乐天, 行第：白二十二, 规范名：白居易, 諡號：文, 未詳：醉吟先生, 未詳：白文公, 未詳：白傅, 室名、別號：香山居士, 曾任：府戸曹参军(0), 府尹(0), 翰林学士(807), 翰林学士(0), 翰林学士(0), 秘书监(827), 秘书省校书郎(803), 司门员外郎(820), 太子宾客(0), 太子宾客分司东都(829), 太子少傅(0), 太子左庶子分司东都(824), 太子左赞善大夫(0), 县尉(0), 刑部尚书(0), 刑部尚书(0), 刑部侍郎(930), 右仆射(0), 知制诰(820), 中书舍人(821), 州刺史(0), 州刺史(822), 州刺史(0), 州刺史(835), 州刺史(830), 州刺史(825), 州刺史(822), 州刺史(818), 主客郎中(0), 左拾遗(0), 司马(0), 為Y作墓誌銘：郑太郡, 文風為Y所效法：李宗易, 女兒：白金銮, 為Y作墓誌銘：皇甫镛, 相唱和：关盼盼, 姻親：皇甫曙, 子：白景受, 祖父：白锽, 父：白季庚, 父：白季庚, 墓誌銘由Y所作：李商隐, 從兄弟;堂兄弟：白敏中, 弟：白行简, 為Y作墓誌銘：元稹'],
+    person_name: ['杜甫'],
+    person_desc: ['杜甫 (712-770), 男, 文人, [為官者：文], 書法家, 詩人, 籍贯：唐朝-关内道-京兆-长安, 行第：杜二, 规范名：杜甫, 字：子美, 封爵：杜工部, 曾任：参谋(0), 工部员外郎(0), 工部员外郎(764), 集贤院待制(751), 节度使判官(764), 卫冑曹参军(0), 县尉(755), 州司功参军(758), 右拾遗(0), 功曹参军(763), 未詳：裴虬, 為Y作墓誌銘：卢太君, 墓誌銘由Y所作：元稹, 直系後裔：杜莘老, 岳父：杨怡, 為Y作墓誌銘：杜氏(杜审言女), 子：杜嗣业, 長子; 第一子：杜宗武, 祖父：杜审言, 收到Y的贈詩、文：陆游, 次子：杜宗文, 父：杜闲'],
     msgList: [{
       speaker: 'server',
       contentType: 'text',
@@ -61,57 +61,57 @@ App({
       time: util.timestampToString(),
     }],
     relList: [[{
-      "name": "郑太郡",
-      "relationType": "為Y作墓誌銘",
-      "uri": "http://data.library.sh.cn/entity/person/yq66vpyttor3aktl"
+      "name": "裴虬",
+      "relationType": "未詳",
+      "uri": "http://data.library.sh.cn/entity/person/y2hodrix1q867ksv"
     },
-    {
-      "name": "李宗易",
-      "relationType": "文風為Y所效法",
-      "uri": "http://data.library.sh.cn/entity/person/1eo922b4k2avwyqc"
-    },
-    {
-      "name": "白金銮",
-      "relationType": "女兒",
-      "uri": "http://data.library.sh.cn/entity/person/7iua3blpb7u584mb"
-    },
-    {
-      "name": "皇甫镛",
-      "relationType": "為Y作墓誌銘",
-      "uri": "http://data.library.sh.cn/entity/person/7j9cy2ne9yuq7k14"
-    },
-    {
-      "name": "关盼盼",
-      "relationType": "相唱和",
-      "uri": "http://data.library.sh.cn/entity/person/r393vc52fbc9vrmg"
-    }]],
+      {
+        "name": "卢太君",
+        "relationType": "為Y作墓誌銘",
+        "uri": "http://data.library.sh.cn/entity/person/763zqs1a52mmjdvf"
+      },
+      {
+        "name": "元稹",
+        "relationType": "墓誌銘由Y所作",
+        "uri": "http://data.library.sh.cn/entity/person/lwz7szbmww4hpvuo"
+      },
+      {
+        "name": "杜莘老",
+        "relationType": "直系後裔",
+        "uri": "http://data.library.sh.cn/entity/person/7p4mr9hla9ooyzf4"
+      },
+      {
+        "name": "杨怡",
+        "relationType": "岳父",
+        "uri": "http://data.library.sh.cn/entity/person/a2gahknkyfuaxhbr"
+      }]],
     canvasList: [{
-      name: '白居易', rel: [{
-        "name": "郑太郡",
-        "relationType": "為Y作墓誌銘",
-        "uri": "http://data.library.sh.cn/entity/person/yq66vpyttor3aktl"
+      name: '杜甫', rel: [{
+        "name": "裴虬",
+        "relationType": "未詳",
+        "uri": "http://data.library.sh.cn/entity/person/y2hodrix1q867ksv"
       },
-      {
-        "name": "李宗易",
-        "relationType": "文風為Y所效法",
-        "uri": "http://data.library.sh.cn/entity/person/1eo922b4k2avwyqc"
-      },
-      {
-        "name": "白金銮",
-        "relationType": "女兒",
-        "uri": "http://data.library.sh.cn/entity/person/7iua3blpb7u584mb"
-      },
-      {
-        "name": "皇甫镛",
-        "relationType": "為Y作墓誌銘",
-        "uri": "http://data.library.sh.cn/entity/person/7j9cy2ne9yuq7k14"
-      },
-      {
-        "name": "关盼盼",
-        "relationType": "相唱和",
-        "uri": "http://data.library.sh.cn/entity/person/r393vc52fbc9vrmg"
-      }]
+        {
+          "name": "卢太君",
+          "relationType": "為Y作墓誌銘",
+          "uri": "http://data.library.sh.cn/entity/person/763zqs1a52mmjdvf"
+        },
+        {
+          "name": "元稹",
+          "relationType": "墓誌銘由Y所作",
+          "uri": "http://data.library.sh.cn/entity/person/lwz7szbmww4hpvuo"
+        },
+        {
+          "name": "杜莘老",
+          "relationType": "直系後裔",
+          "uri": "http://data.library.sh.cn/entity/person/7p4mr9hla9ooyzf4"
+        },
+        {
+          "name": "杨怡",
+          "relationType": "岳父",
+          "uri": "http://data.library.sh.cn/entity/person/a2gahknkyfuaxhbr"
+        }]
     }]
     ,
-  }
+  } 
 })
