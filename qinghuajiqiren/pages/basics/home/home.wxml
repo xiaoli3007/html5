@@ -116,6 +116,40 @@
         <view class="date">{{item.time}}</view>
       </view>
 
+    <!-- <view wx:if='{{item.contentlist.length>0}}' class="cu-modal {{modalName=='Modal_more'+index?'show':''}}">
+      <view class="cu-dialog">
+        <view class="cu-bar bg-white justify-end">
+          <view class="content">{{item.toptitle}}</view>
+          <view class="action" bindtap="hideModal">
+            <text class="cuIcon-close text-red"></text>
+          </view>
+        </view>
+
+        <scroll-view scroll-y style="height:{{scrollheight}}px">
+      
+            <view class="text-left padding" wx:key wx:for='{{item.contentlist}}' wx:for-index="cindex">
+              <text>  {{item}}</text>
+            </view>
+          
+        </scroll-view>
+      </view>
+    </view> -->
+
+
+
+    </block>
+
+
+
+
+  </view>
+
+</scroll-view>
+
+
+
+  <block wx:key wx:for='{{msgList}}' wx:for-index="index">
+ 
     <view wx:if='{{item.contentlist.length>0}}' class="cu-modal {{modalName=='Modal_more'+index?'show':''}}">
       <view class="cu-dialog">
         <view class="cu-bar bg-white justify-end">
@@ -134,17 +168,8 @@
         </scroll-view>
       </view>
     </view>
+  </block>
 
-
-
-    </block>
-
-
-
-
-  </view>
-
-</scroll-view>
 
 <view id='foot' class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
 

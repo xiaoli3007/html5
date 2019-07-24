@@ -9,7 +9,7 @@
 
 
 <!--index.wxml-->
-<view class="container" >
+<view class="container2" >
 
       <ec-canvas  id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
     

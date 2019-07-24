@@ -15,6 +15,11 @@ function setOption(chart, data_list, link_list) {
       {
         type: 'graph',
         layout: 'circular',
+        // force: {
+        //   gravity:1,
+        //   repulsion:100,
+        //   edgeLength: [10, 50]
+        // },
         symbolSize: 38,
         roam: true,
         label: {
@@ -103,12 +108,33 @@ Page({
             //console.log( value);
           })
 
+          if (res.data.length>1){
+            // 主要人物之间的连线
+            let m_l = i + 1 == res.data.length ? 0 : i + 1;
+
+            let linkmain = {}
+            linkmain.source = res.data[i].name;
+            linkmain.target = res.data[m_l].name;
+            linkmain.label = {
+              normal: {
+                show: true,
+                formatter: '',
+                fontSize: 12
+              }
+            };
+
+            console.log(linkmain);
+            linktemp.push(linkmain);
+
+          }
+         
+
         }
        // console.log(datatmeplist)
             
         datatmep = util.deteleObject_key(datatmep, 'name')
-        console.log(datatmep);
-        console.log(linktemp);
+        //console.log(datatmep);
+       // console.log(linktemp);
 
         that.setData({
           datatmep_m: datatmep,

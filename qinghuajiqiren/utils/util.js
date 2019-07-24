@@ -53,7 +53,7 @@ function deteleObject_key(aa,keyname) {
       obj[next.name] ? '' : obj[next.name] = true && item.push(next);
       return item;
     }, []);
-  console.log(aa);
+  // console.log(aa);
   return aa;
 }
 

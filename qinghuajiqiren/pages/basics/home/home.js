@@ -453,12 +453,12 @@ Component({
         })
       }
  
-      // wx.navigateTo({
-      //   //url: '/pages/basics/atlas/atlas',
-      //   url: '/pages/basics/atlastoall/atlastoall',
-      // })
+      wx.navigateTo({
+        url: '/pages/basics/atlas/atlas',
+        //url: '/pages/basics/atlastoall/atlastoall',
+      })
     }
-    ,
+    , 
     MultiChange(e) {
       //console.log(e.detail.value);
       //console.log(this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]]);
