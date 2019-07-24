@@ -444,8 +444,9 @@ Component({
         if (tmp_set_canvasList.length > 2) {
           tmp_set_canvasList = tmp_set_canvasList.slice(-3, tmp_set_canvasList.length)
         }
-
+        
         console.log(tmp_set_canvasList)
+        //console.log(JSON.stringify(tmp_set_canvasList))
         //console.log(this.data.canvasList)
         wx.setStorage({
           key: "canvasList",
