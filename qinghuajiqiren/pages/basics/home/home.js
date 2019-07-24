@@ -430,26 +430,33 @@ Component({
       // wx.navigateTo({
       //   url: '/pages/basics/ceshi/ceshi',
       // })
-       
-      var tmp_set_canvasList = []
+      //console.log(this.data.canvasList)
+      //  let tmp_set_canvasList = this.data.canvasList
+      //临时数组只能这样声明
+      let tmp_set_canvasList = JSON.parse(JSON.stringify(this.data.canvasList));
 
-      if (this.data.canvasList.length>0){
-        if (this.data.canvasList.length > 2) {
-
-          tmp_set_canvasList = this.data.canvasList.slice(-3, this.data.canvasList.length)
-        }else{
-          tmp_set_canvasList = this.data.canvasList
+      if (tmp_set_canvasList.length>0){
+        //大于1 的话  把默认的删除掉
+        if (tmp_set_canvasList.length > 1) {
+          tmp_set_canvasList.splice(0, 1); 
         }
-        //console.log(tmp_set_canvasList)
+        //如果大于2 的话 就取 数组 后三个
+        if (tmp_set_canvasList.length > 2) {
+          tmp_set_canvasList = tmp_set_canvasList.slice(-3, tmp_set_canvasList.length)
+        }
+
+        console.log(tmp_set_canvasList)
+        //console.log(this.data.canvasList)
         wx.setStorage({
           key: "canvasList",
           data: tmp_set_canvasList
         })
       }
  
-      wx.navigateTo({
-        url: '/pages/basics/atlas/atlas',
-      })
+      // wx.navigateTo({
+      //   //url: '/pages/basics/atlas/atlas',
+      //   url: '/pages/basics/atlastoall/atlastoall',
+      // })
     }
     ,
     MultiChange(e) {

@@ -1,0 +1,21 @@
+ 
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">图谱</view>
+</cu-custom>
+
+
+
+
+
+<!--index.wxml-->
+<view class="container" >
+
+      <ec-canvas  id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+    
+</view>
+
+
+
+
+
