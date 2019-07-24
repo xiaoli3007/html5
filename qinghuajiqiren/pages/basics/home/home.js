@@ -275,12 +275,26 @@ Component({
 
             for (i = 0; i < res.data.data.text.length;i++){
                 if(i<3){
-                  tempdatamsglist.push({
-                    speaker: 'server',
-                    contentType: 'text',
-                    content: res.data.data.text[i],
-                    time: util.timestampToString(),
-                  })
+                  if (i == 2 && res.data.data.text.length>3){
+
+                    tempdatamsglist.push({
+                      speaker: 'server',
+                      contentType: 'text',
+                      content: res.data.data.text[i],
+                      time: util.timestampToString(),
+                      contentlist: res.data.data.text,
+                      toptitle: tempmsgdata,
+                    })
+
+                  }else{
+                    tempdatamsglist.push({
+                      speaker: 'server',
+                      contentType: 'text',
+                      content: res.data.data.text[i],
+                      time: util.timestampToString(),
+                    })
+                  }
+                 
                 }
             }
             
@@ -426,7 +440,7 @@ Component({
         }else{
           tmp_set_canvasList = this.data.canvasList
         }
-        console.log(tmp_set_canvasList)
+        //console.log(tmp_set_canvasList)
         wx.setStorage({
           key: "canvasList",
           data: tmp_set_canvasList

@@ -15,7 +15,6 @@
 
 <!--index.wxml-->
 
-  <cax-element id="svg-a"></cax-element>
  
 
 </view>

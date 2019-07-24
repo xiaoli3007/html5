@@ -158,10 +158,10 @@ Page({
         var datatmep = [];
         var linktemp = [];
 
-        console.log(datatmeplist)
+       // console.log(datatmeplist)
         datatmeplist = util.deteleObject_key(datatmeplist,'name')
         //datatmeplist = util.deteleObject(datatmeplist)
-        console.log(datatmeplist)
+        //console.log(datatmeplist)
 
         datatmep.push({ name: tempname});
         datatmeplist.forEach(function (value, i) {
