@@ -455,8 +455,8 @@ Component({
       }
  
       wx.navigateTo({
-        url: '/pages/basics/atlas/atlas',
-        //url: '/pages/basics/atlastoall/atlastoall',
+        //url: '/pages/basics/atlas/atlas',
+        url: '/pages/basics/atlastoall/atlastoall',
       })
     }
     , 

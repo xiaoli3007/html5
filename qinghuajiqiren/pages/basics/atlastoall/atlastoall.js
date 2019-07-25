@@ -14,12 +14,12 @@ function setOption(chart, data_list, link_list) {
     series: [
       {
         type: 'graph',
-        layout: 'circular',
-        // force: {
-        //   gravity:1,
-        //   repulsion:100,
-        //   edgeLength: [10, 50]
-        // },
+        layout: 'force', //circular  force
+        force: {
+          gravity:0.8,
+          repulsion:2500, 
+          edgeLength: [5, 60]
+        },
         symbolSize: 38,
         roam: true,
         label: {
@@ -86,7 +86,11 @@ Page({
           let tempname = res.data[i].name;
           let datatmeplist = res.data[i].rel;
           datatmeplist = util.deteleObject_key(datatmeplist, 'name')
-          datatmep.push({ name: tempname });
+          datatmep.push({
+            name: tempname ,
+            itemStyle: {
+              color: '#FF9F7F'
+            }});
           datatmeplist.forEach(function (value, i) {
             if (i < 3) {
               let t = {}
@@ -107,18 +111,18 @@ Page({
             }
             //console.log( value);
           })
-
-          if (res.data.length>1){
+        
+          if (res.data.length > 1 && i < res.data.length-1){
             // 主要人物之间的连线
             let m_l = i + 1 == res.data.length ? 0 : i + 1;
-
+            let s = '(' + (i + 1)+')'
             let linkmain = {}
             linkmain.source = res.data[i].name;
             linkmain.target = res.data[m_l].name;
             linkmain.label = {
               normal: {
                 show: true,
-                formatter: '',
+                formatter: s,
                 fontSize: 12
               }
             };
