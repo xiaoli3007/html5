@@ -84,9 +84,17 @@
   </view>
 
   <view class="cu-bar btn-group" id='foot_btn_shi'>
-  <button class="cu-btn round sm bg-green">搜云</button>
-  <button class="cu-btn round sm bg-green">九歌</button>
-  <button class="cu-btn round sm bg-green">风骚榜</button>
+
+
+
+  <block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
+   <picker mode="selector" bindchange="MultiSigleChange" data-valkey="{{cindex}}"  value="{{multisigleIndex}}" range="{{item.sub}}">
+  
+   <view class="cu-tag bg-olive round">{{item.name}}</view>
+  
+   </picker>
+      </block>
+  
 </view>
 
 

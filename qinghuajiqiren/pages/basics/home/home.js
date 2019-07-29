@@ -47,6 +47,7 @@ Component({
     isAnnual: 0,
     objectMultiArray: [],
     foot_btn_shi_height:0 //底部三个按钮的高度
+    , multisigleIndex: 0, 
   },
   lifetimes: {
     attached: function() {
@@ -103,7 +104,7 @@ Component({
             temp_categoryall.push(temp_category1)
             temp_categoryall.push(t_o[0].sub)
 
-            //console.log(t_o)
+            console.log(t_o)
 
             that.setData({
               
@@ -469,6 +470,26 @@ Component({
       })
     }
     , 
+    MultiSigleChange(e) {
+       
+      let k = 0 
+      //按钮过来的文字
+      if (e.currentTarget.dataset.hasOwnProperty('valkey')) {
+        k = e.currentTarget.dataset.valkey
+      }
+
+      console.log(k);
+      console.log(e.detail.value);
+      let c = this.data.categoryArray[k].prefix[e.detail.value] + " ";
+      if (c != '') {
+        this.setData({
+          msgdata: c,
+        })
+      }
+      this.setData({
+        multisigleIndex: e.detail.value
+      })
+    },
     MultiChange(e) {
       //console.log(e.detail.value);
       //console.log(this.data.categoryArray[e.detail.value[0]].prefix[e.detail.value[1]]);
