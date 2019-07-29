@@ -69,7 +69,7 @@ Page({
   }, 
   onLoad: function () {
     
-   // console.log(this.data.ec);
+    console.log(this.data.CustomBar);
  
     var that = this
     wx.getStorage({

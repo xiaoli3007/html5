@@ -46,6 +46,7 @@ Component({
     input_focus:false,
     isAnnual: 0,
     objectMultiArray: [],
+    foot_btn_shi_height:0 //底部三个按钮的高度
   },
   lifetimes: {
     attached: function() {
@@ -151,7 +152,7 @@ Component({
           top_main_head_title_height: res.height,
         })
       }).exec()
-
+      
       
       query.select('#top_main').boundingClientRect(function (res) {
         // 这个组件内 #the-id 节点的上边界坐标
@@ -159,6 +160,14 @@ Component({
         that.setData({
           useheight:  res.height,
           top_main_height: res.height,
+        })
+      }).exec()
+
+      query.select('#foot_btn_shi').boundingClientRect(function (res) {
+        // 这个组件内 #the-id 节点的上边界坐标
+        //console.log(res.height)
+        that.setData({
+         foot_btn_shi_height: res.height,
         })
       }).exec()
 
@@ -402,16 +411,16 @@ Component({
         // 三种情况  一种为没有 tab 和介绍 和相关人物  一种为啥信息也没有  一种为 没有相关人物
         //
       //toView: 'msg-' + (tempdatamsglist.length - 1),
-      //console.log(this.data.toView) 
+      console.log(this.data.foot_btn_shi_height) 
       if (this.data.person_name.length>0){
         
           this.setData({
-            scrollheight: app.globalData.windowHeight - (this.data.foot_height + this.data.top_main_height) - 15
+            scrollheight: app.globalData.windowHeight - (this.data.foot_height + this.data.top_main_height) - 15 
           })
         }else{
          // console.log(222) 
           this.setData({
-            scrollheight: app.globalData.windowHeight - (this.data.foot_height + this.data.top_main_head_height + this.data.top_main_head_title_height) - 15
+            scrollheight: app.globalData.windowHeight - (this.data.foot_height + this.data.top_main_head_height + this.data.top_main_head_title_height) - 15 - this.data.foot_btn_shi_height
             
           })
         }

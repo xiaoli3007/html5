@@ -7,6 +7,8 @@ image[class*="gif-"] {
   border-radius: 6rpx;
   display: block;
 }
+#foot_btn_shi{ min-height: 70rpx;}
+ 
 .cu-bar-title{min-height:60rpx;}
 .chatscroll{  height:300px; }
 .cu-chat .cu-item>.main .content{word-break:break-all; display: inline;}
