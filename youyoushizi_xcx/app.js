@@ -42,8 +42,9 @@ App({
 
   },
   globalData: {
+    xtoken: 'sdsadwerer',
     userInfo: null,
-    url: 'https://rms.youyoushizi.com/appapi/app_youyoushizi.php',
+    url: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi.php',
     ColorList: [{
       title: '嫣红',
       name: 'red',

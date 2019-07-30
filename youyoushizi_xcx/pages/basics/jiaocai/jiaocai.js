@@ -8,27 +8,46 @@ Page({
     TabCur: 0,
     scrollLeft: 0,
     tabNav: ['一年级', '二年级', '三年级'],
-    jiaocaiList: [{
-      id: '1',
-      image: 'red',
-      url: 'jiaocai',
-      name: '一年级语文上册（人教版）'
-    }, {
-      id: '2',
-      image: 'orange',
-      url: 'duwu',
-      name: '一年级语文上册（人教版）'
-    }, {
-      id: '3',
-      image: 'orange',
-      url: 'duwu',
-      name: '一年级语文上册（人教版）'
-    }, {
-      id: '4',
-      image: 'orange',
-      url: 'duwu',
-      name: '一年级语文上册（人教版）'
-    }]
+    jiaocaiList: [],
+    loadModal: true
+  },
+  onLoad() {
+    let that = this;
+    //加载教材列表
+    wx.request({
+      url: app.globalData.url + '?act=jiaocailist', //教材
+      data: {
+        pagesize: 10
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+        that.setData({
+
+          jiaocaiList: res.data.items
+        })
+
+      },
+      complete(res) {
+        that.setData({
+
+          loadModal: false
+        })
+        //console.log(res.statusCode)
+        if (res.statusCode == 500) {
+
+        } else {
+
+        }
+
+      }
+    })
+
+
   },
   tabSelect(e) {
     this.setData({

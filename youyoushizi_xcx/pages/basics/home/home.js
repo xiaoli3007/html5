@@ -2,41 +2,12 @@ const app = getApp()
 Component({
   options: {
     addGlobalClass: true,
-  },
+  }, 
   data: {
     TabCur: 0,
     scrollLeft: 0,
-    jiaocaiList: [{
-      id: '1',
-      image: 'red',
-      url: 'jiaocai',
-      name: '一年级语文上册（人教版）'
-    }, {
-      id: '2',
-      image: 'orange',
-      url: 'duwu',
-      name: '一年级语文下册（人教版）'
-      }, {
-        id: '3',
-        image: 'orange',
-        url: 'duwu',
-        name: '一年级语文下册（人教版）'
-      }]
-  ,
-    iconList: [{
-      icon: 'square',
-      color: 'red',
-      badge: 80,
-      url: 'jiaocai',
-      name: '教材'
-    }, {
-      icon: 'pay',
-      color: 'orange',
-      badge: 15,
-      url: 'duwu',
-      name: '课外读物'
-    }],
-
+    jiaocaiList: [],
+    kewaiduwuList: [],
     iconList2: [{
       icon: 'picfill',
       color: 'yellow',
@@ -67,17 +38,56 @@ Component({
       }
 
       var that = this
-      //加载分类
+
+      
+      //加载首页的教材和 课外读物
+
       wx.request({
-        url: app.globalData.url + '?act=list', //课外读物
+        url: app.globalData.url + '?act=jiaocailist', //教材
         data: {
+          pagesize: 3
         },
         header: {
-          'content-type': 'application/json' // 默认值
+          'content-type': 'application/json', // 默认值
+          'X-Token': app.globalData.xtoken
         },
         success(res) {
 
           console.log(res.data)
+          that.setData({
+
+            jiaocaiList: res.data.items
+          })
+
+        },
+        complete(res) {
+          //console.log(res.statusCode)
+          if (res.statusCode == 500) {
+
+          } else {
+
+          }
+
+        }
+      })
+      
+      wx.request({
+        url: app.globalData.url + '?act=list', //课外读物
+        data: {
+          pagesize:3
+        },
+        header: {
+          'content-type': 'application/json', // 默认值
+          'X-Token': app.globalData.xtoken
+        },
+        success(res) {
+
+          console.log(res.data)
+
+          that.setData({
+           
+            kewaiduwuList : res.data.items
+          })
           
         },
         complete(res) {
@@ -90,6 +100,8 @@ Component({
 
         }
       })
+
+     
 
     },
     detached: function () {

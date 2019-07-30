@@ -13,8 +13,6 @@
 
 <block wx:if="{{TabCur==0}}">
 
-
-
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
       <text class="cuIcon-title text-orange ">语文</text> 
@@ -25,59 +23,22 @@
   </view>
 
   <view class="cu-list grid col-3">
-    <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
+    <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key >
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed">
       <cover-image src='/images/IMG_1574.jpg' class='list_image'>
       </cover-image>
-      <text>{{item.name}}</text>
+      <text>{{item.title}}</text>
       </navigator>
     </view>
   </view>
 
 </block>
 
-<block wx:if="{{TabCur==1}}">
 
-  <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action">
-      <text class="cuIcon-title text-orange ">语文2</text> 
-    </view>
-    <view class="action">
-      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
-    </view>
-  </view>
+  <view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view>
 
-   <view class="cu-list grid col-3">
-    <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
-     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed">
-      <cover-image src='/images/IMG_1574.jpg' class='list_image'>
-      </cover-image>
-      <text>{{item.name}}</text>
-      </navigator>
-    </view>
-  </view>
 
-</block>
-
-<block wx:if="{{TabCur==2}}">
-
-  <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action">
-      <text class="cuIcon-title text-orange ">语文3</text> 
-    </view>
-    <view class="action">
-      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
-    </view>
-  </view>
-
-  <view class="cu-list grid col-3">
-    <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
-     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed">
-      <cover-image src='/images/IMG_1574.jpg' class='list_image'>
-      </cover-image>
-      <text>{{item.name}}</text>
-      </navigator>
-    </view>
-  </view>
-
-</block>

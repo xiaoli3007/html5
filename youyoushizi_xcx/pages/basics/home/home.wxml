@@ -20,7 +20,7 @@
       </cover-image>
     
       <view class="text-sm">
-        <text class="text-grey">{{item.name}}</text>
+        <text class="text-grey">{{item.title}}</text>
       </view>
 
       </navigator>
@@ -31,7 +31,7 @@
     <view class="action">
       <text class="cuIcon-title text-orange "></text> 课外读物
     </view>
-    <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
+    <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/duwu/duwu">
     <view class="action">
       <button class="cu-btn bg-green shadow" >更多</button>
     </view>
@@ -39,11 +39,11 @@
   </view>
 
  <view class="cu-list grid col-3">
-    <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
+    <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed">
       
       <view class="text-sm">
-        <text class="text-grey">{{item.name}}</text>
+        <text class="text-grey text-left">{{item.title}}</text>
       </view>
 
       </navigator>
