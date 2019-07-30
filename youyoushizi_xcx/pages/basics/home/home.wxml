@@ -4,11 +4,11 @@
 
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> 我的教材
+      <text class="cuIcon-title text-orange "></text> 教材
     </view>
     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
     <view class="action">
-      <button class="cu-btn bg-green shadow" >新增</button>
+      <button class="cu-btn bg-green shadow" >更多</button>
     </view>
      </navigator>
   </view>
@@ -27,6 +27,28 @@
     </view>
   </view>
 
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-title text-orange "></text> 课外读物
+    </view>
+    <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
+    <view class="action">
+      <button class="cu-btn bg-green shadow" >更多</button>
+    </view>
+     </navigator>
+  </view>
+
+ <view class="cu-list grid col-3">
+    <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3*2}}">
+     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed">
+      
+      <view class="text-sm">
+        <text class="text-grey">{{item.name}}</text>
+      </view>
+
+      </navigator>
+    </view>
+  </view>
 
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
