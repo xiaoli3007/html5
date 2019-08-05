@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/basics/jiaocai/jiaocai",
+    "pages/basics/jiaocai_lession/jiaocai_lession",
     "pages/basics/duwu/duwu",
     "pages/basics/detailed/detailed",
     "pages/basics/task/task",

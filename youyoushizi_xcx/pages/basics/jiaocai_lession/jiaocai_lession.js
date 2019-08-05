@@ -3,21 +3,23 @@ Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    Custom: app.globalData.Custom, 
+    Custom: app.globalData.Custom,
     MainCur: 0,
     TabCur: 0,
     scrollLeft: 0,
-    tabNav: ['一年级', '二年级', '三年级', '三年级'],
-    jiaocaiList: [],
+    // tabNav: ['一年级', '二年级', '三年级'],
+    duwuList: [],
     loadModal: true
-  }, 
-  onLoad() {
+  },
+  onLoad(options) {
+
+    console.log(options)
     let that = this;
-    //加载教材列表
+    //加载列表
     wx.request({
-      url: app.globalData.url2 + '?act=jiaocai_cat_list', //教材
+      url: app.globalData.url + '?act=list', 
       data: {
-        pagesize: 10
+        pagesize: 30
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -26,17 +28,9 @@ Page({
       success(res) {
 
         console.log(res.data)
-        
-        let temptab = []
-        for (var i = 0; i < res.data.items.length;i++){
-         
-          temptab.push(res.data.items[i].name)
- 
-        }
-
         that.setData({
-          tabNav: temptab,
-          jiaocaiList: res.data.items
+
+          duwuList: res.data.items
         })
 
       },

@@ -35,16 +35,17 @@ App({
                 this.userInfoReadyCallback(res)
               }
             }
-          })
+          }) 
         }
       }
-    })
+    }) 
 
   },
   globalData: {
     xtoken: 'sdsadwerer',
     userInfo: null,
     url: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi.php',
+    url2: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi_xcc.php',
     ColorList: [{
       title: '嫣红',
       name: 'red',

@@ -11,7 +11,7 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">听写</view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">学习</view>
   </view>
 
   <view class="action" bindtap="NavChange" data-cur="about">

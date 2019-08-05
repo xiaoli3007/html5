@@ -1,0 +1,33 @@
+
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">教材课程</view>
+  </cu-custom>
+
+<view class="cu-bar search bg-white">
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="课程标题" confirm-type="search"></input>
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow-blur round">搜索</button>
+    </view>
+  </view>
+
+
+
+  <view class="cu-list grid col-3">
+    <view class="cu-item  justify-center align-center" wx:for="{{duwuList}}" wx:key >
+      
+      <text>{{item.title}}</text>
+    </view>
+  </view>
+
+
+  <view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view>
+
+

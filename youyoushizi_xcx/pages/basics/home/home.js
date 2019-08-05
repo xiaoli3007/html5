@@ -18,7 +18,7 @@ Component({
       icon: 'service',
       color: 'olive',
       url: 'jiaocai',
-      badge: 22,
+      badge: 0,
       name: '听写任务'
     }],
     gridCol: 3,
@@ -70,7 +70,7 @@ Component({
 
         }
       })
-      
+
       wx.request({
         url: app.globalData.url + '?act=list', //课外读物
         data: {
