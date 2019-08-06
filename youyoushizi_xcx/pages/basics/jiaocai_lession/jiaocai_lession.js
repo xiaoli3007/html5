@@ -15,7 +15,7 @@ Page({
 
     console.log(options)
     let that = this;
-    //加载列表
+    //加载列表 
     wx.request({
       url: app.globalData.url + '?act=list', 
       data: {

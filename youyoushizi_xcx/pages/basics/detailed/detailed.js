@@ -8,19 +8,7 @@ Page({
     TabCur: 0,
     scrollLeft: 0,
     tabNav: ['一年级', '二年级', '三年级'],
-    jiaocaiList: [{
-      id: '1',
-      name: '第一课'
-    }, {
-      id: '2',
-      name: '第二课'
-    }, {
-      id: '3',
-      name: '第三课'
-    }, {
-      id: '4',
-      name: '第四课'
-    }]
+    
   },
   tabSelect(e) {
     this.setData({

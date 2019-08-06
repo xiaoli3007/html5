@@ -1,3 +1,4 @@
 .jiaocai-top{
  margin-top: 64px; 
 }
+.cu-tag+.cu-tag{ margin-left: 0}

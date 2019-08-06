@@ -4,30 +4,25 @@
     <view slot="content">教材课程</view>
   </cu-custom>
 
-<view class="cu-bar search bg-white">
-    <view class="search-form round">
-      <text class="cuIcon-search"></text>
-      <input type="text" placeholder="课程标题" confirm-type="search"></input>
+<view class="cu-bar bg-white solid-bottom ">
+    <view class="action">
+      <text class="cuIcon-title text-orange ">第一单元</text> 
     </view>
     <view class="action">
-      <button class="cu-btn bg-green shadow-blur round">搜索</button>
+      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
     </view>
   </view>
 
-
-
-  <view class="cu-list grid col-3">
-    <view class="cu-item  justify-center align-center" wx:for="{{duwuList}}" wx:key >
-      
-      <text>{{item.title}}</text>
+ <view class="cu-list menu">
+  
+    <view class="cu-item" wx:for="{{duwuList}}" wx:key>
+      <navigator class="content" hover-class="none" url="/pages/basics/task/task" open-type="redirect">
+        <text class="cuIcon-circlefill text-orange"></text>
+        <text class="text-grey">{{item.title}}</text>
+      </navigator>
     </view>
+
+
+  
+  
   </view>
-
-
-  <view class='cu-load load-modal' wx:if="{{loadModal}}">
-  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
-  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
-  <view class='gray-text'>加载中...</view>
-</view>
-
-

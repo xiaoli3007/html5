@@ -1,27 +1,57 @@
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
-    <view slot="backText">返回</view>
-    <view slot="content">详细页</view>
-  </cu-custom>
+  <view slot="backText">返回</view>
+  <view slot="content">读物详细页</view>
+</cu-custom>
 
- <view class="cu-bar bg-white solid-bottom ">
-    <view class="action">
-      <text class="cuIcon-title text-orange ">一年级语文上册</text> 
-    </view>
-    <view class="action">
-      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
-    </view>
+
+<view class="cu-bar bg-blue  solid-bottom cu-bar-title" id='top_main_head_title'>
+  <view class="action">
+    <text class="cuIcon-title text-white "></text> 作品简介
+  </view>
+</view>
+
+
+  <view class="bg-grey padding-sm margin-xs radius flex   align-start">
+      <view class="bg-grey  margin-xs radius">
+        <cover-image src='/images/logo.png'></cover-image>
+      </view>
+      <view class="bg-grey  margin-xs radius">
+        <view class="text-left "> 作者：张三</view>
+        <view class="text-left ">主题：大声大声道</view>
+        <view class="text-left "> 简介：电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电锅第三个电饭锅第三个电饭锅第三个</view>
+      </view>
   </view>
 
- <view class="cu-list menu">
-  
-    <view class="cu-item" wx:for="{{jiaocaiList}}" wx:key>
-      <navigator class="content" hover-class="none" url="/pages/basics/task/task" open-type="redirect">
-        <text class="cuIcon-circlefill text-orange"></text>
-        <text class="text-grey">{{item.name}}</text>
-      </navigator>
+  <view class="cu-bar bg-blue margin-top solid-bottom">
+  <view class="action">
+    <text class="cuIcon-title text-white"></text> 字集
+  </view>
+</view>
+<scroll-view scroll-x class="bg-cyan nav text-center">
+  <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{8}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    Tab{{index}}
+  </view>
+</scroll-view>
+
+
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{10}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    Tab{{index}}
+  </view>
+</scroll-view>
+
+  <!-- <block wx:key wx:for='{{30}}' wx:for-index="mindex" wx:if="{{TabCur==mindex}}"> -->
+<view class="padding bg-white solid-bottom">
+  <block wx:key wx:for='{{30}}' wx:for-index="mindex2" >
+  <view class="cu-tag radius">圆</view>
+  </block>
+</view>
+
+<view class="flex   justify-center">
+      <view class=" padding-sm margin-xs radius">
+       <button class="cu-btn round lg bg-yellow">开始识字</button>
+      </view>
     </view>
 
 
-  
-  
-  </view>
+ <!-- </block> -->

@@ -43,9 +43,9 @@ Component({
       //加载首页的教材和 课外读物
 
       wx.request({
-        url: app.globalData.url + '?act=jiaocailist', //教材
+        url: app.globalData.url2 + '?act=jiaocai_cat_list', //教材
         data: {
-          pagesize: 3
+          pagesize: 10
         },
         header: {
           'content-type': 'application/json', // 默认值
@@ -53,10 +53,18 @@ Component({
         },
         success(res) {
 
-          console.log(res.data)
+         
+
+          let temptab = []
+          for (var i = 0; i < res.data.items.length; i++) {
+            for (var j = 0;j < res.data.items[i].items.length; j++) {
+              temptab.push(res.data.items[i].items[j])
+            }
+          }
+          console.log(temptab)
           that.setData({
 
-            jiaocaiList: res.data.items
+            jiaocaiList: temptab
           })
 
         },
