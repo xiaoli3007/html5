@@ -5,46 +5,57 @@
 
 
 <view class="cu-bar bg-blue  solid-bottom cu-bar-title" id='top_main_head_title'>
-  <view class="action">
-    <text class="cuIcon-title text-white "></text> 作品简介
+  <view class="action align-center text-center">
+    <!-- <text class="cuIcon-title text-white "></text>-->
+     {{program.title}} 
   </view>
 </view>
 
 
   <view class="bg-grey padding-sm margin-xs radius flex   align-start">
       <view class="bg-grey  margin-xs radius">
-        <cover-image src='/images/logo.png'></cover-image>
+        <!-- <cover-image src='{{program.thumb_xcx}}' style='width:100rpx;'></cover-image> -->
       </view>
       <view class="bg-grey  margin-xs radius">
-        <view class="text-left "> 作者：张三</view>
-        <view class="text-left ">主题：大声大声道</view>
-        <view class="text-left "> 简介：电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电饭锅第三个电锅第三个电饭锅第三个电饭锅第三个</view>
+        <view class="text-left "> 作者：{{program.author}}</view>
+        <view class="text-left ">主题：{{program.subject}}</view>
+        <view class="text-left "> 简介：{{program.description}}</view>
       </view>
   </view>
 
-  <view class="cu-bar bg-blue margin-top solid-bottom">
+  <!-- <view class="cu-bar bg-blue margin-top solid-bottom">
   <view class="action">
     <text class="cuIcon-title text-white"></text> 字集
   </view>
-</view>
+</view> -->
+
+ 
 <scroll-view scroll-x class="bg-cyan nav text-center">
-  <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{8}}" wx:key bindtap="tabSelect" data-id="{{index}}">
-    Tab{{index}}
+  <view class="cu-item {{index==TabCur?'text-white cur':''}}" wx:for="{{datalist}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    {{item.obj.name}}
   </view>
 </scroll-view>
 
+<block  wx:for="{{datalist}}" wx:for-index="mindex" wx:key>
+ 
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLefts}}">
 
-<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
-  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{10}}" wx:key bindtap="tabSelect" data-id="{{index}}">
-    Tab{{index}}
+<block  wx:for="{{item.wcell_list}}" wx:for-index="mindex2" wx:key>
+  <view class="cu-item {{mindex2==TabCursub?'text-green cur':''}}"   bindtap="tabSelect" data-id="{{mindex2}}">
+    {{item.name}}
   </view>
-</scroll-view>
+  </block> 
+</scroll-view> 
+</block> 
+
 
   <!-- <block wx:key wx:for='{{30}}' wx:for-index="mindex" wx:if="{{TabCur==mindex}}"> -->
-<view class="padding bg-white solid-bottom">
+<view class="padding bg-white solid-bottom  flex">
+  <view class="justify-center">
   <block wx:key wx:for='{{30}}' wx:for-index="mindex2" >
-  <view class="cu-tag radius">圆</view>
+  <view class="cu-tag radius line-black padding ">圆</view>
   </block>
+  </view>
 </view>
 
 <view class="flex   justify-center">

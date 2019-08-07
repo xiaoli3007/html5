@@ -58,7 +58,7 @@
 
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
-     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed">
+     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
       
       <view class="text-sm">
         <text class="text-grey text-left">{{item.title}}</text>

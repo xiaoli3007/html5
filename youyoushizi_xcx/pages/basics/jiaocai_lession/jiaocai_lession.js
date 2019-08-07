@@ -8,7 +8,7 @@ Page({
     TabCur: 0,
     scrollLeft: 0,
     // tabNav: ['一年级', '二年级', '三年级'],
-    duwuList: [],
+    jiaocaiList: [],
     loadModal: true
   },
   onLoad(options) {
@@ -17,20 +17,20 @@ Page({
     let that = this;
     //加载列表 
     wx.request({
-      url: app.globalData.url + '?act=list', 
+      url: app.globalData.url2 + '?act=jiaocai_sub_lession', 
       data: {
-        pagesize: 30
+        bookid: options.ebookid
       },
       header: {
         'content-type': 'application/json', // 默认值
         'X-Token': app.globalData.xtoken
-      },
+      }, 
       success(res) {
 
         console.log(res.data)
         that.setData({
 
-          duwuList: res.data.items
+          jiaocaiList: res.data.items
         })
 
       },
