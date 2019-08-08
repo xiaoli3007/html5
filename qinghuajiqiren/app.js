@@ -57,7 +57,7 @@ App({
     msgList: [{
       speaker: 'server',
       contentType: 'text',
-      content: '您好，我是清华大学图书馆智能机器人小图，我可以陪你聊天，还有一些特殊功能',
+      content: '因斑驳而绚烂，因腐朽而芬芳。 我是诗小图，七年前出生于清华大学图书馆，今年五千岁。',
       time: util.timestampToString(),
     }],
     relList: [[{
