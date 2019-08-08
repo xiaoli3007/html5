@@ -14,10 +14,10 @@
 <view class="cu-bar search bg-white">
     <view class="search-form round">
       <text class="cuIcon-search"></text>
-      <input type="text" placeholder="图书标题或作者" confirm-type="search"></input>
+      <input type="text" placeholder="图书标题或作者" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}'></input>
     </view>
     <view class="action">
-      <button class="cu-btn bg-green shadow-blur round">搜索</button>
+      <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button>
     </view>
   </view>
 
@@ -33,10 +33,14 @@
 
   <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{duwuList}}" wx:key >
-      
+      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
       <text>{{item.title}}</text>
+      </navigator>
     </view>
   </view>
+
+
+<view class="cu-load bg-blue {{!isLoad?'loading':'over'}}"></view>
 
 
   <view class='cu-load load-modal' wx:if="{{loadModal}}">
