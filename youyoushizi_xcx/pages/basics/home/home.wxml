@@ -20,7 +20,7 @@
     </view>
   </view>
 
-  <view class="cu-bar bg-white solid-bottom  margin-top">
+  <view class="cu-bar bg-white solid-bottom  ">
     <view class="action">
       <text class="cuIcon-title text-orange "></text> 教材
     </view>
@@ -45,7 +45,7 @@
     </view>
   </view>
 
-  <view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="cu-bar bg-white solid-bottom ">
     <view class="action">
       <text class="cuIcon-title text-orange "></text> 课外读物
     </view>
@@ -59,11 +59,12 @@
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
-      
+       <cover-image src='{{item.thumb_zm}}' class='list_image'>
+      </cover-image>
       <view class="text-sm">
         <text class="text-grey text-left">{{item.title}}</text>
       </view>
-
+ 
       </navigator>
     </view>
   </view>

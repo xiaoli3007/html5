@@ -16,7 +16,7 @@
 
     <view class="cu-bar bg-blue  solid-bottom cu-bar-title" id='top_main_head_title'>
       <view class="action">
-        <text class="cuIcon-title text-white "></text> 相关知识
+        <text class="cuIcon-title text-white "></text> 关联知识图
       </view>
     </view>
   </view>

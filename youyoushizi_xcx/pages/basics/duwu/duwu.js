@@ -12,7 +12,7 @@ Page({
     loadModal: true,
     page: 1,
     isLoad: true,
-    pagesize: 30,
+    pagesize: 12,
     isend: false,
     keywords: '',
     Inputdisabled: false, //搜索按钮的  置灰状态
