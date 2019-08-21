@@ -12,36 +12,39 @@ App({
     })
 
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // console.log(res.code);
-      }
-    })
+    // wx.login({
+    //   success: res => {
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //     console.log(res.code);
+    //   }
+    // })
     // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // console.log(res);
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
+    // wx.getSetting({
+    //   success: res => {
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           console.log(res);
+    //           // 可以将 res 发送给后台解码出 unionId
+    //           this.globalData.userInfo = res.userInfo
 
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
-          }) 
-        }
-      }
-    }) 
+    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //           // 所以此处加入 callback 以防止这种情况
+    //           if (this.userInfoReadyCallback) {
+    //             this.userInfoReadyCallback(res)
+    //           }
+    //         }
+    //       }) 
+    //     }
+    //   }
+    // }) 
 
   },
   globalData: {
+    userid: null,
+    openid: '',
+    spid: 0,
     xtoken: 'sdsadwerer',
     userInfo: null,
     url: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi.php',
@@ -57,5 +60,20 @@ App({
       color: '#f37b1d'
     }
     ]
-  }
+  },
+   setUserInfo: function () {
+    var that = this;
+    if (that.globalData.uid == null) {//是否存在用户信息，如果不存在跳转到首页
+      // wx.showToast({
+      //   title: '用户信息获取失败',
+      //   icon: 'none',
+      //   duration: 1500,
+      // })
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '/pages/about/home/home',
+        })
+      }, 1500)
+    }
+  },
 })
