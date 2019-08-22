@@ -14,7 +14,13 @@ Component({
   },
   lifetimes: {
     attached: function () {
-
+      if (app.globalData.userInfo){
+         this.setData({
+           userInfo: app.globalData.userInfo,
+          hasUserInfo: true
+        })
+      }
+      console.log(app.globalData.userInfo)
       var header = {
         'content-type': 'application/x-www-form-urlencoded',
       };
@@ -76,10 +82,11 @@ Component({
     getUserInfo: function (e) {
       var userInfo = e.detail.userInfo;
       // userInfo.spid = app.globalData.spid;
-      this.setData({
-        userInfo: e.detail.userInfo,
-        hasUserInfo: true
-      }) 
+      // this.setData({
+      //   userInfo: e.detail.userInfo,
+      //   hasUserInfo: true
+      // }) 
+      var that = this 
       wx.login({
         success: function (res) {
           if (res.code) {
@@ -96,9 +103,14 @@ Component({
                 info: userInfo,
               }, 
               success: function (res) {
-                 app.globalData.userid = res.data.items.userid;
-                 app.globalData.openid = res.data.items.routine_openid;
+                app.globalData.userid = res.data.items.userid;
+                app.globalData.openid = res.data.items.routine_openid;
+                app.globalData.userInfo = res.data.items;
                 console.log(res);
+                that.setData({
+                  userInfo: res.data.items,
+                  hasUserInfo: true
+                })
                   
               }
             })

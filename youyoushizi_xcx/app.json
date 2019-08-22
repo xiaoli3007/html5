@@ -10,6 +10,7 @@
     "pages/about/log/log",
     "pages/about/test/list",
     "pages/about/test/filter",
+    "pages/about/account/account",
     "pages/about/home/home"
   ],
   "window": {
