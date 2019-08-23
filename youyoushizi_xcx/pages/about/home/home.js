@@ -21,20 +21,9 @@ Component({
         })
       }
       console.log(app.globalData.userInfo)
-      var header = {
-        'content-type': 'application/x-www-form-urlencoded',
-      };
-      var that = this;
-      // wx.request({
-      //   url: app.globalData.url2 + '?act=wx_get_userinfo&userid=' + app.globalData.userid,
-      //   method: 'POST',
-      //   header: header,
-      //   success: function (res) {
-      //     that.setData({
-      //       userinfo: res.data.data,
-      //     })
-      //   }
-      // });
+     
+     
+
       // 在组件实例进入页面节点树时执行
       // if (app.globalData.userInfo) {
       //   this.setData({
@@ -88,7 +77,7 @@ Component({
       // }) 
       var that = this 
       wx.login({
-        success: function (res) {
+        success: function (res) { 
           if (res.code) {
             userInfo.code = res.code;
             wx.request({
@@ -105,6 +94,7 @@ Component({
               success: function (res) {
                 app.globalData.userid = res.data.items.userid;
                 app.globalData.openid = res.data.items.routine_openid;
+                app.globalData.uid = res.data.items.uid;
                 app.globalData.userInfo = res.data.items;
                 console.log(res);
                 that.setData({

@@ -2,6 +2,15 @@ Page({
   data: {
     PageCur: 'basics'
   },
+
+  onLoad: function (option) {
+    console.log(option.p)
+    if (option.p){
+      this.setData({
+        PageCur: option.p
+      })
+    }
+  },
   NavChange(e) {
     this.setData({
       PageCur: e.currentTarget.dataset.cur
@@ -9,8 +18,8 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: 'ColorUI-高颜值的小程序UI组件库',
-      imageUrl: '/images/share.jpg',
+      title: '-',
+      imageUrl: '/images/logo.png',
       path: '/pages/index/index'
     }
   },

@@ -6,7 +6,7 @@
       <text class="cuIcon-title text-orange "></text> 账号列表
     </view>
     <view class="action">
-      <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="menuModal">
+      <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="Dialogadduser">
       添加账号</button>
     </view>
   </view>
@@ -15,36 +15,107 @@
   <view class="cu-list menu-avatar ">
    
 
-     <view class="cu-item ">
-      <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
-      <view class="content">
-        <view class="text-pink">
-          <text class="text-cut">zhangsan</text>
-        </view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">密码：123123</text>
-        </view>
-      </view>
-      <view class="action" style='width:150rpx;'>
-        <view class="text-grey text-xs"></view>
-        <view class="cu-tag round bg-red ">修改密码</view>
-      </view>
-    </view>
 
-         <view class="cu-item ">
-      <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view>
+ <block  wx:for="{{member_list}}" wx:key >
+     <view class="cu-item ">
+      <!-- <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view> -->
+
+      <view class="cu-avatar radius lg" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
+
+        <view class="cu-avatar radius lg" wx:if='{{!item.avatar}}'>
+          <text class="cuIcon-people"></text>
+        </view>
+
+
       <view class="content">
         <view class="text-pink">
-          <text class="text-cut">zhangsan</text>
+          <text class="text-cut">用户名：{{item.username}}</text>
         </view>
         <view class="text-gray text-sm flex">
-          <text class="text-cut">密码：123123</text>
+          <text class="text-cut">密码：{{item.mingwenpw}}</text>
         </view>
       </view>
       <view class="action" style='width:150rpx;'>
         <view class="text-grey text-xs"></view>
-        <view class="cu-tag round bg-red ">修改密码</view>
+        <view class="cu-tag round bg-red " bindtap="showModal" data-target="DialogModal1">修改密码</view>
       </view>
     </view>
+  </block>
+       
   
   </view>
+
+
+
+  <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">修改密码</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-sm">
+
+        <form>
+        <view class="cu-form-group margin-top">
+          <view class="title">用户名</view>
+          <input ></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">新密码</view>
+          <input placeholder="新密码"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">确认新密码</view>
+          <input placeholder="确认新密码"></input>
+        </view>
+        </form>
+
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+  <view class="cu-modal {{modalName=='Dialogadduser'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">添加账号</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-sm">
+
+        <form>
+        <view class="cu-form-group margin-top">
+          <view class="title">用户名</view>
+          <input placeholder="用户名"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">密码</view>
+          <input placeholder="新密码"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">确认密码</view>
+          <input placeholder="确认新密码"></input>
+        </view>
+        </form>
+
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

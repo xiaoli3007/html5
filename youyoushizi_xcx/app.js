@@ -42,6 +42,7 @@ App({
 
   },
   globalData: {
+    uid: null,
     userid: null,
     openid: '',
     spid: 0,
@@ -61,19 +62,19 @@ App({
     }
     ]
   },
-   setUserInfo: function () {
+  setUserInfo: function ( page = 'basics') {
     var that = this;
     if (that.globalData.uid == null) {//是否存在用户信息，如果不存在跳转到首页
-      // wx.showToast({
-      //   title: '用户信息获取失败',
-      //   icon: 'none',
-      //   duration: 1500,
-      // })
+      wx.showToast({
+        title: '获取用户信息失败！',
+        icon: 'none',
+        duration: 1500,
+      })
       setTimeout(function () {
         wx.navigateTo({
-          url: '/pages/about/home/home',
+          url: '/pages/index/index?p=' + page,
         })
-      }, 1500)
+      }, 1000)
     }
   },
 })
