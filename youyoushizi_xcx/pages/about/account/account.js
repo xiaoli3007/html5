@@ -1,10 +1,19 @@
+
+import WxValidate from '../../../utils/WxValidate.js'
+
 const app = getApp();
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     ColorList: app.globalData.ColorList,
-    member_list:[]
+    member_list:[],
+    form: {
+      username:'',
+      newpasswd: '',
+      confimpasswd: ''
+    }
+
   },
   onLoad: function () { 
   
@@ -29,6 +38,10 @@ Page({
             })
         }
       });
+
+
+      this.initValidate()//验证规则函数
+
       // wx.request({
       //   url: app.globalData.url2 + '?act=wx_get_userinfo&userid=' + app.globalData.userid,
       //   method: 'POST',
@@ -50,6 +63,17 @@ Page({
       delta: 1
     });
   },
+  showModal_editpw(e) {
+    console.log(e);
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      form: {
+        username: e.currentTarget.dataset.username,
+        newpasswd: '',
+        confimpasswd: '' 
+      }
+    })
+  },
    showModal(e) {
     this.setData({
       modalName: e.currentTarget.dataset.target
@@ -60,4 +84,55 @@ Page({
       modalName: null
     })
   },
+  formSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    const params = e.detail.value
+    //校验表单
+    if (!this.WxValidate.checkForm(params)) {
+      const error = this.WxValidate.errorList[0]
+      this.showFormModal(error)
+      return false
+    }
+    this.showFormModal({
+      msg: '提交成功'
+    }) 
+    this.setData({
+      modalName: null
+    })
+  },
+  //报错 
+  showFormModal(error) {
+    wx.showModal({
+      content: error.msg,
+      showCancel: false,
+    })
+  },
+  //验证函数
+  initValidate() {
+    const rules = {
+      newpasswd: {
+        required: true,
+        minlength: 6
+      },
+      confimpasswd: {
+        required: true,
+        minlength: 6,
+        equalTo: 'newpasswd'
+      }
+    }
+    const messages = {
+      newpasswd: {
+        required: '请填写新密码',
+        minlength: '密码至少6位'
+      },
+      confimpasswd: {
+        required: '请填写确认密码',
+        minlength: '密码至少6位',
+        equalTo:'密码不相同'
+      }
+    }
+    this.WxValidate = new WxValidate(rules, messages)
+  },
+
+ 
 });

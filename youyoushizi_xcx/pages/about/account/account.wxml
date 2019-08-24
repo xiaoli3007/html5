@@ -37,7 +37,9 @@
       </view>
       <view class="action" style='width:150rpx;'>
         <view class="text-grey text-xs"></view>
-        <view class="cu-tag round bg-red " bindtap="showModal" data-target="DialogModal1">修改密码</view>
+        <view class="cu-tag round bg-red " bindtap="showModal_editpw" data-target="DialogModal1"
+       data-username="{{item.username}}" 
+        >修改密码</view>
       </view>
     </view>
   </block>
@@ -55,30 +57,31 @@
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
+    <form bindsubmit="formSubmit">
     <view class="padding-sm">
 
-        <form>
+        
         <view class="cu-form-group margin-top">
           <view class="title">用户名</view>
-          <input ></input>
+          <input  disabled="true" name='username' value='{{form.username}}'></input>
         </view>
         <view class="cu-form-group">
           <view class="title">新密码</view>
-          <input placeholder="新密码"></input>
+          <input placeholder="新密码" password="true" name='newpasswd' value='{{form.newpasswd}}'></input>
         </view>
         <view class="cu-form-group">
           <view class="title">确认新密码</view>
-          <input placeholder="确认新密码"></input>
+          <input placeholder="确认新密码" password="true" name='confimpasswd' value='{{form.confimpasswd}}'></input>
         </view>
-        </form>
-
+     
     </view>
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
+        <button class="cu-btn bg-green margin-left" form-type="submit" >确定</button>
       </view>
     </view>
+     </form>
   </view>
 </view>
 
