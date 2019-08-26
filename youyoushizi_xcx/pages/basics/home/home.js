@@ -11,16 +11,25 @@ Component({
     iconList2: [{
       icon: 'picfill',
       color: 'yellow',
-      url: 'jiaocai',
+      url: '/pages/basics/tasklist/tasklist',
       badge: 20,
-      name: '识字任务'
+      name: '识字任务',
+      type: '2'
     }, {
       icon: 'service',
       color: 'olive',
-      url: 'jiaocai',
+        url: '/pages/basics/tasklist/tasklist',
       badge: 0,
-      name: '听写任务'
-    }],
+      name: '听写任务',
+      type: '1'
+      }, {
+        icon: 'brand',
+        color: 'yellow',
+        url: '/pages/basics/reviewselect/reviewselect',
+        badge: 0,
+        name: '复习',
+        type: '3'
+      }],
     gridCol: 3,
     skin: false,
     gridBorder: false

@@ -1,0 +1,61 @@
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">任务列表</view>
+</cu-custom>
+
+
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item {{index==TabCur?'text-blue cur':''}}" wx:for="{{tabNav}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{tabNav[index]}}
+    </view>
+  </view>
+</scroll-view>
+
+<view class="cu-bar search bg-white">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="任务标题" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}'></input>
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button>
+  </view>
+</view>
+
+
+<block wx:if="{{TabCur==mindex}}" wx:for="{{tabNav}}" wx:for-index="mindex" wx:key>
+<view class="cu-list menu ">
+  <block wx:for="{{task_list}}" wx:key>
+    <view class="cu-item ">
+
+      <view class="content">
+        <view class="text-black">
+          <text class="text-cut">{{item.name}}</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut"> 类别：{{item.taskinfotext}}
+          </text>
+
+        </view>
+        <view class="text-orange text-sm flex">
+          <text class="text-cut"> 状态：{{item.status_text}}</text>
+        </view>
+      </view>
+      <view class="action" style='width:150rpx;'>
+        <view class="text-grey text-xs"></view>
+        <view class="cu-tag round bg-green " bindtap="showModal_editpw">开始任务</view>
+      </view>
+    </view>
+  </block>
+</view>
+</block>
+
+
+<view class="cu-load bg-blue {{!isLoad?'loading':'over'}}"></view>
+
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view>

@@ -5,6 +5,8 @@
     "pages/basics/jiaocai_lession/jiaocai_lession",
     "pages/basics/duwu/duwu",
     "pages/basics/detailed/detailed",
+    "pages/basics/tasklist/tasklist",
+    "pages/basics/reviewselect/reviewselect",
     "pages/basics/task/task",
     "pages/about/about/about",
     "pages/about/log/log",
