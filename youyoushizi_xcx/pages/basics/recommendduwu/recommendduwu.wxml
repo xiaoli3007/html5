@@ -8,7 +8,7 @@
 </view> -->
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
     <view slot="backText">返回</view>
-    <view slot="content">课外读物</view>
+    <view slot="content">推荐读物</view>
   </cu-custom>
 
 <view class="cu-bar search bg-white">
@@ -24,7 +24,7 @@
 
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
-      <text class="cuIcon-title text-orange ">课外读物</text> 
+      <text class="cuIcon-title text-orange ">推荐读物</text> 
     </view>
     <view class="action">
       <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
@@ -33,8 +33,8 @@
 
   <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{duwuList}}" wx:key >
-      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
-     <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommenddetailed/recommenddetailed?ebookid={{item.id}}">
+       <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
       </image>
       <text>{{item.title}}</text>
       </navigator>

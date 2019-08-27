@@ -8,7 +8,8 @@ Component({
     scrollLeft: 0,
     jiaocaiList: [],
     kewaiduwuList: [],
-    iconList2: [{
+    tuijianduwuList: [],
+    iconList: [{
       icon: 'picfill',
       color: 'yellow',
       url: '/pages/basics/tasklist/tasklist',
@@ -52,58 +53,31 @@ Component({
       //加载首页的教材和 课外读物
 
       wx.request({
-        url: app.globalData.url2 + '?act=jiaocai_cat_list', //教材
+        url: app.globalData.url2 + '?act=index', //课外读物
         data: {
-          pagesize: 10
+          userid:2
         },
         header: {
           'content-type': 'application/json', // 默认值
           'X-Token': app.globalData.xtoken
         },
         success(res) {
-
-         
-
-          let temptab = []
-          for (var i = 0; i < res.data.items.length; i++) {
-            for (var j = 0;j < res.data.items[i].items.length; j++) {
-              temptab.push(res.data.items[i].items[j])
-            }
-          }
-          console.log(temptab)
+ 
+          console.log(res.data)
+ 
           that.setData({
-
-            jiaocaiList: temptab
+            
+            kewaiduwuList: res.data.items.duwu,
+            jiaocaiList: res.data.items.jiaocai,
+            tuijianduwuList: res.data.items.tuijian_duwu,
+            
           })
 
-        },
-        complete(res) {
-          //console.log(res.statusCode)
-          if (res.statusCode == 500) {
-
-          } else {
-
-          }
-
-        }
-      })
-
-      wx.request({
-        url: app.globalData.url + '?act=list', //课外读物
-        data: {
-          pagesize:3
-        },
-        header: {
-          'content-type': 'application/json', // 默认值
-          'X-Token': app.globalData.xtoken
-        },
-        success(res) {
-
-          console.log(res.data)
-
+          var tprice = 'iconList[0].badge'
+          var tprice2 = 'iconList[1].badge'
           that.setData({
-           
-            kewaiduwuList : res.data.items
+            [tprice]: res.data.shizi_nums,
+            [tprice2]: res.data.tingxie_nums
           })
           
         },

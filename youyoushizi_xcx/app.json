@@ -8,6 +8,8 @@
     "pages/basics/tasklist/tasklist",
     "pages/basics/reviewselect/reviewselect",
     "pages/basics/task/task",
+    "pages/basics/recommendduwu/recommendduwu",
+    "pages/basics/recommenddetailed/recommenddetailed",
     "pages/about/about/about",
     "pages/about/log/log",
     "pages/about/test/list",

@@ -10,7 +10,7 @@
   </view>
 
   <view class="cu-list grid col-{{gridCol}} {{gridBorder?'':'no-border'}}">
-    <view class="cu-item" wx:for="{{iconList2}}" wx:key wx:if="{{index<gridCol*2}}">
+    <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
       
        <navigator  class="align-center" open-type="navigate" hover-class='none' url="{{item.url}}?type={{item.type}}">
       <view class="cuIcon-{{item.icon}} text-{{item.color}}">
@@ -35,12 +35,12 @@
     </view>
      </navigator>
   </view>
-
+ 
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
-      <cover-image src='{{item.thumb}}' class='list_image'>
-      </cover-image>
+      <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+      </image>
     
       <view class="text-sm">
         <text class="text-grey">{{item.title}}</text>
@@ -64,8 +64,10 @@
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
-       <cover-image src='{{item.thumb_zm}}' class='list_image'>
-      </cover-image>
+        
+       <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+      </image>
+
       <view class="text-sm">
         <text class="text-grey text-left">{{item.title}}</text>
       </view>
@@ -80,7 +82,7 @@
     <view class="action">
       <text class="cuIcon-title text-orange "></text> 推荐读物
     </view>
-    <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/duwu/duwu">
+    <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommendduwu/recommendduwu">
     <view class="action">
       <button class="cu-btn bg-green shadow" >更多</button>
     </view>
@@ -88,10 +90,10 @@
   </view>
 
  <view class="cu-list grid col-3">
-    <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
-     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
-       <cover-image src='{{item.thumb_zm}}' class='list_image'>
-      </cover-image>
+    <view class="cu-item  justify-center align-center" wx:for="{{tuijianduwuList}}" wx:key wx:if="{{index<3*2}}">
+     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommenddetailed/recommenddetailed?ebookid={{item.id}}">
+       <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+      </image>
       <view class="text-sm">
         <text class="text-grey text-left">{{item.title}}</text>
       </view>
