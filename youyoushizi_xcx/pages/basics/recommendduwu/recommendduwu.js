@@ -20,7 +20,7 @@ Page({
     let that = this;
     //加载列表
     wx.request({
-      url: app.globalData.url + '?act=list',
+      url: app.globalData.url + '?act=getbookrecommendlist',
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page
@@ -84,7 +84,7 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=list',
+      url: app.globalData.url + '?act=getbookrecommendlist',
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
@@ -139,7 +139,7 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=list',
+      url: app.globalData.url + '?act=getbookrecommendlist',
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
