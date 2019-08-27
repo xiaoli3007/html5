@@ -15,6 +15,8 @@
 <view class="bg-grey padding-sm margin-xs radius flex   align-start">
   <view class="bg-grey  margin-xs radius">
     <!-- <cover-image src='{{program.thumb_xcx}}' style='width:100rpx;'></cover-image> -->
+
+    <image src='{{program.thumb_xcx}}' style="width:200rpx;" mode="widthFix"></image>
   </view>
   <view class="bg-grey  margin-xs radius">
     <view class="text-left "> 作者：{{program.author}}</view>

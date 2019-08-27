@@ -47,6 +47,8 @@
      <view wx:if="{{item.program.summary}}" class="text-left margin-top"><text>
      描述：{{item.program.description_list}}</text></view>
       
+      
+
       </view>
     </view>
   </view> 
