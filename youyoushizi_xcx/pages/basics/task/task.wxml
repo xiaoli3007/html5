@@ -5,7 +5,7 @@
 
  <view class="cu-bar bg-white solid-bottom ">
     <view class="action  justify-center align-center">
-      <text class="cuIcon-title text-orange">一年级语文上册 第一课</text> 
+      <text class="cuIcon-title text-orange">{{taskdata.name}}</text> 
     </view>
     <view class="action">
       <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
@@ -18,6 +18,7 @@
   interval="{{interval}}"
   duration="{{duration}}"
   current="{{current}}"
+  wx:if="{{!loadModal}}"
 >
   <block wx:for="{{taskdata.word1}}" wx:key>
     <swiper-item>
@@ -45,3 +46,9 @@
 
 <!-- <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button>
 <button type="primary" bindtap="audioStart">回到开头</button> -->
+
+  <view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view>

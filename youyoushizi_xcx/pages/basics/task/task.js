@@ -1,66 +1,6 @@
+const app = getApp()
 
 Page({
-
-  onLoad: function (options) {
-   
-    console.log(options.taskid)
-    if (options.taskid ==0) {
-      console.log(options)
-    }else{
-      console.log(options)
-    }
-
-    // var that = this;
-    // if (app.globalData.userid) {
-
-    //   wx.request({
-    //     url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
-    //     method: 'GET',
-    //     header: {
-    //       'content-type': 'application/json', // 默认值
-    //       'X-Token': app.globalData.xtoken
-    //     },
-    //     data: {
-    //       type: that.data.type,
-    //     },
-    //     success: function (res) {
-    //       console.log(res);
-    //       that.setData({
-    //         task_list: res.data.items,
-    //       })
-    //     }, complete(res) {
-    //       that.setData({
-
-    //         loadModal: false
-    //       })
-    //       //console.log(res.statusCode)
-    //       if (res.statusCode == 500) {
-
-    //       } else {
-
-    //       }
-
-    //     }
-    //   });
-    // }
-
-  },
-  onReady(e) {
-    // 使用 wx.createAudioContext 获取 audio 上下文 context
-    // this.audioCtx = wx.createAudioContext('myAudio')
-
-    this.innerAudioContext = wx.createInnerAudioContext()
-    // this.innerAudioContext.autoplay = true
-    this.innerAudioContext.src = '/'+this.data.taskdata.word1[0].sw_sound
-    this.innerAudioContext.onPlay(() => {
-      console.log('开始播放')
-    })
-    this.innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
-
-  },
   data: {
     taskdata: {
       "id": "01",
@@ -82,14 +22,91 @@ Page({
           "lw": "青的草，绿的叶，各色鲜艳的花，都像赶集似的聚拢来，形成了光彩夺目的春天。",
           "lw_sound": "voice/4d/cf/4dcf2e1b7484b6b137b04775c2cb976f.wav"
         }
-      ]},
+      ]
+    },
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
     duration: 1000,
-    current:0,
-    src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
+    current: 0,
+    src: 'http://rms.youyoushizi.com:8088/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
+    loadModal: true,
   },
+  onLoad: function (options) {
+   
+    console.log(options.taskid)
+
+    var apiurl = ''
+    var methd = 'POST'
+    if (options.taskid ==0) {
+      console.log(options)
+      apiurl = app.globalData.url + '?act=taskin'
+    }else{
+      console.log(options)
+      methd = 'GET'
+      apiurl = app.globalData.url + '?act=taskone'
+    }
+    console.log(methd)
+    console.log(apiurl)
+    var that = this;
+    if (app.globalData.userid) {
+
+      wx.request({
+        url: apiurl,
+        method: methd,
+        header: {
+          'content-type': 'application/x-www-form-urlencoded', // 默认值
+          'X-Token': app.globalData.xtoken
+        },
+        data: {
+          userid: app.globalData.userid,
+          type: parseInt(options.type),
+          taskid: parseInt(options.taskid),
+          relation_type: options.relation_type,
+          relation_id: parseInt(options.relation_id),
+          gid: options.gid?parseInt(options.gid):0,
+          wcell_type: options.wcell_type?parseInt(options.wcell_type):0,
+          status:0
+        },
+        success: function (res) {
+          console.log(res);
+          that.setData({
+            taskdata: res.data.word_data,
+          })
+        }, complete(res) {
+          that.setData({
+
+            loadModal: false
+          })
+          //console.log(res.statusCode)
+          if (res.statusCode == 500) {
+
+          } else {
+
+          }
+
+        }
+      });
+    }
+
+  },
+  onReady(e) {
+    // 使用 wx.createAudioContext 获取 audio 上下文 context
+    // this.audioCtx = wx.createAudioContext('myAudio')
+
+    this.innerAudioContext = wx.createInnerAudioContext()
+    // this.innerAudioContext.autoplay = true
+    this.innerAudioContext.src =  this.data.src
+    this.innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+    })
+    this.innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })
+
+  },
+
 
   change: function (e) {
     if ("touch" === e.detail.source) {  // 只在用户触发的情况下
