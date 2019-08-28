@@ -55,7 +55,7 @@ Component({
       wx.request({
         url: app.globalData.url2 + '?act=index', //课外读物
         data: {
-          userid:2
+          userid: app.globalData.userid
         },
         header: {
           'content-type': 'application/json', // 默认值
@@ -79,6 +79,7 @@ Component({
             [tprice]: res.data.shizi_nums,
             [tprice2]: res.data.tingxie_nums
           })
+          
           
         },
         complete(res) {

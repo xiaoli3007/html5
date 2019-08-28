@@ -15,13 +15,25 @@
   </view>
 
  <view class="cu-list menu">
-
-    <view class="cu-item" wx:for="{{item.data}}" wx:key>
-      <navigator class="content" hover-class="none" url="/pages/basics/task/task" open-type="redirect">
+  <block wx:for="{{item.data}}" wx:key>
+    <view class="cu-item" style="border-bottom:none;">
+      <view>
         <text class="cuIcon-circlefill text-orange"></text>
         <text class="text-grey">{{item.title}}</text>
-      </navigator>
+     </view>
     </view>
+
+    <view class="cu-item">
+        <navigator class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
+       <text class="text-yellow cu-tag round "> 识字</text>
+      </navigator>
+       <navigator class="content" hover-class="none" url="/pages/basics/task/task?type=1&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
+       <text class="text-green cu-tag round "> 听写</text>
+      </navigator>
+      </view>
+      
+</block>
+     <!--  -->
 
 
   </view>

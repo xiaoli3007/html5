@@ -1,5 +1,50 @@
 
 Page({
+
+  onLoad: function (options) {
+   
+    console.log(options.taskid)
+    if (options.taskid ==0) {
+      console.log(options)
+    }else{
+      console.log(options)
+    }
+
+    // var that = this;
+    // if (app.globalData.userid) {
+
+    //   wx.request({
+    //     url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+    //     method: 'GET',
+    //     header: {
+    //       'content-type': 'application/json', // 默认值
+    //       'X-Token': app.globalData.xtoken
+    //     },
+    //     data: {
+    //       type: that.data.type,
+    //     },
+    //     success: function (res) {
+    //       console.log(res);
+    //       that.setData({
+    //         task_list: res.data.items,
+    //       })
+    //     }, complete(res) {
+    //       that.setData({
+
+    //         loadModal: false
+    //       })
+    //       //console.log(res.statusCode)
+    //       if (res.statusCode == 500) {
+
+    //       } else {
+
+    //       }
+
+    //     }
+    //   });
+    // }
+
+  },
   onReady(e) {
     // 使用 wx.createAudioContext 获取 audio 上下文 context
     // this.audioCtx = wx.createAudioContext('myAudio')
@@ -36,22 +81,6 @@ Page({
           "dw_sound": "voice/28/f8/28f88368a520672c52800e89184b40e7.wav",
           "lw": "青的草，绿的叶，各色鲜艳的花，都像赶集似的聚拢来，形成了光彩夺目的春天。",
           "lw_sound": "voice/4d/cf/4dcf2e1b7484b6b137b04775c2cb976f.wav"
-        },
-        {
-          "sw": "增",
-          "sw_sound": "voice/c0/a0/c0a0f275a8323b1b3a2ee07f821f11ec.wav",
-          "dw": "增添",
-          "dw_sound": "voice/94/6a/946a2e8a645b34a3f58a35c705c956a2.wav",
-          "lw": "小燕子从南方赶来，为春光增添了许多生机。",
-          "lw_sound": "voice/17/7b/177bb4ea7913763edf851b9265b8b8d7.wav"
-        },
-        {
-          "sw": "掠",
-          "sw_sound": "voice/5c/4f/5c4f4923a63f25137f2e7eb5bc41d5ad.wav",
-          "dw": "掠过",
-          "dw_sound": "voice/18/53/1853946cc3eb1cb39018f0497d4404ee.wav",
-          "lw": "燕子斜着身子在天空中掠过",
-          "lw_sound": "voice/67/2a/672acd376b83e2fce654e582a224cea5.wav"
         }
       ]},
     indicatorDots: false,
@@ -61,6 +90,7 @@ Page({
     current:0,
     src: 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46',
   },
+
   change: function (e) {
     if ("touch" === e.detail.source) {  // 只在用户触发的情况下
       this.setData({

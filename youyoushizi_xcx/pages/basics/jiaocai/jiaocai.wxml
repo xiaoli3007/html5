@@ -26,8 +26,11 @@
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
       <!-- <cover-image src='/images/IMG_1574.jpg' class='list_image'>
       </cover-image> -->
-      <cover-image src='{{item.thumb}}' class='list_image'>
-      </cover-image>
+      <!-- <cover-image src='{{item.thumb}}' class='list_image'>
+      </cover-image> -->
+
+       <image src='{{item.thumb}}' class='list_image' mode="widthFix">
+      </image>
       <text>{{item.title}}</text>
       </navigator>
     </view>

@@ -31,7 +31,28 @@
     </view>
   </view>
 
- <view class="cu-list grid col-1">
+<view class="cu-card article no-card">
+  <view class="cu-item shadow" wx:for="{{duwuList}}" wx:key>
+    <view class="title">
+      <view class="text-cut">{{item.program.title}}</view>
+    </view>
+
+     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommenddetailed/recommenddetailed?ebookid={{item.program.id}}">
+    <view class="content">
+      <image src="{{item.program.thumb_xcx}}" mode="widthFix"></image>
+      <view class="desc">
+        <view class="text-content" style="height: 9.5em;"> {{item.program.head}}</view>
+        <view>
+          <view class="cu-tag bg-red light sm round">{{item.program.author}}</view>
+          <view class="cu-tag bg-green light sm round" wx:if="{{item.program.translator}}">{{item.program.translator}}</view>
+        </view>
+      </view>
+    </view>
+    </navigator>
+  </view>
+</view>
+
+ <!-- <view class="cu-list grid col-1">
     <view class="flex flex-wrap justify-center align-center margin-top" wx:for="{{duwuList}}" wx:key >
 
      <view class="basis-xs">
@@ -47,40 +68,9 @@
      <view wx:if="{{item.program.summary}}" class="text-left margin-top"><text>
      描述：{{item.program.description_list}}</text></view>
       
-      
-
       </view>
     </view>
-  </view> 
-
-
- <!-- <view class="cu-list menu-avatar ">
-  
- <block  wx:for="{{duwuList}}" wx:key >
-     <view class="cu-item ">
-     
-      <view class="cu-avatar radius lg" wx:if='{{item.program.thumb_xcx}}' style="background-image:url({{item.program.thumb_xcx}});"></view>
-  <view class="content">
-        <view class="text-pink">
-          <text class="text-cut">{{item.program.title}}</text>
-        </view>
-        <view class="text-gray text-sm flex">
-          <text class="text-cut">
-          作者：{{item.program.author}} 译者：{{item.program.translator}}</text>
-        </view>
-      </view>
-      <view class="action" style='width:150rpx;'>
-        <view class="text-grey text-xs"></view>
-       
-      </view>
-    </view>
-  </block>
-       
-  
-  </view> -->
-
-
-
+  </view>  -->
 
 
 

@@ -43,7 +43,9 @@
       </view>
       <view class="action" style='width:150rpx;'>
         <view class="text-grey text-xs"></view>
-        <view class="cu-tag round bg-green " bindtap="showModal_editpw">开始任务</view>
+        <navigator class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.id}}" open-type="redirect">
+        <view class="cu-tag round bg-green " >开始任务</view>
+         </navigator>
       </view>
     </view>
   </block>
