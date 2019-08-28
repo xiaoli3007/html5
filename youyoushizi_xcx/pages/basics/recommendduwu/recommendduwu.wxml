@@ -21,6 +21,23 @@
     </view>
   </view>
 
+	<view class="cu-form-group">
+		<view class="title">年级选择</view>
+		<picker bindchange="PickerChange" value="{{index}}" range="{{nianji_select}}">
+			<view class="picker">
+				{{index?nianji_select[index]:'点击选择'}}
+			</view>
+		</picker>
+	</view>
+  	<view class="cu-form-group">
+		<view class="title">年级选择</view>
+		<picker bindchange="PickerChange" value="{{index}}" range="{{nianji_select}}">
+			<view class="picker">
+				{{index?nianji_select[index]:'点击选择'}}
+			</view>
+		</picker>
+	</view>
+  
 
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">

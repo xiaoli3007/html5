@@ -11,10 +11,11 @@ Page({
     loadModal: true,
     page: 1,
     isLoad: true,
-    pagesize: 20,
+    pagesize: 8,
     isend: false,
     keywords: '',
     Inputdisabled: false, //搜索按钮的  置灰状态
+    nianji_select: ['一年级', '二年级', '三年级'],
   },
   onLoad() {
     let that = this;

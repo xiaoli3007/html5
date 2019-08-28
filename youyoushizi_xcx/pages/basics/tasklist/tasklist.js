@@ -21,7 +21,8 @@ Page({
     type:0
   },
   onLoad: function (options) { 
-  
+    
+    app.setUserInfo('about');
     console.log(options.type)
     if (options.type){
       var temptype = 0

@@ -31,9 +31,14 @@ Page({
     current: 0,
     src: 'http://rms.youyoushizi.com:8088/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
     loadModal: true,
+    audiowordlist:[],
+    audiodwordlist: [],
+    audiolwordlist: [],
   },
   onLoad: function (options) {
    
+    app.setUserInfo('about');
+    
     console.log(options.taskid)
 
     var apiurl = ''
@@ -70,9 +75,31 @@ Page({
         },
         success: function (res) {
           console.log(res);
+          
+          var linktemp1 = []; var linktemp2 = []; var linktemp3 = [];
+          res.data.word_data.word1.forEach(function (value, i) {
+            var innerAudioContext = null
+           
+            innerAudioContext = wx.createInnerAudioContext()
+            innerAudioContext.src = value.sw_sound
+
+            linktemp1.push(innerAudioContext)
+            // linktemp2.push(value.dw_sound);
+            // linktemp3.push(value.sw_sound);
+
+            //console.log( value);
+          })
+
+          console.log(linktemp1);
+          // console.log(linktemp2);
+          // console.log(linktemp1);
+
           that.setData({
             taskdata: res.data.word_data,
+            audiowordlist: linktemp1,
           })
+
+
         }, complete(res) {
           that.setData({
 
@@ -93,7 +120,7 @@ Page({
   onReady(e) {
     // 使用 wx.createAudioContext 获取 audio 上下文 context
     // this.audioCtx = wx.createAudioContext('myAudio')
-
+    // console.log(this.data.taskdata);
     this.innerAudioContext = wx.createInnerAudioContext()
     // this.innerAudioContext.autoplay = true
     this.innerAudioContext.src =  this.data.src
@@ -152,7 +179,9 @@ Page({
     })
   },
   audioPlay() {
-    this.innerAudioContext.play()
+    // console.log(this.data.current)
+    this.data.audiowordlist[this.data.current].play()
+    // this.innerAudioContext.play()
   }
 
 })

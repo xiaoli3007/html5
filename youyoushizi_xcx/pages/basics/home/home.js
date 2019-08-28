@@ -40,22 +40,19 @@ Component({
     attached: function () {
       //wx.clearStorage()
       // 在组件实例进入页面节点树时执行
-      if (app.globalData.userInfo) {
-        this.setData({
-          userInfo: app.globalData.userInfo,
-          hasUserInfo: true
-        })
-      }
+      // if (app.globalData.userInfo) {
+      //   this.setData({
+      //     userInfo: app.globalData.userInfo,
+      //     hasUserInfo: true
+      //   })
+      // }
 
       var that = this
-
-      
       //加载首页的教材和 课外读物
-
       wx.request({
         url: app.globalData.url2 + '?act=index', //课外读物
         data: {
-          userid: app.globalData.userid
+          userid: app.globalData.userid ? app.globalData.userid:0
         },
         header: {
           'content-type': 'application/json', // 默认值
