@@ -15,7 +15,7 @@ Page({
 
     console.log(options)
     let that = this;
-    //加载列表 
+    //加载列表  
     wx.request({
       url: app.globalData.url2 + '?act=jiaocai_sub_lession', 
       data: {
@@ -33,7 +33,7 @@ Page({
           jiaocaiList: res.data.items
         })
 
-      },
+      }, 
       complete(res) {
         that.setData({
 

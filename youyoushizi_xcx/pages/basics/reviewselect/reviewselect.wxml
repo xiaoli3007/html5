@@ -15,10 +15,10 @@
         </view>
       </radio-group>
 
-
+ 
     <view class="cu-form-group margin-top  flex flex-wrap">
           <view class="title basis-xs">数目</view>
-          <view class='basis-xl'> <slider  bindchange="slider4change" min="20" max="50" show-value/></view>
+          <view class='basis-xl'> <slider  bindchange="slider4change" min="20" max="50" value="{{numsvalue}}"show-value/></view>
         </view>
 
       
@@ -27,7 +27,11 @@
     </view>
    
     <view class="padding flex flex-direction">
+
+     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/review/review?nums={{numsvalue}}">
   <button class="cu-btn bg-green lg">开始复习</button>
+
+   </navigator>
 </view>
 
      </form>

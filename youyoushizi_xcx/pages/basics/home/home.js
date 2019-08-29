@@ -13,7 +13,7 @@ Component({
       icon: 'picfill',
       color: 'yellow',
       url: '/pages/basics/tasklist/tasklist',
-      badge: 20,
+      badge: 0,
       name: '识字任务',
       type: '2'
     }, {
