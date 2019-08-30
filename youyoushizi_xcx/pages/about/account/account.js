@@ -93,12 +93,52 @@ Page({
       this.showFormModal(error)
       return false
     }
-    this.showFormModal({
-      msg: '提交成功'
-    }) 
-    this.setData({
-      modalName: null
-    })
+    var that = this;
+    wx.request({
+      url: app.globalData.url2 + '?act=wx_edit_password',
+      method: 'POST',
+      header: {
+         'content-type': 'application/x-www-form-urlencoded', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      data: {
+        userid: app.globalData.userid,
+        username: params.username,
+        newpasswd: params.newpasswd,
+        confimpasswd: params.confimpasswd,
+      },
+      success: function (res) {
+        console.log(res);
+
+        if (res.data.code === 20001) {
+
+          that.showFormModal({
+            msg: '提交失败'
+          }) 
+
+        } else {
+          that.showFormModal({
+            msg: '提交成功'
+          }) 
+
+        }
+
+      }, complete(res) {
+        
+        that.setData({
+          modalName: null
+        })
+        //console.log(res.statusCode)
+        if (res.statusCode == 500) {
+
+        } else {
+
+        }
+
+      }
+    });
+   
+    
   },
   //报错 
   showFormModal(error) {

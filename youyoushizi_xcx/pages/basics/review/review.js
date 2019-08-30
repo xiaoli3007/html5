@@ -61,7 +61,7 @@ Page({
         success: function (res) {
           console.log(res);
           
-          if (res.code === 20001) {
+          if (res.data.code === 20001) {
  
              wx.showToast({
               title: '没有要复习的数据！',
@@ -70,33 +70,36 @@ Page({
             })
             setTimeout(function () {
               wx.navigateTo({
-                url: '/pages/reviewselect/reviewselect',
+                url: '/pages/index/index',
               })
             }, 1000)
 
+          }else{
+            var linktemp1 = []; var linktemp2 = []; var linktemp3 = [];
+            res.data.word_data.word1.forEach(function (value, i) {
+              var innerAudioContext = null
+
+              innerAudioContext = wx.createInnerAudioContext()
+              innerAudioContext.src = value.sw_sound
+
+              linktemp1.push(innerAudioContext)
+              // linktemp2.push(value.dw_sound);
+              // linktemp3.push(value.sw_sound);
+
+              //console.log( value);
+            })
+
+            console.log(linktemp1);
+            // console.log(linktemp2);
+            // console.log(linktemp1);
+
+            that.setData({
+              taskdata: res.data.word_data,
+              audiowordlist: linktemp1,
+            })
+
           }
-          var linktemp1 = []; var linktemp2 = []; var linktemp3 = [];
-          res.data.word_data.word1.forEach(function (value, i) {
-            var innerAudioContext = null
-           
-            innerAudioContext = wx.createInnerAudioContext()
-            innerAudioContext.src = value.sw_sound
-
-            linktemp1.push(innerAudioContext)
-            // linktemp2.push(value.dw_sound);
-            // linktemp3.push(value.sw_sound);
-
-            //console.log( value);
-          })
-
-          console.log(linktemp1);
-          // console.log(linktemp2);
-          // console.log(linktemp1);
-
-          that.setData({
-            taskdata: res.data.word_data,
-            audiowordlist: linktemp1,
-          })
+          
 
 
         }, complete(res) {

@@ -16,6 +16,7 @@ Page({
     keywords: '',
     Inputdisabled: false, //搜索按钮的  置灰状态
     nianji_select: ['一年级', '二年级', '三年级'],
+    selectindex: 0,
   },
   onLoad() {
     let that = this;

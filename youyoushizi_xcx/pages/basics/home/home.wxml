@@ -79,15 +79,15 @@
 
 
   <view class="cu-bar bg-white solid-bottom ">
-    <view class="action">
-      <text class="cuIcon-title text-orange "></text> 推荐读物
+    <view class="action text-red">
+      <text class="cuIcon-title text-red "></text> 推荐读物
     </view>
     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommendduwu/recommendduwu">
     <view class="action">
       <button class="cu-btn bg-green shadow" >更多</button>
     </view>
      </navigator>
-  </view>
+  </view> 
 
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{tuijianduwuList}}" wx:key wx:if="{{index<3*2}}">

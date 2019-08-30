@@ -1,3 +1,4 @@
+const app = getApp()
 
 Page({
   onReady(e) {
@@ -10,6 +11,10 @@ Page({
     interval: 5000,
     duration: 1000,
     numsvalue:25
+  },
+
+  onLoad: function () {
+    app.setUserInfo('about');
   },
   
   slider4change: function (e) {
