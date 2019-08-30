@@ -21,22 +21,20 @@
     </view>
   </view>
 
+<block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
 	<view class="cu-form-group">
-		<view class="title">年级选择</view>
-		<picker bindchange="PickerChange" value="{{selectindex}}" range="{{nianji_select}}">
+		<view class="title">{{item.title}}</view>
+		<!-- <picker bindchange="PickerChange" value="{{selectindex}}" range="{{nianji_select}}"> -->
+
+     <picker mode="selector" bindchange="MultiSigleChange" data-valkey="{{cindex}}"  value="{{multisigleIndex}}" range="{{item.sub}}">
+
 			<view class="picker">
-				{{selectindex?nianji_select[selectindex]:'点击选择'}}
+      点击选择
+				<!-- {{selectindex?nianji_select[selectindex]:'点击选择'}} -->
 			</view>
 		</picker>
 	</view>
-  	<view class="cu-form-group">
-		<view class="title">年级选择</view>
-		<picker bindchange="PickerChange" value="{{selectindex}}" range="{{nianji_select}}">
-			<view class="picker">
-				{{selectindex?nianji_select[selectindex]:'点击选择'}}
-			</view>
-		</picker>
-	</view>
+</block>
   
 
   <view class="cu-bar bg-white solid-bottom margin-top">

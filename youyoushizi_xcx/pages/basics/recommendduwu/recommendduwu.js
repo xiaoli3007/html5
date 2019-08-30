@@ -17,9 +17,30 @@ Page({
     Inputdisabled: false, //搜索按钮的  置灰状态
     nianji_select: ['一年级', '二年级', '三年级'],
     selectindex: 0,
+    categoryArray: [],
+    multisigleIndex: 0, 
   },
   onLoad() {
     let that = this;
+    //加载联动
+
+    wx.request({
+      url: app.globalData.url + '?act=ebook_recommend_search_cat',
+      data: {
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+        that.setData({
+          categoryArray: res.data.search_linkage_list_xcx
+        })
+      }
+    })
+
     //加载列表
     wx.request({
       url: app.globalData.url + '?act=getbookrecommendlist',
@@ -63,7 +84,23 @@ Page({
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60
     })
   },
+  MultiSigleChange(e) {
 
+    console.log(e.detail.value);
+    // let k = 0
+    // //按钮过来的文字
+    // if (e.currentTarget.dataset.hasOwnProperty('valkey')) {
+    //   k = e.currentTarget.dataset.valkey
+    // }
+
+    // console.log(k);
+    
+    // let c = this.data.categoryArray[k].prefix[e.detail.value] + " ";
+    
+    // this.setData({
+    //   multisigleIndex: e.detail.value
+    // })
+  },
   /**
    * 页面上拉触底事件的处理函数
    */
