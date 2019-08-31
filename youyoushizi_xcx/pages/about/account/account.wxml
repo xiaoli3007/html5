@@ -96,29 +96,27 @@
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
+     <form bindsubmit="userformSubmit">
     <view class="padding-sm">
-
-        <form>
         <view class="cu-form-group margin-top">
           <view class="title">用户名</view>
-          <input placeholder="用户名"></input>
+          <input placeholder="用户名" name='username' value='{{adduerform.username}}'></input>
         </view>
         <view class="cu-form-group">
           <view class="title">密码</view>
-          <input placeholder="新密码"></input>
+          <input placeholder="密码" password="true" name='newpasswd' value='{{adduerform.newpasswd}}'></input>
         </view>
-        <view class="cu-form-group">
+        <!-- <view class="cu-form-group">
           <view class="title">确认密码</view>
           <input placeholder="确认新密码"></input>
-        </view>
-        </form>
-
+        </view> -->
     </view>
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left" bindtap="hideModal">确定</button>
+        <button class="cu-btn bg-green margin-left"  form-type="submit">确定</button>
       </view>
     </view>
+    </form>
   </view>
 </view>

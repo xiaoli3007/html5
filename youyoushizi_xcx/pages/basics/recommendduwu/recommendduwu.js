@@ -1,6 +1,88 @@
 const app = getApp()
 Page({
   data: {
+    items: [{
+      type: 'radio',
+      label: 'Updated',
+      value: 'updated',
+      checked: true,
+      children: [{
+        label: 'Recently updated',
+        value: 'desc',
+        checked: true, // 默认选中
+      },
+      {
+        label: 'Least recently updated',
+        value: 'asc',
+      },
+      ],
+      groups: ['001'],
+    },
+    {
+      type: 'text',
+      label: 'Forks',
+      value: 'forks',
+      groups: ['002'],
+    },
+    {
+      type: 'sort',
+      label: 'Stars',
+      value: 'stars',
+      groups: ['003'],
+    },
+    {
+      type: 'filter',
+      label: '筛选',
+      value: 'filter',
+      checked: true,
+      children: [
+      {
+        type: 'checkbox',
+        label: 'Query（复选）',
+        value: 'query',
+        children: [{
+          label: 'Angular',
+          value: 'angular',
+        },
+        {
+          label: 'Vue',
+          value: 'vue',
+        },
+        {
+          label: 'React',
+          value: 'react',
+          checked: true, // 默认选中
+        },
+        {
+          label: 'Avalon',
+          value: 'avalon',
+        },
+        ],
+      },
+      
+      {
+        type: 'radio',
+        label: '性别',
+        value: 'gander',
+        children: [{
+          label: '男',
+          value: '0',
+        },
+        {
+          label: '女',
+          value: '1',
+        },
+        {
+          label: '通用',
+          value: '2',
+        },
+        ],
+      },
+     
+      ],
+      groups: ['001', '002', '003'],
+    },
+    ],
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
@@ -15,10 +97,10 @@ Page({
     isend: false,
     keywords: '',
     Inputdisabled: false, //搜索按钮的  置灰状态
-    nianji_select: ['一年级', '二年级', '三年级'],
-    selectindex: 0,
+    list_select_name: [],
     categoryArray: [],
-    multisigleIndex: 0, 
+    multisigleIndex : [], 
+    list_select_value: [], 
   },
   onLoad() {
     let that = this;
@@ -36,7 +118,10 @@ Page({
 
         console.log(res.data)
         that.setData({
-          categoryArray: res.data.search_linkage_list_xcx
+          categoryArray: res.data.search_linkage_list_xcx,
+          multisigleIndex: res.data.search_linkage_list_xcx_default,
+          list_select_name: res.data.search_linkage_list_xcx_default
+          
         })
       }
     })
@@ -87,19 +172,31 @@ Page({
   MultiSigleChange(e) {
 
     console.log(e.detail.value);
-    // let k = 0
-    // //按钮过来的文字
-    // if (e.currentTarget.dataset.hasOwnProperty('valkey')) {
-    //   k = e.currentTarget.dataset.valkey
-    // }
+    let k = 0
+    //按钮过来的文字
+    if (e.currentTarget.dataset.hasOwnProperty('valkey')) {
+      k = e.currentTarget.dataset.valkey
+    }
 
-    // console.log(k);
+    console.log(k);
+
+    let cname = this.data.categoryArray[k].sub[e.detail.value] + "";
+    console.log(cname); //具体的数值
+
+    let c = this.data.categoryArray[k].prefix[e.detail.value] + "";
     
-    // let c = this.data.categoryArray[k].prefix[e.detail.value] + " ";
+    console.log(c); //具体的数值
+
+    var tprice = 'multisigleIndex['+k+']'
+    var tprice2 = 'list_select_name[' + k + ']'
+    var tprice3 = 'list_select_value[' + k + ']'
+    this.setData({
+      [tprice]: e.detail.value,
+      [tprice2]: cname,
+      [tprice3]: c,
+    })
     
-    // this.setData({
-    //   multisigleIndex: e.detail.value
-    // })
+    
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -128,6 +225,7 @@ Page({
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
+        search_linkage_default_string: that.data.list_select_value.join(),
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -167,6 +265,7 @@ Page({
    * 搜索函数
    */
   search_keyword: function() {
+    console.log(this.data.list_select_value)
     console.log(this.data.keywords)
     var that = this;
     this.setData({
@@ -183,6 +282,7 @@ Page({
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
+        search_linkage_default_string: that.data.list_select_value.join(),
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -209,6 +309,78 @@ Page({
         }
       }
     })
-  }
+  },
+  //一下是 筛选框===========================
+  onChange(e) {
+    const { checkedItems, items, checkedValues } = e.detail
+    const params = {}
+
+    console.log(checkedItems, items, checkedValues)
+
+    checkedItems.forEach((n) => {
+      if (n.checked) {
+        if (n.value === 'updated') {
+          const selected = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
+          params.sort = n.value
+          params.order = selected
+        } else if (n.value === 'stars') {
+          params.sort = n.value
+          params.order = n.sort === 1 ? 'asc' : 'desc'
+        } else if (n.value === 'forks') {
+          params.sort = n.value
+        } else if (n.value === 'filter') {
+          n.children.filter((n) => n.selected).forEach((n) => {
+            if (n.value === 'language') {
+              const selected = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
+              params.language = selected
+            } else if (n.value === 'query') {
+              const selected = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
+              params.query = selected
+            }
+          })
+        }
+      }
+    })
+
+    console.log('params', params)
+
+    this.getRepos(params)
+  },
+  getRepos(params = {}) {
+    const language = params.language || 'javascript'
+    const query = params.query || 'react'
+    const q = `${query}+language:${language}`
+    const data = Object.assign({
+      q,
+      order: 'desc',
+    }, params)
+
+    // wx.showLoading()
+    // wx.request({
+    //   url: `https://api.github.com/search/repositories`,
+    //   data,
+    //   success: (res) => {
+    //     console.log(res)
+
+    //     wx.hideLoading()
+
+    //     this.setData({
+    //       repos: res.data.items.map((n) => Object.assign({}, n, {
+    //         date: n.created_at.substr(0, 7),
+    //       })),
+    //     })
+    //   },
+    // })
+  },
+  onOpen(e) {
+    this.setData({ opened: true })
+  },
+  onClose(e) {
+    this.setData({ opened: false })
+  },
+  /**
+   * 阻止触摸移动
+   */
+  noop() { },
 
 })

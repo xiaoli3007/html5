@@ -11,6 +11,8 @@
     <view slot="content">推荐读物</view>
   </cu-custom>
 
+   <!-- <wux-filterbar items="{{ items }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> -->
+
 <view class="cu-bar search bg-white">
     <view class="search-form round">
       <text class="cuIcon-search"></text>
@@ -26,11 +28,11 @@
 		<view class="title">{{item.title}}</view>
 		<!-- <picker bindchange="PickerChange" value="{{selectindex}}" range="{{nianji_select}}"> -->
 
-     <picker mode="selector" bindchange="MultiSigleChange" data-valkey="{{cindex}}"  value="{{multisigleIndex}}" range="{{item.sub}}">
+     <picker mode="selector" bindchange="MultiSigleChange" data-valkey="{{cindex}}"  value="{{multisigleIndex[cindex]}}" range="{{item.sub}}">
 
 			<view class="picker">
-      点击选择
-				<!-- {{selectindex?nianji_select[selectindex]:'点击选择'}} -->
+      <!-- 点击选择 -->
+				{{list_select_name[cindex]?list_select_name[cindex]:'点击选择'}}
 			</view>
 		</picker>
 	</view>
