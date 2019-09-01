@@ -105,6 +105,10 @@ baseComponent({
             type: Array,
             value: [],
         },
+      paddingtops: {
+        type: Number,
+        value: 0,
+      },
         cancelText: {
             type: String,
             value: '重置',

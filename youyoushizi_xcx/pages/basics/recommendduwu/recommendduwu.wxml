@@ -11,7 +11,7 @@
     <view slot="content">推荐读物</view>
   </cu-custom>
 
-   <!-- <wux-filterbar items="{{ items }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> -->
+   
 
 <view class="cu-bar search bg-white">
     <view class="search-form round">
@@ -22,6 +22,8 @@
       <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button>
     </view>
   </view>
+
+  <wux-filterbar items="{{ items }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" />
 
 <block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
 	<view class="cu-form-group">

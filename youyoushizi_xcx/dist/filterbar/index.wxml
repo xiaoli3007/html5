@@ -12,7 +12,7 @@
     </view>
     <block wx:for="{{ options }}" wx:key="">
         <wux-animation-group wux-class="{{ classes.pop }}" in="{{ item.visible }}" class-names="wux-animate--slideInRight" bind:enter="onEnter" bind:exit="onExit" wx:if="{{ item.type === 'filter' }}">
-            <scroll-view class="{{ classes.scrollView }}" scroll-y bindscroll="onScroll">
+            <scroll-view class="{{ classes.scrollView }}" scroll-y bindscroll="onScroll" style="padding-top:{{paddingtops}}px">
                 <block wx:for="{{ item.children }}" wx:for-item="p" wx:for-index="pIndex" wx:key="">
                     <view class="{{ classes.panel }}">
                         <view class="{{ classes.panelHd }}">
