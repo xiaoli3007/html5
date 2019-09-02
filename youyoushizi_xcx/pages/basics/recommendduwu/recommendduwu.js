@@ -1,7 +1,8 @@
 const app = getApp()
 Page({
   data: {
-    items: [{
+    items: [
+      {
       type: 'radio',
       label: 'Updated',
       value: 'updated',
@@ -18,12 +19,12 @@ Page({
       ],
       groups: ['001'],
     },
-    {
-      type: 'text',
-      label: 'Forks',
-      value: 'forks',
-      groups: ['002'],
-    },
+    // {
+    //   type: 'text',
+    //   label: 'Forks',
+    //   value: 'forks',
+    //   groups: ['002'],
+    // },
     {
       type: 'sort',
       label: 'Stars',
@@ -312,10 +313,14 @@ Page({
   },
   //一下是 筛选框===========================
   onChange(e) {
+    console.log(e.detail)
     const { checkedItems, items, checkedValues } = e.detail
     const params = {}
 
-    console.log(checkedItems, items, checkedValues)
+    console.log(checkedItems)
+    console.log(items)
+    console.log(checkedValues)
+    // console.log(checkedItems, items, checkedValues)
 
     checkedItems.forEach((n) => {
       if (n.checked) {

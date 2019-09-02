@@ -16,7 +16,12 @@ Page({
     adduerform: {
       username: '',
       newpasswd: '',
-    }
+    }, 
+    edituernameform: {
+      username: '',
+      newusername: '',
+    }, 
+    userid: app.globalData.userid,
 
   },
   onLoad: function () { 
@@ -39,6 +44,7 @@ Page({
           console.log(res);
           that.setData({
             member_list: res.data.member_list,
+            userid: app.globalData.userid,
             })
         }
       });
@@ -78,6 +84,16 @@ Page({
       }
     })
   },
+  showModal_editusername(e) {
+    console.log(e);
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      edituernameform: {
+        username: e.currentTarget.dataset.username,
+        newusername: '',
+      }
+    })
+  },
    showModal(e) {
     this.setData({
       modalName: e.currentTarget.dataset.target
@@ -87,6 +103,25 @@ Page({
     this.setData({
       modalName: null
     })
+  }, 
+  check_userid(e) {
+    //按钮过来的文字
+    if (e.currentTarget.dataset.hasOwnProperty('val')) {
+      if (e.currentTarget.dataset.val != '') {
+        console.log(e.currentTarget.dataset.val)
+        this.setData({
+          userid: e.currentTarget.dataset.val,
+        })
+        app.globalData.userid = e.currentTarget.dataset.val;
+
+        wx.showToast({
+          title: '切换账号为' + e.currentTarget.dataset.username,
+          icon: 'none',
+          duration: 1500,
+        })
+      }
+    }
+
   },
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -202,6 +237,31 @@ Page({
     }
     this.WxValidate2 = new WxValidate(rulesadduser, messages2)
 
+    const ruleseditusername = {
+      username: {
+        required: true,
+        rangelength: [3, 20]
+
+      },
+      newusername: {
+        required: true,
+        minlength: 3
+      }
+
+    }
+    const messages3 = {
+      username: {
+        required: '请填写用户名',
+        minlength: '用户名3位-20位字符',
+      },
+      newusername: {
+        required: '请填写用户名',
+        minlength: '用户名位3-20位字符'
+      }
+
+    }
+    this.WxValidate3 = new WxValidate(ruleseditusername, messages3)
+
   },
   userformSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -253,6 +313,59 @@ Page({
 
         }
 
+      }
+    });
+
+
+  },
+  formSubmiteditusername: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    const params = e.detail.value
+    //校验表单
+    if (!this.WxValidate3.checkForm(params)) {
+      const error = this.WxValidate3.errorList[0]
+      this.showFormModal(error)
+      return false
+    }
+    var that = this;
+    wx.request({
+      url: app.globalData.url2 + '?act=wx_edit_username',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      data: {
+        wx_id: app.globalData.uid,
+        username: params.username,
+        newusername: params.newusername,
+      },
+      success: function (res) {
+        console.log(res);
+
+        if (res.data.code === 20001) {
+
+          that.showFormModal({
+            msg: res.data.message
+          })
+
+        } else {
+          that.showFormModal({
+            msg: '提交成功',
+          })
+           that.setData({
+            modalName: null
+          })
+
+        }
+
+      }, complete(res) {
+
+        // that.setData({
+        //   modalName: null
+        // })
+        //console.log(res.statusCode)
+       
       }
     });
 
