@@ -34,6 +34,7 @@ Page({
     audiowordlist:[],
     audiodwordlist: [],
     audiolwordlist: [],
+    taskloading:'50%'
   },
   onLoad: function (options) {
    

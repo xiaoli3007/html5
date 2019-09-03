@@ -23,7 +23,7 @@
     </view>
   </view>
 
-  <wux-filterbar items="{{ items }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" />
+  <!-- <wux-filterbar items="{{ items }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> -->
 
 <block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
 	<view class="cu-form-group">
@@ -63,7 +63,7 @@
         <view class="text-content" style="height: 9.5em;"> {{item.program.head}}</view>
         <view>
           <view class="cu-tag bg-red light sm round">{{item.program.author}}</view>
-          <view class="cu-tag bg-green light sm round" wx:if="{{item.program.translator}}">{{item.program.translator}}</view>
+          <view class="cu-tag bg-green light sm round" wx:if="{{item.program.translator}}">译：{{item.program.translator}}</view>
         </view>
       </view>
     </view>
