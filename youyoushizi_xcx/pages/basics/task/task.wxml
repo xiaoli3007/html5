@@ -28,7 +28,7 @@
 
 <wux-row>
   <wux-col span="1" >
-      <wux-tabs defaultCurrent="tab1" current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
+      <wux-tabs controlled current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
             <!-- <wux-tab key="tab1" title="字"></wux-tab>
             <wux-tab key="tab2" title="词"></wux-tab>
             <wux-tab key="tab3" title="句"></wux-tab> -->
@@ -115,8 +115,12 @@
 <view class=" flex flex-wrap justify-between align-center " wx:if="{{type==1}}">
   <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev">
   </view>
-  <view class="cuIcon-video" style="font-size:100rpx;">
+  <!-- <view class="cuIcon-video" style="font-size:100rpx;">
+  </view> -->
+
+    <view class="cuIcon-stop" style="font-size:100rpx;">
   </view>
+
   <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next">
   </view>
 </view>
@@ -146,6 +150,7 @@
   <button class="cu-btn round bg-gradual-green shadow" bindtap="audioPlay_dword">词
     <view class="cuIcon-notification" style="font-size:30rpx;">
     </view>
+    
   </button>
   <button class="cu-btn round bg-gradual-pink shadow" bindtap="audioPlay_lword">句
     <view class="cuIcon-notification" style="font-size:30rpx;">
@@ -156,14 +161,7 @@
   </button>
 </view>
 
-<!--
-<view class="padding flex flex-wrap justify-between align-center bg-white">
- <button class="cu-btn round bg-green shadow" bindtap="audioPause">暂停</button> 
-</view>
 
-
- <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button>
-<button type="primary" bindtap="audioStart">回到开头</button> -->
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->

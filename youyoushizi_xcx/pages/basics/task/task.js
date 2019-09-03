@@ -225,17 +225,25 @@ Page({
   },
   audioPlay_word() {
     // console.log(this.data.current)
+    this.setData({
+      subcurrent: 0,
+      tabkey: this.data.tabs[0].key
+    })
     this.data.audiowordlist[this.data.current].play()
   },
   audioPlay_dword() {
+    
     this.setData({
       subcurrent: 1,
+      tabkey: this.data.tabs[1].key
     })
+    console.log(this.data.tabkey)
     this.data.audiodwordlist[this.data.current].play()
   },
   audioPlay_lword() {
     this.setData({
       subcurrent: 2,
+      tabkey: this.data.tabs[2].key
     })
     this.data.audiolwordlist[this.data.current].play()
   },
