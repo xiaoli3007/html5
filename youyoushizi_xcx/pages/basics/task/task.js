@@ -36,7 +36,22 @@ Page({
     audiolwordlist: [],
     taskloading:'50%',
     konw_current:20,
-    type:0
+    type:0,
+    subcurrent:0,
+    tabs: [
+      {
+        key: 'tab1',
+        title: '字',
+      },
+      {
+        key: 'tab2',
+        title: '词',
+      },
+      {
+        key: 'tab3',
+        title: '句',
+      },
+    ],
   },
   onLoad: function (options) {
    
@@ -213,9 +228,15 @@ Page({
     this.data.audiowordlist[this.data.current].play()
   },
   audioPlay_dword() {
+    this.setData({
+      subcurrent: 1,
+    })
     this.data.audiodwordlist[this.data.current].play()
   },
   audioPlay_lword() {
+    this.setData({
+      subcurrent: 2,
+    })
     this.data.audiolwordlist[this.data.current].play()
   },
   onChangesegmented(e) {
@@ -229,6 +250,29 @@ Page({
     this.setData({
       konw_current: e.detail.key,
     })
+  },
+  onTabsChange(e) {
+    // console.log('onTabsChange', e)
+    const { key } = e.detail
+    console.log(key)
+    const subcurrent = this.data.tabs.map((n) => n.key).indexOf(key)
+    console.log(subcurrent)
+    this.setData({
+      tabkey: key,
+      subcurrent: subcurrent,
+    })
+  },
+  onSubSwiperChange(e) {
+    // console.log('onSubSwiperChange', e)
+    const { current: index, source } = e.detail
+    const { key } = this.data.tabs[index]
+
+    if (!!source) {
+      this.setData({
+        tabkey: key,
+        subcurrent: index,
+      })
+    }
   },
 
 })

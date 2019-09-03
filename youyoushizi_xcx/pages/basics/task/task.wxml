@@ -28,10 +28,13 @@
 
 <wux-row>
   <wux-col span="1" >
-      <wux-tabs defaultCurrent="tab1" direction="vertical">
-            <wux-tab key="tab1" title="字"></wux-tab>
+      <wux-tabs defaultCurrent="tab1" current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
+            <!-- <wux-tab key="tab1" title="字"></wux-tab>
             <wux-tab key="tab2" title="词"></wux-tab>
-            <wux-tab key="tab3" title="句"></wux-tab>
+            <wux-tab key="tab3" title="句"></wux-tab> -->
+             <block wx:for="{{ tabs }}" wx:key="key">
+                <wux-tab key="{{ item.key }}" title="{{ item.title }}"></wux-tab>
+            </block>
         </wux-tabs>
   </wux-col>
   <wux-col span="8" offset="1">
@@ -41,11 +44,16 @@
   <block wx:for="{{taskdata.word1}}" wx:key>
     <swiper-item>
 
-                <swiper  vertical="{{true}}"  >
+                <swiper  vertical="{{true}}"  current="{{subcurrent}}" bindchange="onSubSwiperChange">
                     <swiper-item>
                       <view class="justify-center align-center  text-center sw_view">
-                      <view>  <text class='task_sw text-center'>{{item.sw}}</text> </view>
-                      </view>
+
+                      <!-- <view> 
+                         <text class="task_sw cuIcon-emoji" style=""></text> </view>
+                      -->
+
+                      <view>  <text class='task_sw text-center'>{{item.sw}}</text> </view> 
+                         </view>
                     </swiper-item>
                     <swiper-item>
                       <view class="flex justify-center align-center dw_view">
