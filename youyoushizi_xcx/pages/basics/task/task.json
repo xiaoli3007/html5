@@ -4,6 +4,7 @@
     "wux-col": "../../../dist/col/index",
     "wux-tabs": "../../../dist/tabs/index",
     "wux-tab": "../../../dist/tab/index",
-    "wux-white-space": "../../../dist/white-space/index"
+    "wux-white-space": "../../../dist/white-space/index",
+    "wux-segmented-control": "../../../dist/segmented-control/index"
   }
 }

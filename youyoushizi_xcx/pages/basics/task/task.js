@@ -34,13 +34,19 @@ Page({
     audiowordlist:[],
     audiodwordlist: [],
     audiolwordlist: [],
-    taskloading:'50%'
+    taskloading:'50%',
+    konw_current:20,
+    type:0
   },
   onLoad: function (options) {
    
     app.setUserInfo('about');
     
     console.log(options.taskid)
+
+   
+
+    console.log(options.type)
 
     var apiurl = ''
     var methd = 'POST'
@@ -80,13 +86,19 @@ Page({
           var linktemp1 = []; var linktemp2 = []; var linktemp3 = [];
           res.data.word_data.word1.forEach(function (value, i) {
             var innerAudioContext = null
-           
             innerAudioContext = wx.createInnerAudioContext()
             innerAudioContext.src = value.sw_sound
-
             linktemp1.push(innerAudioContext)
-            // linktemp2.push(value.dw_sound);
-            // linktemp3.push(value.sw_sound);
+
+            var innerAudioContext2 = null
+            innerAudioContext2 = wx.createInnerAudioContext()
+            innerAudioContext2.src = value.dw_sound
+            linktemp2.push(innerAudioContext2)
+
+            var innerAudioContext3 = null
+            innerAudioContext3 = wx.createInnerAudioContext()
+            innerAudioContext3.src = value.lw_sound
+            linktemp3.push(innerAudioContext3)
 
             //console.log( value);
           })
@@ -98,6 +110,9 @@ Page({
           that.setData({
             taskdata: res.data.word_data,
             audiowordlist: linktemp1,
+            audiodwordlist: linktemp2,
+            audiolwordlist: linktemp3,
+            type: parseInt(res.data.taskinfo.type),
           })
 
 
@@ -143,6 +158,20 @@ Page({
       })
     }
   },
+  audioStart(e) {
+    // console.log(11)
+    // console.log(this.data.current)
+    this.setData({
+      current: 0
+    })
+  },
+  audioend(e) {
+    // console.log(11)
+    // console.log(this.data.current)
+    this.setData({
+      current: this.data.taskdata.word1.length -1
+    })
+  },
   prev(e) {
     // console.log(11)
     // console.log(this.data.current)
@@ -179,10 +208,27 @@ Page({
       duration: e.detail.value
     })
   },
-  audioPlay() {
+  audioPlay_word() {
     // console.log(this.data.current)
     this.data.audiowordlist[this.data.current].play()
-    // this.innerAudioContext.play()
-  }
+  },
+  audioPlay_dword() {
+    this.data.audiodwordlist[this.data.current].play()
+  },
+  audioPlay_lword() {
+    this.data.audiolwordlist[this.data.current].play()
+  },
+  onChangesegmented(e) {
+    // console.log(e)
+    // if (e.detail.key === this.key) {
+    //   return wx.showModal({
+    //     title: 'No switching is allowed',
+    //     showCancel: !1,
+    //   })
+    // }
+    this.setData({
+      konw_current: e.detail.key,
+    })
+  },
 
 })
