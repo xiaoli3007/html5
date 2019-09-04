@@ -14,6 +14,16 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+function GetPercent(num, total) {
+  num = parseFloat(num);
+  total = parseFloat(total);
+  if (isNaN(num) || isNaN(total)) {
+    return "-";
+  }
+  return total <= 0 ? "0%" : (Math.round(num / total * 10000) / 100.00) + "%";
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  GetPercent: GetPercent,
 }

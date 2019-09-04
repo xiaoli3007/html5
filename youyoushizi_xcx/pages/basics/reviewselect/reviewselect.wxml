@@ -26,9 +26,9 @@
      
     </view>
    
-    <view class="padding flex flex-direction">
+    <view class="padding flex flex-direction ">
 
-     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/review/review?nums={{numsvalue}}">
+     <navigator  class="flex justify-center align-center" open-type="navigate" hover-class='none' url="/pages/basics/review/review?nums={{numsvalue}}">
   <button class="cu-btn bg-green lg">开始复习</button>
 
    </navigator>

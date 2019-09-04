@@ -17,7 +17,7 @@
 
   <view class="flex">
     <view class="cu-progress round striped">
-      <view class="bg-green" style="width:{{taskloading?taskloading:'0%'}};"></view>
+      <view class="bg-green" style="width:{{taskloading}};"></view>
     </view>
     <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text>
   </view>

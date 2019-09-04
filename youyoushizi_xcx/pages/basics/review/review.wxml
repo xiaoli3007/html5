@@ -17,7 +17,7 @@
 
   <view class="flex">
     <view class="cu-progress round striped">
-      <view class="bg-green" style="width:{{taskloading?taskloading:'0%'}};"></view>
+      <view class="bg-green" style="width:{{taskloading}};"></view>
     </view>
     <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text>
   </view>
@@ -112,7 +112,7 @@
   <view class="" style="width:400rpx;">
 
    <block wx:for="{{ konw_listinfo }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
-    <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{konw_listinfo_title[mindex]}}" bind:change="onChangesegmented" />
+    <wux-segmented-control theme="calm" current="{{konw_current[mindex]}}" controlled values="{{konw_listinfo_title[mindex]}}" bind:change="onChangesegmented" />
     </block>
 
   </view>

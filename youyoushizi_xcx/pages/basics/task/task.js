@@ -1,3 +1,5 @@
+var util = require('../../../utils/util.js')
+
 const app = getApp()
 
 Page({
@@ -35,7 +37,7 @@ Page({
     audiowordlist:[],
     audiodwordlist: [],
     audiolwordlist: [],
-    taskloading:'50%',
+    taskloading:'0%',
     konw_current:[],
     type:0,
     subcurrent:0,
@@ -186,6 +188,13 @@ Page({
         current: e.detail.current
       })
     }
+
+    this.setData({
+      taskloading: util.GetPercent(e.detail.current, this.data.taskdata.word1.length-1)
+    })
+    
+
+    console.log(this.data.taskloading)
   },
   audioStart(e) {
     // console.log(11)
