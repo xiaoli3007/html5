@@ -11,7 +11,7 @@
     <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
   </view>
 </view>
-
+ 
 <wux-row>
   <wux-col span="10" offset="1">
 
@@ -129,7 +129,11 @@
   <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev">
   </view>
   <view class="" style="width:400rpx;">
-    <wux-segmented-control current="{{konw_current}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
+
+   <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+    <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
+    </block>
+
   </view>
   <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next">
   </view>
