@@ -208,7 +208,7 @@ Page({
     this.setData({
       current: this.data.current < this.data.taskdata.word1.length - 1 ? this.data.current + 1 : this.data.taskdata.word1.length - 1,
     })
-    console.log(this.data.current)
+    // console.log(this.data.current)
   },
   audioPlay_word() {
     // console.log(this.data.current)
@@ -241,33 +241,33 @@ Page({
     this.setData({
       [tprice]: e.detail.key,
     })
-    console.log(e.detail.key)
-
+    
+ 
     var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
     var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.key]
-
+    console.log(tempwcellid)
     console.log(temp_fact)
     //发送请求 super 算法
-    // wx.request({
-    //   url: app.globalData.url + '?act=taskinwcell_super',
-    //   method: "POST",
-    //   data: {
-    //     userid: app.globalData.userid ? app.globalData.userid : 0,
-    //     task_wcell_id: tempwcellid,
-    //     day: temp_fact.value,
-    //     quality: temp_fact.quality,
-    //     factor: temp_fact.factor,
-    //   },
-    //   header: {
-    //     'content-type': 'application/x-www-form-urlencoded',
-    //     'X-Token': app.globalData.xtoken
-    //   },
-    //   success(res) {
+    wx.request({
+      url: app.globalData.url + '?act=taskinwcell_super',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        task_wcell_id: tempwcellid,
+        day: temp_fact.value,
+        quality: temp_fact.quality,
+        factor: temp_fact.factor,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
 
-    //     console.log(res.data)
+        console.log(res.data)
 
-    //   }
-    // })
+      }
+    })
 
     var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
     var that = this
