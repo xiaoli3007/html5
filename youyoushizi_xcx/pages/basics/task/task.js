@@ -58,11 +58,11 @@ Page({
    
     app.setUserInfo('about');
     
-    console.log(options.taskid)
+    // console.log(options.taskid)
 
    
 
-    console.log(options.type)
+    // console.log(options.type)
 
     var apiurl = ''
     var methd = 'POST'
@@ -70,12 +70,12 @@ Page({
       console.log(options)
       apiurl = app.globalData.url + '?act=taskin'
     }else{
-      console.log(options)
+      // console.log(options)
       methd = 'GET'
       apiurl = app.globalData.url + '?act=taskone'
     }
-    console.log(methd)
-    console.log(apiurl)
+    // console.log(methd)
+    // console.log(apiurl)
     var that = this;
     if (app.globalData.userid) {
 

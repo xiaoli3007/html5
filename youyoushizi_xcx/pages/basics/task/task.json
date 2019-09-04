@@ -5,6 +5,7 @@
     "wux-tabs": "../../../dist/tabs/index",
     "wux-tab": "../../../dist/tab/index",
     "wux-white-space": "../../../dist/white-space/index",
-    "wux-segmented-control": "../../../dist/segmented-control/index"
+    "wux-segmented-control": "../../../dist/segmented-control/index",
+    "my-timer": "../../../myComponent/timer/timer"
   }
 }
