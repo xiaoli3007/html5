@@ -1,5 +1,15 @@
 /* .task_sw_view{ width: 100%; text-align: center;} */
+.swiper_view{min-height: 200rpx;}
 .task_sw{
-font-size:8rem;  
+font-size:5rem;  
 }
-swiper{ height:250px;}
+.sw_view{ height: 100%;}
+.dw_view{ height: 100%;}
+.lw_view{ height: 100%;}
+.task_dw{
+font-size:2rem;  
+}
+.task_lw{
+font-size:0.7rem;  
+}
+/* swiper{ height:250px;} */

@@ -15,7 +15,7 @@ Component({
     isStart: false,
     setInter: null,
     timenum:0,
-    timestring:'xxxxx',
+    timestring:'',
     countVal: 0, //获取初始值
     pauseTime: 0,
   },
@@ -23,7 +23,7 @@ Component({
     attached: function () {
       // 在组件实例进入页面节点树时执行
    
-      console.log(1111111);
+      // console.log(1111111);
       this.setData({
         countVal: new Date().getTime(),
       });
@@ -35,6 +35,7 @@ Component({
     },
     detached: function () {
       // 在组件实例被从页面节点树移除时执行
+      this.endSetInter()
     },
   },
   methods: {
@@ -69,7 +70,7 @@ Component({
           } else {
             timeS = ":" + s;
           }
-          console.log(timeH + timeM + timeS);
+          // console.log(timeH + timeM + timeS);
 
           vm.setData({
             timestring: timeH + timeM + timeS,

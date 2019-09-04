@@ -2,6 +2,7 @@ const app = getApp()
 
 Page({
   data: {
+    toptitle:'听写任务',
     taskdata: {
       "id": "01",
       "name": "第一课 燕子",
@@ -140,6 +141,7 @@ Page({
             type: parseInt(res.data.taskinfo.type),
             konw_current: konw_currenttemp,
             taskid: res.data.taskid,
+            toptitle: res.data.taskinfo.type=='1'?'听写任务':'识字任务'
           })
           // console.log(konw_currenttemp);
 
@@ -329,6 +331,16 @@ Page({
         subcurrent: index,
       })
     }
+  },
+  onMyEvent: function () {
+     // 自定义组件触发事件时提供的detail对象
+    // console.log(e)
+    var showTwo = this.selectComponent('#mytimes');
+    console.log(showTwo.data.timenum)
+  }, 
+  backquiet: function () {
+    console.log(1111)
+    
   },
 
 })

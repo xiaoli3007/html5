@@ -1,6 +1,6 @@
 <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
-  <view slot="backText">返回</view>
-  <view slot="content">听写任务</view>
+  <view slot="backText" bindchange="backquiet">返回</view>
+  <view slot="content">{{toptitle}}</view>
 </cu-custom>
 
 <view class="cu-bar bg-white solid-bottom margin-bottom">
@@ -91,7 +91,12 @@
   
 <wux-row >
   <wux-col span="8" offset="2">
-  <view class="padding text-center">  已用时：<my-timer> </my-timer>   </view>
+  <view class="padding text-center">  已用时：<my-timer id="mytimes"> </my-timer>  
+  
+  <!-- <text class="cuIcon-video" style="font-size:30rpx;" bindtap="onMyEvent">
+  </text>  -->
+
+   </view>
   </wux-col>
   
 </wux-row>
