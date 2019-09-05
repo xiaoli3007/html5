@@ -4,18 +4,23 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    MainCur: 0,
-    TabCur: 0,
-    duwuList: [],
+    taskinfo: null,
+    word_data: [],
     loadModal: true,
     isLoad: true,
+    ctaskid:0,
+    task_result: [],
   },
-  onLoad() {
+  onLoad(options) {
+
+    console.log(options.taskid)
+
     let that = this;
     //加载列表
     wx.request({
-      url: app.globalData.url + '?act=list',
+      url: app.globalData.url + '?act=taskone',
       data: {
+        taskid: parseInt(options.taskid),
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -24,10 +29,24 @@ Page({
       success(res) {
 
         console.log(res.data)
+        
+
+        var linktemp1 = []; 
+        res.data.word_data.word1.forEach(function (value, i) {
+          
+          linktemp1.push({ 'wcellid': value.wcellid, 'status': 1 })
+          
+        })
+        console.log(linktemp1);
         that.setData({
 
-          duwuList: res.data.items
+          ctaskid: res.data.taskid,
+          taskinfo: res.data.taskinfo,
+          word_data: res.data.word_data,
+          task_result: linktemp1,
         })
+
+        
 
       },
       complete(res) {
@@ -47,11 +66,20 @@ Page({
 
 
   },
-  tabSelect(e) {
-    this.setData({
-      TabCur: e.currentTarget.dataset.id,
-      scrollLeft: (e.currentTarget.dataset.id - 1) * 60
-    })
+  check_word(e) {
+     
+    if (e.currentTarget.dataset.hasOwnProperty('mindex')) {
+      console.log(e.currentTarget.dataset.mindex)
+      console.log(e.currentTarget.dataset.status)
+
+      var tprice = 'task_result[' + e.currentTarget.dataset.mindex + '].status'
+      this.setData({
+        [tprice]: parseInt(e.currentTarget.dataset.status),
+      })
+       
+      console.log(this.data.task_result)
+    }
+
   },
 
 })

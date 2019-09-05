@@ -236,7 +236,7 @@ Page({
     })
     
 
-    console.log(this.data.current)
+    // console.log(this.data.current)
     if (this.data.tingxie_auto){
       if (e.detail.current == this.data.taskdata.word1.length - 1) {
         this.tingxie_stop()
@@ -432,6 +432,12 @@ Page({
       },
       ],
     })
+  },
+  goreadcheck: function () {
+    wx.navigateTo({
+      url: '/pages/basics/readcheck/readcheck?taskid='+this.data.taskid,
+    })
+
   },
 
 })

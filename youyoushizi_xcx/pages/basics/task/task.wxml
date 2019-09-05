@@ -147,6 +147,11 @@
 
   <view class="cuIcon-stop" bindtap="tingxie_stop" style="font-size:100rpx;" wx:if="{{tingxie_auto}}">
   </view>
+
+
+<view class="cuIcon-favor" bindtap="goreadcheck" style="font-size:100rpx;" >
+  </view>
+
   </wux-col>
     <wux-col span="4">
   <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next" wx:if="{{!tingxie_auto}}">
