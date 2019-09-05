@@ -55,7 +55,9 @@ Page({
         title: '句',
       },
     ],
-    taskid:0
+    taskid:0,
+    tingxie_auto: false,
+    tingxie_text_hide:false
   },
   onLoad: function (options) {
    
@@ -143,9 +145,16 @@ Page({
             type: parseInt(res.data.taskinfo.type),
             konw_current: konw_currenttemp,
             taskid: res.data.taskid,
-            toptitle: res.data.taskinfo.type=='1'?'听写任务':'识字任务'
+            toptitle: res.data.taskinfo.type=='1'?'听写任务':'识字任务',
+            tingxie_auto: parseInt(res.data.taskinfo.type)==1?true:false,
+            tingxie_text_hide: parseInt(res.data.taskinfo.type) == 1 ? true : false,
           })
           // console.log(konw_currenttemp);
+          // console.log(that.data.type)
+          //听写模式开始
+          if (parseInt(res.data.taskinfo.type) == 1){
+              that.tingxie_start()
+          }
 
         }, complete(res) {
           that.setData({
@@ -168,20 +177,47 @@ Page({
     // 使用 wx.createAudioContext 获取 audio 上下文 context
     // this.audioCtx = wx.createAudioContext('myAudio')
     // console.log(this.data.taskdata);
-    this.innerAudioContext = wx.createInnerAudioContext()
-    // this.innerAudioContext.autoplay = true
-    this.innerAudioContext.src =  this.data.src
-    this.innerAudioContext.onPlay(() => {
-      console.log('开始播放')
+    // this.innerAudioContext = wx.createInnerAudioContext()
+    // // this.innerAudioContext.autoplay = true
+    // this.innerAudioContext.src =  this.data.src
+    // this.innerAudioContext.onPlay(() => {
+    //   console.log('开始播放')
+    // })
+    // this.innerAudioContext.onError((res) => {
+    //   console.log(res.errMsg)
+    //   console.log(res.errCode)
+    // })
+
+  },
+  onShow(e) {
+
+    console.log(this.data.type)
+  },
+  tingxie_start() {
+
+    this.setData({
+      autoplay: true,
+      interval: 8000,
+      tingxie_auto: true,
     })
-    this.innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
+
+  },
+  tingxie_stop() {
+
+    this.setData({
+      autoplay: false,
+      tingxie_auto: false,
     })
 
   },
 
+  tingxie_text_show_hide() {
 
+    this.setData({
+      tingxie_text_hide: !this.data.tingxie_text_hide
+    })
+
+  },
   change: function (e) {
     if ("touch" === e.detail.source) {  // 只在用户触发的情况下
       this.setData({
@@ -200,7 +236,8 @@ Page({
     // console.log(11)
     // console.log(this.data.current)
     this.setData({
-      current: 0
+      current: 0,
+     
     })
   },
   audioend(e) {

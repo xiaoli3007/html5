@@ -11,124 +11,148 @@
     <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
   </view>
 </view>
- 
+
 <wux-row>
   <wux-col span="10" offset="1">
 
-  <view class="flex">
-    <view class="cu-progress round striped">
-      <view class="bg-green" style="width:{{taskloading}};"></view>
+    <view class="flex">
+      <view class="cu-progress round striped">
+        <view class="bg-green" style="width:{{taskloading}};"></view>
+      </view>
+      <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text>
     </view>
-    <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text>
-  </view>
   </wux-col>
 
 </wux-row>
-  <wux-white-space size="default" />
+<wux-white-space size="default" />
 
 <wux-row>
-  <wux-col span="1" >
-      <wux-tabs controlled current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
-            <!-- <wux-tab key="tab1" title="字"></wux-tab>
+  <wux-col span="1">
+    <wux-tabs controlled current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
+      <!-- <wux-tab key="tab1" title="字"></wux-tab>
             <wux-tab key="tab2" title="词"></wux-tab>
             <wux-tab key="tab3" title="句"></wux-tab> -->
-             <block wx:for="{{ tabs }}" wx:key="key">
-                <wux-tab key="{{ item.key }}" title="{{ item.title }}"></wux-tab>
-            </block>
-        </wux-tabs>
+      <block wx:for="{{ tabs }}" wx:key="key">
+        <wux-tab key="{{ item.key }}" title="{{ item.title }}"></wux-tab>
+      </block>
+    </wux-tabs>
   </wux-col>
   <wux-col span="8" offset="1">
 
-   <view class="bg-green padding radius align-center shadow-blur swiper_view">
-    <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}">
-  <block wx:for="{{taskdata.word1}}" wx:key>
-    <swiper-item>
+    <view class="bg-green padding radius align-center shadow-blur swiper_view">
+      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}">
+        <block wx:for="{{taskdata.word1}}" wx:key>
+          <swiper-item>
 
-                <swiper  vertical="{{true}}"  current="{{subcurrent}}" bindchange="onSubSwiperChange">
-                    <swiper-item>
-                      <view class="justify-center align-center  text-center sw_view">
+            <swiper vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
+              <swiper-item>
+                <view class="justify-center align-center  text-center sw_view">
 
-                      <!-- <view> 
+                   <view wx:if="{{tingxie_text_hide}}"> 
                          <text class="task_sw cuIcon-emoji" style=""></text> </view>
-                      -->
+                      
 
-                      <view>  <text class='task_sw text-center'>{{item.sw}}</text> </view> 
-                         </view>
-                    </swiper-item>
-                    <swiper-item>
-                      <view class="flex justify-center align-center dw_view">
-                       <view> <text class='task_dw text-center'>{{item.dw_xcx}}</text></view>
-                      </view>
-                    </swiper-item>
-                    <swiper-item>
-                      <view class="flex justify-center align-center lw_view">
-                       <view  class=''> <text class='task_lw text-left align-center'>{{item.lw_xcx}}</text></view>
-                      </view>
-                    </swiper-item>
-                </swiper>
+                  <view wx:if="{{!tingxie_text_hide}}">
+                    <text class='task_sw text-center'>{{item.sw}}</text> </view>
+                </view>
+              </swiper-item>
+              <swiper-item>
+                <view class="flex justify-center align-center dw_view">
 
-      <!-- <view class="justify-center align-center task_sw_view text-center">
+                 <view wx:if="{{tingxie_text_hide}}"> 
+                         <text class="task_sw cuIcon-emoji" style=""></text> </view>
+                  <view wx:if="{{!tingxie_text_hide}}">
+                    <text class='task_dw text-center'>{{item.dw_xcx}}</text>
+                  </view>
+                </view>
+              </swiper-item>
+              <swiper-item>
+                <view class="flex justify-center align-center lw_view">
+                 <view wx:if="{{tingxie_text_hide}}"> 
+                         <text class="task_sw cuIcon-emoji" style=""></text> </view>
+                  <view wx:if="{{!tingxie_text_hide}}">
+                    <text class='task_lw text-left align-center'>{{item.lw_xcx}}</text>
+                  </view>
+                </view>
+              </swiper-item>
+            </swiper>
+
+            <!-- <view class="justify-center align-center task_sw_view text-center">
         <text class='task_sw text-center'>{{item.sw}}</text>
       </view> -->
-    </swiper-item>
-  </block>
-</swiper>
+          </swiper-item>
+        </block>
+      </swiper>
 
-</view>
+    </view>
 
   </wux-col>
 
-   <wux-col span="1" offset="1">
-        <button class="cu-btn icon bg-white">
-    <text class="cuIcon-question"></text>
-  </button>
-    
+  <wux-col span="1" offset="1">
+    <button class="cu-btn icon bg-white">
+      <text class="cuIcon-question"></text>
+    </button>
+
   </wux-col>
 
 </wux-row>
 
- <wux-white-space size="large" />
-  
-<wux-row >
+<wux-white-space size="large" />
+
+<wux-row>
   <wux-col span="8" offset="2">
-  <view class="padding text-center">  已用时：<my-timer id="mytimes"> </my-timer>  
-  
-  <!-- <text class="cuIcon-video" style="font-size:30rpx;" bindtap="onMyEvent">
+    <view class="padding text-center"> 已用时：
+      <my-timer id="mytimes"> </my-timer>
+
+      <!-- <text class="cuIcon-video" style="font-size:30rpx;" bindtap="onMyEvent">
   </text>  -->
 
-   </view>
+    </view>
   </wux-col>
-  
+
 </wux-row>
 
 <wux-row wx:if="{{type==1}}">
   <wux-col span="4">
-    <view class="padding text-center">   读三次 <text class="cuIcon-notification" style="font-size:30rpx;"></text></view>
+    <view class="padding text-center"> 读三次
+      <text class="cuIcon-notification" style="font-size:30rpx;"></text>
+    </view>
   </wux-col>
   <wux-col span="4">
-   <view class="padding text-center">    间隔5秒</view>
+    <view class="padding text-center"> 间隔5秒</view>
   </wux-col>
   <wux-col span="4">
-   <view class="padding text-center">    隐藏
-   <!-- <text class="cuIcon-attention" style="font-size:30rpx;"></text> -->
-   <text class="cuIcon-attentionforbid" style="font-size:30rpx;"></text>
-   </view>
+
+    <view class="padding text-center" wx:if="{{!tingxie_text_hide}}" bindtap="tingxie_text_show_hide"> 隐藏
+      <text class="cuIcon-attentionforbid" style="font-size:30rpx;"></text>
+    </view>
+
+    <view class="padding text-center" wx:if="{{tingxie_text_hide}}" bindtap="tingxie_text_show_hide"> 显示
+      <text class="cuIcon-attention" style="font-size:30rpx;"></text>
+    </view>
+
   </wux-col>
 </wux-row>
 
-   <wux-white-space size="default" />
+<wux-white-space size="default" />
 
 <view class=" flex flex-wrap justify-between align-center " wx:if="{{type==1}}">
-  <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev">
+<wux-col span="4">
+  <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev" wx:if="{{!tingxie_auto}}">
   </view>
-  <!-- <view class="cuIcon-video" style="font-size:100rpx;">
-  </view> -->
+  </wux-col>
+  <wux-col span="4">
+  <view class="cuIcon-video" bindtap="tingxie_start" style="font-size:100rpx;" wx:if="{{!tingxie_auto}}">
+  </view>
 
-    <view class="cuIcon-stop" style="font-size:100rpx;">
+  <view class="cuIcon-stop" bindtap="tingxie_stop" style="font-size:100rpx;" wx:if="{{tingxie_auto}}">
+  </view>
+  </wux-col>
+    <wux-col span="4">
+  <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next" wx:if="{{!tingxie_auto}}">
   </view>
 
-  <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next">
-  </view>
+    </wux-col>
 </view>
 
 <view class=" flex flex-wrap justify-between align-center " wx:if="{{type==2}}">
@@ -136,8 +160,8 @@
   </view>
   <view class="" style="width:400rpx;">
 
-   <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
-    <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
+    <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+      <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
     </block>
 
   </view>
@@ -148,9 +172,9 @@
 <wux-white-space size="default" />
 
 
-<view class="padding flex flex-wrap justify-between align-center ">
- <button class="cu-btn round bg-gradual-red shadow" bindtap="audioStart">
-   首
+<view class="padding flex flex-wrap justify-between align-center " wx:if="{{!tingxie_auto}}">
+  <button class="cu-btn round bg-gradual-red shadow" bindtap="audioStart">
+    首
   </button>
   <button class="cu-btn round bg-gradual-blue shadow" bindtap="audioPlay_word">
     字
@@ -160,14 +184,14 @@
   <button class="cu-btn round bg-gradual-green shadow" bindtap="audioPlay_dword">词
     <view class="cuIcon-notification" style="font-size:30rpx;">
     </view>
-    
+
   </button>
   <button class="cu-btn round bg-gradual-pink shadow" bindtap="audioPlay_lword">句
     <view class="cuIcon-notification" style="font-size:30rpx;">
     </view>
   </button>
-   <button class="cu-btn round bg-gradual-orange shadow" bindtap="audioend">
-   尾
+  <button class="cu-btn round bg-gradual-orange shadow" bindtap="audioend">
+    尾
   </button>
 </view>
 
