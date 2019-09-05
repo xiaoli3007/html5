@@ -149,8 +149,8 @@
   </view>
 
 
-<view class="cuIcon-favor" bindtap="goreadcheck" style="font-size:100rpx;" >
-  </view>
+<!-- <view class="cuIcon-favor" bindtap="goreadcheck" style="font-size:100rpx;" >
+  </view> -->
 
   </wux-col>
     <wux-col span="4">

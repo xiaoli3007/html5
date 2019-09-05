@@ -238,7 +238,7 @@ Page({
 
     // console.log(this.data.current)
     if (this.data.tingxie_auto){
-      if (e.detail.current == this.data.taskdata.word1.length - 1) {
+      if (this.data.current == this.data.taskdata.word1.length - 1) {
         this.tingxie_stop()
         this.tingxie_end_open()
       }
@@ -423,7 +423,7 @@ Page({
         onTap(e) {
           console.log('你选择了对照错字！')
           wx.navigateTo({
-            url: '/pages/basics/readcheck/readcheck',
+            url: '/pages/basics/readcheck/readcheck?taskid=' + that.data.taskid,
           })
         },
       },

@@ -34,7 +34,7 @@ Page({
         var linktemp1 = []; 
         res.data.word_data.word1.forEach(function (value, i) {
           
-          linktemp1.push({ 'wcellid': value.wcellid, 'status': 1 })
+          linktemp1.push({ 'wcellid': value.wcellid, 'status': '1' })
           
         })
         console.log(linktemp1);
@@ -69,16 +69,74 @@ Page({
   check_word(e) {
      
     if (e.currentTarget.dataset.hasOwnProperty('mindex')) {
-      console.log(e.currentTarget.dataset.mindex)
-      console.log(e.currentTarget.dataset.status)
+      // console.log(e.currentTarget.dataset.mindex)
+      // console.log(e.currentTarget.dataset.status)
 
       var tprice = 'task_result[' + e.currentTarget.dataset.mindex + '].status'
       this.setData({
-        [tprice]: parseInt(e.currentTarget.dataset.status),
+        [tprice]: e.currentTarget.dataset.status,
       })
        
-      console.log(this.data.task_result)
+      // console.log(this.data.task_result)
     }
+
+  },
+  check_submit(e) {
+
+    this.setData({
+
+      loadModal: true
+    })
+    var that = this
+    // var tmap = []
+    // console.log(typeof tmap)
+    // this.data.task_result.forEach(function (value, i) {
+
+    //   console.log(value)
+      
+    // })
+    var str = JSON.stringify(this.data.task_result)
+    // console.log(JSON.parse(str))
+    //加载列表
+    wx.request({
+      url: app.globalData.url + '?act=taskindata',
+      method: 'POST',
+      data: {
+        taskid: parseInt(this.data.ctaskid),
+        userid: app.globalData.userid,
+        taskdata: str,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+  
+      },
+      complete(res) {
+
+        that.setData({
+
+          loadModal: false
+        })
+
+        wx.showToast({
+          title: '提交成功！',
+          icon: 'none',
+          duration: 1500,
+        })
+        setTimeout(function () {
+          wx.navigateTo({
+            url: '/pages/basics/tasklist/tasklist',
+          })
+        }, 500)
+
+       
+
+      }
+    })
 
   },
 
