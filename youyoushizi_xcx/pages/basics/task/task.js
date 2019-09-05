@@ -1,4 +1,7 @@
+import { $wuxDialog } from '../../../dist/index'
+
 var util = require('../../../utils/util.js')
+
 
 const app = getApp()
 
@@ -197,7 +200,7 @@ Page({
 
     this.setData({
       autoplay: true,
-      interval: 8000,
+      interval: 1000,
       tingxie_auto: true,
     })
 
@@ -219,18 +222,29 @@ Page({
 
   },
   change: function (e) {
-    if ("touch" === e.detail.source) {  // 只在用户触发的情况下
-      this.setData({
-        current: e.detail.current
-      })
-    }
+    // if ("touch" === e.detail.source) {  // 只在用户触发的情况下
+    //   this.setData({
+    //     current: e.detail.current
+    //   })
+    // }
+    this.setData({
+      current: e.detail.current
+    })
 
     this.setData({
       taskloading: util.GetPercent(e.detail.current, this.data.taskdata.word1.length-1)
     })
     
 
-    console.log(this.data.taskloading)
+    console.log(this.data.current)
+    if (this.data.tingxie_auto){
+      if (e.detail.current == this.data.taskdata.word1.length - 1) {
+        this.tingxie_stop()
+        this.tingxie_end_open()
+      }
+    }
+   
+
   },
   audioStart(e) {
     // console.log(11)
@@ -387,6 +401,37 @@ Page({
   backquiet: function () {
     console.log(1111)
     
+  },
+  tingxie_end_open() {
+    
+    var that = this 
+    $wuxDialog().open({
+      resetOnClose: true,
+      // title: '',
+      content: '您好！听写已结束',
+      buttons: [{
+        text: '重新开始',
+        type: 'primary',
+        onTap(e) {
+          console.log('你选择了重新开始！')
+          that.tingxie_start()
+        },
+      },
+      {
+        text: '对照错字',
+        type: 'primary',
+        onTap(e) {
+          console.log('你选择了对照错字！')
+          wx.navigateTo({
+            url: '/pages/basics/readcheck/readcheck',
+          })
+        },
+      },
+      {
+        text: '取消',
+      },
+      ],
+    })
   },
 
 })

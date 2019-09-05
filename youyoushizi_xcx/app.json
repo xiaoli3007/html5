@@ -9,6 +9,7 @@
     "pages/basics/review/review",
     "pages/basics/reviewselect/reviewselect",
     "pages/basics/task/task",
+    "pages/basics/readcheck/readcheck",
     "pages/basics/recommendduwu/recommendduwu",
     "pages/basics/recommenddetailed/recommenddetailed",
     "pages/about/about/about",

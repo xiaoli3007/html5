@@ -202,3 +202,5 @@
   <image src='/images/logo.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>加载中...</view>
 </view>
+
+<wux-dialog id="wux-dialog" />

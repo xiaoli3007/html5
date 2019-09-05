@@ -1,0 +1,36 @@
+<!-- <view class='cu-custom'>
+  <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='cuIcon-back'></text> 返回
+    </navigator>
+    <view class='content' style='top:{{StatusBar}}px;'>课外读物</view>
+  </view>
+</view> -->
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">听写检查</view>
+  </cu-custom>
+
+
+
+  <view class="cu-list grid col-3">
+    <view class="cu-item  justify-center align-center" wx:for="{{duwuList}}" wx:key >
+      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
+     <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+      </image>
+      <text>{{item.title}}</text>
+      </navigator>
+    </view>
+  </view>
+
+
+<view class="cu-load bg-blue {{!isLoad?'loading':'over'}}"></view>
+
+
+  <view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view>
+
+
