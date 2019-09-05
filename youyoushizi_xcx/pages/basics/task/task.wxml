@@ -88,11 +88,12 @@
 
   </wux-col>
 
-  <wux-col span="1" offset="1">
+  <wux-col span="2" >
+  <view class="text-center">
     <button class="cu-btn icon bg-white">
       <text class="cuIcon-question"></text>
     </button>
-
+</view>
   </wux-col>
 
 </wux-row>
@@ -160,7 +161,30 @@
     </wux-col>
 </view>
 
-<view class=" flex flex-wrap justify-between align-center " wx:if="{{type==2}}">
+<wux-row >
+<wux-col span="2" >
+     <view class="cuIcon-pullleft text-center" style="font-size:80rpx;" bindtap="prev">
+  </view>
+  </wux-col>
+  <wux-col span="8" >
+  
+  <view class="" >
+
+    <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+      <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
+    </block>
+
+  </view>
+</wux-col>
+
+<wux-col span="2" >
+      <view class="cuIcon-pullright text-center" style="font-size:80rpx;" bindtap="next">
+  </view>
+    
+  </wux-col>
+</wux-row>
+
+<!-- <view class=" flex flex-wrap justify-between align-center " wx:if="{{type==2}}">
   <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev">
   </view>
   <view class="" style="width:400rpx;">
@@ -172,7 +196,7 @@
   </view>
   <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next">
   </view>
-</view>
+</view> -->
 
 <wux-white-space size="default" />
 

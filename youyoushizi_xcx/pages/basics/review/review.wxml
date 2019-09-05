@@ -105,10 +105,35 @@
 
    <wux-white-space size="default" />
 
+<wux-row >
+<wux-col span="2" >
+     <view class="cuIcon-pullleft text-center" style="font-size:80rpx;" bindtap="prev">
+  </view>
+  </wux-col>
+  <wux-col span="8" >
+  
+  <view class="" >
 
-<view class=" flex flex-wrap justify-between align-center " >
+   <block wx:for="{{ konw_listinfo }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+    <wux-segmented-control theme="calm" current="{{konw_current[mindex]}}" controlled values="{{konw_listinfo_title[mindex]}}" bind:change="onChangesegmented" />
+    </block>
+
+  </view>
+</wux-col>
+
+<wux-col span="2" >
+      <view class="cuIcon-pullright text-center" style="font-size:80rpx;" bindtap="next">
+  </view>
+    
+  </wux-col>
+</wux-row>
+
+<!-- <view class=" flex flex-wrap justify-between align-center " >
+
   <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev">
   </view>
+
+
   <view class="" style="width:400rpx;">
 
    <block wx:for="{{ konw_listinfo }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
@@ -116,9 +141,11 @@
     </block>
 
   </view>
+
   <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next">
   </view>
-</view>
+
+</view> -->
 
 <wux-white-space size="default" />
 

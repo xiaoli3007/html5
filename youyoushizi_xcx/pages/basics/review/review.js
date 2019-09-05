@@ -174,6 +174,33 @@ Page({
     })
 
   },
+  onUnload(e) {
+
+    var showTwo = this.selectComponent('#mytimes');
+    console.log(showTwo.data.timenum)
+
+    // 发送请求 统计学习时间
+    wx.request({
+      url: app.globalData.url + '?act=taskintime',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        taskid: 0,
+        review: 1,
+        duration: showTwo.data.timenum,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+
+      }
+    })
+
+  },
 
 
   change: function(e) {

@@ -7,9 +7,9 @@ font-size:5rem;
 .dw_view{ height: 100%;}
 .lw_view{ height: 100%;}
 .task_dw{
-font-size:2rem;  
+font-size:2.5rem;  
 }
 .task_lw{
-font-size:0.7rem;  
+font-size:1rem;  
 }
 /* swiper{ height:250px;} */
