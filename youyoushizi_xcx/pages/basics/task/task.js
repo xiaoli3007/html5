@@ -61,8 +61,10 @@ Page({
     taskid:0,
     tingxie_auto: false,
     tingxie_text_hide:false,
-    tingxie_loop: 2,
-    tingxie_loop_time: 1
+    tingxie_loop: 3,
+    tingxie_loop_time: 1,
+    tingxie_ready: false,
+    tingxie_ready_text: 'Ready',
   },
   onLoad: function (options) {
    
@@ -202,7 +204,7 @@ Page({
     console.log(this.data.type)
   },
   onUnload(e) {
-
+    this.tingxie_stop()
     var showTwo = this.selectComponent('#mytimes');
     console.log(showTwo.data.timenum)
 
@@ -241,16 +243,35 @@ Page({
       tingxie_auto: true,
     })
 
-    wx.showToast({
-      title: '准备开始！',
-      icon: 'none',
-      duration: 1500,
+    this.setData({
+      tingxie_ready: true,
     })
+    // wx.showToast({
+    //   title: '准备开始！',
+    //   icon: 'none',
+    //   duration: 1500,
+    // })
+   
+
     var that= this
+
+    setTimeout(function () {
+      that.setData({
+        tingxie_ready_text: 'Go!',
+      })
+      setTimeout(function () {
+        that.setData({
+          tingxie_ready: false,
+        })
+      }, 1000)
+    }, 2000)
+
+   
+
     console.log(that.data.current)
     setTimeout(function () {
       that.loopVoice(that.data.current, that.data.tingxie_loop, that.data.tingxie_loop_time)
-    }, 1500)
+    }, 3000)
 
   },
 
@@ -259,6 +280,9 @@ Page({
     this.setData({
       // autoplay: false,
       tingxie_auto: false,
+    })
+    this.setData({
+      tingxie_ready_text: 'Ready',
     })
 
   },
@@ -325,8 +349,10 @@ Page({
       let times = 0
       secondIAC.onPlay(() => {
           times++
+        console.log("播放onPlay" + index + '几次' + times)
         })
       secondIAC.onEnded(() => {
+        console.log("播放onEnded" + index + '几次' + times)
           if (times === maxtimes) {
             secondIAC.destroy()
             // secondIAC.stop()
@@ -334,17 +360,17 @@ Page({
               that.tingxie_loop() //进入下一个
             }, timer * 1000)
           }else{
-            setTimeout(function () {
-              secondIAC.play()
-            }, timer * 1000)
+            if (this.data.tingxie_auto) {
+              setTimeout(function () {
+                secondIAC.play()
+              }, timer * 1000)
+            }
           }
           
         })
-     console.log("播放" + index)
+     console.log("第一次播放" + index)
       secondIAC.play()
-     console.log("播放" + index + '几次' + times)
-     console.log(secondIAC)
-     console.log("结束播放" + index)
+     console.log("第一次结束播放" + index)
   },
 
   audioStart(e) {

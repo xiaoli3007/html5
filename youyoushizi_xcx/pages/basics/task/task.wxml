@@ -225,6 +225,10 @@
 </view>
 
 
+<view class='mecu-load meload-modal' wx:if="{{tingxie_ready}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <view class='text-yellow text-shadow'>{{tingxie_ready_text}}</view>
+</view>
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
