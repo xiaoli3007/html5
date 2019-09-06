@@ -115,7 +115,7 @@
 
 <wux-row wx:if="{{type==1}}">
   <wux-col span="4">
-    <view class="padding text-center"> 读三次
+    <view class="padding text-center"> 读二次
       <text class="cuIcon-notification" style="font-size:30rpx;"></text>
     </view>
   </wux-col>
@@ -161,7 +161,7 @@
     </wux-col>
 </view>
 
-<wux-row >
+<wux-row wx:if="{{type==2}}">
 <wux-col span="2" >
      <view class="cuIcon-pullleft text-center" style="font-size:80rpx;" bindtap="prev">
   </view>

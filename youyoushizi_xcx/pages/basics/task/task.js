@@ -225,9 +225,15 @@ Page({
   },
   tingxie_start() {
 
+    if (this.data.current == this.data.taskdata.word1.length - 1) {
+      this.setData({
+        current: 0,
+        
+      })
+    }
     this.setData({
       autoplay: true,
-      interval: 1000,
+      interval: 12000,
       tingxie_auto: true,
     })
 
@@ -265,6 +271,10 @@ Page({
 
     // console.log(this.data.current)
     if (this.data.tingxie_auto){
+
+      // this.data.audiowordlist[this.data.current].play()
+      this.loopVoice(this.data.current, 2)
+
       if (this.data.current == this.data.taskdata.word1.length - 1) {
         this.tingxie_stop()
         this.tingxie_end_open()
@@ -273,6 +283,30 @@ Page({
    
 
   },
+   loopVoice(index, maxtimes) {
+      let secondIAC = this.data.audiowordlist[index]
+      secondIAC.obeyMuteSwitch = false
+      secondIAC.onError(() => {
+          showToast({
+            icon: 'none',
+            title: '加载失败',
+          })
+        })
+      let times = 0
+      secondIAC.onPlay(() => {
+          times++
+        })
+      secondIAC.onEnded(() => {
+          if (times === maxtimes) {
+            secondIAC.destroy()
+          }
+          setTimeout(function () {
+            secondIAC.play()
+          }, 2000)
+        })
+      secondIAC.play()
+  },
+
   audioStart(e) {
     // console.log(11)
     // console.log(this.data.current)
