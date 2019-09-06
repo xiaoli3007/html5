@@ -62,7 +62,7 @@ Page({
     tingxie_auto: false,
     tingxie_text_hide:false,
     tingxie_loop: 2,
-    tingxie_loop_time: 5
+    tingxie_loop_time: 1
   },
   onLoad: function (options) {
    
@@ -233,23 +233,53 @@ Page({
     if (this.data.current == this.data.taskdata.word1.length - 1) {
       this.setData({
         current: 0,
-        
       })
     }
     this.setData({
-      autoplay: true,
-      interval: 12000,
+      // autoplay: true,
+      // interval: 12000,
       tingxie_auto: true,
     })
 
+    wx.showToast({
+      title: '准备开始！',
+      icon: 'none',
+      duration: 1500,
+    })
+    var that= this
+    console.log(that.data.current)
+    setTimeout(function () {
+      that.loopVoice(that.data.current, that.data.tingxie_loop, that.data.tingxie_loop_time)
+    }, 1500)
+
   },
+
   tingxie_stop() {
 
     this.setData({
-      autoplay: false,
+      // autoplay: false,
       tingxie_auto: false,
     })
 
+  },
+  tingxie_loop() {
+
+    if (this.data.tingxie_auto) {
+      let t_c = this.data.current+1
+      if (t_c > this.data.taskdata.word1.length - 1) {
+        this.tingxie_stop()
+        this.tingxie_end_open()
+      }else{
+        this.setData({
+          current: t_c,
+        })
+        console.log(t_c)
+        this.loopVoice(t_c, this.data.tingxie_loop, this.data.tingxie_loop_time)
+      }
+
+      
+    }
+    
   },
 
   tingxie_text_show_hide() {
@@ -272,25 +302,20 @@ Page({
     this.setData({
       taskloading: util.GetPercent(e.detail.current, this.data.taskdata.word1.length-1)
     })
-    
-
-    console.log(this.data.audiowordlist[this.data.current])
-    if (this.data.tingxie_auto){
-
-      // 
-      this.loopVoice(this.data.current, this.data.tingxie_loop, this.data.tingxie_loop_time)
-
-      if (this.data.current == this.data.taskdata.word1.length - 1) {
-        this.tingxie_stop()
-        this.tingxie_end_open()
-      }
-    }
-   
-
   },
    loopVoice(index, maxtimes,timer) {
-      let secondIAC = this.data.audiowordlist[index]
-      secondIAC.obeyMuteSwitch = false
+
+     
+      // let secondIAC = this.data.audiowordlist[index]
+
+     var secondIAC = null
+     secondIAC = wx.createInnerAudioContext()
+     secondIAC.src = this.data.taskdata.word1[index].sw_sound
+
+      var that = this
+    
+    //  secondIAC.loop = false
+    //  secondIAC.obeyMuteSwitch = false
       secondIAC.onError(() => {
         wx.showToast({
             icon: 'none',
@@ -304,12 +329,22 @@ Page({
       secondIAC.onEnded(() => {
           if (times === maxtimes) {
             secondIAC.destroy()
+            // secondIAC.stop()
+            setTimeout(function () {
+              that.tingxie_loop() //进入下一个
+            }, timer * 1000)
+          }else{
+            setTimeout(function () {
+              secondIAC.play()
+            }, timer * 1000)
           }
-          setTimeout(function () {
-            secondIAC.play()
-          }, timer*1000)
+          
         })
+     console.log("播放" + index)
       secondIAC.play()
+     console.log("播放" + index + '几次' + times)
+     console.log(secondIAC)
+     console.log("结束播放" + index)
   },
 
   audioStart(e) {
