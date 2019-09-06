@@ -35,7 +35,7 @@ Page({
     interval: 5000,
     duration: 1000,
     current: 0,
-    src: 'http://rms.youyoushizi.com:8088/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
+    src: 'https://rmsp.youyoushizi.com/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
     loadModal: true,
     audiowordlist:[],
     audiodwordlist: [],
@@ -60,7 +60,9 @@ Page({
     ],
     taskid:0,
     tingxie_auto: false,
-    tingxie_text_hide:false
+    tingxie_text_hide:false,
+    tingxie_loop: 2,
+    tingxie_loop_time: 5
   },
   onLoad: function (options) {
    
@@ -180,16 +182,19 @@ Page({
     // 使用 wx.createAudioContext 获取 audio 上下文 context
     // this.audioCtx = wx.createAudioContext('myAudio')
     // console.log(this.data.taskdata);
-    // this.innerAudioContext = wx.createInnerAudioContext()
+    // let innerAudioContext = wx.createInnerAudioContext()
     // // this.innerAudioContext.autoplay = true
-    // this.innerAudioContext.src =  this.data.src
-    // this.innerAudioContext.onPlay(() => {
-    //   console.log('开始播放')
-    // })
-    // this.innerAudioContext.onError((res) => {
-    //   console.log(res.errMsg)
-    //   console.log(res.errCode)
-    // })
+    // innerAudioContext.src =  this.data.src
+    // innerAudioContext.onCanplay(() => {
+    //   // 必须。可以当做是初始化时长
+    //   innerAudioContext.duration;
+    //   // 必须。不然也获取不到时长
+    //   setTimeout(() => {
+    //     console.log(innerAudioContext.duration); // 401.475918
+    //   }, 100)
+    // }) 
+    // console.log(this.innerAudioContext.duration);
+ 
 
   },
   onShow(e) {
@@ -269,11 +274,11 @@ Page({
     })
     
 
-    // console.log(this.data.current)
+    console.log(this.data.audiowordlist[this.data.current])
     if (this.data.tingxie_auto){
 
-      // this.data.audiowordlist[this.data.current].play()
-      this.loopVoice(this.data.current, 2)
+      // 
+      this.loopVoice(this.data.current, this.data.tingxie_loop, this.data.tingxie_loop_time)
 
       if (this.data.current == this.data.taskdata.word1.length - 1) {
         this.tingxie_stop()
@@ -283,11 +288,11 @@ Page({
    
 
   },
-   loopVoice(index, maxtimes) {
+   loopVoice(index, maxtimes,timer) {
       let secondIAC = this.data.audiowordlist[index]
       secondIAC.obeyMuteSwitch = false
       secondIAC.onError(() => {
-          showToast({
+        wx.showToast({
             icon: 'none',
             title: '加载失败',
           })
@@ -302,7 +307,7 @@ Page({
           }
           setTimeout(function () {
             secondIAC.play()
-          }, 2000)
+          }, timer*1000)
         })
       secondIAC.play()
   },

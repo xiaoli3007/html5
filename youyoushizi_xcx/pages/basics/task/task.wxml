@@ -115,12 +115,12 @@
 
 <wux-row wx:if="{{type==1}}">
   <wux-col span="4">
-    <view class="padding text-center"> 读二次
+    <view class="padding text-center"> 读{{tingxie_loop}}次
       <text class="cuIcon-notification" style="font-size:30rpx;"></text>
     </view>
   </wux-col>
   <wux-col span="4">
-    <view class="padding text-center"> 间隔5秒</view>
+    <view class="padding text-center"> 间隔{{tingxie_loop_time}}秒</view>
   </wux-col>
   <wux-col span="4">
 
