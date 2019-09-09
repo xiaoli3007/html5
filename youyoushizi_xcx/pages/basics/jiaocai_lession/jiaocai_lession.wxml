@@ -1,16 +1,73 @@
 
-<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+ <cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
     <view slot="backText">返回</view>
     <view slot="content">教材课程</view>
-  </cu-custom>
+  </cu-custom> 
+  <!-- <view class='cu-custom'>
+  <view class="cu-bar fixed bg-shadeTop bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='cuIcon-back'></text> 返回
+    </navigator>
+    <view class='content' style='top:{{StatusBar}}px;'>教材课程</view>
+  </view>
+</view> -->
+<view style="height:20rpx;">
+</view>
+<view class="VerticalBox">
+  <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh)">
+    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{jiaocaiList}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+      {{item.name}}
+    </view>
+  </scroll-view>
+  <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
+    <view class="padding-top padding-lr" wx:for="{{jiaocaiList}}" wx:key id="main-{{index}}">
+      <view class='cu-bar solid-bottom bg-white'>
+        <view class='action'>
+          <text class='cuIcon-title text-green'></text> {{item.name}} </view>
+      </view>
+      <view class="cu-list">
+<block wx:for="{{item.data}}" wx:key>
+        <view class="cu-item-aa bg-white solid-bottom padding">
+        <wux-row>
+        <wux-col span="12" >
 
-<block  wx:for="{{jiaocaiList}}" wx:for-index="mindex" wx:key>
+          <view class="margin-left padding">
+            <text class=" ">{{item.title}}</text>
+          </view>
+
+        </wux-col>
+
+       </wux-row>
+       <wux-row>
+        <wux-col span="5" offset="1">
+
+          <navigator class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
+       <button class="cu-btn round  bg-orange">识字</button>
+      </navigator>
+        </wux-col>
+        <wux-col span="5" offset="1">
+<navigator class="content" hover-class="none" url="/pages/basics/task/task?type=1&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
+       <button class="cu-btn round  bg-green">听写</button>
+      </navigator>
+        </wux-col>
+
+       </wux-row>
+         
+        
+        </view>
+      </block>
+      </view>
+
+    </view>
+  </scroll-view>
+</view>
+
+<!-- <block  wx:for="{{jiaocaiList}}" wx:for-index="mindex" wx:key>
 <view class="cu-bar bg-white solid-bottom ">
     <view class="action">
       <text class="cuIcon-title text-orange ">{{item.name}}</text> 
     </view>
     <view class="action">
-      <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
     </view>
   </view>
 
@@ -33,12 +90,9 @@
       </view>
       
 </block>
-     <!--  -->
+ </view>
 
-
-  </view>
-
-</block>
+</block> -->
 
     <view class='cu-load load-modal' wx:if="{{loadModal}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
