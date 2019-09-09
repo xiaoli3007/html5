@@ -61,8 +61,8 @@ Page({
     taskid:0,
     tingxie_auto: false,
     tingxie_text_hide:false,
-    tingxie_loop: 3,
-    tingxie_loop_time: 1,
+    tingxie_loop: 2,
+    tingxie_loop_time: 3,
     tingxie_ready: false,
     tingxie_ready_text: 'Ready',
   },
@@ -313,15 +313,31 @@ Page({
     })
 
   },
-  change: function (e) {
-    // if ("touch" === e.detail.source) {  // 只在用户触发的情况下
-    //   this.setData({
-    //     current: e.detail.current
-    //   })
-    // }
+  tingxie_change_tingxie_loop(){
+    let t_tingxie_loop = this.data.tingxie_loop + 1 > 3 ? 1 : this.data.tingxie_loop + 1
     this.setData({
-      current: e.detail.current
+      tingxie_loop: t_tingxie_loop
     })
+
+  },
+  tingxie_change_tingxie_loop_time() {
+
+    let t_tingxie_loop_time = this.data.tingxie_loop_time + 1 > 5 ? 1 : this.data.tingxie_loop_time + 1
+
+    this.setData({
+      tingxie_loop_time: t_tingxie_loop_time
+    })
+
+  },
+  change: function (e) {
+    if ("touch" === e.detail.source) {  // 只在用户触发的情况下
+      this.setData({
+        current: e.detail.current
+      })
+    }
+    // this.setData({
+    //   current: e.detail.current
+    // })
 
     this.setData({
       taskloading: util.GetPercent(e.detail.current, this.data.taskdata.word1.length-1)
@@ -348,8 +364,14 @@ Page({
         })
       let times = 0
       secondIAC.onPlay(() => {
-          times++
         console.log("播放onPlay" + index + '几次' + times)
+
+        if (this.data.tingxie_auto) {
+          times++
+        }else{
+          secondIAC.destroy()
+        }
+         
         })
       secondIAC.onEnded(() => {
         console.log("播放onEnded" + index + '几次' + times)
@@ -360,6 +382,8 @@ Page({
               that.tingxie_loop() //进入下一个
             }, timer * 1000)
           }else{
+
+            // secondIAC.seek(0)
             if (this.data.tingxie_auto) {
               setTimeout(function () {
                 secondIAC.play()

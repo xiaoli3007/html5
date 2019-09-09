@@ -46,14 +46,14 @@
 
             <swiper vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
               <swiper-item>
-                <view class="justify-center align-center  text-center sw_view">
+                <view class="flex justify-center align-center  text-center sw_view">
 
                    <view wx:if="{{tingxie_text_hide}}"> 
                          <text class="task_sw cuIcon-emoji" style=""></text> </view>
                       
 
                   <view wx:if="{{!tingxie_text_hide}}">
-                    <text class='task_sw text-center'>{{item.sw}}</text> </view>
+                    <text class="text-center {{item.wcell_type=='25'?'task_dw':'task_sw'}}">{{item.sw}}</text> </view>
                 </view>
               </swiper-item>
               <swiper-item>
@@ -115,12 +115,12 @@
 
 <wux-row wx:if="{{type==1}}">
   <wux-col span="4">
-    <view class="padding text-center"> 读{{tingxie_loop}}次
+    <view class="padding text-center" bindtap="tingxie_change_tingxie_loop"> 读{{tingxie_loop}}次
       <text class="cuIcon-notification" style="font-size:30rpx;"></text>
     </view>
   </wux-col>
   <wux-col span="4">
-    <view class="padding text-center"> 间隔{{tingxie_loop_time}}秒</view>
+    <view class="padding text-center" bindtap="tingxie_change_tingxie_loop_time"> 间隔{{tingxie_loop_time}}秒</view>
   </wux-col>
   <wux-col span="4">
 
