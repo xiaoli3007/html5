@@ -44,7 +44,7 @@ Page({
           console.log(res);
           that.setData({
             member_list: res.data.member_list,
-            userid: app.globalData.userid,
+            userid: res.data.main_userid ? String(res.data.main_userid):app.globalData.userid,
             })
         }
       });
@@ -113,6 +113,24 @@ Page({
           userid: e.currentTarget.dataset.val,
         })
         app.globalData.userid = e.currentTarget.dataset.val;
+
+        //切换用户的主 userid
+        wx.request({
+          url: app.globalData.url2 + '?act=wx_check_userid',
+          method: 'POST',
+          header: {
+            'content-type': 'application/x-www-form-urlencoded', // 默认值
+            'X-Token': app.globalData.xtoken
+          },
+          data: {
+            wx_id: app.globalData.uid,
+            userid: app.globalData.userid,
+          },
+          success: function (res) {
+            console.log(res);
+            
+          }
+        });
 
         wx.showToast({
           title: '切换账号为' + e.currentTarget.dataset.username,

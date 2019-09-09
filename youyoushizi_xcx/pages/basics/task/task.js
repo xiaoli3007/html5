@@ -448,16 +448,34 @@ Page({
       duration: e.detail.value
     })
   },
+  audioPlay_allstop() {
+     
+    this.data.audiowordlist.forEach(function (value, i) {
+      value.stop()
+    })
+    this.data.audiodwordlist.forEach(function (value, i) {
+      value.stop()
+    })
+    this.data.audiolwordlist.forEach(function (value, i) {
+      // console.log(value.currentTime);
+      value.stop()
+    })
+    console.log(this.data.current)
+    // this.data.audiolwordlist[this.data.current].stop()
+  },
   audioPlay_word() {
     // console.log(this.data.current)
+    this.audioPlay_allstop()
+ 
     this.setData({
       subcurrent: 0,
       tabkey: this.data.tabs[0].key
     })
+    
     this.data.audiowordlist[this.data.current].play()
   },
   audioPlay_dword() {
-    
+    this.audioPlay_allstop()
     this.setData({
       subcurrent: 1,
       tabkey: this.data.tabs[1].key
@@ -466,6 +484,7 @@ Page({
     this.data.audiodwordlist[this.data.current].play()
   },
   audioPlay_lword() {
+    // this.audioPlay_allstop()
     this.setData({
       subcurrent: 2,
       tabkey: this.data.tabs[2].key
