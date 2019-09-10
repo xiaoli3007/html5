@@ -67,9 +67,16 @@
 
   <view class="flex   justify-center">
     <view class=" padding-sm margin-xs radius">
-     <navigator class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{program.id}}&gid={{mindex2}}&wcell_type={{mindex}}" open-type="redirect">
-      <button class="cu-btn round lg bg-yellow">开始识字</button>
+
+     <navigator wx:if="{{item.shizi_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{program.id}}&gid={{mindex2}}&wcell_type={{mindex}}" open-type="redirect">
+      <button class="cu-btn round lg line-orange ">开始识字</button>
        </navigator>
+
+        <navigator wx:if="{{item.shizi_taskid!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
+      <button class="cu-btn round lg bg-orange">开始识字</button>
+       </navigator> 
+
+
     </view>
   </view>
 </block>

@@ -484,7 +484,7 @@ Page({
     this.data.audiodwordlist[this.data.current].play()
   },
   audioPlay_lword() {
-    // this.audioPlay_allstop()
+     this.audioPlay_allstop()
     this.setData({
       subcurrent: 2,
       tabkey: this.data.tabs[2].key

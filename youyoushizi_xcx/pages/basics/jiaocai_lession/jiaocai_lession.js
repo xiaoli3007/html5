@@ -21,7 +21,8 @@ Page({
     wx.request({
       url: app.globalData.url2 + '?act=jiaocai_sub_lession', 
       data: {
-        bookid: options.ebookid
+        bookid: options.ebookid,
+        userid: app.globalData.userid,
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -36,7 +37,7 @@ Page({
           temp.id = i
           temp_array.push(temp)
         })
-        // console.log(temp_array)
+        console.log(temp_array)
         that.setData({
 
           jiaocaiList: temp_array
