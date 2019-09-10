@@ -44,22 +44,26 @@
             <wux-row>
               <wux-col span="5" offset="1">
 
-                <navigator wx:if="{{item.shizi_taskid!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
+                <button wx:if="{{item.isread==0}}" class="cu-btn round  line-grey disabled" style="text-decoration:line-through;">识字</button>
+
+                <navigator wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
                   <button class="cu-btn round  bg-orange ">识字</button>
                 </navigator>
 
-                <navigator wx:if="{{item.shizi_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
+                <navigator wx:if="{{item.shizi_taskid==0 && item.isread!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
                   <button class="cu-btn round  line-orange">识字</button>
                 </navigator>
 
               </wux-col>
               <wux-col span="5" offset="1">
+              
+                <button wx:if="{{item.iswrite==0}}" class="cu-btn round  line-grey disabled" style="text-decoration:line-through;">听写</button>
 
-                <navigator wx:if="{{item.tingxie_taskid!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.tingxie_taskid}}" open-type="redirect">
+                <navigator wx:if="{{item.tingxie_taskid!=0 && item.iswrite!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.tingxie_taskid}}" open-type="redirect">
                   <button class="cu-btn round  bg-green ">听写</button>
                 </navigator>
 
-                <navigator wx:if="{{item.tingxie_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=1&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
+                <navigator wx:if="{{item.tingxie_taskid==0 && item.iswrite!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=1&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
                   <button class="cu-btn round  line-green">听写</button>
                 </navigator>
 

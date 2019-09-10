@@ -68,7 +68,7 @@ Page({
       VerticalNavTop: (e.currentTarget.dataset.id - 1) * 50
     })
   },
-  
+   
   VerticalMain(e) {
     let that = this;
     let list = this.data.jiaocaiList;
