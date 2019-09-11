@@ -68,7 +68,9 @@ Page({
     tingxie_loop_time: 3,
     tingxie_ready: false,
     tingxie_ready_text: 'Ready',
-    all_play_c:null
+    all_play_c:null,
+    data_item_word: null,
+    data_item_dword: null,
   },
   onLoad: function (options) {
    
@@ -435,7 +437,7 @@ Page({
       this.setData({
         current: this.data.current  < this.data.taskdata.word1.length-1 ? this.data.current + 1 : this.data.taskdata.word1.length-1
       })
-    console.log(this.data.current)
+    // console.log(this.data.current)
   },
   changeIndicatorDots(e) {
     this.setData({
@@ -619,15 +621,25 @@ Page({
 
   },
   showModal_word_shiyi(e) {
-    let m = 'DrawerModalL_word'+this.data.current
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+    // console.log(item_word);
+    
+    // let m = 'DrawerModalL_word'+this.data.current
     this.setData({
-      modalName: m
+      modalName: 'DrawerModalL_word',
+      data_item_word: item_word,
     })
   },
   showModal_dword_shiyi(e) {
-    let m = 'DrawerModalL_dword' + this.data.current
+
+    let item_dword = this.data.taskdata.word1[this.data.current]
+    // console.log(item_dword);
+
+    // let m = 'DrawerModalL_dword' + this.data.current
     this.setData({
-      modalName: m
+      modalName: 'DrawerModalL_dword',
+      data_item_dword: item_dword,
     })
     // this.setData({
     //   modalName: e.currentTarget.dataset.target
