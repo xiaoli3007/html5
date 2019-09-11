@@ -68,6 +68,7 @@ Page({
     tingxie_loop_time: 3,
     tingxie_ready: false,
     tingxie_ready_text: 'Ready',
+    all_play_c:null
   },
   onLoad: function (options) {
    
@@ -182,6 +183,8 @@ Page({
       });
     }
 
+    
+
   },
   onReady(e) {
     // 使用 wx.createAudioContext 获取 audio 上下文 context
@@ -199,7 +202,10 @@ Page({
     //   }, 100)
     // }) 
     // console.log(this.innerAudioContext.duration);
- 
+    this.setData({
+
+      all_play_c: wx.createInnerAudioContext()
+    })
 
   },
   onShow(e) {
@@ -631,6 +637,17 @@ Page({
     this.setData({
       modalName: null
     })
+  },
+  play_any_src(e) {
+    let src = e.currentTarget.dataset.msrc
+
+    console.log(src);
+    // let innerAudioContext = wx.createInnerAudioContext()
+    // this.data.all_play_c.stop()
+    this.data.all_play_c.src = src
+    this.data.all_play_c.play()
+    // console.log(this.innerAudioContext.duration);
+    
   },
 
 })

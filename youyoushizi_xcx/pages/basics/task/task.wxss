@@ -51,3 +51,6 @@ font-size:1rem;
 	/* z-index: -1; */
 }
 .itemcontent { font-size:14px; line-height: 20px; }
+.basis-lg {
+  flex-basis: 70%;
+}
