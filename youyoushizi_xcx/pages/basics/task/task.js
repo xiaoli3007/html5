@@ -7,6 +7,9 @@ const app = getApp()
 
 Page({
   data: {
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    Custom: app.globalData.Custom,
     toptitle:'听写任务',
     taskdata: {
       "id": "01",
@@ -608,6 +611,26 @@ Page({
       url: '/pages/basics/readcheck/readcheck?taskid='+this.data.taskid,
     })
 
+  },
+  showModal_word_shiyi(e) {
+    let m = 'DrawerModalL_word'+this.data.current
+    this.setData({
+      modalName: m
+    })
+  },
+  showModal_dword_shiyi(e) {
+    let m = 'DrawerModalL_dword' + this.data.current
+    this.setData({
+      modalName: m
+    })
+    // this.setData({
+    //   modalName: e.currentTarget.dataset.target
+    // })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
   },
 
 })

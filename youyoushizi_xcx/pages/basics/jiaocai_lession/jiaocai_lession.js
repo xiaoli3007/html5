@@ -88,10 +88,10 @@ Page({
         load: false,
         jiaocaiList: list
       })
-      console.log(list)
+      // console.log(list)
     }
     let scrollTop = e.detail.scrollTop + 20;
-    console.log(scrollTop)
+    // console.log(scrollTop)
     for (let i = 0; i < list.length; i++) {
       if (scrollTop > list[i].top && scrollTop < list[i].bottom) {
         that.setData({

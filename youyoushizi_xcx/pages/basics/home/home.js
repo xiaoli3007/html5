@@ -14,14 +14,14 @@ Component({
       color: 'yellow',
       url: '/pages/basics/tasklist/tasklist',
       badge: 0,
-      name: '识字任务',
+      name: '识字',
       type: '2'
     }, {
       icon: 'service',
       color: 'olive',
         url: '/pages/basics/tasklist/tasklist',
       badge: 0,
-      name: '听写任务',
+      name: '听写',
       type: '1'
       }, {
         icon: 'brand',
