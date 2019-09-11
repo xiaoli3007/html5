@@ -62,7 +62,13 @@
                   <view wx:if="{{tingxie_text_hide}}">
                     <text class="task_sw cuIcon-emoji" style=""></text> </view>
                   <view wx:if="{{!tingxie_text_hide}}">
-                    <text class='task_dw text-center'>{{item.dw_xcx}}</text>
+                    <!-- <text class='task_dw text-center'>{{item.dw_xcx}}</text> -->
+
+                    <block wx:for="{{item.dw_xcx}}" wx:key="*this"  wx:for-item="itemsub">
+                      <text class='task_dw text-center text-red' wx:if="{{itemsub == item.sw}}" >{{itemsub}}</text> 
+                      <text class='task_dw text-center' wx:else>{{itemsub}}</text>
+                    </block> 
+                    
                   </view>
                 </view>
               </swiper-item>
@@ -71,7 +77,14 @@
                   <view wx:if="{{tingxie_text_hide}}">
                     <text class="task_sw cuIcon-emoji" style=""></text> </view>
                   <view wx:if="{{!tingxie_text_hide}}">
-                    <text class='task_lw text-left align-center'>{{item.lw_xcx}}</text>
+                    <!-- <text class='task_lw text-left align-center'>{{item.lw_xcx}}</text> -->
+
+                     <block wx:for="{{item.lw_xcx}}" wx:key="*this"  wx:for-item="itemsub">
+                      <text class='task_lw text-left text-red' wx:if="{{itemsub == item.sw}}" >{{itemsub}}</text> 
+                      <text class='task_lw text-left' wx:else>{{itemsub}}</text>
+                    </block> 
+
+
                   </view>
                 </view>
               </swiper-item>
@@ -389,11 +402,7 @@
                 <text>拼音：</text>
               </wux-col>
               <wux-col span="8">
-                <button class="cu-btn round bg-gradual-purple shadow" bindtap="audioPlay_lword">
-                  {{item.dword_show_detail.pinyin}}
-                  <view class="cuIcon-notification" style="margin-left:10px;">
-                  </view>
-                </button>
+                 {{item.dword_show_detail.pinyin}}
               </wux-col>
             </wux-row>
             <wux-white-space size="default" />
