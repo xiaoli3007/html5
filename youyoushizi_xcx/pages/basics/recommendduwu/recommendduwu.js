@@ -2,23 +2,23 @@ const app = getApp()
 Page({
   data: {
     items: [
-      {
-      type: 'radio',
-      label: 'Updated',
-      value: 'updated',
-      checked: true,
-      children: [{
-        label: 'Recently updated',
-        value: 'desc',
-        checked: true, // 默认选中
-      },
-      {
-        label: 'Least recently updated',
-        value: 'asc',
-      },
-      ],
-      groups: ['001'],
-    },
+    //   {
+    //   type: 'radio',
+    //   label: 'Updated',
+    //   value: 'updated',
+    //   checked: true,
+    //   children: [{
+    //     label: 'Recently updated',
+    //     value: 'desc',
+    //     checked: true, // 默认选中
+    //   },
+    //   {
+    //     label: 'Least recently updated',
+    //     value: 'asc',
+    //   },
+    //   ],
+    //   groups: ['001'],
+    // },
     // {
     //   type: 'text',
     //   label: 'Forks',
@@ -61,27 +61,27 @@ Page({
         ],
       },
       
-      {
-        type: 'radio',
-        label: '性别',
-        value: 'gander',
-        children: [{
-          label: '男',
-          value: '0',
-        },
-        {
-          label: '女',
-          value: '1',
-        },
-        {
-          label: '通用',
-          value: '2',
-        },
-        ],
-      },
+      // {
+      //   type: 'radio',
+      //   label: '性别',
+      //   value: 'gander',
+      //   children: [{
+      //     label: '男',
+      //     value: '0',
+      //   },
+      //   {
+      //     label: '女',
+      //     value: '1',
+      //   },
+      //   {
+      //     label: '通用',
+      //     value: '2',
+      //   },
+      //   ],
+      // },
      
       ],
-      groups: ['001', '002', '003'],
+      groups: ['003'],
     },
     ],
     StatusBar: app.globalData.StatusBar,
@@ -329,6 +329,7 @@ Page({
           params.sort = n.value
           params.order = selected
         } else if (n.value === 'stars') {
+          console.log(n)
           params.sort = n.value
           params.order = n.sort === 1 ? 'asc' : 'desc'
         } else if (n.value === 'forks') {

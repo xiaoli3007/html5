@@ -39,7 +39,7 @@
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
-      <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+      <image src='{{item.thumb_xcx}}' style="width:120rpx;" mode="widthFix">
       </image>
     
       <view class="text-sm">
@@ -65,11 +65,11 @@
     <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
         
-       <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+       <image src='{{item.thumb_xcx}}'  mode="widthFix" style="width:120rpx;">
       </image>
 
       <view class="text-sm">
-        <text class="text-grey text-left">{{item.title}}</text>
+        <text class="text-grey text-center">{{item.title}}</text>
       </view>
  
       </navigator>
@@ -92,7 +92,7 @@
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{tuijianduwuList}}" wx:key wx:if="{{index<3*2}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommenddetailed/recommenddetailed?ebookid={{item.id}}">
-       <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+       <image src='{{item.thumb_xcx}}' style="width:120rpx;" mode="widthFix">
       </image>
       <view class="text-sm">
         <text class="text-grey text-left">{{item.title}}</text>

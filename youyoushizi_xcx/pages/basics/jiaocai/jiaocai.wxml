@@ -29,7 +29,7 @@
       <!-- <cover-image src='{{item.thumb}}' class='list_image'>
       </cover-image> -->
 
-       <image src='{{item.thumb}}' class='list_image' mode="widthFix">
+       <image src='{{item.thumb}}' style="width:150rpx;" mode="widthFix">
       </image>
       <text>{{item.title}}</text>
       </navigator>

@@ -34,7 +34,7 @@
   <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{duwuList}}" wx:key >
       <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
-     <image src='{{item.thumb_xcx}}' class='list_image' mode="widthFix">
+     <image src='{{item.thumb_xcx}}' style="width:120rpx;" mode="widthFix">
       </image>
       <text>{{item.title}}</text>
       </navigator>

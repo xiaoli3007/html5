@@ -42,8 +42,8 @@ App({
 
   },
   globalData: {
-    uid: 29,
-    userid: 6, 
+    uid: null,
+    userid: null, 
     openid: '',
     spid: 0,
     xtoken: 'sdsadwerer',
