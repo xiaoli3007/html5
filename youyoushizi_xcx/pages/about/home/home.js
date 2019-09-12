@@ -5,6 +5,7 @@ Component({
     addGlobalClass: true,
   },
   data: {
+    loadModal: false,
     starCount: 0,
     forksCount: 0,
     visitTotal: 0,
@@ -71,10 +72,9 @@ Component({
     getUserInfo: function (e) {
       var userInfo = e.detail.userInfo;
       // userInfo.spid = app.globalData.spid;
-      // this.setData({
-      //   userInfo: e.detail.userInfo,
-      //   hasUserInfo: true
-      // }) 
+      this.setData({
+        loadModal: true
+      }) 
       var that = this 
       wx.login({
         success: function (res) { 
@@ -99,7 +99,8 @@ Component({
                 console.log(res);
                 that.setData({
                   userInfo: res.data.items,
-                  hasUserInfo: true
+                  hasUserInfo: true,
+                  loadModal: false,
                 })
                   
               }

@@ -244,6 +244,13 @@
   </button>
 </view>
 
+<button class="cu-btn round bg-gradual-orange shadow" bindtap="ceshiyuyin">
+    语音测试mp3
+  </button>
+  <button class="cu-btn round bg-gradual-orange shadow" bindtap="ceshiyuyin2">
+    语音测试mp4
+  </button>
+
 
 <view class='mecu-load meload-modal' wx:if="{{tingxie_ready}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->

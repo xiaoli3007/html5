@@ -309,9 +309,9 @@ Page({
         if (res.data.code === 20001) {
 
           that.showFormModal({
-            msg: '提交失败'
+            msg: res.data.message
           })
-
+          
         } else {
           that.showFormModal({
             msg: '提交成功'

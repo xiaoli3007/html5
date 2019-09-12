@@ -39,6 +39,8 @@ Page({
     duration: 1000,
     current: 0,
     src: 'https://rmsp.youyoushizi.com/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
+    ceshisrc:'http://rmsp.youyoushizi.com/course_voice/2/96/ef/96efdd4349ebac426a83730767cbf808.mp4',
+    ceshisrc2:'http://rms.youyoushizi.com:8088/downdir/baiduyuyin.mp3',
     loadModal: true,
     audiowordlist:[],
     audiodwordlist: [],
@@ -71,6 +73,9 @@ Page({
     all_play_c:null,
     data_item_word: null,
     data_item_dword: null,
+    audioword_object: null,
+    audiodword_object: null,
+    audiolword_object: null,
   },
   onLoad: function (options) {
    
@@ -117,26 +122,27 @@ Page({
         success: function (res) {
           console.log(res);
           
-          var linktemp1 = []; var linktemp2 = []; var linktemp3 = []; var konw_currenttemp = [];
-          res.data.word_data.word1.forEach(function (value, i) {
-            var innerAudioContext = null
-            innerAudioContext = wx.createInnerAudioContext()
-            innerAudioContext.src = value.sw_sound
-            linktemp1.push(innerAudioContext)
+          var linktemp1 = []; var linktemp2 = []; var linktemp3 = []; 
+          // res.data.word_data.word1.forEach(function (value, i) {
+          //   var innerAudioContext = null
+          //   innerAudioContext = wx.createInnerAudioContext()
+          //   innerAudioContext.src = value.sw_sound
+          //   linktemp1.push(innerAudioContext)
 
-            var innerAudioContext2 = null
-            innerAudioContext2 = wx.createInnerAudioContext()
-            innerAudioContext2.src = value.dw_sound
-            linktemp2.push(innerAudioContext2)
+          //   var innerAudioContext2 = null
+          //   innerAudioContext2 = wx.createInnerAudioContext()
+          //   innerAudioContext2.src = value.dw_sound
+          //   linktemp2.push(innerAudioContext2)
 
-            var innerAudioContext3 = null
-            innerAudioContext3 = wx.createInnerAudioContext()
-            innerAudioContext3.src = value.lw_sound
-            linktemp3.push(innerAudioContext3)
+          //   var innerAudioContext3 = null
+          //   innerAudioContext3 = wx.createInnerAudioContext()
+          //   innerAudioContext3.src = value.lw_sound
+          //   linktemp3.push(innerAudioContext3)
 
-            //console.log( value);
-          })
+          //   //console.log( value);
+          // })
 
+          var konw_currenttemp = [];
           res.data.word_data.task_word_data_items.forEach(function (value, i) {
             // console.log(value);
             let wstatus = value.status == '0'?20:value.status =='1'?0:1
@@ -206,7 +212,11 @@ Page({
     // console.log(this.innerAudioContext.duration);
     this.setData({
 
-      all_play_c: wx.createInnerAudioContext()
+      all_play_c: wx.createInnerAudioContext(),
+      audioword_object: wx.createInnerAudioContext(),
+      audiodword_object: wx.createInnerAudioContext(),
+      audiolword_object: wx.createInnerAudioContext(),
+
     })
 
   },
@@ -475,32 +485,60 @@ Page({
     // this.data.audiolwordlist[this.data.current].stop()
   },
   audioPlay_word() {
-    // console.log(this.data.current)
-    this.audioPlay_allstop()
+    // 
+    // this.audioPlay_allstop()
  
     this.setData({
       subcurrent: 0,
       tabkey: this.data.tabs[0].key
     })
     
-    this.data.audiowordlist[this.data.current].play()
+    // this.data.audiowordlist[this.data.current].play()
+
+    let item_word_src = this.data.taskdata.word1[this.data.current].sw_sound
+
+    this.data.audiolword_object.stop()
+    this.data.audiodword_object.stop()
+    this.data.audioword_object.stop()
+    this.data.audioword_object.src = item_word_src
+    this.data.audioword_object.play()
+
+    
+    // console.log(item_word_src)
+    // console.log(item_dword_src)
+    // console.log(item_lword_src)
+
   },
   audioPlay_dword() {
-    this.audioPlay_allstop()
+    // this.audioPlay_allstop()
     this.setData({
       subcurrent: 1,
       tabkey: this.data.tabs[1].key
     })
-    console.log(this.data.tabkey)
-    this.data.audiodwordlist[this.data.current].play()
+    // console.log(this.data.tabkey)
+    // this.data.audiodwordlist[this.data.current].play()
+    let item_dword_src = this.data.taskdata.word1[this.data.current].dw_sound
+
+    this.data.audiolword_object.stop()
+    this.data.audiodword_object.stop()
+    this.data.audioword_object.stop()
+    this.data.audiodword_object.src = item_dword_src
+    this.data.audiodword_object.play()
   },
   audioPlay_lword() {
-     this.audioPlay_allstop()
+    //  this.audioPlay_allstop()
     this.setData({
       subcurrent: 2,
       tabkey: this.data.tabs[2].key
     })
-    this.data.audiolwordlist[this.data.current].play()
+    // this.data.audiolwordlist[this.data.current].play()
+    let item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
+
+    this.data.audiolword_object.stop()
+    this.data.audiodword_object.stop()
+    this.data.audioword_object.stop()
+    this.data.audiolword_object.src = item_lword_src
+    this.data.audiolword_object.play()
   },
   onChangesegmented(e) {
     // console.log(e.detail.key)
@@ -660,6 +698,58 @@ Page({
     this.data.all_play_c.play()
     // console.log(this.innerAudioContext.duration);
     
+  },
+  ceshiyuyin(e){
+
+    let innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放startTime-' + innerAudioContext.startTime)
+      console.log('开始播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })
+    innerAudioContext.onEnded((res) => {
+      console.log('结束播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onWaiting((res) => {
+      console.log('onWaiting播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onSeeking((res) => {
+      console.log('onSeeking播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.stop()
+    // innerAudioContext.destroy()
+    innerAudioContext.src = this.data.ceshisrc2
+    innerAudioContext.play()
+
+  },
+  ceshiyuyin2(e) {
+
+    let innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放startTime-' + innerAudioContext.startTime)
+      console.log('开始播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })
+    innerAudioContext.onEnded((res) => {
+      console.log('结束播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onWaiting((res) => {
+      console.log('onWaiting播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onSeeking((res) => {
+      console.log('onSeeking播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.stop()
+    // innerAudioContext.destroy()
+    innerAudioContext.src = this.data.ceshisrc
+    innerAudioContext.play()
+
   },
 
 })
