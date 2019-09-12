@@ -457,10 +457,14 @@ Page({
     //  secondIAC.loop = false 
     //  secondIAC.obeyMuteSwitch = false
       secondIAC.onError(() => {
-        wx.showToast({
-            icon: 'none',
-            title: '加载失败',
-          })
+        // wx.showToast({
+        //     icon: 'none',
+        //     title: '加载失败',
+        //   })
+        that.setData({
+          tingxie_loading_text: '加载语音失败...',
+        })
+
         })
     
       let times = 0
