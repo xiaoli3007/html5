@@ -244,14 +244,29 @@
   </button>
 </view>
 
-<button class="cu-btn round bg-gradual-orange shadow" bindtap="ceshiyuyin">
+<!-- <button class="cu-btn round bg-gradual-orange shadow" bindtap="ceshiyuyin">
     语音测试mp3
-  </button>
-  <button class="cu-btn round bg-gradual-orange shadow" bindtap="ceshiyuyin2">
-    语音测试mp4
-  </button>
+  </button> -->
 
 
+ <wux-divider wx:if="{{tingxie_auto}}">
+        	<view class="loadmore">
+        		<!-- <view class="loading"></view> -->
+        		<text class="text">{{tingxie_loading_text}}</text>
+        	</view>
+        </wux-divider>
+
+
+
+   <wux-divider wx:if="{{button_loading_auto}}">
+        	<view class="loadmore">
+        		<!-- <view class="loading"></view> -->
+        		<text class="text">{{button_loading_text}}</text>
+        	</view>
+        </wux-divider>
+
+
+ 
 <view class='mecu-load meload-modal' wx:if="{{tingxie_ready}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <view class='text-yellow text-shadow'>{{tingxie_ready_text}}</view>

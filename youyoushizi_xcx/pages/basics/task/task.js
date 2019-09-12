@@ -40,7 +40,6 @@ Page({
     current: 0,
     src: 'https://rmsp.youyoushizi.com/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
     ceshisrc:'http://rmsp.youyoushizi.com/course_voice/2/96/ef/96efdd4349ebac426a83730767cbf808.mp4',
-    ceshisrc2:'http://rms.youyoushizi.com:8088/downdir/baiduyuyin.mp3',
     loadModal: true,
     audiowordlist:[],
     audiodwordlist: [],
@@ -76,6 +75,9 @@ Page({
     audioword_object: null,
     audiodword_object: null,
     audiolword_object: null,
+    tingxie_loading_text: '',
+    button_loading_text: '',
+    button_loading_auto:false,
   },
   onLoad: function (options) {
    
@@ -218,6 +220,81 @@ Page({
       audiolword_object: wx.createInnerAudioContext(),
 
     })
+    var that = this 
+    this.data.audioword_object.onError(() => {
+      that.setData({
+        button_loading_text: '加载语音失败！',
+        button_loading_auto:true
+      })
+    })
+    this.data.audioword_object.onWaiting(() => {
+      that.setData({
+        button_loading_text: '加载语音...',
+        button_loading_auto: true
+      })
+    })
+    this.data.audioword_object.onPlay(() => {
+        that.setData({
+          button_loading_text: '播放语音中...',
+          button_loading_auto: true
+        })
+    })
+    this.data.audioword_object.onEnded(() => {
+        that.setData({
+          button_loading_text: '播放结束...',
+          button_loading_auto: false
+        })
+    })
+  //============================================================
+    this.data.audiodword_object.onError(() => {
+      that.setData({
+        button_loading_text: '加载语音失败！',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiodword_object.onWaiting(() => {
+      that.setData({
+        button_loading_text: '加载语音...',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiodword_object.onPlay(() => {
+      that.setData({
+        button_loading_text: '播放语音中...',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiodword_object.onEnded(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false
+      })
+    })
+  //==============================================================
+    this.data.audiolword_object.onError(() => {
+      that.setData({
+        button_loading_text: '加载语音失败！',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiolword_object.onWaiting(() => {
+      that.setData({
+        button_loading_text: '加载语音...',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiolword_object.onPlay(() => {
+      that.setData({
+        button_loading_text: '播放语音中...',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiolword_object.onEnded(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false
+      })
+    })
 
   },
   onShow(e) {
@@ -283,6 +360,7 @@ Page({
       setTimeout(function () {
         that.setData({
           tingxie_ready: false,
+          
         })
       }, 1000)
     }, 2000)
@@ -375,7 +453,8 @@ Page({
 
       var that = this
     
-    //  secondIAC.loop = false
+    
+    //  secondIAC.loop = false 
     //  secondIAC.obeyMuteSwitch = false
       secondIAC.onError(() => {
         wx.showToast({
@@ -383,11 +462,21 @@ Page({
             title: '加载失败',
           })
         })
+    
       let times = 0
+     secondIAC.onWaiting(() => {
+       console.log("加载语音" + index)
+       that.setData({
+         tingxie_loading_text: '加载语音...',
+       })
+     })
       secondIAC.onPlay(() => {
         console.log("播放onPlay" + index + '几次' + times)
-
+        
         if (this.data.tingxie_auto) {
+          that.setData({
+            tingxie_loading_text: '播放语音中...',
+          })
           times++
         }else{
           secondIAC.destroy()
@@ -399,6 +488,9 @@ Page({
           if (times === maxtimes) {
             secondIAC.destroy()
             // secondIAC.stop()
+            that.setData({
+              tingxie_loading_text: '播放结束，准备播放下一个...',
+            })
             setTimeout(function () {
               that.tingxie_loop() //进入下一个
             }, timer * 1000)
@@ -406,6 +498,9 @@ Page({
 
             // secondIAC.seek(0)
             if (this.data.tingxie_auto) {
+              that.setData({
+                tingxie_loading_text: '播放结束...',
+              })
               setTimeout(function () {
                 secondIAC.play()
               }, timer * 1000)
@@ -487,14 +582,11 @@ Page({
   audioPlay_word() {
     // 
     // this.audioPlay_allstop()
- 
     this.setData({
       subcurrent: 0,
       tabkey: this.data.tabs[0].key
     })
-    
     // this.data.audiowordlist[this.data.current].play()
-
     let item_word_src = this.data.taskdata.word1[this.data.current].sw_sound
 
     this.data.audiolword_object.stop()
@@ -502,12 +594,6 @@ Page({
     this.data.audioword_object.stop()
     this.data.audioword_object.src = item_word_src
     this.data.audioword_object.play()
-
-    
-    // console.log(item_word_src)
-    // console.log(item_dword_src)
-    // console.log(item_lword_src)
-
   },
   audioPlay_dword() {
     // this.audioPlay_allstop()
@@ -725,31 +811,7 @@ Page({
     innerAudioContext.play()
 
   },
-  ceshiyuyin2(e) {
-
-    let innerAudioContext = wx.createInnerAudioContext()
-    innerAudioContext.onPlay(() => {
-      console.log('开始播放startTime-' + innerAudioContext.startTime)
-      console.log('开始播放currentTime-' + innerAudioContext.currentTime)
-    })
-    innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
-    innerAudioContext.onEnded((res) => {
-      console.log('结束播放currentTime-' + innerAudioContext.currentTime)
-    })
-    innerAudioContext.onWaiting((res) => {
-      console.log('onWaiting播放currentTime-' + innerAudioContext.currentTime)
-    })
-    innerAudioContext.onSeeking((res) => {
-      console.log('onSeeking播放currentTime-' + innerAudioContext.currentTime)
-    })
-    innerAudioContext.stop()
-    // innerAudioContext.destroy()
-    innerAudioContext.src = this.data.ceshisrc
-    innerAudioContext.play()
-
-  },
+ 
+  
 
 })
