@@ -1,9 +1,13 @@
 
 <scroll-view scroll-y class="scrollPage">
   <view class="UCenter-bg">
-    <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}}" class="png" mode="widthFix"></image>
-    <view class="text-xl">{{userInfo.nickName?userInfo.nickName:'xx'}}
-      <text class="text-df"> </text>
+    <!-- <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}}" class="png" mode="widthFix"></image> -->
+
+    <view class="cu-avatar xl round" style="background-image:url({{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}});"></view>
+
+
+    <view class="text-xl">
+      <text class="text-df"> {{userInfo.nickName?userInfo.nickName:'xx'}}</text>
     </view>
 <view class="text-xl">
      <button wx:if="{{!userInfo.avatarUrl}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-btn"> 登录 </button>
@@ -14,16 +18,32 @@
     <image src="https://rmsp.youyoushizi.com/statics/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
   
-
+ 
  
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
  
  <view class="cu-item arrow">
       <navigator class="content" url="/pages/about/account/account" hover-class="none">
         <text class="cuIcon-friendfavor text-cyan"></text>
-        <text class="text-grey">账号管理</text>
+        <text class="text-grey">用户管理</text>
       </navigator>
     </view>
+
+   <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+        <text class="cuIcon-notice text-cyan"></text>
+        <text class="text-grey">系统消息</text>
+      </navigator>
+    </view>
+
+     <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+        <text class="cuIcon-edit text-cyan"></text>
+        <text class="text-grey">缺书登记</text>
+      </navigator>
+    </view>
+
+
 
     <view class="cu-item arrow">
       <navigator class="content" url="/pages/about/about/about" hover-class="none">

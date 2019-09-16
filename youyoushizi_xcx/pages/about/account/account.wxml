@@ -1,13 +1,13 @@
-<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">账号管理</view></cu-custom>
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">用户管理</view></cu-custom>
 
 
   <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> 账号列表
+      <text class="cuIcon-title text-orange "></text> 用户列表
     </view>
     <view class="action">
       <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="Dialogadduser">
-      添加账号</button>
+      添加用户</button>
     </view>
   </view>
 
@@ -125,7 +125,7 @@
   <view class="cu-modal {{modalName=='Dialogadduser'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
-      <view class="content">添加账号</view>
+      <view class="content">添加用户</view>
       <view class="action" bindtap="hideModal">
         <text class="cuIcon-close text-red"></text>
       </view>

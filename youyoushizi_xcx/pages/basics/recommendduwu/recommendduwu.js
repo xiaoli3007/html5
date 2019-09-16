@@ -19,15 +19,15 @@ Page({
     //   ],
     //   groups: ['001'],
     // },
-    // {
-    //   type: 'text',
-    //   label: 'Forks',
-    //   value: 'forks',
-    //   groups: ['002'],
-    // },
+    {
+      type: 'text',
+      label: '热度',
+      value: 'forks',
+      groups: ['002'],
+    },
     {
       type: 'sort',
-      label: '访问量',
+      label: '篇幅',
       value: 'stars',
       groups: ['003'],
     },

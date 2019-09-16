@@ -21,7 +21,7 @@
     </view>
   </view>
 
-  <view class="cu-list grid col-3">
+  <view class="cu-list grid col-2">
     <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList[TabCur].items}}" wx:key >
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
       <!-- <cover-image src='/images/IMG_1574.jpg' class='list_image'>

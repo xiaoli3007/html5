@@ -72,12 +72,14 @@ Component({
 
           var tprice = 'iconList[0].badge'
           var tprice2 = 'iconList[1].badge'
+          var tprice3 = 'iconList[2].badge'
           that.setData({
             [tprice]: res.data.shizi_nums,
-            [tprice2]: res.data.tingxie_nums
+            [tprice2]: res.data.tingxie_nums,
+            [tprice3]: res.data.fuxi_nums,
           })
           
-          
+           
         },
         complete(res) {
           //console.log(res.statusCode)
