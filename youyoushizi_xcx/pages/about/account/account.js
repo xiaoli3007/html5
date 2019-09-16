@@ -128,7 +128,7 @@ Page({
           },
           success: function (res) {
             console.log(res);
-            
+            app.globalData.username = res.data.username;
           }
         });
 

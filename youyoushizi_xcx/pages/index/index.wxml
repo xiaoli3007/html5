@@ -14,6 +14,11 @@
     <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">学习</view>
   </view>
 
+   <view class="action text-gray add-action">
+      <button class="cu-btn cuIcon-scan bg-green shadow" bindtap="scanCode"></button>
+       
+    </view>
+
   <view class="action" bindtap="NavChange" data-cur="about">
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>

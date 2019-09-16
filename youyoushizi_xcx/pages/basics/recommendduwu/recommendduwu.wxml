@@ -16,39 +16,40 @@
 <view class="cu-bar search bg-white">
     <view class="search-form round">
       <text class="cuIcon-search"></text>
-      <input type="text" placeholder="图书标题或作者" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}'></input>
+      <input type="text" placeholder="图书标题或作者" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}' bindconfirm="search_keyword"></input>
     </view>
     <view class="action">
-      <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button>
+      <!-- <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button> -->
+
+       <text class="cuIcon-scan lg text-gray" bindtap="scanCode"></text>
+
     </view>
   </view>
 
-  <!-- <wux-filterbar items="{{ items }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> -->
+  <wux-filterbar items="{{ items }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> 
 
-<block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
+<!-- <block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
 	<view class="cu-form-group">
 		<view class="title">{{item.title}}</view>
-		<!-- <picker bindchange="PickerChange" value="{{selectindex}}" range="{{nianji_select}}"> -->
 
      <picker mode="selector" bindchange="MultiSigleChange" data-valkey="{{cindex}}"  value="{{multisigleIndex[cindex]}}" range="{{item.sub}}">
 
 			<view class="picker">
-      <!-- 点击选择 -->
 				{{list_select_name[cindex]?list_select_name[cindex]:'点击选择'}}
 			</view>
 		</picker>
 	</view>
-</block>
+</block> -->
   
 
-  <view class="cu-bar bg-white solid-bottom margin-top">
+  <!-- <view class="cu-bar bg-white solid-bottom margin-top">
     <view class="action">
       <text class="cuIcon-title text-orange ">推荐读物</text> 
     </view>
     <view class="action">
      
     </view>
-  </view>
+  </view> -->
 
 <view class="cu-card article no-card">
   <view class="cu-item shadow" wx:for="{{duwuList}}" wx:key>
@@ -56,7 +57,7 @@
       <view class="text-cut">{{item.program.title}}</view>
     </view>
 
-     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommenddetailed/recommenddetailed?ebookid={{item.program.id}}">
+     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.program.id}}">
     <view class="content">
       <image src="{{item.program.thumb_xcx}}" mode="widthFix"></image>
       <view class="desc">

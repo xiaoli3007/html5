@@ -78,6 +78,7 @@ Page({
     tingxie_loading_text: '',
     button_loading_text: '',
     button_loading_auto:false,
+    button_global_src: '',
   },
   onLoad: function (options) {
    
@@ -236,14 +237,23 @@ Page({
     this.data.audioword_object.onPlay(() => {
         that.setData({
           button_loading_text: '播放语音中...',
-          button_loading_auto: true
+          button_loading_auto: true,
+          button_global_src: that.data.audioword_object.src
         })
     })
     this.data.audioword_object.onEnded(() => {
         that.setData({
           button_loading_text: '播放结束...',
-          button_loading_auto: false
+          button_loading_auto: false,
+          button_global_src: ''
         })
+    })
+    this.data.audioword_object.onStop(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false,
+        button_global_src: ''
+      })
     })
   //============================================================
     this.data.audiodword_object.onError(() => {
@@ -259,15 +269,25 @@ Page({
       })
     })
     this.data.audiodword_object.onPlay(() => {
+      
       that.setData({
         button_loading_text: '播放语音中...',
-        button_loading_auto: true
+        button_loading_auto: true,
+        button_global_src: that.data.audiodword_object.src
       })
     })
     this.data.audiodword_object.onEnded(() => {
       that.setData({
         button_loading_text: '播放结束...',
-        button_loading_auto: false
+        button_loading_auto: false,
+        button_global_src: ''
+      })
+    })
+    this.data.audiodword_object.onStop(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false,
+        button_global_src: ''
       })
     })
   //==============================================================
@@ -284,15 +304,25 @@ Page({
       })
     })
     this.data.audiolword_object.onPlay(() => {
+      // console.log(that.data.audiolword_object.src)
       that.setData({
         button_loading_text: '播放语音中...',
-        button_loading_auto: true
+        button_loading_auto: true,
+        button_global_src: that.data.audiolword_object.src
       })
     })
     this.data.audiolword_object.onEnded(() => {
       that.setData({
         button_loading_text: '播放结束...',
-        button_loading_auto: false
+        button_loading_auto: false,
+        button_global_src: ''
+      })
+    })
+    this.data.audiolword_object.onStop(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false,
+        button_global_src: ''
       })
     })
 
@@ -595,9 +625,14 @@ Page({
 
     this.data.audiolword_object.stop()
     this.data.audiodword_object.stop()
-    this.data.audioword_object.stop()
-    this.data.audioword_object.src = item_word_src
-    this.data.audioword_object.play()
+    // this.data.audioword_object.stop()
+    
+    if (this.data.button_global_src == item_word_src) {
+      this.data.audioword_object.stop()
+    } else {
+      this.data.audioword_object.src = item_word_src
+      this.data.audioword_object.play()
+    }
   },
   audioPlay_dword() {
     // this.audioPlay_allstop()
@@ -605,15 +640,21 @@ Page({
       subcurrent: 1,
       tabkey: this.data.tabs[1].key
     })
-    // console.log(this.data.tabkey)
+    
     // this.data.audiodwordlist[this.data.current].play()
     let item_dword_src = this.data.taskdata.word1[this.data.current].dw_sound
 
     this.data.audiolword_object.stop()
-    this.data.audiodword_object.stop()
+    // this.data.audiodword_object.stop()
     this.data.audioword_object.stop()
-    this.data.audiodword_object.src = item_dword_src
-    this.data.audiodword_object.play()
+
+    if (this.data.button_global_src == item_dword_src) {
+      this.data.audiodword_object.stop()
+    } else {
+      this.data.audiodword_object.src = item_dword_src
+      this.data.audiodword_object.play()
+    }
+    
   },
   audioPlay_lword() {
     //  this.audioPlay_allstop()
@@ -621,14 +662,20 @@ Page({
       subcurrent: 2,
       tabkey: this.data.tabs[2].key
     })
+    console.log(this.data.button_global_src)
     // this.data.audiolwordlist[this.data.current].play()
     let item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
-
-    this.data.audiolword_object.stop()
+    
+    
     this.data.audiodword_object.stop()
     this.data.audioword_object.stop()
-    this.data.audiolword_object.src = item_lword_src
-    this.data.audiolword_object.play()
+    if (this.data.button_global_src == item_lword_src) {
+      this.data.audiolword_object.stop()
+    } else {
+      this.data.audiolword_object.src = item_lword_src
+      this.data.audiolword_object.play()
+    }
+    
   },
   onChangesegmented(e) {
     // console.log(e.detail.key)

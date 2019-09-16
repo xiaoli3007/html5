@@ -27,7 +27,7 @@ Page({
     // },
     {
       type: 'sort',
-      label: 'Stars',
+      label: '访问量',
       value: 'stars',
       groups: ['003'],
     },
@@ -389,4 +389,24 @@ Page({
    */
   noop() { },
 
+  scanCode() {
+    // this.setData({ msg: 'Hello World' })
+    wx.scanCode({
+      onlyFromCamera: true,
+      success(res) {
+        wx.showToast({
+          title: '结果:' + res.result,
+          icon: 'none',
+          duration: 1500,
+        })
+        console.log(res)
+      },
+      fail(res) {
+        console.log(res)
+      },
+      complete(res) {
+        console.log(res)
+      }
+    })
+  },
 })

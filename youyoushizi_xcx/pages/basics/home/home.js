@@ -33,19 +33,19 @@ Component({
       }],
     gridCol: 3,
     skin: false,
-    gridBorder: false
+    gridBorder: false,
+    username:'我'
 
   },
   lifetimes: {
     attached: function () {
       //wx.clearStorage()
       // 在组件实例进入页面节点树时执行
-      // if (app.globalData.userInfo) {
-      //   this.setData({
-      //     userInfo: app.globalData.userInfo,
-      //     hasUserInfo: true
-      //   })
-      // }
+      if (app.globalData.username) {
+        this.setData({
+          username: app.globalData.username,
+        })
+      }
 
       var that = this
       //加载首页的教材和 课外读物
@@ -66,7 +66,7 @@ Component({
             
             kewaiduwuList: res.data.items.duwu,
             jiaocaiList: res.data.items.jiaocai,
-            tuijianduwuList: res.data.items.tuijian_duwu,
+            // tuijianduwuList: res.data.items.tuijian_duwu,
             
           })
 

@@ -2,7 +2,7 @@
 
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> 我的任务
+      <text class="cuIcon-title text-orange "></text> {{username}}的任务
     </view>
     <view class="action">
       <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
@@ -31,7 +31,8 @@
     </view>
     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
     <view class="action">
-      <button class="cu-btn bg-green shadow" >更多</button>
+      <!-- <button class="cu-btn bg-green shadow" >更多</button> -->
+      <text class="cuIcon-more lg text-gray"></text>
     </view>
      </navigator>
   </view>
@@ -54,9 +55,10 @@
     <view class="action">
       <text class="cuIcon-title text-orange "></text> 课外读物
     </view>
-    <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/duwu/duwu">
+    <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommendduwu/recommendduwu">
     <view class="action">
-      <button class="cu-btn bg-green shadow" >更多</button>
+      <!-- <button class="cu-btn bg-green shadow" >更多</button> -->
+      <text class="cuIcon-more lg text-gray"></text>
     </view>
      </navigator>
   </view>
@@ -78,7 +80,7 @@
 
 
 
-  <view class="cu-bar bg-white solid-bottom ">
+  <!-- <view class="cu-bar bg-white solid-bottom ">
     <view class="action text-red">
       <text class="cuIcon-title text-red "></text> 推荐读物
     </view>
@@ -100,7 +102,7 @@
  
       </navigator>
     </view>
-  </view>
+  </view> -->
 
 
   <view class='cu-tabbar-height'></view>
