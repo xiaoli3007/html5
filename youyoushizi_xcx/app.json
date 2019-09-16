@@ -13,6 +13,8 @@
     "pages/basics/recommendduwu/recommendduwu",
     "pages/basics/recommenddetailed/recommenddetailed",
     "pages/about/about/about",
+    "pages/about/message/message",
+    "pages/about/regbook/regbook",
     "pages/about/log/log",
     "pages/about/test/list",
     "pages/about/test/filter",

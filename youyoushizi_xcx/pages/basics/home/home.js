@@ -2,7 +2,7 @@ const app = getApp()
 Component({
   options: {
     addGlobalClass: true,
-  }, 
+  },       
   data: {
     TabCur: 0,
     scrollLeft: 0,

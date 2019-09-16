@@ -30,14 +30,14 @@
     </view>
 
    <view class="cu-item arrow">
-      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+      <navigator class="content" url="/pages/about/message/message" hover-class="none">
         <text class="cuIcon-notice text-cyan"></text>
         <text class="text-grey">系统消息</text>
       </navigator>
     </view>
 
      <view class="cu-item arrow">
-      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+      <navigator class="content" url="/pages/about/regbook/regbook" hover-class="none">
         <text class="cuIcon-edit text-cyan"></text>
         <text class="text-grey">缺书登记</text>
       </navigator>
