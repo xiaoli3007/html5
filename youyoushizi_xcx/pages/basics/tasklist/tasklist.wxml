@@ -26,7 +26,7 @@
 <block wx:if="{{TabCur==mindex}}" wx:for="{{tabNav}}" wx:for-index="mindex" wx:key>
 <view class="cu-list menu ">
   <block wx:for="{{task_list}}" wx:key>
-    <view class="cu-item ">
+    <view class="cu-item margin-top">
 
       <view class="content">
         <view class="text-black">

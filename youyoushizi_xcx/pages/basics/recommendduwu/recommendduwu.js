@@ -1,88 +1,87 @@
 const app = getApp()
 Page({
   data: {
-    items: [
-    //   {
-    //   type: 'radio',
-    //   label: 'Updated',
-    //   value: 'updated',
-    //   checked: true,
-    //   children: [{
-    //     label: 'Recently updated',
-    //     value: 'desc',
-    //     checked: true, // 默认选中
-    //   },
-    //   {
-    //     label: 'Least recently updated',
-    //     value: 'asc',
-    //   },
-    //   ],
-    //   groups: ['001'],
-    // },
-    {
-      type: 'text',
-      label: '热度',
-      value: 'forks',
-      groups: ['002'],
-    },
-    {
-      type: 'sort',
-      label: '篇幅',
-      value: 'stars',
-      groups: ['003'],
-    },
-    {
-      type: 'filter',
-      label: '筛选',
-      value: 'filter',
-      checked: true,
-      children: [
-      {
-        type: 'checkbox',
-        label: 'Query（复选）',
-        value: 'query',
-        children: [{
-          label: 'Angular',
-          value: 'angular',
-        },
-        {
-          label: 'Vue',
-          value: 'vue',
-        },
-        {
-          label: 'React',
-          value: 'react',
-          checked: true, // 默认选中
-        },
-        {
-          label: 'Avalon',
-          value: 'avalon',
-        },
-        ],
-      },
-      
-      // {
+    searchitems: [
+      //   {
       //   type: 'radio',
-      //   label: '性别',
-      //   value: 'gander',
+      //   label: 'Updated',
+      //   value: 'updated',
+      //   checked: true,
       //   children: [{
-      //     label: '男',
-      //     value: '0',
+      //     label: 'Recently updated',
+      //     value: 'desc',
+      //     checked: true, // 默认选中
       //   },
       //   {
-      //     label: '女',
-      //     value: '1',
-      //   },
-      //   {
-      //     label: '通用',
-      //     value: '2',
+      //     label: 'Least recently updated',
+      //     value: 'asc',
       //   },
       //   ],
+      //   groups: ['001'],
       // },
-     
-      ],
-      groups: ['003'],
-    },
+      {
+        type: 'text',
+        label: '热度',
+        value: 'task_nums',
+        groups: ['002'],
+      },
+      {
+        type: 'sort',
+        label: '篇幅',
+        value: 'length',
+        groups: ['003'],
+      },
+      {
+        type: 'filter',
+        label: '筛选',
+        value: 'filter',
+        checked: true,
+        children: [{
+            type: 'checkbox',
+            label: 'Query（复选）',
+            value: 'query',
+            children: [{
+                label: 'Angular',
+                value: 'angular',
+              },
+              {
+                label: 'Vue',
+                value: 'vue',
+              },
+              {
+                label: 'React',
+                value: 'react',
+                checked: true, // 默认选中
+              },
+              {
+                label: 'Avalon',
+                value: 'avalon',
+              },
+            ],
+          },
+
+          // {
+          //   type: 'radio',
+          //   label: '性别',
+          //   value: 'gander',
+          //   children: [{
+          //     label: '男',
+          //     value: '0',
+          //   },
+          //   {
+          //     label: '女',
+          //     value: '1',
+          //   },
+          //   {
+          //     label: '通用',
+          //     value: '2',
+          //   },
+          //   ],
+          // },
+
+        ],
+        groups: ['002', '003'],
+      },
     ],
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
@@ -100,30 +99,35 @@ Page({
     Inputdisabled: false, //搜索按钮的  置灰状态
     list_select_name: [],
     categoryArray: [],
-    multisigleIndex : [], 
-    list_select_value: [], 
+    multisigleIndex: [],
+    list_select_value: [],
   },
   onLoad() {
     let that = this;
     //加载联动
 
     wx.request({
-      url: app.globalData.url + '?act=ebook_recommend_search_cat',
-      data: {
-      },
+      url: app.globalData.url + '?act=ebook_recommend_search_cat_bar',
+      data: {},
       header: {
         'content-type': 'application/json', // 默认值
         'X-Token': app.globalData.xtoken
       },
       success(res) {
 
-        console.log(res.data)
+        console.log(res.data.items)
+        // that.setData({
+        //   categoryArray: res.data.search_linkage_list_xcx,
+        //   multisigleIndex: res.data.search_linkage_list_xcx_default,
+        //   list_select_name: res.data.search_linkage_list_xcx_default
+
+        // })
+        var tprice = 'searchitems[2].children'
         that.setData({
-          categoryArray: res.data.search_linkage_list_xcx,
-          multisigleIndex: res.data.search_linkage_list_xcx_default,
-          list_select_name: res.data.search_linkage_list_xcx_default
-          
+          [tprice]: res.data.items,
         })
+
+        // console.log(that.data.searchitems)
       }
     })
 
@@ -185,10 +189,10 @@ Page({
     console.log(cname); //具体的数值
 
     let c = this.data.categoryArray[k].prefix[e.detail.value] + "";
-    
+
     console.log(c); //具体的数值
 
-    var tprice = 'multisigleIndex['+k+']'
+    var tprice = 'multisigleIndex[' + k + ']'
     var tprice2 = 'list_select_name[' + k + ']'
     var tprice3 = 'list_select_value[' + k + ']'
     this.setData({
@@ -196,8 +200,8 @@ Page({
       [tprice2]: cname,
       [tprice3]: c,
     })
-    
-    
+
+
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -272,6 +276,7 @@ Page({
     this.setData({
       isLoad: false,
       isend: false,
+      loadModal:true
     })
     // 页数+1
     this.setData({
@@ -302,49 +307,55 @@ Page({
           that.setData({
             duwuList: res.data.items
           })
-        }else{
+        } else {
           that.setData({
             duwuList: [],
             isLoad: true,
           })
         }
+      }, complete(res) {
+        
+        that.setData({
+          loadModal: false
+        })
       }
     })
   },
   //一下是 筛选框===========================
   onChange(e) {
-    console.log(e.detail)
-    const { checkedItems, items, checkedValues } = e.detail
+    // console.log(e.detail)
+    const {
+      checkedItems,
+      items,
+      checkedValues
+    } = e.detail
     const params = {}
 
-    console.log(checkedItems)
-    console.log(items)
-    console.log(checkedValues)
-    // console.log(checkedItems, items, checkedValues)
+    // console.log(checkedItems)
+    // console.log(items)
+    // console.log(checkedValues)
+    checkedValues.forEach((n, i) => {
 
-    checkedItems.forEach((n) => {
-      if (n.checked) {
-        if (n.value === 'updated') {
-          const selected = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
-          params.sort = n.value
-          params.order = selected
-        } else if (n.value === 'stars') {
-          console.log(n)
-          params.sort = n.value
-          params.order = n.sort === 1 ? 'asc' : 'desc'
-        } else if (n.value === 'forks') {
-          params.sort = n.value
-        } else if (n.value === 'filter') {
-          n.children.filter((n) => n.selected).forEach((n) => {
-            if (n.value === 'language') {
-              const selected = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
-              params.language = selected
-            } else if (n.value === 'query') {
-              const selected = n.children.filter((n) => n.checked).map((n) => n.value).join(' ')
-              params.query = selected
-            }
-          })
+      if (i == 0) {
+        params.text = n
+      } else if (i == 1) {
+        if (n) {
+          params.sort = {
+            sort: 'task_nums',
+            order: n === 1 ? 'asc' : 'desc'
+          }
         }
+
+      } else if (i == 2) {
+        let arr = []
+        n.forEach((n2) => {
+          n2.forEach((n3) => {
+            // console.log(n3)
+            arr.push(n3)
+          })
+        })
+        // console.log(arr)
+        params.linkages = arr
       }
     })
 
@@ -353,41 +364,35 @@ Page({
     this.getRepos(params)
   },
   getRepos(params = {}) {
-    const language = params.language || 'javascript'
-    const query = params.query || 'react'
-    const q = `${query}+language:${language}`
-    const data = Object.assign({
-      q,
-      order: 'desc',
-    }, params)
-
-    // wx.showLoading()
-    // wx.request({
-    //   url: `https://api.github.com/search/repositories`,
-    //   data,
-    //   success: (res) => {
-    //     console.log(res)
-
-    //     wx.hideLoading()
+    var that = this;
+    this.setData({
+      list_select_value: params.linkages,
+    })
+    setTimeout(function() {
+      that.search_keyword()
+    }, 500)
 
     //     this.setData({
     //       repos: res.data.items.map((n) => Object.assign({}, n, {
     //         date: n.created_at.substr(0, 7),
     //       })),
     //     })
-    //   },
-    // })
+
   },
   onOpen(e) {
-    this.setData({ opened: true })
+    this.setData({
+      opened: true
+    })
   },
   onClose(e) {
-    this.setData({ opened: false })
+    this.setData({
+      opened: false
+    })
   },
   /**
    * 阻止触摸移动
    */
-  noop() { },
+  noop() {},
 
   scanCode() {
     // this.setData({ msg: 'Hello World' })

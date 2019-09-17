@@ -101,5 +101,13 @@ Page({
         return false
       }
     }
-  }
+  },
+  showToast_help(e) {
+      wx.showToast({
+        title: '没有',
+        icon: 'none',
+        duration: 1500,
+      })
+  },
+
 })

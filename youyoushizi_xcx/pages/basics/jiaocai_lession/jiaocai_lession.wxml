@@ -70,10 +70,17 @@
               </wux-col>
 
               <wux-col span="5" offset="1">
-                 <view class="text-center text-xs"><text class="text-purple">已学习</text></view>
+                 <view class="text-center text-xs">
+                 <text class="text-purple" wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}">已学习</text>           
+                 <text class="text-gray" wx:if="{{item.shizi_taskid==0 && item.isread!=0}}">未学习</text>
+
+                 </view>
                </wux-col>
                 <wux-col span="5" offset="1">
-                <view class="text-center text-xs"><text class="text-gray">未学习</text></view>
+                <view class="text-center text-xs">
+                 <text class="text-purple" wx:if="{{item.tingxie_taskid!=0 && item.iswrite!=0}}">已学习</text>           
+                 <text class="text-gray" wx:if="{{item.tingxie_taskid==0 && item.iswrite!=0}}">未学习</text>
+                </view>
                </wux-col>
 
             </wux-row>

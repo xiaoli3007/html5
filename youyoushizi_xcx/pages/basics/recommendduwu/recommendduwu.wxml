@@ -11,8 +11,6 @@
     <view slot="content">推荐读物</view>
   </cu-custom>
 
-   
-
 <view class="cu-bar search bg-white">
     <view class="search-form round">
       <text class="cuIcon-search"></text>
@@ -20,13 +18,12 @@
     </view>
     <view class="action">
       <!-- <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button> -->
-
        <text class="cuIcon-scan lg text-gray" bindtap="scanCode"></text>
-
     </view>
   </view>
 
-  <wux-filterbar items="{{ items }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> 
+  <!-- <view class="cu-bar-sun fixed" style="top:{{CustomBar+50}}px;"> </view> -->
+  <wux-filterbar items="{{ searchitems }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> 
 
 <!-- <block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
 	<view class="cu-form-group">
