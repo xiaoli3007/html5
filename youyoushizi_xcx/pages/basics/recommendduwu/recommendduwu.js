@@ -101,6 +101,7 @@ Page({
     categoryArray: [],
     multisigleIndex: [],
     list_select_value: [],
+    scan_code:''
   },
   onLoad() {
     let that = this;
@@ -270,8 +271,8 @@ Page({
    * 搜索函数
    */
   search_keyword: function() {
-    console.log(this.data.list_select_value)
-    console.log(this.data.keywords)
+    // console.log(this.data.list_select_value)
+    // console.log(this.data.keywords)
     var that = this;
     this.setData({
       isLoad: false,
@@ -289,14 +290,16 @@ Page({
         page: that.data.page,
         keywords: that.data.keywords,
         search_linkage_default_string: that.data.list_select_value.join(),
+        scan_code: that.data.scan_code,
       },
       header: {
         'content-type': 'application/json', // 默认值
         'X-Token': app.globalData.xtoken
       },
       success: function(res) {
+        console.log(res.data)
         if (res.data.code === 20000) {
-          console.log(res.data.items.length)
+          
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
@@ -396,15 +399,24 @@ Page({
 
   scanCode() {
     // this.setData({ msg: 'Hello World' })
+
+    var that = this;
+    
     wx.scanCode({
       onlyFromCamera: true,
       success(res) {
-        wx.showToast({
-          title: '结果:' + res.result,
-          icon: 'none',
-          duration: 1500,
-        })
+        // wx.showToast({
+        //   title: '结果:' + res.result,
+        //   icon: 'none',
+        //   duration: 1500,
+        // })
         console.log(res)
+        that.setData({
+          scan_code: res.result,
+        })
+        setTimeout(function () {
+          that.search_keyword()
+        }, 800)
       },
       fail(res) {
         console.log(res)
