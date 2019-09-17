@@ -48,7 +48,7 @@
     </view>
   </view> -->
 
-<view class="cu-card article no-card">
+<view class="cu-card article no-card" catchtouchmove="{{ opened ? 'noop' : '' }}">
   <view class="cu-item shadow" wx:for="{{duwuList}}" wx:key>
     <view class="title">
       <view class="text-cut">{{item.program.title}}</view>
