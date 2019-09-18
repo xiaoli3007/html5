@@ -393,7 +393,7 @@ Page({
    
     let tuserid =  e.currentTarget.dataset.userid
     let index = e.currentTarget.dataset.index
-
+    var that = this 
     console.log({tuserid,index})
     wx.chooseImage({
       count: 1, //默认9
@@ -402,10 +402,7 @@ Page({
       success: (res) => {
         const tempFilePaths = res.tempFilePaths
 
-        var tprice = 'member_list[' + index + '].avatar'
-        this.setData({
-          [tprice]: tempFilePaths,
-        })
+        
         wx.uploadFile({
           url: app.globalData.url2 + '?act=wx_avatar',
           filePath: tempFilePaths[0],
@@ -418,7 +415,21 @@ Page({
           },
           success(res) {
             // const data = res.data
-            console.log(res)
+            // console.log(res)
+            const data = JSON.parse(res.data)
+            console.log(data)
+            if (data.response.success == 0){
+              wx.showToast({
+                title: data.response.msg,
+                icon: 'none',
+                duration: 1500,
+              })
+            }else{
+              var tprice = 'member_list[' + index + '].avatar'
+              that.setData({
+                [tprice]: data.response.avatar,
+              })
+            }
           }
         })
         

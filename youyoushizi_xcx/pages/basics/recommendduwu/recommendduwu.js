@@ -1,3 +1,4 @@
+import { $wuxDialog } from '../../../dist/index'
 const app = getApp()
 Page({
   data: {
@@ -109,7 +110,7 @@ Page({
 
     // console.log(options.scan_code_g)
 
-    let temp_scan = options.scan_code_g
+    let temp_scan = options.scan_code_g ? options.scan_code_g:''
 
     let that = this;
     //加载联动
@@ -153,12 +154,31 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-
+        console.log('默认加载进来的请求')  
         console.log(res.data)
-        that.setData({
 
-          duwuList: res.data.items
-        })
+        if (res.data.code == 20001 && temp_scan != '') {
+
+          wx.showModal({
+            title: '您好！没有查到此书',
+            content: '前往登记？',
+            cancelText: '取消',
+            confirmText: '好的',
+            success: res => {
+              if (res.confirm) {
+                wx.navigateTo({
+                  url: '/pages/about/regbook/regbook',
+                })
+              }
+            }
+          })
+
+        } else {
+          that.setData({
+            duwuList: res.data.items
+          })
+        }
+        
 
       },
       complete(res) {
@@ -301,7 +321,7 @@ Page({
         page: that.data.page,
         keywords: that.data.keywords,
         search_linkage_default_string: that.data.list_select_value.join(),
-        scan_code: that.data.scan_code,
+        // scan_code: that.data.scan_code,
         slistorder: that.data.listorder,
         sorderby: that.data.orderby,
       },
@@ -431,11 +451,81 @@ Page({
         // })
         console.log(res)
         that.setData({
-          scan_code: res.result,
+          
+          loadModal: true
         })
-        setTimeout(function () {
-          that.search_keyword()
-        }, 800)
+        //加载列表
+        wx.request({
+          url: app.globalData.url + '?act=getbookrecommendlist',
+          data: {
+            pagesize: that.data.pagesize,
+            page: that.data.page,
+            scan_code: res.result,
+          },
+          header: {
+            'content-type': 'application/json', // 默认值
+            'X-Token': app.globalData.xtoken
+          },
+          success(res) {
+            console.log('扫码请求的结果')
+            console.log(res.data)
+            if (res.data.code==20001){
+
+              wx.showModal({
+                title: '您好！没有查到此书',
+                content: '前往登记？',
+                cancelText: '取消',
+                confirmText: '好的',
+                success: res => {
+                  if (res.confirm) {
+                      wx.navigateTo({
+                        url: '/pages/about/regbook/regbook',
+                      })
+                  }
+                }
+              })
+              // $wuxDialog().open({
+              //   resetOnClose: true,
+              //   // title: '',
+              //   content: '您好！没有查到此书',
+              //   buttons: [
+              //   {
+              //     text: '缺书登记',
+              //     type: 'primary',
+              //     onTap(e) {
+              //       console.log('你选择了缺书登记！')
+              //       wx.navigateTo({
+              //         url: '/pages/about/regbook/regbook',
+              //       })
+              //     },
+              //   },
+              //   {
+              //     text: '取消',
+              //   },
+              //   ],
+              // })
+
+            }else{
+              that.setData({
+                duwuList: res.data.items
+              })
+            }
+            
+          },
+          complete(res) {
+            that.setData({
+              isLoad: true,
+              isend: true,
+              loadModal: false
+            })
+           }
+        })
+        // that.setData({
+        //   scan_code: res.result,
+        // })
+        // setTimeout(function () {
+        //   that.search_keyword()
+        // }, 800)
       },
       fail(res) {
         console.log(res)

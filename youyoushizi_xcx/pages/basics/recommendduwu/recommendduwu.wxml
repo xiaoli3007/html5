@@ -100,4 +100,6 @@
   <view class='gray-text'>加载中...</view>
 </view>
 
+<wux-dialog id="wux-dialog" />
+
 
