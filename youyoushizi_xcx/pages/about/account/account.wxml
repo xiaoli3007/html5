@@ -20,9 +20,9 @@
      <view class="cu-item " style="height:190rpx;" bindtap="check_userid" data-username="{{item.username}}" data-val="{{item.userid}}">
       <!-- <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view> -->
 
-      <view class="cu-avatar radius lg" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
+      <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
 
-        <view class="cu-avatar radius lg" wx:if='{{!item.avatar}}'>
+        <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}"  data-userid="{{item.userid}}"  wx:if='{{!item.avatar}}'>
           <text class="cuIcon-people"></text>
         </view>
 

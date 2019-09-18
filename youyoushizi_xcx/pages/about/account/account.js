@@ -389,6 +389,48 @@ Page({
 
 
   },
+  uploadChooseImage(e) {
+   
+    let tuserid =  e.currentTarget.dataset.userid
+    let index = e.currentTarget.dataset.index
+
+    console.log({tuserid,index})
+    wx.chooseImage({
+      count: 1, //默认9
+      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album'], //从相册选择
+      success: (res) => {
+        const tempFilePaths = res.tempFilePaths
+
+        var tprice = 'member_list[' + index + '].avatar'
+        this.setData({
+          [tprice]: tempFilePaths,
+        })
+        wx.uploadFile({
+          url: app.globalData.url2 + '?act=wx_avatar',
+          filePath: tempFilePaths[0],
+          name: 'file',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          formData: {
+            userid: tuserid,
+          },
+          success(res) {
+            // const data = res.data
+            console.log(res)
+          }
+        })
+        
+      }
+    });
+  },
+  ViewImage(e) {
+    // wx.previewImage({
+    //   urls: this.data.imgList,
+    //   current: e.currentTarget.dataset.url
+    // });
+  },
 
  
 });

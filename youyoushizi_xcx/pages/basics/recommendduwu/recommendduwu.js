@@ -22,13 +22,13 @@ Page({
       {
         type: 'text',
         label: '热度',
-        value: 'task_nums',
+        value: 'task_num',
         groups: ['002'],
       },
       {
         type: 'sort',
         label: '篇幅',
-        value: 'length',
+        value: 'fulltext_num',
         groups: ['003'],
       },
       {
@@ -101,9 +101,16 @@ Page({
     categoryArray: [],
     multisigleIndex: [],
     list_select_value: [],
-    scan_code:''
+    scan_code:'',
+    listorder: '',
+    orderby: ''
   },
-  onLoad() {
+  onLoad(options) {
+
+    // console.log(options.scan_code_g)
+
+    let temp_scan = options.scan_code_g
+
     let that = this;
     //加载联动
 
@@ -137,7 +144,9 @@ Page({
       url: app.globalData.url + '?act=getbookrecommendlist',
       data: {
         pagesize: that.data.pagesize,
-        page: that.data.page
+        page: that.data.page,
+        scan_code: temp_scan,
+
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -209,7 +218,7 @@ Page({
    */
   onReachBottom: function() {
 
-    console.log(11)
+    // console.log(11)
     if (this.data.isend) { //到底了不在执行
       return
     }
@@ -232,6 +241,8 @@ Page({
         page: that.data.page,
         keywords: that.data.keywords,
         search_linkage_default_string: that.data.list_select_value.join(),
+        slistorder: that.data.listorder,
+        sorderby: that.data.orderby,
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -291,6 +302,8 @@ Page({
         keywords: that.data.keywords,
         search_linkage_default_string: that.data.list_select_value.join(),
         scan_code: that.data.scan_code,
+        slistorder: that.data.listorder,
+        sorderby: that.data.orderby,
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -340,11 +353,15 @@ Page({
     checkedValues.forEach((n, i) => {
 
       if (i == 0) {
-        params.text = n
+        // params.text = n
+        params.sort = {
+          sort: 'task_num',
+          order: 'desc'
+        }
       } else if (i == 1) {
         if (n) {
           params.sort = {
-            sort: 'task_nums',
+            sort: 'fulltext_num', 
             order: n === 1 ? 'asc' : 'desc'
           }
         }
@@ -369,6 +386,8 @@ Page({
   getRepos(params = {}) {
     var that = this;
     this.setData({
+      listorder: params.sort.sort,
+      orderby: params.sort.order,
       list_select_value: params.linkages,
     })
     setTimeout(function() {

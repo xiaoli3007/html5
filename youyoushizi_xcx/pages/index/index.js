@@ -28,27 +28,28 @@ Page({
     wx.scanCode({
       onlyFromCamera: true,
       success(res) {
-        console.log(res)
-        wx.showToast({
-          title: '结果:' + res.result,
-          icon: 'none',
-          duration: 1500,
+        // console.log(res)
+        // wx.showToast({
+        //   title: '结果:' + res.result,
+        //   icon: 'none',
+        //   duration: 1500,
+        // })
+        wx.navigateTo({
+          url: '/pages/basics/recommendduwu/recommendduwu?scan_code_g=' + res.result,
         })
-        setTimeout(function () {
-          wx.navigateTo({
-            url: '/pages/recommendduwu/recommendduwu',
-          })
-        }, 1000)
+        // setTimeout(function () {
+         
+        // }, 1000)
 
       },
       fail(res) {
-        console.log(res)
+        // console.log(res)
         wx.navigateTo({
           url: '/pages/index/index',
         })
       },
       complete(res) {
-        console.log(res)
+        // console.log(res)
       }
     })
   },
