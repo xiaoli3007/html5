@@ -154,3 +154,10 @@
     </form>
   </view>
 </view>
+
+
+<view class='cu-load load-modal' wx:if="{{avatarloadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>头像上传中...</view>
+</view>

@@ -22,7 +22,7 @@ Page({
       newusername: '',
     }, 
     userid: app.globalData.userid,
-
+    avatarloadModal:false
   },
   onLoad: function () { 
   
@@ -390,18 +390,21 @@ Page({
 
   },
   uploadChooseImage(e) {
-   
+    
     let tuserid =  e.currentTarget.dataset.userid
     let index = e.currentTarget.dataset.index
     var that = this 
-    console.log({tuserid,index})
+    // console.log({tuserid,index})
     wx.chooseImage({
       count: 1, //默认9
-      sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album'], //从相册选择
+      sizeType: [ 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], //从相册选择
       success: (res) => {
         const tempFilePaths = res.tempFilePaths
 
+        that.setData({
+          avatarloadModal: true
+        })
         
         wx.uploadFile({
           url: app.globalData.url2 + '?act=wx_avatar',
@@ -412,7 +415,7 @@ Page({
           },
           formData: {
             userid: tuserid,
-          },
+          }, 
           success(res) {
             // const data = res.data
             // console.log(res)
@@ -430,6 +433,18 @@ Page({
                 [tprice]: data.response.avatar,
               })
             }
+          },
+          fail(res) {
+            wx.showToast({
+              title: '上传失败',
+              icon: 'none',
+              duration: 1500,
+            })
+          },
+          complete(res) {
+            that.setData({
+              avatarloadModal: false
+            })
           }
         })
         

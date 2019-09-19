@@ -369,7 +369,7 @@ Page({
 
     // console.log(checkedItems)
     // console.log(items)
-    // console.log(checkedValues)
+    console.log(checkedValues)
     checkedValues.forEach((n, i) => {
 
       if (i == 0) {
@@ -389,10 +389,16 @@ Page({
       } else if (i == 2) {
         let arr = []
         n.forEach((n2) => {
-          n2.forEach((n3) => {
-            // console.log(n3)
-            arr.push(n3)
-          })
+          // console.log(Object.prototype.toString.apply(n2) === '[object Array]')  
+          if (Object.prototype.toString.apply(n2) === '[object Array]'){
+            n2.forEach((n3) => {
+              arr.push(n3)
+           })
+          }else{
+            arr.push(n2)
+          }
+          
+          
         })
         // console.log(arr)
         params.linkages = arr
