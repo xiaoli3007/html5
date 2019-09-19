@@ -3,14 +3,14 @@
   <view class="UCenter-bg">
     <!-- <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}}" class="png" mode="widthFix"></image> -->
 
-    <view class="cu-avatar xl round" style="background-image:url({{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}});"></view>
-
+    <view class="cu-avatar xl round" style="background-image:url({{userInfo.avatar?userInfo.avatar:'/images/logo.png'}});"></view>
+ 
 
     <view class="text-xl">
-      <text class="text-df"> {{userInfo.nickName?userInfo.nickName:'xx'}}</text>
+      <text class="text-df"> {{userInfo.username?userInfo.username:'xx'}}</text>
     </view>
 <view class="text-xl">
-     <button wx:if="{{!userInfo.avatarUrl}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-btn"> 登录 </button>
+     <button wx:if="{{!userInfo.username}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-btn"> 登录 </button>
   </view>
     <view class="margin-top-sm">
       <text></text>

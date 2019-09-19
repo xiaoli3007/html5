@@ -236,6 +236,123 @@ Page({
       }
     })
   },
+  gotask(e) {
 
+    let taskid = e.currentTarget.dataset.taskid
+    let status = e.currentTarget.dataset.status
+    var that = this
+    console.log(taskid)
+    if (status == 3){
+
+      wx.showModal({
+        title: '您好！该任务已经完成！',
+        content: '确定要从新开始任务？',
+        cancelText: '取消',
+        confirmText: '好的',
+        success: res => {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/basics/task/task?taskid=' + taskid,
+            })
+          }
+        }
+      })
+
+    }else{
+
+      wx.navigateTo({
+        url: '/pages/basics/task/task?taskid=' + taskid,
+      })
+
+    }
+    
+  
+  },
+  // ListTouch触摸开始
+  ListTouchStart(e) {
+    this.setData({
+      ListTouchStart: e.touches[0].pageX
+    })
+  },
+
+  // ListTouch计算方向
+  ListTouchMove(e) {
+    this.setData({
+      ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
+    })
+  },
+
+  // ListTouch计算滚动
+  ListTouchEnd(e) {
+    if (this.data.ListTouchDirection == 'left') {
+      this.setData({
+        modalName: e.currentTarget.dataset.target
+      })
+    } else {
+      this.setData({
+        modalName: null
+      })
+    }
+    this.setData({
+      ListTouchDirection: null
+    })
+  },
+  delete_task(e) {
+    // console.log(e)
+
+    let ttaskid = e.currentTarget.dataset.taskid
+    let tindex = e.currentTarget.dataset.index
+    var that = this
+    console.log({ttaskid,tindex})
+
+    wx.showModal({
+      title: '删除任务',
+      content: '确定要删除该任务？',
+      cancelText: '取消',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+
+          that.setData({
+
+            loadModal: true
+          })
+          //删除任务
+          wx.request({
+            url: app.globalData.url + '?act=task_delete',
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded', // 默认值
+              'X-Token': app.globalData.xtoken
+            },
+            data: {
+              userid: app.globalData.userid,
+              taskid: ttaskid,
+            },
+            success: function (res) {
+              console.log(res);
+               
+              that.data.task_list.splice(tindex, 1)
+              that.setData({
+                task_list: that.data.task_list
+              })
+            },
+             complete(res) {
+              that.setData({
+
+                loadModal: false
+              })
+              
+            }
+          });
+          
+        }
+      }
+    })
+
+   
+
+
+  },
  
 });

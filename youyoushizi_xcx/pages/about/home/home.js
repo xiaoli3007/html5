@@ -97,6 +97,7 @@ Component({
                 app.globalData.uid = res.data.items.uid;
                 app.globalData.userInfo = res.data.items;
                 app.globalData.username = res.data.items.username;
+                app.globalData.avatar = res.data.items.avatar;
                 console.log(res);
                 that.setData({
                   userInfo: res.data.items,

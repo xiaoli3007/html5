@@ -32,7 +32,7 @@
 </view> -->
 
 
-<scroll-view scroll-x class="bg-cyan nav text-center">
+<scroll-view scroll-x class="bg-blue nav text-center">
   <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{datalist}}" wx:key bindtap="tabSelect" data-id="{{index}}">
     {{item.obj.name}}
   </view>
@@ -40,7 +40,7 @@
 
 <block wx:for="{{datalist}}" wx:for-index="mindex" wx:key>
 
-  <scroll-view wx:if="{{TabCur==mindex}}" scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLefts}}">
+  <scroll-view wx:if="{{TabCur==mindex}}" scroll-x class="bg-white nav text-center" scroll-with-animation scroll-left="{{scrollLefts}}">
 
     <block wx:for="{{item.wcell_list}}" wx:for-index="mindex2" wx:key>
       <view class="cu-item {{mindex2==TabCursub?'text-green cur':''}}" bindtap="tabSelect2" data-id="{{mindex2}}">
@@ -57,27 +57,28 @@
 
   <block wx:if="{{TabCur==mindex && TabCursub==mindex2 }}">
 
-  <view class="padding bg-white solid-bottom  flex">
-    <view class="justify-center">
+
+    <view class="padding bg-white" style="padding-bottom:120rpx;">
+     <view class="cu-list grid col-3">
       <block wx:key wx:for='{{item.data}}' wx:for-index="mindex3">
-        <view class="cu-tag radius line-black padding ">{{item.word}}</view>
+      
+        <view class="cu-tag radius line-black padding margin-bottom">{{item.word}}</view>
       </block>
+      </view>
     </view>
-  </view>
+  
 
-  <view class="flex   justify-center">
-    <view class=" padding-sm margin-xs radius">
+  <view class="cu-bar flex  bg-white justify-center  foot" style="bottom:0px;">
+    
 
-     <navigator wx:if="{{item.shizi_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{program.id}}&gid={{mindex2}}&wcell_type={{mindex}}" open-type="redirect">
-      <button class="cu-btn round lg line-orange ">开始识字</button>
+     <navigator wx:if="{{item.shizi_taskid==0}}"  hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{program.id}}&gid={{mindex2}}&wcell_type={{mindex}}" open-type="redirect">
+      <button class="cu-btn round lg line-blue ">开始识字</button>
        </navigator>
 
-        <navigator wx:if="{{item.shizi_taskid!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
-      <button class="cu-btn round lg bg-orange">开始识字</button>
+        <navigator wx:if="{{item.shizi_taskid!=0}}"  hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
+      <button class="cu-btn round lg bg-blue">开始识字</button>
        </navigator> 
-
-
-    </view>
+ 
   </view>
 </block>
 

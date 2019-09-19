@@ -45,6 +45,7 @@ App({
     uid: null,
     userid: null, 
     username: null, 
+    avatar: null, 
     openid: '',
     spid: 0,
     xtoken: 'sdsadwerer',
