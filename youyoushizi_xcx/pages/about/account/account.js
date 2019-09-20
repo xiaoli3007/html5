@@ -129,6 +129,7 @@ Page({
           success: function (res) {
             console.log(res);
             app.globalData.username = res.data.username;
+            app.globalData.avatar = res.data.userinfo.avatar;
           }
         });
 
@@ -432,6 +433,9 @@ Page({
               that.setData({
                 [tprice]: data.response.avatar,
               })
+              if (tuserid == app.globalData.userid){
+                app.globalData.avatar = data.response.avatar
+              }
             }
           },
           fail(res) {

@@ -34,11 +34,13 @@ Component({
     gridCol: 3,
     skin: false,
     gridBorder: false,
-    username:'我'
+    username:'我',
+    isLoad: true,
 
   },
   lifetimes: {
     attached: function () {
+      // console.log(111) 
       //wx.clearStorage()
       // 在组件实例进入页面节点树时执行
       if (app.globalData.username) {
@@ -82,6 +84,11 @@ Component({
            
         },
         complete(res) {
+
+          that.setData({
+            isLoad: false,
+            
+          })
           //console.log(res.statusCode)
           if (res.statusCode == 500) {
 
@@ -100,10 +107,11 @@ Component({
     },
     ready: function () {
      
-      // console.log(111) 
+     
 
     },
   },
+  
   methods: {
     tabSelect(e) {
       this.setData({
@@ -111,6 +119,64 @@ Component({
         scrollLeft: (e.currentTarget.dataset.id - 1) * 60
       })
     },
+    onLoad: function () {
+      console.log(111)
+    },
+    
+    /**
+* 页面 刷新
+*/  
+    onPullDownRefresh() {
+
+      console.log(11)
+      var that = this;
+
+      that.setData({
+        isLoad: true,
+      })
+
+      wx.request({
+        url: app.globalData.url2 + '?act=index', //课外读物
+        data: {
+          userid: app.globalData.userid ? app.globalData.userid : 0
+        },
+        header: {
+          'content-type': 'application/json', // 默认值
+          'X-Token': app.globalData.xtoken
+        },
+        success(res) {
+
+          console.log(res.data)
+
+          that.setData({
+
+            kewaiduwuList: res.data.items.duwu,
+            jiaocaiList: res.data.items.jiaocai,
+            // tuijianduwuList: res.data.items.tuijian_duwu,
+
+          })
+
+          var tprice = 'iconList[0].badge'
+          var tprice2 = 'iconList[1].badge'
+          var tprice3 = 'iconList[2].badge'
+          that.setData({
+            [tprice]: res.data.shizi_nums,
+            [tprice2]: res.data.tingxie_nums,
+            [tprice3]: res.data.fuxi_nums,
+          })
+
+        },
+        complete(res) {
+
+          that.setData({
+            isLoad: false,
+          })
+         
+
+        }
+      })
+    },
+   
   }
 
 })

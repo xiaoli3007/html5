@@ -11,17 +11,24 @@ Component({
     visitTotal: 0,
     userInfo: {},
     hasUserInfo: false,
+    username:null,
+    avatar:null,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   lifetimes: {
     attached: function () {
-      if (app.globalData.userInfo){
+      if (app.globalData.username){
          this.setData({
-           userInfo: app.globalData.userInfo,
-          hasUserInfo: true
+           username: app.globalData.username,
         })
       }
-      console.log(app.globalData.userInfo)
+
+      if (app.globalData.avatar) {
+        this.setData({
+          avatar: app.globalData.avatar,
+        })
+      }
+      // console.log(app.globalData.avatar)
      
      
 
@@ -101,7 +108,8 @@ Component({
                 console.log(res);
                 that.setData({
                   userInfo: res.data.items,
-                  hasUserInfo: true,
+                  username: res.data.items.username,
+                  avatar: res.data.items.avatar,
                   loadModal: false,
                 })
                   

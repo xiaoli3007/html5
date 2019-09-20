@@ -1,4 +1,8 @@
-<scroll-view scroll-y class="scrollPage">
+
+<view class="cu-load bg-blue loading" wx:if="{{isLoad}}"></view>
+
+
+<scroll-view scroll-y class="scrollPage" style="" bindscrolltoupper="onPullDownRefresh">
 
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">
@@ -107,3 +111,4 @@
 
   <view class='cu-tabbar-height'></view>
 </scroll-view>
+
