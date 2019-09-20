@@ -15,6 +15,30 @@ Component({
     avatar:null,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+  pageLifetimes: {
+    // 组件所在页面的生命周期函数
+    show: function () {
+
+      console.log(111)
+      if (app.globalData.username) {
+        this.setData({
+          username: app.globalData.username,
+        })
+      }
+
+      if (app.globalData.avatar) {
+        this.setData({
+          avatar: app.globalData.avatar,
+        })
+      }
+    },
+    hide: function () {
+      console.log(222)
+    },
+    resize: function () {
+      console.log(333)
+    },
+  },
   lifetimes: {
     attached: function () {
       if (app.globalData.username){
@@ -67,14 +91,7 @@ Component({
     },
   },
   methods: {
-    // getUserInfo: function (e) {
-    //   console.log(e)
-    //   app.globalData.userInfo = e.detail.userInfo
-    //   this.setData({
-    //     userInfo: e.detail.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // },
+ 
     //获取用户信息并且授权
     getUserInfo: function (e) {
       var userInfo = e.detail.userInfo;

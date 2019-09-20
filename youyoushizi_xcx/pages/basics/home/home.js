@@ -38,6 +38,20 @@ Component({
     isLoad: true,
 
   },
+  pageLifetimes: {
+    // 组件所在页面的生命周期函数
+    show: function () {
+
+      // console.log(111) 
+      this.onPullDownRefresh()
+     },
+    hide: function () { 
+      // console.log(222) 
+    },
+    resize: function () {
+      // console.log(333) 
+     },
+  },
   lifetimes: {
     attached: function () {
       // console.log(111) 
@@ -68,7 +82,6 @@ Component({
             
             kewaiduwuList: res.data.items.duwu,
             jiaocaiList: res.data.items.jiaocai,
-            // tuijianduwuList: res.data.items.tuijian_duwu,
             
           })
 
