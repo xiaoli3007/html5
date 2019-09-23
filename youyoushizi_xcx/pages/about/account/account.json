@@ -1,1 +1,8 @@
-{}
+{
+  "usingComponents": {
+    "wux-row": "../../../dist/row/index",
+    "wux-col": "../../../dist/col/index",
+    "wux-white-space": "../../../dist/white-space/index",
+    "wux-divider": "../../../dist/divider/index"
+  }
+}

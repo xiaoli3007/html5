@@ -3,7 +3,7 @@
   <view slot="content">教材课程</view>
 </cu-custom> -->
 <view class='cu-custom' style="height:{{CustomBar}}px">
-  <view class="cu-bar fixed bg-shadeTop bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+  <view class="cu-bar fixed  bg-orange" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
     <!-- <navigator class='action' open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
       <text class='cuIcon-back'></text> 返回
     </navigator> -->
@@ -18,7 +18,7 @@
 
 <view class="VerticalBox">
   <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - {{CustomBar}}px)">
-    <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{jiaocaiList}}" wx:key bindtap='tabSelect' data-id="{{index}}">
+    <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{jiaocaiList}}" wx:key bindtap='tabSelect' data-id="{{index}}">
       {{item.name}}
     </view>
   </scroll-view>
@@ -26,7 +26,7 @@
     <view class="padding-top padding-lr" wx:for="{{jiaocaiList}}" wx:key id="main-{{index}}">
       <view class='cu-bar solid-bottom bg-white'>
         <view class='action'>
-          <text class='cuIcon-title text-green'></text> {{item.name}} </view>
+          <text class='cuIcon-title text-orange'></text> {{item.name}} </view>
         </view>
       <view class="cu-list">
         <block wx:for="{{item.data}}" wx:key>
@@ -60,25 +60,25 @@
                 <button wx:if="{{item.iswrite==0}}" class="cu-btn round  line-grey disabled" style="text-decoration:line-through;">听写</button>
 
                 <navigator wx:if="{{item.tingxie_taskid!=0 && item.iswrite!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.tingxie_taskid}}" open-type="redirect">
-                  <button class="cu-btn round  bg-green ">听写</button>
+                  <button class="cu-btn round  bg-blue ">听写</button>
                 </navigator>
 
                 <navigator wx:if="{{item.tingxie_taskid==0 && item.iswrite!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=1&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
-                  <button class="cu-btn round  line-green">听写</button>
+                  <button class="cu-btn round  line-blue">听写</button>
                 </navigator>
                 </view>
               </wux-col>
 
               <wux-col span="5" offset="1">
                  <view class="text-center text-xs">
-                 <text class="text-purple" wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}">已学习</text>           
+                 <text class="text-orange" wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}">已学习</text>           
                  <text class="text-gray" wx:if="{{item.shizi_taskid==0 && item.isread!=0}}">未学习</text>
 
                  </view>
                </wux-col>
                 <wux-col span="5" offset="1">
                 <view class="text-center text-xs">
-                 <text class="text-purple" wx:if="{{item.tingxie_taskid!=0 && item.iswrite!=0}}">已学习</text>           
+                 <text class="text-orange" wx:if="{{item.tingxie_taskid!=0 && item.iswrite!=0}}">已学习</text>           
                  <text class="text-gray" wx:if="{{item.tingxie_taskid==0 && item.iswrite!=0}}">未学习</text>
                 </view>
                </wux-col>

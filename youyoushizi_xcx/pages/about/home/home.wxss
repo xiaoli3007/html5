@@ -1,5 +1,5 @@
 .UCenter-bg {
-   background: #0081ff;
+   background: #f37b1d;
   background-size: cover;
   height: 460rpx;
   display: flex;

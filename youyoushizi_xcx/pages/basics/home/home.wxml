@@ -2,18 +2,19 @@
 <view class="cu-load bg-blue loading" wx:if="{{isLoad}}"></view>
 
 
-<scroll-view scroll-y class="scrollPage" style="" bindscrolltoupper="onPullDownRefresh">
+<scroll-view scroll-y class="scrollPage" class="bg-white" style="" bindscrolltoupper="onPullDownRefresh">
 
-  <view class="cu-bar bg-white solid-bottom">
+  <view class="cu-bar bg-white ">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> {{username}}的任务
+      <!-- <text class="cuIcon-title text-orange "></text>  -->
+     <text class=""> {{username}}的任务</text>
     </view>
     <view class="action">
       <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
     </view>
   </view>
 
-  <view class="cu-list grid col-{{gridCol}} {{gridBorder?'':'no-border'}}">
+  <view class="cu-list grid col-3"  style="margin-top:0;">
     <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
       
        <navigator  class="align-center" open-type="navigate" hover-class='none' url="{{item.url}}?type={{item.type}}">
@@ -29,18 +30,20 @@
 
   </view>
 
-  <view class="cu-bar bg-white solid-bottom  ">
+  <view class="cu-bar bg-white   ">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> 教材
+      <!-- <text class="cuIcon-title text-orange "></text> -->
+       教材
     </view>
     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
     <view class="action">
       <!-- <button class="cu-btn bg-green shadow" >更多</button> -->
-      <text class="cuIcon-more lg text-gray"></text>
+      <text class="text-gray">更多</text>
     </view>
      </navigator>
   </view>
  
+  <view class=" radius shadow shadow-warp bg-white margin" style="margin-top:0;">
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
@@ -54,19 +57,22 @@
       </navigator>
     </view>
   </view>
+ </view>
 
-  <view class="cu-bar bg-white solid-bottom ">
+
+  <view class="cu-bar bg-white  ">
     <view class="action">
-      <text class="cuIcon-title text-orange "></text> 课外读物
+      <!-- <text class="cuIcon-title text-orange "></text> -->
+       课外读物
     </view>
     <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommendduwu/recommendduwu">
     <view class="action">
       <!-- <button class="cu-btn bg-green shadow" >更多</button> -->
-      <text class="cuIcon-more lg text-gray"></text>
+      <text class="text-gray">更多</text>
     </view>
      </navigator>
   </view>
-
+  <view class=" radius shadow shadow-warp bg-white margin"  style="margin-top:0;">
  <view class="cu-list grid col-3">
     <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
@@ -81,7 +87,7 @@
       </navigator>
     </view>
   </view>
-
+  </view>
 
 
   <!-- <view class="cu-bar bg-white solid-bottom ">

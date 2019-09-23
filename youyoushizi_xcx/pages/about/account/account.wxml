@@ -1,30 +1,83 @@
-<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">用户管理</view></cu-custom>
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">用户管理</view>
+</cu-custom>
 
 
-  <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action">
-      <text class="cuIcon-title text-orange "></text> 用户列表
-    </view>
-    <view class="action">
-      <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="Dialogadduser">
-      添加用户</button>
-    </view>
+<!-- <view class="cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text> 用户列表
   </view>
+  <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="Dialogadduser">
+      添加用户</button>
+  </view>
+</view> -->
+
+  <block wx:for="{{member_list}}" wx:key>
+  <view class="bg-white margin-top padding-top">
+        <wux-row>
+            <wux-col span="2" offset="1">
+                 <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
+            </wux-col>
+            <wux-col span="7">
+             <view class="content">
+        <view class="text-pink">
+          <text class="text-cut">用户名：{{item.username}}</text>
+        </view>
+        <view class="text-gray text-sm flex">
+          <text class="text-cut">密码：{{item.mingwenpw}}</text>
+        </view>
+      </view>
+                
+            </wux-col>
+             <wux-col span="2" >
+                <view class="text-green text-xs cuIcon-check" wx:if='{{item.userid===userid}}'></view> 
+            </wux-col>
+        </wux-row>
+          <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+            <wux-col span="3" >
+             <view class="flex flex-direction  justify-center">
+                  <view class="cuIcon-friendfavor text-center"></view>
+                 <view class="text-grey text-center">修改用户名</view>
+              </view>
+            </wux-col>
+            <wux-col span="3">
+             <view class="flex flex-direction  justify-center">
+                  <view class="cuIcon-friendfavor text-center"></view>
+                 <view class="text-grey text-center">修改密码</view>
+              </view>
+                 
+            </wux-col>
+             <wux-col span="3">
+              <view class="flex flex-direction  justify-center">
+                  <view class="cuIcon-friendfavor text-center"></view>
+                 <view class="text-grey text-center">用户充值</view>
+              </view>
+                  
+            </wux-col>
+             <wux-col span="3">
+              <view class="flex flex-direction  justify-center">
+                  <view class="cuIcon-friendfavor text-center"></view>
+                 <view class="text-grey text-center">删除用户</view>
+              </view>
+                  
+            </wux-col>
+        </wux-row>
+<wux-white-space size="default" />
+</view>
+</block>
 
 
-  <view class="cu-list menu-avatar ">
-   
-
-
- <block  wx:for="{{member_list}}" wx:key >
-     <view class="cu-item " style="height:190rpx;" bindtap="check_userid" data-username="{{item.username}}" data-val="{{item.userid}}">
-      <!-- <view class="cu-avatar radius lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"></view> -->
-
+<!-- <view class="cu-list menu-avatar ">
+  <block wx:for="{{member_list}}" wx:key>
+    <view class="cu-item " style="height:190rpx;" bindtap="check_userid" data-username="{{item.username}}" data-val="{{item.userid}}">
       <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
 
-        <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}"  data-userid="{{item.userid}}"  wx:if='{{!item.avatar}}'>
-          <text class="cuIcon-people"></text>
-        </view>
+      <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{!item.avatar}}'>
+        <text class="cuIcon-people"></text>
+      </view>
 
       <view class="content">
         <view class="text-pink">
@@ -36,23 +89,17 @@
       </view>
       <view class="action" style='width:150rpx;'>
         <view class="text-green text-xs cuIcon-check" wx:if='{{item.userid===userid}}'></view>
-        <view class="cu-tag round bg-red " catchtap="showModal_editpw" data-target="DialogModal1"
-       data-username="{{item.username}}" 
-        >修改密码 </view>
-         <view class="cu-tag round bg-red " catchtap="showModal_editusername" data-target="DialogModaleditusername"
-       data-username="{{item.username}}" 
-        >修改用户名</view>
+        <view class="cu-tag round bg-red " catchtap="showModal_editpw" data-target="DialogModal1" data-username="{{item.username}}">修改密码 </view>
+        <view class="cu-tag round bg-red " catchtap="showModal_editusername" data-target="DialogModaleditusername" data-username="{{item.username}}">修改用户名</view>
       </view>
 
     </view>
   </block>
-       
-  
-  </view>
+</view> -->
 
 
 
-  <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">修改密码</view>
@@ -61,12 +108,12 @@
       </view>
     </view>
     <form bindsubmit="formSubmit">
-    <view class="padding-sm">
+      <view class="padding-sm">
 
-        
+
         <view class="cu-form-group margin-top">
           <view class="title">用户名</view>
-          <input  disabled="true" name='username' value='{{form.username}}'></input>
+          <input disabled="true" name='username' value='{{form.username}}'></input>
         </view>
         <view class="cu-form-group">
           <view class="title">新密码</view>
@@ -76,20 +123,20 @@
           <view class="title">确认新密码</view>
           <input placeholder="确认新密码" password="true" name='confimpasswd' value='{{form.confimpasswd}}'></input>
         </view>
-     
-    </view>
-    <view class="cu-bar bg-white justify-end">
-      <view class="action">
-        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left" form-type="submit" >确定</button>
+
       </view>
-    </view>
-     </form>
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button>
+        </view>
+      </view>
+    </form>
   </view>
 </view>
 
 
-  <view class="cu-modal {{modalName=='DialogModaleditusername'?'show':''}}">
+<view class="cu-modal {{modalName=='DialogModaleditusername'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">修改用户名</view>
@@ -98,31 +145,31 @@
       </view>
     </view>
     <form bindsubmit="formSubmiteditusername">
-    <view class="padding-sm">
+      <view class="padding-sm">
 
-        
+
         <view class="cu-form-group margin-top">
           <view class="title">用户名</view>
-          <input  disabled="true" name='username' value='{{edituernameform.username}}'></input>
+          <input disabled="true" name='username' value='{{edituernameform.username}}'></input>
         </view>
         <view class="cu-form-group">
           <view class="title">新用户名</view>
-          <input placeholder="新用户名"  name='newusername' value='{{edituernameform.newusername}}'></input>
+          <input placeholder="新用户名" name='newusername' value='{{edituernameform.newusername}}'></input>
         </view>
-       
-    </view>
-    <view class="cu-bar bg-white justify-end">
-      <view class="action">
-        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left" form-type="submit" >确定</button>
+
       </view>
-    </view>
-     </form>
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button>
+        </view>
+      </view>
+    </form>
   </view>
 </view>
 
 
-  <view class="cu-modal {{modalName=='Dialogadduser'?'show':''}}">
+<view class="cu-modal {{modalName=='Dialogadduser'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-white justify-end">
       <view class="content">添加用户</view>
@@ -130,8 +177,8 @@
         <text class="cuIcon-close text-red"></text>
       </view>
     </view>
-     <form bindsubmit="userformSubmit">
-    <view class="padding-sm">
+    <form bindsubmit="userformSubmit">
+      <view class="padding-sm">
         <view class="cu-form-group margin-top">
           <view class="title">用户名</view>
           <input placeholder="用户名" name='username' value='{{adduerform.username}}'></input>
@@ -144,13 +191,13 @@
           <view class="title">确认密码</view>
           <input placeholder="确认新密码"></input>
         </view> -->
-    </view>
-    <view class="cu-bar bg-white justify-end">
-      <view class="action">
-        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-        <button class="cu-btn bg-green margin-left"  form-type="submit">确定</button>
       </view>
-    </view>
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button>
+        </view>
+      </view>
     </form>
   </view>
 </view>

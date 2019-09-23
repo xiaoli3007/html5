@@ -1,0 +1,1 @@
+.cu-list.grid>.cu-item:after {border:none;}

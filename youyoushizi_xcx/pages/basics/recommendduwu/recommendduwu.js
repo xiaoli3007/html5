@@ -21,7 +21,7 @@ Page({
       //   groups: ['001'],
       // },
       {
-        type: 'text',
+        type: 'sort',
         label: '热度',
         value: 'task_num',
         groups: ['002'],
@@ -376,7 +376,7 @@ Page({
         // params.text = n
         params.sort = {
           sort: 'task_num',
-          order: 'desc'
+          order: n === 1 ? 'asc' : 'desc'
         }
       } else if (i == 1) {
         if (n) {

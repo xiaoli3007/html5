@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-gradual-blue">
+<cu-custom bgColor="bg-orange">
   <view slot="content">优优识字</view>
 </cu-custom>
 
@@ -11,11 +11,11 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">学习</view>
+    <view class="{{PageCur=='basics'?'text-orange':'text-gray'}}">学习</view>
   </view>
 
    <view class="action text-gray add-action">
-      <button class="cu-btn cuIcon-scan bg-green shadow" bindtap="scanCode"></button>
+      <button class="cu-btn cuIcon-scan bg-orange shadow" bindtap="scanCode"></button>
        
     </view>
 
@@ -23,6 +23,6 @@
     <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">我的</view>
+    <view class="{{PageCur=='about'?'text-orange':'text-gray'}}">我的</view>
   </view>
 </view>
