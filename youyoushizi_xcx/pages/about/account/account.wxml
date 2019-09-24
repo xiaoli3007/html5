@@ -16,7 +16,7 @@
 
   <block wx:for="{{member_list}}" wx:key>
   <view class="bg-white margin-top padding-top">
-        <wux-row>
+        <wux-row bindtap="check_userid" data-username="{{item.username}}" data-val="{{item.userid}}">
             <wux-col span="2" offset="1">
                  <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
             </wux-col>
@@ -38,13 +38,13 @@
           <wux-divider show-text="{{ false }}" dashed />
         <wux-row>
             <wux-col span="3" >
-             <view class="flex flex-direction  justify-center">
+             <view class="flex flex-direction  justify-center" catchtap="showModal_editusername" data-target="DialogModaleditusername" data-username="{{item.username}}">
                   <view class="cuIcon-friendfavor text-center"></view>
                  <view class="text-grey text-center">修改用户名</view>
               </view>
             </wux-col>
             <wux-col span="3">
-             <view class="flex flex-direction  justify-center">
+             <view class="flex flex-direction  justify-center"  catchtap="showModal_editpw" data-target="DialogModal1" data-username="{{item.username}}">
                   <view class="cuIcon-friendfavor text-center"></view>
                  <view class="text-grey text-center">修改密码</view>
               </view>
@@ -52,13 +52,15 @@
             </wux-col>
              <wux-col span="3">
               <view class="flex flex-direction  justify-center">
-                  <view class="cuIcon-friendfavor text-center"></view>
+
+                   <view class="sunIcon-yes text-center text-orange"></view>
+
                  <view class="text-grey text-center">用户充值</view>
               </view>
                   
             </wux-col>
              <wux-col span="3">
-              <view class="flex flex-direction  justify-center">
+              <view class="flex flex-direction  justify-center" catchtap="delete_user"  data-val="{{item.userid}}">
                   <view class="cuIcon-friendfavor text-center"></view>
                  <view class="text-grey text-center">删除用户</view>
               </view>
@@ -207,4 +209,11 @@
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <image src='/images/logo.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>头像上传中...</view>
+</view>
+
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
 </view>

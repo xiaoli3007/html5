@@ -461,6 +461,59 @@ Page({
     //   current: e.currentTarget.dataset.url
     // });
   },
+  delete_user(e) {
+    // console.log(e)
+
+    let tuserid = e.currentTarget.dataset.val
+    var that = this
+    console.log({ tuserid })
+
+    wx.showModal({
+      title: '删除用户',
+      content: '确定要删除用户？',
+      cancelText: '取消',
+      confirmText: '确定',
+      success: res => {
+        if (res.confirm) {
+
+          that.setData({
+
+            loadModal: true
+          })
+          //删除任务
+          wx.request({
+            url: app.globalData.url2 + '?act=wx_delete',
+            method: 'POST',
+            header: {
+              'content-type': 'application/x-www-form-urlencoded', // 默认值
+              'X-Token': app.globalData.xtoken
+            },
+            data: {
+              userid: tuserid,
+            },
+            success: function (res) {
+              console.log(res);
+
+                wx.showToast({
+                  title: res.data.message,
+                  icon: 'none',
+                  duration: 1500,
+                })
+               that.onLoad()
+            },
+            complete(res) {
+              that.setData({
+
+                loadModal: false
+              })
+
+            }
+          });
+
+        }
+      }
+    })
+  },
 
  
 });

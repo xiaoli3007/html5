@@ -1,3 +1,14 @@
 .jiaocai-top{
  margin-top: 64px; 
 }
+
+.bradius {
+  border-radius: 30rpx;
+  box-shadow: 0rpx 40rpx 100rpx 0rpx rgba(0,0,0,0.1);
+  /* --ShadowSize: 0rpx 40rpx 100rpx 0rpx; */
+
+}
+
+.boraaaa {
+border-right: 1px solid rgba(0, 0, 0, .1);
+}
