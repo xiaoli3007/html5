@@ -43,8 +43,8 @@
      </navigator>
   </view>
  
-  <view class=" radius shadow shadow-warp bg-white margin" style="margin-top:0;">
- <view class="cu-list grid col-3">
+  <view class="  bg-white margin" style="margin-top:0;">
+ <view class="cu-list grid col-3 bradius">
     <view class="cu-item  justify-center align-center" wx:for="{{jiaocaiList}}" wx:key wx:if="{{index<3}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
       <image src='{{item.thumb_xcx}}' style="width:120rpx;" mode="widthFix">
@@ -72,8 +72,8 @@
     </view>
      </navigator>
   </view>
-  <view class=" radius shadow shadow-warp bg-white margin"  style="margin-top:0;">
- <view class="cu-list grid col-3">
+  <view class="  bg-white margin "  style="margin-top:0;">
+ <view class="cu-list grid col-3 bradius ">
     <view class="cu-item  justify-center align-center" wx:for="{{kewaiduwuList}}" wx:key wx:if="{{index<3*2}}">
      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/detailed/detailed?ebookid={{item.id}}">
         

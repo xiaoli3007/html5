@@ -1,0 +1,55 @@
+<!-- <view class='cu-custom'>
+  <view class="cu-bar fixed bg-shadeTop" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <navigator class='action' open-type="navigateBack" delta="1" hover-class="none">
+      <text class='cuIcon-back'></text> 返回
+    </navigator>
+    <view class='content' style='top:{{StatusBar}}px;'>课外读物</view>
+  </view>
+</view> -->
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">搜索结果</view>
+</cu-custom>
+
+<view class="bg-white padding-top" style="height:100%;">
+
+  <wux-row>
+    <wux-col span="10" offset="1">
+
+ <view class="padding flex flex-direction">
+          <image src="https://rmsp.youyoushizi.com/statics/yysz/ico_wjg.svg" mode="scaleToFill" ></image>
+            </view>
+
+    </wux-col>
+  </wux-row>
+
+    <wux-row>
+    <wux-col span="10" offset="1">
+          <view class="padding flex flex-direction">
+         <text class="text-center">没有搜索到书籍，请点击 “缺书登记” 按钮 书籍上线后我们会第一时间通知您
+         
+         {{code}}=={{title}}
+         </text>
+           </view>
+    </wux-col>
+  </wux-row>
+
+  <wux-white-space size="default" />
+  <wux-row>
+    <wux-col span="10" offset="1">
+          <view class="padding flex flex-direction">
+         <button class="cu-btn round bg-orange lg" bindtap="gotoregbook">缺书登记</button>
+           </view>
+
+
+    </wux-col>
+
+  </wux-row>
+
+</view>
+
+
+<!-- <view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view> -->

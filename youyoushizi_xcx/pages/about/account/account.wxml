@@ -18,7 +18,7 @@
   <view class="bg-white margin-top padding-top">
         <wux-row bindtap="check_userid" data-username="{{item.username}}" data-val="{{item.userid}}">
             <wux-col span="2" offset="1">
-                 <view class="cu-avatar radius lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
+                 <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
             </wux-col>
             <wux-col span="7">
              <view class="content">
@@ -39,29 +39,33 @@
         <wux-row>
             <wux-col span="3" >
              <view class="flex flex-direction  justify-center" catchtap="showModal_editusername" data-target="DialogModaleditusername" data-username="{{item.username}}">
-                  <view class="cuIcon-friendfavor text-center"></view>
+                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl text-orange">
+                    </text>
                  <view class="text-grey text-center">修改用户名</view>
               </view>
             </wux-col>
             <wux-col span="3">
              <view class="flex flex-direction  justify-center"  catchtap="showModal_editpw" data-target="DialogModal1" data-username="{{item.username}}">
-                  <view class="cuIcon-friendfavor text-center"></view>
+                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_xgmm text-orange">
+                    </text>
                  <view class="text-grey text-center">修改密码</view>
               </view>
                  
             </wux-col>
              <wux-col span="3">
               <view class="flex flex-direction  justify-center">
-
-                   <view class="sunIcon-yes text-center text-orange"></view>
-
+                  <!-- <view class=""></view> -->
+                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
+                    </text>
+                    
                  <view class="text-grey text-center">用户充值</view>
               </view>
                   
             </wux-col>
              <wux-col span="3">
               <view class="flex flex-direction  justify-center" catchtap="delete_user"  data-val="{{item.userid}}">
-                  <view class="cuIcon-friendfavor text-center"></view>
+                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_sc text-orange">
+                    </text>
                  <view class="text-grey text-center">删除用户</view>
               </view>
                   

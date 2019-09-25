@@ -8,21 +8,35 @@
 
 <view class="cu-bar tabbar bg-white shadow foot">
   <view class="action" bindtap="NavChange" data-cur="basics">
-    <view class='cuIcon-cu-image'>
+    <!-- <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/basics{{PageCur=='basics'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='basics'?'text-orange':'text-gray'}}">学习</view>
+    <view class="{{PageCur=='basics'?'text-orange':'text-gray'}}">学习</view> -->
+
+    <view class="action {{PageCur=='basics'?'text-orange':'text-gray'}}">
+      <view class="proIcon-iconico_xx_xz"></view> 学习
+    </view>
+
   </view>
 
    <view class="action text-gray add-action">
-      <button class="cu-btn cuIcon-scan bg-orange shadow" bindtap="scanCode"></button>
-       
+      <button class="cu-btn proIcon-iconico_sm bg-white text-orange " bindtap="scanCode"></button> 
+       <!--<button class="cu-btn  bg-orange shadow" bindtap="scanCode">
+
+         <text style="font-size:50rpx;" class="proIcon-iconico_sm">
+                    </text> 
+
+       </button>-->
     </view>
 
   <view class="action" bindtap="NavChange" data-cur="about">
-    <view class='cuIcon-cu-image'>
+    <!-- <view class='cuIcon-cu-image'>
       <image src="/images/tabbar/about{{PageCur=='about'?'_cur':''}}.png"></image>
     </view>
-    <view class="{{PageCur=='about'?'text-orange':'text-gray'}}">我的</view>
+    <view class="{{PageCur=='about'?'text-orange':'text-gray'}}">我的</view> -->
+       <view class="action {{PageCur=='about'?'text-orange':'text-gray'}}">
+      <view class="proIcon-iconico_wd"></view> 我的
+    </view>
+
   </view>
-</view>
+</view> 
