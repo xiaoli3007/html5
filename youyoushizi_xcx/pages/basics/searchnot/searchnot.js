@@ -19,7 +19,7 @@ Page({
 
     let searchnot_title = options.searchnot_title ? options.searchnot_title : ''
 
-    that.setData({
+    this.setData({
       code: searchnot_code,
       title: searchnot_title,
     })

@@ -39,16 +39,8 @@
 </block> -->
   
 
-  <!-- <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class="action">
-      <text class="cuIcon-title text-orange ">推荐读物</text> 
-    </view>
-    <view class="action">
-     
-    </view>
-  </view> -->
-
-<view class="cu-card article no-card" catchtouchmove="{{ opened ? 'noop' : '' }}">
+<!-- 
+ <view class="cu-card article no-card" catchtouchmove="{{ opened ? 'noop' : '' }}">
   <view class="cu-item shadow" wx:for="{{duwuList}}" wx:key>
     <view class="title">
       <view class="text-cut">{{item.program.title}}</view>
@@ -67,27 +59,32 @@
     </view>
     </navigator>
   </view>
-</view>
+</view>  -->
 
- <!-- <view class="cu-list grid col-1">
-    <view class="flex flex-wrap justify-center align-center margin-top" wx:for="{{duwuList}}" wx:key >
+ <view class="cu-list " catchtouchmove="{{ opened ? 'noop' : '' }}">
+    <view class="padding-sm bg-white flex flex-wrap justify-center align-center margin-top" wx:for="{{duwuList}}" wx:key >
 
-     <view class="basis-xs">
-      <navigator  class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/recommenddetailed/recommenddetailed?ebookid={{item.program.id}}">
-       <image src='{{item.program.thumb_xcx}}' style="width:120rpx;" mode="widthFix">
+     <view class="basis-xs" style="flex-basis: 30%;">
+      <image src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
       </image>
-     </navigator>
-      </view>
-     <view class="basis-xl">
-     <view class="text-left ">{{item.program.title}}</view>
-     <view class="text-left margin-top"><text>作者：{{item.program.author}}</text> <text wx:if="{{item.program.translator!=''}}" ><text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>译者：{{item.program.translator}}</text></view>
+    </view>
+     <view class="basis-xl" style="flex-basis: 70%;">
+     <view class="text-left text-xl"><text class="text-black text-bold">{{item.program.title}}</text></view>
+     <view class="text-left">
+     <text class="text-lg">作者：{{item.program.author}}</text>
+     <text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
+     <text class="text-lg" wx:if="{{item.program.translator!=''}}" >译者：{{item.program.translator}}</text>
+     </view>
 
-     <view wx:if="{{item.program.summary}}" class="text-left margin-top"><text>
-     描述：{{item.program.description_list}}</text></view>
+    <view class="text-left text-df">字数：100000</view>
+
+     <view  class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;"> 
+     描述：{{item.program.head}}
+     </view>
       
       </view>
     </view>
-  </view>  -->
+  </view>  
 
 
 
