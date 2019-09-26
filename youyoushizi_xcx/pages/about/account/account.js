@@ -22,7 +22,9 @@ Page({
       newusername: '',
     }, 
     userid: app.globalData.userid,
-    avatarloadModal:false
+    avatarloadModal:false,
+    duserid:null,
+    dusername:null
   },
   onLoad: function () { 
   
@@ -72,6 +74,14 @@ Page({
     wx.navigateBack({
       delta: 1
     });
+  },
+  showModal_deleteuser(e) {
+    console.log(e);
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      duserid: e.currentTarget.dataset.userid,
+      dusername: e.currentTarget.dataset.username,
+    })
   },
   showModal_editpw(e) {
     console.log(e);
@@ -464,55 +474,59 @@ Page({
   delete_user(e) {
     // console.log(e)
 
-    let tuserid = e.currentTarget.dataset.val
+    let duserid = this.data.duserid
+    let dusername = this.data.dusername
     var that = this
-    console.log({ tuserid })
+    console.log({ duserid, dusername})
 
-    wx.showModal({
-      title: '删除用户',
-      content: '确定要删除用户？',
-      cancelText: '取消',
-      confirmText: '确定',
-      success: res => {
-        if (res.confirm) {
+    that.setData({
 
-          that.setData({
-
-            loadModal: true
-          })
-          //删除任务
-          wx.request({
-            url: app.globalData.url2 + '?act=wx_delete',
-            method: 'POST',
-            header: {
-              'content-type': 'application/x-www-form-urlencoded', // 默认值
-              'X-Token': app.globalData.xtoken
-            },
-            data: {
-              userid: tuserid,
-            },
-            success: function (res) {
-              console.log(res);
-
-                wx.showToast({
-                  title: res.data.message,
-                  icon: 'none',
-                  duration: 1500,
-                })
-               that.onLoad()
-            },
-            complete(res) {
-              that.setData({
-
-                loadModal: false
-              })
-
-            }
-          });
-
-        }
-      }
+      loadModal: true
     })
+    //删除用户
+    wx.request({
+      url: app.globalData.url2 + '?act=wx_delete',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      data: {
+        userid: duserid,
+      },
+      success: function (res) {
+        console.log(res);
+
+        wx.showToast({
+          title: res.data.message,
+          icon: 'none',
+          duration: 1500,
+        })
+        that.onLoad()
+      },
+      complete(res) {
+        that.setData({
+
+          loadModal: false,
+          modalName: null
+        })
+
+      }
+    });
+
+    // wx.showModal({
+    //   title: '删除用户',
+    //   content: '确定要删除用户？',
+    //   cancelText: '取消',
+    //   confirmText: '确定',
+    //   success: res => {
+    //     if (res.confirm) {
+
+    //     }
+    //   }
+    // })
+
+
   },
 
  

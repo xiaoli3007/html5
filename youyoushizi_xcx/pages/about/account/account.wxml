@@ -75,7 +75,7 @@
                   
             </wux-col>
              <wux-col span="3">
-              <view class="flex flex-direction  justify-center" catchtap="delete_user"  data-val="{{item.userid}}">
+              <view class="flex flex-direction  justify-center"   catchtap="showModal_deleteuser" data-target="DialogModaldeleteusername" data-username="{{item.username}}"  data-userid="{{item.userid}}">
                    <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_sc text-orange">
                     </text>
                  <view class="text-grey text-center">删除用户</view>
@@ -119,10 +119,10 @@
 
 <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
   <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
+    <view class="cu-bar bg-orange justify-end">
       <view class="content">修改密码</view>
       <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
+        <text class="proIcon-iconico_gb text-white"></text>
       </view>
     </view>
     <form bindsubmit="formSubmit">
@@ -157,10 +157,10 @@
 
 <view class="cu-modal {{modalName=='DialogModaleditusername'?'show':''}}">
   <view class="cu-dialog">
-    <view class="cu-bar bg-white justify-end">
+    <view class="cu-bar bg-orange justify-end">
       <view class="content">修改用户名</view>
       <view class="action" bindtap="hideModal">
-        <text class="cuIcon-close text-red"></text>
+        <text class="proIcon-iconico_gb text-white"></text>
       </view>
     </view>
     <form bindsubmit="formSubmiteditusername">
@@ -221,6 +221,29 @@
         </view>
       </view>
     </form>
+  </view>
+</view>
+
+
+
+<view class="cu-modal {{modalName=='DialogModaldeleteusername'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-orange justify-end">
+      <view class="content">删除用户</view>
+      <view class="action" bindtap="hideModal">
+        <text class="proIcon-iconico_gb text-white"></text>
+      </view>
+    </view>
+      <view class="padding-sm bg-white" style="padding:150rpx 10rpx;">
+
+          您确定要删除当前的<text class="text-red">{{dusername}}</text>这个用户么！
+      </view>
+      <view class="cu-bar bg-white justify-center padding-bottom">
+        <view class="action">
+          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+          <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" catchtap="delete_user">确定</button>
+        </view>
+      </view>
   </view>
 </view>
 
