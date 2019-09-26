@@ -12,9 +12,22 @@ Page({
       content: '',
       contact: ''
     },
-    avatarloadModal: false
+    avatarloadModal: false,
+    isbn:''
   },
-  onLoad: function () {
+  onLoad: function (options) {
+
+    let searchnot_code = options.searchnot_code ? options.searchnot_code : ''
+    let searchnot_title = options.searchnot_title ? options.searchnot_title : ''
+
+    this.setData({
+      isbn: searchnot_code,
+      form: {
+        name: searchnot_title,
+        content: '',
+        contact: ''
+      }
+    })
 
     this.initValidate()//验证规则函数
 
@@ -72,6 +85,7 @@ Page({
           name: params.name,
           content: params.content,
           contact: params.contact,
+          isbn: that.data.isbn
         },
         success: function (res) {
           const data = JSON.parse(res.data)
@@ -104,6 +118,7 @@ Page({
           name: params.name,
           content: params.content,
           contact: params.contact,
+          isbn:that.data.isbn
         },
         success: function (res) {
           console.log(res)
