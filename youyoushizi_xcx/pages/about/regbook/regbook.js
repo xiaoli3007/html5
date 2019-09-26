@@ -91,6 +91,15 @@ Page({
           const data = JSON.parse(res.data)
           console.log(data)
 
+          that.setData({
+            isbn: '',
+            form: {
+              name: '',
+              content: '',
+              contact: ''
+            }
+          })
+
           that.showFormModal({
             msg: data.message
           })
@@ -123,6 +132,14 @@ Page({
         success: function (res) {
           console.log(res)
 
+          that.setData({
+            isbn: '',
+            form: {
+              name: '',
+              content: '',
+              contact: ''
+            }
+          })
           that.showFormModal({
             msg: res.data.message
           })
