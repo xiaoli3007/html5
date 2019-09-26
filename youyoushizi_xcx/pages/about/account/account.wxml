@@ -32,7 +32,19 @@
                 
             </wux-col>
              <wux-col span="2" >
-                <view class="text-green text-xs cuIcon-check" wx:if='{{item.userid===userid}}'></view> 
+                <view class="text-orange text-xs  text-center" wx:if='{{item.userid===userid}}'>
+
+                <text style="font-size:50rpx;" class="proIcon-iconico_gx_x">
+                    </text>
+
+                </view> 
+
+                 <view class="text-green text-xs  text-center" wx:if='{{item.userid!=userid}}'>
+
+                <text style="font-size:50rpx;" class="proIcon-iconico_wgx">
+                    </text>
+                </view> 
+
             </wux-col>
         </wux-row>
           <wux-divider show-text="{{ false }}" dashed />
@@ -114,7 +126,7 @@
       </view>
     </view>
     <form bindsubmit="formSubmit">
-      <view class="padding-sm">
+      <view class="padding-sm bg-white">
 
 
         <view class="cu-form-group margin-top">
@@ -131,10 +143,11 @@
         </view>
 
       </view>
-      <view class="cu-bar bg-white justify-end">
+      <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
-          <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button>
+        <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
+          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button> -->
         </view>
       </view>
     </form>
@@ -151,23 +164,23 @@
       </view>
     </view>
     <form bindsubmit="formSubmiteditusername">
-      <view class="padding-sm">
+      <view class="padding-sm bg-white">
 
 
         <view class="cu-form-group margin-top">
           <view class="title">用户名</view>
           <input disabled="true" name='username' value='{{edituernameform.username}}'></input>
         </view>
-        <view class="cu-form-group">
+        <view class="cu-form-group margin-bottom">
           <view class="title">新用户名</view>
           <input placeholder="新用户名" name='newusername' value='{{edituernameform.newusername}}'></input>
         </view>
 
       </view>
-      <view class="cu-bar bg-white justify-end">
+      <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
-          <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button>
+          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+          <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
         </view>
       </view>
     </form>
@@ -198,10 +211,13 @@
           <input placeholder="确认新密码"></input>
         </view> -->
       </view>
-      <view class="cu-bar bg-white justify-end">
+      <view class="cu-bar bg-white justify-center">
         <view class="action">
           <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button>
+          <!-- <button class="cu-btn bg-green margin-left" form-type="submit">确定</button> -->
+
+           <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
+
         </view>
       </view>
     </form>
