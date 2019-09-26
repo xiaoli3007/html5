@@ -39,7 +39,7 @@
 
                 </view> 
 
-                 <view class="text-green text-xs  text-center" wx:if='{{item.userid!=userid}}'>
+                 <view class="text-orange text-xs  text-center" wx:if='{{item.userid!=userid}}'>
 
                 <text style="font-size:50rpx;" class="proIcon-iconico_wgx">
                     </text>
