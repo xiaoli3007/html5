@@ -32,9 +32,14 @@ Page({
   gotoregbook() {
     // this.setData({ msg: 'Hello World' })
 
+    
+
     wx.navigateTo({
-      url: '/pages/about/regbook/regbook',
-    })
+      url: '/pages/about/regbook/regbook?searchnot_code=' + this.data.code + '&searchnot_title=' + this.data.title,
+
+    }) 
+
+
   },
 
 })

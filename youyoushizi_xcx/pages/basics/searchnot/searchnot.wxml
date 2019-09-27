@@ -28,7 +28,7 @@
           <view class="padding flex flex-direction">
          <text class="text-center">没有搜索到书籍，请点击 “缺书登记” 按钮 书籍上线后我们会第一时间通知您
          
-         {{code}}=={{title}}
+         <!-- {{code}}=={{title}} -->
          </text>
            </view>
     </wux-col>
