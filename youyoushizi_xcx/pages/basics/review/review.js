@@ -130,7 +130,7 @@ Page({
 
             })
 
-
+ 
 
             // res.data.word_data.task_word_data_items.forEach(function(value, i) {
             // })

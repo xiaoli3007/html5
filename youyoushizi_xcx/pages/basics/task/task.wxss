@@ -1,5 +1,17 @@
 /* .task_sw_view{ width: 100%; text-align: center;} */
-.swiper_view{min-height: 200rpx;}
+
+.swiper_big {
+ 
+height: 500rpx;
+
+}
+.swiper_sub{
+  height: 400rpx;
+}
+
+.swiper_view{
+  min-height: 200rpx;
+  }
 .task_sw{
 font-size:5rem;  
 }

@@ -3,44 +3,59 @@
   <view slot="content">{{toptitle}}</view>
 </cu-custom>
 
-<view class="cu-bar bg-white solid-bottom margin-bottom">
-  <view class="action  justify-center align-center">
+ <view class="bg-white solid-bottom margin-bottom-xs padding-bottom-xs">
+  <!-- <view class="action  justify-center align-center">
     <text class="cuIcon-title text-gray">{{taskdata.name}}</text>
-  </view>
-  <view class="action">
-    <!-- <button class="cu-btn bg-green shadow" >新增</button> -->
-  </view>
-</view>
+  </view> -->
+  <wux-row>
+  <wux-col span="12" >
+    <view class="text-center">  <text class="text-xl">{{taskdata.name}}</text>
+    <text class="margin-left">({{current+1}}/{{taskdata.word1.length}})</text>
+    </view>
+  </wux-col>
+</wux-row>
 
 <wux-row>
-  <wux-col span="10" offset="1">
+  <wux-col span="8" offset="2">
+    <view class="text-center text-gray text-sm"> 已用时：
+      <my-timer id="mytimes"> </my-timer>
+    </view>
+  </wux-col>
+</wux-row>
+
+<wux-row>
+  <wux-col span="12" >
 
     <view class="flex">
-      <view class="cu-progress round striped">
+      <view class="cu-progress  ">
         <view class="bg-green" style="width:{{taskloading}};"></view>
       </view>
-      <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text>
+      <!-- <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text> -->
     </view>
   </wux-col>
 
 </wux-row>
+ 
+</view> 
+
+
 <wux-white-space size="default" />
 
 <wux-row>
-  <wux-col span="1">
+  <!-- <wux-col span="1">
     <wux-tabs controlled current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
       <block wx:for="{{ tabs }}" wx:key="key">
         <wux-tab key="{{ item.key }}" title="{{ item.title }}"></wux-tab>
       </block>
     </wux-tabs>
-  </wux-col>
-  <wux-col span="8" offset="1">
-    <view class="bg-green padding radius align-center shadow-blur swiper_view">
-      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}">
+  </wux-col> -->
+  <wux-col span="12" >
+    <view class="bg-white text-orange padding radius align-center shadow-blur swiper_view">
+      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big">
         <block wx:for="{{taskdata.word1}}" wx:key>
           <swiper-item>
 
-            <swiper vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
+            <swiper class="swiper_sub" vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
               <swiper-item>
                 <view class="flex justify-center align-center  text-center sw_view">
 
@@ -85,6 +100,17 @@
             </swiper>
 
 
+                 <wux-row wx:if="{{type==2}}">
+                  <wux-col span="12">
+
+                    <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+                      <my-radio current="{{konw_current[mindex]}}" dataArray="{{konw_select_menu}}" bind:myevent="onChangeKnow"> </my-radio>
+                    </block>
+
+                  </wux-col>
+
+                </wux-row>  
+
           </swiper-item>
         </block>
       </swiper>
@@ -93,7 +119,7 @@
 
   </wux-col>
 
-  <wux-col span="2">
+  <!-- <wux-col span="2">
     <view class="text-center">
       <button class="cu-btn icon bg-white" bindtap="showModal_word_shiyi" data-target="DrawerModalL">
         字
@@ -106,18 +132,12 @@
         <text class="cuIcon-question"></text>
       </button>
     </view>
-  </wux-col>
+  </wux-col> -->
 </wux-row>
 
 <wux-white-space size="large" />
 
-<wux-row>
-  <wux-col span="8" offset="2">
-    <view class="padding text-center"> 已用时：
-      <my-timer id="mytimes"> </my-timer>
-    </view>
-  </wux-col>
-</wux-row>
+
 
 <wux-row wx:if="{{type==1}}">
   <wux-col span="4">
@@ -164,39 +184,21 @@
   </wux-col>
 </view>
 
-<wux-row wx:if="{{type==2}}">
+<!-- <wux-row wx:if="{{type==2}}">
   <wux-col span="2">
     <view class="cuIcon-pullleft text-center" style="font-size:80rpx;" bindtap="prev">
     </view>
   </wux-col>
   <wux-col span="8">
-
-    <view class="">
-
-      <!-- <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+ <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
         <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
-      </block> -->
-
-
-    </view>
+      </block> 
   </wux-col>
-
   <wux-col span="2">
     <view class="cuIcon-pullright text-center" style="font-size:80rpx;" bindtap="next">
     </view>
-
   </wux-col>
-
-
-   <wux-col span="12">
-
-    <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
-       <my-radio current="{{konw_current[mindex]}}" dataArray="{{konw_select_menu}}" bind:myevent="onChangeKnow"> </my-radio>
-     </block>
-
-  </wux-col>
-
-</wux-row>
+</wux-row> -->
 
 
 
@@ -225,11 +227,6 @@
     尾
   </button>
 </view>
-
-<!-- <button class="cu-btn round bg-gradual-orange shadow" bindtap="ceshiyuyin">
-    语音测试mp3
-  </button> -->
-
 
 <wux-divider wx:if="{{tingxie_auto}}">
   <view class="loadmore">
