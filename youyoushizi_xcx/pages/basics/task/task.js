@@ -151,12 +151,14 @@ Page({
           var konw_currenttemp = [];
           res.data.word_data.task_word_data_items.forEach(function (value, i) {
             // console.log(value);
-            let wstatus = value.status == '0'?20:value.status =='1'?0:1
+            // let wstatus = value.status == '0'?20:value.status =='1'?0:1
+
+            let wstatus = value.status == '0' ? 20 : value.status
             konw_currenttemp.push(wstatus)
             //console.log( value);
           })
 
-          // console.log(konw_currenttemp);
+          console.log(konw_currenttemp);
 
           // console.log(linktemp1);
 
@@ -680,12 +682,34 @@ Page({
   },
   onChangeKnow(e) {
     console.log(e.detail)
-    console.log(this.data.current)
+    // console.log(this.data.current)
     var tprice = 'konw_current[' + this.data.current + ']'
     this.setData({
       [tprice]: e.detail.value,
     })
-    
+
+    var tempwcellid = this.data.taskdata.word1[this.data.current].wcellid
+    //识字认识不认识 发送请求
+    wx.request({
+      url: app.globalData.url + '?act=taskinwcell',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        taskid: this.data.taskid,
+        wcellid: tempwcellid,
+        status: e.detail.value,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+
+      }
+    })
+
     var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
     var that = this
     setTimeout(function () {
@@ -693,6 +717,14 @@ Page({
         current: nextitem,
       })
     }, 500)
+
+    if (this.data.current == this.data.taskdata.word1.length - 1) {
+      wx.showToast({
+        title: '本次识字已完成！',
+        icon: 'none',
+        duration: 1500,
+      })
+    }
 
   },
   onChangesegmented(e) {

@@ -173,9 +173,9 @@
 
     <view class="">
 
-      <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+      <!-- <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
         <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
-      </block>
+      </block> -->
 
 
     </view>
