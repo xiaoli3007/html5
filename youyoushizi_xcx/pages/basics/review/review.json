@@ -6,6 +6,7 @@
     "wux-tab": "../../../dist/tab/index",
     "wux-white-space": "../../../dist/white-space/index",
     "wux-segmented-control": "../../../dist/segmented-control/index",
-    "my-timer": "../../../myComponent/timer/timer"
+    "my-timer": "../../../myComponent/timer/timer",
+    "my-radio": "../../../myComponent/myradio/myradio"
   }
 }

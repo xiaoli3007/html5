@@ -29,9 +29,7 @@
 <wux-row>
   <wux-col span="1" >
       <wux-tabs controlled current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
-            <!-- <wux-tab key="tab1" title="字"></wux-tab>
-            <wux-tab key="tab2" title="词"></wux-tab>
-            <wux-tab key="tab3" title="句"></wux-tab> -->
+           
              <block wx:for="{{ tabs }}" wx:key="key">
                 <wux-tab key="{{ item.key }}" title="{{ item.title }}"></wux-tab>
             </block>
@@ -48,9 +46,7 @@
                     <swiper-item>
                       <view class="justify-center align-center  text-center sw_view">
 
-                      <!-- <view> 
-                         <text class="task_sw cuIcon-emoji" style=""></text> </view>
-                      -->
+                    
 
                       <view>  <text class='task_sw text-center'>{{item.sw}}</text> </view> 
                          </view>
@@ -67,9 +63,7 @@
                     </swiper-item>
                 </swiper>
 
-      <!-- <view class="justify-center align-center task_sw_view text-center">
-        <text class='task_sw text-center'>{{item.sw}}</text>
-      </view> -->
+   
     </swiper-item>
   </block>
 </swiper>
@@ -94,9 +88,6 @@
   <wux-col span="8" offset="2">
   <view class="padding text-center">  已用时：<my-timer id="mytimes"> </my-timer>  
   
-  <!-- <text class="cuIcon-video" style="font-size:30rpx;" bindtap="onMyEvent">
-  </text>  -->
-
    </view>
   </wux-col>
   
@@ -115,8 +106,17 @@
   
   <view class="" >
 
-   <block wx:for="{{ konw_listinfo }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+   <!-- <block wx:for="{{ konw_listinfo }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
     <wux-segmented-control theme="calm" current="{{konw_current[mindex]}}" controlled values="{{konw_listinfo_title[mindex]}}" bind:change="onChangesegmented" />
+
+    
+
+    </block> -->
+
+    <block wx:for="{{ konw_listinfo }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+     
+     <my-radio current="{{konw_current[mindex]}}" dataArray="{{konw_list_radios[mindex]}}" bind:myevent="onChangeKnow"> </my-radio>
+ 
     </block>
 
   </view>

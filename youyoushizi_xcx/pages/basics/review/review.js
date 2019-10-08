@@ -39,7 +39,8 @@ Page({
         title: '句',
       },
     ],
-    taskid: 0
+    taskid: 0,
+    konw_list_radios: [],
   },
   onLoad: function(options) {
 
@@ -87,6 +88,7 @@ Page({
             var konw_currenttemp = [];
             var konw_currenttemplist = [];
             var konw_currenttemplist_title = [];
+            var tempkonw_list_radios = [];
 
             res.data.word_data.word1.forEach(function(value, i) {
               var innerAudioContext = null
@@ -114,6 +116,18 @@ Page({
               })
               konw_currenttemplist_title.push(titletmep)
               //console.log( value);
+              //新的单选按钮
+              let titletmepaaa = [];
+              value.review_select_days.forEach(function (value, i) { 
+                let titletmepaaasub = {};
+                titletmepaaasub = {
+                  value: i,
+                  isicon: false,
+                  label: value.name}
+                titletmepaaa.push(titletmepaaasub)
+              })
+              tempkonw_list_radios.push(titletmepaaa)
+
             })
 
 
@@ -134,9 +148,10 @@ Page({
               konw_current: konw_currenttemp,
               konw_listinfo: konw_currenttemplist,
               konw_listinfo_title: konw_currenttemplist_title,
+              konw_list_radios: tempkonw_list_radios,
               chuchu: res.data.word_data.word1[0].chuchu
             })
-            // console.log(konw_currenttemp);
+            console.log(tempkonw_list_radios);
 
           }
 
@@ -264,6 +279,57 @@ Page({
     })
     this.data.audiolwordlist[this.data.current].play()
   },
+  
+  onChangeKnow(e) {
+    console.log(e.detail.value)
+    // console.log(this.data.current)
+    var tprice = 'konw_current[' + this.data.current + ']'
+    this.setData({
+      [tprice]: e.detail.value,
+    })
+    var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
+    var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.value]
+    console.log(tempwcellid)
+    console.log(temp_fact)
+    //发送请求 super 算法
+    wx.request({
+      url: app.globalData.url + '?act=taskinwcell_super',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        task_wcell_id: tempwcellid,
+        day: temp_fact.value,
+        quality: temp_fact.quality,
+        factor: temp_fact.factor,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+
+      }
+    })
+
+    var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
+    var that = this
+    setTimeout(function () {
+      that.setData({
+        current: nextitem,
+      })
+    }, 500)
+
+    if (this.data.current == this.data.taskdata.word1.length - 1) {
+      wx.showToast({
+        title: '本次识字已完成！',
+        icon: 'none',
+        duration: 1500,
+      })
+    }
+
+   },
   onChangesegmented(e) {
     console.log(e.detail.key)
     // console.log(this.data.current)
@@ -272,7 +338,6 @@ Page({
       [tprice]: e.detail.key,
     })
     
- 
     var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
     var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.key]
     console.log(tempwcellid)
