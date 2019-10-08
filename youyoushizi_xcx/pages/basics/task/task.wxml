@@ -50,11 +50,38 @@
     </wux-tabs>
   </wux-col> -->
   <wux-col span="12" >
-    <view class="bg-white text-orange padding radius align-center shadow-blur swiper_view">
-      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big">
+    <view class="bg-white text-orange  radius align-center shadow-blur swiper_view">
+          <view class="padding-sm">
+                <wux-row>
+                  <wux-col span="4">
+                    <view class="text-left cz_icon">
+                    <text class="proIcon-iconico_bc"></text>
+                    </view>
+                    
+                  </wux-col>
+                  <wux-col span="4">
+                       <view class="text-center cz_icon text-grey">
+                    <text class="proIcon-iconico_jt_s"></text>
+                    </view>
+                  </wux-col>
+                  <wux-col span="4">
+                       <view class="text-right cz_icon">
+                    <text class="proIcon-iconico_bz"></text>
+                    </view>
+                  </wux-col>
+                </wux-row>  
+                 <wux-row>
+                  <wux-col span="4" offset="8">
+                       <view class="text-right cz_icon">
+                    <text class="proIcon-iconico_yy"></text>
+                    </view>
+                  </wux-col>
+                </wux-row> 
+              </view> 
+      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs">
         <block wx:for="{{taskdata.word1}}" wx:key>
           <swiper-item>
-
+ 
             <swiper class="swiper_sub" vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
               <swiper-item>
                 <view class="flex justify-center align-center  text-center sw_view">
@@ -100,6 +127,12 @@
             </swiper>
 
 
+          </swiper-item>
+        </block>
+      </swiper>
+
+      
+
                  <wux-row wx:if="{{type==2}}">
                   <wux-col span="12">
 
@@ -110,10 +143,7 @@
                   </wux-col>
 
                 </wux-row>  
-
-          </swiper-item>
-        </block>
-      </swiper>
+                <wux-white-space size="default" />
 
     </view>
 
@@ -201,11 +231,9 @@
 </wux-row> -->
 
 
+ 
 
-<wux-white-space size="default" />
-
-
-<view class="padding flex flex-wrap justify-between align-center " wx:if="{{!tingxie_auto}}">
+<!-- <view class="padding flex flex-wrap justify-between align-center " wx:if="{{!tingxie_auto}}">
   <button class="cu-btn round bg-gradual-red shadow" bindtap="audioStart">
     首
   </button>
@@ -226,7 +254,7 @@
   <button class="cu-btn round bg-gradual-orange shadow" bindtap="audioend">
     尾
   </button>
-</view>
+</view> -->
 
 <wux-divider wx:if="{{tingxie_auto}}">
   <view class="loadmore">
