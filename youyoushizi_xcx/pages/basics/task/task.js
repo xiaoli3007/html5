@@ -79,6 +79,19 @@ Page({
     button_loading_text: '',
     button_loading_auto:false,
     button_global_src: '',
+    konw_select_menu: [
+      {
+        value: '1',
+        isicon: true,
+        label: 'proIcon-iconico_rs',
+      },
+      {
+        value: '2',
+        isicon: true,
+        label: 'proIcon-iconico_brs',
+      },
+
+    ],
   },
   onLoad: function (options) {
    
@@ -132,16 +145,6 @@ Page({
           //   innerAudioContext.src = value.sw_sound
           //   linktemp1.push(innerAudioContext)
 
-          //   var innerAudioContext2 = null
-          //   innerAudioContext2 = wx.createInnerAudioContext()
-          //   innerAudioContext2.src = value.dw_sound
-          //   linktemp2.push(innerAudioContext2)
-
-          //   var innerAudioContext3 = null
-          //   innerAudioContext3 = wx.createInnerAudioContext()
-          //   innerAudioContext3.src = value.lw_sound
-          //   linktemp3.push(innerAudioContext3)
-
           //   //console.log( value);
           // })
 
@@ -155,8 +158,6 @@ Page({
 
           // console.log(konw_currenttemp);
 
-          // console.log(linktemp1);
-          // console.log(linktemp2);
           // console.log(linktemp1);
 
           that.setData({
@@ -676,6 +677,23 @@ Page({
       this.data.audiolword_object.play()
     }
     
+  },
+  onChangeKnow(e) {
+    console.log(e.detail)
+    console.log(this.data.current)
+    var tprice = 'konw_current[' + this.data.current + ']'
+    this.setData({
+      [tprice]: e.detail.value,
+    })
+    
+    var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
+    var that = this
+    setTimeout(function () {
+      that.setData({
+        current: nextitem,
+      })
+    }, 500)
+
   },
   onChangesegmented(e) {
     // console.log(e.detail.key)

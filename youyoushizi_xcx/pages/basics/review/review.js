@@ -265,7 +265,7 @@ Page({
     this.data.audiolwordlist[this.data.current].play()
   },
   onChangesegmented(e) {
-    // console.log(e.detail.key)
+    console.log(e.detail.key)
     // console.log(this.data.current)
     var tprice = 'konw_current[' + this.data.current + ']'
     this.setData({

@@ -8,6 +8,7 @@
     "wux-segmented-control": "../../../dist/segmented-control/index",
     "wux-dialog": "../../../dist/dialog/index",
     "wux-divider": "../../../dist/divider/index",
-    "my-timer": "../../../myComponent/timer/timer"
+    "my-timer": "../../../myComponent/timer/timer",
+    "my-radio": "../../../myComponent/myradio/myradio"
   }
 }

@@ -2,7 +2,7 @@ import { $wuxDialog } from '../../../dist/index'
 const app = getApp()
 Page({
   data: {
-    searchitems: [
+    searchitems: [ 
       //   {
       //   type: 'radio',
       //   label: 'Updated',

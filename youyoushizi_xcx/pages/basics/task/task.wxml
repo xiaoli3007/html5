@@ -29,16 +29,12 @@
 <wux-row>
   <wux-col span="1">
     <wux-tabs controlled current="{{ tabkey }}" direction="vertical" bindchange="onTabsChange">
-      <!-- <wux-tab key="tab1" title="字"></wux-tab>
-            <wux-tab key="tab2" title="词"></wux-tab>
-            <wux-tab key="tab3" title="句"></wux-tab> -->
       <block wx:for="{{ tabs }}" wx:key="key">
         <wux-tab key="{{ item.key }}" title="{{ item.title }}"></wux-tab>
       </block>
     </wux-tabs>
   </wux-col>
   <wux-col span="8" offset="1">
-
     <view class="bg-green padding radius align-center shadow-blur swiper_view">
       <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}">
         <block wx:for="{{taskdata.word1}}" wx:key>
@@ -62,13 +58,12 @@
                   <view wx:if="{{tingxie_text_hide}}">
                     <text class="task_sw cuIcon-emoji" style=""></text> </view>
                   <view wx:if="{{!tingxie_text_hide}}" style="width:100%;" class='text-center'>
-                    <!-- <text class='task_dw text-center'>{{item.dw_xcx}}</text> -->
 
-                    <block wx:for="{{item.dw_xcx}}" wx:key="*this"  wx:for-item="itemsub">
-                      <text class='task_dw text-red' wx:if="{{itemsub == item.sw}}" >{{itemsub}}</text> 
+                    <block wx:for="{{item.dw_xcx}}" wx:key="*this" wx:for-item="itemsub">
+                      <text class='task_dw text-red' wx:if="{{itemsub == item.sw}}">{{itemsub}}</text>
                       <text class='task_dw ' wx:else>{{itemsub}}</text>
-                    </block> 
-                    
+                    </block>
+
                   </view>
                 </view>
               </swiper-item>
@@ -77,12 +72,11 @@
                   <view wx:if="{{tingxie_text_hide}}">
                     <text class="task_sw cuIcon-emoji" style=""></text> </view>
                   <view wx:if="{{!tingxie_text_hide}}" style="width:100%;">
-                    <!-- <text class='task_lw text-left align-center'>{{item.lw_xcx}}</text> -->
 
-                     <block wx:for="{{item.lw_xcx}}" wx:key="*this"  wx:for-item="itemsub">
-                      <text class='task_lw text-left text-red' wx:if="{{itemsub == item.sw}}" >{{itemsub}}</text> 
+                    <block wx:for="{{item.lw_xcx}}" wx:key="*this" wx:for-item="itemsub">
+                      <text class='task_lw text-left text-red' wx:if="{{itemsub == item.sw}}">{{itemsub}}</text>
                       <text class='task_lw text-left' wx:else>{{itemsub}}</text>
-                    </block> 
+                    </block>
 
 
                   </view>
@@ -90,9 +84,7 @@
               </swiper-item>
             </swiper>
 
-            <!-- <view class="justify-center align-center task_sw_view text-center">
-        <text class='task_sw text-center'>{{item.sw}}</text>
-      </view> -->
+
           </swiper-item>
         </block>
       </swiper>
@@ -115,7 +107,6 @@
       </button>
     </view>
   </wux-col>
-
 </wux-row>
 
 <wux-white-space size="large" />
@@ -124,13 +115,8 @@
   <wux-col span="8" offset="2">
     <view class="padding text-center"> 已用时：
       <my-timer id="mytimes"> </my-timer>
-
-      <!-- <text class="cuIcon-video" style="font-size:30rpx;" bindtap="onMyEvent">
-  </text>  -->
-
     </view>
   </wux-col>
-
 </wux-row>
 
 <wux-row wx:if="{{type==1}}">
@@ -170,9 +156,6 @@
     </view>
 
 
-    <!-- <view class="cuIcon-favor" bindtap="goreadcheck" style="font-size:100rpx;" >
-  </view> -->
-
   </wux-col>
   <wux-col span="4">
     <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next" wx:if="{{!tingxie_auto}}">
@@ -194,6 +177,7 @@
         <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
       </block>
 
+
     </view>
   </wux-col>
 
@@ -202,21 +186,19 @@
     </view>
 
   </wux-col>
-</wux-row>
 
-<!-- <view class=" flex flex-wrap justify-between align-center " wx:if="{{type==2}}">
-  <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev">
-  </view>
-  <view class="" style="width:400rpx;">
+
+   <wux-col span="12">
 
     <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
-      <wux-segmented-control current="{{konw_current[mindex]}}" controlled values="{{ ['认识', '不认识'] }}" bind:change="onChangesegmented" />
-    </block>
+       <my-radio current="{{konw_current[mindex]}}" dataArray="{{konw_select_menu}}" bind:myevent="onChangeKnow"> </my-radio>
+     </block>
 
-  </view>
-  <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next">
-  </view>
-</view> -->
+  </wux-col>
+
+</wux-row>
+
+
 
 <wux-white-space size="default" />
 
@@ -249,31 +231,27 @@
   </button> -->
 
 
- <wux-divider wx:if="{{tingxie_auto}}">
-        	<view class="loadmore">
-        		<!-- <view class="loading"></view> -->
-        		<text class="text">{{tingxie_loading_text}}</text>
-        	</view>
-        </wux-divider>
+<wux-divider wx:if="{{tingxie_auto}}">
+  <view class="loadmore">
+    <text class="text">{{tingxie_loading_text}}</text>
+  </view>
+</wux-divider>
 
 
 
-   <wux-divider wx:if="{{button_loading_auto}}">
-        	<view class="loadmore">
-        		<!-- <view class="loading"></view> -->
-        		<text class="text">{{button_loading_text}}</text>
-        	</view>
-        </wux-divider>
+<wux-divider wx:if="{{button_loading_auto}}">
+  <view class="loadmore">
+    <text class="text">{{button_loading_text}}</text>
+  </view>
+</wux-divider>
 
 
- 
+
 <view class='mecu-load meload-modal' wx:if="{{tingxie_ready}}">
-  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <view class='text-yellow text-shadow'>{{tingxie_ready_text}}</view>
 </view>
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
-  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <image src='/images/logo.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>加载中...</view>
 </view>
@@ -281,166 +259,161 @@
 <wux-dialog id="wux-dialog" />
 
 
-<!-- <block wx:for="{{taskdata.word1}}" wx:for-index="mindex" wx:key>
-</block> -->
-  <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type!='25'}}">
-    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
-      <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-        <view class="itemcontent text-left">
-          <wux-white-space size="default" />
 
-          <wux-row wx:if="{{data_item_word.word_show_detail.bihua_img!=''}}">
-            <wux-col span="8" offset="2">
-              <view class="text-center">
-                <image src='{{data_item_word.word_show_detail.bihua_img}}' mode="widthFix" style="width:50%;">
-                </image>
-              </view>
-            </wux-col>
-          </wux-row>
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type!='25'}}">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+      <view class="itemcontent text-left">
+        <wux-white-space size="default" />
 
-          <wux-divider show-text="{{ false }}" dashed />
+        <wux-row wx:if="{{data_item_word.word_show_detail.bihua_img!=''}}">
+          <wux-col span="8" offset="2">
+            <view class="text-center">
+              <image src='{{data_item_word.word_show_detail.bihua_img}}' mode="widthFix" style="width:50%;">
+              </image>
+            </view>
+          </wux-col>
+        </wux-row>
+
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="10" offset="1">
+            <text> 笔顺：{{data_item_word.word_show_detail.bishun}}
+                   </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="5" offset="1">
+            <text> 笔画：{{data_item_word.word_show_detail.bihuaw}}
+                   </text>
+          </wux-col>
+          <wux-col span="5" offset="1">
+            <text>  部首：{{data_item_word.word_show_detail.bushou}}
+                   </text>
+          </wux-col>
+
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="10" offset="1">
+            <text> 字形：{{data_item_word.word_show_detail.zixing}}
+                   </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+
+        <block wx:for="{{data_item_word.word_show_detail.mean_list}}" wx:key>
           <wux-row>
-            <wux-col span="10" offset="1">
-              <text> 笔顺：{{data_item_word.word_show_detail.bishun}}
-                   </text>
+            <wux-col span="3" offset="1">
+              <text>拼音：</text>
+            </wux-col>
+            <wux-col span="8">
+              <button class="cu-btn round bg-gradual-purple shadow" bindtap="play_any_src" data-msrc="{{item.mp3}}">
+                {{item.pinyin}}
+                <view class="cuIcon-notification" style="margin-left:10px;">
+                </view>
+              </button>
             </wux-col>
           </wux-row>
-          <wux-divider show-text="{{ false }}" dashed />
-          <wux-row>
-            <wux-col span="5" offset="1">
-              <text> 笔画：{{data_item_word.word_show_detail.bihuaw}}
-                   </text>
-            </wux-col>
-            <wux-col span="5" offset="1">
-              <text>  部首：{{data_item_word.word_show_detail.bushou}}
-                   </text>
-            </wux-col>
-
-          </wux-row>
-          <wux-divider show-text="{{ false }}" dashed />
-          <wux-row>
-            <wux-col span="10" offset="1">
-              <text> 字形：{{data_item_word.word_show_detail.zixing}}
-                   </text>
-            </wux-col>
-          </wux-row>
-          <wux-divider show-text="{{ false }}" dashed />
-
-          <block wx:for="{{data_item_word.word_show_detail.mean_list}}" wx:key>
-            <wux-row>
-              <wux-col span="3" offset="1">
-                <text>拼音：</text>
-              </wux-col>
-              <wux-col span="8">
-                <button class="cu-btn round bg-gradual-purple shadow" bindtap="play_any_src" data-msrc="{{item.mp3}}">
-                  {{item.pinyin}}
-                  <view class="cuIcon-notification" style="margin-left:10px;">
-                  </view>
-                </button>
-              </wux-col>
-            </wux-row>
-            <wux-white-space size="default" />
-            <wux-row>
-              <wux-col span="3" offset="1">
-                <text> 释义： </text>
-              </wux-col>
-              <wux-col span="8">
-                <block wx:for="{{item.submean_list}}" wx:key>
-                  <text> {{item}} </text>
-                </block>
-                <!-- <text wx:for="{{item.submean_list}}">
-                      {{item}}
-                  </text> -->
-              </wux-col>
-            </wux-row>
-            <wux-divider show-text="{{ false }}" dashed />
-          </block>
-
-        </view>
-      </scroll-view>
-    </view>
-  </view>
-
-
-     <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal"  wx:if="{{data_item_word.wcell_type=='25'}}">
-    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
-      <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-        <view class="itemcontent text-left">
-         <wux-white-space size="default" />
           <wux-white-space size="default" />
-             
-            <wux-white-space size="default" />
-            <wux-row>
-              <wux-col span="3" offset="1">
-                <text> 注音： </text>
-              </wux-col>
-              <wux-col span="7">
-                  <text> {{data_item_word.word_show_detail.zhuyin}} </text>
-              </wux-col>
-            </wux-row>
-            <wux-divider show-text="{{ false }}" dashed />
-            <wux-row>
-              <wux-col span="3" offset="1">
-                <text> 出处： </text>
-              </wux-col>
-              <wux-col span="7">
-                  <text> {{data_item_word.word_show_detail.chuchu}} </text>
-              </wux-col>
-            </wux-row>
-            <wux-divider show-text="{{ false }}" dashed />
-            <wux-row>
-              <wux-col span="3" offset="1">
-                <text> 释义： </text>
-              </wux-col>
-              <wux-col span="7">
-                  <text> {{data_item_word.word_show_detail.shiyi}} </text>
-              </wux-col>
-            </wux-row>
-            <wux-divider show-text="{{ false }}" dashed />
-            <wux-row>
-              <wux-col span="3" offset="1">
-                <text> 实例： </text>
-              </wux-col>
-              <wux-col span="7">
-                  <text> {{data_item_word.word_show_detail.shili}} </text>
-              </wux-col>
-            </wux-row>
-            <wux-divider show-text="{{ false }}" dashed />
-        </view>
-      </scroll-view>
-    </view>
+          <wux-row>
+            <wux-col span="3" offset="1">
+              <text> 释义： </text>
+            </wux-col>
+            <wux-col span="8">
+              <block wx:for="{{item.submean_list}}" wx:key>
+                <text> {{item}} </text>
+              </block>
+
+            </wux-col>
+          </wux-row>
+          <wux-divider show-text="{{ false }}" dashed />
+        </block>
+
+      </view>
+    </scroll-view>
   </view>
+</view>
 
 
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type=='25'}}">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+      <view class="itemcontent text-left">
+        <wux-white-space size="default" />
+        <wux-white-space size="default" />
 
-
-   <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal" >
-    <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
-      <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-        <view class="itemcontent text-left">
-         <wux-white-space size="default" />
-          <wux-white-space size="default" />
-             <wux-row>
-              <wux-col span="3" offset="1">
-                <text>拼音：</text>
-              </wux-col>
-              <wux-col span="8">
-                 {{data_item_dword.dword_show_detail.pinyin}}
-              </wux-col>
-            </wux-row>
-            <wux-white-space size="default" />
-            <wux-row>
-              <wux-col span="3" offset="1">
-                <text> 释义： </text>
-              </wux-col>
-              <wux-col span="8">
-                  <text> {{data_item_dword.dword_show_detail.shiyi}} </text>
-              </wux-col>
-            </wux-row>
-            <wux-divider show-text="{{ false }}" dashed />
-        </view>
-      </scroll-view>
-    </view>
+        <wux-white-space size="default" />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 注音： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.zhuyin}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 出处： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.chuchu}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 释义： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.shiyi}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 实例： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.shili}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+      </view>
+    </scroll-view>
   </view>
+</view>
 
 
+
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+      <view class="itemcontent text-left">
+        <wux-white-space size="default" />
+        <wux-white-space size="default" />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text>拼音：</text>
+          </wux-col>
+          <wux-col span="8">
+            {{data_item_dword.dword_show_detail.pinyin}}
+          </wux-col>
+        </wux-row>
+        <wux-white-space size="default" />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 释义： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text> {{data_item_dword.dword_show_detail.shiyi}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+      </view>
+    </scroll-view>
+  </view>
+</view>
