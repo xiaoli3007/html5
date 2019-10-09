@@ -71,14 +71,22 @@
                   </wux-col>
                 </wux-row>  
                  <wux-row>
-                  <wux-col span="4" offset="8">
+                <wux-col span="8" >
+                 <wux-divider wx:if="{{button_loading_auto}}">
+                    <view class="loadmore">
+                      <text class="text">{{button_loading_text}}</text>
+                    </view>
+                  </wux-divider>
+                </wux-col>
+
+                  <wux-col span="4">
                        <view class="text-right cz_icon">
                     <text class="proIcon-iconico_yy"></text>
                     </view>
                   </wux-col>
                 </wux-row> 
               </view> 
-      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs">
+      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs margin-sm">
         <block wx:for="{{taskdata.word1}}" wx:key>
           <swiper-item>
  
@@ -167,7 +175,26 @@
 
 <wux-white-space size="large" />
 
+<view class=" flex flex-wrap justify-between align-center " wx:if="{{type==1}}">
+  <wux-col span="4">
+    <!-- <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev" wx:if="{{!tingxie_auto}}">
+    </view> -->
+  </wux-col>
+  <wux-col span="4">
+    <view class="proIcon-iconico_bf" bindtap="tingxie_start" style="font-size:60rpx;" wx:if="{{!tingxie_auto}}">
+    </view>
 
+    <view class="proIcon-iconico_zt" bindtap="tingxie_stop" style="font-size:60rpx;" wx:if="{{tingxie_auto}}">
+    </view>
+
+
+  </wux-col>
+  <wux-col span="4">
+    <!-- <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next" wx:if="{{!tingxie_auto}}">
+    </view> -->
+
+  </wux-col>
+</view>
 
 <wux-row wx:if="{{type==1}}">
   <wux-col span="4">
@@ -191,28 +218,7 @@
   </wux-col>
 </wux-row>
 
-<wux-white-space size="default" />
 
-<view class=" flex flex-wrap justify-between align-center " wx:if="{{type==1}}">
-  <wux-col span="4">
-    <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev" wx:if="{{!tingxie_auto}}">
-    </view>
-  </wux-col>
-  <wux-col span="4">
-    <view class="cuIcon-video" bindtap="tingxie_start" style="font-size:100rpx;" wx:if="{{!tingxie_auto}}">
-    </view>
-
-    <view class="cuIcon-stop" bindtap="tingxie_stop" style="font-size:100rpx;" wx:if="{{tingxie_auto}}">
-    </view>
-
-
-  </wux-col>
-  <wux-col span="4">
-    <view class="cuIcon-pullright" style="font-size:80rpx;" bindtap="next" wx:if="{{!tingxie_auto}}">
-    </view>
-
-  </wux-col>
-</view>
 
 <!-- <wux-row wx:if="{{type==2}}">
   <wux-col span="2">
@@ -264,11 +270,6 @@
 
 
 
-<wux-divider wx:if="{{button_loading_auto}}">
-  <view class="loadmore">
-    <text class="text">{{button_loading_text}}</text>
-  </view>
-</wux-divider>
 
 
 

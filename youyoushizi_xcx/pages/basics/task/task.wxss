@@ -3,10 +3,11 @@
 .swiper_big {
  
 height: 600rpx;
+border: 1px dashed #333;
 
 }
 .swiper_sub{
-  height: 400rpx;
+  height: 100%;
 }
 .cz_icon{
   font-size:80rpx; 
