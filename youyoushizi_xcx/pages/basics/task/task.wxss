@@ -3,14 +3,14 @@
 .swiper_big {
  
 /* height: 600rpx; */
-border: 1px dashed #333;
+border: 1px dashed #aaa;
 
 }
 .swiper_sub{
   height: 100%;
 }
 .cz_icon{
-  font-size:80rpx; 
+  font-size:70rpx; 
 }
 .swiper_view{
   min-height: 200rpx;

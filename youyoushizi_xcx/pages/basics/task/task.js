@@ -79,6 +79,7 @@ Page({
     button_loading_text: '',
     button_loading_auto:false,
     button_global_src: '',
+    button_global_currt:0,
     konw_select_menu: [
       {
         value: '1',
@@ -231,74 +232,74 @@ Page({
 
     })
     var that = this 
-    this.data.audioword_object.onError(() => {
-      that.setData({
-        button_loading_text: '加载语音失败！',
-        button_loading_auto:true
-      })
-    })
-    this.data.audioword_object.onWaiting(() => {
-      that.setData({
-        button_loading_text: '加载语音...',
-        button_loading_auto: true
-      })
-    })
-    this.data.audioword_object.onPlay(() => {
-        that.setData({
-          button_loading_text: '播放语音中...',
-          button_loading_auto: true,
-          button_global_src: that.data.audioword_object.src
-        })
-    })
-    this.data.audioword_object.onEnded(() => {
-        that.setData({
-          button_loading_text: '播放结束...',
-          button_loading_auto: false,
-          button_global_src: ''
-        })
-    })
-    this.data.audioword_object.onStop(() => {
-      that.setData({
-        button_loading_text: '播放结束...',
-        button_loading_auto: false,
-        button_global_src: ''
-      })
-    })
+    // this.data.audioword_object.onError(() => {
+    //   that.setData({
+    //     button_loading_text: '加载语音失败！',
+    //     button_loading_auto:true
+    //   })
+    // })
+    // this.data.audioword_object.onWaiting(() => {
+    //   that.setData({
+    //     button_loading_text: '加载语音...',
+    //     button_loading_auto: true
+    //   })
+    // })
+    // this.data.audioword_object.onPlay(() => {
+    //     that.setData({
+    //       button_loading_text: '播放语音中...',
+    //       button_loading_auto: true,
+    //       button_global_src: that.data.audioword_object.src
+    //     })
+    // })
+    // this.data.audioword_object.onEnded(() => {
+    //     that.setData({
+    //       button_loading_text: '播放结束...',
+    //       button_loading_auto: false,
+    //       button_global_src: ''
+    //     })
+    // })
+    // this.data.audioword_object.onStop(() => {
+    //   that.setData({
+    //     button_loading_text: '播放结束...',
+    //     button_loading_auto: false,
+    //     button_global_src: ''
+    //   })
+    // })
   //============================================================
-    this.data.audiodword_object.onError(() => {
-      that.setData({
-        button_loading_text: '加载语音失败！',
-        button_loading_auto: true
-      })
-    })
-    this.data.audiodword_object.onWaiting(() => {
-      that.setData({
-        button_loading_text: '加载语音...',
-        button_loading_auto: true
-      })
-    })
-    this.data.audiodword_object.onPlay(() => {
+    // this.data.audiodword_object.onError(() => {
+    //   that.setData({
+    //     button_loading_text: '加载语音失败！',
+    //     button_loading_auto: true
+    //   })
+    // })
+    // this.data.audiodword_object.onWaiting(() => {
+    //   that.setData({
+    //     button_loading_text: '加载语音...',
+    //     button_loading_auto: true
+    //   })
+    // })
+    // this.data.audiodword_object.onPlay(() => {
       
-      that.setData({
-        button_loading_text: '播放语音中...',
-        button_loading_auto: true,
-        button_global_src: that.data.audiodword_object.src
-      })
-    })
-    this.data.audiodword_object.onEnded(() => {
-      that.setData({
-        button_loading_text: '播放结束...',
-        button_loading_auto: false,
-        button_global_src: ''
-      })
-    })
-    this.data.audiodword_object.onStop(() => {
-      that.setData({
-        button_loading_text: '播放结束...',
-        button_loading_auto: false,
-        button_global_src: ''
-      })
-    })
+    //   that.setData({
+    //     button_loading_text: '播放语音中...',
+    //     button_loading_auto: true,
+    //     button_global_src: that.data.audiodword_object.src
+    //   })
+    // })
+    // this.data.audiodword_object.onEnded(() => {
+    //   that.setData({
+    //     button_loading_text: '播放结束...',
+    //     button_loading_auto: false,
+    //     button_global_src: ''
+    //   })
+    // })
+    // this.data.audiodword_object.onStop(() => {
+    //   that.setData({
+    //     button_loading_text: '播放结束...',
+    //     button_loading_auto: false,
+    //     button_global_src: ''
+    //   })
+    // })
   //==============================================================
     this.data.audiolword_object.onError(() => {
       that.setData({
@@ -317,8 +318,10 @@ Page({
       that.setData({
         button_loading_text: '播放语音中...',
         button_loading_auto: true,
-        button_global_src: that.data.audiolword_object.src
+        button_global_src: that.data.audiolword_object.src,
+        button_global_currt: that.data.current,
       })
+      
     })
     this.data.audiolword_object.onEnded(() => {
       that.setData({
@@ -677,78 +680,77 @@ Page({
   },
   audioPlay_allstop() {
      
-    this.data.audiowordlist.forEach(function (value, i) {
-      value.stop()
-    })
-    this.data.audiodwordlist.forEach(function (value, i) {
-      value.stop()
-    })
-    this.data.audiolwordlist.forEach(function (value, i) {
-      // console.log(value.currentTime);
-      value.stop()
-    })
-    console.log(this.data.current)
-    // this.data.audiolwordlist[this.data.current].stop()
+    // this.data.audiowordlist.forEach(function (value, i) {
+    //   value.stop()
+    // })
+   
   },
-  audioPlay_word() {
-    // 
-    // this.audioPlay_allstop()
-    this.setData({
-      subcurrent: 0,
-      tabkey: this.data.tabs[0].key
-    })
-    // this.data.audiowordlist[this.data.current].play()
-    let item_word_src = this.data.taskdata.word1[this.data.current].sw_sound
+  // audioPlay_word() {
+  //   // 
+  //   // this.audioPlay_allstop()
+  //   this.setData({
+  //     subcurrent: 0,
+  //     tabkey: this.data.tabs[0].key
+  //   })
+  //   // this.data.audiowordlist[this.data.current].play()
+  //   let item_word_src = this.data.taskdata.word1[this.data.current].sw_sound
 
-    this.data.audiolword_object.stop()
-    this.data.audiodword_object.stop()
-    // this.data.audioword_object.stop()
+  //   this.data.audiolword_object.stop()
+  //   this.data.audiodword_object.stop()
+  //   // this.data.audioword_object.stop()
     
-    if (this.data.button_global_src == item_word_src) {
-      this.data.audioword_object.stop()
-    } else {
-      this.data.audioword_object.src = item_word_src
-      this.data.audioword_object.play()
-    }
-  },
-  audioPlay_dword() {
-    // this.audioPlay_allstop()
-    this.setData({
-      subcurrent: 1,
-      tabkey: this.data.tabs[1].key
-    })
+  //   if (this.data.button_global_src == item_word_src) {
+  //     this.data.audioword_object.stop()
+  //   } else {
+  //     this.data.audioword_object.src = item_word_src
+  //     this.data.audioword_object.play()
+  //   }
+  // },
+  // audioPlay_dword() {
+  //   this.setData({
+  //     subcurrent: 1,
+  //     tabkey: this.data.tabs[1].key
+  //   })
     
-    // this.data.audiodwordlist[this.data.current].play()
-    let item_dword_src = this.data.taskdata.word1[this.data.current].dw_sound
+  //   let item_dword_src = this.data.taskdata.word1[this.data.current].dw_sound
 
-    this.data.audiolword_object.stop()
-    // this.data.audiodword_object.stop()
-    this.data.audioword_object.stop()
+  //   this.data.audiolword_object.stop()
+  //   this.data.audioword_object.stop()
 
-    if (this.data.button_global_src == item_dword_src) {
-      this.data.audiodword_object.stop()
-    } else {
-      this.data.audiodword_object.src = item_dword_src
-      this.data.audiodword_object.play()
-    }
+  //   if (this.data.button_global_src == item_dword_src) {
+  //     this.data.audiodword_object.stop()
+  //   } else {
+  //     this.data.audiodword_object.src = item_dword_src
+  //     this.data.audiodword_object.play()
+  //   }
     
-  },
+  // },
   audioPlay_lword() {
-    //  this.audioPlay_allstop()
-    this.setData({
-      subcurrent: 2,
-      tabkey: this.data.tabs[2].key
-    })
+    // this.setData({
+    //   subcurrent: 2,
+    //   tabkey: this.data.tabs[2].key
+    // })
     console.log(this.data.button_global_src)
+    console.log(this.data.subcurrent)
+
     // this.data.audiolwordlist[this.data.current].play()
-    let item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
+    let item_lword_src = ''
+    if (this.data.subcurrent == 0){
+       item_lword_src = this.data.taskdata.word1[this.data.current].sw_sound
+    } else if (this.data.subcurrent == 1){
+       item_lword_src = this.data.taskdata.word1[this.data.current].dw_sound
+    } else if (this.data.subcurrent == 2) {
+       item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
+    }
     
     
-    this.data.audiodword_object.stop()
-    this.data.audioword_object.stop()
-    if (this.data.button_global_src == item_lword_src) {
+    // console.log(item_lword_src)
+    
+
+    if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {
       this.data.audiolword_object.stop()
-    } else {
+    }else{
+      this.data.audiolword_object.stop()
       this.data.audiolword_object.src = item_lword_src
       this.data.audiolword_object.play()
     }

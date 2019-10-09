@@ -85,7 +85,7 @@
 
           <wux-col span="2">
 
-            <view class="text-right cz_icon" wx:if="{{!tingxie_auto}}">
+            <view bindtap="audioPlay_lword" class="text-right cz_icon" wx:if="{{!tingxie_auto}}">
               <text class="proIcon-iconico_yy"></text>
             </view>
 
@@ -150,7 +150,7 @@
       </swiper>
 
 
-      <view class="padding-bottom padding-top" id="main_hight_shizi_know" wx:if="{{type==2}}">  
+      <view class="padding-bottom-lg padding-top-lg" id="main_hight_shizi_know" wx:if="{{type==2}}">  
         <wux-row>
           <wux-col span="12">
 
