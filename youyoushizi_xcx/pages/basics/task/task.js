@@ -369,25 +369,44 @@ Page({
   },
   auto_height(type) {
     console.log(type)
-
-
-    wx.createSelectorQuery().select('#main_hight_head').boundingClientRect(function (res) {
-      // 公共头部的高度
-      console.log('公共头部的高度' + res.height)
-
-    }).exec()
+    var that = this 
+    let main_hight_head = 0
+    let main_hight_common_icon_top = 0
+    let main_hight_common_icon = 0
+    let main_hight_shizi_know = 0
+    let main_hight_tingxie_play = 0
+    let main_hight_tingxie_setting = 0
+    // wx.createSelectorQuery().select('#main_hight_head').boundingClientRect(function (res) {
+    //   // 公共头部的高度
+    //   // console.log(res)
+    //   main_hight_head = res.height
+    //   console.log('公共头部的高度' + main_hight_head)
+    // }).exec()
     wx.createSelectorQuery().select('#main_hight_common_icon').boundingClientRect(function (res) {
       // 公共图标的高度
+      console.log(res)
+      main_hight_common_icon_top = res.top
+      main_hight_common_icon = res.height
       console.log('公共图标的高度' + res.height)
 
     }).exec()
     if (type == 2){
       wx.createSelectorQuery().select('#main_hight_shizi_know').boundingClientRect(function (res) {
         // 识字对错的高度
+        main_hight_shizi_know = res.height
         console.log('识字对错的高度' + res.height)
+
+        let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_shizi_know) 
+        console.log('算出来的高度为' + tempswiperheight)
+       
+        that.setData({
+          swiperheight: tempswiperheight
+        })
 
       }).exec()
 
+      
+      
     }
     if (type == 1) {
       wx.createSelectorQuery().select('#main_hight_tingxie_play').boundingClientRect(function (res) {
@@ -401,6 +420,8 @@ Page({
 
       }).exec()
     }
+
+    
 
   },
   tingxie_start() {
