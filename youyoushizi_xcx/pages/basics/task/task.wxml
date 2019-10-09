@@ -39,7 +39,6 @@
 </view> 
 
 
-<wux-white-space size="default" />
 
 <wux-row>
   <!-- <wux-col span="1">
