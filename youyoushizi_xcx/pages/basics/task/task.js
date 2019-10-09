@@ -387,6 +387,7 @@ Page({
       console.log(res)
       main_hight_common_icon_top = res.top
       main_hight_common_icon = res.height
+      console.log('公共图标的上边距度' + res.top)
       console.log('公共图标的高度' + res.height)
 
     }).exec()
@@ -411,12 +412,22 @@ Page({
     if (type == 1) {
       wx.createSelectorQuery().select('#main_hight_tingxie_play').boundingClientRect(function (res) {
         // 听写播放的高度
-        console.log('听写播放的高度' + res.height)
+        main_hight_tingxie_play = res.height
+        console.log('听写播放的高度' + main_hight_tingxie_play)
 
       }).exec()
       wx.createSelectorQuery().select('#main_hight_tingxie_setting').boundingClientRect(function (res) {
         // 听写设置的高度
-        console.log('听写设置的高度' + res.height)
+        main_hight_tingxie_setting = res.height
+        console.log('听写设置的高度' + main_hight_tingxie_setting)
+
+        let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_tingxie_play + main_hight_tingxie_setting)
+        console.log('算出来的高度为' + tempswiperheight)
+
+        that.setData({
+          swiperheight: tempswiperheight
+        })
+
 
       }).exec()
     }
