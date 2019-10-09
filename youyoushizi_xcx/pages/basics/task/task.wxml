@@ -3,40 +3,39 @@
   <view slot="content">{{toptitle}}</view>
 </cu-custom>
 
- <view class="bg-white solid-bottom margin-bottom-xs padding-bottom-xs">
-  <!-- <view class="action  justify-center align-center">
-    <text class="cuIcon-title text-gray">{{taskdata.name}}</text>
-  </view> -->
+<view class="bg-white solid-bottom margin-bottom-xs padding-bottom-xs" id='main_hight_head'>
+
   <wux-row>
-  <wux-col span="12" >
-    <view class="text-center">  <text class="text-xl">{{taskdata.name}}</text>
-    <text class="margin-left">({{current+1}}/{{taskdata.word1.length}})</text>
-    </view>
-  </wux-col>
-</wux-row>
-
-<wux-row>
-  <wux-col span="8" offset="2">
-    <view class="text-center text-gray text-sm"> 已用时：
-      <my-timer id="mytimes"> </my-timer>
-    </view>
-  </wux-col>
-</wux-row>
-
-<wux-row>
-  <wux-col span="12" >
-
-    <view class="flex">
-      <view class="cu-progress  ">
-        <view class="bg-green" style="width:{{taskloading}};"></view>
+    <wux-col span="12">
+      <view class="text-center">
+        <text class="text-xl">{{taskdata.name}}</text>
+        <text class="margin-left">({{current+1}}/{{taskdata.word1.length}})</text>
       </view>
-      <!-- <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text> -->
-    </view>
-  </wux-col>
+    </wux-col>
+  </wux-row>
 
-</wux-row>
- 
-</view> 
+  <wux-row>
+    <wux-col span="8" offset="2">
+      <view class="text-center text-gray text-sm"> 已用时：
+        <my-timer id="mytimes"> </my-timer>
+      </view>
+    </wux-col>
+  </wux-row>
+
+  <wux-row>
+    <wux-col span="12">
+
+      <view class="flex">
+        <view class="cu-progress  ">
+          <view class="bg-green" style="width:{{taskloading}};"></view>
+        </view>
+        <!-- <text class="margin-left">{{current+1}}/{{taskdata.word1.length}}</text> -->
+      </view>
+    </wux-col>
+
+  </wux-row>
+
+</view>
 
 
 
@@ -48,47 +47,53 @@
       </block>
     </wux-tabs>
   </wux-col> -->
-  <wux-col span="12" >
+  <wux-col span="12">
     <view class="bg-white text-orange  radius align-center shadow-blur swiper_view">
-          <view class="padding-sm">
-                <wux-row>
-                  <wux-col span="4">
-                    <view class="text-left cz_icon">
-                    <text class="proIcon-iconico_bc"></text>
-                    </view>
-                    
-                  </wux-col>
-                  <wux-col span="4">
-                       <view class="text-center cz_icon text-grey">
-                    <text class="proIcon-iconico_jt_s"></text>
-                    </view>
-                  </wux-col>
-                  <wux-col span="4">
-                       <view class="text-right cz_icon">
-                    <text class="proIcon-iconico_bz"></text>
-                    </view>
-                  </wux-col>
-                </wux-row>  
-                 <wux-row>
-                <wux-col span="8" >
-                 <wux-divider wx:if="{{button_loading_auto}}">
-                    <view class="loadmore">
-                      <text class="text">{{button_loading_text}}</text>
-                    </view>
-                  </wux-divider>
-                </wux-col>
+      <view class="padding-sm" id="main_hight_common_icon">
+        <wux-row>
+          <wux-col span="4">
+            <view class="text-left cz_icon">
+              <text class="proIcon-iconico_bc"></text>
+            </view>
 
-                  <wux-col span="4">
-                       <view class="text-right cz_icon">
-                    <text class="proIcon-iconico_yy"></text>
-                    </view>
-                  </wux-col>
-                </wux-row> 
-              </view> 
-      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs margin-sm">
+          </wux-col>
+          <wux-col span="4">
+            <view class="text-center cz_icon text-grey">
+              <text class="proIcon-iconico_jt_s"></text>
+            </view>
+          </wux-col>
+          <wux-col span="4">
+            <view class="text-right cz_icon">
+              <text class="proIcon-iconico_bz"></text>
+            </view>
+          </wux-col>
+        </wux-row>
+        <wux-row>
+          <wux-col span="10">
+            <wux-divider wx:if="{{button_loading_auto}}">
+              <view class="loadmore">
+                <text class="text">{{button_loading_text}}</text>
+              </view>
+            </wux-divider>
+
+            <wux-divider wx:if="{{tingxie_auto}}">
+              <view class="loadmore">
+                <text class="text">{{tingxie_loading_text}}</text>
+              </view>
+            </wux-divider>
+          </wux-col>
+
+          <wux-col span="2">
+            <view class="text-right cz_icon">
+              <text class="proIcon-iconico_yy"></text>
+            </view>
+          </wux-col>
+        </wux-row>
+      </view>
+      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs margin-sm" style="height:{{swiperheight}}px">
         <block wx:for="{{taskdata.word1}}" wx:key>
           <swiper-item>
- 
+
             <swiper class="swiper_sub" vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
               <swiper-item>
                 <view class="flex justify-center align-center  text-center sw_view">
@@ -138,19 +143,19 @@
         </block>
       </swiper>
 
-      
 
-                 <wux-row wx:if="{{type==2}}">
-                  <wux-col span="12">
+      <view class="padding-bottom" id="main_hight_shizi_know">  
+        <wux-row wx:if="{{type==2}}">
+          <wux-col span="12">
 
-                    <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
-                      <my-radio current="{{konw_current[mindex]}}" dataArray="{{konw_select_menu}}" bind:myevent="onChangeKnow"> </my-radio>
-                    </block>
+            <block wx:for="{{ taskdata.word1 }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+              <my-radio current="{{konw_current[mindex]}}" dataArray="{{konw_select_menu}}" bind:myevent="onChangeKnow"> </my-radio>
+            </block>
 
-                  </wux-col>
-
-                </wux-row>  
-                <wux-white-space size="default" />
+          </wux-col>
+        </wux-row>
+      </view>
+      <!-- <wux-white-space size="default" /> -->
 
     </view>
 
@@ -172,9 +177,8 @@
   </wux-col> -->
 </wux-row>
 
-<wux-white-space size="large" />
 
-<view class=" flex flex-wrap justify-between align-center " wx:if="{{type==1}}">
+<view class=" flex flex-wrap justify-between align-center " wx:if="{{type==1}}" id="main_hight_tingxie_play">
   <wux-col span="4">
     <!-- <view class="cuIcon-pullleft" style="font-size:80rpx;" bindtap="prev" wx:if="{{!tingxie_auto}}">
     </view> -->
@@ -195,6 +199,7 @@
   </wux-col>
 </view>
 
+<view class="" id="main_hight_tingxie_setting"> 
 <wux-row wx:if="{{type==1}}">
   <wux-col span="4">
     <view class="padding text-center" bindtap="tingxie_change_tingxie_loop"> 读{{tingxie_loop}}次
@@ -216,7 +221,7 @@
 
   </wux-col>
 </wux-row>
-
+</view>
 
 
 <!-- <wux-row wx:if="{{type==2}}">
@@ -236,7 +241,7 @@
 </wux-row> -->
 
 
- 
+
 
 <!-- <view class="padding flex flex-wrap justify-between align-center " wx:if="{{!tingxie_auto}}">
   <button class="cu-btn round bg-gradual-red shadow" bindtap="audioStart">
@@ -261,11 +266,7 @@
   </button>
 </view> -->
 
-<wux-divider wx:if="{{tingxie_auto}}">
-  <view class="loadmore">
-    <text class="text">{{tingxie_loading_text}}</text>
-  </view>
-</wux-divider>
+
 
 
 

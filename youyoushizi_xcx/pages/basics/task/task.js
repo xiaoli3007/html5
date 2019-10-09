@@ -92,6 +92,7 @@ Page({
       },
 
     ],
+    swiperheight:300
   },
   onLoad: function (options) {
    
@@ -101,7 +102,7 @@ Page({
 
    
 
-    // console.log(options.type)
+    console.log(options.type)
 
     var apiurl = ''
     var methd = 'POST'
@@ -181,6 +182,7 @@ Page({
               that.tingxie_start()
           }
 
+          that.auto_height(res.data.taskinfo.type)
         }, complete(res) {
           that.setData({
 
@@ -201,6 +203,10 @@ Page({
 
   },
   onReady(e) {
+
+    // const query = wx.createSelectorQuery().in(this) 在组件中这样
+    var that = this
+ 
     // 使用 wx.createAudioContext 获取 audio 上下文 context
     // this.audioCtx = wx.createAudioContext('myAudio')
     // console.log(this.data.taskdata);
@@ -359,6 +365,42 @@ Page({
 
       }
     })
+
+  },
+  auto_height(type) {
+    console.log(type)
+
+
+    wx.createSelectorQuery().select('#main_hight_head').boundingClientRect(function (res) {
+      // 公共头部的高度
+      console.log('公共头部的高度' + res.height)
+
+    }).exec()
+    wx.createSelectorQuery().select('#main_hight_common_icon').boundingClientRect(function (res) {
+      // 公共图标的高度
+      console.log('公共图标的高度' + res.height)
+
+    }).exec()
+    if (type == 2){
+      wx.createSelectorQuery().select('#main_hight_shizi_know').boundingClientRect(function (res) {
+        // 识字对错的高度
+        console.log('识字对错的高度' + res.height)
+
+      }).exec()
+
+    }
+    if (type == 1) {
+      wx.createSelectorQuery().select('#main_hight_tingxie_play').boundingClientRect(function (res) {
+        // 听写播放的高度
+        console.log('听写播放的高度' + res.height)
+
+      }).exec()
+      wx.createSelectorQuery().select('#main_hight_tingxie_setting').boundingClientRect(function (res) {
+        // 听写设置的高度
+        console.log('听写设置的高度' + res.height)
+
+      }).exec()
+    }
 
   },
   tingxie_start() {
