@@ -174,19 +174,7 @@ Page({
 
   },
   onReady(e) {
-    // 使用 wx.createAudioContext 获取 audio 上下文 context
-    // this.audioCtx = wx.createAudioContext('myAudio')
-    // console.log(this.data.taskdata);
-    this.innerAudioContext = wx.createInnerAudioContext()
-    // this.innerAudioContext.autoplay = true
-    this.innerAudioContext.src = this.data.src
-    this.innerAudioContext.onPlay(() => {
-      console.log('开始播放')
-    })
-    this.innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
+  
 
   },
   onUnload(e) {
@@ -330,57 +318,57 @@ Page({
     }
 
    },
-  onChangesegmented(e) {
-    console.log(e.detail.key)
-    // console.log(this.data.current)
-    var tprice = 'konw_current[' + this.data.current + ']'
-    this.setData({
-      [tprice]: e.detail.key,
-    })
+  // onChangesegmented(e) {
+  //   console.log(e.detail.key)
+  //   // console.log(this.data.current)
+  //   var tprice = 'konw_current[' + this.data.current + ']'
+  //   this.setData({
+  //     [tprice]: e.detail.key,
+  //   })
     
-    var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
-    var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.key]
-    console.log(tempwcellid)
-    console.log(temp_fact)
-    //发送请求 super 算法
-    wx.request({
-      url: app.globalData.url + '?act=taskinwcell_super',
-      method: "POST",
-      data: {
-        userid: app.globalData.userid ? app.globalData.userid : 0,
-        task_wcell_id: tempwcellid,
-        day: temp_fact.value,
-        quality: temp_fact.quality,
-        factor: temp_fact.factor,
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'X-Token': app.globalData.xtoken
-      },
-      success(res) {
+  //   var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
+  //   var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.key]
+  //   console.log(tempwcellid)
+  //   console.log(temp_fact)
+  //   //发送请求 super 算法
+  //   wx.request({
+  //     url: app.globalData.url + '?act=taskinwcell_super',
+  //     method: "POST",
+  //     data: {
+  //       userid: app.globalData.userid ? app.globalData.userid : 0,
+  //       task_wcell_id: tempwcellid,
+  //       day: temp_fact.value,
+  //       quality: temp_fact.quality,
+  //       factor: temp_fact.factor,
+  //     },
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded',
+  //       'X-Token': app.globalData.xtoken
+  //     },
+  //     success(res) {
 
-        console.log(res.data)
+  //       console.log(res.data)
 
-      }
-    })
+  //     }
+  //   })
 
-    var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
-    var that = this
-    setTimeout(function() {
-      that.setData({
-        current: nextitem,
-      })
-    }, 500)
+  //   var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
+  //   var that = this
+  //   setTimeout(function() {
+  //     that.setData({
+  //       current: nextitem,
+  //     })
+  //   }, 500)
 
-    if (this.data.current == this.data.taskdata.word1.length - 1) {
-      wx.showToast({
-        title: '本次识字已完成！',
-        icon: 'none',
-        duration: 1500,
-      })
-    }
+  //   if (this.data.current == this.data.taskdata.word1.length - 1) {
+  //     wx.showToast({
+  //       title: '本次识字已完成！',
+  //       icon: 'none',
+  //       duration: 1500,
+  //     })
+  //   }
 
-  },
+  // },
   onTabsChange(e) {
     // console.log('onTabsChange', e)
     const {
