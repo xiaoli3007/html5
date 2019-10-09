@@ -43,7 +43,7 @@ Component({
     show: function () {
 
       // console.log(111) 
-      this.onPullDownRefresh()
+      // this.onPullDownRefresh()
      },
     hide: function () { 
       // console.log(222) 

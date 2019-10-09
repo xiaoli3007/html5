@@ -50,6 +50,7 @@ Page({
          },
          data: {
            type: that.data.type,
+           pagesize: that.data.pagesize,
          },
         success: function (res) {
           console.log(res);
