@@ -126,6 +126,10 @@ Page({
           // wx.hideLoading();
         } else {
 
+          that.setData({
+            isLoad: true,
+            isend: true,
+          })
 
         }
       }
@@ -242,7 +246,7 @@ Page({
     let status = e.currentTarget.dataset.status
     var that = this
     console.log(taskid)
-    if (status == 3){
+    if (status == -1){
 
       wx.showModal({
         title: '您好！该任务已经完成！',
