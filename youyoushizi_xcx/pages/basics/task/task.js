@@ -873,7 +873,7 @@ Page({
     let tempsubc = this.data.subcurrent+1
   
      tempsubc = tempsubc > this.data.max_subcurrent ? this.data.max_subcurrent : tempsubc
-    console.log(tempsubc)
+    // console.log(tempsubc)
     if (tempsubc == this.data.max_subcurrent){
       
       this.setData({
@@ -891,7 +891,7 @@ Page({
     let tempsubc = this.data.subcurrent-1
     tempsubc = tempsubc < 0 ? 0 : tempsubc
 
-    console.log(tempsubc)
+    // console.log(tempsubc)
     if (tempsubc == 0) {
 
       this.setData({
@@ -915,13 +915,28 @@ Page({
     })
   },
   onSubSwiperChange(e) {
+    
     // console.log('onSubSwiperChange', e)
     const { current: index, source } = e.detail
-    const { key } = this.data.tabs[index]
+    // console.log(index)
+    // if (index == 0) {
 
+    //   this.setData({
+    //     middle_subcurrent: true,
+    //   })
+    // }
+    // if (index == this.data.max_subcurrent) {
+
+    //   this.setData({
+    //     middle_subcurrent: false,
+    //   })
+    // }
+    // const { key } = this.data.tabs[index]
+
+   
     if (!!source) {
       this.setData({
-        tabkey: key,
+        // tabkey: key,
         subcurrent: index,
       })
     }
