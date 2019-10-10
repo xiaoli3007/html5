@@ -94,7 +94,9 @@ Page({
 
     ],
     swiperheight:300,
-    task_wcell_type :0
+    task_wcell_type :0,
+    max_subcurrent: 2,
+    middle_subcurrent: true
   },
   onLoad: function (options) {
    
@@ -176,7 +178,8 @@ Page({
             toptitle: res.data.taskinfo.type=='1'?'听写任务':'识字任务',
             tingxie_auto: parseInt(res.data.taskinfo.type)==1?true:false,
             tingxie_text_hide: parseInt(res.data.taskinfo.type) == 1 ? true : false,
-            task_wcell_type: res.data.taskinfo.wcell_type
+            task_wcell_type: res.data.taskinfo.wcell_type,
+            max_subcurrent: parseInt(res.data.taskinfo.wcell_type) == 25 ? 1 : 2,
           })
           // console.log(res.data.taskinfo.wcell_type);
           // console.log(that.data.type)
@@ -864,12 +867,40 @@ Page({
     }
 
   },
-  onUpDownChange() {
-    // const subcurrent = this.data.tabs.map((n) => n.key).indexOf(key)
-    // console.log(subcurrent)
-    // this.setData({
-    //   subcurrent: subcurrent,
-    // })
+  onDownChange() {
+
+    // console.log(this.data.max_subcurrent)
+    let tempsubc = this.data.subcurrent+1
+  
+     tempsubc = tempsubc > this.data.max_subcurrent ? this.data.max_subcurrent : tempsubc
+    console.log(tempsubc)
+    if (tempsubc == this.data.max_subcurrent){
+      
+      this.setData({
+        middle_subcurrent: false ,
+      })
+    }
+    this.setData({
+      subcurrent: tempsubc,
+    })
+
+  },
+  onUpChange() {
+
+    // console.log(this.data.max_subcurrent)
+    let tempsubc = this.data.subcurrent-1
+    tempsubc = tempsubc < 0 ? 0 : tempsubc
+
+    console.log(tempsubc)
+    if (tempsubc == 0) {
+
+      this.setData({
+        middle_subcurrent: true,
+      })
+    }
+    this.setData({
+      subcurrent: tempsubc,
+    })
 
   },
   onTabsChange(e) {
