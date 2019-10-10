@@ -93,7 +93,8 @@ Page({
       },
 
     ],
-    swiperheight:300
+    swiperheight:300,
+    task_wcell_type :0
   },
   onLoad: function (options) {
    
@@ -103,7 +104,7 @@ Page({
 
    
 
-    console.log(options.type)
+    // console.log(options.type)
 
     var apiurl = ''
     var methd = 'POST'
@@ -160,7 +161,7 @@ Page({
             //console.log( value);
           })
 
-          console.log(konw_currenttemp);
+          // console.log(konw_currenttemp);
 
           // console.log(linktemp1);
 
@@ -175,8 +176,9 @@ Page({
             toptitle: res.data.taskinfo.type=='1'?'听写任务':'识字任务',
             tingxie_auto: parseInt(res.data.taskinfo.type)==1?true:false,
             tingxie_text_hide: parseInt(res.data.taskinfo.type) == 1 ? true : false,
+            task_wcell_type: res.data.taskinfo.wcell_type
           })
-          // console.log(konw_currenttemp);
+          // console.log(res.data.taskinfo.wcell_type);
           // console.log(that.data.type)
           //听写模式开始
           if (parseInt(res.data.taskinfo.type) == 1){
@@ -191,7 +193,11 @@ Page({
           })
           //console.log(res.statusCode)
           if (res.statusCode == 500) {
-
+            wx.showToast({
+              title: '请求失败！',
+              icon: 'none',
+              duration: 1500,
+            })
           } else {
 
           }
@@ -341,7 +347,7 @@ Page({
   },
   onShow(e) {
 
-    console.log(this.data.type)
+    // console.log(this.data.type)
   },
   onUnload(e) {
     this.tingxie_stop()
@@ -371,7 +377,7 @@ Page({
 
   },
   auto_height(type) {
-    console.log(type)
+    // console.log(type)
     var that = this 
     let main_hight_head = 0
     let main_hight_common_icon_top = 0
@@ -387,21 +393,21 @@ Page({
     // }).exec()
     wx.createSelectorQuery().select('#main_hight_common_icon').boundingClientRect(function (res) {
       // 公共图标的高度
-      console.log(res)
+      // console.log(res)
       main_hight_common_icon_top = res.top
       main_hight_common_icon = res.height
-      console.log('公共图标的上边距度' + res.top)
-      console.log('公共图标的高度' + res.height)
+      // console.log('公共图标的上边距度' + res.top)
+      // console.log('公共图标的高度' + res.height)
 
     }).exec()
     if (type == 2){
       wx.createSelectorQuery().select('#main_hight_shizi_know').boundingClientRect(function (res) {
         // 识字对错的高度
         main_hight_shizi_know = res.height
-        console.log('识字对错的高度' + res.height)
+        // console.log('识字对错的高度' + res.height)
 
         let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_shizi_know) 
-        console.log('算出来的高度为' + tempswiperheight)
+        // console.log('算出来的高度为' + tempswiperheight)
        
         that.setData({
           swiperheight: tempswiperheight
@@ -416,16 +422,16 @@ Page({
       wx.createSelectorQuery().select('#main_hight_tingxie_play').boundingClientRect(function (res) {
         // 听写播放的高度
         main_hight_tingxie_play = res.height
-        console.log('听写播放的高度' + main_hight_tingxie_play)
+        // console.log('听写播放的高度' + main_hight_tingxie_play)
 
       }).exec()
       wx.createSelectorQuery().select('#main_hight_tingxie_setting').boundingClientRect(function (res) {
         // 听写设置的高度
         main_hight_tingxie_setting = res.height
-        console.log('听写设置的高度' + main_hight_tingxie_setting)
+        // console.log('听写设置的高度' + main_hight_tingxie_setting)
 
         let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_tingxie_play + main_hight_tingxie_setting)
-        console.log('算出来的高度为' + tempswiperheight)
+        // console.log('算出来的高度为' + tempswiperheight)
 
         that.setData({
           swiperheight: tempswiperheight
@@ -730,17 +736,24 @@ Page({
     //   subcurrent: 2,
     //   tabkey: this.data.tabs[2].key
     // })
-    console.log(this.data.button_global_src)
-    console.log(this.data.subcurrent)
+    // console.log(this.data.button_global_src)
+    // console.log(this.data.subcurrent)
 
     // this.data.audiolwordlist[this.data.current].play()
     let item_lword_src = ''
     if (this.data.subcurrent == 0){
+
        item_lword_src = this.data.taskdata.word1[this.data.current].sw_sound
+
     } else if (this.data.subcurrent == 1){
-       item_lword_src = this.data.taskdata.word1[this.data.current].dw_sound
+
+      
+      item_lword_src = this.data.task_wcell_type == 25 ? this.data.taskdata.word1[this.data.current].lw_sound : this.data.taskdata.word1[this.data.current].dw_sound
+
     } else if (this.data.subcurrent == 2) {
+
        item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
+
     }
     
     
@@ -849,6 +862,14 @@ Page({
         duration: 1500,
       })
     }
+
+  },
+  onUpDownChange() {
+    // const subcurrent = this.data.tabs.map((n) => n.key).indexOf(key)
+    // console.log(subcurrent)
+    // this.setData({
+    //   subcurrent: subcurrent,
+    // })
 
   },
   onTabsChange(e) {

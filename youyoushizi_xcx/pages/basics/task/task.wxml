@@ -3,7 +3,7 @@
   <view slot="content">{{toptitle}}</view>
 </cu-custom>
 
-<view class="bg-white solid-bottom margin-bottom-lg padding-bottom-xs" id='main_hight_head'>
+<view class="bg-white   padding-bottom-xs" id='main_hight_head'>
 
   <wux-row>
     <wux-col span="12">
@@ -48,7 +48,7 @@
     </wux-tabs>
   </wux-col> -->
   <wux-col span="12">
-    <view class="bg-white text-orange  align-center">
+    <view class="bg-white text-orange  align-center ">
       <view class="padding-sm" id="main_hight_common_icon">
         <wux-row>
           <wux-col span="4">
@@ -96,7 +96,7 @@
           </wux-col>
         </wux-row>
       </view>
-      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs margin-left-sm  margin-right-sm" style="height:{{swiperheight}}px">
+      <swiper bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs  margin-left-sm  margin-right-sm" style="height:{{swiperheight}}px">
         <block wx:for="{{taskdata.word1}}" wx:key>
           <swiper-item>
 
@@ -112,7 +112,7 @@
                     <text class="text-center {{item.wcell_type=='25'?'task_dw':'task_sw'}}">{{item.sw}}</text> </view>
                 </view>
               </swiper-item>
-              <swiper-item>
+              <swiper-item wx:if="{{item.wcell_type!='25'}}">
                 <view class="flex justify-center align-center dw_view">
 
                   <view wx:if="{{tingxie_text_hide}}">

@@ -16,16 +16,16 @@ border: 1px dashed #aaa;
   min-height: 200rpx;
   }
 .task_sw{
-font-size:7rem;  
+font-size:9rem;  
 }
 .sw_view{ height: 100%;}
 .dw_view{ height: 100%;}
 .lw_view{ height: 100%;}
 .task_dw{
-font-size:3rem;  
+font-size:5rem;  
 }
 .task_lw{
-font-size:1rem;  
+font-size:2rem;  
 }
 /* swiper{ height:250px;} */
 

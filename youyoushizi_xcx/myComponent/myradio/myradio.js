@@ -55,7 +55,7 @@ Component({
     attached: function () {
       // 在组件实例进入页面节点树时执行
    
-      console.log(this.data.current)
+      // console.log(this.data.current)
 
       this.setData({
         c_value: this.data.current,
