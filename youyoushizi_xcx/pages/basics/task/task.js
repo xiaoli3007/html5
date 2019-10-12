@@ -993,9 +993,16 @@ Page({
     let item_word = this.data.taskdata.word1[this.data.current]
     // console.log(item_word);
     
-    // let m = 'DrawerModalL_word'+this.data.current
+    let m = 'DrawerModalL_word'
+
+    if (this.data.subcurrent > 0 && this.data.subcurrent < this.data.max_subcurrent){
+      m = 'DrawerModalL_dword'
+    }
+    
+
+    // DrawerModalL_dword
     this.setData({
-      modalName: 'DrawerModalL_word',
+      modalName: m,
       data_item_word: item_word,
     })
   },

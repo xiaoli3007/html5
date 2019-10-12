@@ -69,7 +69,7 @@
 
           </wux-col>
           <wux-col span="4">
-            <view class="text-right cz_icon">
+            <view class="text-right cz_icon" bindtap="showModal_word_shiyi" data-target="DrawerModalL">
               <text class="proIcon-iconico_bz"></text>
             </view>
           </wux-col>
@@ -347,7 +347,7 @@
               <text>拼音：</text>
             </wux-col>
             <wux-col span="8">
-              <button class="cu-btn round bg-gradual-purple shadow" bindtap="play_any_src" data-msrc="{{item.mp3}}">
+              <button class="cu-btn round bg-orange shadow" bindtap="play_any_src" data-msrc="{{item.mp3}}">
                 {{item.pinyin}}
                 <view class="cuIcon-notification" style="margin-left:10px;">
                 </view>
