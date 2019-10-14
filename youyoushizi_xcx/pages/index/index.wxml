@@ -1,6 +1,4 @@
-<cu-custom bgColor="bg-orange">
-  <view slot="content">优优识字</view>
-</cu-custom>
+
 
 <basics wx:if="{{PageCur=='basics'}}"></basics>
 

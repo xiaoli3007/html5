@@ -15,7 +15,7 @@
     <view class="margin-top-sm">
       <text></text>
     </view>
-    <image src="https://rmsp.youyoushizi.com/statics/images/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+    <!-- <image src="https://rmsp.youyoushizi.com/statics/images/wave.gif" mode="scaleToFill" class="gif-wave"></image> -->
   </view>
   
  

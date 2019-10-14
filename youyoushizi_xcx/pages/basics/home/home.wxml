@@ -1,3 +1,6 @@
+<cu-custom bgColor="bg-orange">
+  <view slot="content">优优识字</view>
+</cu-custom>
 
 <view class="cu-load bg-orange loading" wx:if="{{isLoad}}"></view>
 
