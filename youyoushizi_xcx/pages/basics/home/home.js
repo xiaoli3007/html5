@@ -10,6 +10,7 @@ Component({
     kewaiduwuList: [],
     tuijianduwuList: [],
     iconList: [{
+      bg_image: 'https://rmsp.youyoushizi.com/statics/yysz/ico_sz.svg',
       icon: 'picfill',
       color: 'yellow',
       url: '/pages/basics/tasklist/tasklist',
@@ -17,6 +18,7 @@ Component({
       name: '识字',
       type: '2'
     }, {
+      bg_image: 'https://rmsp.youyoushizi.com/statics/yysz/ico_tx.svg',
       icon: 'service',
       color: 'olive',
         url: '/pages/basics/tasklist/tasklist',
@@ -24,6 +26,7 @@ Component({
       name: '听写',
       type: '1'
       }, {
+        bg_image: 'https://rmsp.youyoushizi.com/statics/yysz/ico_fx.svg',
         icon: 'brand',
         color: 'yellow',
         url: '/pages/basics/reviewselect/reviewselect',

@@ -9,6 +9,11 @@ border: 1px dashed #aaa;
 .swiper_sub{
   height: 100%;
 }
+.cz_iconup text{
+  font-size:30rpx; 
+  color: #ddd;
+}
+
 .cz_icon{
   font-size:70rpx; 
 }

@@ -53,18 +53,19 @@
         <wux-row>
           <wux-col span="4">
             <view class="text-left cz_icon">
-              <text class="proIcon-iconico_bc"></text>
+              <!-- <text class="proIcon-iconico_bc"></text> -->
+               <button class="cu-btn round  line-grey">报错</button>
             </view>
 
           </wux-col>
           <wux-col span="4">
 
             <view wx:if="{{middle_subcurrent}}" bindtap="onDownChange" class="text-center cz_icon text-grey">
-              <text class="proIcon-iconico_jt_s" ></text>
+              <text class="proIcon-iconico_jt_s" style="font-size:30rpx;color: #ddd;"></text>
             </view>
 
             <view wx:if="{{!middle_subcurrent}}" bindtap="onUpChange" class="text-center cz_icon text-grey">
-              <text class="proIcon-iconico_jt_x" ></text>
+              <text class="proIcon-iconico_jt_x" style="font-size:30rpx;color: #ddd;"></text>
             </view>
 
           </wux-col>
