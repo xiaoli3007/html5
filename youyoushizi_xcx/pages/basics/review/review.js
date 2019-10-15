@@ -3,6 +3,9 @@ const app = getApp()
 
 Page({
   data: {
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    Custom: app.globalData.Custom,
     toptitle: '复习',
     chuchu:'',
     taskdata: {
@@ -41,6 +44,21 @@ Page({
     ],
     taskid: 0,
     konw_list_radios: [],
+    tingxie_auto: false,
+    all_play_c: null,
+    data_item_word: null,
+    data_item_dword: null,
+    audioword_object: null,
+    audiodword_object: null,
+    audiolword_object: null,
+    button_loading_text: '',
+    button_loading_auto: false,
+    button_global_src: '',
+    button_global_currt: 0,
+    swiperheight: 300,
+    task_wcell_type: 0,
+    max_subcurrent: 2,
+    middle_subcurrent: true
   },
   onLoad: function(options) {
 
@@ -81,33 +99,16 @@ Page({
             }, 1000)
 
           } else {
-
-            var linktemp1 = [];
-            var linktemp2 = [];
-            var linktemp3 = [];
+      
             var konw_currenttemp = [];
             var konw_currenttemplist = [];
             var konw_currenttemplist_title = [];
             var tempkonw_list_radios = [];
 
             res.data.word_data.word1.forEach(function(value, i) {
-              var innerAudioContext = null
-              innerAudioContext = wx.createInnerAudioContext()
-              innerAudioContext.src = value.sw_sound
-              linktemp1.push(innerAudioContext)
-
-              var innerAudioContext2 = null
-              innerAudioContext2 = wx.createInnerAudioContext()
-              innerAudioContext2.src = value.dw_sound
-              linktemp2.push(innerAudioContext2)
-
-              var innerAudioContext3 = null
-              innerAudioContext3 = wx.createInnerAudioContext()
-              innerAudioContext3.src = value.lw_sound
-              linktemp3.push(innerAudioContext3)
+             
 
               konw_currenttemplist.push(value.review_select_days)
-              
               konw_currenttemp.push(20)
 
               var titletmep = [];
@@ -135,24 +136,22 @@ Page({
             // res.data.word_data.task_word_data_items.forEach(function(value, i) {
             // })
 
-            console.log(konw_currenttemplist_title);
+            // console.log(konw_currenttemplist_title);
             // console.log(linktemp1);
             // console.log(linktemp2);
             // console.log(linktemp1);
 
             that.setData({
               taskdata: res.data.word_data,
-              audiowordlist: linktemp1,
-              audiodwordlist: linktemp2,
-              audiolwordlist: linktemp3,
               konw_current: konw_currenttemp,
               konw_listinfo: konw_currenttemplist,
               konw_listinfo_title: konw_currenttemplist_title,
               konw_list_radios: tempkonw_list_radios,
               chuchu: res.data.word_data.word1[0].chuchu
             })
-            console.log(tempkonw_list_radios);
+            // console.log(tempkonw_list_radios);
 
+            that.auto_height()
           }
 
         },
@@ -174,7 +173,55 @@ Page({
 
   },
   onReady(e) {
-  
+
+    var that = this
+
+    this.setData({
+
+      all_play_c: wx.createInnerAudioContext(),
+      audioword_object: wx.createInnerAudioContext(),
+      audiodword_object: wx.createInnerAudioContext(),
+      audiolword_object: wx.createInnerAudioContext(),
+
+    })
+    var that = this
+    //==============================================================
+    this.data.audiolword_object.onError(() => {
+      that.setData({
+        button_loading_text: '加载语音失败！',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiolword_object.onWaiting(() => {
+      that.setData({
+        button_loading_text: '加载语音...',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiolword_object.onPlay(() => {
+      // console.log(that.data.audiolword_object.src)
+      that.setData({
+        button_loading_text: '播放语音中...',
+        button_loading_auto: true,
+        button_global_src: that.data.audiolword_object.src,
+        button_global_currt: that.data.current,
+      })
+
+    })
+    this.data.audiolword_object.onEnded(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false,
+        button_global_src: ''
+      })
+    })
+    this.data.audiolword_object.onStop(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false,
+        button_global_src: ''
+      })
+    })
 
   },
   onUnload(e) {
@@ -204,7 +251,46 @@ Page({
     })
 
   },
+  auto_height() {
+    // console.log(type)
+    var that = this
+    let main_hight_head = 0
+    let main_hight_common_icon_top = 0
+    let main_hight_common_icon = 0
+    let main_hight_shizi_know = 0
+    let main_hight_tingxie_play = 0
+    let main_hight_tingxie_setting = 0
+    // wx.createSelectorQuery().select('#main_hight_head').boundingClientRect(function (res) {
+    //   // 公共头部的高度
+    //   // console.log(res)
+    //   main_hight_head = res.height
+    //   console.log('公共头部的高度' + main_hight_head)
+    // }).exec()
+    wx.createSelectorQuery().select('#main_hight_common_icon').boundingClientRect(function (res) {
+      // 公共图标的高度
+      // console.log(res)
+      main_hight_common_icon_top = res.top
+      main_hight_common_icon = res.height
+      // console.log('公共图标的上边距度' + res.top)
+      // console.log('公共图标的高度' + res.height)
 
+    }).exec()
+  
+      wx.createSelectorQuery().select('#main_hight_shizi_know').boundingClientRect(function (res) {
+        // 识字对错的高度
+        main_hight_shizi_know = res.height
+        // console.log('识字对错的高度' + res.height)
+
+        let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_shizi_know)
+        // console.log('算出来的高度为' + tempswiperheight)
+
+        that.setData({
+          swiperheight: tempswiperheight
+        })
+
+      }).exec()
+
+  },
 
   change: function(e) {
     if ("touch" === e.detail.source) { // 只在用户触发的情况下
@@ -243,29 +329,36 @@ Page({
     })
     // console.log(this.data.current)
   },
-  audioPlay_word() {
-    // console.log(this.data.current)
-    this.setData({
-      subcurrent: 0,
-      tabkey: this.data.tabs[0].key
-    })
-    this.data.audiowordlist[this.data.current].play()
-  },
-  audioPlay_dword() {
-
-    this.setData({
-      subcurrent: 1,
-      tabkey: this.data.tabs[1].key
-    })
-    console.log(this.data.tabkey)
-    this.data.audiodwordlist[this.data.current].play()
-  },
   audioPlay_lword() {
-    this.setData({
-      subcurrent: 2,
-      tabkey: this.data.tabs[2].key
-    })
-    this.data.audiolwordlist[this.data.current].play()
+
+    let item_lword_src = ''
+    if (this.data.subcurrent == 0) {
+
+      item_lword_src = this.data.taskdata.word1[this.data.current].sw_sound
+
+    } else if (this.data.subcurrent == 1) {
+
+
+      item_lword_src = this.data.task_wcell_type == 25 ? this.data.taskdata.word1[this.data.current].lw_sound : this.data.taskdata.word1[this.data.current].dw_sound
+
+    } else if (this.data.subcurrent == 2) {
+
+      item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
+
+    }
+
+
+    // console.log(item_lword_src)
+
+
+    if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current) {
+      this.data.audiolword_object.stop()
+    } else {
+      this.data.audiolword_object.stop()
+      this.data.audiolword_object.src = item_lword_src
+      this.data.audiolword_object.play()
+    }
+
   },
   
   onChangeKnow(e) {
@@ -318,57 +411,42 @@ Page({
     }
 
    },
-  // onChangesegmented(e) {
-  //   console.log(e.detail.key)
-  //   // console.log(this.data.current)
-  //   var tprice = 'konw_current[' + this.data.current + ']'
-  //   this.setData({
-  //     [tprice]: e.detail.key,
-  //   })
-    
-  //   var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
-  //   var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.key]
-  //   console.log(tempwcellid)
-  //   console.log(temp_fact)
-  //   //发送请求 super 算法
-  //   wx.request({
-  //     url: app.globalData.url + '?act=taskinwcell_super',
-  //     method: "POST",
-  //     data: {
-  //       userid: app.globalData.userid ? app.globalData.userid : 0,
-  //       task_wcell_id: tempwcellid,
-  //       day: temp_fact.value,
-  //       quality: temp_fact.quality,
-  //       factor: temp_fact.factor,
-  //     },
-  //     header: {
-  //       'content-type': 'application/x-www-form-urlencoded',
-  //       'X-Token': app.globalData.xtoken
-  //     },
-  //     success(res) {
+  onDownChange() {
 
-  //       console.log(res.data)
+    // console.log(this.data.max_subcurrent)
+    let tempsubc = this.data.subcurrent + 1
 
-  //     }
-  //   })
+    tempsubc = tempsubc > this.data.max_subcurrent ? this.data.max_subcurrent : tempsubc
+    // console.log(tempsubc)
+    if (tempsubc == this.data.max_subcurrent) {
 
-  //   var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
-  //   var that = this
-  //   setTimeout(function() {
-  //     that.setData({
-  //       current: nextitem,
-  //     })
-  //   }, 500)
+      this.setData({
+        middle_subcurrent: false,
+      })
+    }
+    this.setData({
+      subcurrent: tempsubc,
+    })
 
-  //   if (this.data.current == this.data.taskdata.word1.length - 1) {
-  //     wx.showToast({
-  //       title: '本次识字已完成！',
-  //       icon: 'none',
-  //       duration: 1500,
-  //     })
-  //   }
+  },
+  onUpChange() {
 
-  // },
+    // console.log(this.data.max_subcurrent)
+    let tempsubc = this.data.subcurrent - 1
+    tempsubc = tempsubc < 0 ? 0 : tempsubc
+
+    // console.log(tempsubc)
+    if (tempsubc == 0) {
+
+      this.setData({
+        middle_subcurrent: true,
+      })
+    }
+    this.setData({
+      subcurrent: tempsubc,
+    })
+
+  },
   onTabsChange(e) {
     // console.log('onTabsChange', e)
     const {
@@ -383,21 +461,37 @@ Page({
     })
   },
   onSubSwiperChange(e) {
+
     // console.log('onSubSwiperChange', e)
-    const {
-      current: index,
-      source
-    } = e.detail
-    const {
-      key
-    } = this.data.tabs[index]
+    const { current: index, source } = e.detail
 
     if (!!source) {
       this.setData({
-        tabkey: key,
+        // tabkey: key,
         subcurrent: index,
       })
     }
+  },
+  showModal_word_shiyi(e) {
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+    // console.log(item_word);
+
+    let m = 'DrawerModalL_word'
+
+    if (this.data.subcurrent > 0 && this.data.subcurrent < this.data.max_subcurrent) {
+      m = 'DrawerModalL_dword'
+    }
+    // DrawerModalL_dword
+    this.setData({
+      modalName: m,
+      data_item_word: item_word,
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
   },
 
 
