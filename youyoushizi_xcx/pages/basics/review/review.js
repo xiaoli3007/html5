@@ -493,6 +493,17 @@ Page({
       modalName: null
     })
   },
+  play_any_src(e) {
+    let src = e.currentTarget.dataset.msrc
+
+    console.log(src);
+    // let innerAudioContext = wx.createInnerAudioContext()
+    // this.data.all_play_c.stop()
+    this.data.all_play_c.src = src
+    this.data.all_play_c.play()
+    // console.log(this.innerAudioContext.duration);
+
+  },
 
 
 })

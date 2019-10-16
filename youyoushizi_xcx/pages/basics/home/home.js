@@ -1,3 +1,5 @@
+import { $startWuxRefresher, $stopWuxRefresher, $stopWuxLoader } from '../../../dist/index'
+
 const app = getApp()
 Component({
   options: {
@@ -38,7 +40,7 @@ Component({
     skin: false,
     gridBorder: false,
     username:'我',
-    isLoad: true,
+    isLoad: false,
 
   },
   pageLifetimes: {
@@ -66,56 +68,57 @@ Component({
         })
       }
 
-      var that = this
-      //加载首页的教材和 课外读物
-      wx.request({
-        url: app.globalData.url2 + '?act=index', //课外读物
-        data: {
-          userid: app.globalData.userid ? app.globalData.userid:0
-        },
-        header: {
-          'content-type': 'application/json', // 默认值
-          'X-Token': app.globalData.xtoken
-        },
-        success(res) {
+       $startWuxRefresher('#wux-refresher', this)
+      // var that = this
+      // //加载首页的教材和 课外读物
+      // wx.request({
+      //   url: app.globalData.url2 + '?act=index', //课外读物
+      //   data: {
+      //     userid: app.globalData.userid ? app.globalData.userid:0
+      //   },
+      //   header: {
+      //     'content-type': 'application/json', // 默认值
+      //     'X-Token': app.globalData.xtoken
+      //   },
+      //   success(res) {
  
-          console.log(res.data)
+      //     console.log(res.data)
  
-          that.setData({
+      //     that.setData({
             
-            kewaiduwuList: res.data.items.duwu,
-            jiaocaiList: res.data.items.jiaocai,
+      //       kewaiduwuList: res.data.items.duwu,
+      //       jiaocaiList: res.data.items.jiaocai,
             
-          })
+      //     })
 
-          var tprice = 'iconList[0].badge'
-          var tprice2 = 'iconList[1].badge'
-          var tprice3 = 'iconList[2].badge'
-          that.setData({
-            [tprice]: res.data.shizi_nums,
-            [tprice2]: res.data.tingxie_nums,
-            [tprice3]: res.data.fuxi_nums,
-          })
+      //     var tprice = 'iconList[0].badge'
+      //     var tprice2 = 'iconList[1].badge'
+      //     var tprice3 = 'iconList[2].badge'
+      //     that.setData({
+      //       [tprice]: res.data.shizi_nums,
+      //       [tprice2]: res.data.tingxie_nums,
+      //       [tprice3]: res.data.fuxi_nums,
+      //     })
           
            
-        },
-        complete(res) {
+      //   },
+      //   complete(res) {
+      //     $stopWuxRefresher('#wux-refresher', that)
+      //     // that.setData({
+      //     //   isLoad: false,
+      //     // })
+      //     //console.log(res.statusCode)
+      //     if (res.statusCode == 500) {
 
-          that.setData({
-            isLoad: false,
-            
-          })
-          //console.log(res.statusCode)
-          if (res.statusCode == 500) {
+      //     } else {
 
-          } else {
+      //     }
 
-          }
+      //   }
+      // })
 
-        }
-      })
-
-     
+       
+       
 
     },
     detached: function () {
@@ -135,21 +138,18 @@ Component({
         scrollLeft: (e.currentTarget.dataset.id - 1) * 60
       })
     },
-    onLoad: function () {
-      console.log(111)
-    },
-    
+   
     /**
 * 页面 刷新
 */  
     onPullDownRefresh() {
 
-      console.log(11)
+      console.log('onRefresh')
       var that = this;
 
-      that.setData({
-        isLoad: true,
-      })
+      // that.setData({
+      //   isLoad: true,
+      // })
 
       wx.request({
         url: app.globalData.url2 + '?act=index', //课外读物
@@ -183,15 +183,32 @@ Component({
 
         },
         complete(res) {
-
-          that.setData({
-            isLoad: false,
-          })
+          
+          $stopWuxRefresher('#wux-refresher', that)
+          // that.setData({
+          //   isLoad: false,
+          // })
          
 
         }
       })
     },
+    onPageScroll(e) {
+      this.setData({
+        scrollTop: e.scrollTop
+      })
+    },
+    onPulling() {
+      console.log('onPulling')
+    },
+    // onRefresh() {
+    //   console.log('onRefresh')
+    //   // var that = this 
+    //   setTimeout(() => {
+    //     $stopWuxRefresher('#wux-refresher', this)
+    //     console.log('onRefresh222')
+    //   }, 3000)
+    // },
    
   }
 
