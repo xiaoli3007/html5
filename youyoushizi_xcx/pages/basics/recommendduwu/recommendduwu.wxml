@@ -7,23 +7,23 @@
   </view>
 </view> -->
 <cu-custom bgColor="bg-orange" isBack="{{true}}">
-    <view slot="backText">返回</view>
-    <view slot="content">推荐读物</view>
-  </cu-custom>
+  <view slot="backText">返回</view>
+  <view slot="content">推荐读物</view>
+</cu-custom>
 
 <view class="cu-bar search bg-white">
-    <view class="search-form round">
-      <text class="cuIcon-search"></text>
-      <input type="text" placeholder="图书标题或作者" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}' bindconfirm="search_keyword"></input>
-    </view>
-    <view class="action">
-      <!-- <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button> -->
-       <text class="cuIcon-scan lg text-gray" bindtap="scanCode"></text>
-    </view>
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="图书标题或作者" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}' bindconfirm="search_keyword"></input>
   </view>
+  <view class="action">
+    <!-- <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button> -->
+    <text class="cuIcon-scan lg text-gray" bindtap="scanCode"></text>
+  </view>
+</view>
 
-  <!-- <view class="cu-bar-sun fixed" style="top:{{CustomBar+50}}px;"> </view> -->
-  <wux-filterbar items="{{ searchitems }}"  paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" /> 
+<!-- <view class="cu-bar-sun fixed" style="top:{{CustomBar+50}}px;"> </view> -->
+<wux-filterbar items="{{ searchitems }}" paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" />
 
 <!-- <block wx:key wx:for='{{categoryArray}}' wx:for-index="cindex" >
 	<view class="cu-form-group">
@@ -37,7 +37,7 @@
 		</picker>
 	</view>
 </block> -->
-  
+
 
 <!-- 
  <view class="cu-card article no-card" catchtouchmove="{{ opened ? 'noop' : '' }}">
@@ -61,42 +61,44 @@
   </view>
 </view>  -->
 
- <view class="cu-list " catchtouchmove="{{ opened ? 'noop' : '' }}">
-    <view class="padding-sm bg-white flex flex-wrap justify-center align-center margin-top" wx:for="{{duwuList}}" wx:key >
-
-     <view class="basis-xs" style="flex-basis: 30%;">
-      <image src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
-      </image>
-    </view>
-     <view class="basis-xl" style="flex-basis: 70%;">
-     <view class="text-left text-xl"><text class="text-black text-bold">{{item.program.title}}</text></view>
-     <view class="text-left">
-     <text class="text-lg">作者：{{item.program.author}}</text>
-     <text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
-     <text class="text-lg" wx:if="{{item.program.translator!=''}}" >译者：{{item.program.translator}}</text>
-     </view>
-
-    <view class="text-left text-df">字数：100000</view>
-
-     <view  class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;"> 
-     描述：{{item.program.head}}
-     </view>
-      
+<view class="cu-list " catchtouchmove="{{ opened ? 'noop' : '' }}">
+  <block wx:for="{{duwuList}}" wx:key>
+    <view data-programid="{{item.program.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-center margin-top">
+      <view class="basis-xs" style="flex-basis: 30%;">
+        <image src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
+        </image>
       </view>
+      <view class="basis-xl" style="flex-basis: 70%;">
+        <view class="text-left text-xl">
+          <text class="text-black text-bold">{{item.program.title}}</text>
+        </view>
+        <view class="text-left">
+          <text class="text-lg">作者：{{item.program.author}}</text>
+          <text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
+          <text class="text-lg" wx:if="{{item.program.translator!=''}}">译者：{{item.program.translator}}</text>
+        </view>
+
+        <view class="text-left text-df">字数：100000</view>
+
+        <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">
+          描述：{{item.program.head}}
+        </view>
+
+      </view>
+
     </view>
-  </view>  
+  </block>
+</view>
 
 
 
 <view class="cu-load bg-blue {{!isLoad?'loading':'over'}}"></view>
 
 
-  <view class='cu-load load-modal' wx:if="{{loadModal}}">
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <image src='/images/logo.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>加载中...</view>
 </view>
 
 <wux-dialog id="wux-dialog" />
-
-

@@ -86,15 +86,5 @@ Page({
       TabCursub: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60
     })
-  },
-  gotodeteil_study(e) {
-
-    let programid = e.currentTarget.dataset.programid
-    // var that = this
-    // console.log(programid)
-    wx.navigateTo({
-      url: '/pages/basics/detailed_study/detailed_study?ebookid=' + programid,
-    })
-  },
-
+  }
 })

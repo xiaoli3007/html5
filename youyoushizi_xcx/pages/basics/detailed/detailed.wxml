@@ -1,87 +1,25 @@
-<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">读物详细页</view>
 </cu-custom>
 
 
-<view class="cu-bar bg-blue  solid-bottom cu-bar-title" id='top_main_head_title'>
-  <view class="action align-center text-center">
-    <!-- <text class="cuIcon-title text-white "></text>-->
-    {{program.title}}
-  </view>
-</view>
-
-
-<view class="bg-grey padding-sm margin-xs radius flex   align-start">
-  <view class="bg-grey  margin-xs radius">
-    <!-- <cover-image src='{{program.thumb_xcx}}' style='width:100rpx;'></cover-image> -->
-
-    <image src='{{program.thumb_xcx}}' style="width:200rpx;" mode="widthFix"></image>
-  </view>
-  <view class="bg-grey  margin-xs radius">
-    <view class="text-left "> 作者：{{program.author}}</view>
-    <view class="text-left ">主题：{{program.subject}}</view>
-    <view class="text-left "> 简介：{{program.description}}</view>
-  </view>
-</view>
-
-<!-- <view class="cu-bar bg-blue margin-top solid-bottom">
-  <view class="action">
-    <text class="cuIcon-title text-white"></text> 字集
-  </view>
-</view> -->
-
-
-<scroll-view scroll-x class="bg-blue nav text-center">
-  <view class="cu-item {{index==TabCur?'text-yellow cur':''}}" wx:for="{{datalist}}" wx:key bindtap="tabSelect" data-id="{{index}}">
-    {{item.obj.name}}
-  </view>
-</scroll-view>
-
-<block wx:for="{{datalist}}" wx:for-index="mindex" wx:key>
-
-  <scroll-view wx:if="{{TabCur==mindex}}" scroll-x class="bg-white nav text-center" scroll-with-animation scroll-left="{{scrollLefts}}">
-
-    <block wx:for="{{item.wcell_list}}" wx:for-index="mindex2" wx:key>
-      <view class="cu-item {{mindex2==TabCursub?'text-green cur':''}}" bindtap="tabSelect2" data-id="{{mindex2}}">
-        {{item.name}} 
-      </view>
-    </block>
-  </scroll-view>
-</block>
-
-
-<block wx:key wx:for='{{datalist}}' wx:for-index="mindex">
-
-<block wx:key wx:for='{{item.wcell_list}}' wx:for-index="mindex2">
-
-  <block wx:if="{{TabCur==mindex && TabCursub==mindex2 }}">
-
-
-    <view class="padding bg-white" style="padding-bottom:120rpx;">
-     <view class="cu-list grid col-3">
-      <block wx:key wx:for='{{item.data}}' wx:for-index="mindex3">
-      
-        <view class="cu-tag radius line-black padding margin-bottom">{{item.word}}</view>
-      </block>
-      </view>
-    </view>
-  
-
-  <view class="cu-bar flex  bg-white justify-center  foot" style="bottom:0px;">
-    
-
-     <navigator wx:if="{{item.shizi_taskid==0}}"  hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{program.id}}&gid={{mindex2}}&wcell_type={{mindex}}" open-type="redirect">
-      <button class="cu-btn round lg line-blue ">开始识字</button>
-       </navigator>
-
-        <navigator wx:if="{{item.shizi_taskid!=0}}"  hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
-      <button class="cu-btn round lg bg-blue">开始识字</button>
-       </navigator> 
  
+<view class="bg-white padding-sm margin-top  flex   align-start">
+  <view class=" margin-xs radius">
+    <image src='{{program.thumb_xcx}}' style="width:150rpx;" mode="widthFix"></image>
   </view>
-</block>
+  <view class=" margin-xs radius">
+  <view class="text-left text-xl text-black text-bold">  {{program.title}}</view>
+    <view class="text-left margin-top-xs"> {{program.author}}</view>
+    <view class="text-left margin-top-xs">{{program.subject}}</view>
+    <view class="text-left margin-top-xs"> 字数：xxx</view>
+  </view> 
+</view>
 
-</block>
 
-</block>
+
+<view class="flex flex-direction cu-bar-sun foot">
+  <button class="cu-btn bg-orange lg" data-programid="{{program.id}}" bindtap="gotodeteil_study">去学习</button>
+</view>
+ 

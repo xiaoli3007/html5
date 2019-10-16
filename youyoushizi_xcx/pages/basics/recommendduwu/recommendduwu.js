@@ -521,4 +521,13 @@ Page({
       }
     })
   },
+  gotodeteil(e) {
+
+    let programid = e.currentTarget.dataset.programid
+    // var that = this
+    // console.log(programid)
+      wx.navigateTo({
+        url: '/pages/basics/detailed/detailed?ebookid=' + programid,
+      })
+  },
 })
