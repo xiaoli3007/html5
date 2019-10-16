@@ -5,3 +5,17 @@
   /* --ShadowSize: 0rpx 40rpx 100rpx 0rpx; */
 
 }
+
+.home_icon {
+  font-size: 50rpx;
+
+}
+
+.cu-avatar.lgme {
+width: 120rpx;
+height: 120rpx;
+font-size: 2em;
+}
+.cu-list.grid>.cu-item text{
+  margin-top: 0;
+}
