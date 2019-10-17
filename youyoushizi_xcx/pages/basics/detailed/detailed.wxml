@@ -7,16 +7,16 @@
 <view class="" style="padding-bottom:80rpx;">
 
   <view class="bg-white padding-sm margin-top  flex   align-start">
-    <view class=" margin-xs"  style="flex: 1;">
+    <view class=""  style="flex: 1;">
       <image src='{{program.thumb_xcx}}' style="width:150rpx;" mode="widthFix"></image>
     </view>
-    <view class=" margin-xs"  style="flex: 3;">
+    <view class=" margin-left-xs margin-right-xs"  style="flex: 3;">
       <view class="text-left text-xl text-black text-bold"> {{program.title}}</view>
       <view class="text-left margin-top-xs"> {{program.author}} 译：{{program.translator}}</view>
       <view class="text-left margin-top-xs">{{program.subject}}</view>
       <view class="text-left margin-top-xs"> 评分：{{program.score}}</view>
     </view>
-    <view class="margin-xs" style="flex: 1;">
+    <view class="" style="flex: 1;">
       <view class="text-left margin-top-xs">
         <button class="cu-btn round  line-grey">收藏</button>
       </view>
