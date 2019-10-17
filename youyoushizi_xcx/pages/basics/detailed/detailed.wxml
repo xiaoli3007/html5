@@ -3,23 +3,89 @@
   <view slot="content">读物详细页</view>
 </cu-custom>
 
+<view class="" style="padding-bottom:80rpx;">
 
- 
-<view class="bg-white padding-sm margin-top  flex   align-start">
-  <view class=" margin-xs radius">
-    <image src='{{program.thumb_xcx}}' style="width:150rpx;" mode="widthFix"></image>
+  <view class="bg-white padding-sm margin-top  flex   align-start">
+    <view class=" margin-xs radius">
+      <image src='{{program.thumb_xcx}}' style="width:150rpx;" mode="widthFix"></image>
+    </view>
+    <view class=" margin-xs radius">
+      <view class="text-left text-xl text-black text-bold"> {{program.title}}</view>
+      <view class="text-left margin-top-xs"> {{program.author}}</view>
+      <view class="text-left margin-top-xs">{{program.subject}} 中篇小说 | 美国</view>
+      <view class="text-left margin-top-xs"> 字数：xxx</view>
+    </view>
   </view>
-  <view class=" margin-xs radius">
-  <view class="text-left text-xl text-black text-bold">  {{program.title}}</view>
-    <view class="text-left margin-top-xs"> {{program.author}}</view>
-    <view class="text-left margin-top-xs">{{program.subject}}</view>
-    <view class="text-left margin-top-xs"> 字数：xxx</view>
-  </view> 
+
+   <view class="cu-bar bg-white  margin-top">
+    <view class="action text-orange">
+      全文分析
+    </view>
+    <view class="action">
+      <text class="text-orange">更多 <text class="text-grey"> ></text></text>
+    </view>
+  </view>
+  <view class="bg-white padding-left padding-right padding-bottom">
+    <view class="text-df">
+      <text class="text-block text-center">字数：10万3千，汉字总数：2480，一级字：1209，二级字 50 三级字 5 成语数430
+      生字率： 
+      2年级上 43%  2年级下 29%  3年级上 22%  3年级下 17%  4年级上 13%  4年级下 11%  5年级上 10% 5年级下 9% 6年级上 8% 6年级下 8%
+      </text>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white  margin-top">
+    <view class="action text-orange">
+      内容描述
+    </view>
+    <view class="action">
+      <text class="text-orange">更多 <text class="text-grey"> ></text></text>
+    </view>
+  </view>
+  <view class="bg-white padding-left padding-right padding-bottom">
+    <view class="text-df">
+      <text class="text-block text-center">阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发</text>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white  margin-top">
+    <view class="action text-orange">
+      正文开头
+    </view>
+    <view class="action">
+      <text class="text-orange">更多 <text class="text-grey"> ></text></text>
+    </view>
+  </view>
+  <view class="bg-white padding-left padding-right padding-bottom">
+    <view class="text-df">
+      <text class="text-block text-center">阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发</text>
+    </view>
+  </view>
+
+
+
+
+  <view class="cu-bar bg-white  margin-top">
+    <view class="action text-orange">
+      推荐语
+    </view>
+    <view class="action">
+      <!-- <text class="text-orange">更多 <text class="text-grey"> ></text></text> -->
+    </view>
+  </view>
+
+  <view class="bg-white padding-xs  solid-bottom  flex   align-start">
+    <view class=" margin-xs radius">
+      <image src='{{program.thumb_xcx}}' style="width:100rpx;" mode="widthFix"></image>
+    </view>
+    <view class=" margin-xs radius">
+      <view class="text-left text-df text-black text-bold"> 嗷嗷的</view>
+      <view class="text-left  text-sm margin-top-xs"> 大声大声道大声大声道大声大声道大声大声道大声大声道大声大声道大声大声道大声大声道大声 </view>
+    </view>
+  </view>
+ 
 </view>
-
-
 
 <view class="flex flex-direction cu-bar-sun foot">
   <button class="cu-btn bg-orange lg" data-programid="{{program.id}}" bindtap="gotodeteil_study">去学习</button>
 </view>
- 
