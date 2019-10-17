@@ -7,16 +7,16 @@
 <view class="" style="padding-bottom:80rpx;">
 
   <view class="bg-white padding-sm margin-top  flex   align-start">
-    <view class=" margin-xs">
+    <view class=" margin-xs"  style="flex: 1;">
       <image src='{{program.thumb_xcx}}' style="width:150rpx;" mode="widthFix"></image>
     </view>
-    <view class=" margin-xs">
+    <view class=" margin-xs"  style="flex: 3;">
       <view class="text-left text-xl text-black text-bold"> {{program.title}}</view>
       <view class="text-left margin-top-xs"> {{program.author}} 译：{{program.translator}}</view>
       <view class="text-left margin-top-xs">{{program.subject}}</view>
       <view class="text-left margin-top-xs"> 评分：{{program.score}}</view>
     </view>
-    <view class="margin-xs">
+    <view class="margin-xs" style="flex: 1;">
       <view class="text-left margin-top-xs">
         <button class="cu-btn round  line-grey">收藏</button>
       </view>
@@ -56,30 +56,13 @@
     </view>
 
     <view class="grid col-3 text-left">
-      <view class="text-block ">1年级上：{{program.book_rate.r1}}
+      <view class="text-block ">1年级上：{{common.util_perset(program.book_rate.r1)}}
       </view>
-      <view class="text-block ">1年级上：{{program.book_rate.r2}}
+      <view class="text-block ">1年级上：{{common.util_perset(program.book_rate.r2)}}
       </view>
-      <view class="text-block ">2年级上：{{program.book_rate.r3}}
+      <view class="text-block ">2年级上：{{common.util_perset(program.book_rate.r3)}}
       </view>
-      <!-- <view class="text-block ">2年级下：{{program.book_rate.r4}}
-      </view>
-      <view class="text-block ">3年级上：{{program.book_rate.r5}}
-      </view>
-      <view class="text-block ">3年级下：{{program.book_rate.r6}}
-      </view>
-      <view class="text-block ">4年级下：{{program.book_rate.r7}} 
-      </view>
-      <view class="text-block ">4年级上：{{program.book_rate.r8}} 
-      </view>
-      <view class="text-block ">5年级下：{{program.book_rate.r9}}
-      </view>
-      <view class="text-block ">5年级下：{{program.book_rate.r10}}
-      </view>
-      <view class="text-block ">6年级上：{{program.book_rate.r111}} 
-      </view>
-      <view class="text-block ">6年级下：{{program.book_rate.r12}}
-      </view> -->
+    
     </view>
 
   </view>
@@ -176,29 +159,29 @@
         </view>
 
         <view class="grid col-2 text-left">
-          <view class="text-block ">1年级上：{{program.book_rate.r1}}
+          <view class="text-block ">1年级上：{{common.util_perset(program.book_rate.r1)}}
           </view>
-          <view class="text-block ">1年级上：{{program.book_rate.r2}}
+          <view class="text-block ">1年级上：{{common.util_perset(program.book_rate.r2)}}
           </view>
-          <view class="text-block ">2年级上：{{program.book_rate.r3}}
+          <view class="text-block ">2年级上：{{common.util_perset(program.book_rate.r3)}}
           </view>
-          <view class="text-block ">2年级下：{{program.book_rate.r4}}
+          <view class="text-block ">2年级下：{{common.util_perset(program.book_rate.r4)}}
           </view>
-          <view class="text-block ">3年级上：{{program.book_rate.r5}}
+          <view class="text-block ">3年级上：{{common.util_perset(program.book_rate.r5)}}
           </view>
-          <view class="text-block ">3年级下：{{program.book_rate.r6}}
+          <view class="text-block ">3年级下：{{common.util_perset(program.book_rate.r6)}}
           </view>
-          <view class="text-block ">4年级下：{{program.book_rate.r7}}
+          <view class="text-block ">4年级下：{{common.util_perset(program.book_rate.r7)}}
           </view>
-          <view class="text-block ">4年级上：{{program.book_rate.r8}}
+          <view class="text-block ">4年级上：{{common.util_perset(program.book_rate.r8)}}
           </view>
-          <view class="text-block ">5年级下：{{program.book_rate.r9}}
+          <view class="text-block ">5年级下：{{common.util_perset(program.book_rate.r9)}}
           </view>
-          <view class="text-block ">5年级下：{{program.book_rate.r10}}
+          <view class="text-block ">5年级下：{{common.util_perset(program.book_rate.r10)}}
           </view>
-          <view class="text-block ">6年级上：{{program.book_rate.r111}}
+          <view class="text-block ">6年级上：{{common.util_perset(program.book_rate.r11)}}
           </view>
-          <view class="text-block ">6年级下：{{program.book_rate.r12}}
+          <view class="text-block ">6年级下：{{common.util_perset(program.book_rate.r12)}}
           </view>
         </view>
 

@@ -4,12 +4,18 @@ var util_substring = function (val) {
     return val.substring(0, 60) + "..."
   }
   
+}
 
+var util_perset = function (val) {
+ 
+  if (val) {
+    // console.log(typeof val)
+    // console.log()
+     return parseInt(parseFloat(val) * 100) + "%"
+  }
 }
-var bar = function (d) {
-  return d;
-}
+
 module.exports = {
   util_substring: util_substring,
-  bar: bar
+  util_perset: util_perset
 };
