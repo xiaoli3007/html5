@@ -1,3 +1,4 @@
+var util = require('../../../utils/util.js')
 const app = getApp()
 Page({
   data: {
@@ -60,6 +61,18 @@ Page({
     // console.log(programid)
     wx.navigateTo({
       url: '/pages/basics/detailed_study/detailed_study?ebookid=' + programid,
+    })
+  },
+  showModal(e) {
+    // console.log(item_word);
+    let m = e.currentTarget.dataset.target
+    this.setData({
+      modalName: m,
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
     })
   },
 

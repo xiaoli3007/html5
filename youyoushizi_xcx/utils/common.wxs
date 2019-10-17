@@ -1,0 +1,15 @@
+var util_substring = function (val) {
+
+  if (val){
+    return val.substring(0, 60) + "..."
+  }
+  
+
+}
+var bar = function (d) {
+  return d;
+}
+module.exports = {
+  util_substring: util_substring,
+  bar: bar
+};

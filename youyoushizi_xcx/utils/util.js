@@ -23,7 +23,12 @@ function GetPercent(num, total) {
   return total <= 0 ? "0%" : (Math.round(num / total * 10000) / 100.00) + "%";
 }
 
+function util_substring(val) {
+  return val.substring(0, 60) + "..."
+}
+
 module.exports = {
   formatTime: formatTime,
   GetPercent: GetPercent,
+  util_substring: util_substring,
 }
