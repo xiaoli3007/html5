@@ -11,9 +11,9 @@
     </view>
     <view class=" margin-xs radius">
       <view class="text-left text-xl text-black text-bold"> {{program.title}}</view>
-      <view class="text-left margin-top-xs"> {{program.author}}</view>
-      <view class="text-left margin-top-xs">{{program.subject}} 中篇小说 | 美国</view>
-      <view class="text-left margin-top-xs"> 字数：xxx</view>
+      <view class="text-left margin-top-xs"> {{program.author}} 译：{{program.translator}}</view>
+      <view class="text-left margin-top-xs">{{program.subject}}</view>
+      <view class="text-left margin-top-xs"> 评分：{{program.score}}</view>
     </view>
   </view>
 
@@ -44,7 +44,7 @@
   </view>
   <view class="bg-white padding-left padding-right padding-bottom">
     <view class="text-df">
-      <text class="text-block text-center">阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发</text>
+      <text class="text-block text-center">{{program.description}}</text>
     </view>
   </view>
 
@@ -58,7 +58,7 @@
   </view>
   <view class="bg-white padding-left padding-right padding-bottom">
     <view class="text-df">
-      <text class="text-block text-center">阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发阿萨德法师法师法师发</text>
+      <text class="text-block text-center">{{program.head}}</text>
     </view>
   </view>
 

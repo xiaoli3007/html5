@@ -4,13 +4,6 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    MainCur: 0,
-    TabCur: 0,
-    TabCursub: 0,
-    scrollLeft: 0,
-    scrollLefts: 0,
-    tabNavcat: [],
-    tabNavcat_sub: [],
     program:null,
     datalist: [], datatablist: [],
   },
@@ -38,13 +31,7 @@ Page({
 
         // })
         that.setData({
-
-          datalist: res.data.items,
           program: res.data.program,
-          datatablist_k: res.data.datas_xcc_tab_key,
-          datatablist: res.data.datas_xcc_tab,
-          TabCur: res.data.datas_xcc_tab[0]['m'],
-          TabCursub: res.data.datas_xcc_tab[0]['s'][0],
         })
 
 
@@ -65,27 +52,6 @@ Page({
     })
 
 
-  },
-  tabSelect(e) {
-    // console.log(e.currentTarget.dataset.id);
-    // console.log(this.data.TabCur);
-    // console.log( this.data.datatablist);
-    // console.log(this.data.datatablist_k);
-    if (e.currentTarget.dataset.id != this.data.TabCur){
-      this.setData({
-        TabCur: e.currentTarget.dataset.id,
-        TabCursub: this.data.datatablist_k[e.currentTarget.dataset.id]['s'][0],
-        scrollLeft: (e.currentTarget.dataset.id - 1) * 60
-      })
-    }
-    
-
-  },
-  tabSelect2(e) {
-    this.setData({
-      TabCursub: e.currentTarget.dataset.id,
-      scrollLeft: (e.currentTarget.dataset.id - 1) * 60
-    })
   },
   gotodeteil_study(e) {
 
