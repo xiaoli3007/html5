@@ -81,7 +81,15 @@ Page({
     })
   },
   member_favorite(e) {
+    if (!app.globalData.userid){
 
+      wx.showToast({
+        title: '请先登录！',
+        icon: 'none',
+        duration: 1500,
+      })
+      return 
+    }
     let t = e.currentTarget.dataset.target
 
     let that = this;
