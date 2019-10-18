@@ -38,7 +38,17 @@ Page({
         that.setData({
           program: res.data.program,
           ebookid: res.data.program.id,
-        })
+        }) 
+        if (res.data.program.is_exit_favorite){
+          that.setData({
+            favorite: true,
+          })
+        }
+        if (res.data.program.is_exit_looked) {
+          that.setData({
+            looked: true,
+          })
+        }
 
 
       },

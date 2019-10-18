@@ -18,7 +18,15 @@ Page({
     tabNav: ['识字任务', '听写任务'],
     TabCur: 0,
     typelist: [2, 1],
-    type:0
+    type:0,
+    right: [{
+      text: 'Cancel',
+      style: 'background-color: #ddd; color: white',
+    },
+    {
+      text: 'Delete',
+      style: 'background-color: #F4333C; color: white',
+    }],
   },
   onLoad: function (options) { 
     
@@ -358,6 +366,15 @@ Page({
    
 
 
+  },
+  onClickaaa(e) {
+    console.log('onClick', e.detail)
+    if (e.detail.data) {
+      wx.showModal({
+        title: `The data is ${e.detail.data}`,
+        showCancel: !1,
+      })
+    }
   },
  
 });
