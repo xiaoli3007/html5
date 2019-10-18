@@ -6,7 +6,11 @@ Page({
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
     program:null,
-    datalist: [], datatablist: [],
+    datalist: [], 
+    datatablist: [],
+    ebookid:0,
+    favorite:false,
+    looked:false
   },
   onLoad(options) {
     console.log(options)
@@ -33,6 +37,7 @@ Page({
         // })
         that.setData({
           program: res.data.program,
+          ebookid: res.data.program.id,
         })
 
 
@@ -73,6 +78,42 @@ Page({
   hideModal(e) {
     this.setData({
       modalName: null
+    })
+  },
+  member_favorite(e) {
+
+    let t = e.currentTarget.dataset.target
+
+    let that = this;
+    //收藏
+    wx.request({
+      url: app.globalData.url + '?act=member_favorite',
+      data: {
+        ebookid: that.data.ebookid,
+        userid: app.globalData.userid,
+        type: t,
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+        console.log(res.data)
+        if (t =='member_favorite'){
+          that.setData({
+            favorite: true,
+          })
+
+        }else{
+          that.setData({
+            looked: true,
+          })
+        }
+   
+      },
+      complete(res) {
+       
+      }
     })
   },
 

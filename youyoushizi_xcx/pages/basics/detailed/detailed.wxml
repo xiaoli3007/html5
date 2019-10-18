@@ -17,12 +17,24 @@
       <view class="text-left margin-top-xs"> 评分：{{program.score}}</view>
     </view>
     <view class="" style="flex: 1;">
-      <view class="text-left margin-top-xs">
+
+      <view wx:if="{{!favorite}}" class="text-left margin-top-xs" bindtap="member_favorite" data-target="member_favorite">
         <button class="cu-btn round  line-grey">收藏</button>
       </view>
-      <view class="text-left margin-top-xs">
+
+      <view wx:if="{{favorite}}" class="text-left margin-top-xs" >
+        <button class="cu-btn round  line-orange">收藏</button>
+      </view>
+
+      <view  wx:if="{{!looked}}" class="text-left margin-top-xs"  bindtap="member_favorite" data-target="member_looked">
         <button class="cu-btn round  line-grey">已读</button>
       </view>
+
+      <view  wx:if="{{looked}}" class="text-left margin-top-xs" >
+        <button class="cu-btn round  line-orange">已读</button>
+      </view>
+
+
     </view>
   </view>
 
