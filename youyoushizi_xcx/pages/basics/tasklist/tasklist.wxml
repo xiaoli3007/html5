@@ -34,25 +34,32 @@
 
   <wux-swipe-action-group>
   <block wx:for="{{task_list}}" wx:key>
+<view class="margin-top" >
+   <wux-swipe-action autoClose  right="{{ right }}"  data="{{item.id+'-'+index}}" bind:click="delete_task">
+    <view class="flex align-center" bindtap="gotask" data-taskid="{{item.id}}" data-status="{{item.status}}"  data-target="move-box-{{index}}">
 
-   <wux-swipe-action autoClose  right="{{ right }}" data="2019" bind:click="onClickaaa">
-    <view class="cu-item padding-top" bindtap="gotask" data-taskid="{{item.id}}" data-status="{{item.status}}"  data-target="move-box-{{index}}">
-
-      <view class="content">
-        <view class="text-black">
+      <view class="content margin-xs margin-left" style="flex: 2;">
+        <view class="text-black text-lg text-bold">
           <text class="text-cut">{{item.name}}</text>
         </view>
-        <view class="text-gray text-sm flex">
+        <view class="text-gray text-sm  margin-top-xs">
           <text class="text-cut"> 类别：{{item.taskinfotext}}
           </text>
         </view>
-        <view class="text-orange text-sm flex">
-          <text class="text-cut"> </text>
+        <view class="text-orange text-sm margin-top-xs">
+            <button class="cu-btn round  line-orange">同书任务</button>
         </view>
       </view>
-      
-      <view class="action" style='width:150rpx;'>
-        <view class="text-red text-xs">{{item.status_text}}</view>
+
+      <view class="margin-xs margin-right text-right text-sm" style="flex: 1;"> 
+        <view class="text-red " wx:if="{{item.status_text=='纠错'}}">{{item.status_text}} ></view>
+        <view class="text-blue " wx:if="{{item.status_text=='进行中'}}">{{item.status_text}} ></view>
+        <view class="text-grey " wx:if="{{item.status_text=='未开始'}}">{{item.status_text}} ></view>
+        <view class="text-green " wx:if="{{item.status_text=='全部完成'}}">
+        {{item.status_text}} ></view>
+
+        <view class="text-grey margin-top" >{{item.createtime_text}}</view>
+
       </view>
 
       <!-- <view class="move">
@@ -61,6 +68,7 @@
 
     </view>
     </wux-swipe-action>
+    </view>
   </block>
   </wux-swipe-action-group>
 </view>

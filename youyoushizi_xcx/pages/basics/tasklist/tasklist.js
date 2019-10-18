@@ -19,12 +19,13 @@ Page({
     TabCur: 0,
     typelist: [2, 1],
     type:0,
-    right: [{
-      text: 'Cancel',
-      style: 'background-color: #ddd; color: white',
-    },
+    right: [
+    //   {
+    //   text: 'Cancel',
+    //   style: 'background-color: #ddd; color: white',
+    // },
     {
-      text: 'Delete',
+      text: '删除',
       style: 'background-color: #F4333C; color: white',
     }],
   },
@@ -281,43 +282,21 @@ Page({
     
   
   },
-  // ListTouch触摸开始
-  ListTouchStart(e) {
-    this.setData({
-      ListTouchStart: e.touches[0].pageX
-    })
-  },
 
-  // ListTouch计算方向
-  ListTouchMove(e) {
-    this.setData({
-      ListTouchDirection: e.touches[0].pageX - this.data.ListTouchStart > 0 ? 'right' : 'left'
-    })
-  },
-
-  // ListTouch计算滚动
-  ListTouchEnd(e) {
-    if (this.data.ListTouchDirection == 'left') {
-      this.setData({
-        modalName: e.currentTarget.dataset.target
-      })
-    } else {
-      this.setData({
-        modalName: null
-      })
-    }
-    this.setData({
-      ListTouchDirection: null
-    })
-  },
   delete_task(e) {
     // console.log(e)
 
-    let ttaskid = e.currentTarget.dataset.taskid
-    let tindex = e.currentTarget.dataset.index
+    // let ttaskid = e.currentTarget.dataset.taskid
+    // let tindex = e.currentTarget.dataset.index
+
+    var strs = new Array()
+    strs = e.detail.data.split("-")
+    let ttaskid = strs[0]
+    let tindex = strs[1]
+
     var that = this
     console.log({ttaskid,tindex})
-
+    // return
     wx.showModal({
       title: '删除任务',
       content: '确定要删除该任务？',
@@ -368,13 +347,16 @@ Page({
 
   },
   onClickaaa(e) {
-    console.log('onClick', e.detail)
-    if (e.detail.data) {
-      wx.showModal({
-        title: `The data is ${e.detail.data}`,
-        showCancel: !1,
-      })
-    }
+    var strs = new Array()
+    strs = e.detail.data.split("-")
+    console.log(strs)
+    // console.log('onClick', e.detail.data)
+    // if (e.detail.data) {
+    //   wx.showModal({
+    //     title: `The data is ${e.detail.data}`,
+    //     showCancel: !1,
+    //   })
+    // }
   },
  
 });
