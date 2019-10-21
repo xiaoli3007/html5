@@ -15,7 +15,7 @@ Page({
     keywords: '',
     Inputdisabled: false, //搜索按钮的  置灰状态
     scrollLeft: 0,
-    tabNav: ['识字任务', '听写任务'],
+    tabNav: ['收藏', '已读'],
     TabCur: 0,
     typelist: [2, 1],
     type:0,
@@ -53,7 +53,7 @@ Page({
     if (app.globalData.userid) {
 
        wx.request({
-         url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+         url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
         method: 'GET',
          header: {
            'content-type': 'application/json', // 默认值
@@ -107,7 +107,7 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
@@ -169,7 +169,7 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
@@ -221,7 +221,7 @@ Page({
 
     var that = this;
     wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
@@ -260,29 +260,13 @@ Page({
     let status = e.currentTarget.dataset.status
     var that = this
     console.log(taskid)
-    if (status == -1){
-
-      wx.showModal({
-        title: '您好！该任务已经完成！',
-        content: '确定要从新开始任务？',
-        cancelText: '取消',
-        confirmText: '好的',
-        success: res => {
-          if (res.confirm) {
-            wx.navigateTo({
-              url: '/pages/basics/task/task?taskid=' + taskid,
-            })
-          }
-        }
-      })
-
-    }else{
+    
 
       wx.navigateTo({
         url: '/pages/basics/task/task?taskid=' + taskid,
       })
 
-    }
+    
     
   
   },
@@ -348,71 +332,6 @@ Page({
 
   }
   ,
-  identical_task(e) {
 
-    let srelation_id = e.currentTarget.dataset.relation_id
-    let srelation_type = e.currentTarget.dataset.relation_type
-    var that = this
-    console.log({ srelation_type, srelation_id})
-
-    var that = this;
-    this.setData({
-      isLoad: false,
-      isend: false,
-      relation_type: srelation_type,
-      relation_id: srelation_id,
-    })
-    // 页数+1
-    this.setData({
-      page: 1
-    })
-    wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
-      data: {
-        pagesize: that.data.pagesize,
-        page: that.data.page,
-        type: that.data.type,
-        relation_type: srelation_type,
-        relation_id: srelation_id,
-      },
-      header: {
-        'content-type': 'application/json', // 默认值
-        'X-Token': app.globalData.xtoken
-      },
-      success: function (res) {
-        if (res.data.code === 20000) {
-          console.log(res.data.items.length)
-          if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
-            that.setData({
-              isLoad: true,
-              isend: true,
-            })
-          }
-          // 回调函数
-          that.setData({
-            task_list: res.data.items
-          })
-        } else {
-          that.setData({
-            task_list: [],
-            isLoad: true,
-          })
-        }
-      }
-    })
-
-  },
-  onClickaaa(e) {
-    var strs = new Array()
-    strs = e.detail.data.split("-")
-    console.log(strs)
-    // console.log('onClick', e.detail.data)
-    // if (e.detail.data) {
-    //   wx.showModal({
-    //     title: `The data is ${e.detail.data}`,
-    //     showCancel: !1,
-    //   })
-    // }
-  },
  
 });

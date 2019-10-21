@@ -47,7 +47,7 @@
           </text>
         </view>
         <view class="text-orange text-sm margin-top-xs">
-            <button class="cu-btn round  line-orange">同书任务</button>
+            <button class="cu-btn round  line-orange" data-relation_id="{{item.relation_id}}" data-relation_type="{{item.relation_type}}"  catchtap="identical_task">同书任务</button>
         </view>
       </view>
 

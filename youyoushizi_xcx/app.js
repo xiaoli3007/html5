@@ -43,8 +43,8 @@ App({
 
   },
   globalData: {
-    uid: null,
-    userid: null, 
+    uid: 29,
+    userid: 6, 
     username: null, 
     avatar: null, 
     openid: '',
