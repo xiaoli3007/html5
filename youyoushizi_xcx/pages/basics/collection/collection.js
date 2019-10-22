@@ -33,7 +33,7 @@ Page({
   onLoad: function (options) { 
     
     app.setUserInfo('about');
-    console.log(options.type)
+    // console.log(options.type)
     if (options.type){
       var temptype = 0
       if (options.type == 'member_looked'){
@@ -45,7 +45,7 @@ Page({
       })
     }
 
-    console.log(this.data.TabCur)
+    // console.log(this.data.TabCur)
 
     var that = this;
     if (app.globalData.userid) {
@@ -256,9 +256,11 @@ Page({
     let programid = e.currentTarget.dataset.programid
     var that = this
     console.log(programid)
-      wx.navigateTo({
-        url: '/pages/basics/task/task?taskid=' + taskid,
-      })    
+    
+
+    wx.navigateTo({
+      url: '/pages/basics/detailed/detailed?ebookid=' + programid,
+    })   
   
   },
 
@@ -278,8 +280,8 @@ Page({
     console.log({ttaskid,tindex})
     // return
     wx.showModal({
-      title: '删除任务',
-      content: '确定要删除该任务？',
+      title: '删除',
+      content: '确定要删除么？',
       cancelText: '取消',
       confirmText: '确定',
       success: res => {

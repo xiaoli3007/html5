@@ -1,0 +1,71 @@
+<wxs src="../../../utils/common.wxs" module="common" />
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">作者详细页</view>
+</cu-custom>
+
+
+  <view class="bg-white padding-sm margin-top  flex   align-start">
+    <view class=""  style="flex: 1;">
+      <image src='{{program.thumb_xcx}}' style="width:150rpx;" mode="widthFix"></image>
+    </view>
+    <view class=" margin-left-xs margin-right-xs"  style="flex: 3;">
+      <view class="text-left text-xl text-black text-bold"> {{program.title}}</view>
+      <view class="text-left margin-top-xs"> {{program.author}} 译：{{program.translator}}</view>
+      <view class="text-left margin-top-xs">{{program.subject}}</view>
+      <view class="text-left margin-top-xs"> 评分：{{program.score}}</view>
+    </view>
+    <view class="" style="flex: 1;">
+
+      <view wx:if="{{!favorite}}" class="text-left margin-top-xs" bindtap="member_favorite" data-target="member_favorite">
+        <button class="cu-btn round  line-grey">收藏</button>
+      </view>
+
+      <view wx:if="{{favorite}}" class="text-left margin-top-xs" >
+        <button class="cu-btn round  line-orange">收藏</button>
+      </view>
+
+    </view>
+  </view>
+
+
+
+
+  <view class="cu-bar bg-white  margin-top">
+    <view class="action text-orange">
+      内容描述
+    </view>
+    <view class="action" bindtap="showModal" data-target="DrawerModalL_neirong">
+      <text class="text-orange">更多 <text class="text-grey"> ></text></text>
+    </view>
+  </view>
+  <view class="bg-white padding-left padding-right padding-bottom">
+    <view class="text-df">
+      <text class="text-block text-center">{{common.util_substring(program.description)}}</text>
+    </view>
+  </view>
+
+
+
+  <!-- <view class="cu-bar bg-white  margin-top">
+    <view class="action text-orange">
+      推荐语
+    </view>
+    <view class="action">
+    </view>
+  </view>
+  <block wx:for="{{program.book_recommend_list}}" wx:key>
+    <view class="bg-white padding-xs  solid-bottom  flex   align-start">
+      <view class=" margin-xs radius">
+        <image wx:if="{{item.author_info.thumb!=''}}" src='{{item.author_info.thumb}}' style="width:100rpx;" mode="widthFix"></image>
+        <view wx:if="{{item.author_info.thumb==''}}" class="proIcon-iconico_zz  text-grey" style="font-size:80rpx;"> </view>
+      </view>
+      <view class=" margin-xs radius">
+        <view class="text-left text-df text-black text-bold"> {{item.author_info.name}}</view>
+        <view class="text-left  text-sm margin-top-xs"> {{item.content}} </view>
+      </view>
+    </view>
+  </block>
+</view> -->
+
+
