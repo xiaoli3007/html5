@@ -6,7 +6,7 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     ColorList: app.globalData.ColorList,
-    task_list:[],
+    collection_list:[],
     loadModal: true,
     page: 1,
     isLoad: true,
@@ -17,8 +17,8 @@ Page({
     scrollLeft: 0,
     tabNav: ['收藏', '已读'],
     TabCur: 0,
-    typelist: [2, 1],
-    type:0,
+    typelist: ['member_favorite', 'member_looked'],
+    type:'member_favorite',
     right: [
     //   {
     //   text: 'Cancel',
@@ -28,8 +28,7 @@ Page({
       text: '删除',
       style: 'background-color: #F4333C; color: white',
     }],
-    relation_type: '',
-    relation_id: 0,
+
   },
   onLoad: function (options) { 
     
@@ -37,9 +36,8 @@ Page({
     console.log(options.type)
     if (options.type){
       var temptype = 0
-      if (options.type ==1){
-        var temptype = 1
-        console.log(temptype)
+      if (options.type == 'member_looked'){
+         temptype = 1
       }
       this.setData({
         type: options.type,
@@ -66,7 +64,7 @@ Page({
         success: function (res) {
           console.log(res);
           that.setData({
-            task_list: res.data.items,
+            collection_list: res.data.items,
             })
          }, complete(res) {
            that.setData({
@@ -113,8 +111,7 @@ Page({
         page: that.data.page,
         keywords: that.data.keywords,
         type: that.data.type,
-        relation_type: that.data.relation_type,
-        relation_id: that.data.relation_id,
+
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -131,10 +128,10 @@ Page({
             })
           }
           // 回调函数
-          var moment_list = that.data.task_list;
-          const oldData = that.data.task_list;
+          var moment_list = that.data.collection_list;
+          const oldData = that.data.collection_list;
           that.setData({
-            task_list: oldData.concat(res.data.items)
+            collection_list: oldData.concat(res.data.items)
           })
           // 隐藏加载框
           // wx.hideLoading();
@@ -191,11 +188,11 @@ Page({
           }
           // 回调函数
           that.setData({
-            task_list: res.data.items
+            collection_list: res.data.items
           })
         } else {
           that.setData({
-            task_list: [],
+            collection_list: [],
             isLoad: true,
           })
         }
@@ -243,35 +240,29 @@ Page({
           }
           // 回调函数
           that.setData({
-            task_list: res.data.items
+            collection_list: res.data.items
           })
         } else {
           that.setData({
-            task_list: [],
+            collection_list: [],
             isLoad: true,
           })
         }
       }
     })
   },
-  gotask(e) {
+  gotodeteil(e) {
 
-    let taskid = e.currentTarget.dataset.taskid
-    let status = e.currentTarget.dataset.status
+    let programid = e.currentTarget.dataset.programid
     var that = this
-    console.log(taskid)
-    
-
+    console.log(programid)
       wx.navigateTo({
         url: '/pages/basics/task/task?taskid=' + taskid,
-      })
-
-    
-    
+      })    
   
   },
 
-  delete_task(e) {
+  delete_collection(e) {
     // console.log(e)
 
     // let ttaskid = e.currentTarget.dataset.taskid
@@ -281,6 +272,7 @@ Page({
     strs = e.detail.data.split("-")
     let ttaskid = strs[0]
     let tindex = strs[1]
+    let ttype = strs[2]
 
     var that = this
     console.log({ttaskid,tindex})
@@ -299,7 +291,7 @@ Page({
           })
           //删除任务
           wx.request({
-            url: app.globalData.url + '?act=task_delete',
+            url: app.globalData.url + '?act=collection_delete',
             method: 'POST',
             header: {
               'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -307,14 +299,15 @@ Page({
             },
             data: {
               userid: app.globalData.userid,
-              taskid: ttaskid,
+              collection_id: ttaskid,
+              collection_type: ttype,
             },
             success: function (res) {
               console.log(res);
                
-              that.data.task_list.splice(tindex, 1)
+              that.data.collection_list.splice(tindex, 1)
               that.setData({
-                task_list: that.data.task_list
+                collection_list: that.data.collection_list
               })
             },
              complete(res) {
