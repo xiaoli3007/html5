@@ -277,7 +277,8 @@ Page({
     let ttype = strs[2]
 
     var that = this
-    console.log({ttaskid,tindex})
+    console.log({ ttaskid, tindex, ttype})
+
     // return
     wx.showModal({
       title: '删除',
