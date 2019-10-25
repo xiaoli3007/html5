@@ -50,7 +50,7 @@
         </view>
 
         <view class="flex-sub  padding-sm text-center">
-          <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
+          <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/authorlist/authorlist">
             <view class="proIcon-iconico_zz home_icon text-orange"></view>
             <view class="">作者</view>
           </navigator>

@@ -15,49 +15,45 @@
 </view>
 
 
-<block wx:if="{{TabCur==mindex}}" wx:for="{{tabNav}}" wx:for-index="mindex" wx:key>
-  <view class="cu-list menu ">
+<view class="cu-list menu ">
 
 
-    <wux-swipe-action-group>
-      <block wx:for="{{collection_list}}" wx:key>
-        <view class="margin-top">
-          <wux-swipe-action autoClose right="{{ right }}" data="{{item.id+'-'+index+'-'+type}}" bind:click="delete_collection">
-            <!-- <view class="flex align-center" bindtap="gotask" data-taskid="{{item.id}}"   >
-    </view> -->
-            <view data-programid="{{item.program.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-center">
-              <view class="basis-xs" style="flex-basis: 30%;">
-                <image src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
-                </image>
-              </view>
-              <view class="basis-xl" style="flex-basis: 70%;">
-                <view class="text-left text-xl">
-                  <text class="text-black text-bold">{{item.program.title}}</text>
-                </view>
-                <view class="text-left">
-                  <text class="text-lg">作者：{{item.program.author}}</text>
-                  <text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
-                  <text class="text-lg" wx:if="{{item.program.translator!=''}}">译者：{{item.program.translator}}</text>
-                </view>
-
-                <view class="text-left text-df">{{item.program.linfo_text}}</view>
-
-                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">
-                  描述：{{item.program.head}}
-                </view>
-
-              </view>
-
-            </view>
+  <block wx:for="{{collection_list}}" wx:key>
+    <view class="margin-top">
 
 
+      <view data-programid="{{item.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-center">
+        <view class="basis-xs text-center" style="flex-basis: 30%;">
+          <image wx:if="{{item.thumb_xcx}}" src='{{item.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
+          </image>
 
-          </wux-swipe-action>
+          <view wx:if="{{!item.thumb_xcx}}" class="proIcon-iconico_zz  text-grey" style="font-size:80rpx;"> </view>
+
+
         </view>
-      </block>
-    </wux-swipe-action-group>
-  </view>
-</block>
+        <view class="basis-xl" style="flex-basis: 70%;">
+          <view class="text-left text-xl">
+            <text class="text-black text-bold">{{item.name}}</text>
+          </view>
+          <view class="text-left">
+            <text class="text-lg"> {{item.country}}</text>
+
+          </view>
+
+
+          <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">
+            {{item.description}}
+          </view>
+
+        </view>
+
+      </view>
+
+
+    </view>
+  </block>
+</view>
+
 
 
 <view class="cu-load bg-orange {{!isLoad?'loading':'over'}}"></view>

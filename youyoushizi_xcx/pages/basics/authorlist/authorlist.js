@@ -17,43 +17,38 @@ Page({
   },
   onLoad: function (options) {
 
-    app.setUserInfo('about');
-    // console.log(options.type)
+    console.log(1111)
 
     var that = this;
-    if (app.globalData.userid) {
 
       wx.request({
-        url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+        url: app.globalData.url + '?act=author_list' ,
         method: 'GET',
         header: {
           'content-type': 'application/json', // 默认值
           'X-Token': app.globalData.xtoken
         },
         data: {
-          type: that.data.type,
           pagesize: that.data.pagesize,
         },
         success: function (res) {
-          console.log(res);
+          
           that.setData({
             collection_list: res.data.items,
           })
+
+          console.log(that.data.collection_list)
+
         }, complete(res) {
           that.setData({
 
             loadModal: false
           })
           //console.log(res.statusCode)
-          if (res.statusCode == 500) {
-
-          } else {
-
-          }
-
+        
         }
       });
-    }
+    
 
   },
   /**
@@ -78,12 +73,11 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=author_list',
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
-        type: that.data.type,
 
       },
       header: {
@@ -139,12 +133,11 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=author_list',
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
-        type: that.data.type,
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -181,9 +174,9 @@ Page({
     console.log(programid)
 
 
-    wx.navigateTo({
-      url: '/pages/basics/detailed/detailed?ebookid=' + programid,
-    })
+    // wx.navigateTo({
+    //   url: '/pages/basics/author/author?authorid=' + programid,
+    // })
 
   },
 
