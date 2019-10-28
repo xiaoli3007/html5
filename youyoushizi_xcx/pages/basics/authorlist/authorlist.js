@@ -173,10 +173,9 @@ Page({
     var that = this
     console.log(programid)
 
-
-    // wx.navigateTo({
-    //   url: '/pages/basics/author/author?authorid=' + programid,
-    // })
+    wx.navigateTo({
+      url: '/pages/basics/author/author?authorid=' + programid,
+    })
 
   },
 

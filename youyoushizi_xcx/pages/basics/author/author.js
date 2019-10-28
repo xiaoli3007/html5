@@ -5,20 +5,20 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    program:null,
-    datalist: [], 
-    datatablist: [],
-    ebookid:0,
+    author_info:null,
+    author_book_recommend: [], 
+    list_ebooks: [],
     favorite:false,
+    authorid: 0,
   },
   onLoad(options) {
     console.log(options)
     let that = this;
     //加载列表
     wx.request({
-      url: app.globalData.url + '?act=ebook_show',
+      url: app.globalData.url + '?act=author_show',
       data: {
-        ebookid: options.ebookid,
+        author_id: options.authorid,
         userid: app.globalData.userid,
       },
       header: {
@@ -35,21 +35,17 @@ Page({
 
         // })
         that.setData({
-          program: res.data.program,
-          ebookid: res.data.program.id,
+          author_info: res.data.author_info,
+          author_book_recommend: res.data.author_book_recommend,
+          list_ebooks: res.data.list_ebooks,
+          authorid: options.authorid
         }) 
-        if (res.data.program.is_exit_favorite){
-          that.setData({
-            favorite: true,
-          })
-        }
-        if (res.data.program.is_exit_looked) {
-          that.setData({
-            looked: true,
-          })
-        }
-
-
+        // if (res.data.program.is_exit_favorite){
+        //   that.setData({
+        //     favorite: true,
+        //   })
+        // }
+   
       },
       complete(res) {
         that.setData({
@@ -66,16 +62,6 @@ Page({
       }
     })
 
-
-  },
-  gotodeteil_study(e) {
-
-    let programid = e.currentTarget.dataset.programid
-    // var that = this
-    // console.log(programid)
-    wx.navigateTo({
-      url: '/pages/basics/detailed_study/detailed_study?ebookid=' + programid,
-    })
   },
   showModal(e) {
     // console.log(item_word);
@@ -89,7 +75,7 @@ Page({
       modalName: null
     })
   },
-  member_favorite(e) {
+  member_favorite_author(e) {
     if (!app.globalData.userid){
 
       wx.showToast({
@@ -104,11 +90,10 @@ Page({
     let that = this;
     //收藏
     wx.request({
-      url: app.globalData.url + '?act=member_favorite',
+      url: app.globalData.url + '?act=member_favorite_author',
       data: {
-        ebookid: that.data.ebookid,
+        authorid: that.data.authorid,
         userid: app.globalData.userid,
-        type: t,
       },
       header: {
         'content-type': 'application/json', // 默认值
