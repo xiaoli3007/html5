@@ -6,7 +6,7 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     ColorList: app.globalData.ColorList,
-    collection_list: [],
+    sentence_list: [],
     loadModal: true,
     page: 1,
     isLoad: true,
@@ -17,27 +17,24 @@ Page({
   },
   onLoad: function (options) {
 
-    app.setUserInfo('about');
-    // console.log(options.type)
-
+  
     var that = this;
-    if (app.globalData.userid) {
+    
 
       wx.request({
-        url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+        url: app.globalData.url + '?act=sentence_list&userid=' + app.globalData.userid,
         method: 'GET',
         header: {
           'content-type': 'application/json', // 默认值
           'X-Token': app.globalData.xtoken
         },
         data: {
-          type: that.data.type,
           pagesize: that.data.pagesize,
         },
         success: function (res) {
           console.log(res);
           that.setData({
-            collection_list: res.data.items,
+            sentence_list: res.data.items,
           })
         }, complete(res) {
           that.setData({
@@ -53,7 +50,7 @@ Page({
 
         }
       });
-    }
+    
 
   },
   /**
@@ -78,13 +75,11 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=sentence_list&userid=' + app.globalData.userid,
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
-        type: that.data.type,
-
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -101,10 +96,10 @@ Page({
             })
           }
           // 回调函数
-          var moment_list = that.data.collection_list;
-          const oldData = that.data.collection_list;
+          var moment_list = that.data.sentence_list;
+          const oldData = that.data.sentence_list;
           that.setData({
-            collection_list: oldData.concat(res.data.items)
+            sentence_list: oldData.concat(res.data.items)
           })
           // 隐藏加载框
           // wx.hideLoading();
@@ -139,12 +134,11 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=sentence_list&userid=' + app.globalData.userid,
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
-        type: that.data.type,
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -161,11 +155,11 @@ Page({
           }
           // 回调函数
           that.setData({
-            collection_list: res.data.items
+            sentence_list: res.data.items
           })
         } else {
           that.setData({
-            collection_list: [],
+            sentence_list: [],
             isLoad: true,
           })
         }
@@ -180,9 +174,8 @@ Page({
     var that = this
     console.log(programid)
 
-
     wx.navigateTo({
-      url: '/pages/basics/detailed/detailed?ebookid=' + programid,
+      url: '/pages/basics/sentence/sentence?sentenceid=' + programid,
     })
 
   },

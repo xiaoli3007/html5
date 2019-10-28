@@ -5,10 +5,8 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    program:null,
-    datalist: [], 
-    datatablist: [],
-    ebookid:0,
+    sentence_info:null,
+    sentenceid:0,
     favorite:false,
   },
   onLoad(options) {
@@ -16,9 +14,9 @@ Page({
     let that = this;
     //加载列表
     wx.request({
-      url: app.globalData.url + '?act=ebook_show',
+      url: app.globalData.url + '?act=sentence_show',
       data: {
-        ebookid: options.ebookid,
+        sentenceid: options.sentenceid,
         userid: app.globalData.userid,
       },
       header: {
@@ -27,28 +25,18 @@ Page({
       },
       success(res) {
 
-        // let arr = res.data.items
+   
         console.log(res.data)
-        // console.log(Object.keys(arr));
-        // arr.forEach(function (value, i) {
-        //   　　console.log('forEach遍历:' + i );
-
-        // })
+     
         that.setData({
-          program: res.data.program,
-          ebookid: res.data.program.id,
+          sentence_info: res.data.sentence_info,
         }) 
-        if (res.data.program.is_exit_favorite){
-          that.setData({
-            favorite: true,
-          })
-        }
-        if (res.data.program.is_exit_looked) {
-          that.setData({
-            looked: true,
-          })
-        }
-
+        // if (res.data.program.is_exit_favorite){
+        //   that.setData({
+        //     favorite: true,
+        //   })
+        // }
+    
 
       },
       complete(res) {
@@ -68,62 +56,26 @@ Page({
 
 
   },
-  gotodeteil_study(e) {
+  // gotodeteil_study(e) {
 
-    let programid = e.currentTarget.dataset.programid
-    // var that = this
-    // console.log(programid)
-    wx.navigateTo({
-      url: '/pages/basics/detailed_study/detailed_study?ebookid=' + programid,
-    })
-  },
-  showModal(e) {
-    // console.log(item_word);
-    let m = e.currentTarget.dataset.target
-    this.setData({
-      modalName: m,
-    })
-  },
-  hideModal(e) {
-    this.setData({
-      modalName: null
-    })
-  },
-  member_favorite(e) {
-    if (!app.globalData.userid){
+  //   let programid = e.currentTarget.dataset.programid
+ 
+  //   wx.navigateTo({
+  //     url: '/pages/basics/detailed_study/detailed_study?ebookid=' + programid,
+  //   })
+  // },
+  // showModal(e) {
+  //   // console.log(item_word);
+  //   let m = e.currentTarget.dataset.target
+  //   this.setData({
+  //     modalName: m,
+  //   })
+  // },
+  // hideModal(e) {
+  //   this.setData({
+  //     modalName: null
+  //   })
+  // },
 
-      wx.showToast({
-        title: '请先登录！',
-        icon: 'none',
-        duration: 1500,
-      })
-      return 
-    }
-    let t = e.currentTarget.dataset.target
-
-    let that = this;
-    //收藏
-    wx.request({
-      url: app.globalData.url + '?act=member_favorite',
-      data: {
-        ebookid: that.data.ebookid,
-        userid: app.globalData.userid,
-        type: t,
-      },
-      header: {
-        'content-type': 'application/json', // 默认值
-        'X-Token': app.globalData.xtoken
-      },
-      success(res) {
-        console.log(res.data)
-          that.setData({
-            favorite: true,
-          })
-      },
-      complete(res) {
-       
-      }
-    })
-  },
 
 })
