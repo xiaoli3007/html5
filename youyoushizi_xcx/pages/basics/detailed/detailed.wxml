@@ -212,8 +212,8 @@
 
       </view>
       <view class="bg-white padding-left padding-right padding-bottom">
-        <view class="text-df">
-          <text class="text-block text-center">{{program.description}}</text>
+        <view class="text-df text-left">
+          <text class="text-block">{{program.description}}</text>
         </view>
       </view>
     </scroll-view>
@@ -230,8 +230,8 @@
 
       </view>
       <view class="bg-white padding-left padding-right padding-bottom">
-        <view class="text-df">
-          <text class="text-block text-center">{{program.head}}</text>
+        <view class="text-df text-left">
+          <text class="text-block">{{program.head}}</text>
         </view>
       </view>
     </scroll-view>

@@ -12,6 +12,8 @@ Page({
     authorid: 0,
     loadModal: true, 
     TabCur: 0,
+    global_text:'',
+    global_title:'',
     tablist: [{ name: '简介', value: 'desc' }, { name: '图书', value: 'desc' }, { name: '推荐', value: 'desc' }, { name: '书评', value: 'desc' }]
   },
   onLoad(options) {
@@ -43,11 +45,11 @@ Page({
           list_ebooks: res.data.list_ebooks,
           authorid: options.authorid
         }) 
-        // if (res.data.program.is_exit_favorite){
-        //   that.setData({
-        //     favorite: true,
-        //   })
-        // }
+        if (res.data.author_info.is_exit_favorite){
+          that.setData({
+            favorite: true,
+          })
+        }
    
       },
       complete(res) {
@@ -69,8 +71,14 @@ Page({
   showModal(e) {
     // console.log(item_word);
     let m = e.currentTarget.dataset.target
+
+    let t = e.currentTarget.dataset.title
+    let c = e.currentTarget.dataset.content
+
     this.setData({
       modalName: m,
+      global_title: t,
+      global_text: c
     })
   },
   hideModal(e) {
@@ -102,19 +110,20 @@ Page({
       })
       return 
     }
-    let t = e.currentTarget.dataset.target
+    // let t = e.currentTarget.dataset.target
 
     let that = this;
     //收藏
     wx.request({
       url: app.globalData.url + '?act=member_favorite_author',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
       data: {
         authorid: that.data.authorid,
         userid: app.globalData.userid,
-      },
-      header: {
-        'content-type': 'application/json', // 默认值
-        'X-Token': app.globalData.xtoken
       },
       success(res) {
         console.log(res.data)

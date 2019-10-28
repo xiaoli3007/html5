@@ -86,7 +86,7 @@
       <view class=" margin-xs radius">
         <view class="text-left text-df text-black text-bold"> {{item.title}}</view>
         <view class="text-left  text-sm margin-top-xs"> {{item.program.linfo_text}} </view>
-        <view class="text-left   text-grey text-df margin-top-xs"><text class="text-red">推荐语：</text> {{common.util_substring(item.content)}} </view>
+        <view class="text-left   text-grey text-df margin-top-xs" bindtap="showModal" data-target="DrawerModalL_neirong" data-title="推荐语" data-content="{{item.content}}"><text class="text-red">推荐语：</text> {{common.util_substring(item.content)}} </view>
       </view>
     </view>
   </block>
@@ -120,4 +120,21 @@
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <image src='/images/logo.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>加载中...</view>
+</view>
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_neirong'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg bg-white" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+      <view class="cu-bar bg-white  ">
+        <view class="action text-orange">
+          {{global_title}}
+        </view>
+      </view>
+      <view class="bg-white padding-left padding-right padding-bottom">
+        <view class="text-df text-left">
+          <text class="text-block ">{{global_text}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
 </view>
