@@ -10,6 +10,9 @@ Page({
     list_ebooks: [],
     favorite:false,
     authorid: 0,
+    loadModal: true, 
+    TabCur: 0,
+    tablist: [{ name: '简介', value: 'desc' }, { name: '图书', value: 'desc' }, { name: '推荐', value: 'desc' }, { name: '书评', value: 'desc' }]
   },
   onLoad(options) {
     console.log(options)
@@ -74,6 +77,20 @@ Page({
     this.setData({
       modalName: null
     })
+  },
+  tabSelect(e) {
+    // console.log(e.currentTarget.dataset.id);
+    // console.log(this.data.TabCur);
+    // console.log( this.data.datatablist);
+    // console.log(this.data.datatablist_k);
+    if (e.currentTarget.dataset.id != this.data.TabCur) {
+      this.setData({
+        TabCur: e.currentTarget.dataset.id,
+        scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+      })
+    }
+
+
   },
   member_favorite_author(e) {
     if (!app.globalData.userid){
