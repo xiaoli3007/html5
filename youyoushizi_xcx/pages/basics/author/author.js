@@ -7,6 +7,7 @@ Page({
     Custom: app.globalData.Custom,
     author_info:null,
     author_book_recommend: [], 
+    author_book_xu: [], 
     list_ebooks: [],
     favorite:false,
     authorid: 0,
@@ -42,7 +43,9 @@ Page({
         that.setData({
           author_info: res.data.author_info,
           author_book_recommend: res.data.author_book_recommend,
+          author_book_xu: res.data.author_book_xu,
           list_ebooks: res.data.list_ebooks,
+
           authorid: options.authorid
         }) 
         if (res.data.author_info.is_exit_favorite){

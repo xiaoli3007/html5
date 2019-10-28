@@ -5,10 +5,10 @@
 </cu-custom>
 
 
-  <view class="bg-white padding-sm margin-top  flex   align-start">
+  <view class="bg-white padding-sm margin-top  ">
     <view class=" margin-left-xs margin-right-xs" >
-      <view class="text-left text-xl text-black text-bold"> {{sentence_info.program.title}}</view>
-      <view class="text-left margin-top-xs"> {{sentence_info.program.author}}  {{sentence_info.program.translator}}</view>
+      <view class="text-center text-xl text-black text-bold"> {{sentence_info.program.title}}</view>
+      <view class="text-center margin-top-xs"> {{sentence_info.program.author}}  {{sentence_info.program.translator}}</view>
        
     </view>
   
@@ -27,7 +27,7 @@
   </view> -->
   <view class="bg-white padding-left padding-right padding-bottom">
     <view class="text-df">
-      <text class="text-block text-center">{{sentence_info.lword}}</text>
+      <text class="text-block text-left">{{sentence_info.lword}}</text>
     </view>
   </view>
 
