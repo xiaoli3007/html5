@@ -27,10 +27,20 @@
 
 </view>
 
-<scroll-view scroll-x class=" bg-white nav text-center">
+<!-- <scroll-view scroll-x class=" bg-white nav text-center">
   <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{tablist}}" wx:key bindtap="tabSelect" data-id="{{index}}">
     {{item.name}}
   </view>
+</scroll-view> -->
+
+<scroll-view scroll-x class="bg-white nav text-center">
+<view class="flex flex-wrap">
+     <view class="" style="flex-basis: 25%;" wx:for="{{tablist}}" wx:key >
+    <view class="cu-item {{index==TabCur?'text-orange cur':''}}" bindtap='tabSelect' data-id="{{index}}">
+     {{item.name}}
+    </view>
+      </view>
+ </view>
 </scroll-view>
 
 
@@ -107,7 +117,7 @@
       <view class=" margin-xs radius">
         <view class="text-left text-df text-black text-bold"> {{item.title}}</view>
         <view class="text-left  text-sm margin-top-xs"> {{item.program.linfo_text}} </view>
-        <view class="text-left   text-grey text-df margin-top-xs">
+        <view class="text-left   text-grey text-df margin-top-xs"  bindtap="showModal" data-target="DrawerModalL_neirong" data-title="序" data-content="{{item.content}}">
        <text class="text-red">序：</text>{{common.util_substring(item.content)}} </view>
       </view>
     </view>

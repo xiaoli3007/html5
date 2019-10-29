@@ -56,19 +56,19 @@
           </navigator>
         </view>
 
-         <view class="flex-sub  padding-sm text-center">
+         <!-- <view class="flex-sub  padding-sm text-center">
           <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/sentencelist/sentencelist">
             <view class="proIcon-iconico_lj home_icon text-orange"></view>
             <view class="">例句</view>
           </navigator>
-        </view>
+        </view> -->
 
-        <!-- <view class="flex-sub  padding-sm text-center">
+       <view class="flex-sub  padding-sm text-center">
           <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai/jiaocai">
             <view class="proIcon-iconico_lj home_icon text-orange"></view>
             <view class="">例句</view>
           </navigator>
-        </view> -->
+        </view> 
 
         <view class="flex-sub  padding-sm text-center">
           <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/collection/collection">
