@@ -16,6 +16,10 @@ Page({
     adduerform: {
       username: '',
       newpasswd: '',
+      realname: '',
+      sex: '',
+      birthday: '',
+      nianji: 0,
     }, 
     edituernameform: {
       username: '',
@@ -24,7 +28,12 @@ Page({
     userid: app.globalData.userid,
     avatarloadModal:false,
     duserid:null,
-    dusername:null
+    dusername:null,
+    pickersex: ['男', '女'],
+    pickernianji: ['一年级', '二年级', '三年级', '四年级', '五年级', '六年级'],
+    add_birthday:'请选择',
+    add_sex:0,
+    add_nianji: 0,
   },
   onLoad: function () { 
   
@@ -69,6 +78,11 @@ Page({
 
     }
 
+  },
+  DateChange(e) {
+    this.setData({
+      add_birthday: e.detail.value
+    })
   },
   pageBack() {
     wx.navigateBack({

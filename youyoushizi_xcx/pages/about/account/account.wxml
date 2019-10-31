@@ -15,7 +15,7 @@
 </view> -->
 
   <block wx:for="{{member_list}}" wx:key>
-  <view class="bg-white margin-top padding-top">
+  <view class="bg-white margin-top padding-top" style="padding-bottom:80rpx;">
         <wux-row bindtap="check_userid" data-username="{{item.username}}" data-val="{{item.userid}}">
             <wux-col span="2" offset="1">
                  <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
@@ -87,6 +87,10 @@
 </view>
 </block>
 
+<!-- <view class="flex  cu-bar-sun foot">
+  <button class="flex-sub cu-btn bg-orange lg"  bindtap="showModal" data-target="Dialogadduser">添加账号</button>
+  <button class="flex-sub cu-btn bg-white lg" >绑定账号</button>
+</view> -->
 
 <!-- <view class="cu-list menu-avatar ">
   <block wx:for="{{member_list}}" wx:key>
@@ -197,8 +201,8 @@
       </view>
     </view>
     <form bindsubmit="userformSubmit">
-      <view class="padding-sm">
-        <view class="cu-form-group margin-top">
+      <view class="">
+        <view class="cu-form-group">
           <view class="title">用户名</view>
           <input placeholder="用户名" name='username' value='{{adduerform.username}}'></input>
         </view>
@@ -206,6 +210,41 @@
           <view class="title">密码</view>
           <input placeholder="密码" password="true" name='newpasswd' value='{{adduerform.newpasswd}}'></input>
         </view>
+
+        <view class="cu-form-group">
+          <view class="title">姓名</view>
+          <input placeholder="姓名" name='realname' value='{{adduerform.realname}}'></input>
+        </view>
+
+       
+
+        	<view class="cu-form-group ">
+		<view class="title">性别</view>
+		<picker bindchange="PickerChange" value="{{add_sex}}" range="{{pickersex}}">
+			<view class="picker">
+				{{add_sex?pickersex[add_sex]:'请选择'}}
+			</view>
+		</picker>
+	</view>
+
+    	<view class="cu-form-group">
+        <view class="title">生日</view>
+        <picker mode="date" value="{{add_birthday}}" start="2000-09-01" end="2020-09-01" bindchange="DateChange">
+          <view class="picker">
+            {{add_birthday}}
+          </view>
+        </picker>
+      </view>
+        
+            	<view class="cu-form-group ">
+		<view class="title">年级</view>
+		<picker bindchange="PickerChange" value="{{add_nianji}}" range="{{pickernianji}}">
+			<view class="picker">
+				{{add_nianji?pickernianji[add_nianji]:'请选择'}}
+			</view>
+		</picker>
+	</view>
+
         <!-- <view class="cu-form-group">
           <view class="title">确认密码</view>
           <input placeholder="确认新密码"></input>
@@ -213,7 +252,7 @@
       </view>
       <view class="cu-bar bg-white justify-center">
         <view class="action">
-          <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
           <!-- <button class="cu-btn bg-green margin-left" form-type="submit">确定</button> -->
 
            <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
