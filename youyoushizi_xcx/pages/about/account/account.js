@@ -1,6 +1,6 @@
 
 import WxValidate from '../../../utils/WxValidate.js'
-
+var util = require('../../../utils/util.js')
 const app = getApp();
 Page({
   data: {
@@ -38,6 +38,9 @@ Page({
     add_birthday:'',
     add_sex:'',
     add_nianji: '',
+    edit_birthday: '',
+    edit_sex: '',
+    edit_nianji: '',
     loadModal:false
   },
   onLoad: function () { 
@@ -96,19 +99,48 @@ Page({
 
   },
   sexChange(e) {
-    this.setData({
-      add_sex: e.detail.value
-    })
+    let modalName = e.currentTarget.dataset.target
+    if (modalName=='edit'){
+
+      this.setData({
+        edit_sex: e.detail.value
+      })
+    }else{
+      this.setData({
+        add_sex: e.detail.value
+      })
+    }
+   
   },
   DateChange(e) {
-    this.setData({
-      add_birthday: e.detail.value
-    })
+
+    let modalName = e.currentTarget.dataset.target
+    if (modalName == 'edit') {
+
+      this.setData({
+        edit_birthday: e.detail.value
+      })
+    } else {
+      this.setData({
+        add_birthday: e.detail.value
+      })
+    }
+   
   },
   nianjiChange(e) {
-    this.setData({
-      add_nianji: e.detail.value
-    })
+
+    let modalName = e.currentTarget.dataset.target
+    if (modalName == 'edit') {
+
+      this.setData({
+        edit_nianji: e.detail.value
+      })
+    } else {
+      this.setData({
+        add_nianji: e.detail.value
+      })
+    }
+    
   },
   pageBack() {
     wx.navigateBack({
@@ -135,14 +167,33 @@ Page({
     })
   },
   showModal_editusername(e) {
-    console.log(e);
+    // console.log(e);
+
+    // console.log(this.data.member_list[e.currentTarget.dataset.index]);
+   // index
+    let u = this.data.member_list[e.currentTarget.dataset.index]
     this.setData({
       modalName: e.currentTarget.dataset.target,
       edituernameform: {
         username: e.currentTarget.dataset.username,
-        newusername: '',
+        userid: e.currentTarget.dataset.userid,
+        realname: u.realname,
       }
     })
+
+    // console.log(u.sex)
+    // console.log(this.data.pickersex)
+   
+    let objsex = this.data.pickersex
+    let nianjiobj = this.data.pickernianji
+
+    // console.log(util.findKey(obj,value))
+    this.setData({
+      edit_birthday: u.birthday,
+      edit_sex: u.sex?util.findKey(objsex, u.sex):'',
+      edit_nianji: u.nianji ?util.findKey(nianjiobj, u.nianji):'',
+    })
+
   },
    showModal(e) {
     this.setData({
@@ -455,6 +506,8 @@ Page({
       this.showFormModal(error)
       return false
     }
+    // console.log(this.data.edituernameform)
+    // return false
     var that = this;
     wx.request({
       url: app.globalData.url2 + '?act=wx_edit_username',
@@ -464,6 +517,7 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       data: {
+        userid: that.data.edituernameform.userid,
         wx_id: app.globalData.uid,
         username: params.username,
         // newusername: params.newusername,
@@ -488,7 +542,7 @@ Page({
            that.setData({
             modalName: null
           })
-
+          that.onLoad()
         }
 
       }, complete(res) {

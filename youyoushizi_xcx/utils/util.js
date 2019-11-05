@@ -27,8 +27,13 @@ function util_substring(val) {
   return val.substring(0, 60) + "..."
 }
 
+function findKey(obj, value, compare = (a, b) => a === b) {
+  return Object.keys(obj).find(k => compare(obj[k], value))
+}
+
 module.exports = {
   formatTime: formatTime,
   GetPercent: GetPercent,
   util_substring: util_substring,
+  findKey: findKey,
 }
