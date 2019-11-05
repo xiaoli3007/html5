@@ -163,6 +163,7 @@ Page({
     this.setData({
       isLoad: false,
       isend: false,
+      loadModal: true,
     })
     // 页数+1
     this.setData({
@@ -187,6 +188,7 @@ Page({
             that.setData({
               isLoad: true,
               isend: true,
+              
             })
           }
           // 回调函数
@@ -197,8 +199,16 @@ Page({
           that.setData({
             task_list: [],
             isLoad: true,
+            
           })
         }
+      },
+      complete(res) {
+        that.setData({
+
+          loadModal: false
+        })
+
       }
     })
   },
@@ -215,6 +225,7 @@ Page({
       isend: false,
       page: 1,
       type: this.data.typelist[e.currentTarget.dataset.id],
+      loadModal: true,
     })
     
     console.log(this.data.type)
@@ -239,6 +250,7 @@ Page({
             that.setData({
               isLoad: true,
               isend: true,
+             
             })
           }
           // 回调函数
@@ -248,9 +260,17 @@ Page({
         } else {
           that.setData({
             task_list: [],
-            isLoad: true,
+            isLoad: false,
+            
           })
         }
+      },
+      complete(res) {
+        that.setData({
+
+          loadModal: false
+        })
+
       }
     })
   },
@@ -361,6 +381,7 @@ Page({
       isend: false,
       relation_type: srelation_type,
       relation_id: srelation_id,
+      loadModal: true,
     })
     // 页数+1
     this.setData({
@@ -386,6 +407,7 @@ Page({
             that.setData({
               isLoad: true,
               isend: true,
+              loadModal: false,
             })
           }
           // 回调函数
@@ -396,6 +418,7 @@ Page({
           that.setData({
             task_list: [],
             isLoad: true,
+            loadModal: false,
           })
         }
       }

@@ -128,6 +128,7 @@ Page({
     this.setData({
       isLoad: false,
       isend: false,
+      loadModal: true,
     })
     // 页数+1
     this.setData({
@@ -151,6 +152,7 @@ Page({
             that.setData({
               isLoad: true,
               isend: true,
+             
             })
           }
           // 回调函数
@@ -161,8 +163,16 @@ Page({
           that.setData({
             sentence_list: [],
             isLoad: true,
+           
           })
         }
+      }, complete(res) {
+        that.setData({
+
+          loadModal: false
+        })
+        
+
       }
     })
   },

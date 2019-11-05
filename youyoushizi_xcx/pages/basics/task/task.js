@@ -1036,6 +1036,18 @@ Page({
     // console.log(this.innerAudioContext.duration);
     
   },
+  post_word_error(e) {
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+     console.log(item_word);
+
+ 
+    // this.setData({
+    //   modalName: m,
+    //   data_item_word: item_word,
+    // })
+
+  },
   ceshiyuyin(e){
 
     let innerAudioContext = wx.createInnerAudioContext()

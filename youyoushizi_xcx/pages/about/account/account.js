@@ -19,11 +19,15 @@ Page({
       realname: '',
       sex: '',
       birthday: '',
-      nianji: 0,
+      nianji: '',
     }, 
     edituernameform: {
       username: '',
-      newusername: '',
+      // newusername: '',
+      realname: '',
+      sex: '',
+      birthday: '',
+      nianji: '',
     }, 
     userid: app.globalData.userid,
     avatarloadModal:false,
@@ -31,9 +35,10 @@ Page({
     dusername:null,
     pickersex: ['男', '女'],
     pickernianji: ['一年级', '二年级', '三年级', '四年级', '五年级', '六年级'],
-    add_birthday:'请选择',
-    add_sex:0,
-    add_nianji: 0,
+    add_birthday:'',
+    add_sex:'',
+    add_nianji: '',
+    loadModal:false
   },
   onLoad: function () { 
   
@@ -42,6 +47,10 @@ Page({
       'content-type': 'application/x-www-form-urlencoded',
     };
     var that = this;
+
+    that.setData({
+      loadModal: true
+    })
     if (app.globalData.uid) {
 
        wx.request({
@@ -57,7 +66,14 @@ Page({
             member_list: res.data.member_list,
             userid: res.data.main_userid ? String(res.data.main_userid):app.globalData.userid,
             })
-        }
+         }, complete(res) {
+
+           that.setData({
+             loadModal: false
+           })
+           
+
+         }
       });
 
 
@@ -79,9 +95,19 @@ Page({
     }
 
   },
+  sexChange(e) {
+    this.setData({
+      add_sex: e.detail.value
+    })
+  },
   DateChange(e) {
     this.setData({
       add_birthday: e.detail.value
+    })
+  },
+  nianjiChange(e) {
+    this.setData({
+      add_nianji: e.detail.value
     })
   },
   pageBack() {
@@ -264,6 +290,19 @@ Page({
       newpasswd: {
         required: true,
         minlength: 6
+      },
+      realname: {
+        required: true,
+        maxlength: 20
+      },
+      sex: {
+        required: true
+      },
+      birthday: {
+        required: true
+      },
+      nianji: {
+        required: true
       }
       
     }
@@ -275,6 +314,19 @@ Page({
       newpasswd: {
         required: '请填写密码',
         minlength: '密码至少6位'
+      },
+      realname: {
+        required: '请填写姓名',
+        minlength: '姓名超出长度范围'
+      },
+      sex: {
+        required: '请选择性别',
+      },
+      birthday: {
+        required: '请选择生日',
+      },
+      nianji: {
+        required: '请选择年级',
       }
       
     }
@@ -286,10 +338,23 @@ Page({
         rangelength: [3, 20]
 
       },
-      newusername: {
+      realname: {
         required: true,
-        minlength: 3
+        maxlength: 20
+      },
+      sex: {
+        required: true
+      },
+      birthday: {
+        required: true
+      },
+      nianji: {
+        required: true
       }
+      // newusername: {
+      //   required: true,
+      //   minlength: 3
+      // }
 
     }
     const messages3 = {
@@ -297,9 +362,22 @@ Page({
         required: '请填写用户名',
         minlength: '用户名3位-20位字符',
       },
-      newusername: {
-        required: '请填写用户名',
-        minlength: '用户名位3-20位字符'
+      // newusername: {
+      //   required: '请填写用户名',
+      //   minlength: '用户名位3-20位字符'
+      // }
+      realname: {
+        required: '请填写姓名',
+        minlength: '姓名超出长度范围'
+      },
+      sex: {
+        required: '请选择性别',
+      },
+      birthday: {
+        required: '请选择生日',
+      },
+      nianji: {
+        required: '请选择年级',
       }
 
     }
@@ -309,12 +387,15 @@ Page({
   userformSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
+    
     //校验表单
     if (!this.WxValidate2.checkForm(params)) {
       const error = this.WxValidate2.errorList[0]
       this.showFormModal(error)
       return false
     }
+
+    //return false
     var that = this;
     wx.request({
       url: app.globalData.url2 + '?act=wx_add_user',
@@ -327,6 +408,10 @@ Page({
         wx_id: app.globalData.uid,
         username: params.username,
         newpasswd: params.newpasswd,
+        realname: params.realname,
+        sex: that.data.pickersex[params.sex],
+        birthday: params.birthday,
+        nianji: that.data.pickernianji[params.nianji],
       },
       success: function (res) {
         console.log(res);
@@ -341,7 +426,7 @@ Page({
           that.showFormModal({
             msg: '提交成功'
           })
-
+          that.onLoad()
         }
 
       }, complete(res) {
@@ -381,7 +466,11 @@ Page({
       data: {
         wx_id: app.globalData.uid,
         username: params.username,
-        newusername: params.newusername,
+        // newusername: params.newusername,
+        realname: params.realname,
+        sex: that.data.pickersex[params.sex],
+        birthday: params.birthday,
+        nianji: that.data.pickernianji[params.nianji],
       },
       success: function (res) {
         console.log(res);

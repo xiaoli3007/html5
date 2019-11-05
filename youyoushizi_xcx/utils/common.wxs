@@ -11,7 +11,7 @@ var util_perset = function (val) {
   if (val) {
     // console.log(typeof val)
     // console.log()
-     return parseInt(parseFloat(val) * 100) + "%"
+     return parseInt(100-parseFloat(val) * 100) + "%"
   }
 }
 

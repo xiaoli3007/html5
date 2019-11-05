@@ -72,7 +72,7 @@
   <block wx:for="{{list_ebooks}}" wx:key>
     <view class="bg-white padding-xs  solid-bottom  flex   align-start">
       <view class=" margin-xs radius">
-        <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:100rpx;" mode="widthFix"></image>
+        <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:160rpx;" mode="widthFix"></image>
       </view>
       <view class=" margin-xs radius">
         <view class="text-left text-df text-black text-bold"> {{item.program.title}}</view>
@@ -91,7 +91,7 @@
   <block wx:for="{{author_book_recommend}}" wx:key>
     <view class="bg-white padding-xs  solid-bottom  flex   align-start">
       <view class=" margin-xs radius">
-        <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:100rpx;" mode="widthFix"></image>
+        <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:160rpx;" mode="widthFix"></image>
       </view>
       <view class=" margin-xs radius">
         <view class="text-left text-df text-black text-bold"> {{item.title}}</view>
@@ -111,10 +111,10 @@
   </view>
   <block wx:for="{{author_book_xu}}" wx:key>
     <view class="bg-white padding-xs  solid-bottom  flex   align-start">
-      <view class=" margin-xs radius">
-        <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:100rpx;" mode="widthFix"></image>
+      <view class=" margin-xs radius"  >
+        <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:160rpx;" mode="widthFix"></image>
       </view>
-      <view class=" margin-xs radius">
+      <view class=" margin-xs radius" >
         <view class="text-left text-df text-black text-bold"> {{item.title}}</view>
         <view class="text-left  text-sm margin-top-xs"> {{item.program.linfo_text}} </view>
         <view class="text-left   text-grey text-df margin-top-xs"  bindtap="showModal" data-target="DrawerModalL_neirong" data-title="序" data-content="{{item.content}}">
