@@ -71,13 +71,21 @@
                  
             </wux-col>
              <wux-col span="3">
-              <view class="flex flex-direction  justify-center"   catchtap="showModal_chongzhi" data-target="DialogModalchongzhi"  data-username="{{item.username}}"  data-userid="{{item.userid}}">
-                  <!-- <view class=""></view> -->
+              <view class="flex flex-direction  justify-center" >
+                  
                    <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
                     </text>
                     
                  <view class="text-grey text-center">用户充值</view>
               </view>
+
+              <!-- <view class="flex flex-direction  justify-center"   catchtap="showModal_chongzhi" data-target="DialogModalchongzhi"  data-username="{{item.username}}"  data-userid="{{item.userid}}">
+                  
+                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
+                    </text>
+                    
+                 <view class="text-grey text-center">用户充值</view>
+              </view> -->
                   
             </wux-col>
              <wux-col span="3">
@@ -99,10 +107,10 @@
   
 </view> 
 
-<!-- <view class="flex  cu-bar-sun foot">
+ <view class="flex  cu-bar-sun foot">
   <button class="flex-sub cu-btn bg-orange lg"  bindtap="showModal" data-target="Dialogadduser">添加账号</button>
   <button class="flex-sub cu-btn bg-white lg" >绑定账号</button>
-</view>  -->
+</view>  
 
 
 <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
