@@ -71,7 +71,7 @@
                  
             </wux-col>
              <wux-col span="3">
-              <view class="flex flex-direction  justify-center">
+              <view class="flex flex-direction  justify-center"   catchtap="showModal_chongzhi" data-target="DialogModalchongzhi"  data-username="{{item.username}}"  data-userid="{{item.userid}}">
                   <!-- <view class=""></view> -->
                    <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
                     </text>
@@ -99,10 +99,10 @@
   
 </view> 
 
-<view class="flex  cu-bar-sun foot">
+<!-- <view class="flex  cu-bar-sun foot">
   <button class="flex-sub cu-btn bg-orange lg"  bindtap="showModal" data-target="Dialogadduser">添加账号</button>
   <button class="flex-sub cu-btn bg-white lg" >绑定账号</button>
-</view> 
+</view>  -->
 
 
 <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
@@ -301,6 +301,44 @@
           <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" catchtap="delete_user">确定</button>
         </view>
       </view>
+  </view>
+</view>
+
+
+
+<view class="cu-modal {{modalName=='DialogModalchongzhi'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-orange justify-end">
+      <view class="content">账户充值</view>
+      <view class="action" bindtap="hideModal">
+        <text class="proIcon-iconico_gb text-white"></text>
+      </view>
+    </view>
+
+    <form bindsubmit="userchongzhiformSubmit">
+      <view class="padding-sm bg-white" style="padding:150rpx 10rpx;">
+
+        <view class="cu-form-group">
+          <view class="title">用户名</view>
+          <input disabled="true" placeholder="用户名" name='username' value='{{chongzhiusername}}'></input>
+        </view>
+      
+        <view class="cu-form-group">
+          <view class="title">充值金额</view>
+          <input placeholder="充值金额" name='price' type="number" value='{{price}}'></input>
+        </view>
+
+
+      </view>
+      <view class="cu-bar bg-white justify-center padding-bottom">
+        <view class="action">
+          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+          <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
+        </view>
+      </view>
+
+    </form>
+
   </view>
 </view>
 
