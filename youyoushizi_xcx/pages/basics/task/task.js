@@ -96,7 +96,8 @@ Page({
     swiperheight:300,
     task_wcell_type :0,
     max_subcurrent: 2,
-    middle_subcurrent: true
+    middle_subcurrent: true,
+    error_list: []
   },
   onLoad: function (options) {
    
@@ -153,7 +154,7 @@ Page({
           //   //console.log( value);
           // })
 
-          var konw_currenttemp = [];
+          var konw_currenttemp = []; var temp_error_list = [];
           res.data.word_data.task_word_data_items.forEach(function (value, i) {
             // console.log(value);
             // let wstatus = value.status == '0'?20:value.status =='1'?0:1
@@ -161,6 +162,7 @@ Page({
             let wstatus = value.status == '0' ? 20 : value.status
             konw_currenttemp.push(wstatus)
             //console.log( value);
+            temp_error_list.push(false)
           })
 
           // console.log(konw_currenttemp);
@@ -168,6 +170,7 @@ Page({
           // console.log(linktemp1);
 
           that.setData({
+            error_list: temp_error_list,
             taskdata: res.data.word_data,
             audiowordlist: linktemp1,
             audiodwordlist: linktemp2,
@@ -971,6 +974,11 @@ Page({
     
   },
   post_word_error(e) {
+
+    var tprice = 'error_list[' + this.data.current + ']'
+    this.setData({
+      [tprice]: true,
+    })
 
     let item_word = this.data.taskdata.word1[this.data.current]
     let bookcellid = item_word.bookcellid
