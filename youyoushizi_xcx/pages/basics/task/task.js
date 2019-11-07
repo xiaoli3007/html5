@@ -241,74 +241,8 @@ Page({
 
     })
     var that = this 
-    // this.data.audioword_object.onError(() => {
-    //   that.setData({
-    //     button_loading_text: '加载语音失败！',
-    //     button_loading_auto:true
-    //   })
-    // })
-    // this.data.audioword_object.onWaiting(() => {
-    //   that.setData({
-    //     button_loading_text: '加载语音...',
-    //     button_loading_auto: true
-    //   })
-    // })
-    // this.data.audioword_object.onPlay(() => {
-    //     that.setData({
-    //       button_loading_text: '播放语音中...',
-    //       button_loading_auto: true,
-    //       button_global_src: that.data.audioword_object.src
-    //     })
-    // })
-    // this.data.audioword_object.onEnded(() => {
-    //     that.setData({
-    //       button_loading_text: '播放结束...',
-    //       button_loading_auto: false,
-    //       button_global_src: ''
-    //     })
-    // })
-    // this.data.audioword_object.onStop(() => {
-    //   that.setData({
-    //     button_loading_text: '播放结束...',
-    //     button_loading_auto: false,
-    //     button_global_src: ''
-    //   })
-    // })
+
   //============================================================
-    // this.data.audiodword_object.onError(() => {
-    //   that.setData({
-    //     button_loading_text: '加载语音失败！',
-    //     button_loading_auto: true
-    //   })
-    // })
-    // this.data.audiodword_object.onWaiting(() => {
-    //   that.setData({
-    //     button_loading_text: '加载语音...',
-    //     button_loading_auto: true
-    //   })
-    // })
-    // this.data.audiodword_object.onPlay(() => {
-      
-    //   that.setData({
-    //     button_loading_text: '播放语音中...',
-    //     button_loading_auto: true,
-    //     button_global_src: that.data.audiodword_object.src
-    //   })
-    // })
-    // this.data.audiodword_object.onEnded(() => {
-    //   that.setData({
-    //     button_loading_text: '播放结束...',
-    //     button_loading_auto: false,
-    //     button_global_src: ''
-    //   })
-    // })
-    // this.data.audiodword_object.onStop(() => {
-    //   that.setData({
-    //     button_loading_text: '播放结束...',
-    //     button_loading_auto: false,
-    //     button_global_src: ''
-    //   })
-    // })
   //==============================================================
     this.data.audiolword_object.onError(() => {
       that.setData({
@@ -1039,8 +973,39 @@ Page({
   post_word_error(e) {
 
     let item_word = this.data.taskdata.word1[this.data.current]
+    let bookcellid = item_word.bookcellid
      console.log(item_word);
 
+    wx.request({
+      url: app.globalData.url + '?act=book_error',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        bookcellid: bookcellid,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+        if (res.data.code === 20000) {
+
+          wx.showToast({
+            title: '报错成功！',
+            icon: 'none',
+            duration: 1500,
+          })
+
+        } else {
+         
+
+        }
+        
+
+      }
+    })
  
     // this.setData({
     //   modalName: m,
