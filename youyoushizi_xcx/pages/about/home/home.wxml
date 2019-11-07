@@ -29,6 +29,22 @@
       </navigator>
     </view>
 
+     <view class="cu-item arrow">
+      <navigator class="content" url="/pages/basics/collection/collection" hover-class="none">
+        <text class="proIcon-iconico_me_wdsc_xz text-orange"></text>
+        <text class="text-grey">我的收藏</text>
+      </navigator>
+    </view>
+
+   <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/concern/concern" hover-class="none">
+        <text class="proIcon-iconico_me_wdsc_xz text-orange"></text>
+        <text class="text-grey">我的关注</text>
+      </navigator>
+    </view>
+
+
+
    <view class="cu-item arrow">
       <navigator class="content" url="/pages/about/message/message" hover-class="none">
         <text class="proIcon-iconico_me_xtxx text-orange"></text>

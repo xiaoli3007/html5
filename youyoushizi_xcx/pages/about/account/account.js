@@ -1,7 +1,7 @@
 
 import WxValidate from '../../../utils/WxValidate.js'
 var util = require('../../../utils/util.js')
-const app = getApp();
+const app = getApp(); 
 Page({
   data: {
     StatusBar: app.globalData.StatusBar,

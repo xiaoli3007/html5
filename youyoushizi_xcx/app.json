@@ -19,6 +19,7 @@
     "pages/basics/authorlist/authorlist",
     "pages/basics/sentence/sentence",
     "pages/basics/sentencelist/sentencelist",
+    "pages/about/concern/concern",
     "pages/about/about/about",
     "pages/about/message/message",
     "pages/about/regbook/regbook",
