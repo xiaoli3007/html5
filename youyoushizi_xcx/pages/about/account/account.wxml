@@ -379,7 +379,12 @@
       <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
          <button wx:if="{{relation_name==''}}"  class="cu-btn round bg-grey lg" style="padding: 0 160rpx;" >邀请</button>
-        <button wx:if="{{relation_name!=''}}" bindinput="yaoqing_weixin" class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" >邀请</button>
+        <button wx:if="{{relation_name!=''}}"  open-type='share'  class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" >邀请</button>
+
+
+        <!-- <button catchtap="yaoqing_weixin"  class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" >测试</button> -->
+
+         
         </view> 
       </view>
   </view>

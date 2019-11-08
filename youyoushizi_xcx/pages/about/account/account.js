@@ -156,8 +156,22 @@ Page({
       delta: 1
     });
   },
+  onShareAppMessage: function (res) {
+
+    if (res.from === 'button') {
+    }
+
+    return {
+      title: "邀请绑定",
+      path: '/pages/about/binding/binding?bd_userid=' + this.data.relationboy_userid + '&&bd_name=' + this.data.relationboy_name + '&&bd_p_name=' + this.data.relation_name
+    }
+  },
   yaoqing_weixin: function (e) {
      
+    wx.navigateTo({
+      url: '/pages/about/binding/binding?bd_userid=12&&bd_name=aaa&&bd_p_name=bbb'
+    })
+
   },
   bindKeyInput: function (e) {
     this.setData({
