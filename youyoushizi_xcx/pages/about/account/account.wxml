@@ -364,21 +364,23 @@
       <view class="padding-sm bg-white" >
         <view class="grid col-2 padding-sm">
         <view class="margin-tb-sm text-center" wx:for="{{relationList}}" wx:key>
-          <button class="cu-btn round bg-grey ">{{item}}</button>
+          <button wx:if="{{!relationList_is[index]}}" class="cu-btn round bg-grey " catchtap="onclick_relation_select" data-name="{{item}}"  data-index="{{index}}">{{item}}</button>
+          <button wx:if="{{relationList_is[index]}}" class="cu-btn round bg-orange ">{{item}}</button>
         </view>
       </view>
 
        
         <view class="solid text-left padding-sm">
-          <input placeholder="其他" name='qita_relationship'  value=''></input>
+          <input placeholder="其他" name='qita_relationship' bindinput="bindKeyInput" value='{{qita_relationship}}'></input>
         </view>
         
 
       </view>
       <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
-        <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" >邀请</button>
-        </view>
+         <button wx:if="{{relation_name==''}}"  class="cu-btn round bg-grey lg" style="padding: 0 160rpx;" >邀请</button>
+        <button wx:if="{{relation_name!=''}}" bindinput="yaoqing_weixin" class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" >邀请</button>
+        </view> 
       </view>
   </view>
 </view>

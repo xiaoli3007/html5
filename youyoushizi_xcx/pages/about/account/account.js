@@ -46,8 +46,11 @@ Page({
     chongzhiusername: null,
     price: 0.01,
     relationList: ['爸爸', '妈妈', '爷爷', '奶奶', '外公', '外婆'],
+    relation_name: '',
     relationboy_name:'',
-    relationboy_userid: 0
+    relationboy_userid: 0,
+    relationList_is: [false,false,false,false,false,false],
+    qita_relationship:''
   },
   onLoad: function () { 
   
@@ -153,9 +156,48 @@ Page({
       delta: 1
     });
   },
+  yaoqing_weixin: function (e) {
+     
+  },
+  bindKeyInput: function (e) {
+    this.setData({
+      relation_name: e.detail.value,
+      qita_relationship: e.detail.value
+    })
+    if (e.detail.value!=''){
+      this.setData({
+        relationList_is: [false, false, false, false, false, false]
+      })
+    }
+  },
+  onclick_relation_select(e) {
+    // console.log(e);
+    let index = e.currentTarget.dataset.index
+    let name = e.currentTarget.dataset.name
+    // this.data.relationList.forEach(function (value, i) {
+    //   if (i == index) {
+
+    //   }
+    // })
+
+    this.setData({
+      relationList_is: [false, false, false, false, false, false]
+    })
+    var tprice = 'relationList_is[' + index + ']'
+    this.setData({
+      [tprice]: true,
+    })
+    //设置家长的身份名称
+    this.setData({
+      relation_name: name,
+      qita_relationship:''
+    })
+   
+  },
   showModal_relation(e) {
     // console.log(e);
 
+   
     let temp_relationboy_userid = app.globalData.userid
 
     let temp_relationboy_name = ''
