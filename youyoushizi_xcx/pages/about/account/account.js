@@ -858,6 +858,7 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       data: {
+        wx_id: app.globalData.uid,
         userid: duserid,
       },
       success: function (res) {
