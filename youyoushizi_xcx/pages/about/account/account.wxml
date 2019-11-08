@@ -109,7 +109,7 @@
 
  <view class="flex  cu-bar-sun foot">
   <button class="flex-sub cu-btn bg-orange lg"  bindtap="showModal" data-target="Dialogadduser">添加账号</button>
-  <button class="flex-sub cu-btn bg-white lg" >绑定账号</button>
+  <button class="flex-sub cu-btn bg-white lg"  data-target="DialogModalrelationship" catchtap="showModal_relation"  >绑定账号</button>
 </view>  
 
 
@@ -347,6 +347,39 @@
 
     </form>
 
+  </view>
+</view>
+
+
+<view class="cu-modal {{modalName=='DialogModalrelationship'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-orange justify-end">
+      <view class="content">邀请{{relationboy_name}}的</view>
+      <view class="action" bindtap="hideModal">
+        <text class="proIcon-iconico_gb text-white"></text>
+      </view>
+    </view>
+
+    
+      <view class="padding-sm bg-white" >
+        <view class="grid col-2 padding-sm">
+        <view class="margin-tb-sm text-center" wx:for="{{relationList}}" wx:key>
+          <button class="cu-btn round bg-grey ">{{item}}</button>
+        </view>
+      </view>
+
+       
+        <view class="solid text-left padding-sm">
+          <input placeholder="其他" name='qita_relationship'  value=''></input>
+        </view>
+        
+
+      </view>
+      <view class="cu-bar bg-white justify-center padding-bottom">
+        <view class="action">
+        <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" >邀请</button>
+        </view>
+      </view>
   </view>
 </view>
 

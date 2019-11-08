@@ -45,6 +45,9 @@ Page({
     chongzhiuserid:null,
     chongzhiusername: null,
     price: 0.01,
+    relationList: ['爸爸', '妈妈', '爷爷', '奶奶', '外公', '外婆'],
+    relationboy_name:'',
+    relationboy_userid: 0
   },
   onLoad: function () { 
   
@@ -149,6 +152,26 @@ Page({
     wx.navigateBack({
       delta: 1
     });
+  },
+  showModal_relation(e) {
+    // console.log(e);
+
+    let temp_relationboy_userid = app.globalData.userid
+
+    let temp_relationboy_name = ''
+
+
+    this.data.member_list.forEach(function (value, i) {
+      if (value.userid == temp_relationboy_userid){
+        temp_relationboy_name = value.realname ? value.realname : value.username
+        }
+    })
+
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      relationboy_userid: temp_relationboy_userid,
+      relationboy_name: temp_relationboy_name,
+    })
   },
   showModal_deleteuser(e) {
     console.log(e);
