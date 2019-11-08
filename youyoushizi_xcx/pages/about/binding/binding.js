@@ -63,7 +63,7 @@ Page({
         } else {
           
           wx.showToast({
-            title: '绑定失败',
+            title:  res.data.message,
             icon: 'none',
             duration: 1500,
           })
