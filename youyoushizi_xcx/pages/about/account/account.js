@@ -50,7 +50,8 @@ Page({
     relationboy_name:'',
     relationboy_userid: 0,
     relationList_is: [false,false,false,false,false,false],
-    qita_relationship:''
+    qita_relationship:'',
+    abouturl: '/pages/index/index?p=about'
   },
   onLoad: function () { 
   

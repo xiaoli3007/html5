@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-orange" isBack="{{true}}">
+<cu-custom bgColor="bg-orange" isurl="{{true}}" curl="{{abouturl}}">
   <view slot="backText">返回</view>
   <view slot="content">用户管理</view>
 </cu-custom>

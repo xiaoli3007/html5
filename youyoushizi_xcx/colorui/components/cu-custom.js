@@ -26,6 +26,14 @@ Component({
     bgImage: {
       type: String,
       default: ''
+    }, 
+    isurl: {
+      type: [Boolean, String],
+      default: false
+    },
+    curl: {
+      type: String,
+      default: ''
     },
   },
   /**
@@ -48,6 +56,11 @@ Component({
     toHome(){
       wx.reLaunch({
         url: '/pages/index/index',
+      })
+    },
+    toUrl() {
+      wx.navigateTo({
+        url: this.data.curl,
       })
     }
   }
