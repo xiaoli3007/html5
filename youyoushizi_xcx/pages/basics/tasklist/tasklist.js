@@ -3,6 +3,7 @@
 const app = getApp();
 Page({
   data: {
+    basicsurl: '/pages/index/index?p=basics',
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     ColorList: app.globalData.ColorList,
@@ -279,9 +280,9 @@ Page({
     let taskid = e.currentTarget.dataset.taskid
     let status = e.currentTarget.dataset.status
     var that = this
-    console.log(taskid)
+    
     if (status == -1){
-
+      console.log(status)
       wx.showModal({
         title: '您好！该任务已经完成！',
         content: '确定要从新开始任务？',
@@ -297,7 +298,7 @@ Page({
       })
 
     }else{
-
+      console.log(taskid)
       wx.navigateTo({
         url: '/pages/basics/task/task?taskid=' + taskid,
       })
@@ -423,6 +424,26 @@ Page({
         }
       }
     })
+
+  },
+  gotodetail(e) {
+
+    let jumpebookid = e.currentTarget.dataset.jumpebookid
+    let relation_type = e.currentTarget.dataset.relation_type
+    var that = this
+
+    if (relation_type == 'ebook') {
+      wx.navigateTo({
+        url: '/pages/basics/detailed/detailed?ebookid=' + jumpebookid,
+      })
+    } else {
+     
+      wx.navigateTo({
+        url: '/pages/basics/jiaocai_lession/jiaocai_lession?ebookid=' + jumpebookid,
+      })
+
+    }
+
 
   },
   onClickaaa(e) {

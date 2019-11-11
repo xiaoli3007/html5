@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-orange" isBack="{{true}}">
+<cu-custom bgColor="bg-orange" isurl="{{true}}" curl="{{basicsurl}}">
   <view slot="backText">返回</view>
   <view slot="content">任务列表</view>
 </cu-custom>
@@ -47,7 +47,9 @@
           </text>
         </view>
         <view class="text-orange text-sm margin-top-xs">
-            <button class="cu-btn round  line-orange" data-relation_id="{{item.relation_id}}" data-relation_type="{{item.relation_type}}"  catchtap="identical_task">同书任务</button>
+            <!-- <button class="cu-btn round  line-orange" data-relation_id="{{item.relation_id}}" data-relation_type="{{item.relation_type}}"  catchtap="identical_task">同书任务</button> -->
+
+            <button class="cu-btn round  line-orange" data-jumpebookid="{{item.jump_ebookid}}" data-relation_type="{{item.relation_type}}"  catchtap="gotodetail">同书任务</button>
         </view>
       </view>
 

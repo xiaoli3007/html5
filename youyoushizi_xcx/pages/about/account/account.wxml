@@ -199,7 +199,7 @@
         
             	<view class="cu-form-group ">
 		<view class="title">年级</view>
-		<picker bindchange="nianjiChange" data-target="edit" name='nianji' value="{{add_nianji}}" range="{{pickernianji}}">
+		<picker bindchange="nianjiChange" data-target="edit" name='nianji' value="{{edit_nianji}}" range="{{pickernianji}}">
 			<view class="picker">
 				{{edit_nianji?pickernianji[edit_nianji]:'请选择'}}
 			</view>

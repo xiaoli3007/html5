@@ -272,7 +272,7 @@ Page({
       }
     })
 
-    // console.log(u.sex)
+    console.log(u)
     // console.log(this.data.pickersex)
    
     let objsex = this.data.pickersex

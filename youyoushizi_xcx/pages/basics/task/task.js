@@ -7,6 +7,7 @@ const app = getApp()
 
 Page({
   data: {
+    tasjlisturl: '/pages/basics/tasklist/tasklist',
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
@@ -748,11 +749,12 @@ Page({
     }, 500)
 
     if (this.data.current == this.data.taskdata.word1.length - 1) {
-      wx.showToast({
-        title: '本次识字已完成！',
-        icon: 'none',
-        duration: 1500,
-      })
+      // wx.showToast({
+      //   title: '本次识字已完成！',
+      //   icon: 'none',
+      //   duration: 1500,
+      // })
+      this.shizi_end_back()
     }
 
   },
@@ -796,11 +798,12 @@ Page({
     }, 500)
 
     if (this.data.current == this.data.taskdata.word1.length - 1){
-      wx.showToast({
-        title: '本次识字已完成！',
-        icon: 'none',
-        duration: 1500,
-      })
+      // wx.showToast({
+      //   title: '本次识字已完成！',
+      //   icon: 'none',
+      //   duration: 1500,
+      // })
+      this.shizi_end_back()
     }
 
   },
@@ -1020,6 +1023,30 @@ Page({
     //   data_item_word: item_word,
     // })
 
+  },
+  shizi_end_back() {
+
+    var that = this
+    $wuxDialog().open({
+      resetOnClose: true,
+      // title: '',
+      content: '您好！识字已结束',
+      buttons: [
+      {
+        text: '返回任务列表',
+        type: 'primary',
+        onTap(e) {
+          console.log('你选择了返回任务列表！')
+          wx.navigateTo({
+            url: '/pages/basics/tasklist/tasklist',
+          })
+        },
+      },
+      {
+        text: '取消',
+      },
+      ],
+    })
   },
   ceshiyuyin(e){
 

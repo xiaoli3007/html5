@@ -63,26 +63,24 @@
 
 <view class="cu-list " catchtouchmove="{{ opened ? 'noop' : '' }}">
   <block wx:for="{{duwuList}}" wx:key>
-    <view data-programid="{{item.program.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-center margin-top">
+    <view data-programid="{{item.program.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-start  margin-top">
       <view class="basis-xs" style="flex-basis: 30%;">
         <image src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
         </image>
       </view>
-      <view class="basis-xl" style="flex-basis: 70%;">
+      <view class="basis-xl" style="flex-basis: 70%; ">
         <view class="text-left text-xl">
           <text class="text-black text-bold">{{item.program.title}}</text>
         </view>
         <view class="text-left">
-          <text class="text-lg">作者：{{item.program.author}}</text>
+          <text class="text-lg" wx:if="{{item.program.author!=''}}">作者：{{item.program.author}}</text>
           <text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
           <text class="text-lg" wx:if="{{item.program.translator!=''}}">译者：{{item.program.translator}}</text>
         </view>
 
         <view class="text-left text-df">{{item.program.linfo_text}}</view>
 
-        <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">
-          描述：{{item.program.head}}
-        </view>
+        <view wx:if="{{item.program.description!=''}}" class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">描述：{{item.program.description}}</view>
 
       </view>
 

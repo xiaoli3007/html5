@@ -6,6 +6,14 @@ var util_substring = function (val) {
   
 }
 
+var util_substring2 = function (val) {
+
+  if (val) {
+    return val.substring(0, 30) + "..."
+  }
+
+}
+
 var util_perset = function (val) {
  
   if (val) {
@@ -17,5 +25,6 @@ var util_perset = function (val) {
 
 module.exports = {
   util_substring: util_substring,
+  util_substring2: util_substring2,
   util_perset: util_perset
 };

@@ -36,7 +36,7 @@
           <wux-swipe-action autoClose right="{{ right }}" data="{{item.id+'-'+index+'-'+type}}" bind:click="delete_collection">
             <!-- <view class="flex align-center" bindtap="gotask" data-taskid="{{item.id}}"   >
     </view> -->
-            <view data-programid="{{item.program.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-center">
+            <view data-programid="{{item.program.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-start">
               <view class="basis-xs" style="flex-basis: 30%;">
                 <image src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
                 </image>

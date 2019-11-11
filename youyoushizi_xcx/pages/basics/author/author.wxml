@@ -70,14 +70,14 @@
   <view class="bg-white  margin-top">
   </view>
   <block wx:for="{{list_ebooks}}" wx:key>
-    <view class="bg-white padding-xs  solid-bottom  flex   align-start">
+    <view class="bg-white padding-xs  solid-bottom  flex   align-start" data-programid="{{item.program.id}}" bindtap="gotodeteil">
       <view class=" margin-xs radius">
         <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:160rpx;" mode="widthFix"></image>
       </view>
       <view class=" margin-xs radius">
         <view class="text-left text-df text-black text-bold"> {{item.program.title}}</view>
         <view class="text-left  text-sm margin-top-xs"> {{item.program.linfo_text}} </view>
-        <view class="text-left   text-grey text-df margin-top-xs">{{common.util_substring(item.program.description)}} </view>
+        <view class="text-left   text-grey text-df margin-top-xs">{{common.util_substring2(item.program.description)}} </view>
       </view>
     </view>
   </block>
@@ -96,7 +96,7 @@
       <view class=" margin-xs radius">
         <view class="text-left text-df text-black text-bold"> {{item.title}}</view>
         <view class="text-left  text-sm margin-top-xs"> {{item.program.linfo_text}} </view>
-        <view class="text-left   text-grey text-df margin-top-xs" bindtap="showModal" data-target="DrawerModalL_neirong" data-title="推荐语" data-content="{{item.content}}"><text class="text-red">推荐语：</text> {{common.util_substring(item.content)}} </view>
+        <view class="text-left   text-grey text-df margin-top-xs" bindtap="showModal" data-target="DrawerModalL_neirong" data-title="推荐语" data-content="{{item.content}}"><text class="text-red">推荐语：</text> {{common.util_substring2(item.content)}} </view>
       </view>
     </view>
   </block>
@@ -118,7 +118,7 @@
         <view class="text-left text-df text-black text-bold"> {{item.title}}</view>
         <view class="text-left  text-sm margin-top-xs"> {{item.program.linfo_text}} </view>
         <view class="text-left   text-grey text-df margin-top-xs"  bindtap="showModal" data-target="DrawerModalL_neirong" data-title="序" data-content="{{item.content}}">
-       <text class="text-red">序：</text>{{common.util_substring(item.content)}} </view>
+       <text class="text-red">序：</text>{{common.util_substring2(item.content)}} </view>
       </view>
     </view>
   </block>
