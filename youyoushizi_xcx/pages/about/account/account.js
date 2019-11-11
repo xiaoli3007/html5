@@ -280,7 +280,7 @@ Page({
 
     // console.log(util.findKey(obj,value))
     this.setData({
-      edit_birthday: u.birthday,
+      edit_birthday: u.birthday ? u.birthday:'',
       edit_sex: u.sex?util.findKey(objsex, u.sex):'',
       edit_nianji: u.nianji ?util.findKey(nianjiobj, u.nianji):'',
     })
