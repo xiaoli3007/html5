@@ -4,7 +4,7 @@ Page({
   },
 
   onLoad: function (option) {
-    console.log(option.p)
+    // console.log(option.p)
     if (option.p){
       this.setData({
         PageCur: option.p

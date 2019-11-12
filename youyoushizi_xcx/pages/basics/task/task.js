@@ -144,7 +144,7 @@ Page({
           status:0
         },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           
           var linktemp1 = []; var linktemp2 = []; var linktemp3 = []; 
           // res.data.word_data.word1.forEach(function (value, i) {
@@ -176,7 +176,7 @@ Page({
             res.data.word_data.word1[i].lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
           })
 
-          console.log(res.data.word_data.word1);
+          // console.log(res.data.word_data.word1);
 
           // console.log(linktemp1);
 
@@ -1047,7 +1047,7 @@ Page({
         type: 'primary',
         onTap(e) {
           console.log('你选择了返回任务列表！')
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/basics/tasklist/tasklist',
           })
         },

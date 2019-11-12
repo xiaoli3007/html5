@@ -86,5 +86,28 @@ Page({
       TabCursub: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60
     })
-  }
+  },
+  gotodeteil_task(e) {
+
+    let taskid = e.currentTarget.dataset.taskid
+    let relation_id = e.currentTarget.dataset.relation_id
+    let gid = e.currentTarget.dataset.gid
+    let wcell_type = e.currentTarget.dataset.wcell_type
+    
+    // var that = this
+    // console.log({ taskid, relation_id, gid, wcell_type})
+    // return
+    if (taskid && taskid!=0){
+      wx.navigateTo({
+        url: '/pages/basics/task/task?taskid=' + taskid,
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id=' + relation_id + '&gid=' + gid+'&wcell_type=' + wcell_type,
+      })
+    }
+    
+
+  },
+
 })

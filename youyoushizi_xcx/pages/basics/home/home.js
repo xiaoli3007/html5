@@ -144,7 +144,7 @@ Component({
 */  
     onPullDownRefresh() {
 
-      console.log('onRefresh')
+      // console.log('onRefresh')
       var that = this;
 
       // that.setData({
@@ -162,7 +162,7 @@ Component({
         },
         success(res) {
 
-          console.log(res.data)
+          // console.log(res.data)
 
           that.setData({
 

@@ -26,7 +26,15 @@
         {{item.name}} 
       </view>
     </block>
-  </scroll-view>
+  </scroll-view> 
+   <!-- <view wx:if="{{TabCur==mindex}}"  class="margin-top bg-white flex text-center" >
+
+    <block wx:for="{{item.wcell_list}}" wx:for-index="mindex2" wx:key>
+      <view class="cu-item {{mindex2==TabCursub?'text-orange cur':''}}" bindtap="tabSelect2" data-id="{{mindex2}}">
+        {{item.name}} 
+      </view>
+    </block>
+  </view> -->
 </block>
 
 
@@ -51,18 +59,14 @@
     </view>
   
 
-  <view class="cu-bar flex  bg-white justify-center  foot" style="bottom:0px;">
-    
+  <view class="flex flex-direction cu-bar-sun foot">
+  <button class="cu-btn bg-orange lg" data-taskid="{{item.shizi_taskid}}" data-relation_id="{{program.id}}" data-gid="{{mindex2}}" data-wcell_type="{{mindex}}" bindtap="gotodeteil_task">
+  <text>开始识字</text><text wx:if="{{item.shizi_taskid!=0}}">(已添加)</text></button>
+</view>
 
-     <navigator wx:if="{{item.shizi_taskid==0}}"  hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{program.id}}&gid={{mindex2}}&wcell_type={{mindex}}" open-type="redirect">
-      <button class="cu-btn round lg line-orange ">开始识字</button>
-       </navigator>
 
-        <navigator wx:if="{{item.shizi_taskid!=0}}"  hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
-      <button class="cu-btn round lg bg-orange">开始识字</button>
-       </navigator> 
- 
-  </view>
+
+
 </block>
 
 </block>

@@ -19,7 +19,7 @@ Page({
     tabNav: ['识字任务', '听写任务'],
     TabCur: 0,
     typelist: [2, 1],
-    type:0,
+    type:2,
     right: [
     //   {
     //   text: 'Cancel',
@@ -36,6 +36,8 @@ Page({
     
     app.setUserInfo('about');
     console.log(options.type)
+    var stemptype = 2
+
     if (options.type){
       var temptype = 0
       if (options.type ==1){
@@ -46,9 +48,11 @@ Page({
         type: options.type,
         TabCur: temptype
       })
+
+      stemptype = options.type
     }
 
-    console.log(this.data.TabCur)
+    console.log(this.data.type)
 
     var that = this;
     if (app.globalData.userid) {
@@ -61,11 +65,11 @@ Page({
            'X-Token': app.globalData.xtoken
          },
          data: {
-           type: that.data.type,
+           type: stemptype,
            pagesize: that.data.pagesize,
          },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           that.setData({
             task_list: res.data.items,
             })
