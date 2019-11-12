@@ -98,7 +98,8 @@ Page({
     task_wcell_type :0,
     max_subcurrent: 2,
     middle_subcurrent: true,
-    error_list: []
+    error_list: [],
+    taskdataword: []
   },
   onLoad: function (options) {
    
@@ -166,7 +167,16 @@ Page({
             temp_error_list.push(false)
           })
 
-          // console.log(konw_currenttemp);
+          var temp_taskdataword = [];
+          res.data.word_data.word1.forEach(function (value, i) {
+
+            // let w_temp_taskdataword = value
+            // w_temp_taskdataword.lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
+            // temp_taskdataword.push(w_temp_taskdataword)
+            res.data.word_data.word1[i].lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
+          })
+
+          console.log(res.data.word_data.word1);
 
           // console.log(linktemp1);
 
@@ -1047,6 +1057,25 @@ Page({
       },
       ],
     })
+  },
+  // 根据搜索字分割字符
+  hilight_word (key, word) {
+    let idx = word.indexOf(key), t = [];
+
+    if (idx > -1) {
+      if (idx == 0) {
+        t = this.hilight_word(key, word.substr(key.length));
+        t.unshift({ key: true, str: key });
+        return t;
+      }
+
+      if (idx > 0) {
+        t = this.hilight_word(key, word.substr(idx));
+        t.unshift({ key: false, str: word.substring(0, idx) });
+        return t;
+      }
+    }
+    return [{ key: false, str: word }];
   },
   ceshiyuyin(e){
 

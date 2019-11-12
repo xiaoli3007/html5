@@ -143,9 +143,9 @@
                     <text class="task_sw cuIcon-emoji" style=""></text> </view>
                   <view wx:if="{{!tingxie_text_hide}}" style="width:100%;">
 
-                    <block wx:for="{{item.lw_xcx}}" wx:key="*this" wx:for-item="itemsub">
-                      <text class='task_lw text-left text-projectlv' wx:if="{{itemsub == item.sw}}">{{itemsub}}</text>
-                      <text class='task_lw text-left' wx:else>{{itemsub}}</text>
+                    <block wx:for="{{item.lw_red}}" wx:key="*this" wx:for-item="itemsub">
+                      <text class='task_lw text-left text-projectlv' wx:if="{{itemsub.key == true}}">{{itemsub.str}}</text>
+                      <text class='task_lw text-left' wx:else>{{itemsub.str}}</text>
                     </block>
 
 
