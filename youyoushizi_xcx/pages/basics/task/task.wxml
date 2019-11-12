@@ -442,18 +442,90 @@
             <text>拼音：</text>
           </wux-col>
           <wux-col span="8">
-            {{data_item_dword.dword_show_detail.pinyin}}
+            {{data_item_word.dword_show_detail.pinyin}}
           </wux-col>
         </wux-row>
         <wux-white-space size="default" />
         <wux-row>
+          <wux-col span="12" >
+            <wux-divider dashed  text="释义" />
+          </wux-col>
+          <!-- <wux-col span="8">
+            <text> {{data_item_word.dword_show_detail.shiyi}} </text>
+          </wux-col> -->
+        </wux-row>
+
+      <block wx:for="{{data_item_word.dword_show_detail.shiyi.mean_list}}" wx:for-index="sindex" wx:key>
+        <wux-row>
           <wux-col span="3" offset="1">
-            <text> 释义： </text>
+            <text> 拼音： </text>
           </wux-col>
           <wux-col span="8">
-            <text> {{data_item_dword.dword_show_detail.shiyi}} </text>
+            {{item.pinyin}} 
           </wux-col>
         </wux-row>
+        
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 词义： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text wx:for="{{item.submean}}" wx:key> {{item}} </text>
+          </wux-col>
+        </wux-row>
+
+      
+        <wux-row>
+          <wux-col span="12" >
+             
+            <wux-divider dashed  text="辨析" />
+          </wux-col>
+        </wux-row>
+       <wux-row>
+          <wux-col span="1">
+            
+          </wux-col>
+          <wux-col span="11">
+          <text> 辨析词：{{item.dword_bx.dwords}} \n</text>
+          <text> 辨析词相同意思：{{item.dword_bx.mean_same}} \n</text>
+           <block wx:for="{{item.dword_bx.mean_diff_list}}"  wx:key>
+             <text>词义： {{item.mean}} \n</text> 
+             <text>注释： {{item.note}} \n</text> 
+             <text>辨析词： {{item.dword}} \n</text> 
+             <text>拼音： {{item.pinyin}} \n</text> 
+             <text>例句： {{item.example}} \n</text> 
+          </block>
+          </wux-col>
+        </wux-row>
+
+     <wux-divider show-text="{{ false }}" dashed />
+
+         <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 反义词： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text> {{item.dword_fy}} </text>
+          </wux-col>
+        </wux-row>
+         <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 近义词： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text> {{item.dword_jy}} </text>
+          </wux-col>
+        </wux-row>
+         <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 相关词： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text wx:for="{{item.dword_list}}" wx:key> {{item}} </text>
+          </wux-col>
+        </wux-row>
+    </block>
+
         <wux-divider show-text="{{ false }}" dashed />
       </view>
     </scroll-view>

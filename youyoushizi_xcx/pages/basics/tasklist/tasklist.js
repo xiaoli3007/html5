@@ -290,7 +290,7 @@ Page({
         confirmText: '好的',
         success: res => {
           if (res.confirm) {
-            wx.navigateTo({
+            wx.redirectTo({
               url: '/pages/basics/task/task?taskid=' + taskid,
             })
           }
@@ -299,7 +299,7 @@ Page({
 
     }else{
       console.log(taskid)
-      wx.navigateTo({
+      wx.redirectTo({
         url: '/pages/basics/task/task?taskid=' + taskid,
       })
 

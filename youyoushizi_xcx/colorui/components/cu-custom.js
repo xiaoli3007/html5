@@ -59,7 +59,7 @@ Component({
       })
     },
     toUrl() {
-      wx.navigateTo({
+      wx.redirectTo({
         url: this.data.curl,
       })
     }

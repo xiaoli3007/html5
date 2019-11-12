@@ -931,7 +931,7 @@ Page({
   showModal_word_shiyi(e) {
 
     let item_word = this.data.taskdata.word1[this.data.current]
-    // console.log(item_word);
+    console.log(item_word);
     
     let m = 'DrawerModalL_word'
 

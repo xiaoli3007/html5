@@ -43,8 +43,8 @@ App({
 
   },
   globalData: {
-    uid: null,
-    userid: null, 
+    uid: 29,
+    userid: 6, 
     username: null, 
     avatar: null, 
     openid: '',
@@ -74,10 +74,10 @@ App({
         duration: 1500,
       })
       setTimeout(function () {
-        wx.navigateTo({
+        wx.reLaunch({
           url: '/pages/index/index?p=' + page,
         })
       }, 1000)
-    }
+    } 
   },
 })
