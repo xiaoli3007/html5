@@ -53,8 +53,7 @@
 
                 <view class="text-left text-df">{{item.program.linfo_text}}</view>
 
-                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">
-                  描述：{{item.program.head}}
+                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.program.description}}
                 </view>
 
               </view>
