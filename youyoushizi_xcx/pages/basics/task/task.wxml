@@ -473,33 +473,8 @@
             <text wx:for="{{item.submean}}" wx:key> {{item}} </text>
           </wux-col>
         </wux-row>
-
-      
-        <wux-row>
-          <wux-col span="12" >
-             
-            <wux-divider dashed  text="辨析" />
-          </wux-col>
-        </wux-row>
-       <wux-row>
-          <wux-col span="1">
-            
-          </wux-col>
-          <wux-col span="11">
-          <text> 辨析词：{{item.dword_bx.dwords}} \n</text>
-          <text> 辨析词相同意思：{{item.dword_bx.mean_same}} \n</text>
-           <block wx:for="{{item.dword_bx.mean_diff_list}}"  wx:key>
-             <text>词义： {{item.mean}} \n</text> 
-             <text>注释： {{item.note}} \n</text> 
-             <text>辨析词： {{item.dword}} \n</text> 
-             <text>拼音： {{item.pinyin}} \n</text> 
-             <text>例句： {{item.example}} \n</text> 
-          </block>
-          </wux-col>
-        </wux-row>
-
-     <wux-divider show-text="{{ false }}" dashed />
-
+        
+    
          <wux-row>
           <wux-col span="3" offset="1">
             <text> 反义词： </text>
@@ -524,6 +499,32 @@
             <text wx:for="{{item.dword_list}}" wx:key> {{item}} </text>
           </wux-col>
         </wux-row>
+
+      
+        <wux-row>
+          <wux-col span="12" >
+             
+            <wux-divider dashed position="left" text="辨析" />
+          </wux-col>
+        </wux-row>
+       <wux-row>
+          <wux-col span="1">
+            
+          </wux-col>
+          <wux-col span="11">
+          <text> 辨析词：{{item.dword_bx.dwords}} \n</text>
+          <text> 辨析词相同意思：{{item.dword_bx.mean_same}} \n</text>
+          <text> 辨析词不相同意思： \n</text>
+           <block wx:for="{{item.dword_bx.mean_diff_list}}"  wx:key>
+             <text>词义： {{item.mean}} \n</text> 
+             <text>注释： {{item.note}} \n</text> 
+             <text>辨析词： {{item.dword}} \n</text> 
+             <text>拼音： {{item.pinyin}} \n</text> 
+             <text>例句： {{item.example}} \n</text> 
+          </block>
+          </wux-col>
+        </wux-row>
+
     </block>
 
         <wux-divider show-text="{{ false }}" dashed />
