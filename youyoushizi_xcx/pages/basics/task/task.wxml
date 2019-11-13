@@ -437,14 +437,14 @@
       <view class="itemcontent text-left">
         <wux-white-space size="default" />
         <wux-white-space size="default" />
-        <wux-row>
+         <wux-row>
           <wux-col span="3" offset="1">
             <text>拼音：</text>
           </wux-col>
           <wux-col span="8">
             {{data_item_word.dword_show_detail.pinyin}}
           </wux-col>
-        </wux-row>
+        </wux-row> 
         <wux-white-space size="default" />
         <wux-row>
           <wux-col span="12" >
@@ -475,7 +475,7 @@
         </wux-row>
         
     
-         <wux-row>
+         <wux-row wx:if="{{item.dword_fy!=''}}">
           <wux-col span="3" offset="1">
             <text> 反义词： </text>
           </wux-col>
@@ -483,7 +483,8 @@
             <text> {{item.dword_fy}} </text>
           </wux-col>
         </wux-row>
-         <wux-row>
+
+         <wux-row wx:if="{{item.dword_jy!=''}}">
           <wux-col span="3" offset="1">
             <text> 近义词： </text>
           </wux-col>
@@ -491,7 +492,8 @@
             <text> {{item.dword_jy}} </text>
           </wux-col>
         </wux-row>
-         <wux-row>
+
+         <wux-row wx:if="{{item.dword_list.length>0}}">
           <wux-col span="3" offset="1">
             <text> 相关词： </text>
           </wux-col>
@@ -512,9 +514,9 @@
             
           </wux-col>
           <wux-col span="11">
-          <text> 辨析词：{{item.dword_bx.dwords}} \n</text>
-          <text> 辨析词相同意思：{{item.dword_bx.mean_same}} \n</text>
-          <text> 辨析词不相同意思： \n</text>
+          <text  wx:if="{{item.dword_bx.dwords!=''}}"> 辨析词：{{item.dword_bx.dwords}} \n</text>
+          <text  wx:if="{{item.dword_bx.mean_same!=''}}"> 辨析词相同意思：{{item.dword_bx.mean_same}} \n</text>
+          <text wx:if="{{item.dword_bx.mean_diff_list>0}}"> 辨析词不相同意思： \n</text>
            <block wx:for="{{item.dword_bx.mean_diff_list}}"  wx:key>
              <text>词义： {{item.mean}} \n</text> 
              <text>注释： {{item.note}} \n</text> 

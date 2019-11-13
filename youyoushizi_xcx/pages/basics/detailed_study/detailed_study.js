@@ -12,7 +12,10 @@ Page({
     tabNavcat: [],
     tabNavcat_sub: [],
     program:null,
+    all_play_c: null,
     datalist: [], datatablist: [],
+    isloaditem:false,
+    data_item_word:null
   },
   onLoad(options) {
     console.log(options)
@@ -66,6 +69,14 @@ Page({
 
 
   },
+  onReady(e) {
+
+    var that = this
+    this.setData({
+
+      all_play_c: wx.createInnerAudioContext(),
+    })
+    },
   tabSelect(e) {
     // console.log(e.currentTarget.dataset.id);
     // console.log(this.data.TabCur);
@@ -107,6 +118,72 @@ Page({
       })
     }
     
+
+  },
+  play_any_src(e) {
+    let src = e.currentTarget.dataset.msrc
+
+    console.log(src);
+    // let innerAudioContext = wx.createInnerAudioContext()
+    // this.data.all_play_c.stop()
+    this.data.all_play_c.src = src
+    this.data.all_play_c.play()
+    // console.log(this.innerAudioContext.duration);
+
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  showModal_word_shiyi(e) {
+
+    let wcellid = e.currentTarget.dataset.wcellid
+
+    let wcell_type = e.currentTarget.dataset.wcell_type
+
+    console.log({ wcell_type, wcellid});
+
+    let that = this;
+    let m = 'DrawerModalL_word'
+    if (wcell_type=='25'){
+      m = 'DrawerModalC_word'
+    }
+    that.setData({
+      modalName: m, 
+      isloaditem: true
+    })
+    //加载列表
+    wx.request({
+      url: app.globalData.url + '?act=book_item_word_shiyi',
+      data: {
+        wcellid: wcellid,
+        userid: app.globalData.userid,
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+        console.log(res.data) 
+        that.setData({
+          data_item_word: res.data.items,
+        })
+      },
+      complete(res) {
+        that.setData({
+
+          isloaditem: false
+        })
+        
+      }
+    })
+
+    // this.setData({
+    //   modalName: m,
+    //   data_item_word: item_word,
+    // })
+
 
   },
 
