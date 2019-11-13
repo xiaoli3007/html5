@@ -76,7 +76,12 @@
 
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" >
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
-    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)" class="bg-white">
+
+   
+    <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
+ 
+
       <view class="itemcontent text-left">
         <wux-white-space size="default" />
 
@@ -153,6 +158,7 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalC_word'?'show':''}}" bindtap="hideModal" >
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+       <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
       <view class="itemcontent text-left">
         <wux-white-space size="default" />
         <wux-white-space size="default" />

@@ -142,7 +142,7 @@ Page({
 
     let wcell_type = e.currentTarget.dataset.wcell_type
 
-    console.log({ wcell_type, wcellid});
+    // console.log({ wcell_type, wcellid});
 
     let that = this;
     let m = 'DrawerModalL_word'
@@ -165,7 +165,7 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-        console.log(res.data) 
+        // console.log(res.data) 
         that.setData({
           data_item_word: res.data.items,
         })
