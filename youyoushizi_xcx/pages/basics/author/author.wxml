@@ -75,9 +75,9 @@
         <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix"></image>
       </view>
       <view class=" margin-xs radius">
-        <view class="text-left text-df text-black text-bold"> {{item.program.title}}</view>
-        <view class="text-left  text-sm margin-top-xs"> {{item.program.linfo_text}} </view>
-        <view class="text-left   text-grey text-df margin-top-xs">{{common.util_substring2(item.program.description)}} </view>
+        <view class="text-left text-xl text-black text-bold"> {{item.program.title}}</view>
+        <view class="text-left  text-df margin-top-xs"> {{item.program.linfo_text}} </view>
+        <view class="text-left   text-grey text-sm margin-top-xs">{{common.util_substring2(item.program.description)}} </view>
       </view>
     </view>
   </block>

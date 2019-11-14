@@ -9,7 +9,7 @@ var util_substring = function (val) {
 var util_substring2 = function (val) {
 
   if (val) {
-    return val.substring(0, 30) + "..."
+    return val.substring(0, 50) + "..."
   }
 
 }

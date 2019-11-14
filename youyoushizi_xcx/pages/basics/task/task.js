@@ -144,17 +144,32 @@ Page({
           status:0
         },
         success: function (res) {
-          // console.log(res);
-          
-          var linktemp1 = []; var linktemp2 = []; var linktemp3 = []; 
-          // res.data.word_data.word1.forEach(function (value, i) {
-          //   var innerAudioContext = null
-          //   innerAudioContext = wx.createInnerAudioContext()
-          //   innerAudioContext.src = value.sw_sound
-          //   linktemp1.push(innerAudioContext)
+           console.log(res);
+          //进行状态中的进度跳转================================================
+          if (res.data.taskinfo.status=='1'){
+            let temp_progress_wcellid = null
 
-          //   //console.log( value);
-          // })
+            if (res.data.word_data.survey) {
+               temp_progress_wcellid = res.data.word_data.survey.progress_wcellid 
+            }
+            console.log(temp_progress_wcellid )
+            if (temp_progress_wcellid){
+              let temp_goto_index = 0
+              res.data.word_data.word1.forEach(function (value, i) {
+                if (value.wcellid === temp_progress_wcellid) {
+                  temp_goto_index = i
+                }
+              })
+              if (temp_goto_index>0) {
+                that.setData({
+                  current: temp_goto_index
+                })
+              }
+            }
+          }
+          //进行状态中的进度跳转============end================================
+          var linktemp1 = []; var linktemp2 = []; var linktemp3 = []; 
+
 
           var konw_currenttemp = []; var temp_error_list = [];
           res.data.word_data.task_word_data_items.forEach(function (value, i) {
@@ -642,46 +657,7 @@ Page({
     // })
    
   },
-  // audioPlay_word() {
-  //   // 
-  //   // this.audioPlay_allstop()
-  //   this.setData({
-  //     subcurrent: 0,
-  //     tabkey: this.data.tabs[0].key
-  //   })
-  //   // this.data.audiowordlist[this.data.current].play()
-  //   let item_word_src = this.data.taskdata.word1[this.data.current].sw_sound
-
-  //   this.data.audiolword_object.stop()
-  //   this.data.audiodword_object.stop()
-  //   // this.data.audioword_object.stop()
-    
-  //   if (this.data.button_global_src == item_word_src) {
-  //     this.data.audioword_object.stop()
-  //   } else {
-  //     this.data.audioword_object.src = item_word_src
-  //     this.data.audioword_object.play()
-  //   }
-  // },
-  // audioPlay_dword() {
-  //   this.setData({
-  //     subcurrent: 1,
-  //     tabkey: this.data.tabs[1].key
-  //   })
-    
-  //   let item_dword_src = this.data.taskdata.word1[this.data.current].dw_sound
-
-  //   this.data.audiolword_object.stop()
-  //   this.data.audioword_object.stop()
-
-  //   if (this.data.button_global_src == item_dword_src) {
-  //     this.data.audiodword_object.stop()
-  //   } else {
-  //     this.data.audiodword_object.src = item_dword_src
-  //     this.data.audiodword_object.play()
-  //   }
-    
-  // },
+  
   audioPlay_lword() {
     // this.setData({
     //   subcurrent: 2,
