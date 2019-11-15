@@ -14,6 +14,39 @@ Page({
     isend: false,
     keywords: '',
     Inputdisabled: false, //搜索按钮的  置灰状态
+    searchitems: [
+      {
+        type: 'filter',
+        label: '筛选',
+        value: 'filter',
+        checked: true,
+        children: [{
+          type: 'checkbox',
+          label: 'Query（复选）',
+          value: 'query',
+          children: [{
+            label: 'Angular',
+            value: 'angular',
+          },
+          {
+            label: 'Vue',
+            value: 'vue',
+          },
+          {
+            label: 'React',
+            value: 'react',
+            checked: true, // 默认选中
+          },
+          {
+            label: 'Avalon',
+            value: 'avalon',
+          },
+          ],
+        },
+        ],
+      },
+    ],
+    list_select_value: [],
   },
   onLoad: function (options) {
 
@@ -21,6 +54,26 @@ Page({
 
     var that = this;
 
+    //加载联动
+
+    wx.request({
+      url: app.globalData.url + '?act=authorlist_search_cat_bar',
+      data: {},
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data.items)
+        var tprice = 'searchitems[0].children'
+        that.setData({
+          [tprice]: res.data.items,
+        })
+        // console.log(that.data.searchitems)
+      }
+    })
+  //加载列表
       wx.request({
         url: app.globalData.url + '?act=author_list' ,
         method: 'GET',
@@ -78,7 +131,7 @@ Page({
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
-
+        search_linkage_default_string: that.data.list_select_value.join(),
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -138,6 +191,7 @@ Page({
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
+        search_linkage_default_string: that.data.list_select_value.join(),
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -178,6 +232,71 @@ Page({
     })
 
   },
+  //一下是 筛选框===========================
+  onChange(e) {
+    // console.log(e.detail)
+    const {
+      checkedItems,
+      items,
+      checkedValues
+    } = e.detail
+    const params = {}
+
+    // console.log(checkedItems)
+    // console.log(items)
+    console.log(checkedValues)
+    checkedValues.forEach((n, i) => {
+
+     if (i == 0) {
+        let arr = []
+        n.forEach((n2) => {
+          // console.log(Object.prototype.toString.apply(n2) === '[object Array]')  
+          if (Object.prototype.toString.apply(n2) === '[object Array]') {
+            n2.forEach((n3) => {
+              arr.push(n3)
+            })
+          } else {
+            arr.push(n2)
+          }
+
+
+        })
+        // console.log(arr)
+        params.linkages = arr
+      }
+    })
+
+    console.log('params', params)
+
+    this.getRepos(params)
+  },
+  getRepos(params = {}) {
+    var that = this;
+    this.setData({
+      // listorder: params.sort.sort,
+      // orderby: params.sort.order,
+      list_select_value: params.linkages,
+    })
+    setTimeout(function () {
+      that.search_keyword()
+    }, 500)
+
+
+  },
+  onOpen(e) {
+    this.setData({
+      opened: true
+    })
+  },
+  onClose(e) {
+    this.setData({
+      opened: false
+    })
+  },
+  /**
+   * 阻止触摸移动
+   */
+  noop() { },
 
 
 

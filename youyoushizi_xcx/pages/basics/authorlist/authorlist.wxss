@@ -1,1 +1,3 @@
 .cu-list.menu>.cu-item { min-height: 190rpx;} 
+
+.wux-filterbar__bd:after{ border-bottom: none}

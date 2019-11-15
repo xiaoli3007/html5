@@ -12,6 +12,8 @@
     <input type="text" placeholder="关键词" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}' bindconfirm="search_keyword"></input>
   </view>
 
+<wux-filterbar items="{{ searchitems }}" paddingtops="{{ CustomBar }}" bind:change="onChange" bind:open="onOpen" bind:close="onClose" />
+
 </view>
 
 
