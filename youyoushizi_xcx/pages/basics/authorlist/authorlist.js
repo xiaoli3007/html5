@@ -180,6 +180,7 @@ Page({
     this.setData({
       isLoad: false,
       isend: false,
+      loadModal:true
     })
     // 页数+1
     this.setData({
@@ -216,6 +217,13 @@ Page({
             isLoad: true,
           })
         }
+      }, complete(res) {
+        that.setData({
+
+          loadModal: false
+        })
+        //console.log(res.statusCode)
+
       }
     })
   },
