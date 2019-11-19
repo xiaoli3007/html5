@@ -129,12 +129,14 @@ Component({
                   avatar: res.data.items.avatar,
                   loadModal: false,
                 })
+                console.log(res.data.items.token)
                 if (res.data.items.token){
+                  console.log(res.data.items.token)
                   wx.setStorage({
                     key: "usertoken",
-                    data: res.data.items.token
+                    data: res.data.items.token 
                   })
-                }
+                } 
                   
               }
             })

@@ -18,7 +18,10 @@ App({
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           // console.log(res)
-
+          // wx.setStorage({
+          //   key: "usertoken",
+          //   data: 'fc0a7ab52ca15ab5ae066e381cef904f6524e70c'
+          // }) 
           wx.getStorage({
             key: 'usertoken',
             success(res) {
@@ -37,12 +40,13 @@ App({
                     token: t,
                   },
                   success: function (res) {
-                    console.log(res);
+                    
                     if (res.data.code === 20000) {
-                       // that.globalData.uid = res.data.items.uid;
-                      // that.globalData.userid = res.data.items.userid;
-                      // that.globalData.username = res.data.items.username;
-                      // that.globalData.avatar = res.data.items.avatar;
+                      console.log(res);
+                      //   that.globalData.uid = res.data.items.wx_id;
+                      //  that.globalData.userid = res.data.items.userid;
+                      //  that.globalData.username = res.data.items.username;
+                      //  that.globalData.avatar = res.data.items.avatar;
                       // that.globalData.openid = res.data.items.routine_openid;
                       // that.globalData.userInfo = res.data.items;
                       
