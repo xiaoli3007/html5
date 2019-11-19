@@ -76,7 +76,7 @@
       </view>
       <view class=" margin-xs radius">
         <view class="text-left text-xl text-black text-bold"> {{item.program.title}}</view>
-        <view class="text-left  text-df margin-top-xs"> {{item.program.linfo_text}} </view>
+        <view class="text-left  text-df margin-top-xs"> {{item.program.linfo_text}} <text  wx:if="{{item.program.translator!=''}}">(译：{{item.program.translator}})</text></view>
         <view class="text-left   text-grey text-sm margin-top-xs">{{common.util_substring2(item.program.description)}} </view>
       </view>
     </view>
