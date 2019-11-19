@@ -322,6 +322,13 @@ Page({
             console.log(res);
             app.globalData.username = res.data.username;
             app.globalData.avatar = res.data.userinfo.avatar;
+            //更新当前应用的session
+            if (res.data.token) {
+              wx.setStorage({
+                key: "usertoken",
+                data: res.data.token
+              })
+            }
           }
         });
 

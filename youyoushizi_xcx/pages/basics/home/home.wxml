@@ -130,9 +130,7 @@
             </image>
 
             <view class="text-sm">
-              <text class="text-grey text-center">
-              {{common.util_stut_string(item.title,8)}}
-              </text>
+              <text class="text-grey text-center">{{common.util_stut_string(item.title,8)}}</text>
             </view>
 
           </navigator>

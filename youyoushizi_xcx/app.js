@@ -1,7 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
-    
+    var that = this;
     wx.getSystemInfo({
       success: e => {
         this.globalData.StatusBar = e.statusBarHeight;
@@ -17,7 +17,51 @@ App({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          console.log(res)
+          // console.log(res)
+
+          wx.getStorage({
+            key: 'usertoken',
+            success(res) {
+              console.log(res.data)
+              var t = res.data
+              if (t){
+                //通过token获取用户
+                wx.request({
+                  url: that.globalData.url2 + '?act=session_get_userinfo',
+                  method: 'POST',
+                  header: {
+                    'content-type': 'application/x-www-form-urlencoded', // 默认值
+                    'X-Token': that.globalData.xtoken
+                  },
+                  data: {
+                    token: t,
+                  },
+                  success: function (res) {
+                    console.log(res);
+                    if (res.data.code === 20000) {
+                       // that.globalData.uid = res.data.items.uid;
+                      // that.globalData.userid = res.data.items.userid;
+                      // that.globalData.username = res.data.items.username;
+                      // that.globalData.avatar = res.data.items.avatar;
+                      // that.globalData.openid = res.data.items.routine_openid;
+                      // that.globalData.userInfo = res.data.items;
+                      
+
+                    } else {
+        
+                    }
+
+                  },
+                  complete(res) {
+
+                  }
+                })
+              } 
+            },
+            fail(failres) {
+              console.log(failres)
+            }
+          })
           // wx.getUserInfo({
           //   success: res => {
           //     console.log(res);
