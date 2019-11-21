@@ -529,7 +529,7 @@
              <view class="margin-top-xs " wx:if="{{item.note!=''}}">注释： {{item.note}} \n</view> 
             
 
-             <view class="margin-top-xs "> {{item.example}} \n</view> 
+             <view class="margin-top-xs padding-xs bg-brown"> {{item.example}} \n</view> 
                <wux-divider show-text="{{ false }}" dashed />
           </block>
 
