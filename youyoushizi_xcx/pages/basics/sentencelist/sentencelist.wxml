@@ -14,6 +14,17 @@
 
 </view>
 
+<!-- <view class="cu-bar bg-white search">
+    <view class="search-form round">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="关键词" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}' bindconfirm="search_keyword"></input>
+    </view>
+    <view class="action">
+      <text class="cuIcon-close"></text>
+      <text>取消</text>
+    </view>
+  </view> -->
+
 
 
   <view class="cu-list menu ">
@@ -30,14 +41,10 @@
                   <text class="text-black text-bold">{{item.program.title}}</text>
                 </view>
                 <view class="text-left">
-                  <text class="text-lg">{{item.program.author}}</text>
-                  <text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text>
-                  <text class="text-lg" wx:if="{{item.program.translator!=''}}">译者：{{item.program.translator}}</text><text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text><text class="text-left text-df">{{item.program.linfo_text}}</text>
+                  <text class="text-lg">{{item.program.author}}</text><text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text><text class="text-lg" wx:if="{{item.program.translator!=''}}">译者：{{item.program.translator}}</text><text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text><text class="text-left text-df">{{item.program.linfo_text}}</text>
                 </view>
  
-                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">
-                  {{item.lword}}
-                </view>
+                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.lword}}</view>
 
               </view>
 

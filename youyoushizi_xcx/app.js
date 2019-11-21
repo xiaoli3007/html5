@@ -52,6 +52,17 @@ App({
                       
 
                     } else {
+                      // wx.showToast({
+                      //   title: res.data.message,
+                      //   icon: 'none',
+                      //   duration: 1500,
+                      // })
+                      wx.removeStorage({
+                        key: 'usertoken',
+                        success(res) {
+                          console.log('删除过期token') 
+                        }
+                      })
         
                     }
 

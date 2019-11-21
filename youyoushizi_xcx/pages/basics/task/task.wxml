@@ -435,7 +435,7 @@
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
       <view class="itemcontent text-left">
-        <wux-white-space size="default" />
+        <!-- <wux-white-space size="default" />
         <wux-white-space size="default" />
          <wux-row>
           <wux-col span="3" offset="1">
@@ -444,7 +444,7 @@
           <wux-col span="8">
             {{data_item_word.dword_show_detail.pinyin}}
           </wux-col>
-        </wux-row> 
+        </wux-row>  -->
         <wux-white-space size="default" />
         <wux-row>
           <wux-col span="12" >
@@ -514,22 +514,31 @@
             
           </wux-col>
           <wux-col span="11">
-          <text  wx:if="{{item.dword_bx.dwords!=''}}"> 辨析词：{{item.dword_bx.dwords}} \n</text>
-          <text  wx:if="{{item.dword_bx.mean_same!=''}}"> 辨析词相同意思：{{item.dword_bx.mean_same}} \n</text>
-          <text wx:if="{{item.dword_bx.mean_diff_list>0}}"> 辨析词不相同意思： \n</text>
+
+          <view class="cu-tag bg-orange" wx:if="{{item.dword_bx.dwords!=''}}">辨析词</view>
+          <view class="margin-top-xs " wx:if="{{item.dword_bx.dwords!=''}}"> {{item.dword_bx.dwords}} </view>
+
+          <view class="margin-top-sm cu-tag bg-orange" wx:if="{{item.dword_bx.mean_same!=''}}">同</view>
+          <view class="margin-top-xs " wx:if="{{item.dword_bx.mean_same!=''}}"> {{item.dword_bx.mean_same}} \n</view>
+
+          <view class="margin-top-sm cu-tag bg-orange" wx:if="{{item.dword_bx.mean_diff_list.length>0}}"> 异 </view>
            <block wx:for="{{item.dword_bx.mean_diff_list}}"  wx:key>
-             <text>词义： {{item.mean}} \n</text> 
-             <text>注释： {{item.note}} \n</text> 
-             <text>辨析词： {{item.dword}} \n</text> 
-             <text>拼音： {{item.pinyin}} \n</text> 
-             <text>例句： {{item.example}} \n</text> 
+            <view class="margin-top-xs ">[<text class="text-red"> {{item.dword}} </text>] <text>{{item.pinyin}}</text> </view>
+            
+              <view class="margin-top-xs "> {{item.mean}} \n</view>  
+             <view class="margin-top-xs " wx:if="{{item.note!=''}}">注释： {{item.note}} \n</view> 
+            
+
+             <view class="margin-top-xs "> {{item.example}} \n</view> 
+               <wux-divider show-text="{{ false }}" dashed />
           </block>
+
           </wux-col>
         </wux-row>
 
     </block>
 
-        <wux-divider show-text="{{ false }}" dashed />
+        <!-- <wux-divider show-text="{{ false }}" dashed /> -->
       </view>
     </scroll-view>
   </view>
