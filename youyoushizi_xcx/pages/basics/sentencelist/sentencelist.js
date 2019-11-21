@@ -14,6 +14,8 @@ Page({
     isend: false,
     keywords: '',
     Inputdisabled: false, //搜索按钮的  置灰状态
+    firstone_show: false,
+    firstone_data: null,
   },
   onLoad: function (options) {
 
@@ -35,6 +37,7 @@ Page({
           console.log(res);
           that.setData({
             sentence_list: res.data.items,
+            
           })
         }, complete(res) {
           that.setData({
@@ -146,8 +149,9 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success: function (res) {
+        console.log(res.data)
         if (res.data.code === 20000) {
-          console.log(res.data.items.length)
+          
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
@@ -159,11 +163,23 @@ Page({
           that.setData({
             sentence_list: res.data.items
           })
+          //第一条显示
+          if (res.data.first_one.length>0){
+            that.setData({
+              firstone_show: true,
+              firstone_data: res.data.first_one[0]
+            })
+          }else{
+            that.setData({
+              firstone_show: false,
+              firstone_data: null
+            })
+          }
         } else {
           that.setData({
             sentence_list: [],
             isLoad: true,
-           
+            firstone_show: false,
           })
         }
       }, complete(res) {
@@ -190,6 +206,18 @@ Page({
 
   },
 
+
+  gotodeteil_cidian(e) {
+
+    let lword = e.currentTarget.dataset.lword
+    var that = this
+    console.log(lword)
+
+    wx.navigateTo({
+      url: '/pages/basics/sentence/sentence?firstdword=' + lword,
+    })
+
+  },
 
 
 

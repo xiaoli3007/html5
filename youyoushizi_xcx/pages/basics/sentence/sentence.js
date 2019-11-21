@@ -16,7 +16,8 @@ Page({
     wx.request({
       url: app.globalData.url + '?act=sentence_show',
       data: {
-        sentenceid: options.sentenceid,
+        sentenceid: options.sentenceid ? options.sentenceid:0,
+        firstdword: options.firstdword ? options.firstdword : '',
         userid: app.globalData.userid,
       },
       header: {

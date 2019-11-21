@@ -29,6 +29,22 @@
 
   <view class="cu-list menu ">
 
+     <view class="margin-top"  wx:if="{{firstone_show}}">
+         
+            <view data-lword="{{firstone_data.keywords}}" bindtap="gotodeteil_cidian" class="padding-sm bg-white flex flex-wrap justify-center align-center">
+             
+              <view class="" style="flex-basis: 99%;">
+                <view class="text-left text-xl">
+                  <text class="text-black text-bold">{{firstone_data.title}}</text>
+                </view>
+              
+                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{firstone_data.lword}}</view>
+
+              </view>
+
+            </view>
+        </view>
+
 
    
       <block wx:for="{{sentence_list}}" wx:key>
