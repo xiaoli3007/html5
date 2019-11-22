@@ -18,6 +18,7 @@ Page({
       data: {
         sentenceid: options.sentenceid ? options.sentenceid:0,
         firstdword: options.firstdword ? options.firstdword : '',
+        dword: options.dword ? options.dword : '',
         userid: app.globalData.userid,
       },
       header: {
@@ -57,9 +58,22 @@ Page({
 
 
   },
+  showModal_word_shiyi(e) {
+
+    let m = e.currentTarget.dataset.target
+    // DrawerModalL_dword
+    this.setData({
+      modalName: m,
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
   // gotodeteil_study(e) {
 
-  //   let programid = e.currentTarget.dataset.programid
+  //   let programid = e.currentTarget.dataset.target
  
   //   wx.navigateTo({
   //     url: '/pages/basics/detailed_study/detailed_study?ebookid=' + programid,

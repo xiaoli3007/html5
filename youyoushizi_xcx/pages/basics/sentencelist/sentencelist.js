@@ -201,7 +201,7 @@ Page({
     console.log(programid)
 
     wx.navigateTo({
-      url: '/pages/basics/sentence/sentence?sentenceid=' + programid,
+      url: '/pages/basics/sentence/sentence?sentenceid=' + programid + '&dword=' + that.data.keywords,
     })
 
   },

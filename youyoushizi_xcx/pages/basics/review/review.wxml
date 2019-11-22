@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
   <view slot="backText" bindchange="backquiet">返回</view>
   <view slot="content">{{toptitle}}</view>
 </cu-custom>
@@ -307,7 +307,7 @@
 
 
 
-<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
+<!-- <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
       <view class="itemcontent text-left">
@@ -331,6 +331,119 @@
           </wux-col>
         </wux-row>
         <wux-divider show-text="{{ false }}" dashed />
+      </view>
+    </scroll-view>
+  </view>
+</view> -->
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+      <view class="itemcontent text-left">
+        <!-- <wux-white-space size="default" />
+        <wux-white-space size="default" />
+         <wux-row>
+          <wux-col span="3" offset="1">
+            <text>拼音：</text>
+          </wux-col>
+          <wux-col span="8">
+            {{data_item_word.dword_show_detail.pinyin}}
+          </wux-col>
+        </wux-row>  -->
+        <wux-white-space size="default" />
+        <wux-row>
+          <wux-col span="12" >
+            <wux-divider dashed  text="释义" />
+          </wux-col>
+          <!-- <wux-col span="8">
+            <text> {{data_item_word.dword_show_detail.shiyi}} </text>
+          </wux-col> -->
+        </wux-row>
+
+      <block wx:for="{{data_item_word.dword_show_detail.shiyi.mean_list}}" wx:for-index="sindex" wx:key>
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 拼音： </text>
+          </wux-col>
+          <wux-col span="8">
+            {{item.pinyin}} 
+          </wux-col>
+        </wux-row>
+        
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 词义： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text wx:for="{{item.submean}}" wx:key> {{item}} </text>
+          </wux-col>
+        </wux-row>
+        
+    
+         <wux-row wx:if="{{item.dword_fy!=''}}">
+          <wux-col span="3" offset="1">
+            <text> 反义词： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text> {{item.dword_fy}} </text>
+          </wux-col>
+        </wux-row>
+
+         <wux-row wx:if="{{item.dword_jy!=''}}">
+          <wux-col span="3" offset="1">
+            <text> 近义词： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text> {{item.dword_jy}} </text>
+          </wux-col>
+        </wux-row>
+
+         <wux-row wx:if="{{item.dword_list.length>0}}">
+          <wux-col span="3" offset="1">
+            <text> 相关词： </text>
+          </wux-col>
+          <wux-col span="8">
+            <text wx:for="{{item.dword_list}}" wx:key> {{item}} </text>
+          </wux-col>
+        </wux-row>
+
+      
+        <wux-row>
+          <wux-col span="12" >
+             
+            <wux-divider dashed position="left" text="辨析" />
+          </wux-col>
+        </wux-row>
+       <wux-row>
+          <wux-col span="1">
+            
+          </wux-col>
+          <wux-col span="11">
+
+          <view class="cu-tag bg-orange" wx:if="{{item.dword_bx.dwords!=''}}">辨析词</view>
+          <view class="margin-top-xs " wx:if="{{item.dword_bx.dwords!=''}}"> {{item.dword_bx.dwords}} </view>
+
+          <view class="margin-top-sm cu-tag bg-orange" wx:if="{{item.dword_bx.mean_same!=''}}">同</view>
+          <view class="margin-top-xs " wx:if="{{item.dword_bx.mean_same!=''}}"> {{item.dword_bx.mean_same}} \n</view>
+
+          <view class="margin-top-sm cu-tag bg-orange" wx:if="{{item.dword_bx.mean_diff_list.length>0}}"> 异 </view>
+           <block wx:for="{{item.dword_bx.mean_diff_list}}"  wx:key>
+            <view class="margin-top-xs ">[<text class="text-red"> {{item.dword}} </text>] <text>{{item.pinyin}}</text> </view>
+            
+              <view class="margin-top-xs "> {{item.mean}} \n</view>  
+             <view class="margin-top-xs " wx:if="{{item.note!=''}}">注释： {{item.note}} \n</view> 
+            
+
+             <view class="margin-top-xs padding-xs bg-brown"> {{item.example}} \n</view> 
+               <wux-divider show-text="{{ false }}" dashed />
+          </block>
+
+          </wux-col>
+        </wux-row>
+
+    </block>
+
+        <!-- <wux-divider show-text="{{ false }}" dashed /> -->
       </view>
     </scroll-view>
   </view>
