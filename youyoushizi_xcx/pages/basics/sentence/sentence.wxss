@@ -10,3 +10,7 @@ z-index: 1024;
 box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
 
 }
+.itemcontent { font-size:14px; line-height: 20px; }
+.basis-lg {
+  flex-basis: 70%;
+}

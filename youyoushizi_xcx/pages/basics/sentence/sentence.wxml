@@ -33,7 +33,7 @@
 
 <view class="padding flex flex-direction" wx:if="{{sentence_info.dword_show_detail}}">
   <button class="cu-btn bg-orange lg" bindtap="showModal_word_shiyi" data-target="DrawerModalL">
-  {{sentence_info.dword}}（释义）
+ （释义）
   </button>
 </view>
 
