@@ -43,10 +43,10 @@ App({
                     
                     if (res.data.code === 20000) {
                       console.log(res);
-                      //   that.globalData.uid = res.data.items.wx_id;
-                      //  that.globalData.userid = res.data.items.userid;
-                      //  that.globalData.username = res.data.items.username;
-                      //  that.globalData.avatar = res.data.items.avatar;
+                         that.globalData.uid = res.data.items.wx_id;
+                       that.globalData.userid = res.data.items.userid;
+                      that.globalData.username = res.data.items.username;
+                      that.globalData.avatar = res.data.items.avatar;
                       // that.globalData.openid = res.data.items.routine_openid;
                       // that.globalData.userInfo = res.data.items;
                       

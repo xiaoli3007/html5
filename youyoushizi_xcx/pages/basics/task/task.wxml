@@ -177,20 +177,7 @@
 
   </wux-col>
 
-  <!-- <wux-col span="2">
-    <view class="text-center">
-      <button class="cu-btn icon bg-white" bindtap="showModal_word_shiyi" data-target="DrawerModalL">
-        字
-        <text class="cuIcon-question"></text>
-      </button>
-    </view>
-    <view class="text-center margin-top">
-      <button class="cu-btn icon bg-white" bindtap="showModal_dword_shiyi" data-target="DrawerModalL">
-        词
-        <text class="cuIcon-question"></text>
-      </button>
-    </view>
-  </wux-col> -->
+
 </wux-row>
 
 
@@ -259,36 +246,6 @@
 
 
 
-<!-- <view class="padding flex flex-wrap justify-between align-center " wx:if="{{!tingxie_auto}}">
-  <button class="cu-btn round bg-gradual-red shadow" bindtap="audioStart">
-    首
-  </button>
-  <button class="cu-btn round bg-gradual-blue shadow" bindtap="audioPlay_word">
-    字
-    <view class="cuIcon-notification" style="font-size:30rpx;">
-    </view>
-  </button>
-  <button class="cu-btn round bg-gradual-green shadow" bindtap="audioPlay_dword">词
-    <view class="cuIcon-notification" style="font-size:30rpx;">
-    </view>
-
-  </button>
-  <button class="cu-btn round bg-gradual-pink shadow" bindtap="audioPlay_lword">句
-    <view class="cuIcon-notification" style="font-size:30rpx;">
-    </view>
-  </button>
-  <button class="cu-btn round bg-gradual-orange shadow" bindtap="audioend">
-    尾
-  </button>
-</view> -->
-
-
-
-
-
-
-
-
 <view class='mecu-load meload-modal' wx:if="{{tingxie_ready}}">
   <view class='text-yellow text-shadow'>{{tingxie_ready_text}}</view>
 </view>
@@ -305,7 +262,10 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type!='25'}}">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-      <view class="itemcontent text-left">
+
+    <my-word dataArray="{{data_item_word.word_show_detail}}" > </my-word>
+
+      <!-- <view class="itemcontent text-left">
         <wux-white-space size="default" />
 
         <wux-row wx:if="{{data_item_word.word_show_detail.bihua_img!=''}}">
@@ -373,7 +333,7 @@
           <wux-divider show-text="{{ false }}" dashed />
         </block>
 
-      </view>
+      </view> -->
     </scroll-view>
   </view>
 </view>
@@ -382,7 +342,10 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type=='25'}}">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-      <view class="itemcontent text-left">
+
+     <my-chengyu dataArray="{{data_item_word.word_show_detail}}" > </my-chengyu>
+
+      <!-- <view class="itemcontent text-left">
         <wux-white-space size="default" />
         <wux-white-space size="default" />
 
@@ -423,7 +386,7 @@
           </wux-col>
         </wux-row>
         <wux-divider show-text="{{ false }}" dashed />
-      </view>
+      </view> -->
     </scroll-view>
   </view>
 </view>
@@ -434,25 +397,17 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-      <view class="itemcontent text-left">
-        <!-- <wux-white-space size="default" />
-        <wux-white-space size="default" />
-         <wux-row>
-          <wux-col span="3" offset="1">
-            <text>拼音：</text>
-          </wux-col>
-          <wux-col span="8">
-            {{data_item_word.dword_show_detail.pinyin}}
-          </wux-col>
-        </wux-row>  -->
+
+     <my-dword dataArray="{{data_item_word.dword_show_detail}}" > </my-dword>
+
+      <!-- <view class="itemcontent text-left">
+      
         <wux-white-space size="default" />
         <wux-row>
           <wux-col span="12" >
             <wux-divider dashed  text="释义" />
           </wux-col>
-          <!-- <wux-col span="8">
-            <text> {{data_item_word.dword_show_detail.shiyi}} </text>
-          </wux-col> -->
+        
         </wux-row>
 
       <block wx:for="{{data_item_word.dword_show_detail.shiyi.mean_list}}" wx:for-index="sindex" wx:key>
@@ -538,8 +493,7 @@
 
     </block>
 
-        <!-- <wux-divider show-text="{{ false }}" dashed /> -->
-      </view>
+      </view> -->
     </scroll-view>
   </view>
 </view>

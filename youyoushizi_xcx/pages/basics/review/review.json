@@ -8,6 +8,9 @@
     "wux-segmented-control": "../../../dist/segmented-control/index",
     "my-timer": "../../../myComponent/timer/timer",
     "wux-divider": "../../../dist/divider/index",
-    "my-radio": "../../../myComponent/myradio/myradio"
+    "my-radio": "../../../myComponent/myradio/myradio",
+    "my-dword": "../../../myComponent/dword/dword",
+    "my-word": "../../../myComponent/word/word",
+    "my-chengyu": "../../../myComponent/chengyu/chengyu"
   }
 }

@@ -37,6 +37,23 @@
   </button>
 </view>
 
+<view class="padding flex flex-direction" wx:if="{{sentence_info.word_show_detail}}">
+  <button class="cu-btn bg-orange lg" bindtap="showModal_word_shiyi" data-target="DrawerModal">
+ （释义）
+  </button>
+</view>
+
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModal'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+
+    <my-word dataArray="{{sentence_info.word_show_detail}}" > </my-word>
+
+    
+    </scroll-view>
+  </view>
+</view>
 
 
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal">
