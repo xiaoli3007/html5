@@ -1,0 +1,69 @@
+<view class="itemcontent text-left">
+        <wux-white-space size="default" />
+
+        <wux-row wx:if="{{dataArray.bihua_img!=''}}">
+          <wux-col span="8" offset="2">
+            <view class="text-center">
+              <image src='{{dataArray.bihua_img}}' mode="widthFix" style="width:50%;">
+              </image>
+            </view>
+          </wux-col>
+        </wux-row>
+
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="10" offset="1">
+            <text> 笔顺：{{dataArray.bishun}}
+                   </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="5" offset="1">
+            <text> 笔画：{{dataArray.bihuaw}}
+                   </text>
+          </wux-col>
+          <wux-col span="5" offset="1">
+            <text>  部首：{{dataArray.bushou}}
+                   </text>
+          </wux-col>
+
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="10" offset="1">
+            <text> 字形：{{dataArray.zixing}}
+                   </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+
+        <block wx:for="{{dataArray.mean_list}}" wx:key>
+          <wux-row>
+            <wux-col span="3" offset="1">
+              <text>拼音：</text>
+            </wux-col>
+            <wux-col span="8">
+              <button class="cu-btn round bg-orange shadow" bindtap="play_any_src" data-msrc="{{item.mp3}}">
+                {{item.pinyin}}
+                <view class="cuIcon-notification" style="margin-left:10px;">
+                </view>
+              </button>
+            </wux-col>
+          </wux-row>
+          <wux-white-space size="default" />
+          <wux-row>
+            <wux-col span="3" offset="1">
+              <text> 释义： </text>
+            </wux-col>
+            <wux-col span="8">
+              <block wx:for="{{item.submean_list}}" wx:key>
+                <text> {{item}} </text>
+              </block>
+
+            </wux-col>
+          </wux-row>
+          <wux-divider show-text="{{ false }}" dashed />
+        </block>
+
+      </view>
