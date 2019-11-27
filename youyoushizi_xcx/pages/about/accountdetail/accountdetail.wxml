@@ -1,20 +1,10 @@
 <cu-custom bgColor="bg-orange" isBack="{{true}}" >
   <view slot="backText">返回</view>
-  <view slot="content">主页</view>
+  <view slot="content">{{member_detail.realname?member_detail.realname:member_detail.username}}的主页</view>
 </cu-custom>
 
 
-<!-- <view class="cu-bar bg-white solid-bottom margin-top">
-  <view class="action">
-    <text class="cuIcon-title text-orange "></text> 用户列表
-  </view>
-  <view class="action">
-    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="Dialogadduser">
-      添加用户</button>
-  </view>
-</view> -->
 
- 
   <view class="bg-white margin-top padding-top" >
         <wux-row data-username="{{member_detail.username}}" data-val="{{member_detail.userid}}">
             <wux-col span="2" offset="1">

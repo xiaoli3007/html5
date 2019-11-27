@@ -13,14 +13,6 @@ Page({
       newpasswd: '',
       confimpasswd: ''
     },
-    adduerform: {
-      username: '',
-      newpasswd: '',
-      realname: '',
-      sex: '',
-      birthday: '',
-      nianji: '',
-    }, 
     edituernameform: {
       username: '',
       // newusername: '',
@@ -29,7 +21,7 @@ Page({
       birthday: '',
       nianji: '',
     }, 
-    userid: app.globalData.userid,
+    userid: 0,
     avatarloadModal:false,
     duserid:null,
     dusername:null,
@@ -45,12 +37,6 @@ Page({
     chongzhiuserid:null,
     chongzhiusername: null,
     price: 0.01,
-    relationList: ['爸爸', '妈妈', '爷爷', '奶奶', '外公', '外婆'],
-    relation_name: '',
-    relationboy_name:'',
-    relationboy_userid: 0,
-    relationList_is: [false,false,false,false,false,false],
-    qita_relationship:'',
     abouturl: '/pages/index/index?p=about'
   },
   onLoad: function (options) { 
@@ -148,74 +134,6 @@ Page({
       delta: 1
     });
   },
-  // onShareAppMessage: function (res) {
-
-  //   if (res.from === 'button') {
-  //   }
-
-  //   return {
-  //     title: "邀请绑定",
-  //     path: '/pages/about/binding/binding?bd_userid=' + this.data.relationboy_userid + '&&bd_name=' + this.data.relationboy_name + '&&bd_p_name=' + this.data.relation_name
-  //   }
-  // },
-  yaoqing_weixin: function (e) {
-     
-    wx.navigateTo({
-      url: '/pages/about/binding/binding?bd_userid=12&&bd_name=aaa&&bd_p_name=bbb'
-    })
-
-  },
-  bindKeyInput: function (e) {
-    this.setData({
-      relation_name: e.detail.value,
-      qita_relationship: e.detail.value
-    })
-    if (e.detail.value!=''){
-      this.setData({
-        relationList_is: [false, false, false, false, false, false]
-      })
-    }
-  },
-  // onclick_relation_select(e) {
-  //   // console.log(e);
-  //   let index = e.currentTarget.dataset.index
-  //   let name = e.currentTarget.dataset.name
-
-  //   this.setData({
-  //     relationList_is: [false, false, false, false, false, false]
-  //   })
-  //   var tprice = 'relationList_is[' + index + ']'
-  //   this.setData({
-  //     [tprice]: true,
-  //   })
-  //   //设置家长的身份名称
-  //   this.setData({
-  //     relation_name: name,
-  //     qita_relationship:''
-  //   })
-   
-  // },
-  // showModal_relation(e) {
-  //   // console.log(e);
-
-   
-  //   let temp_relationboy_userid = app.globalData.userid
-
-  //   let temp_relationboy_name = ''
-
-
-  //   this.data.member_list.forEach(function (value, i) {
-  //     if (value.userid == temp_relationboy_userid){
-  //       temp_relationboy_name = value.realname ? value.realname : value.username
-  //       }
-  //   })
-
-  //   this.setData({
-  //     modalName: e.currentTarget.dataset.target,
-  //     relationboy_userid: temp_relationboy_userid,
-  //     relationboy_name: temp_relationboy_name,
-  //   })
-  // },
   showModal_deleteuser(e) {
     console.log(e);
     this.setData({
@@ -282,51 +200,7 @@ Page({
       modalName: null
     })
   }, 
-  check_userid(e) {
-    //按钮过来的文字
-    if (e.currentTarget.dataset.hasOwnProperty('val')) {
-      if (e.currentTarget.dataset.val != '') {
-        console.log(e.currentTarget.dataset.val)
-        this.setData({
-          userid: e.currentTarget.dataset.val,
-        })
-        app.globalData.userid = e.currentTarget.dataset.val;
 
-        //切换用户的主 userid
-        wx.request({
-          url: app.globalData.url2 + '?act=wx_check_userid',
-          method: 'POST',
-          header: {
-            'content-type': 'application/x-www-form-urlencoded', // 默认值
-            'X-Token': app.globalData.xtoken
-          },
-          data: {
-            wx_id: app.globalData.uid,
-            userid: app.globalData.userid,
-          },
-          success: function (res) {
-            console.log(res);
-            app.globalData.username = res.data.username;
-            app.globalData.avatar = res.data.userinfo.avatar;
-            //更新当前应用的session
-            if (res.data.token) {
-              wx.setStorage({
-                key: "usertoken",
-                data: res.data.token
-              })
-            }
-          }
-        });
-
-        wx.showToast({
-          title: '切换账号为' + e.currentTarget.dataset.username,
-          icon: 'none',
-          duration: 1500,
-        })
-      }
-    }
-
-  },
   formSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
@@ -416,56 +290,6 @@ Page({
     }
     this.WxValidate = new WxValidate(rules, messages)
 
-    const rulesadduser = {
-      username: {
-        required: true,
-        rangelength: [3, 20]
-
-      },
-      newpasswd: {
-        required: true,
-        minlength: 6
-      },
-      realname: {
-        required: true,
-        maxlength: 20
-      },
-      sex: {
-        required: true
-      },
-      birthday: {
-        required: true
-      },
-      nianji: {
-        required: true
-      }
-      
-    }
-    const messages2 = {
-      username: {
-        required: '请填写用户名',
-        minlength: '用户名3位-20位字符',
-      },
-      newpasswd: {
-        required: '请填写密码',
-        minlength: '密码至少6位'
-      },
-      realname: {
-        required: '请填写姓名',
-        minlength: '姓名超出长度范围'
-      },
-      sex: {
-        required: '请选择性别',
-      },
-      birthday: {
-        required: '请选择生日',
-      },
-      nianji: {
-        required: '请选择年级',
-      }
-      
-    }
-    this.WxValidate2 = new WxValidate(rulesadduser, messages2)
 
     const ruleseditusername = {
       username: {
@@ -611,20 +435,6 @@ Page({
             duration: 1000,
           })
         }
-        // console.log(res);
-
-        // if (res.data.code === 20001) {
-
-        //   that.showFormModal({
-        //     msg: res.data.message
-        //   })
-
-        // } else {
-        //   that.showFormModal({
-        //     msg: '提交成功'
-        //   })
-        //   that.onLoad()
-        // }
 
       }, 
       complete(res) {
@@ -638,68 +448,7 @@ Page({
 
 
   },
-  userformSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    const params = e.detail.value
-    
-    //校验表单
-    if (!this.WxValidate2.checkForm(params)) {
-      const error = this.WxValidate2.errorList[0]
-      this.showFormModal(error)
-      return false
-    }
 
-    //return false
-    var that = this;
-    wx.request({
-      url: app.globalData.url2 + '?act=wx_add_user',
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded', // 默认值
-        'X-Token': app.globalData.xtoken
-      },
-      data: {
-        wx_id: app.globalData.uid,
-        username: params.username,
-        newpasswd: params.newpasswd,
-        realname: params.realname,
-        sex: that.data.pickersex[params.sex],
-        birthday: params.birthday,
-        nianji: that.data.pickernianji[params.nianji],
-      },
-      success: function (res) {
-        console.log(res);
-
-        if (res.data.code === 20001) {
-
-          that.showFormModal({
-            msg: res.data.message
-          })
-          
-        } else {
-          that.showFormModal({
-            msg: '提交成功'
-          })
-          that.onLoad()
-        }
-
-      }, complete(res) {
-
-        that.setData({
-          modalName: null
-        })
-        //console.log(res.statusCode)
-        if (res.statusCode == 500) {
-
-        } else {
-
-        }
-
-      }
-    });
-
-
-  },
   formSubmiteditusername: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
@@ -745,7 +494,7 @@ Page({
            that.setData({
             modalName: null
           })
-          that.onLoad()
+          // that.onLoad()
         }
 
       }, complete(res) {
@@ -863,7 +612,7 @@ Page({
           icon: 'none',
           duration: 1500,
         })
-        that.onLoad()
+        // that.onLoad()
       },
       complete(res) {
         that.setData({
@@ -874,18 +623,6 @@ Page({
 
       }
     });
-
-    // wx.showModal({
-    //   title: '删除用户',
-    //   content: '确定要删除用户？',
-    //   cancelText: '取消',
-    //   confirmText: '确定',
-    //   success: res => {
-    //     if (res.confirm) {
-
-    //     }
-    //   }
-    // })
 
 
   },

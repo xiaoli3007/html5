@@ -4,15 +4,15 @@
 </cu-custom>
 
 
-<!-- <view class="cu-bar bg-white solid-bottom margin-top">
+ <view class="cu-bar  margin-top">
   <view class="action">
-    <text class="cuIcon-title text-orange "></text> 用户列表
+    用户列表
   </view>
   <view class="action">
-    <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="Dialogadduser">
-      添加用户</button>
+    <button class="cu-btn bg-orange shadow"  bindtap="showModal" data-target="Dialogadduser">
+     <text style="font-size:20rpx;" class="proIcon-iconico_wo_ghgl_yq text-white margin-right-sm"></text> 添加用户</button>
   </view>
-</view> -->
+</view> 
 
 <block wx:for="{{member_list}}" wx:key>
   <view class="bg-white margin-top padding-top">
@@ -32,7 +32,7 @@
             <text class="text-cut">用户名：{{item.username}}</text>
           </view>
           <view class="text-gray text-sm flex">
-            <text class="text-cut">密码：{{item.mingwenpw}}</text>
+            <text class="text-cut">姓名：{{item.realname}}</text>
           </view>
         </view>
 
@@ -54,7 +54,33 @@
       </wux-col>
     </wux-row>
     <wux-divider show-text="{{ false }}" dashed />
+
     <wux-row>
+
+      <wux-col span="3">
+
+       <view  class="text-sm  text-center  text-orange">
+            <view style="font-size:80rpx;" class="text-sl  text-center proIcon-iconico_wo_ghgl_yq text-orange"></view>
+
+            <view class="text-sm  text-center  text-orange"> 我想邀请</view>
+        </view>
+       </wux-col>
+       
+        <block wx:for="{{item.relationship_user_list}}" wx:key>
+        <wux-col span="3">
+        <view  class="text-sm  text-center  text-orange">
+            <view class="cu-avatar lg round" style="background-image:url({{item.avatar}});">
+              
+            </view>
+
+             <view> {{item.name}}</view>
+        </view>
+       </wux-col>
+       </block>
+
+    </wux-row>
+
+    <!-- <wux-row>
       <wux-col span="3">
         <view class="flex flex-direction  justify-center" catchtap="showModal_editusername" data-target="DialogModaleditusername" data-index="{{index}}" data-username="{{item.username}}" data-userid="{{item.userid}}">
           <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl text-orange">
@@ -71,21 +97,14 @@
 
       </wux-col>
       <wux-col span="3">
-        <view class="flex flex-direction  justify-center">
-
-          <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
-                    </text>
-
-          <view class="text-grey text-center">用户充值</view>
-        </view>
-
-        <!-- <view class="flex flex-direction  justify-center"   catchtap="showModal_chongzhi" data-target="DialogModalchongzhi"  data-username="{{item.username}}"  data-userid="{{item.userid}}">
+   
+        <view class="flex flex-direction  justify-center"   catchtap="showModal_chongzhi" data-target="DialogModalchongzhi"  data-username="{{item.username}}"  data-userid="{{item.userid}}">
                   
                    <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
                     </text>
                     
                  <view class="text-grey text-center">用户充值</view>
-              </view> -->
+              </view> 
 
       </wux-col>
       <wux-col span="3">
@@ -96,7 +115,7 @@
         </view>
 
       </wux-col>
-    </wux-row>
+    </wux-row> -->
     <wux-white-space size="default" />
   </view>
 </block>
@@ -107,10 +126,10 @@
 
 </view>
 
-<view class="flex  cu-bar-sun foot">
+<!-- <view class="flex  cu-bar-sun foot">
   <button class="flex-sub cu-btn bg-orange lg" bindtap="showModal" data-target="Dialogadduser">添加账号</button>
   <button class="flex-sub cu-btn bg-white lg" data-target="DialogModalrelationship" catchtap="showModal_relation">绑定账号</button>
-</view>
+</view> -->
 
 
 <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
