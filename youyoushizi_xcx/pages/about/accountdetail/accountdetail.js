@@ -7,7 +7,7 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     ColorList: app.globalData.ColorList,
-    member_list:[],
+    member_detail: null,
     form: {
       username:'',
       newpasswd: '',
@@ -53,9 +53,13 @@ Page({
     qita_relationship:'',
     abouturl: '/pages/index/index?p=about'
   },
-  onLoad: function () { 
+  onLoad: function (options) { 
   
     app.setUserInfo('about');
+
+    console.log(options)
+    let bd_userid = options.userid ? options.userid : 0
+
     var header = {
       'content-type': 'application/x-www-form-urlencoded',
     };
@@ -64,20 +68,20 @@ Page({
     that.setData({
       loadModal: true
     })
-    if (app.globalData.uid) {
+    if (bd_userid) {
 
        wx.request({
-         url: app.globalData.url2 + '?act=wx_get_wxmemberlist&uid=' + app.globalData.uid,
+         url: app.globalData.url2 + '?act=wx_get_wxmember_detaul&userid=' + bd_userid,
         method: 'POST',
         header: header,
         data: { 
-          uid: app.globalData.uid,
+          userid: bd_userid,
         },
         success: function (res) {
           console.log(res);
           that.setData({
-            member_list: res.data.member_list,
-            userid: res.data.main_userid ? String(res.data.main_userid):app.globalData.userid,
+            member_detail: res.data.member_detail,
+            userid: res.data.member_detail.userid,
             })
          }, complete(res) {
 
@@ -89,22 +93,9 @@ Page({
          }
       });
 
-
       this.initValidate()//验证规则函数
-
-      // wx.request({
-      //   url: app.globalData.url2 + '?act=wx_get_userinfo&userid=' + app.globalData.userid,
-      //   method: 'POST',
-      //   header: header,
-      //   data: {
-      //     userid: app.globalData.userid,
-      //   },
-      //   success: function (res) {
-      //     console.log(res);
-           
-      //   }
-      // });
-
+    }else{
+      app.setUserInfo('about');
     }
 
   },
@@ -157,16 +148,16 @@ Page({
       delta: 1
     });
   },
-  onShareAppMessage: function (res) {
+  // onShareAppMessage: function (res) {
 
-    if (res.from === 'button') {
-    }
+  //   if (res.from === 'button') {
+  //   }
 
-    return {
-      title: "邀请绑定",
-      path: '/pages/about/binding/binding?bd_userid=' + this.data.relationboy_userid + '&&bd_name=' + this.data.relationboy_name + '&&bd_p_name=' + this.data.relation_name
-    }
-  },
+  //   return {
+  //     title: "邀请绑定",
+  //     path: '/pages/about/binding/binding?bd_userid=' + this.data.relationboy_userid + '&&bd_name=' + this.data.relationboy_name + '&&bd_p_name=' + this.data.relation_name
+  //   }
+  // },
   yaoqing_weixin: function (e) {
      
     wx.navigateTo({
@@ -185,51 +176,46 @@ Page({
       })
     }
   },
-  onclick_relation_select(e) {
-    // console.log(e);
-    let index = e.currentTarget.dataset.index
-    let name = e.currentTarget.dataset.name
-    // this.data.relationList.forEach(function (value, i) {
-    //   if (i == index) {
+  // onclick_relation_select(e) {
+  //   // console.log(e);
+  //   let index = e.currentTarget.dataset.index
+  //   let name = e.currentTarget.dataset.name
 
-    //   }
-    // })
-
-    this.setData({
-      relationList_is: [false, false, false, false, false, false]
-    })
-    var tprice = 'relationList_is[' + index + ']'
-    this.setData({
-      [tprice]: true,
-    })
-    //设置家长的身份名称
-    this.setData({
-      relation_name: name,
-      qita_relationship:''
-    })
+  //   this.setData({
+  //     relationList_is: [false, false, false, false, false, false]
+  //   })
+  //   var tprice = 'relationList_is[' + index + ']'
+  //   this.setData({
+  //     [tprice]: true,
+  //   })
+  //   //设置家长的身份名称
+  //   this.setData({
+  //     relation_name: name,
+  //     qita_relationship:''
+  //   })
    
-  },
-  showModal_relation(e) {
-    // console.log(e);
+  // },
+  // showModal_relation(e) {
+  //   // console.log(e);
 
    
-    let temp_relationboy_userid = app.globalData.userid
+  //   let temp_relationboy_userid = app.globalData.userid
 
-    let temp_relationboy_name = ''
+  //   let temp_relationboy_name = ''
 
 
-    this.data.member_list.forEach(function (value, i) {
-      if (value.userid == temp_relationboy_userid){
-        temp_relationboy_name = value.realname ? value.realname : value.username
-        }
-    })
+  //   this.data.member_list.forEach(function (value, i) {
+  //     if (value.userid == temp_relationboy_userid){
+  //       temp_relationboy_name = value.realname ? value.realname : value.username
+  //       }
+  //   })
 
-    this.setData({
-      modalName: e.currentTarget.dataset.target,
-      relationboy_userid: temp_relationboy_userid,
-      relationboy_name: temp_relationboy_name,
-    })
-  },
+  //   this.setData({
+  //     modalName: e.currentTarget.dataset.target,
+  //     relationboy_userid: temp_relationboy_userid,
+  //     relationboy_name: temp_relationboy_name,
+  //   })
+  // },
   showModal_deleteuser(e) {
     console.log(e);
     this.setData({
@@ -262,7 +248,7 @@ Page({
 
     // console.log(this.data.member_list[e.currentTarget.dataset.index]);
    // index
-    let u = this.data.member_list[e.currentTarget.dataset.index]
+    let u = this.data.member_detail
     this.setData({
       modalName: e.currentTarget.dataset.target,
       edituernameform: {
@@ -903,15 +889,6 @@ Page({
 
 
   },
-  goto_userdetail(e) {
 
-    let userid = e.currentTarget.dataset.val
-    
-    var that = this
-  
-      wx.navigateTo({
-        url: '/pages/about/accountdetail/accountdetail?userid=' + userid,
-      })
-  },
  
 });

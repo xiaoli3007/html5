@@ -60,7 +60,7 @@ App({
                       wx.removeStorage({
                         key: 'usertoken',
                         success(res) {
-                          console.log('删除过期token') 
+                          console.log('删除过期token1') 
                         }
                       })
         

@@ -27,6 +27,7 @@
     "pages/about/test/list",
     "pages/about/test/filter",
     "pages/about/account/account",
+    "pages/about/accountdetail/accountdetail",
     "pages/about/binding/binding",
     "pages/about/home/home"
   ],
