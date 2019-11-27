@@ -213,7 +213,7 @@ Page({
     // console.log(e);
 
    
-    let temp_relationboy_userid = app.globalData.userid
+    let temp_relationboy_userid = e.currentTarget.dataset.userid
 
     let temp_relationboy_name = ''
 
