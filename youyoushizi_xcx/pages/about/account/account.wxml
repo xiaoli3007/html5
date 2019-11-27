@@ -4,7 +4,7 @@
 </cu-custom>
 
 
-<view class="cu-bar  margin-top">
+<view class="cu-bar">
   <view class="action">
     用户列表
   </view>
@@ -15,7 +15,7 @@
 </view>
 
 <block wx:for="{{member_list}}" wx:key>
-  <view class="bg-white margin-top padding-top">
+  <view class="bg-white margin-top-sm padding-top">
     <wux-row bindtap="goto_userdetail" data-username="{{item.username}}" data-val="{{item.userid}}">
       <wux-col span="2" offset="1">
         <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
@@ -74,9 +74,13 @@
       <wux-col span="3">
 
         <view class="text-sm  text-center  text-orange" data-userid="{{item.userid}}" data-target="DialogModalrelationship" catchtap="showModal_relation">
-          <view style="font-size:80rpx;" class="text-sl  text-center proIcon-iconico_wo_ghgl_yq text-orange"></view>
+         
+          <view    class="yaoqingjia">
+             <text    class=" proIcon-iconico_wo_ghgl_yq"></text>
+          </view>
+          
 
-          <view class="text-sm  text-center  text-orange"> 我想邀请</view>
+          <view class="margin-top-xs text-sm  text-center  text-orange"> 我想邀请</view>
         </view>
       </wux-col>
 
@@ -87,7 +91,7 @@
 
             </view>
 
-            <view> {{item.name}}</view>
+            <view class="margin-top-xs text-sm  text-center  text-orange"> {{item.name}}</view>
           </view>
         </wux-col>
       </block>

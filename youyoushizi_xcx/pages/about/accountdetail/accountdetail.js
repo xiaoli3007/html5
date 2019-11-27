@@ -143,12 +143,21 @@ Page({
     })
   },
   showModal_chongzhi(e) {
-    console.log(e);
-    this.setData({
-      modalName: e.currentTarget.dataset.target,
-      chongzhiuserid: e.currentTarget.dataset.userid,
-      chongzhiusername: e.currentTarget.dataset.username,
+
+    let userid = e.currentTarget.dataset.userid
+
+    var that = this
+
+    wx.navigateTo({
+      url: '/pages/about/accountrecharge/accountrecharge?userid=' + userid,
     })
+
+    // console.log(e);
+    // this.setData({
+    //   modalName: e.currentTarget.dataset.target,
+    //   chongzhiuserid: e.currentTarget.dataset.userid,
+    //   chongzhiusername: e.currentTarget.dataset.username,
+    // })
   },
   showModal_editpw(e) {
     console.log(e);
@@ -237,7 +246,7 @@ Page({
           that.showFormModal({
             msg: '提交成功'
           }) 
-
+          that.onLoad({ 'userid': that.data.userid })
         }
 
       }, complete(res) {
@@ -494,7 +503,7 @@ Page({
            that.setData({
             modalName: null
           })
-          // that.onLoad()
+           that.onLoad({'userid':that.data.userid})
         }
 
       }, complete(res) {
@@ -612,7 +621,12 @@ Page({
           icon: 'none',
           duration: 1500,
         })
-        // that.onLoad()
+        // that.onLoad({ 'userid': that.data.userid })
+
+        wx.redirectTo({
+          url: '/pages/about/account/account',
+        })
+
       },
       complete(res) {
         that.setData({

@@ -1,0 +1,37 @@
+<cu-custom bgColor="bg-orange" isBack="{{true}}" >
+  <view slot="backText">返回</view>
+  <view slot="content">用户充值</view>
+</cu-custom>
+
+
+     <scroll-view scroll-x class="bg-white nav text-center">
+<view class="flex flex-wrap">
+     <view  style="flex-basis:33%;" wx:for="{{tabNav}}" wx:key >
+    <view class="cu-item {{index==TabCur?'text-orange cur':''}}" bindtap='tabSelect' data-id="{{index}}">
+      {{tabNav[index]}}
+    </view>
+      </view>
+ </view>
+</scroll-view>
+    
+
+
+<block wx:if="{{TabCur==mindex}}" wx:for="{{tabNav}}" wx:for-index="mindex" wx:key>
+<view class="cu-list menu ">
+111111
+</view>
+
+</block>
+
+
+<view class="flex flex-direction cu-bar-sun foot">
+  <button class="cu-btn bg-orange lg"  bindtap="userchongzhi">立即购买{{price}}</button>
+</view>
+
+
+
+      <view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view>
