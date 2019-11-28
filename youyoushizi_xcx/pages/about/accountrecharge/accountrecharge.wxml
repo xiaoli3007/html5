@@ -34,7 +34,7 @@
           </view>
 
           <view class="text-sl text-center padding-xs align-center">
-            59元/月
+            {{pricelist[TabCur]}}元/月
           </view>
         </view>
       </view>
@@ -62,7 +62,7 @@
           </view>
 
           <view class="text-sl text-center padding-xs align-center">
-            300元/月
+            {{pricelist[TabCur]}}元/月
           </view>
         </view>
       </view>
@@ -90,7 +90,7 @@
           </view>
 
           <view class="text-sl text-center padding-xs align-center">
-            100元/月
+            {{pricelist[TabCur]}}元/月
           </view>
         </view>
       </view>
@@ -115,10 +115,10 @@
   <view class="text-xl text-black padding-sm  margin-top-sm margin-bottom-sm bg-white flex flex-direction justify-center">
     <view class="flex " style=" justify-content:space-between;">
       <view class="" style="">
-        订阅费：（59元/月*1）
+        订阅费：（{{pricelist[TabCur]}}元/月*1）
       </view>
       <view class="" style="">
-        ￥59.00
+       ￥{{pricefloatlist[TabCur]}}
       </view>
     </view>
 
@@ -127,7 +127,7 @@
         总价
       </view>
       <view class="text-orange" style="">
-        ￥59.00
+        ￥{{pricefloatlist[TabCur]}}
       </view>
     </view>
 
@@ -152,7 +152,7 @@
 
 
 <view class="flex flex-direction cu-bar-sun foot">
-  <button class="cu-btn bg-orange lg" bindtap="userchongzhi">立即购买 (￥{{price}})</button>
+  <button class="cu-btn bg-orange lg" bindtap="userchongzhi">立即购买 (￥{{pricefloatlist[TabCur]}})</button>
 </view>
 
 

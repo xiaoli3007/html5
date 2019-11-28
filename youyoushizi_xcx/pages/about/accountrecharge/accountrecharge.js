@@ -11,6 +11,8 @@ Page({
     price: 59,
     scrollLeft: 0,
     TabCur: 0,
+    pricefloatlist: ['59.00', '300.00', '100.00'],
+    pricelist: [59, 300, 100],
   },
   onLoad: function (options) { 
 
@@ -35,6 +37,7 @@ Page({
     this.setData({
       TabCur: e.currentTarget.dataset.id,
       scrollLeft: (e.currentTarget.dataset.id - 1) * 60,
+      price: this.data.pricelist[e.currentTarget.dataset.id],
     })
 
  
@@ -42,8 +45,15 @@ Page({
   userchongzhi: function (e) {
     // console.log('form发生了submit事件，携带数据为：', e.detail.value)
     // const params = e.detail.value
-    // return false
     var that = this;
+    console.log({
+      wx_id: app.globalData.uid,
+      userid: that.data.userid,
+      // username: that.data.username,
+      price: that.data.price,
+    })
+    return false
+    
     wx.request({
       url: app.globalData.url2 + '?act=wx_chongzhi',
       method: 'POST',
@@ -54,7 +64,7 @@ Page({
       data: {
         wx_id: app.globalData.uid,
         userid: that.data.userid,
-        username: that.data.username,
+        // username: that.data.username,
         price: that.data.price,
       },
       success: function (res) {
