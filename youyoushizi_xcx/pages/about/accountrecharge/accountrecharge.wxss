@@ -1,7 +1,7 @@
 .yueka-bg {
-  margin-top:50rpx;
-  background-size: contain;
-  width: 700rpx;
+ 
+  background-size:100% 100%;
+  /* width: 100%; */
   background-repeat:no-repeat;
 
 }
@@ -13,4 +13,5 @@ z-index: 1024;
 box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
 
 }
+.margin-ka{margin-top: 35rpx; margin-bottom: 35rpx;}
 
