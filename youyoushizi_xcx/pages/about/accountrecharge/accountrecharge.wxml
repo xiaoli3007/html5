@@ -1,96 +1,101 @@
-<cu-custom bgColor="bg-orange" isBack="{{true}}" >
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">用户充值</view>
 </cu-custom>
 
 
-     <scroll-view scroll-x class="bg-white nav text-center">
-<view class="flex flex-wrap">
-     <view  style="flex-basis:33%;" wx:for="{{tabNav}}" wx:key >
-    <view class="cu-item {{index==TabCur?'text-orange cur':''}}" bindtap='tabSelect' data-id="{{index}}">
-      {{tabNav[index]}}
-    </view>
+<scroll-view scroll-x class="bg-white nav text-center">
+  <view class="flex flex-wrap">
+    <view style="flex-basis:33%;" wx:for="{{tabNav}}" wx:key>
+      <view class="cu-item {{index==TabCur?'text-orange cur':''}}" bindtap='tabSelect' data-id="{{index}}">
+        {{tabNav[index]}}
       </view>
- </view>
+    </view>
+  </view>
 </scroll-view>
-    
 
 
-<block wx:if="{{TabCur==0}}" >
-<view class="margin-df flex flex-wrap justify-center">
 
-<!-- <image src='https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_yk@3x.png' style="width:480rpx;" mode="widthFix">
+<block wx:if="{{TabCur==0}}">
+  <view class="margin-df flex flex-wrap justify-center">
+
+    <!-- <image src='https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_yk@3x.png' style="width:480rpx;" mode="widthFix">
         </image> -->
 
-
     <view class="yueka-bg " style="background-image: url('https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_yk@3x.png');">
-  <view class="padding-xl text-white">
-    <view class="padding-xs text-xl">
-      <text class="padding-xs"></text>月卡会员
+      <view class="padding-xl text-white">
+        <view class="padding-xs text-xl">
+          <text class="proIcon-iconico_wd_yhcz_hy"></text>月卡会员
+        </view>
+        <view class="padding-xs">
+          1.99元/天
+        </view>
+        <view class="padding-xs">
+          59元/月
+        </view>
+      </view>
     </view>
-    <view class="padding-xs">
-      1.99元/天
-    </view>
-    <view class="padding-xs">
-      59元/月
-    </view>
-  </view>
-</view>
 
-</view>
+  </view>
+
+   <view class="padding-sm margin-top-sm bg-white flex justify-center"> 
+         <view class="flex align-center margin-right padding-left-sm padding-right-sm" style="border-radius: 10rpx;border: 1px solid rgba(0, 0, 0, .1); flex-basis:70%;" >
+          <input class="align-center"   placeholder="将会获取焦点"/>
+        </view>
+
+         <view class="" style="flex-basis:30%;">
+          <button class="bg-orange" bindtap="userchongzhi">点击应用</button>
+        </view>
+   </view> 
+
+
+    <view class="text-xl text-black padding-sm  margin-top-sm margin-bottom-sm bg-white flex flex-direction justify-center"> 
+         <view class="flex " style=" justify-content:space-between;" >
+            <view class="" style="">
+              订阅费：（59元/月*1）
+             </view>
+             <view class="" style="">
+                ￥59.00
+             </view>
+        </view>
+
+         <view class="flex " style=" justify-content:space-between;" >
+            <view class="" style="">
+              总价
+             </view>
+             <view class="text-orange" style="">
+                ￥59.00
+             </view>
+        </view>
+
+         
+   </view> 
+
+
+
+      <view class="text-left text-black padding-sm  margin-top-sm margin-bottom-sm bg-white"> 
+        <view class="text-left">您理解并同意：</view>
+        <view class="text-left">1.大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托</view>
+          <view class="text-left">1.大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托</view>
+            <view class="text-left">1.大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托大幅噶的个分为威特委托</view>
+   </view> 
+
+
 </block>
 
-<block wx:if="{{TabCur==1}}" >
-<view class="cu-list menu ">
 
 
-    <view class="bg-img  padding-tb-xl" style="background-image: url('https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_nk@3x.png');height: 414rpx;">
-  <view class="padding-xl text-white">
-    <view class="padding-xs text-xl">
-      <text class="padding-xs"></text>月卡会员
-    </view>
-    <view class="padding-xs">
-      1.99元/天
-    </view>
-    <view class="padding-xs">
-      59元/月
-    </view>
-  </view>
+<view class="" style="padding-bottom:80rpx;">
 </view>
-
-</view>
-</block>
-
-<block wx:if="{{TabCur==2}}" >
-<view class="cu-list menu ">
-
-
-    <view class="bg-img  padding-tb-xl" style="background-image: url('https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_jk@3x.png');height: 414rpx;">
-  <view class="padding-xl text-white">
-    <view class="padding-xs text-xl">
-      <text class="padding-xs"></text>月卡会员
-    </view>
-    <view class="padding-xs">
-      1.99元/天
-    </view>
-    <view class="padding-xs">
-      59元/月
-    </view>
-  </view>
-</view>
-
-</view>
-</block>
-
 
 
 <view class="flex flex-direction cu-bar-sun foot">
-  <button class="cu-btn bg-orange lg"  bindtap="userchongzhi">立即购买{{price}}</button>
+  <button class="cu-btn bg-orange lg" bindtap="userchongzhi">立即购买 (￥{{price}})</button>
 </view>
 
 
 
-      <view class='cu-load load-modal' wx:if="{{loadModal}}">
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
   <image src='/images/logo.png' class='png' mode='aspectFit'></image>
   <view class='gray-text'>加载中...</view>
