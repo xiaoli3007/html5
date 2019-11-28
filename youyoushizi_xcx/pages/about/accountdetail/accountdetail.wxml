@@ -75,6 +75,26 @@
 
 
 
+<view class="margin-top-sm bg-white text-center text-xl padding-top padding-bottom">
+        <view class="flex flex-wrap justify-center">
+          <view class=" justify-start align-center"  style="flex-basis: 45%;">
+             <view> <text class="text-sl text-orange">0</text><text class="text-grey text-df">天</text> </view>
+             <view> <text class="text-xxl text-black text-bold">阅读打卡</text> </view>
+          </view>
+
+           <view class=" justify-center align-center" style="width: 1px;height:130rpx; background: #eee;" >
+              <text></text>
+          </view>
+
+            <view class=" justify-end align-center" style="flex-basis: 45%;">
+             <view> <text class="text-sl text-orange">10</text><text class="text-grey text-df">本</text> </view>
+             <view> <text class="text-xxl text-black text-bold">读书</text> </view>
+          </view>
+
+        </view>
+      </view>
+
+
 
 <view style="padding-bottom:80rpx;">
   

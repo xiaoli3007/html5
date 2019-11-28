@@ -16,12 +16,72 @@
     
 
 
-<block wx:if="{{TabCur==mindex}}" wx:for="{{tabNav}}" wx:for-index="mindex" wx:key>
-<view class="cu-list menu ">
-111111
+<block wx:if="{{TabCur==0}}" >
+<view class="margin-df flex flex-wrap justify-center">
+
+<!-- <image src='https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_yk@3x.png' style="width:480rpx;" mode="widthFix">
+        </image> -->
+
+
+    <view class="yueka-bg " style="background-image: url('https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_yk@3x.png');">
+  <view class="padding-xl text-white">
+    <view class="padding-xs text-xl">
+      <text class="padding-xs"></text>月卡会员
+    </view>
+    <view class="padding-xs">
+      1.99元/天
+    </view>
+    <view class="padding-xs">
+      59元/月
+    </view>
+  </view>
 </view>
 
+</view>
 </block>
+
+<block wx:if="{{TabCur==1}}" >
+<view class="cu-list menu ">
+
+
+    <view class="bg-img  padding-tb-xl" style="background-image: url('https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_nk@3x.png');height: 414rpx;">
+  <view class="padding-xl text-white">
+    <view class="padding-xs text-xl">
+      <text class="padding-xs"></text>月卡会员
+    </view>
+    <view class="padding-xs">
+      1.99元/天
+    </view>
+    <view class="padding-xs">
+      59元/月
+    </view>
+  </view>
+</view>
+
+</view>
+</block>
+
+<block wx:if="{{TabCur==2}}" >
+<view class="cu-list menu ">
+
+
+    <view class="bg-img  padding-tb-xl" style="background-image: url('https://rmsp.youyoushizi.com/statics/yysz/ico_wd_yhcz_jk@3x.png');height: 414rpx;">
+  <view class="padding-xl text-white">
+    <view class="padding-xs text-xl">
+      <text class="padding-xs"></text>月卡会员
+    </view>
+    <view class="padding-xs">
+      1.99元/天
+    </view>
+    <view class="padding-xs">
+      59元/月
+    </view>
+  </view>
+</view>
+
+</view>
+</block>
+
 
 
 <view class="flex flex-direction cu-bar-sun foot">
