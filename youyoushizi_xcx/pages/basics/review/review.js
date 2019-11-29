@@ -370,8 +370,8 @@ Page({
     })
     var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
     var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.value]
-    console.log(tempwcellid)
-    console.log(temp_fact)
+    // console.log(tempwcellid)
+    // console.log(temp_fact)
     //发送请求 super 算法
     wx.request({
       url: app.globalData.url + '?act=taskinwcell_super',

@@ -659,6 +659,9 @@ Page({
   },
   
   audioPlay_lword() {
+    if (this.data.tingxie_auto){
+        return false
+    }
     // this.setData({
     //   subcurrent: 2,
     //   tabkey: this.data.tabs[2].key
