@@ -52,7 +52,10 @@ Page({
       // username: that.data.username,
       price: that.data.price,
     })
-    return false
+    
+    if (that.data.price<=0){
+      return false
+    }
     
     wx.request({
       url: app.globalData.url2 + '?act=wx_chongzhi',

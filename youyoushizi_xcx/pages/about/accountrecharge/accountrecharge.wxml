@@ -103,7 +103,7 @@
 
   <view class="padding-sm margin-top-sm bg-white flex justify-center">
     <view class="flex align-center margin-right padding-left-sm padding-right-sm" style="border-radius: 10rpx;border: 1px solid rgba(0, 0, 0, .1); flex-basis:70%;">
-      <input class="align-center" placeholder="将会获取焦点" />
+      <input class="align-center" placeholder="请输入折扣卷" />
     </view>
 
     <view class="" style="flex-basis:30%;">

@@ -8,6 +8,7 @@ Page({
     CustomBar: app.globalData.CustomBar,
     ColorList: app.globalData.ColorList,
     member_detail: null,
+    countto: null,
     form: {
       username:'',
       newpasswd: '',
@@ -67,6 +68,7 @@ Page({
           console.log(res);
           that.setData({
             member_detail: res.data.member_detail,
+            countto: res.data.countto,
             userid: res.data.member_detail.userid,
             })
          }, complete(res) {

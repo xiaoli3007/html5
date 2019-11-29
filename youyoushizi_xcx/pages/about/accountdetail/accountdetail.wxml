@@ -1,23 +1,23 @@
-<cu-custom bgColor="bg-orange" isBack="{{true}}" >
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">{{member_detail.realname?member_detail.realname:member_detail.username}}的主页</view>
 </cu-custom>
 
 
 
-  <view class="bg-white margin-top padding-top" >
-        <wux-row data-username="{{member_detail.username}}" data-val="{{member_detail.userid}}">
-            <wux-col span="2" offset="1">
-                 <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{member_detail.userid}}" wx:if='{{member_detail.avatar}}' style="background-image:url({{member_detail.avatar}});"></view>
+<view class="bg-white margin-top padding-top">
+  <wux-row data-username="{{member_detail.username}}" data-val="{{member_detail.userid}}">
+    <wux-col span="2" offset="1">
+      <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{member_detail.userid}}" wx:if='{{member_detail.avatar}}' style="background-image:url({{member_detail.avatar}});"></view>
 
-                    <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{member_detail.userid}}" wx:if='{{member_detail.avatar==""}}' >
-                    <view class="proIcon-iconico_zz  text-white"></view>
-                    </view>
+      <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{member_detail.userid}}" wx:if='{{member_detail.avatar==""}}'>
+        <view class="proIcon-iconico_zz  text-white"></view>
+      </view>
 
 
-            </wux-col>
-            <wux-col span="7">
-             <view class="content">
+    </wux-col>
+    <wux-col span="7">
+      <view class="content">
         <view class="text-pink">
           <text class="text-cut">用户名：{{member_detail.username}}</text>
         </view>
@@ -25,80 +25,86 @@
           <text class="text-cut">密码：{{member_detail.mingwenpw}}</text>
         </view>
       </view>
-                
-            </wux-col>
-             <wux-col span="2" >
-               
 
-            </wux-col>
-        </wux-row>
-          <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-            <wux-col span="3" >
-             <view class="flex flex-direction  justify-center" catchtap="showModal_editusername" data-target="DialogModaleditusername" data-index="{{index}}" data-username="{{member_detail.username}}" data-userid="{{member_detail.userid}}">
-                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl text-orange">
-                    </text>
-                 <view class="text-grey text-center">修改资料</view>
-              </view>
-            </wux-col>
-            <wux-col span="3">
-             <view class="flex flex-direction  justify-center"  catchtap="showModal_editpw" data-target="DialogModal1" data-username="{{member_detail.username}}">
-                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_xgmm text-orange">
-                    </text>
-                 <view class="text-grey text-center">修改密码</view>
-              </view>
-                 
-            </wux-col>
-             <wux-col span="3">
-            
+    </wux-col>
+    <wux-col span="2">
 
-               <view class="flex flex-direction  justify-center"   catchtap="showModal_chongzhi" data-target="DialogModalchongzhi"  data-username="{{member_detail.username}}"  data-userid="{{member_detail.userid}}">
-                  
-                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
+
+    </wux-col>
+  </wux-row>
+  <wux-divider show-text="{{ false }}" dashed />
+  <wux-row>
+    <wux-col span="3">
+      <view class="flex flex-direction  justify-center" catchtap="showModal_editusername" data-target="DialogModaleditusername" data-index="{{index}}" data-username="{{member_detail.username}}" data-userid="{{member_detail.userid}}">
+        <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl text-orange">
                     </text>
-                    
-                 <view class="text-grey text-center">用户充值</view>
-              </view> 
-                  
-            </wux-col>
-             <wux-col span="3">
-              <view class="flex flex-direction  justify-center"   catchtap="showModal_deleteuser" data-target="DialogModaldeleteusername" data-username="{{member_detail.username}}"  data-userid="{{member_detail.userid}}">
-                   <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_sc text-orange">
+        <view class="text-grey text-center">修改资料</view>
+      </view>
+    </wux-col>
+    <wux-col span="3">
+      <view class="flex flex-direction  justify-center" catchtap="showModal_editpw" data-target="DialogModal1" data-username="{{member_detail.username}}">
+        <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_xgmm text-orange">
                     </text>
-                 <view class="text-grey text-center">删除用户</view>
-              </view>
-                  
-            </wux-col>
-        </wux-row>
-<wux-white-space size="default" />
+        <view class="text-grey text-center">修改密码</view>
+      </view>
+
+    </wux-col>
+    <wux-col span="3">
+
+
+      <view class="flex flex-direction  justify-center" catchtap="showModal_chongzhi" data-target="DialogModalchongzhi" data-username="{{member_detail.username}}" data-userid="{{member_detail.userid}}">
+
+        <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
+                    </text>
+
+        <view class="text-grey text-center">用户充值</view>
+      </view>
+
+    </wux-col>
+    <wux-col span="3">
+      <view class="flex flex-direction  justify-center" catchtap="showModal_deleteuser" data-target="DialogModaldeleteusername" data-username="{{member_detail.username}}" data-userid="{{member_detail.userid}}">
+        <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_sc text-orange">
+                    </text>
+        <view class="text-grey text-center">删除用户</view>
+      </view>
+
+    </wux-col>
+  </wux-row>
+  <wux-white-space size="default" />
 </view>
 
 
-
+<block wx:for="{{countto}}" wx:key>
 <view class="margin-top-sm bg-white text-center text-xl padding-top padding-bottom">
-        <view class="flex flex-wrap justify-center">
-          <view class=" justify-start align-center"  style="flex-basis: 45%;">
-             <view> <text class="text-sl text-orange">0</text><text class="text-grey text-df">天</text> </view>
-             <view> <text class="text-xl text-black text-bold">阅读打卡</text> </view>
-          </view>
+  <view class="flex flex-wrap justify-center">
+    <view class=" justify-start align-center" style="flex-basis: 45%;">
+      <view>
+        <text class="text-sl text-orange">{{item[0]['value']}}</text>
+        <text class="text-grey text-df">{{item[0]['jl']}}</text> </view>
+      <view>
+        <text class="text-xl text-black text-bold">{{item[0]['name']}}</text> </view>
+    </view>
 
-           <view class=" justify-center align-center" style="width: 1px;height:150rpx; background: #eee;" >
-              <text></text>
-          </view>
+    <view class=" justify-center align-center" style="width: 1px;height:150rpx; background: #eee;">
+      <text></text>
+    </view>
 
-            <view class=" justify-end align-center" style="flex-basis: 45%;">
-             <view> <text class="text-sl text-orange">10</text><text class="text-grey text-df">本</text> </view>
-             <view> <text class="text-xl text-black text-bold">读书</text> </view>
-          </view>
+    <view class=" justify-end align-center" style="flex-basis: 45%;">
+      <view>
+        <text class="text-sl text-orange">{{item[1]['value']}}</text>
+        <text class="text-grey text-df">{{item[1]['jl']}}</text> </view>
+      <view>
+        <text class="text-xl text-black text-bold">{{item[1]['name']}}</text> </view>
+    </view>
 
-        </view>
-      </view>
-
+  </view>
+</view>
+</block>
 
 
 <view style="padding-bottom:80rpx;">
-  
-</view> 
+
+</view>
 
 
 
@@ -131,7 +137,7 @@
       </view>
       <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
-        <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
+          <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
           <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
           <button class="cu-btn bg-green margin-left" form-type="submit">确定</button> -->
         </view>
@@ -155,46 +161,46 @@
 
         <view class="cu-form-group margin-top">
           <view class="title">用户名</view>
-          <input  name='username' value='{{edituernameform.username}}'></input>
+          <input name='username' value='{{edituernameform.username}}'></input>
         </view>
         <!-- <view class="cu-form-group margin-bottom">
           <view class="title">新用户名</view>
           <input placeholder="新用户名" name='newusername' value='{{edituernameform.newusername}}'></input>
         </view> -->
 
-         <view class="cu-form-group">
+        <view class="cu-form-group">
           <view class="title">姓名</view>
           <input placeholder="姓名" name='realname' value='{{edituernameform.realname}}'></input>
         </view>
 
-       
 
-        	<view class="cu-form-group ">
-		<view class="title">性别</view>
-		<picker bindchange="sexChange" data-target="edit" name='sex' value="{{edit_sex}}" range="{{pickersex}}">
-			<view class="picker">
-				{{edit_sex?pickersex[edit_sex]:'请选择'}}
-			</view>
-		</picker>
-	</view>
 
-    	<view class="cu-form-group">
-        <view class="title">生日</view>
-        <picker mode="date" name='birthday' data-target="edit" value="{{edit_birthday}}" start="2000-09-01" end="2020-09-01" bindchange="DateChange">
-          <view class="picker">
-           	{{edit_birthday?edit_birthday:'请选择'}}
-          </view>
-        </picker>
-      </view>
-        
-            	<view class="cu-form-group ">
-		<view class="title">年级</view>
-		<picker bindchange="nianjiChange" data-target="edit" name='nianji' value="{{edit_nianji}}" range="{{pickernianji}}">
-			<view class="picker">
-				{{edit_nianji?pickernianji[edit_nianji]:'请选择'}}
-			</view>
-		</picker>
-	</view>
+        <view class="cu-form-group ">
+          <view class="title">性别</view>
+          <picker bindchange="sexChange" data-target="edit" name='sex' value="{{edit_sex}}" range="{{pickersex}}">
+            <view class="picker">
+              {{edit_sex?pickersex[edit_sex]:'请选择'}}
+            </view>
+          </picker>
+        </view>
+
+        <view class="cu-form-group">
+          <view class="title">生日</view>
+          <picker mode="date" name='birthday' data-target="edit" value="{{edit_birthday}}" start="2000-09-01" end="2020-09-01" bindchange="DateChange">
+            <view class="picker">
+              {{edit_birthday?edit_birthday:'请选择'}}
+            </view>
+          </picker>
+        </view>
+
+        <view class="cu-form-group ">
+          <view class="title">年级</view>
+          <picker bindchange="nianjiChange" data-target="edit" name='nianji' value="{{edit_nianji}}" range="{{pickernianji}}">
+            <view class="picker">
+              {{edit_nianji?pickernianji[edit_nianji]:'请选择'}}
+            </view>
+          </picker>
+        </view>
 
       </view>
       <view class="cu-bar bg-white justify-center padding-bottom">
@@ -220,16 +226,17 @@
         <text class="proIcon-iconico_gb text-white"></text>
       </view>
     </view>
-      <view class="padding-sm bg-white" style="padding:150rpx 10rpx;">
+    <view class="padding-sm bg-white" style="padding:150rpx 10rpx;">
 
-          您确定要删除当前的<text class="text-red">{{dusername}}</text>这个用户么！
+      您确定要删除当前的
+      <text class="text-red">{{dusername}}</text>这个用户么！
+    </view>
+    <view class="cu-bar bg-white justify-center padding-bottom">
+      <view class="action">
+        <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+        <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" catchtap="delete_user">确定</button>
       </view>
-      <view class="cu-bar bg-white justify-center padding-bottom">
-        <view class="action">
-          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
-          <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" catchtap="delete_user">确定</button>
-        </view>
-      </view>
+    </view>
   </view>
 </view>
 
@@ -251,7 +258,7 @@
           <view class="title">用户名</view>
           <input disabled="true" placeholder="用户名" name='username' value='{{chongzhiusername}}'></input>
         </view>
-      
+
         <view class="cu-form-group">
           <view class="title">充值金额</view>
           <input placeholder="充值金额" name='price' type="number" value='{{price}}'></input>
