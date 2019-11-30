@@ -1,5 +1,5 @@
 
-
+var util = require('../../../utils/util.js')
 const app = getApp();
 Page({
   data: {
@@ -101,6 +101,12 @@ Page({
           // 回调函数
           var moment_list = that.data.sentence_list;
           const oldData = that.data.sentence_list;
+          if (that.data.keywords){
+            res.data.items.forEach(function (value, i) {
+              res.data.items[i].lw_red = util.global_hilight_word(that.data.keywords, value.lword)
+            })
+          }
+          
           that.setData({
             sentence_list: oldData.concat(res.data.items)
           })
@@ -159,6 +165,12 @@ Page({
              
             })
           }
+
+          res.data.items.forEach(function (value, i) {
+            res.data.items[i].lw_red = util.global_hilight_word(that.data.keywords, value.lword)
+          })
+
+          console.log(res.data.items)
           // 回调函数
           that.setData({
             sentence_list: res.data.items

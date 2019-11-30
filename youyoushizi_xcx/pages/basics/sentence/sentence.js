@@ -28,8 +28,15 @@ Page({
       success(res) {
 
    
+        
+        if (options.dword){
+          console.log(options.dword)
+          res.data.sentence_info.lw_red = util.global_hilight_word(options.dword, res.data.sentence_info.lword)
+        }
+
+        
+       
         console.log(res.data)
-     
         that.setData({
           sentence_info: res.data.sentence_info,
         }) 

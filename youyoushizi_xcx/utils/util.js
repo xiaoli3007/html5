@@ -31,9 +31,30 @@ function findKey(obj, value, compare = (a, b) => a === b) {
   return Object.keys(obj).find(k => compare(obj[k], value))
 }
 
+// 根据搜索字分割字符
+function global_hilight_word(key, word) {
+  let idx = word.indexOf(key), t = [];
+
+  if (idx > -1) {
+    if (idx == 0) {
+      t = global_hilight_word(key, word.substr(key.length));
+      t.unshift({ key: true, str: key });
+      return t;
+    }
+
+    if (idx > 0) {
+      t = global_hilight_word(key, word.substr(idx));
+      t.unshift({ key: false, str: word.substring(0, idx) });
+      return t;
+    }
+  }
+  return [{ key: false, str: word }];
+}
+
 module.exports = {
   formatTime: formatTime,
   GetPercent: GetPercent,
   util_substring: util_substring,
   findKey: findKey,
+  global_hilight_word: global_hilight_word,
 }

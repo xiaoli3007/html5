@@ -60,7 +60,15 @@
                   <text class="text-lg">{{item.program.author}}</text><text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text><text class="text-lg" wx:if="{{item.program.translator!=''}}">译者：{{item.program.translator}}</text><text class="user-motto" decode="{{true}}">&nbsp;&nbsp;&nbsp;</text><text class="text-left text-df">{{item.program.linfo_text}}</text>
                 </view>
  
-                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.lword}}</view>
+                 <view wx:if="{{!item.lw_red}}" class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.lword}}</view> 
+
+                <view wx:if="{{item.lw_red}}" class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">
+                 <block wx:for="{{item.lw_red}}" wx:key="*this" wx:for-item="itemsub">
+                      <text class='task_lw text-left text-orange' wx:if="{{itemsub.key == true}}">{{itemsub.str}}</text>
+                      <text class='task_lw text-left' wx:else>{{itemsub.str}}</text>
+                    </block>
+                </view>
+
 
               </view>
 
