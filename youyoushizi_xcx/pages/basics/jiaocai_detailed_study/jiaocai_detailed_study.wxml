@@ -1,0 +1,206 @@
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{program.title}}</view>
+</cu-custom>
+
+
+<!-- <view class=" solid-bottom" id='top_main_head_title'>
+  <view class="align-center text-center">
+    {{program.title}}
+  </view>
+</view> -->
+
+
+<scroll-view scroll-x class=" bg-white nav text-center">
+  <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{datalist}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    {{item.obj.name}}
+  </view>
+</scroll-view>
+
+<block wx:for="{{datalist}}" wx:for-index="mindex" wx:key>
+
+  <scroll-view wx:if="{{TabCur==mindex}}" scroll-x class="margin-top bg-white nav text-center" scroll-with-animation scroll-left="{{scrollLefts}}">
+
+    <block wx:for="{{item.wcell_list}}" wx:for-index="mindex2" wx:key>
+      <view class="cu-item {{mindex2==TabCursub?'text-orange cur':''}}" bindtap="tabSelect2" data-id="{{mindex2}}">
+        {{item.name}} 
+      </view>
+    </block>
+  </scroll-view> 
+   <!-- <view wx:if="{{TabCur==mindex}}"  class="margin-top bg-white flex text-center" >
+
+    <block wx:for="{{item.wcell_list}}" wx:for-index="mindex2" wx:key>
+      <view class="cu-item {{mindex2==TabCursub?'text-orange cur':''}}" bindtap="tabSelect2" data-id="{{mindex2}}">
+        {{item.name}} 
+      </view>
+    </block>
+  </view> -->
+</block>
+
+
+<block wx:key wx:for='{{datalist}}' wx:for-index="mindex">
+
+<block wx:key wx:for='{{item.wcell_list}}' wx:for-index="mindex2">
+
+  <block wx:if="{{TabCur==mindex && TabCursub==mindex2 }}">
+
+
+    <view class="padding-xs bg-white" style="padding-bottom:120rpx;">
+     <view class="cu-list grid col-3">
+      <block wx:key wx:for='{{item.data}}' wx:for-index="mindex3">
+      
+        <view class="line-black padding-xs">
+         <view class="cu-tag radius margin-xs" data-wcell_type="{{item.wcell_type}}" data-wcellid="{{item.id}}" bindtap="showModal_word_shiyi"> 
+          {{item.word}}
+         </view>
+        </view>
+      </block>
+      </view>
+    </view>
+  
+
+  <view class="flex flex-direction cu-bar-sun foot">
+  <button class="cu-btn bg-orange lg" data-taskid="{{item.shizi_taskid}}" data-relation_id="{{program.id}}" data-gid="{{mindex2}}" data-wcell_type="{{mindex}}" bindtap="gotodeteil_task">
+  <text>开始识字</text><text wx:if="{{item.shizi_taskid!=0}}">(已添加)</text></button>
+</view>
+
+
+
+
+</block>
+
+</block>
+
+</block>
+
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" >
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)" class="bg-white">
+
+   
+    <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
+ 
+
+      <view class="itemcontent text-left">
+        <wux-white-space size="default" />
+
+        <wux-row wx:if="{{data_item_word.word_show_detail.bihua_img!=''}}">
+          <wux-col span="8" offset="2">
+            <view class="text-center">
+              <image src='{{data_item_word.word_show_detail.bihua_img}}' mode="widthFix" style="width:50%;">
+              </image>
+            </view>
+          </wux-col>
+        </wux-row>
+
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="10" offset="1">
+            <text> 笔顺：{{data_item_word.word_show_detail.bishun}}
+                   </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="5" offset="1">
+            <text> 笔画：{{data_item_word.word_show_detail.bihuaw}}
+                   </text>
+          </wux-col>
+          <wux-col span="5" offset="1">
+            <text>  部首：{{data_item_word.word_show_detail.bushou}}
+                   </text>
+          </wux-col>
+
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="10" offset="1">
+            <text> 字形：{{data_item_word.word_show_detail.zixing}}
+                   </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+
+        <block wx:for="{{data_item_word.word_show_detail.mean_list}}" wx:key>
+          <wux-row>
+            <wux-col span="3" offset="1">
+              <text>拼音：</text>
+            </wux-col>
+            <wux-col span="8">
+              <button class="cu-btn round bg-orange shadow" bindtap="play_any_src" data-msrc="{{item.mp3}}">
+                {{item.pinyin}}
+                <view class="cuIcon-notification" style="margin-left:10px;">
+                </view>
+              </button>
+            </wux-col>
+          </wux-row>
+          <wux-white-space size="default" />
+          <wux-row>
+            <wux-col span="3" offset="1">
+              <text> 释义： </text>
+            </wux-col>
+            <wux-col span="8">
+              <block wx:for="{{item.submean_list}}" wx:key>
+                <text> {{item}} </text>
+              </block>
+
+            </wux-col>
+          </wux-row>
+          <wux-divider show-text="{{ false }}" dashed />
+        </block>
+
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalC_word'?'show':''}}" bindtap="hideModal" >
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+       <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
+      <view class="itemcontent text-left">
+        <wux-white-space size="default" />
+        <wux-white-space size="default" />
+
+        <wux-white-space size="default" />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 注音： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.zhuyin}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 出处： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.chuchu}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 释义： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.shiyi}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 实例： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{data_item_word.word_show_detail.shili}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+      </view>
+    </scroll-view>
+  </view>
+</view>
