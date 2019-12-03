@@ -10,13 +10,19 @@ Page({
     VerticalNavTop: 0,
     // tabNav: ['一年级', '二年级', '三年级'],
     jiaocaiList: [],
+    ebookid: 0,
     loadModal: true,
     load: true
   },
   onLoad(options) {
-
-    console.log(options)
     let that = this;
+    console.log(options)
+    if (options.ebookid){
+      that.setData({
+
+        ebookid: options.ebookid
+      })
+    }
     //加载列表  
     wx.request({
       url: app.globalData.url2 + '?act=jiaocai_sub_lession', 
@@ -111,7 +117,7 @@ Page({
   },
   tabSelectshengzi(e) {
     
-    let jumpebookid = e.currentTarget.dataset.jumpebookid
+    let jumpebookid = this.data.ebookid
     var that = this
 
     console.log(jumpebookid)

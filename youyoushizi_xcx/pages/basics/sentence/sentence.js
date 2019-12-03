@@ -8,6 +8,7 @@ Page({
     sentence_info:null,
     sentenceid:0,
     favorite:false,
+    tasjlisturl: '/pages/basics/sentencelist/sentencelist',
   },
   onLoad(options) {
     console.log(options)

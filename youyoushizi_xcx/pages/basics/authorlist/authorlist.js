@@ -65,7 +65,7 @@ Page({
       },
       success(res) {
 
-        console.log(res.data.items)
+        // console.log(res.data.items)
         var tprice = 'searchitems[0].children'
         that.setData({
           [tprice]: res.data.items,
@@ -90,7 +90,7 @@ Page({
             collection_list: res.data.items,
           })
 
-          console.log(that.data.collection_list)
+          // console.log(that.data.collection_list)
 
         }, complete(res) {
           that.setData({

@@ -17,7 +17,7 @@
 </view>
 
 
-<view class="cu-list menu ">
+<view class="cu-list menu " catchtouchmove="{{ opened ? 'noop' : '' }}">
 
 
   <block wx:for="{{collection_list}}" wx:key>

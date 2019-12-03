@@ -81,8 +81,9 @@
    
     <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
  
+       <my-word dataArray="{{data_item_word.word_show_detail}}" > </my-word>
 
-      <view class="itemcontent text-left">
+      <!-- <view class="itemcontent text-left">
         <wux-white-space size="default" />
 
         <wux-row wx:if="{{data_item_word.word_show_detail.bihua_img!=''}}">
@@ -150,7 +151,7 @@
           <wux-divider show-text="{{ false }}" dashed />
         </block>
 
-      </view>
+      </view> -->
     </scroll-view>
   </view>
 </view>
@@ -159,7 +160,9 @@
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
        <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
-      <view class="itemcontent text-left">
+
+       <my-chengyu dataArray="{{data_item_word.word_show_detail}}" > </my-chengyu>
+      <!-- <view class="itemcontent text-left">
         <wux-white-space size="default" />
         <wux-white-space size="default" />
 
@@ -200,7 +203,7 @@
           </wux-col>
         </wux-row>
         <wux-divider show-text="{{ false }}" dashed />
-      </view>
+      </view> -->
     </scroll-view>
   </view>
 </view>

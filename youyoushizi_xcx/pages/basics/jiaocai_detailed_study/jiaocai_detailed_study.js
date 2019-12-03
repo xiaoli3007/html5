@@ -22,7 +22,7 @@ Page({
     let that = this;
     //加载列表
     wx.request({
-      url: app.globalData.url + '?act=ebook_show_study',
+      url: app.globalData.url + '?act=ebook_jiaocai_show_study',
       data: {
         ebookid: options.ebookid,
         userid: app.globalData.userid,

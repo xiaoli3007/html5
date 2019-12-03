@@ -16,6 +16,7 @@ Page({
     Inputdisabled: false, //搜索按钮的  置灰状态
     firstone_show: false,
     firstone_data: null,
+    basicsurl: '/pages/index/index?p=basics',
   },
   onLoad: function (options) {
 
