@@ -109,5 +109,16 @@ Page({
         duration: 1500,
       })
   },
+  tabSelectshengzi(e) {
+    
+    let jumpebookid = e.currentTarget.dataset.jumpebookid
+    var that = this
+
+    console.log(jumpebookid)
+    
+      wx.navigateTo({
+        url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid,
+      })
+  },
 
 })

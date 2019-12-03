@@ -21,6 +21,11 @@
     <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{jiaocaiList}}" wx:key bindtap='tabSelect' data-id="{{index}}">
       {{item.name}}
     </view>
+
+     <view class="cu-item text-green"  bindtap='tabSelectshengzi' >
+      课文生字
+    </view>
+
   </scroll-view>
   <scroll-view class="VerticalMain" scroll-y scroll-with-animation style="height:calc(100vh - {{CustomBar}}px)" scroll-into-view="main-{{MainCur}}" bindscroll="VerticalMain">
     <view class="padding-top padding-lr" wx:for="{{jiaocaiList}}" wx:key id="main-{{index}}">

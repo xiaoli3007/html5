@@ -27,14 +27,7 @@
       </view>
     </block>
   </scroll-view> 
-   <!-- <view wx:if="{{TabCur==mindex}}"  class="margin-top bg-white flex text-center" >
 
-    <block wx:for="{{item.wcell_list}}" wx:for-index="mindex2" wx:key>
-      <view class="cu-item {{mindex2==TabCursub?'text-orange cur':''}}" bindtap="tabSelect2" data-id="{{mindex2}}">
-        {{item.name}} 
-      </view>
-    </block>
-  </view> -->
 </block>
 
 
@@ -63,8 +56,6 @@
   <button class="cu-btn bg-orange lg" data-taskid="{{item.shizi_taskid}}" data-relation_id="{{program.id}}" data-gid="{{mindex2}}" data-wcell_type="{{mindex}}" bindtap="gotodeteil_task">
   <text>开始识字</text><text wx:if="{{item.shizi_taskid!=0}}">(已添加)</text></button>
 </view>
-
-
 
 
 </block>
