@@ -1,6 +1,6 @@
 /* pages/component/nav/nav.wxss */
 .VerticalNav.nav {
-  width: 220rpx;
+  width: 250rpx;
   white-space: initial;
 }
 
@@ -35,4 +35,4 @@
 .VerticalMain{
   background-color: #f1f1f1;
 }
-.cu-item-aa{ height: 250rpx;}
+.cu-item-aa{ height: 180rpx;}

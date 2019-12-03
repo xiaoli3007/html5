@@ -14,7 +14,7 @@
   </view>
 </view>
 
-  <!-- <view  style="height:calc(100vh-{{CustomBar}}px)"></view> -->
+<!-- <view  style="height:calc(100vh-{{CustomBar}}px)"></view> -->
 
 <view class="VerticalBox">
   <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation scroll-top="{{VerticalNavTop}}" style="height:calc(100vh - {{CustomBar}}px)">
@@ -27,67 +27,45 @@
       <view class='cu-bar solid-bottom bg-white'>
         <view class='action'>
           <text class='cuIcon-title text-orange'></text> {{item.name}} </view>
-        </view>
+      </view>
       <view class="cu-list">
-        <block wx:for="{{item.data}}" wx:key>
-          <view class="cu-item-aa bg-white solid-bottom padding">
-            <wux-row>
-              <wux-col span="12">
 
-                <view class="margin-left padding">
-                  <text class=" ">{{item.title}}</text>
-                </view>
-
-              </wux-col>
-
-            </wux-row>
-            <wux-row>
+        <view class="cu-item-aa bg-white solid-bottom padding text-center">
+          <wux-row>
+            <block wx:for="{{item.data}}" wx:key>
               <wux-col span="5" offset="1">
+
+                <view class="">
+                  <text class="">第{{item.gid}}组</text>
+                </view>
                 <view class="text-center">
-                <button wx:if="{{item.isread==0}}" class="cu-btn round  line-grey disabled" style="text-decoration:line-through;">识字</button>
 
-                <navigator wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
-                  <button class="cu-btn round  bg-orange ">识字</button>
-                </navigator>
+                  <navigator wx:if="{{item.shizi_taskid!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.shizi_taskid}}" open-type="redirect">
+                    <button class="cu-btn round  bg-orange ">识字</button>
+                  </navigator>
 
-                <navigator wx:if="{{item.shizi_taskid==0 && item.isread!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
-                  <button class="cu-btn round  line-orange">识字</button>
-                </navigator>
+                  <navigator wx:if="{{item.shizi_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
+                    <button class="cu-btn round  line-orange">识字</button>
+                  </navigator>
+
+                  <view class="text-center text-xs">
+                    <text class="text-orange" wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}">已学习</text>
+                    <text class="text-gray" wx:if="{{item.shizi_taskid==0 && item.isread!=0}}">未学习</text>
+
+                  </view>
+
+
                 </view>
               </wux-col>
-              <wux-col span="5" offset="1">
-                 <view class="text-center">
-                <button wx:if="{{item.iswrite==0}}" class="cu-btn round  line-grey disabled" style="text-decoration:line-through;">听写</button>
-
-                <navigator wx:if="{{item.tingxie_taskid!=0 && item.iswrite!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?taskid={{item.tingxie_taskid}}" open-type="redirect">
-                  <button class="cu-btn round  bg-blue ">听写</button>
-                </navigator>
-
-                <navigator wx:if="{{item.tingxie_taskid==0 && item.iswrite!=0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=1&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
-                  <button class="cu-btn round  line-blue">听写</button>
-                </navigator>
-                </view>
-              </wux-col>
-
-              <wux-col span="5" offset="1">
-                 <view class="text-center text-xs">
-                 <text class="text-orange" wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}">已学习</text>           
-                 <text class="text-gray" wx:if="{{item.shizi_taskid==0 && item.isread!=0}}">未学习</text>
-
-                 </view>
-               </wux-col>
-                <wux-col span="5" offset="1">
-                <view class="text-center text-xs">
-                 <text class="text-orange" wx:if="{{item.tingxie_taskid!=0 && item.iswrite!=0}}">已学习</text>           
-                 <text class="text-gray" wx:if="{{item.tingxie_taskid==0 && item.iswrite!=0}}">未学习</text>
-                </view>
-               </wux-col>
-
-            </wux-row>
+            </block>
 
 
-          </view>
-        </block>
+
+          </wux-row>
+
+
+        </view>
+
       </view>
 
     </view>

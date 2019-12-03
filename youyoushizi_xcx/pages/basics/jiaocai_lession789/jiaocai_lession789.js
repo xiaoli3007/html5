@@ -19,9 +19,8 @@ Page({
     let that = this;
     //加载列表  
     wx.request({
-      url: app.globalData.url2 + '?act=jiaocai_sub_lession', 
+      url: app.globalData.url2 + '?act=jiaocai_sub_lession789', 
       data: {
-        bookid: options.ebookid,
         userid: app.globalData.userid,
       },
       header: {
@@ -30,14 +29,14 @@ Page({
       }, 
       success(res) {
 
-       
+        console.log( res.data.items)
         var temp_array = []
         res.data.items.forEach(function (value, i) {
           let temp = value
           temp.id = i
           temp_array.push(temp)
         })
-        console.log(temp_array)
+        
         that.setData({
 
           jiaocaiList: temp_array

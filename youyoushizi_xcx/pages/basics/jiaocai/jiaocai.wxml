@@ -51,7 +51,7 @@
         <view class="cu-list grid col-2 bradius   no-border">
           <view class="cu-item  justify-center align-center" >
             <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession789/jiaocai_lession789">
-              <image src='' style="width:150rpx;" mode="widthFix">
+              <image src='https://rmsp.youyoushizi.com/uploadfile/2019/1202/20191202061848186.jpg' style="width:150rpx;" mode="widthFix">
               </image>
               <text>七八九年级</text>
             </navigator>
