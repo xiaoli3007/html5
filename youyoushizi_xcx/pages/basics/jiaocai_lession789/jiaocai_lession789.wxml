@@ -44,13 +44,17 @@
                     <button class="cu-btn round  bg-orange ">识字</button>
                   </navigator>
 
-                  <navigator wx:if="{{item.shizi_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
-                    <button class="cu-btn round  line-orange">识字</button>
+                  <navigator wx:if="{{item.shizi_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{item.bookid}}&gid={{item.gid}}&wcell_type={{item.wcell_type}}" open-type="redirect">
+                    <button class="cu-btn round  line-orange">识字
+                    
+                    
+                    </button>
                   </navigator>
 
+
                   <view class="text-center text-xs">
-                    <text class="text-orange" wx:if="{{item.shizi_taskid!=0 && item.isread!=0}}">已学习</text>
-                    <text class="text-gray" wx:if="{{item.shizi_taskid==0 && item.isread!=0}}">未学习</text>
+                    <text class="text-orange" wx:if="{{item.shizi_taskid!=0 }}">已学习</text>
+                    <text class="text-gray" wx:if="{{item.shizi_taskid==0}}">未学习</text>
 
                   </view>
 

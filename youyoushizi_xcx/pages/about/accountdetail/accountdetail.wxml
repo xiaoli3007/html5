@@ -51,14 +51,22 @@
     </wux-col>
     <wux-col span="3">
 
-
-      <view class="flex flex-direction  justify-center" catchtap="showModal_chongzhi" data-target="DialogModalchongzhi" data-username="{{member_detail.username}}" data-userid="{{member_detail.userid}}">
+       <view class="flex flex-direction  justify-center" >
 
         <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
                     </text>
 
         <view class="text-grey text-center">用户充值</view>
       </view>
+
+
+      <!-- <view class="flex flex-direction  justify-center" catchtap="showModal_chongzhi" data-target="DialogModalchongzhi" data-username="{{member_detail.username}}" data-userid="{{member_detail.userid}}">
+
+        <text style="font-size:50rpx;" class="text-sl  text-center proIcon-iconico_me_zhgl_cz text-orange">
+                    </text>
+
+        <view class="text-grey text-center">用户充值</view>
+      </view> -->
 
     </wux-col>
     <wux-col span="3">

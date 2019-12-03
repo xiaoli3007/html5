@@ -31,6 +31,7 @@ Page({
     }],
     relation_type: '',
     relation_id: 0,
+    jiaocailist789: [467767, 467768, 467769	, 467770, 467771, 467772],
   },
   onLoad: function (options) { 
     
@@ -437,9 +438,26 @@ Page({
     var that = this
 
     if (relation_type == 'ebook') {
+
+      console.log(jumpebookid)
+      console.log(this.data.jiaocailist789)
+   
+      if (this.data.jiaocailist789.indexOf(parseInt(jumpebookid))!= -1){
+           wx.navigateTo({
+          url: '/pages/basics/jiaocai_lession789/jiaocai_lession789',
+        })
+      }
+     
+
       wx.navigateTo({
         url: '/pages/basics/detailed/detailed?ebookid=' + jumpebookid,
       })
+
+
+     
+
+        
+
     } else {
      
       wx.navigateTo({
