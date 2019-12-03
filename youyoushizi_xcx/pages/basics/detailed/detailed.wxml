@@ -67,12 +67,21 @@
     <view class="text-bold text-left">生字率：
     </view>
 
-    <view class="grid col-3 text-left">
-      <view class="text-block ">一年级上：{{common.util_perset(program.book_rate.r1)}}
+    <view class="grid col-3 text-left text-block">
+
+    <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r1)}}">一年级上：{{common.util_perset(program.book_rate.r1)}}
+          </view>
+      <view wx:else>一年级上：{{common.util_perset(program.book_rate.r1)}}
       </view>
-      <view class="text-block ">一年级上：{{common.util_perset(program.book_rate.r2)}}
+
+     <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r2)}}">一年级下：{{common.util_perset(program.book_rate.r2)}}
+          </view>
+      <view wx:else>一年级下：{{common.util_perset(program.book_rate.r2)}}
       </view>
-      <view class="text-block ">二年级上：{{common.util_perset(program.book_rate.r3)}}
+
+       <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r3)}}">二年级上：{{common.util_perset(program.book_rate.r3)}}
+          </view>
+      <view wx:else>二年级上：{{common.util_perset(program.book_rate.r3)}}
       </view>
     
     </view>
@@ -170,30 +179,66 @@
         <view class="text-bold text-left margin-top">生字率：
         </view>
 
-        <view class="grid col-2 text-left">
-          <view class="text-block ">一年级上：{{common.util_perset(program.book_rate.r1)}}
+        <view class="grid col-2 text-left text-block">
+           <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r1)}}">一年级上：{{common.util_perset(program.book_rate.r1)}}
           </view>
-          <view class="text-block ">一年级下：{{common.util_perset(program.book_rate.r2)}}
+
+          <view wx:else>一年级上：{{common.util_perset(program.book_rate.r1)}}
           </view>
-          <view class="text-block ">二年级上：{{common.util_perset(program.book_rate.r3)}}
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r2)}}">一年级下：{{common.util_perset(program.book_rate.r2)}}
           </view>
-          <view class="text-block ">二年级下：{{common.util_perset(program.book_rate.r4)}}
+          <view wx:else>一年级下：{{common.util_perset(program.book_rate.r2)}}
           </view>
-          <view class="text-block ">三年级上：{{common.util_perset(program.book_rate.r5)}}
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r3)}}">二年级上：{{common.util_perset(program.book_rate.r3)}}
           </view>
-          <view class="text-block ">三年级下：{{common.util_perset(program.book_rate.r6)}}
+          <view wx:else>二年级上：{{common.util_perset(program.book_rate.r3)}}
           </view>
-          <view class="text-block ">四年级下：{{common.util_perset(program.book_rate.r7)}}
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r4)}}">二年级下：{{common.util_perset(program.book_rate.r4)}}
           </view>
-          <view class="text-block ">四年级上：{{common.util_perset(program.book_rate.r8)}}
+          <view wx:else>二年级下：{{common.util_perset(program.book_rate.r4)}}
           </view>
-          <view class="text-block ">五年级上：{{common.util_perset(program.book_rate.r9)}}
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r5)}}">三年级上：{{common.util_perset(program.book_rate.r5)}}
           </view>
-          <view class="text-block ">五年级下：{{common.util_perset(program.book_rate.r10)}}
+          <view wx:else>三年级上：{{common.util_perset(program.book_rate.r5)}}
           </view>
-          <view class="text-block ">六年级上：{{common.util_perset(program.book_rate.r11)}}
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r6)}}">三年级下：{{common.util_perset(program.book_rate.r6)}}
           </view>
-          <view class="text-block ">六年级下：{{common.util_perset(program.book_rate.r12)}}
+          <view wx:else>三年级下：{{common.util_perset(program.book_rate.r6)}}
+          </view>
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r7)}}">四年级上：{{common.util_perset(program.book_rate.r7)}}
+          </view>
+          <view wx:else>四年级上：{{common.util_perset(program.book_rate.r7)}}
+          </view>
+
+           <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r8)}}">四年级下：{{common.util_perset(program.book_rate.r8)}}
+          </view>
+          <view  wx:else>四年级下：{{common.util_perset(program.book_rate.r8)}}
+          </view>
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r9)}}">五年级上：{{common.util_perset(program.book_rate.r9)}}
+          </view>
+          <view wx:else>五年级上：{{common.util_perset(program.book_rate.r9)}}
+          </view>
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r10)}}">五年级下：{{common.util_perset(program.book_rate.r10)}}
+          </view>
+          <view wx:else>五年级下：{{common.util_perset(program.book_rate.r10)}}
+          </view>
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r11)}}">六年级上：{{common.util_perset(program.book_rate.r11)}}
+          </view>
+          <view wx:else>六年级上：{{common.util_perset(program.book_rate.r11)}}
+          </view>
+
+          <view class="text-green" wx:if="{{common.util_perset_good(program.book_rate.r12)}}">六年级下：{{common.util_perset(program.book_rate.r12)}}
+          </view>
+          <view wx:else>六年级下：{{common.util_perset(program.book_rate.r12)}}
           </view>
         </view>
 

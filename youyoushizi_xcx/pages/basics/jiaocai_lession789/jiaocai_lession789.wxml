@@ -95,37 +95,6 @@
 </view>
 
 
-<!-- <block  wx:for="{{jiaocaiList}}" wx:for-index="mindex" wx:key>
-<view class="cu-bar bg-white solid-bottom ">
-    <view class="action">
-      <text class="cuIcon-title text-orange ">{{item.name}}</text> 
-    </view>
-    <view class="action">
-    </view>
-  </view>
-
- <view class="cu-list menu">
-  <block wx:for="{{item.data}}" wx:key>
-    <view class="cu-item" style="border-bottom:none;">
-      <view>
-        <text class="cuIcon-circlefill text-orange"></text>
-        <text class="text-grey">{{item.title}}</text>
-     </view>
-    </view>
-
-    <view class="cu-item">
-        <navigator class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
-       <text class="text-yellow cu-tag round "> 识字</text>
-      </navigator>
-       <navigator class="content" hover-class="none" url="/pages/basics/task/task?type=1&relation_type=lesson&taskid=0&relation_id={{item.id}}" open-type="redirect">
-       <text class="text-green cu-tag round "> 听写</text>
-      </navigator>
-      </view>
-      
-</block>
- </view>
-
-</block> -->
 
 <view class='cu-load load-modal' wx:if="{{loadModal}}">
   <!-- <view class='cuIcon-emojifill text-orange'></view> -->
