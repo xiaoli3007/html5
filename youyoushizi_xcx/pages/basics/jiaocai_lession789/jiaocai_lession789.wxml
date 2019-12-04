@@ -28,7 +28,7 @@
         <view class='action'>
           <text class='cuIcon-title text-orange'></text> {{item.name}} </view>
 
-           <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}">课文生字</button>
+        <!-- <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}">课文生字</button> -->
 
       </view>
       <view class="cu-list">
@@ -49,8 +49,8 @@
 
                   <navigator wx:if="{{item.shizi_taskid==0}}" class="content" hover-class="none" url="/pages/basics/task/task?type=2&relation_type=ebook&taskid=0&relation_id={{item.bookid}}&gid={{item.gid}}&wcell_type={{item.wcell_type}}" open-type="redirect">
                     <button class="cu-btn round  line-orange">识字
-                    
-                    
+
+
                     </button>
                   </navigator>
 
@@ -69,6 +69,28 @@
 
 
           </wux-row>
+
+
+          <wux-row>
+          <wux-col span="12" >
+             
+            <!-- <wux-divider dashed position="left" text="辨析" /> -->
+
+            <wux-divider show-text="{{ false }}" dashed /> 
+          </wux-col>
+        </wux-row>
+
+
+          <wux-row>
+            <wux-col span="5" offset="1">
+              <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}">课文生字</button>
+            </wux-col>
+            <wux-col span="5" offset="1">
+            <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}">成语</button>
+
+            </wux-col>
+          </wux-row>
+
 
 
         </view>

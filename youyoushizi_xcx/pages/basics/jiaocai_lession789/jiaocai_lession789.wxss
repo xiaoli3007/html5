@@ -35,4 +35,4 @@
 .VerticalMain{
   background-color: #f1f1f1;
 }
-.cu-item-aa{ height: 180rpx;}
+.cu-item-aa{ height: 300rpx;}
