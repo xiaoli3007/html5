@@ -32,6 +32,7 @@ Page({
     relation_type: '',
     relation_id: 0,
     jiaocailist789: [467767, 467768, 467769	, 467770, 467771, 467772],
+    // jiaocai_ebook_list: [467767, 467768, 467769, 467770, 467771, 467772],
   },
   onLoad: function (options) { 
     
@@ -435,28 +436,39 @@ Page({
 
     let jumpebookid = e.currentTarget.dataset.jumpebookid
     let relation_type = e.currentTarget.dataset.relation_type
+
+    let wcell_type = e.currentTarget.dataset.wcell_type
+
+    // console.log({ jumpebookid, relation_type, wcell_type})
+    // return false
     var that = this
 
     if (relation_type == 'ebook') {
 
-      console.log(jumpebookid)
-      console.log(this.data.jiaocailist789)
+      // console.log(jumpebookid)
+      // console.log(this.data.jiaocailist789)
    
-      if (this.data.jiaocailist789.indexOf(parseInt(jumpebookid))!= -1){
-           wx.navigateTo({
+      // if (this.data.jiaocailist789.indexOf(parseInt(jumpebookid))!= -1){
+      //      wx.navigateTo({
+      //     url: '/pages/basics/jiaocai_lession789/jiaocai_lession789',
+      //   })
+      // }
+      //教材课文生字
+      if (wcell_type =='29') {
+        wx.navigateTo({
           url: '/pages/basics/jiaocai_lession789/jiaocai_lession789',
         })
       }
-     
-
+      //教材生字
+      if (wcell_type == '30') {
+        wx.navigateTo({
+          url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid,
+        })
+      }
+  
       wx.navigateTo({
         url: '/pages/basics/detailed/detailed?ebookid=' + jumpebookid,
-      })
-
-
-     
-
-        
+      })     
 
     } else {
      
