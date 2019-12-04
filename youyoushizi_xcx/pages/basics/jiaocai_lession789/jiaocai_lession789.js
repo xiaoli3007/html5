@@ -109,4 +109,21 @@ Page({
       })
   },
 
+  gotodetail(e) {
+
+    let jumpebookid = e.currentTarget.dataset.jumpebookid
+ 
+
+    // let wcell_type = e.currentTarget.dataset.wcell_type
+
+     console.log({ jumpebookid})
+    //  return false
+    var that = this
+ 
+    wx.navigateTo({
+      url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid,
+    })
+      
+  },
+
 })

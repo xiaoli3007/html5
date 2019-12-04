@@ -27,6 +27,9 @@
       <view class='cu-bar solid-bottom bg-white'>
         <view class='action'>
           <text class='cuIcon-title text-orange'></text> {{item.name}} </view>
+
+           <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}">课文生字</button>
+
       </view>
       <view class="cu-list">
 
