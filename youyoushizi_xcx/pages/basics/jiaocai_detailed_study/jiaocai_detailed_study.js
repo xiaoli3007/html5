@@ -18,7 +18,11 @@ Page({
     data_item_word:null
   },
   onLoad(options) {
-    console.log(options)
+    console.log(options.wcell_type)
+    let default_wcelltype = 25 
+    if (options.wcell_type){
+       default_wcelltype = parseInt(options.wcell_type)
+    }
     let that = this;
     //加载列表
     wx.request({
@@ -33,20 +37,27 @@ Page({
       },
       success(res) {
 
-        // let arr = res.data.items
-        console.log(res.data)
+        let arr = res.data.datas_xcc_tab
+       
         // console.log(Object.keys(arr));
-        // arr.forEach(function (value, i) {
-        //   　　console.log('forEach遍历:' + i );
+        let default_i = 0 
+        arr.forEach(function (value, i) {
+          // 　　console.log('forEach遍历:' + i );
+            //  console.log( value.m);
+          if (default_wcelltype == value.m){
+            default_i = value.m
+          }
+        })
 
-        // })
+        console.log(res.data)
+
         that.setData({
-
           datalist: res.data.items,
           program: res.data.program,
           datatablist_k: res.data.datas_xcc_tab_key,
           datatablist: res.data.datas_xcc_tab,
-          TabCur: res.data.datas_xcc_tab[0]['m'],
+          TabCur: default_i,
+          // TabCur: res.data.datas_xcc_tab[0]['m'],
           TabCursub: res.data.datas_xcc_tab[0]['s'][0],
         })
 

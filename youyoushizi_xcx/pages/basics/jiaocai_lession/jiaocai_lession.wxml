@@ -22,8 +22,11 @@
       {{item.name}}
     </view>
 
-     <view class="cu-item text-green"  bindtap='tabSelectshengzi' >
+     <view class="cu-item text-green"  bindtap='tabSelectshengzi' data-wcell_type="30">
       课文生字
+    </view>
+    <view class="cu-item text-green"  bindtap='tabSelectshengzi' data-wcell_type="25">
+      成语
     </view>
 
   </scroll-view>

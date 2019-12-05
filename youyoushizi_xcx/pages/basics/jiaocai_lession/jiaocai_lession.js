@@ -120,10 +120,12 @@ Page({
     let jumpebookid = this.data.ebookid
     var that = this
 
-    console.log(jumpebookid)
+    let wcell_type = e.currentTarget.dataset.wcell_type
+
+    console.log(jumpebookid,wcell_type)
     
       wx.navigateTo({
-        url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid,
+        url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid + '&wcell_type=' + wcell_type,
       })
   },
 
