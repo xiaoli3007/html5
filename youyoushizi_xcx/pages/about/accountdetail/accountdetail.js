@@ -315,12 +315,12 @@ Page({
       sex: {
         required: true
       },
-      birthday: {
-        required: true
-      },
-      nianji: {
-        required: true
-      }
+      // birthday: {
+      //   required: true
+      // },
+      // nianji: {
+      //   required: true
+      // }
       // newusername: {
       //   required: true,
       //   minlength: 3
@@ -343,12 +343,12 @@ Page({
       sex: {
         required: '请选择性别',
       },
-      birthday: {
-        required: '请选择生日',
-      },
-      nianji: {
-        required: '请选择年级',
-      }
+      // birthday: {
+      //   required: '请选择生日',
+      // },
+      // nianji: {
+      //   required: '请选择年级',
+      // }
 
     }
     this.WxValidate3 = new WxValidate(ruleseditusername, messages3)

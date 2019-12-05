@@ -447,12 +447,12 @@ Page({
       sex: {
         required: true
       },
-      birthday: {
-        required: true
-      },
-      nianji: {
-        required: true
-      }
+      // birthday: {
+      //   required: true
+      // },
+      // nianji: {
+      //   required: true
+      // }
       
     }
     const messages2 = {
@@ -471,12 +471,12 @@ Page({
       sex: {
         required: '请选择性别',
       },
-      birthday: {
-        required: '请选择生日',
-      },
-      nianji: {
-        required: '请选择年级',
-      }
+      // birthday: {
+      //   required: '请选择生日',
+      // },
+      // nianji: {
+      //   required: '请选择年级',
+      // }
       
     }
     this.WxValidate2 = new WxValidate(rulesadduser, messages2)

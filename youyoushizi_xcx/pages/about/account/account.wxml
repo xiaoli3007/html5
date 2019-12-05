@@ -29,10 +29,11 @@
       <wux-col span="7">
         <view class="content">
           <view class="text-pink">
-            <text class="text-cut">用户名：{{item.username}}</text>
+           <text class="text-cut">姓名：{{item.realname}}</text>
+           
           </view>
           <view class="text-gray text-sm flex">
-            <text class="text-cut">姓名：{{item.realname}}</text>
+            <text class="text-cut">用户名：{{item.username}}</text>
           </view>
         </view>
 
@@ -91,7 +92,8 @@
 
             </view>
 
-            <view class="margin-top-xs text-sm  text-center  text-orange"> {{item.name}}</view>
+             <view wx:if='{{item.isadmin==1}}' class="margin-top-xs text-sm  text-center  text-orange"> <text style="" class="proIcon-iconico_zz"></text>{{item.name}}</view>
+            <view wx:if='{{item.isadmin!=1}}' class="margin-top-xs text-sm  text-center  text-orange"> {{item.name}}</view>
           </view>
         </wux-col>
       </block>
@@ -150,7 +152,7 @@
 </view> -->
 
 
-<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+<!-- <view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-orange justify-end">
       <view class="content">修改密码</view>
@@ -179,16 +181,15 @@
       <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
           <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
-          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
-          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button> -->
+        
         </view>
       </view>
     </form>
   </view>
-</view>
+</view> -->
 
 
-<view class="cu-modal {{modalName=='DialogModaleditusername'?'show':''}}">
+<!-- <view class="cu-modal {{modalName=='DialogModaleditusername'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-orange justify-end">
       <view class="content">修改资料</view>
@@ -204,10 +205,7 @@
           <view class="title">用户名</view>
           <input name='username' value='{{edituernameform.username}}'></input>
         </view>
-        <!-- <view class="cu-form-group margin-bottom">
-          <view class="title">新用户名</view>
-          <input placeholder="新用户名" name='newusername' value='{{edituernameform.newusername}}'></input>
-        </view> -->
+      
 
         <view class="cu-form-group">
           <view class="title">姓名</view>
@@ -246,13 +244,13 @@
       </view>
       <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
-          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+      
           <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
         </view>
       </view>
     </form>
   </view>
-</view>
+</view> -->
 
 
 <view class="cu-modal {{modalName=='Dialogadduser'?'show':''}}">
@@ -328,7 +326,7 @@
 
 
 
-<view class="cu-modal {{modalName=='DialogModaldeleteusername'?'show':''}}">
+<!-- <view class="cu-modal {{modalName=='DialogModaldeleteusername'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-orange justify-end">
       <view class="content">删除用户</view>
@@ -343,16 +341,16 @@
     </view>
     <view class="cu-bar bg-white justify-center padding-bottom">
       <view class="action">
-        <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+      
         <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" catchtap="delete_user">确定</button>
       </view>
     </view>
   </view>
-</view>
+</view> -->
 
 
 
-<view class="cu-modal {{modalName=='DialogModalchongzhi'?'show':''}}">
+<!-- <view class="cu-modal {{modalName=='DialogModalchongzhi'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-orange justify-end">
       <view class="content">账户充值</view>
@@ -378,7 +376,7 @@
       </view>
       <view class="cu-bar bg-white justify-center padding-bottom">
         <view class="action">
-          <!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button> -->
+         
           <button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
         </view>
       </view>
@@ -386,7 +384,7 @@
     </form>
 
   </view>
-</view>
+</view> -->
 
 
 <view class="cu-modal {{modalName=='DialogModalrelationship'?'show':''}}">
