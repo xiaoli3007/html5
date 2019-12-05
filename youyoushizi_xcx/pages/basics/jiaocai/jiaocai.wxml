@@ -39,7 +39,7 @@
   <wux-row>
     <wux-col span="10" offset="1">
       <view class="text-left text-xl">
-        <text class="text-grey ">七八九年级</text>
+        <text class="text-grey ">初高中</text>
       </view>
     </wux-col>
   </wux-row>
@@ -53,7 +53,7 @@
             <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession789/jiaocai_lession789">
               <image src='https://rmsp.youyoushizi.com/uploadfile/2019/1202/20191202061848186.jpg' style="width:150rpx;" mode="widthFix">
               </image>
-              <text>七八九年级</text>
+              <text>初中</text>
             </navigator>
           </view>
         </view>

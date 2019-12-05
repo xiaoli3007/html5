@@ -458,21 +458,26 @@ Page({
               url: '/pages/basics/jiaocai_lession789/jiaocai_lession789',
             })
           }
-
-        wx.navigateTo({
-          url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid + '&wcell_type=' + wcell_type,
-        })
+          if (wcell_type != '29') {
+            wx.navigateTo({
+              url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid + '&wcell_type=' + wcell_type,
+            })
+          }
           // //教材生字
           // if (wcell_type == '30') {
           //   wx.navigateTo({
           //     url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid + '&wcell_type=' + wcell_type,
           //   })
           // }
+      }else{
+
+        wx.navigateTo({
+          url: '/pages/basics/detailed/detailed?ebookid=' + jumpebookid,
+        })  
+        
       }
   
-      wx.navigateTo({
-        url: '/pages/basics/detailed/detailed?ebookid=' + jumpebookid,
-      })     
+         
 
     } else {
      

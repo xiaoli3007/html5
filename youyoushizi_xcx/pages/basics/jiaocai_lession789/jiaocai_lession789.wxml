@@ -86,7 +86,7 @@
               <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}" data-wcell_type="30">课文生字</button>
             </wux-col>
             <wux-col span="5" offset="1">
-            <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}" data-wcell_type="25">成语</button>
+            <button class="sm cu-btn bg-green shadow" bindtap="gotodetail" data-jumpebookid="{{item.lid}}" data-wcell_type="25">课文成语</button>
 
             </wux-col>
           </wux-row>

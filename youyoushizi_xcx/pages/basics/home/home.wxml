@@ -5,6 +5,9 @@
 
 <view class="cu-load bg-orange loading" wx:if="{{isLoad}}"></view>
 
+<!-- <image src='http://rms.youyoushizi.com:8088/downdir/14470.svg' mode="widthFix" style="width:50%;">
+              </image>  -->
+
 <wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onPullDownRefresh">
   <scroll-view scroll-y class="scrollPage" class="" style="">
 

@@ -26,7 +26,7 @@
       课文生字
     </view>
     <view class="cu-item text-green"  bindtap='tabSelectshengzi' data-wcell_type="25">
-      成语
+      课文成语
     </view>
 
   </scroll-view>

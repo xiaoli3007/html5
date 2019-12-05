@@ -17,10 +17,17 @@
                    </text>
           </wux-col>
         </wux-row>
+         <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="10" offset="1">
+            <text> 拆字：{{dataArray.chaizi}}
+                   </text>
+          </wux-col>
+        </wux-row>
         <wux-divider show-text="{{ false }}" dashed />
         <wux-row>
           <wux-col span="5" offset="1">
-            <text> 笔画：{{dataArray.bihuaw}}
+            <text> 笔画：{{dataArray.bihuaw}}/{{dataArray.bihua}}
                    </text>
           </wux-col>
           <wux-col span="5" offset="1">
