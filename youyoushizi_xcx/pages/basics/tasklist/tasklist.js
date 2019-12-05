@@ -32,7 +32,7 @@ Page({
     relation_type: '',
     relation_id: 0,
     jiaocailist789: [467767, 467768, 467769	, 467770, 467771, 467772],
-    // jiaocai_ebook_list: [467767, 467768, 467769, 467770, 467771, 467772],
+    jiaocai_ebook_list: [466135, 466136, 466137, 466138, 466139, 466140, 466454, 466455, 466456, 467879, 467880, 467881,467767, 467768, 467769, 467770, 467771, 467772],
   },
   onLoad: function (options) { 
     
@@ -448,22 +448,26 @@ Page({
       // console.log(jumpebookid)
       // console.log(this.data.jiaocailist789)
    
-      // if (this.data.jiaocailist789.indexOf(parseInt(jumpebookid))!= -1){
-      //      wx.navigateTo({
-      //     url: '/pages/basics/jiaocai_lession789/jiaocai_lession789',
-      //   })
-      // }
-      //教材课文生字
-      if (wcell_type =='29') {
+      if (this.data.jiaocai_ebook_list.indexOf(parseInt(jumpebookid))!= -1){
+
+        
+
+          //初中生字
+          if (wcell_type == '29') {
+            wx.navigateTo({
+              url: '/pages/basics/jiaocai_lession789/jiaocai_lession789',
+            })
+          }
+
         wx.navigateTo({
-          url: '/pages/basics/jiaocai_lession789/jiaocai_lession789',
+          url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid + '&wcell_type=' + wcell_type,
         })
-      }
-      //教材生字
-      if (wcell_type == '30') {
-        wx.navigateTo({
-          url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid,
-        })
+          // //教材生字
+          // if (wcell_type == '30') {
+          //   wx.navigateTo({
+          //     url: '/pages/basics/jiaocai_detailed_study/jiaocai_detailed_study?ebookid=' + jumpebookid + '&wcell_type=' + wcell_type,
+          //   })
+          // }
       }
   
       wx.navigateTo({
