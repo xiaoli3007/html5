@@ -101,7 +101,9 @@
 
     <view class=" justify-end align-center" style="flex-basis: 45%;">
       <view>
-        <text class="text-sl text-orange">{{item[1]['value']}}</text>
+        <text wx:if="{{!item[1]['red']}}" class="text-sl text-orange">{{item[1]['value']}}</text>
+        <text wx:if="{{item[1]['red']}}" class="text-sl text-projectlv">{{item[1]['value']}}</text>
+
         <text class="text-grey text-df">{{item[1]['jl']}}</text> </view>
       <view>
         <text class="text-xl text-black text-bold">{{item[1]['name']}}</text> </view>
