@@ -44,7 +44,7 @@ Page({
   
     app.setUserInfo('about');
 
-    console.log(options)
+    // console.log(options)
     let bd_userid = options.userid ? options.userid : 0
 
     var header = {
@@ -65,7 +65,7 @@ Page({
           userid: bd_userid,
         },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           that.setData({
             member_detail: res.data.member_detail,
             countto: res.data.countto,
@@ -137,7 +137,7 @@ Page({
     });
   },
   showModal_deleteuser(e) {
-    console.log(e);
+    // console.log(e);
     this.setData({
       modalName: e.currentTarget.dataset.target,
       duserid: e.currentTarget.dataset.userid,
@@ -162,7 +162,7 @@ Page({
     // })
   },
   showModal_editpw(e) {
-    console.log(e);
+    // console.log(e);
     this.setData({
       modalName: e.currentTarget.dataset.target,
       form: {
@@ -187,7 +187,7 @@ Page({
       }
     })
 
-    console.log(u)
+    // console.log(u)
     // console.log(this.data.pickersex)
    
     let objsex = this.data.pickersex
@@ -213,7 +213,7 @@ Page({
   }, 
 
   formSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
     //校验表单
     if (!this.WxValidate.checkForm(params)) {
@@ -236,7 +236,7 @@ Page({
         confimpasswd: params.confimpasswd,
       },
       success: function (res) {
-        console.log(res);
+        // console.log(res);
 
         if (res.data.code === 20001) {
 
@@ -461,7 +461,7 @@ Page({
   },
 
   formSubmiteditusername: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
     //校验表单
     if (!this.WxValidate3.checkForm(params)) {
@@ -490,7 +490,7 @@ Page({
         nianji: that.data.pickernianji[params.nianji],
       },
       success: function (res) {
-        console.log(res);
+        // console.log(res);
 
         if (res.data.code === 20001) {
 
@@ -523,7 +523,7 @@ Page({
   uploadChooseImage(e) {
     
     let tuserid =  e.currentTarget.dataset.userid
-    let index = e.currentTarget.dataset.index
+    // let index = e.currentTarget.dataset.index
     var that = this 
     // console.log({tuserid,index})
     wx.chooseImage({
@@ -559,7 +559,7 @@ Page({
                 duration: 1500,
               })
             }else{
-              var tprice = 'member_list[' + index + '].avatar'
+              var tprice = 'member_detail.avatar'
               that.setData({
                 [tprice]: data.response.avatar,
               })

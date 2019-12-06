@@ -44,7 +44,7 @@ Page({
       var temptype = 0
       if (options.type ==1){
         var temptype = 1
-        console.log(temptype)
+        // console.log(temptype)
       }
       this.setData({
         type: options.type,
@@ -304,7 +304,7 @@ Page({
       })
 
     }else{
-      console.log(taskid)
+      // console.log(taskid)
       wx.redirectTo({
         url: '/pages/basics/task/task?taskid=' + taskid,
       })

@@ -18,9 +18,9 @@
   <view class="bg-white margin-top-sm padding-top">
     <wux-row bindtap="goto_userdetail" data-username="{{item.username}}" data-val="{{item.userid}}">
       <wux-col span="2" offset="1">
-        <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
+        <view class="cu-avatar round lg"  data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar}}' style="background-image:url({{item.avatar}});"></view>
 
-        <view class="cu-avatar round lg" catchtap="uploadChooseImage" data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar==""}}'>
+        <view class="cu-avatar round lg"  data-index="{{index}}" data-userid="{{item.userid}}" wx:if='{{item.avatar==""}}'>
           <view class="proIcon-iconico_zz  text-white"></view>
         </view>
 

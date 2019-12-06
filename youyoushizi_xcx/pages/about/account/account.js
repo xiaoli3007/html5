@@ -76,7 +76,7 @@ Page({
           uid: app.globalData.uid,
         },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           that.setData({
             member_list: res.data.member_list,
             userid: res.data.main_userid ? String(res.data.main_userid):app.globalData.userid,
@@ -249,7 +249,7 @@ Page({
     })
   },
   showModal_guanxiname(e) {
-    console.log(e);
+    // console.log(e);
     this.setData({
       modalName: e.currentTarget.dataset.target,
       guanxi_id: e.currentTarget.dataset.id,

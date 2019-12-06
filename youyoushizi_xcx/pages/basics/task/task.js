@@ -144,7 +144,7 @@ Page({
           status:0
         },
         success: function (res) {
-           console.log(res);
+          //  console.log(res);
           //进行状态中的进度跳转================================================
           if (res.data.taskinfo.status=='1'){
             let temp_progress_wcellid = null
@@ -152,17 +152,17 @@ Page({
             if (res.data.word_data.survey) {
                temp_progress_wcellid = res.data.word_data.survey.progress_wcellid 
             }
-            console.log(temp_progress_wcellid )
+            // console.log(temp_progress_wcellid )
             if (temp_progress_wcellid){
               let temp_goto_index = 0
               res.data.word_data.word1.forEach(function (value, i) {
                 if (value.wcellid === temp_progress_wcellid) {
-                  temp_goto_index = i
+                  temp_goto_index = i+1
                 }
               })
               if (temp_goto_index>0) {
                 that.setData({
-                  current: temp_goto_index
+                  current: temp_goto_index > res.data.word_data.word1.length - 1 ? res.data.word_data.word1.length - 1 : temp_goto_index
                 })
               }
             }
@@ -449,7 +449,7 @@ Page({
 
    
 
-    console.log(that.data.current)
+    // console.log(that.data.current)
     setTimeout(function () {
       that.loopVoice(that.data.current, that.data.tingxie_loop, that.data.tingxie_loop_time)
     }, 3000)
@@ -478,7 +478,7 @@ Page({
         this.setData({
           current: t_c,
         })
-        console.log(t_c)
+        // console.log(t_c)
         this.loopVoice(t_c, this.data.tingxie_loop, this.data.tingxie_loop_time)
       }
 
@@ -551,13 +551,13 @@ Page({
     
       let times = 0
      secondIAC.onWaiting(() => {
-       console.log("加载语音" + index)
+      //  console.log("加载语音" + index)
        that.setData({
          tingxie_loading_text: '加载语音...',
        })
      })
       secondIAC.onPlay(() => {
-        console.log("播放onPlay" + index + '几次' + times)
+        // console.log("播放onPlay" + index + '几次' + times)
         
         if (this.data.tingxie_auto) {
           that.setData({
@@ -570,7 +570,7 @@ Page({
          
         })
       secondIAC.onEnded(() => {
-        console.log("播放onEnded" + index + '几次' + times)
+        // console.log("播放onEnded" + index + '几次' + times)
           if (times === maxtimes) {
             secondIAC.destroy()
             // secondIAC.stop()
@@ -594,9 +594,9 @@ Page({
           }
           
         })
-     console.log("第一次播放" + index)
+    //  console.log("第一次播放" + index)
       secondIAC.play()
-     console.log("第一次结束播放" + index)
+    //  console.log("第一次结束播放" + index)
   },
 
   audioStart(e) {
@@ -700,7 +700,7 @@ Page({
     
   },
   onChangeKnow(e) {
-    console.log(e.detail)
+    // console.log(e.detail)
     // console.log(this.data.current)
     var tprice = 'konw_current[' + this.data.current + ']'
     this.setData({
@@ -724,7 +724,7 @@ Page({
       },
       success(res) {
 
-        console.log(res.data)
+        // console.log(res.data)
 
       }
     })
@@ -773,7 +773,7 @@ Page({
       },
       success(res) {
 
-        console.log(res.data)
+        // console.log(res.data)
       
       }
     })
@@ -835,9 +835,9 @@ Page({
   onTabsChange(e) {
     // console.log('onTabsChange', e)
     const { key } = e.detail
-    console.log(key)
+    // console.log(key)
     const subcurrent = this.data.tabs.map((n) => n.key).indexOf(key)
-    console.log(subcurrent)
+    // console.log(subcurrent)
     this.setData({
       tabkey: key,
       subcurrent: subcurrent,
@@ -874,10 +874,10 @@ Page({
      // 自定义组件触发事件时提供的detail对象
     // console.log(e)
     var showTwo = this.selectComponent('#mytimes');
-    console.log(showTwo.data.timenum)
+    // console.log(showTwo.data.timenum)
   }, 
   backquiet: function () {
-    console.log(1111)
+    // console.log(1111)
     
   },
   tingxie_end_open() {
@@ -891,7 +891,7 @@ Page({
         text: '重新开始',
         type: 'primary',
         onTap(e) {
-          console.log('你选择了重新开始！')
+          // console.log('你选择了重新开始！')
           that.tingxie_start()
         },
       },
@@ -899,7 +899,7 @@ Page({
         text: '对照错字',
         type: 'primary',
         onTap(e) {
-          console.log('你选择了对照错字！')
+          // console.log('你选择了对照错字！')
           wx.navigateTo({
             url: '/pages/basics/readcheck/readcheck?taskid=' + that.data.taskid,
           })
@@ -920,7 +920,7 @@ Page({
   showModal_word_shiyi(e) {
 
     let item_word = this.data.taskdata.word1[this.data.current]
-    console.log(item_word);
+    // console.log(item_word);
     
     let m = 'DrawerModalL_word'
 
@@ -957,7 +957,7 @@ Page({
   play_any_src(e) {
     let src = e.currentTarget.dataset.msrc
 
-    console.log(src);
+    // console.log(src);
     // let innerAudioContext = wx.createInnerAudioContext()
     // this.data.all_play_c.stop()
     this.data.all_play_c.src = src
@@ -974,7 +974,7 @@ Page({
 
     let item_word = this.data.taskdata.word1[this.data.current]
     let bookcellid = item_word.bookcellid
-     console.log(item_word);
+    //  console.log(item_word);
 
     wx.request({
       url: app.globalData.url + '?act=book_error',
@@ -989,7 +989,7 @@ Page({
       },
       success(res) {
 
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.code === 20000) {
 
           wx.showToast({

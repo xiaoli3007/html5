@@ -124,7 +124,7 @@ Page({
       },
       success(res) {
 
-        console.log(res.data.items)
+        // console.log(res.data.items)
         // that.setData({
         //   categoryArray: res.data.search_linkage_list_xcx,
         //   multisigleIndex: res.data.search_linkage_list_xcx_default,
@@ -154,8 +154,8 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-        console.log('默认加载进来的请求')  
-        console.log(res.data)
+        // console.log('默认加载进来的请求')  
+        // console.log(res.data)
 
         if (res.data.code == 20001 && temp_scan != '') {
           
@@ -336,7 +336,7 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success: function(res) {
-        console.log(res.data)
+        // console.log(res.data)
         if (res.data.code === 20000) {
           
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
@@ -375,7 +375,7 @@ Page({
 
     // console.log(checkedItems)
     // console.log(items)
-    console.log(checkedValues)
+    // console.log(checkedValues)
     checkedValues.forEach((n, i) => {
 
       if (i == 0) {
@@ -411,7 +411,7 @@ Page({
       }
     })
 
-    console.log('params', params)
+    // console.log('params', params)
 
     this.getRepos(params)
   },

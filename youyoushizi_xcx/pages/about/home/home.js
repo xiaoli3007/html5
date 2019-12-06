@@ -19,7 +19,7 @@ Component({
     // 组件所在页面的生命周期函数
     show: function () {
 
-      console.log(111)
+      // console.log(111)
       if (app.globalData.username) {
         this.setData({
           username: app.globalData.username,
@@ -33,10 +33,10 @@ Component({
       }
     },
     hide: function () {
-      console.log(222)
+      // console.log(222)
     },
     resize: function () {
-      console.log(333)
+      // console.log(333)
     },
   },
   lifetimes: {
