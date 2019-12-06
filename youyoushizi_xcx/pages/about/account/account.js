@@ -53,7 +53,9 @@ Page({
     qita_relationship:'',
     abouturl: '/pages/index/index?p=about',
     guanxi_id: 0,
-    guanxi_name:''
+    guanxi_name: '',
+    qita_guanxi_name: '',
+    guanxi_relationList_is: [false, false, false, false, false, false],
   },
   onLoad: function () { 
   
@@ -232,6 +234,36 @@ Page({
       relationboy_name: temp_relationboy_name,
     })
   },
+  guanxiname_bindKeyInput: function (e) {
+    this.setData({
+      guanxi_name: e.detail.value,
+      qita_guanxi_name: e.detail.value
+    })
+    if (e.detail.value != '') {
+      this.setData({
+        guanxi_relationList_is: [false, false, false, false, false, false]
+      })
+    }
+  },
+  onclick_guanxiname_select(e) {
+    console.log(e);
+    let index = e.currentTarget.dataset.index
+    let name = e.currentTarget.dataset.name
+
+    this.setData({
+      guanxi_relationList_is: [false, false, false, false, false, false]
+    })
+    var tprice = 'guanxi_relationList_is[' + index + ']'
+    this.setData({
+      [tprice]: true,
+    })
+    //修改家长的身份名称
+    this.setData({
+      guanxi_name: name,
+      qita_guanxi_name: ''
+    })
+
+  },
   showModal_deleteuser(e) {
     console.log(e);
     this.setData({
@@ -250,10 +282,21 @@ Page({
   },
   showModal_guanxiname(e) {
     // console.log(e);
+
+    let temp_relationboy_userid = e.currentTarget.dataset.userid
+    let temp_relationboy_name = ''
+    this.data.member_list.forEach(function (value, i) {
+      if (value.userid == temp_relationboy_userid) {
+        temp_relationboy_name = value.realname ? value.realname : value.username
+      }
+    })
+    console.log(temp_relationboy_name)
+
     this.setData({
       modalName: e.currentTarget.dataset.target,
       guanxi_id: e.currentTarget.dataset.id,
       guanxi_name: e.currentTarget.dataset.name,
+      guanxi_realname: temp_relationboy_name,
     })
   },
   showModal_editpw(e) {
@@ -803,16 +846,16 @@ Page({
 
 
   },
-  userguanxiformSubmit: function (e) {
+  userguanxiformSubmit (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    const params = e.detail.value
+    // const params = e.detail.value
     var that = this;
     //校验表单
-    if (!this.WxValidate_guanxi.checkForm(params)) {
-      const error = this.WxValidate_guanxi.errorList[0]
-      this.showFormModal(error)
-      return false
-    }
+    // if (!this.WxValidate_guanxi.checkForm(params)) {
+    //   const error = this.WxValidate_guanxi.errorList[0]
+    //   this.showFormModal(error)
+    //   return false
+    // }
     // console.log(that.data.guanxi_id)
 
     // return false
@@ -827,7 +870,7 @@ Page({
       data: {
         wx_id: app.globalData.uid,
         relationship_id: that.data.guanxi_id,
-        name: params.name,
+        name: that.data.guanxi_name,
       },
       success: function (res) {
         console.log(res);
@@ -840,7 +883,14 @@ Page({
 
         } else {
           that.showFormModal({
-            msg: '提交成功'
+            msg: '修改成功'
+          })
+
+          that.setData({
+            guanxi_relationList_is: [false, false, false, false, false, false],
+            guanxi_name:'',
+            qita_guanxi_name: '',
+            guanxi_id: 0,
           })
           that.onLoad()
         }

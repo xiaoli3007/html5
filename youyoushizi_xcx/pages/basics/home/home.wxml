@@ -76,7 +76,7 @@
 
         <view class="flex-sub  padding-sm text-center">
           <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/collection/collection">
-            <view class="proIcon-iconico_me_wdsc_xz home_icon text-orange"></view>
+            <view class="proIcon-iconico_me_wdsc home_icon text-orange"></view>
             <view class="">收藏</view>
           </navigator>
         </view>

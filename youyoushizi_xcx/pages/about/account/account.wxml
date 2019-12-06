@@ -85,15 +85,15 @@
         </view>
       </wux-col>
 
-      <block wx:for="{{item.relationship_user_list}}" wx:key>
+      <block wx:for="{{item.relationship_user_list}}"  wx:for-item="itemrelation" wx:key>
         <wux-col span="3">
-          <view class="text-sm  text-center  text-orange"  catchtap="showModal_guanxiname" data-target="DialogModalguanxiname" data-name="{{item.name}}" data-id="{{item.id}}">
-            <view class="cu-avatar lg round" style="background-image:url({{item.avatar}});">
+          <view class="text-sm  text-center  text-orange"  catchtap="showModal_guanxiname" data-target="DialogModalguanxiname" data-userid="{{item.userid}}"  data-name="{{itemrelation.name}}" data-id="{{itemrelation.id}}">
+            <view class="cu-avatar lg round" style="background-image:url({{itemrelation.avatar}});">
 
             </view>
 
-             <view wx:if='{{item.isadmin==1}}' class="margin-top-xs text-sm  text-center  text-orange"> <text style="" class="proIcon-iconico_zz"></text>{{item.name}}</view>
-            <view wx:if='{{item.isadmin!=1}}' class="margin-top-xs text-sm  text-center  text-orange"> {{item.name}}</view>
+             <view wx:if='{{itemrelation.isadmin==1}}' class="margin-top-xs text-sm  text-center  text-orange"> <text style="" class="proIcon-iconico_zz"></text>{{itemrelation.name}}</view>
+            <view wx:if='{{itemrelation.isadmin!=1}}' class="margin-top-xs text-sm  text-center  text-orange"> {{itemrelation.name}}</view>
 
 
           </view>
@@ -151,6 +151,42 @@
 <view class="cu-modal {{modalName=='DialogModalguanxiname'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-orange justify-end">
+      <view class="content">修改为{{guanxi_realname}}的</view>
+      <view class="action" bindtap="hideModal">
+        <text class="proIcon-iconico_gb text-white"></text>
+      </view>
+    </view>
+
+
+    <view class="padding-sm bg-white">
+      <view class="grid col-2 padding-sm">
+        <view class="margin-tb-sm text-center" wx:for="{{relationList}}" wx:key>
+          <button wx:if="{{!guanxi_relationList_is[index]}}" class="cu-btn round bg-grey " catchtap="onclick_guanxiname_select" data-name="{{item}}" data-index="{{index}}">{{item}}</button>
+          <button wx:if="{{guanxi_relationList_is[index]}}" class="cu-btn round bg-orange ">{{item}}</button>
+        </view>
+      </view>
+
+
+      <view class="solid text-left padding-sm">
+        <input placeholder="其他" name='qita_guanxi_name' bindinput="guanxiname_bindKeyInput" value='{{qita_guanxi_name}}'></input>
+      </view>
+
+
+    </view>
+    <view class="cu-bar bg-white justify-center padding-bottom">
+      <view class="action">
+        <button wx:if="{{guanxi_name==''}}" class="cu-btn round bg-grey lg" style="padding: 0 160rpx;">确定</button>
+        <button wx:if="{{guanxi_name!=''}}" catchtap="userguanxiformSubmit"   class="cu-btn round bg-orange lg" style="padding: 0 160rpx;">确定</button>
+
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- <view class="cu-modal {{modalName=='DialogModalguanxiname'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-orange justify-end">
       <view class="content">名称修改</view>
       <view class="action" bindtap="hideModal">
         <text class="proIcon-iconico_gb text-white"></text>
@@ -180,7 +216,7 @@
     </form>
 
   </view>
-</view>
+</view> -->
 
 <!-- <view class="flex  cu-bar-sun foot">
   <button class="flex-sub cu-btn bg-orange lg" bindtap="showModal" data-target="Dialogadduser">添加账号</button>
