@@ -18,7 +18,7 @@ Page({
     data_item_word:null
   },
   onLoad(options) {
-    console.log(options.wcell_type)
+    // console.log(options.wcell_type)
     let default_wcelltype = 25 
     if (options.wcell_type){
        default_wcelltype = parseInt(options.wcell_type)
@@ -49,7 +49,7 @@ Page({
           }
         })
 
-        console.log(res.data)
+        // console.log(res.data)
 
         that.setData({
           datalist: res.data.items,

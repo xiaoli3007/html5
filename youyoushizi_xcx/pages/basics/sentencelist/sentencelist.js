@@ -35,7 +35,7 @@ Page({
           pagesize: that.data.pagesize,
         },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           that.setData({
             sentence_list: res.data.items,
             
@@ -62,7 +62,6 @@ Page({
  */
   onReachBottom: function () {
 
-    console.log(11)
     if (this.data.isend) { //到底了不在执行
       return
     }
@@ -92,7 +91,7 @@ Page({
       success: function (res) {
         if (res.data.code === 20000) {
 
-          console.log(res.data.items.length)
+          // console.log(res.data.items.length)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,

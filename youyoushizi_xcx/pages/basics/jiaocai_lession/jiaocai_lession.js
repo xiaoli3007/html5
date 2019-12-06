@@ -16,7 +16,7 @@ Page({
   },
   onLoad(options) {
     let that = this;
-    console.log(options)
+    // console.log(options)
     if (options.ebookid){
       that.setData({
 
@@ -43,7 +43,7 @@ Page({
           temp.id = i
           temp_array.push(temp)
         })
-        console.log(temp_array)
+        // console.log(temp_array)
         that.setData({
 
           jiaocaiList: temp_array

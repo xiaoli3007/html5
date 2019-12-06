@@ -18,7 +18,7 @@ Page({
     tablist: [{ name: '简介', value: 'desc' }, { name: '图书', value: 'desc' }, { name: '推荐', value: 'desc' }, { name: '书评', value: 'desc' }]
   },
   onLoad(options) {
-    console.log(options)
+    // console.log(options)
     let that = this;
     //加载列表
     wx.request({
@@ -34,7 +34,7 @@ Page({
       success(res) {
 
         // let arr = res.data.items
-        console.log(res.data)
+        // console.log(res.data)
         // console.log(Object.keys(arr));
         // arr.forEach(function (value, i) {
         //   　　console.log('forEach遍历:' + i );

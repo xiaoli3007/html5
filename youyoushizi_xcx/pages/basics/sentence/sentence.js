@@ -11,7 +11,7 @@ Page({
     tasjlisturl: '/pages/basics/sentencelist/sentencelist',
   },
   onLoad(options) {
-    console.log(options)
+    // console.log(options)
     let that = this;
     //加载列表
     wx.request({
@@ -37,7 +37,7 @@ Page({
 
         
        
-        console.log(res.data)
+        // console.log(res.data)
         that.setData({
           sentence_info: res.data.sentence_info,
         }) 

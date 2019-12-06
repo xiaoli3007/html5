@@ -25,7 +25,7 @@ App({
           wx.getStorage({
             key: 'usertoken',
             success(res) {
-              console.log(res.data)
+              // console.log(res.data)
               var t = res.data
               if (t){
                 //通过token获取用户
@@ -42,7 +42,7 @@ App({
                   success: function (res) {
                     
                     if (res.data.code === 20000) {
-                      console.log(res);
+                      // console.log(res);
                          that.globalData.uid = res.data.items.wx_id;
                        that.globalData.userid = res.data.items.userid;
                       that.globalData.username = res.data.items.username;

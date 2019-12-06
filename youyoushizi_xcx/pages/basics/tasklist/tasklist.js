@@ -37,7 +37,7 @@ Page({
   onLoad: function (options) { 
     
     app.setUserInfo('about');
-    console.log(options.type)
+    // console.log(options.type)
     var stemptype = 2
 
     if (options.type){
@@ -54,7 +54,7 @@ Page({
       stemptype = options.type
     }
 
-    console.log(this.data.type)
+    // console.log(this.data.type)
 
     var that = this;
     if (app.globalData.userid) {

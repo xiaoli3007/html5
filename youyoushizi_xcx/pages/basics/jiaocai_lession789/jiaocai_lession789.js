@@ -15,7 +15,7 @@ Page({
   },
   onLoad(options) {
 
-    console.log(options)
+    // console.log(options)
     let that = this;
     //加载列表  
     wx.request({
@@ -29,7 +29,7 @@ Page({
       }, 
       success(res) {
 
-        console.log( res.data.items)
+        // console.log( res.data.items)
         var temp_array = []
         res.data.items.forEach(function (value, i) {
           let temp = value
@@ -116,7 +116,7 @@ Page({
 
      let wcell_type = e.currentTarget.dataset.wcell_type
 
-    console.log({ jumpebookid, wcell_type})
+    // console.log({ jumpebookid, wcell_type})
     //  return false
     var that = this
  

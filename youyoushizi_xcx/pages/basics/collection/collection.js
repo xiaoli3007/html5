@@ -62,7 +62,7 @@ Page({
            pagesize: that.data.pagesize,
          },
         success: function (res) {
-          console.log(res);
+          // console.log(res);
           that.setData({
             collection_list: res.data.items,
             })
@@ -214,7 +214,7 @@ Page({
       type: this.data.typelist[e.currentTarget.dataset.id],
     })
     
-    console.log(this.data.type)
+    // console.log(this.data.type)
 
     var that = this;
     wx.request({
@@ -231,7 +231,7 @@ Page({
       },
       success: function (res) {
         if (res.data.code === 20000) {
-          console.log(res.data.items.length)
+          // console.log(res.data.items.length)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,

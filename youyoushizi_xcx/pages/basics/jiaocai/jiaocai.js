@@ -25,7 +25,7 @@ Page({
       },
       success(res) {
 
-        console.log(res.data)
+        // console.log(res.data)
         
         let temptab = []
         for (var i = 0; i < res.data.items.length;i++){

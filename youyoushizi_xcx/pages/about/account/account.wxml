@@ -151,7 +151,7 @@
 <view class="cu-modal {{modalName=='DialogModalguanxiname'?'show':''}}">
   <view class="cu-dialog">
     <view class="cu-bar bg-orange justify-end">
-      <view class="content">关系名称修改</view>
+      <view class="content">名称修改</view>
       <view class="action" bindtap="hideModal">
         <text class="proIcon-iconico_gb text-white"></text>
       </view>

@@ -50,7 +50,7 @@ Page({
   },
   onLoad: function (options) {
 
-    console.log(1111)
+    // console.log(1111)
 
     var that = this;
 
@@ -109,7 +109,7 @@ Page({
  */
   onReachBottom: function () {
 
-    console.log(11)
+    // console.log(11)
     if (this.data.isend) { //到底了不在执行
       return
     }
@@ -140,7 +140,7 @@ Page({
       success: function (res) {
         if (res.data.code === 20000) {
 
-          console.log(res.data.items.length)
+          // console.log(res.data.items.length)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
@@ -233,7 +233,7 @@ Page({
 
     let programid = e.currentTarget.dataset.programid
     var that = this
-    console.log(programid)
+    // console.log(programid)
 
     wx.navigateTo({
       url: '/pages/basics/author/author?authorid=' + programid,
