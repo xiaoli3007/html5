@@ -560,12 +560,14 @@ Page({
 
       name: {
         required: true,
+        maxlength: 8
       },
     }
     const guanximessages = {
 
       name: {
         required: '请填写名称',
+        maxlength: '名称太长',
       }
     }
     this.WxValidate_guanxi = new WxValidate(guanxi, guanximessages)
@@ -802,16 +804,17 @@ Page({
   userguanxiformSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
-    
+    var that = this;
     //校验表单
     if (!this.WxValidate_guanxi.checkForm(params)) {
       const error = this.WxValidate_guanxi.errorList[0]
       this.showFormModal(error)
       return false
     }
+    // console.log(that.data.guanxi_id)
 
-    return false
-    var that = this;
+    // return false
+    
     wx.request({
       url: app.globalData.url2 + '?act=wx_edit_relationship_name',
       method: 'POST',
