@@ -51,7 +51,9 @@ Page({
     relationboy_userid: 0,
     relationList_is: [false,false,false,false,false,false],
     qita_relationship:'',
-    abouturl: '/pages/index/index?p=about'
+    abouturl: '/pages/index/index?p=about',
+    guanxi_id: 0,
+    guanxi_name:''
   },
   onLoad: function () { 
   
@@ -244,6 +246,14 @@ Page({
       modalName: e.currentTarget.dataset.target,
       chongzhiuserid: e.currentTarget.dataset.userid,
       chongzhiusername: e.currentTarget.dataset.username,
+    })
+  },
+  showModal_guanxiname(e) {
+    console.log(e);
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      guanxi_id: e.currentTarget.dataset.id,
+      guanxi_name: e.currentTarget.dataset.name,
     })
   },
   showModal_editpw(e) {
@@ -546,6 +556,21 @@ Page({
     }
     this.WxValidate4 = new WxValidate(chongzhi, messages4)
 
+    const guanxi = {
+
+      name: {
+        required: true,
+      },
+    }
+    const guanximessages = {
+
+      name: {
+        required: '请填写名称',
+      }
+    }
+    this.WxValidate_guanxi = new WxValidate(guanxi, guanximessages)
+
+    
   },
   userchongzhiformSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
@@ -769,6 +794,58 @@ Page({
         // })
         //console.log(res.statusCode)
        
+      }
+    });
+
+
+  },
+  userguanxiformSubmit: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+    const params = e.detail.value
+    
+    //校验表单
+    if (!this.WxValidate_guanxi.checkForm(params)) {
+      const error = this.WxValidate_guanxi.errorList[0]
+      this.showFormModal(error)
+      return false
+    }
+
+    return false
+    var that = this;
+    wx.request({
+      url: app.globalData.url2 + '?act=wx_edit_relationship_name',
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      data: {
+        wx_id: app.globalData.uid,
+        relationship_id: that.data.guanxi_id,
+        name: params.name,
+      },
+      success: function (res) {
+        console.log(res);
+
+        if (res.data.code === 20001) {
+
+          that.showFormModal({
+            msg: res.data.message
+          })
+
+        } else {
+          that.showFormModal({
+            msg: '提交成功'
+          })
+          that.onLoad()
+        }
+
+      }, complete(res) {
+
+        that.setData({
+          modalName: null
+        })
+
       }
     });
 
