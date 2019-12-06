@@ -40,6 +40,7 @@ Component({
     skin: false,
     gridBorder: false,
     username:'我',
+    realname: '我',
     isLoad: false,
 
   },
@@ -65,6 +66,11 @@ Component({
       if (app.globalData.username) {
         this.setData({
           username: app.globalData.username,
+        })
+      }
+      if (app.globalData.realname) {
+        this.setData({
+          realname: app.globalData.realname,
         })
       }
 

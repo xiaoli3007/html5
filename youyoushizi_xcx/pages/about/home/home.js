@@ -13,6 +13,7 @@ Component({
     hasUserInfo: false,
     username:null,
     avatar:null,
+    realname: null,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   pageLifetimes: {
@@ -31,6 +32,13 @@ Component({
           avatar: app.globalData.avatar,
         })
       }
+      console.log(app.globalData.realname)
+      if (app.globalData.realname) {
+        this.setData({
+          realname: app.globalData.realname,
+        })
+      }
+
     },
     hide: function () {
       // console.log(222)
@@ -52,7 +60,12 @@ Component({
           avatar: app.globalData.avatar,
         })
       }
-      // console.log(app.globalData.avatar)
+      if (app.globalData.realname) {
+        this.setData({
+          realname: app.globalData.realname,
+        })
+      }
+      console.log(app.globalData.realname)
      
      
 
@@ -122,10 +135,12 @@ Component({
                 app.globalData.userInfo = res.data.items;
                 app.globalData.username = res.data.items.username;
                 app.globalData.avatar = res.data.items.avatar;
+                app.globalData.realname = res.data.items.realname;
                 console.log(res);
                 that.setData({
                   userInfo: res.data.items,
                   username: res.data.items.username,
+                  realname: res.data.items.realname,
                   avatar: res.data.items.avatar,
                   loadModal: false,
                 })
@@ -145,6 +160,15 @@ Component({
           }
         }
       })
+    },
+    gotodeteil(e) {
+
+   
+
+      wx.navigateTo({
+        url: '/pages/about/account/account',
+      })
+
     },
 
   } 

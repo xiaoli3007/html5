@@ -329,9 +329,11 @@ Page({
             userid: app.globalData.userid,
           },
           success: function (res) {
-            console.log(res);
+            console.log(res.data.userinfo);
             app.globalData.username = res.data.username;
             app.globalData.avatar = res.data.userinfo.avatar;
+            app.globalData.realname = res.data.userinfo.realname;
+            console.log(app.globalData.realname);
             //更新当前应用的session
             if (res.data.token) {
               wx.setStorage({

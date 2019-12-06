@@ -99,6 +99,7 @@ App({
     uid: null,
     userid: null, 
     username: null, 
+    realname: null,
     avatar: null, 
     openid: '',
     spid: 0,

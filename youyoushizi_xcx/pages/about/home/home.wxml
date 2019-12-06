@@ -2,11 +2,13 @@
   <view class="UCenter-bg">
     <!-- <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}}" class="png" mode="widthFix"></image> -->
 
-    <view class="cu-avatar xl round" style="background-image:url({{avatar?avatar:'/images/logo.png'}});"></view>
+    <view wx:if="{{!username}}" class="cu-avatar xl round" style="background-image:url({{avatar?avatar:'/images/logo.png'}});"></view>
+
+    <view wx:if="{{username}}" bindtap="gotodeteil" class="cu-avatar xl round" style="background-image:url({{avatar?avatar:'/images/logo.png'}});"></view>
  
 
     <view class="text-xl">
-      <text class="text-df"> {{username?username:'未登录'}}</text>
+      <text class="text-df"> {{realname?realname:'未登录'}}</text>
     </view>
 <view class="text-xl">
      <button wx:if="{{!username}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-btn"> 登录 </button>
