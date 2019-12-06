@@ -32,7 +32,7 @@ Component({
           avatar: app.globalData.avatar,
         })
       }
-      console.log(app.globalData.realname)
+      // console.log(app.globalData.realname)
       if (app.globalData.realname) {
         this.setData({
           realname: app.globalData.realname,
@@ -65,7 +65,7 @@ Component({
           realname: app.globalData.realname,
         })
       }
-      console.log(app.globalData.realname)
+      // console.log(app.globalData.realname)
      
      
 

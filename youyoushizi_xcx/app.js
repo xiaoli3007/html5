@@ -47,6 +47,7 @@ App({
                        that.globalData.userid = res.data.items.userid;
                       that.globalData.username = res.data.items.username;
                       that.globalData.avatar = res.data.items.avatar;
+                      that.globalData.realname = res.data.items.realname;
                       // that.globalData.openid = res.data.items.routine_openid;
                       // that.globalData.userInfo = res.data.items;
                       
