@@ -188,13 +188,15 @@ Component({
                     app.globalData.username = res.data.userinfo.username;
                     app.globalData.avatar = res.data.userinfo.avatar;
                     app.globalData.realname = res.data.userinfo.realname;
+                    that.setData({
+                      realname: res.data.userinfo.realname                   
+                    })
                   }
 
                   that.setData({
 
                     kewaiduwuList: res.data.items.duwu,
                     jiaocaiList: res.data.items.jiaocai,
-                    realname: res.data.userinfo.realname
                     // tuijianduwuList: res.data.items.tuijian_duwu,
 
                   })
