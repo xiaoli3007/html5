@@ -1026,9 +1026,11 @@ Page({
         type: 'primary',
         onTap(e) {
           console.log('你选择了返回任务列表！')
-          wx.redirectTo({
-            url: '/pages/basics/tasklist/tasklist',
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '/pages/basics/tasklist/tasklist',
+            })
+          }, 300)
         },
       },
       {

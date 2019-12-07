@@ -625,9 +625,11 @@ Page({
         })
         // that.onLoad({ 'userid': that.data.userid })
 
-        wx.redirectTo({
-          url: '/pages/about/account/account',
-        })
+        setTimeout(() => {
+          wx.redirectTo({
+            url: '/pages/about/account/account',
+          })
+        }, 300)
 
       },
       complete(res) {

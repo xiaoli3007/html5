@@ -296,18 +296,26 @@ Page({
         confirmText: '好的',
         success: res => {
           if (res.confirm) {
-            wx.redirectTo({
-              url: '/pages/basics/task/task?taskid=' + taskid,
-            })
+
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '/pages/basics/task/task?taskid=' + taskid,
+              })
+            }, 300)
+           
           }
         }
       })
 
     }else{
       // console.log(taskid)
-      wx.redirectTo({
-        url: '/pages/basics/task/task?taskid=' + taskid,
-      })
+
+      setTimeout(() => {
+        wx.redirectTo({
+          url: '/pages/basics/task/task?taskid=' + taskid,
+        })
+      }, 300)
+     
 
     }
     

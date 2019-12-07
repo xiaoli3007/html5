@@ -165,7 +165,7 @@ Component({
         wx.getStorage({
           key: 'usertoken',
           success(res) {
-            console.log(res.data)
+            // console.log(res.data)
             var t = res.data
             if (t) {
               //通过token获取用户
@@ -181,7 +181,7 @@ Component({
                 },
                 success(res) {
  
-                  console.log(res.data)
+                  // console.log(res.data)
                   if (res.data.userinfo) {
                     app.globalData.uid = res.data.userinfo.wx_id;
                     app.globalData.userid = res.data.userinfo.userid;
@@ -194,6 +194,7 @@ Component({
 
                     kewaiduwuList: res.data.items.duwu,
                     jiaocaiList: res.data.items.jiaocai,
+                    realname: res.data.userinfo.realname
                     // tuijianduwuList: res.data.items.tuijian_duwu,
 
                   })
@@ -289,7 +290,7 @@ Component({
         },
         success(res) {
 
-          console.log(res.data)
+          // console.log(res.data)
 
           that.setData({
 

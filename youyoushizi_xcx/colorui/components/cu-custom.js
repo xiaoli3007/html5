@@ -60,9 +60,11 @@ Component({
     },
     toUrl() {
       // console.log(this.data.curl)
-      wx.redirectTo({
-        url: this.data.curl,
-      })
+      setTimeout(() => {
+        wx.redirectTo({
+          url: this.data.curl,
+        })
+      }, 300)
     }
   }
 })
