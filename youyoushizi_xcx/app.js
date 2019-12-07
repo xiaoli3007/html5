@@ -12,7 +12,7 @@ App({
       }
     })
 
-    // 获取用户信息
+    // 获取用户信息 
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -22,62 +22,68 @@ App({
           //   key: "usertoken",
           //   data: 'fc0a7ab52ca15ab5ae066e381cef904f6524e70c'
           // }) 
-          wx.getStorage({
-            key: 'usertoken',
-            success(res) {
-              // console.log(res.data)
-              var t = res.data
-              if (t){
-                //通过token获取用户
-                wx.request({
-                  url: that.globalData.url2 + '?act=session_get_userinfo',
-                  method: 'POST',
-                  header: {
-                    'content-type': 'application/x-www-form-urlencoded', // 默认值
-                    'X-Token': that.globalData.xtoken
-                  },
-                  data: {
-                    token: t,
-                  },
-                  success: function (res) {
+
+
+
+          // wx.getStorage({
+          //   key: 'usertoken',
+          //   success(res) {
+          //      console.log(res.data)
+          //     var t = res.data
+          //     if (t){
+          //       //通过token获取用户
+          //       wx.request({
+          //         url: that.globalData.url2 + '?act=session_get_userinfo',
+          //         method: 'POST',
+          //         header: {
+          //           'content-type': 'application/x-www-form-urlencoded', // 默认值
+          //           'X-Token': that.globalData.xtoken
+          //         },
+          //         data: {
+          //           token: t,
+          //         },
+          //         success: function (res) {
                     
-                    if (res.data.code === 20000) {
-                      // console.log(res);
-                         that.globalData.uid = res.data.items.wx_id;
-                       that.globalData.userid = res.data.items.userid;
-                      that.globalData.username = res.data.items.username;
-                      that.globalData.avatar = res.data.items.avatar;
-                      that.globalData.realname = res.data.items.realname;
-                      // that.globalData.openid = res.data.items.routine_openid;
-                      // that.globalData.userInfo = res.data.items;
+          //           if (res.data.code === 20000) {
+          //             // console.log(res);
+          //                that.globalData.uid = res.data.items.wx_id;
+          //              that.globalData.userid = res.data.items.userid;
+          //             that.globalData.username = res.data.items.username;
+          //             that.globalData.avatar = res.data.items.avatar;
+          //             that.globalData.realname = res.data.items.realname;
+          //             // that.globalData.openid = res.data.items.routine_openid;
+          //             // that.globalData.userInfo = res.data.items;
                       
 
-                    } else {
-                      // wx.showToast({
-                      //   title: res.data.message,
-                      //   icon: 'none',
-                      //   duration: 1500,
-                      // })
-                      wx.removeStorage({
-                        key: 'usertoken',
-                        success(res) {
-                          console.log('删除过期token1') 
-                        }
-                      })
+          //           } else {
+          //             // wx.showToast({
+          //             //   title: res.data.message,
+          //             //   icon: 'none',
+          //             //   duration: 1500,
+          //             // })
+          //             wx.removeStorage({
+          //               key: 'usertoken',
+          //               success(res) {
+          //                 console.log('删除过期token1') 
+          //               }
+          //             })
         
-                    }
+          //           }
 
-                  },
-                  complete(res) {
+          //         },
+          //         complete(res) {
 
-                  }
-                })
-              } 
-            },
-            fail(failres) {
-              console.log(failres)
-            }
-          })
+          //         }
+          //       })
+          //     } 
+          //   },
+          //   fail(failres) {
+          //     console.log(failres)
+          //   }
+          // })
+
+
+
           // wx.getUserInfo({
           //   success: res => {
           //     console.log(res);
