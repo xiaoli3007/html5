@@ -61,7 +61,7 @@ Component({
     toUrl() {
       // console.log(this.data.curl)
       setTimeout(() => {
-        wx.redirectTo({
+        wx.reLaunch({
           url: this.data.curl,
         })
       }, 300)

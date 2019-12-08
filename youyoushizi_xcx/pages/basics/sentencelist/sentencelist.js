@@ -215,8 +215,8 @@ Page({
     wx.navigateTo({
       url: '/pages/basics/sentence/sentence?sentenceid=' + programid + '&dword=' + that.data.keywords,
     })
-
-  },
+ 
+  }, 
 
 
   gotodeteil_cidian(e) {
