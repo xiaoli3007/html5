@@ -298,7 +298,7 @@ Page({
           if (res.confirm) {
 
             setTimeout(() => {
-              wx.redirectTo({
+              wx.navigateTo({
                 url: '/pages/basics/task/task?taskid=' + taskid,
               })
             }, 300)
@@ -311,7 +311,7 @@ Page({
       // console.log(taskid)
 
       setTimeout(() => {
-        wx.redirectTo({
+        wx.navigateTo({
           url: '/pages/basics/task/task?taskid=' + taskid,
         })
       }, 300)

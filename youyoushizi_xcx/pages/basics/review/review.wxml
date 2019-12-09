@@ -193,83 +193,12 @@
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
     <my-chengyu dataArray="{{data_item_word.word_show_detail}}" > </my-chengyu>
-      <!-- <view class="itemcontent text-left">
-        <wux-white-space size="default" />
-        <wux-white-space size="default" />
-
-        <wux-white-space size="default" />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 注音： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.zhuyin}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 出处： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.chuchu}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 释义： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.shiyi}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 实例： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.shili}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-      </view> -->
+    
     </scroll-view>
   </view>
 </view>
 
 
-
-
-<!-- <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
-  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
-    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-      <view class="itemcontent text-left">
-        <wux-white-space size="default" />
-        <wux-white-space size="default" />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text>拼音：</text>
-          </wux-col>
-          <wux-col span="8">
-            {{data_item_dword.dword_show_detail.pinyin}}
-          </wux-col>
-        </wux-row>
-        <wux-white-space size="default" />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 释义： </text>
-          </wux-col>
-          <wux-col span="8">
-            <text> {{data_item_dword.dword_show_detail.shiyi}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-      </view>
-    </scroll-view>
-  </view>
-</view> -->
 
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">

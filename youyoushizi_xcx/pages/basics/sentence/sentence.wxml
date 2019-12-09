@@ -1,5 +1,6 @@
 <wxs src="../../../utils/common.wxs" module="common" />
-<cu-custom bgColor="bg-orange" isurl="{{true}}" curl="{{tasjlisturl}}">
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+<!-- <cu-custom bgColor="bg-orange" isurl="{{true}}" curl="{{tasjlisturl}}"> -->
   <view slot="backText">返回</view>
   <view slot="content">例句详细页</view>
 </cu-custom>
