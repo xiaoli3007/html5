@@ -1030,7 +1030,7 @@ Page({
             wx.redirectTo({
               url: '/pages/basics/tasklist/tasklist',
             })
-          }, 300)
+          }, 500)
         },
       },
       {

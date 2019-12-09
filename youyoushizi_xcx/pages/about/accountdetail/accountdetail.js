@@ -629,7 +629,7 @@ Page({
           wx.redirectTo({
             url: '/pages/about/account/account',
           })
-        }, 300)
+        }, 500)
 
       },
       complete(res) {
