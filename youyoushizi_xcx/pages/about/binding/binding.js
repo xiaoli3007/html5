@@ -60,7 +60,7 @@ Page({
             wx.redirectTo({
               url: '/pages/about/account/account'
             })
-          }, 300)
+          }, 500)
 
         } else {
           
@@ -69,10 +69,11 @@ Page({
             icon: 'none',
             duration: 1500,
           })
-
-          wx.navigateTo({
-            url: '/pages/about/account/account'
-          })
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '/pages/about/account/account'
+            })
+          }, 500)
         }
 
       },

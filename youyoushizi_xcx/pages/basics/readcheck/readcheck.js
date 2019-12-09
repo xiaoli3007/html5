@@ -128,7 +128,7 @@ Page({
           duration: 1500,
         })
         setTimeout(function () {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/basics/tasklist/tasklist',
           })
         }, 500)
