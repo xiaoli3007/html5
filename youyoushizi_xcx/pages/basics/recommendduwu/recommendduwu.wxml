@@ -15,7 +15,7 @@
   <view class="search-form round">
     <text class="cuIcon-search"></text>
     <input type="text" placeholder="图书标题或作者" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}' bindconfirm="search_keyword" ></input>
-    <text class="cuIcon-roundclosefill" wx:if="{{ search_clear && keywords && keywords.length > 0 }}"  bindtap="onClear" style="font-size:36rpx;"></text>
+    <text class="cuIcon-roundclosefill " wx:if="{{ search_clear && keywords && keywords.length > 0 }}"  bindtap="onClear" style="font-size:36rpx;color:#ddd;"></text>
   </view>
   <view class="action">
     <!-- <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button> -->
