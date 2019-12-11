@@ -104,7 +104,10 @@ Page({
     list_select_value: [],
     scan_code:'',
     listorder: '',
-    orderby: ''
+    orderby: '',
+    cursor:5,
+    search_clear: false,
+     inputFocus: false,
   },
   onLoad(options) {
 
@@ -305,16 +308,31 @@ Page({
     })
   },
   bindKeyInput: function(e) {
+    // console.log(e)
     this.setData({
+      search_clear: true,
       keywords: e.detail.value
+    })
+  },
+  onClear: function (e) {
+    this.setData({
+      keywords: '',
+      search_clear: false,
+      // inputFocus: false,
     })
   },
   /**
    * 搜索函数
    */
-  search_keyword: function() {
-    // console.log(this.data.list_select_value)
-    // console.log(this.data.keywords)
+  search_keyword: function(e) {
+    // console.log(e)
+    // // console.log(this.data.keywords)
+    // if (e){
+    //   this.setData({
+    //     keywords: e.detail.value
+    //   })
+    // }
+    
     var that = this;
     this.setData({
       isLoad: false,
@@ -534,5 +552,14 @@ Page({
       wx.navigateTo({
         url: '/pages/basics/detailed/detailed?ebookid=' + programid,
       })
+  },
+  search_focus: function (e) {
+
+    console.log(e)
+    let l = e.detail.value.length
+    console.log(l)
+    this.setData({
+      cursor: l
+    })
   },
 })
