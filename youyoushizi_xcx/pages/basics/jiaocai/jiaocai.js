@@ -13,6 +13,9 @@ Page({
   }, 
   onLoad() {
     let that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     //加载教材列表
     wx.request({
       url: app.globalData.url2 + '?act=jiaocai_cat_list', //教材
@@ -25,7 +28,7 @@ Page({
       },
       success(res) {
 
-        // console.log(res.data)
+         console.log(res.data)
         
         let temptab = []
         for (var i = 0; i < res.data.items.length;i++){
@@ -45,6 +48,9 @@ Page({
 
           loadModal: false
         })
+
+        wx.hideLoading()
+
         //console.log(res.statusCode)
         if (res.statusCode == 500) {
 

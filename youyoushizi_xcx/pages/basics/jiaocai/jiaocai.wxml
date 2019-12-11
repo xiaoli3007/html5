@@ -22,11 +22,19 @@
       <view class="text-left text-xl">
         <view class="cu-list grid col-2 bradius   no-border">
           <view class="cu-item  justify-center align-center" wx:for="{{item.items}}" wx:key>
-            <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
+
+           <navigator wx:if="{{!item.ischuz}}" class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession/jiaocai_lession?ebookid={{item.id}}">
               <image src='{{item.thumb}}' style="width:150rpx;" mode="widthFix">
               </image>
               <text>{{item.title}}</text>
             </navigator>
+
+            <navigator wx:if="{{item.ischuz}}" class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/jiaocai_lession789/jiaocai_lession789">
+              <image src='{{item.thumb}}' style="width:150rpx;" mode="widthFix">
+              </image>
+              <text>{{item.title}}</text>
+            </navigator> 
+
           </view>
         </view>
       </view>
@@ -36,7 +44,7 @@
 </block>
 
 
-  <wux-row>
+  <!-- <wux-row>
     <wux-col span="10" offset="1">
       <view class="text-left text-xl">
         <text class="text-grey ">初高中</text>
@@ -60,7 +68,7 @@
       </view>
     </wux-col>
   </wux-row>
-   <wux-white-space size="default" />
+   <wux-white-space size="default" /> -->
 
 
 </view>

@@ -23,6 +23,9 @@ Page({
         ebookid: options.ebookid
       })
     }
+    wx.showLoading({
+      title: '加载中',
+    })
     //加载列表  
     wx.request({
       url: app.globalData.url2 + '?act=jiaocai_sub_lession', 
@@ -55,6 +58,7 @@ Page({
 
           loadModal: false
         })
+        wx.hideLoading()
         //console.log(res.statusCode)
         if (res.statusCode == 500) {
 
