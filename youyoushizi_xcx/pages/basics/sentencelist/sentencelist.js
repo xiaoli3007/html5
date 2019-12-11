@@ -9,7 +9,7 @@ Page({
     sentence_list: [],
     loadModal: true,
     page: 1,
-    isLoad: true,
+    isLoad: false,
     pagesize: 15,
     isend: false,
     keywords: '',
@@ -36,6 +36,12 @@ Page({
         },
         success: function (res) {
           // console.log(res);
+          if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
+            that.setData({
+              isLoad: true,
+              isend: true,
+            })
+          }
           that.setData({
             sentence_list: res.data.items,
             

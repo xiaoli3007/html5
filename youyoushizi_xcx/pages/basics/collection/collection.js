@@ -9,7 +9,7 @@ Page({
     collection_list:[],
     loadModal: true,
     page: 1,
-    isLoad: true,
+    isLoad: false,
     pagesize: 15,
     isend: false,
     keywords: '',
@@ -63,6 +63,15 @@ Page({
          },
         success: function (res) {
           // console.log(res);
+
+          console.log(res.data.items.length)
+          if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
+            that.setData({
+              isLoad: true,
+              isend: true,
+            })
+          }
+          
           that.setData({
             collection_list: res.data.items,
             })

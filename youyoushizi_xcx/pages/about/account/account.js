@@ -68,6 +68,9 @@ Page({
     that.setData({
       loadModal: true
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     if (app.globalData.uid) {
 
        wx.request({
@@ -88,6 +91,7 @@ Page({
            that.setData({
              loadModal: false
            })
+          wx.hideLoading()
            
 
          }

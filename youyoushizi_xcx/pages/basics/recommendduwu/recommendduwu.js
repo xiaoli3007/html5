@@ -93,7 +93,7 @@ Page({
     duwuList: [],
     loadModal: true,
     page: 1,
-    isLoad: true,
+    isLoad: false,
     pagesize: 8,
     isend: false,
     keywords: '',
@@ -139,7 +139,9 @@ Page({
         // console.log(that.data.searchitems)
       }
     })
-
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
     //加载列表
     wx.request({
       url: app.globalData.url + '?act=getbookrecommendlist',
@@ -188,6 +190,9 @@ Page({
 
       },
       complete(res) {
+        
+        // wx.hideLoading()
+
         that.setData({
 
           loadModal: false

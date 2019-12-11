@@ -55,6 +55,9 @@ Page({
     that.setData({
       loadModal: true
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     if (bd_userid) {
 
        wx.request({
@@ -76,6 +79,7 @@ Page({
            that.setData({
              loadModal: false
            })
+          wx.hideLoading()
            
 
          }

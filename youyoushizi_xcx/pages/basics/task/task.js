@@ -124,6 +124,9 @@ Page({
     // console.log(methd)
     // console.log(apiurl)
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     if (app.globalData.userid) {
 
       wx.request({
@@ -223,6 +226,7 @@ Page({
 
             loadModal: false
           })
+          wx.hideLoading()
           //console.log(res.statusCode)
           if (res.statusCode == 500) {
             wx.showToast({
