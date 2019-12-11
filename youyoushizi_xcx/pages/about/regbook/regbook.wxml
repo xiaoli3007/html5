@@ -46,12 +46,17 @@
 	</view>
 
 
-    <view class="cu-bar  bg-orange justify-center  foot" >
+    <!-- <view class="cu-bar  bg-orange justify-center  foot" >
     
 
       <button class="cu-btn lg bg-orange "  form-type="submit">提交</button>
  
-  </view>
+  </view> -->
+
+    <view class="flex flex-direction cu-bar-sun foot">
+  <button class="cu-btn lg bg-orange "  form-type="submit">提交</button>
+</view>
+
 
   </form>
 

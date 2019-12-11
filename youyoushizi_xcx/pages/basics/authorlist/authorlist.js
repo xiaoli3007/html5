@@ -47,6 +47,8 @@ Page({
       },
     ],
     list_select_value: [],
+    search_clear: false,
+    inputFocus: false,
   },
   onLoad: function (options) {
 
@@ -173,9 +175,19 @@ Page({
       }
     })
   },
+
   bindKeyInput: function (e) {
+    // console.log(e)
     this.setData({
+      search_clear: true,
       keywords: e.detail.value
+    })
+  },
+  onClear: function (e) {
+    this.setData({
+      keywords: '',
+      search_clear: false,
+      // inputFocus: false,
     })
   },
   /**
