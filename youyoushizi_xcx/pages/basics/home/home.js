@@ -331,6 +331,14 @@ Component({
     onPulling() {
       console.log('onPulling')
     },
+
+    gotodetail(e) {
+
+        wx.navigateTo({
+          url: '/pages/basics/recommendduwu/recommendduwu',
+        })
+
+    },
     // onRefresh() {
     //   console.log('onRefresh')
     //   // var that = this 

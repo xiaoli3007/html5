@@ -113,7 +113,7 @@
 
 
     <view class="cu-bar bg-white  ">
-      <view class="action">
+      <view class="action" bindtap="gotodetail">
         <!-- <text class="cuIcon-title text-orange "></text> -->
         课外读物
       </view>

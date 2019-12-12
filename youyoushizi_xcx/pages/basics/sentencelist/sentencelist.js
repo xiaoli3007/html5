@@ -157,6 +157,9 @@ Page({
       isend: false,
       loadModal: true,
     })
+    wx.showLoading({
+      title: '加载中',
+    })
     // 页数+1
     this.setData({
       page: 1
@@ -213,6 +216,8 @@ Page({
           })
         }
       }, complete(res) {
+
+        wx.hideLoading()
         that.setData({
 
           loadModal: false
