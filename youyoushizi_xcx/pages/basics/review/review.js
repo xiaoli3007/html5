@@ -72,6 +72,7 @@ Page({
     if (app.globalData.userid) {
       wx.showLoading({
         title: '加载中',
+        mask: true
       })  
       wx.request({
         url: apiurl,
@@ -162,7 +163,7 @@ Page({
 
             loadModal: false
           })
-          wx.hideLoading()
+           wx.hideLoading()
           //console.log(res.statusCode)
           if (res.statusCode == 500) {
 
