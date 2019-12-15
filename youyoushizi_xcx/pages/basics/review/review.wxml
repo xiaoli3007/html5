@@ -113,7 +113,7 @@
                   <view wx:if="{{!tingxie_text_hide}}" style="width:100%;" class='text-center'>
 
                     <block wx:for="{{item.dw_xcx}}" wx:key="*this" wx:for-item="itemsub">
-                      <text class='task_dw text-red' wx:if="{{itemsub == item.sw}}">{{itemsub}}</text>
+                      <text class='task_dw text-projectlv' wx:if="{{itemsub == item.sw}}">{{itemsub}}</text>
                       <text class='task_dw ' wx:else>{{itemsub}}</text>
                     </block>
 
@@ -127,7 +127,7 @@
                   <view wx:if="{{!tingxie_text_hide}}" style="width:100%;">
 
                     <block wx:for="{{item.lw_xcx}}" wx:key="*this" wx:for-item="itemsub">
-                      <text class='task_lw text-left text-red' wx:if="{{itemsub == item.sw}}">{{itemsub}}</text>
+                      <text class='task_lw text-left text-projectlv' wx:if="{{itemsub == item.sw}}">{{itemsub}}</text>
                       <text class='task_lw text-left' wx:else>{{itemsub}}</text>
                     </block>
 

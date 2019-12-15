@@ -10,6 +10,7 @@ Page({
     form: {
       name: '',
       content: '',
+      isbn: '',
       contact: ''
     },
     avatarloadModal: false,
@@ -24,6 +25,7 @@ Page({
       isbn: searchnot_code,
       form: {
         name: searchnot_title,
+        isbn: searchnot_code,
         content: '',
         contact: ''
       }
@@ -85,7 +87,7 @@ Page({
           name: params.name,
           content: params.content,
           contact: params.contact,
-          isbn: that.data.isbn
+          isbn: params.isbn
         },
         success: function (res) {
           const data = JSON.parse(res.data)
@@ -96,6 +98,7 @@ Page({
             form: {
               name: '',
               content: '',
+              isbn: '',
               contact: ''
             }
           })
@@ -127,7 +130,7 @@ Page({
           name: params.name,
           content: params.content,
           contact: params.contact,
-          isbn:that.data.isbn
+          isbn: params.isbn
         },
         success: function (res) {
           console.log(res)
@@ -137,6 +140,7 @@ Page({
             form: {
               name: '',
               content: '',
+              isbn: '',
               contact: ''
             }
           })

@@ -14,7 +14,7 @@
       <view class="text-left text-xl text-black text-bold"> {{program.title}}</view>
       <view class="text-left margin-top-xs"> {{program.author}} 译：{{program.translator}}</view>
       <view class="text-left margin-top-xs">{{program.subject}}</view>
-      <view class="text-left margin-top-xs"> 评分：{{program.score}}</view>
+      <view class="text-left margin-top-xs"> {{program.linfo_text}}</view>
     </view>
     <view class="" style="flex: 1;">
 

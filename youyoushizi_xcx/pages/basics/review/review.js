@@ -86,7 +86,7 @@ Page({
           nums: parseInt(nums)
         },
         success: function(res) {
-          console.log(res);
+          // console.log(res); 
 
           if (res.data.code === 20001) {
 

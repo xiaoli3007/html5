@@ -2,9 +2,9 @@
 <view class='margin-xl bg-white padding-xl radius shadow-lg'>
   <view class='text-center margin-bottom text-lg  text-grey'>关于优优识字</view>
   <view class='text-content'>
-    <view>优优识字是一款识字软件！</view>
+    <view>优优识字，小学生识字好帮手。紧扣教材，自动提取图书中的生字、词语、成语、例句，帮孩子第一时间正确读准、认识生字，并按记忆曲线复习生字，快速提升孩子识字量；针对孩子的识字水平，分级推荐优秀读物，提高孩子阅读能力。</view>
     
     <view class='margin-top-sm'></view>
-    <view class='margin-top-sm'>更多功能敬请期待！</view>
+    <!-- <view class='margin-top-sm'>更多功能敬请期待！</view> -->
   </view>
 </view>

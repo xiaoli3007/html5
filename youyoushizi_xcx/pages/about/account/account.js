@@ -388,14 +388,16 @@ Page({
                 data: res.data.token
               })
             }
+            wx.showToast({
+              title: '切换账号为' + res.data.userinfo.realname,
+              icon: 'none',
+              duration: 1500,
+            })
+
           }
         });
 
-        wx.showToast({
-          title: '切换账号为' + e.currentTarget.dataset.username,
-          icon: 'none',
-          duration: 1500,
-        })
+      
       }
     }
 
