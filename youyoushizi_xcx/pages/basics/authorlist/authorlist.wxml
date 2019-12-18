@@ -39,12 +39,12 @@
             <text class="text-black text-bold">{{item.name}}</text>
           </view>
           <view class="text-left">
-            <text class="text-lg">{{item.country}}</text>
+            <text class="text-lg">{{item.country}} </text> <text class="text-lg">{{item.jiangxiang}}</text>
 
           </view>
 
 
-          <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.description}}</view>
+          <!-- <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.description}}</view> -->
 
         </view>
 

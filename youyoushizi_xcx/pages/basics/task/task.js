@@ -165,9 +165,14 @@ Page({
                 }
               })
               if (temp_goto_index>0) {
+                let c_go = temp_goto_index > res.data.word_data.word1.length - 1 ? res.data.word_data.word1.length - 1 : temp_goto_index
                 that.setData({
-                  current: temp_goto_index > res.data.word_data.word1.length - 1 ? res.data.word_data.word1.length - 1 : temp_goto_index
+                  current: c_go,
+                  taskloading: util.GetPercent(c_go, res.data.word_data.word1.length - 1)
                 })
+
+               
+
               }
             }
           }

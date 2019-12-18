@@ -3,7 +3,7 @@
 .swiper_big {
  
 /* height: 600rpx; */
-border: 1px dashed #aaa;
+border: 1px dashed #aaa;font-family: KaiTi;
 
 }
 .swiper_sub{

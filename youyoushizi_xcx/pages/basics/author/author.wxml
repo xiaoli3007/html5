@@ -10,15 +10,15 @@
     <image src='{{author_info.thumb}}' style="width:150rpx;" mode="widthFix"></image>
   </view>
   <view class=" margin-left-xs margin-right-xs" style="flex: 3;">
-    <view class="text-left text-xl text-black text-bold"> {{author_info.name}}</view>
-    <view class="text-left margin-top-xs">{{author_info.country}}</view>
-    <view class="text-left margin-top-xs">
+    <view class="text-left text-lg text-black text-bold"> {{author_info.name}}</view>
+    <view class="text-left margin-top-xs"><text>{{author_info.country}} </text> <text>{{author_info.jiangxiang}}</text></view>
+    <view class="text-right margin-top-xs margin-right-xs">
 
-      <view wx:if="{{!favorite}}" class="text-left margin-top-xs" bindtap="member_favorite_author">
+      <view wx:if="{{!favorite}}" class="text-right margin-top-xs" bindtap="member_favorite_author">
         <button class="cu-btn round  line-grey">关注</button>
       </view>
 
-      <view wx:if="{{favorite}}" class="text-left margin-top-xs">
+      <view wx:if="{{favorite}}" class="text-right margin-top-xs">
         <button class="cu-btn round  line-orange">关注</button>
       </view>
 

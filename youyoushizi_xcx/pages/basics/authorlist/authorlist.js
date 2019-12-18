@@ -88,6 +88,8 @@ Page({
         },
         success: function (res) {
           
+          //console.log(res.data.items)
+
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
@@ -99,7 +101,7 @@ Page({
             collection_list: res.data.items,
           })
 
-          // console.log(that.data.collection_list)
+          // 
 
         }, complete(res) {
           that.setData({

@@ -12,7 +12,7 @@
     </view>
     <view class=" margin-left-xs margin-right-xs"  style="flex: 3;">
       <view class="text-left text-xl text-black text-bold"> {{program.title}}</view>
-      <view class="text-left margin-top-xs"> {{program.author}} 译：{{program.translator}}</view>
+      <view class="text-left margin-top-xs"> <text>{{program.author}}</text><text wx:if="{{program.translator!=''}}"> 译：{{program.translator}}</text></view>
       <view class="text-left margin-top-xs">{{program.subject}}</view>
       <view class="text-left margin-top-xs"> {{program.linfo_text}}</view>
     </view>
