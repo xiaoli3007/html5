@@ -64,12 +64,19 @@
               <text> 释义： </text>
             </wux-col>
             <wux-col span="8">
-              <block wx:for="{{item.submean_list}}" wx:key>
-                <text> {{item}} </text>
-              </block>
-
+           
             </wux-col>
           </wux-row>
+
+               <wux-row>
+            <wux-col span="11" offset="1">
+              <block wx:for="{{item.submean_list}}" wx:key>
+                <view class="margin-top-xs"> {{item}} </view>
+              </block>
+            </wux-col>
+           
+          </wux-row>
+
           <wux-divider show-text="{{ false }}" dashed />
         </block>
 

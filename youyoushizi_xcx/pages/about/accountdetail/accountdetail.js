@@ -27,7 +27,7 @@ Page({
     duserid:null,
     dusername:null,
     pickersex: ['男', '女'],
-    pickernianji: ['一年级', '二年级', '三年级', '四年级', '五年级', '六年级', '七年级', '八年级', '九年级'],
+    pickernianji: ['未选择','一年级', '二年级', '三年级', '四年级', '五年级', '六年级', '七年级', '八年级', '九年级'],
     add_birthday:'',
     add_sex:'',
     add_nianji: '',

@@ -35,7 +35,7 @@
 
         </view>
         <view class="basis-xl" style="flex-basis: 70%;">
-          <view class="text-left text-xl">
+          <view class="text-left text-lg">
             <text class="text-black text-bold">{{item.name}}</text>
           </view>
           <view class="text-left">
@@ -44,7 +44,7 @@
           </view>
 
 
-          <!-- <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.description}}</view> -->
+           <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:90rpx;overflow: hidden;">{{item.description}}</view> 
 
         </view>
 

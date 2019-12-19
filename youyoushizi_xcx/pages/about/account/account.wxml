@@ -363,7 +363,7 @@
 
         <view class="cu-form-group">
           <view class="title">生日</view>
-          <picker mode="date" name='birthday' value="{{add_birthday}}" start="2000-09-01" end="2020-09-01" bindchange="DateChange">
+          <picker mode="date" name='birthday' value="{{add_birthday}}" start="1930-09-01" end="2020-09-01" bindchange="DateChange">
             <view class="picker">
               {{add_birthday?add_birthday:'请选择'}}
             </view>
