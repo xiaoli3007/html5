@@ -30,8 +30,8 @@
   <wux-row>
     <wux-col span="12">
       <view class=" flex flex-direction">
-        <text class="text-center">没有内容，请先添加任务。\n</text>
-         <text class="text-center">任务可以在首页的“教材”或“课外读物”功能里添加</text>
+        <text class="text-center">任务可以在首页的"教材”选中课本，创建听写、识字任务；\n</text>
+         <text class="text-center">或者在课外读物中选中图书，“去学习“创建识字任务。</text>
       </view>
     </wux-col>
   </wux-row>

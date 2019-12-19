@@ -338,7 +338,8 @@ Page({
     let item_lword_src = ''
     if (this.data.subcurrent == 0) {
 
-      item_lword_src = this.data.taskdata.word1[this.data.current].sw_sound
+      // item_lword_src = this.data.taskdata.word1[this.data.current].sw_sound
+      item_lword_src = this.data.taskdata.word1[this.data.current].lry_audio ? this.data.taskdata.word1[this.data.current].lry_audio : this.data.taskdata.word1[this.data.current].sw_sound
 
     } else if (this.data.subcurrent == 1) {
 
