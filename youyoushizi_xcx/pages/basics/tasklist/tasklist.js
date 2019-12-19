@@ -33,6 +33,7 @@ Page({
     relation_id: 0,
     jiaocailist789: [467767, 467768, 467769	, 467770, 467771, 467772],
     jiaocai_ebook_list: [466135, 466136, 466137, 466138, 466139, 466140, 466454, 466455, 466456, 467879, 467880, 467881,467767, 467768, 467769, 467770, 467771, 467772],
+    havetask: 0, //是否有任务
   },
   onLoad: function (options) { 
     
@@ -71,17 +72,21 @@ Page({
            pagesize: that.data.pagesize,
          },
         success: function (res) {
-          // console.log(res);
-          console.log(res.data.items.length)
-          if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
+          console.log(res);
+          // console.log(res.data.items.length)
+          if (res.data.items){
+            if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
+              that.setData({
+                isLoad: true,
+                isend: true,
+              })
+            }
             that.setData({
-              isLoad: true,
-              isend: true,
+              task_list: res.data.items,
+              havetask: parseInt(res.data.havatasknums),
             })
           }
-          that.setData({
-            task_list: res.data.items,
-            })
+          
          }, complete(res) {
            that.setData({
 
@@ -269,12 +274,14 @@ Page({
           }
           // 回调函数
           that.setData({
-            task_list: res.data.items
+            task_list: res.data.items,
+            havetask: parseInt(res.data.havatasknums),
           })
         } else {
           that.setData({
             task_list: [],
             isLoad: false,
+            havetask: 0,
             
           })
         }
@@ -503,6 +510,16 @@ Page({
     }
 
 
+  },
+  gotojiaocai(e) {
+      wx.navigateTo({
+        url: '/pages/basics/jiaocai/jiaocai',
+      })
+  },
+  gotoduwu(e) {
+    wx.navigateTo({
+      url: '/pages/basics/recommendduwu/recommendduwu',
+    })
   },
   onClickaaa(e) {
     var strs = new Array()

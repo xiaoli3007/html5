@@ -15,8 +15,50 @@
  </view>
 </scroll-view>
 
+<view class="no_task" wx:if="{{havetask==0}}">
 
- 
+    <wux-row>
+    <wux-col span="8" offset="2">
+
+      <view class="text-center margin-top padding flex justify-center align-center">
+        <image src="https://rmsp.youyoushizi.com/statics/yysz/ico_rw_qsy@3x.png" style="width:300rpx;" mode="widthFix" ></image>
+      </view>
+
+    </wux-col>
+  </wux-row>
+
+  <wux-row>
+    <wux-col span="12">
+      <view class=" flex flex-direction">
+        <text class="text-center">没有内容，请先添加任务。\n</text>
+         <text class="text-center">任务可以在首页的“教材”或“课外读物”功能里添加</text>
+      </view>
+    </wux-col>
+  </wux-row>
+
+  <wux-white-space size="default" />
+  <wux-row>
+    <wux-col span="8" offset="2">
+      <view class="padding flex flex-direction">
+        <button class="cu-btn round bg-orange lg" bindtap="gotojiaocai">前往教材</button>
+      </view>
+
+       <view class="text-center  flex flex-direction">
+        或者
+      </view>
+
+       <view class="padding flex flex-direction">
+        <button class="cu-btn round bg-orange lg" bindtap="gotoduwu">前往课外读物</button>
+      </view>
+
+    </wux-col>
+
+  </wux-row>
+
+</view>
+
+
+ <view class="you_task" wx:if="{{havetask>0}}"> 
 
 <view class="cu-bar search bg-white">
   <view class="search-form round">
@@ -80,6 +122,9 @@
 
 <view class="cu-load bg-orange {{!isLoad?'loading':'over'}}"></view>
 
+
+
+</view>
 
 <!-- <view class='cu-load load-modal' wx:if="{{loadModal}}">
 
