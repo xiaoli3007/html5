@@ -6,7 +6,7 @@
 
 
 <view class="bg-white padding-sm margin-top  flex   align-start">
-  <view class="" style="flex: 1;">
+  <view class="" style="flex: 1;"  bindtap="ViewImage" data-url="{{author_info.thumb}}">
     <image src='{{author_info.thumb}}' style="width:150rpx;" mode="widthFix"></image>
   </view>
   <view class=" margin-left-xs margin-right-xs" style="flex: 3;">

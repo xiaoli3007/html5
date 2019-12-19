@@ -7,7 +7,7 @@
 <view class="" style="padding-bottom:80rpx;">
 
   <view class="bg-white padding-sm margin-top  flex   align-start">
-    <view class=""  style="flex: 1;">
+    <view class=""  style="flex: 1;"  bindtap="ViewImage" data-url="{{program.thumb_xcx}}">
       <image src='{{program.thumb_xcx}}' style="width:150rpx;" mode="widthFix"></image>
     </view>
     <view class=" margin-left-xs margin-right-xs"  style="flex: 3;">

@@ -134,5 +134,11 @@ Page({
       }
     })
   },
+  ViewImage(e) {
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.url],
+      current: e.currentTarget.dataset.url
+    });
+  },
 
 })
