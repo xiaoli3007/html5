@@ -285,8 +285,9 @@ Page({
       success: function(res) {
         if (res.data.code === 20000) {
 
-          console.log(res.data.items.length)
+          console.log(res.data.items)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
+            console.log(res.data.length)
             that.setData({
               isLoad: true,
               isend: true,
@@ -301,7 +302,10 @@ Page({
           // 隐藏加载框
           // wx.hideLoading();
         } else {
-
+          that.setData({
+            isLoad: true,
+            isend: true,
+          })
 
         }
       }
