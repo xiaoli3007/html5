@@ -7,7 +7,7 @@ Page({
     MainCur: 0,
     TabCur: 0,
     TabCursub: 0,
-    scrollLeft: 0,
+    // scrollLeft: 0,
     scrollLefts: 0,
     tabNavcat: [],
     tabNavcat_sub: [],
@@ -15,7 +15,9 @@ Page({
     all_play_c: null,
     datalist: [], datatablist: [],
     isloaditem:false,
-    data_item_word:null
+    data_item_word:null,
+    toView: 'msg-1', 
+    topscrollLeft: 0
   },
   onLoad(options) {
     console.log(options)
@@ -76,6 +78,16 @@ Page({
 
       all_play_c: wx.createInnerAudioContext(),
     })
+
+    // setTimeout(function () {
+    //   that.setData({
+    //     toView: 'msg-10',
+    //     TabCur:10,
+    //     TabCursub: that.data.datatablist_k[10]['s'][0],
+    //   })
+    // }, 500)
+
+
     },
   tabSelect(e) {
     // console.log(e.currentTarget.dataset.id);
@@ -95,7 +107,7 @@ Page({
   tabSelect2(e) {
     this.setData({
       TabCursub: e.currentTarget.dataset.id,
-      scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+      // scrollLefts: (e.currentTarget.dataset.iid - 1) * 60
     })
   },
   gotodeteil_task(e) {
