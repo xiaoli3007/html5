@@ -698,8 +698,8 @@ Page({
 
     }
     
-    
-    // console.log(item_lword_src)
+    console.log(this.data.taskdata.word1[this.data.current])
+     console.log(item_lword_src)
     
 
     if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {

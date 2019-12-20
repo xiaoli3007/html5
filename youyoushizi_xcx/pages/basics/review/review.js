@@ -86,7 +86,7 @@ Page({
           nums: parseInt(nums)
         },
         success: function(res) {
-          // console.log(res); 
+           console.log(res); 
 
           if (res.data.code === 20001) {
 
@@ -297,6 +297,9 @@ Page({
   },
 
   change: function(e) {
+    this.setData({
+      subcurrent: 0
+    })
     if ("touch" === e.detail.source) { // 只在用户触发的情况下
       this.setData({
         current: e.detail.current
@@ -308,7 +311,7 @@ Page({
       taskloading: util.GetPercent(e.detail.current, this.data.taskdata.word1.length - 1)
     })
     
-     
+    
 
   },
   audioStart(e) {
@@ -338,13 +341,23 @@ Page({
     let item_lword_src = ''
     if (this.data.subcurrent == 0) {
 
+      if (this.data.taskdata.word1[this.data.current].wcell_type == '25'){
+        item_lword_src = this.data.taskdata.word1[this.data.current].dw_sound 
+      }else{
+        item_lword_src = this.data.taskdata.word1[this.data.current].ren_word_md5 ? this.data.taskdata.word1[this.data.current].ren_word_md5 : this.data.taskdata.word1[this.data.current].word_sound
+      }
       
-      item_lword_src = this.data.taskdata.word1[this.data.current].ren_word_md5 ? this.data.taskdata.word1[this.data.current].ren_word_md5 : this.data.taskdata.word1[this.data.current].word_sound
 
     } else if (this.data.subcurrent == 1) {
 
+      if (this.data.taskdata.word1[this.data.current].wcell_type == '25') {
 
-      item_lword_src = this.data.task_wcell_type == 25 ? this.data.taskdata.word1[this.data.current].lw_sound : this.data.taskdata.word1[this.data.current].dw_sound
+        item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
+
+      } else {
+        item_lword_src = this.data.taskdata.word1[this.data.current].dw_sound
+      }
+     
 
     } else if (this.data.subcurrent == 2) {
 
@@ -353,7 +366,7 @@ Page({
     }
 
 
-    // console.log(item_lword_src)
+     console.log(item_lword_src)
 
 
     if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current) {
