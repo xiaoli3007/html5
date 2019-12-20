@@ -39,7 +39,7 @@
             <text class="text-black text-bold">{{item.name}}</text>
           </view>
           <view class="text-left">
-            <text class="text-lg">{{item.country}} </text> <text class="text-lg">{{item.jiangxiang}}</text>
+            <text class="text-df">{{item.country}} </text> <text class="text-df">{{item.jiangxiang}}</text>
 
           </view>
 
