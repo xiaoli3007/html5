@@ -2,7 +2,7 @@
 
    <block wx:for="{{ dataArray }}" wx:key="key" wx:for-index="mindex" >
 
-    <view  class="myradio_w round cu-btn {{c_value==item['value']?'lines-orange text-orange':'lines-grey text-grey'}}" bindtap="onTap" data-value="{{item.value}}">
+    <view  class="myradio_w {{item['isicon']?'isicon ':''}}round cu-btn {{c_value==item['value']?'lines-orange text-orange':'lines-grey text-grey'}}" bindtap="onTap" data-value="{{item.value}}">
        <text class="{{item['isicon']?item['label']:''}}">{{item['isicon']?'':item['label']}}</text>
         <!-- <text class="">熟悉</text> -->
     </view>

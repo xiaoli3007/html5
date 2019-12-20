@@ -88,7 +88,7 @@ Page({
         },
         success: function (res) {
           
-          //console.log(res.data.items)
+          console.log(res.data)
 
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
