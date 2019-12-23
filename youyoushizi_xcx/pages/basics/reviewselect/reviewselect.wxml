@@ -43,3 +43,10 @@
      </form>
 
 
+  <view class="text-left text-black padding-sm  margin-top-sm margin-bottom-sm bg-white">
+    <view class="text-left">复习介绍</view>
+    <view class="text-left margin-top-sm">识字、听写任务完成后，所有学习过的生字会加入到复习清单中复习。</view>
+    <view class="text-left margin-top-sm">复习基于著名的SuperMemo记忆曲线算法，该算法发展20多年，效果显著。</view>
+    <view class="text-left margin-top-sm">对字的掌握程度分为陌生、掌握、容易三档，下次复习时间间隔依次增加，这样保证陌生的字多出现，熟悉的字少出现。</view>
+  </view>
+
