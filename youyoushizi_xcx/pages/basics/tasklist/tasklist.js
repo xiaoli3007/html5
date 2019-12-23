@@ -33,7 +33,7 @@ Page({
     relation_id: 0,
     jiaocailist789: [467767, 467768, 467769	, 467770, 467771, 467772],
     jiaocai_ebook_list: [466135, 466136, 466137, 466138, 466139, 466140, 466454, 466455, 466456, 467879, 467880, 467881,467767, 467768, 467769, 467770, 467771, 467772],
-    havetask: null, //是否有任务
+    havetask: -1, //是否有任务
   },
   onLoad: function (options) { 
     
@@ -85,10 +85,14 @@ Page({
                 isend: true,
               })
             }
-            that.setData({
-              task_list: res.data.items,
-              havetask: parseInt(res.data.havatasknums),
-            })
+
+            // setTimeout(function () {
+              that.setData({
+                task_list: res.data.items,
+                havetask: parseInt(res.data.havatasknums),
+              })
+            // }, 500)
+           
           }else{
 
             that.setData({

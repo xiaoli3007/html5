@@ -120,11 +120,14 @@
 </block>
 
 
-<view class="cu-load bg-orange {{!isLoad?'loading':'over'}}"></view>
+ <view class="cu-load bg-orange {{!isLoad?'loading':'over'}}"></view> 
+
+<!-- <view class="cu-load bg-orange loading"></view>-->
+
+</view> 
 
 
 
-</view>
 
 <!-- <view class='cu-load load-modal' wx:if="{{loadModal}}">
 
