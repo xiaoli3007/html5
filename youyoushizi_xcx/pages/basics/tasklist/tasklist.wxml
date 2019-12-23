@@ -15,7 +15,7 @@
  </view>
 </scroll-view>
 
-<view class="no_task" wx:if="{{havetask==0}}">
+<view class="no_task" wx:if="{{havetask!=null && havetask==0}}">
 
     <wux-row>
     <wux-col span="8" offset="2">
@@ -58,7 +58,7 @@
 </view>
 
 
- <view class="you_task" wx:if="{{havetask>0}}"> 
+ <view class="you_task" wx:if="{{havetask!=null && havetask>0}}"> 
 
 <view class="cu-bar search bg-white">
   <view class="search-form round">

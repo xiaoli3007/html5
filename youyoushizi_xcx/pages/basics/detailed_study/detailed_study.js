@@ -52,13 +52,13 @@ Page({
           TabCursub: res.data.datas_xcc_tab[0]['s'][0],
         })
         if (res.data.default_main_tab!=0){
-          setTimeout(function () {
+         // setTimeout(function () {
             that.setData({
               toView: 'msg-' + res.data.default_main_tab,
               TabCur: res.data.default_main_tab,
               TabCursub: res.data.datas_xcc_tab_key[res.data.default_main_tab]['s'][0],
             })
-          }, 500)
+         // }, 200)
 
         }
            

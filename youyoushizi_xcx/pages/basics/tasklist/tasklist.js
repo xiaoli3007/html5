@@ -33,7 +33,7 @@ Page({
     relation_id: 0,
     jiaocailist789: [467767, 467768, 467769	, 467770, 467771, 467772],
     jiaocai_ebook_list: [466135, 466136, 466137, 466138, 466139, 466140, 466454, 466455, 466456, 467879, 467880, 467881,467767, 467768, 467769, 467770, 467771, 467772],
-    havetask: 0, //是否有任务
+    havetask: null, //是否有任务
   },
   onLoad: function (options) { 
     
@@ -56,6 +56,10 @@ Page({
     }
 
     // console.log(this.data.type)
+
+    wx.showLoading({
+      title: '加载中',
+    })
 
     var that = this;
     if (app.globalData.userid) {
@@ -85,6 +89,13 @@ Page({
               task_list: res.data.items,
               havetask: parseInt(res.data.havatasknums),
             })
+          }else{
+
+            that.setData({
+              
+              havetask: 0,
+            })
+            
           }
           
          }, complete(res) {
@@ -92,6 +103,7 @@ Page({
 
              loadModal: false
            })
+          wx.hideLoading()
            //console.log(res.statusCode)
            if (res.statusCode == 500) {
 
@@ -248,7 +260,9 @@ Page({
     })
     
     console.log(this.data.type)
-
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     wx.request({
       url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
@@ -291,6 +305,7 @@ Page({
 
           loadModal: false
         })
+        wx.hideLoading();
 
       }
     })

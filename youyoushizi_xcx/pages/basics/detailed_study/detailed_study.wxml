@@ -11,7 +11,7 @@
 </view> -->
 
 
-<scroll-view scroll-x  class="bg-white nav text-center"  scroll-with-animation="{{true}}" scroll-into-view="{{toView}}">
+<scroll-view scroll-x  class="bg-white nav text-center"  scroll-with-animation="{{false}}" scroll-into-view="{{toView}}">
   <view class="cu-item {{index==TabCur?'text-orange cur':''}}" wx:for="{{datalist}}" wx:key bindtap="tabSelect" data-id="{{index}}"  id='msg-{{index}}'>
     {{item.obj.name}}
   </view>
