@@ -23,6 +23,7 @@ Page({
     if (options.wcell_type){
        default_wcelltype = parseInt(options.wcell_type)
     }
+    console.log(default_wcelltype)
     let that = this;
     //加载列表
     wx.request({
@@ -36,20 +37,22 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-
-        let arr = res.data.datas_xcc_tab
+        console.log(res.data)
+        let arr = res.data.datas_xcc_tab 
        
         // console.log(Object.keys(arr));
         let default_i = 0 
         arr.forEach(function (value, i) {
           // 　　console.log('forEach遍历:' + i );
-            //  console.log( value.m);
+              console.log( value.m);
           if (default_wcelltype == value.m){
-            default_i = value.m
+            default_i = value.k
           }
         })
 
-        // console.log(res.data)
+        console.log(default_i)
+
+        //  console.log(res.data)
 
         that.setData({
           datalist: res.data.items,
@@ -58,7 +61,7 @@ Page({
           datatablist: res.data.datas_xcc_tab,
           TabCur: default_i,
           // TabCur: res.data.datas_xcc_tab[0]['m'],
-          TabCursub: res.data.datas_xcc_tab[0]['s'][0],
+          TabCursub: res.data.datas_xcc_tab_key[default_i]['s'][0],
         })
 
 

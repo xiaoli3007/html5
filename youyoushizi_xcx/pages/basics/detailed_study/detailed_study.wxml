@@ -38,9 +38,9 @@
 </block>
 
 
-<block wx:key wx:for='{{datalist}}' wx:for-index="mindex">
+<block wx:key wx:for='{{datalist}}' wx:for-index="mindex" wx:for-item="itemmain">
 
-<block wx:key wx:for='{{item.wcell_list}}' wx:for-index="mindex2">
+<block wx:key wx:for='{{itemmain.wcell_list}}' wx:for-index="mindex2">
 
   <block wx:if="{{TabCur==mindex && TabCursub==mindex2 }}">
 
@@ -60,7 +60,7 @@
   
 
   <view class="flex flex-direction cu-bar-sun foot">
-  <button class="cu-btn bg-orange lg" data-taskid="{{item.shizi_taskid}}" data-relation_id="{{program.id}}" data-gid="{{mindex2}}" data-wcell_type="{{mindex}}" bindtap="gotodeteil_task">
+  <button class="cu-btn bg-orange lg" data-taskid="{{item.shizi_taskid}}" data-relation_id="{{program.id}}" data-gid="{{mindex2}}" data-wcell_type="{{itemmain.obj.wcell_type}}" bindtap="gotodeteil_task">
   <text>开始识字</text><text wx:if="{{item.shizi_taskid!=0}}">(已添加)</text></button>
 </view>
 
@@ -83,75 +83,7 @@
  
        <my-word dataArray="{{data_item_word.word_show_detail}}" > </my-word>
 
-      <!-- <view class="itemcontent text-left">
-        <wux-white-space size="default" />
-
-        <wux-row wx:if="{{data_item_word.word_show_detail.bihua_img!=''}}">
-          <wux-col span="8" offset="2">
-            <view class="text-center">
-              <image src='{{data_item_word.word_show_detail.bihua_img}}' mode="widthFix" style="width:50%;">
-              </image>
-            </view>
-          </wux-col>
-        </wux-row>
-
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="10" offset="1">
-            <text> 笔顺：{{data_item_word.word_show_detail.bishun}}
-                   </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="5" offset="1">
-            <text> 笔画：{{data_item_word.word_show_detail.bihuaw}}
-                   </text>
-          </wux-col>
-          <wux-col span="5" offset="1">
-            <text>  部首：{{data_item_word.word_show_detail.bushou}}
-                   </text>
-          </wux-col>
-
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="10" offset="1">
-            <text> 字形：{{data_item_word.word_show_detail.zixing}}
-                   </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-
-        <block wx:for="{{data_item_word.word_show_detail.mean_list}}" wx:key>
-          <wux-row>
-            <wux-col span="3" offset="1">
-              <text>拼音：</text>
-            </wux-col>
-            <wux-col span="8">
-              <button class="cu-btn round bg-orange shadow" bindtap="play_any_src" data-msrc="{{item.mp3}}">
-                {{item.pinyin}}
-                <view class="cuIcon-notification" style="margin-left:10px;">
-                </view>
-              </button>
-            </wux-col>
-          </wux-row>
-          <wux-white-space size="default" />
-          <wux-row>
-            <wux-col span="3" offset="1">
-              <text> 释义： </text>
-            </wux-col>
-            <wux-col span="8">
-              <block wx:for="{{item.submean_list}}" wx:key>
-                <text> {{item}} </text>
-              </block>
-
-            </wux-col>
-          </wux-row>
-          <wux-divider show-text="{{ false }}" dashed />
-        </block>
-
-      </view> -->
+   
     </scroll-view>
   </view>
 </view>
@@ -162,48 +94,7 @@
        <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
 
        <my-chengyu dataArray="{{data_item_word.word_show_detail}}" > </my-chengyu>
-      <!-- <view class="itemcontent text-left">
-        <wux-white-space size="default" />
-        <wux-white-space size="default" />
-
-        <wux-white-space size="default" />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 注音： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.zhuyin}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 出处： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.chuchu}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 释义： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.shiyi}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-        <wux-row>
-          <wux-col span="3" offset="1">
-            <text> 实例： </text>
-          </wux-col>
-          <wux-col span="7">
-            <text> {{data_item_word.word_show_detail.shili}} </text>
-          </wux-col>
-        </wux-row>
-        <wux-divider show-text="{{ false }}" dashed />
-      </view> -->
+ 
     </scroll-view>
   </view>
 </view>
