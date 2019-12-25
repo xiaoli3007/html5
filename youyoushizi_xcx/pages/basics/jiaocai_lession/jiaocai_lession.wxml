@@ -43,7 +43,8 @@
               <wux-col span="12">
 
                 <view class="margin-left padding">
-                  <text class=" ">{{item.title}}</text>
+                {{item.title}}
+                  <!-- <text class=" ">{{item.title}}</text> -->
                 </view>
 
               </wux-col>

@@ -74,3 +74,6 @@ font-size:1.7rem;
 .basis-lg {
   flex-basis: 70%;
 }
+.cu-modal.show{
+   -webkit-overflow-scrolling: touch;
+}

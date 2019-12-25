@@ -64,17 +64,25 @@ Page({
         success: function (res) {
           // console.log(res);
 
-          console.log(res.data.items.length)
-          if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
+          // console.log(res.data.items.length)
+          if (res.data.items){
+            if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
+              that.setData({
+                isLoad: true,
+                isend: true,
+              })
+            }
+
+            that.setData({
+              collection_list: res.data.items,
+            })
+          }else{
             that.setData({
               isLoad: true,
               isend: true,
             })
           }
           
-          that.setData({
-            collection_list: res.data.items,
-            })
          }, complete(res) {
            that.setData({
 
