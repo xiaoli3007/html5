@@ -45,7 +45,7 @@
         </wux-row>
         <wux-divider show-text="{{ false }}" dashed />
 
-        <block wx:for="{{dataArray.mean_list}}" wx:key>
+        <block wx:for="{{dataArray.new_mean_list}}" wx:key>
           <wux-row>
             <wux-col span="3" offset="1">
               <text>拼音：</text>
@@ -70,14 +70,26 @@
 
                <wux-row>
             <wux-col span="11" offset="1">
-              <block wx:for="{{item.submean_list}}" wx:key>
-                <view class="margin-top-xs"> {{item}} </view>
+              <block wx:for="{{item.submean_list}}" wx:key wx:for-item="itemone">
+
+                <view class="margin-top-xs text-black text-bold"> {{itemone.mean}} </view>
+                  
+                    <view wx:if="{{itemone.ext_mean.type_name!=''}}" class="cu-tag bg-green margin-top-xs  sm"> {{itemone.ext_mean.type_name}} </view>
+
+                   <!-- <view wx:if="{{itemone.ext_mean.type_name!=''}}" class="text-green margin-top-xs  "> {{itemone.ext_mean.type_name}} </view> -->
+                   
+
+                    <block  wx:for="{{itemone.ext_mean.mean_list}}" wx:key wx:for-item="itemsub">
+                      <view class="margin-top-xs"> {{itemsub}} </view> 
+                    </block>
+
+                 <wux-divider show-text="{{ false }}" dashed />
               </block>
             </wux-col>
            
           </wux-row>
 
-          <wux-divider show-text="{{ false }}" dashed />
+          <!-- <wux-divider show-text="{{ false }}" dashed /> -->
         </block>
 
       </view>
