@@ -79,9 +79,13 @@
                    <!-- <view wx:if="{{itemone.ext_mean.type_name!=''}}" class="text-green margin-top-xs  "> {{itemone.ext_mean.type_name}} </view> -->
                    
 
-                    <block  wx:for="{{itemone.ext_mean.mean_list}}" wx:key wx:for-item="itemsub">
-                      <view class="margin-top-xs"> {{itemsub}} </view> 
-                    </block>
+                 
+                      <view class="margin-top-xs"> 
+                         <block  wx:for="{{itemone.ext_mean.mean_list}}" wx:key wx:for-item="itemsub">
+                     <text>{{itemsub}} \n</text> 
+                      </block>
+                      </view> 
+                    
 
                  <wux-divider show-text="{{ false }}" dashed />
               </block>

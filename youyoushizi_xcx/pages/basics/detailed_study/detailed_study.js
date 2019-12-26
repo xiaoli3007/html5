@@ -187,7 +187,7 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-         console.log(res.data) 
+        //  console.log(res.data) 
         that.setData({
           data_item_word: res.data.items,
         })
