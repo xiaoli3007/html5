@@ -72,7 +72,7 @@
             <wux-col span="11" offset="1">
               <block wx:for="{{item.submean_list}}" wx:key wx:for-item="itemone">
 
-                <view class="margin-top-xs text-black text-bold"> {{itemone.mean}} </view>
+                <view class="margin-top-xs text-black text-bold"> <text> {{itemone.mean}} </text></view>
                   
                     <view wx:if="{{itemone.ext_mean.type_name!=''}}" class="cu-tag bg-green margin-top-xs  sm"> {{itemone.ext_mean.type_name}} </view>
 

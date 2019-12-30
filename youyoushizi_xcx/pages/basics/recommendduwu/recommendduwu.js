@@ -285,7 +285,7 @@ Page({
       success: function(res) {
         if (res.data.code === 20000) {
 
-          console.log(res.data.items)
+          // console.log(res.data.items)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             console.log(res.data.length)
             that.setData({
