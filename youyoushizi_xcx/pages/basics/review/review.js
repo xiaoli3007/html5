@@ -132,6 +132,9 @@ Page({
               })
               tempkonw_list_radios.push(titletmepaaa)
 
+              //关键字标红 
+              res.data.word_data.word1[i].lw_red = util.global_hilight_word(value.dw_xcx, value.lw_xcx)
+
             })
 
  

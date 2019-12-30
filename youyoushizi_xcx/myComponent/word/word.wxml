@@ -21,7 +21,7 @@
         <wux-row>
           <wux-col span="10" offset="1">
             <text> 拆字：{{dataArray.chaizi}}
-                   </text>
+                   </text> 
           </wux-col>
         </wux-row>
         <wux-divider show-text="{{ false }}" dashed />
