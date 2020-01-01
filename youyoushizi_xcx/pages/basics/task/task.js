@@ -932,7 +932,7 @@ Page({
   showModal_word_shiyi(e) {
 
     let item_word = this.data.taskdata.word1[this.data.current]
-    // console.log(item_word);
+     
     
     let m = 'DrawerModalL_word'
 
@@ -946,6 +946,39 @@ Page({
       modalName: m,
       data_item_word: item_word,
     })
+    let wcellid = item_word.wcellid
+    let dw_xcx = item_word.dw_xcx
+    let wcell_type = item_word.wcell_type
+    // console.log(item_word)
+    console.log({wcellid,dw_xcx,wcell_type})
+
+    wx.request({
+      url: app.globalData.url + '?act=global_item_word_shiyi',
+      data: {
+        wcellid: wcellid,
+        dw_xcx: dw_xcx,
+        wcell_type: wcell_type,
+        userid: app.globalData.userid,
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+         console.log(res.data) 
+        // that.setData({
+        //   data_item_word: res.data.items,
+        // })
+      },
+      complete(res) {
+        // that.setData({
+
+        //   isloaditem: false
+        // })
+        
+      }
+    })
+
   },
   showModal_dword_shiyi(e) {
 

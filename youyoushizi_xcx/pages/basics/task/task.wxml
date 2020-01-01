@@ -125,12 +125,11 @@
                    
                  
                 </view> -->
+                <view class="flex justify-center align-center  text-center sw_view">
                      <view wx:if="{{tingxie_text_hide}}" class="text-center task_sw cuIcon-emoji"> </view>
 
-                     <view wx:if="{{!tingxie_text_hide}}" class="text-center {{item.wcell_type=='25'?'task_dw':'task_sw'}}">
-                    {{item.sw}}
-                    </view>
-
+                     <view wx:if="{{!tingxie_text_hide}}" class="text-center {{item.wcell_type=='25'?'task_dw':'task_sw'}}">{{item.sw}}</view>
+                 </view>
                 
               </swiper-item>
               <swiper-item wx:if="{{item.wcell_type!='25'}}">

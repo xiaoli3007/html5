@@ -35,6 +35,8 @@ Page({
         //   　　console.log('forEach遍历:' + i );
 
         // })
+
+        console.log(res.data.program.thumb_big);
         that.setData({
           program: res.data.program,
           ebookid: res.data.program.id,
