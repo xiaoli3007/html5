@@ -111,6 +111,7 @@ App({
     openid: '',
     spid: 0,
     xtoken: 'sdsadwerer',
+    jiamikey: 'FAWG2ed3e19c4689',
     userInfo: null,
     // url: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi.php',
     // url2: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi_xcc.php',

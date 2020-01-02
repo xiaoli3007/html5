@@ -1,4 +1,4 @@
-
+var fun_aes = require('../../../utils/aes.js')
 
 const app = getApp();
 Page({
@@ -90,6 +90,10 @@ Page({
           
           console.log(res.data)
 
+          var str_aes_decode = that.Decrypt(res.data.aa)
+          let tmp_set_canvasList = JSON.parse(str_aes_decode)
+       console.log(tmp_set_canvasList)
+
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
@@ -112,8 +116,35 @@ Page({
         
         }
       });
+
+
+      // var str_aes_encode = this.Encrypt('{pwd:{app_id:1234567890,user_name:user_info,nick_name:cai,header_url:baidu.com,gender:0,province:广东省,city:深圳,system:anroid,platform:wx}');
+      // console.info("encode:" + str_aes_encode);
+      //  var str = "uWFMDaHxCrK1+USIsXG8o1EZrYESfb+V3GGUPKi6SgErT++k/AUSdk7K/BO2EFd7rOr5Zs0ucZxmrWzD7+1nlWaaBeMV/7nR5d/aoc4gBpRyAppMYtfH52MJneVMN+OjZV6BpYOtTSJoEk10byc1LMRBAio+tRinxhR4W6ymwJvwR7XN9bYo6OLkSDS5UgzMi6zlvgiIJN5JVxBSjckmqQ==";
+      //  var str_aes_decode = this.Decrypt(str);
+      //  console.info("aes:" + str_aes_decode);
     
 
+  },
+  Encrypt: function(word) {
+    var srcs = fun_aes.CryptoJS.enc.Utf8.parse(word);
+    var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
+    var encrypted = fun_aes.CryptoJS.AES.encrypt(srcs, key, {
+      mode: fun_aes.CryptoJS.mode.ECB,
+      padding: fun_aes.CryptoJS.pad.Pkcs7
+    });
+    //返回大写十六进制加密结果
+    return encrypted.toString();
+  },
+  Decrypt: function(word) {
+    var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
+    //mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7
+    var decrypt = fun_aes.CryptoJS.AES.decrypt(word, key, {
+      mode: fun_aes.CryptoJS.mode.ECB,
+      padding: fun_aes.CryptoJS.pad.Pkcs7
+    });
+    var decryptedStr = decrypt.toString(fun_aes.CryptoJS.enc.Utf8);
+    return decryptedStr.toString();
   },
   /**
  * 页面上拉触底事件的处理函数

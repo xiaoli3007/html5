@@ -4,6 +4,8 @@ import {
   $stopWuxLoader
 } from '../../../dist/index'
 
+var fun_aes = require('../../../utils/aes.js')
+
 const app = getApp()
 Component({
   options: {
@@ -127,7 +129,7 @@ Component({
       //   }
       // })
 
-
+    
 
 
     },
@@ -136,12 +138,14 @@ Component({
     },
     ready: function() {
 
-
+     
 
     },
   },
 
   methods: {
+
+   
     tabSelect(e) {
       this.setData({
         TabCur: e.currentTarget.dataset.id,
