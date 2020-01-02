@@ -190,7 +190,7 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type!='25'}}">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-
+<image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
      <my-word dataArray="{{data_item_word.word_show_detail}}" > </my-word>
      
     </scroll-view>
@@ -201,6 +201,7 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type=='25'}}">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+    <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
     <my-chengyu dataArray="{{data_item_word.word_show_detail}}" > </my-chengyu>
     
     </scroll-view>
@@ -213,6 +214,7 @@
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
 
+<image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
      <my-dword dataArray="{{data_item_word.dword_show_detail}}" > </my-dword>
 
     </scroll-view>

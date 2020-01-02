@@ -495,6 +495,7 @@ Page({
   },
   showModal_word_shiyi(e) {
 
+    let that = this;
     let item_word = this.data.taskdata.word1[this.data.current]
     // console.log(item_word);
 
@@ -504,16 +505,20 @@ Page({
       m = 'DrawerModalL_dword'
     }
     // DrawerModalL_dword
+    // this.setData({
+    //   modalName: m,
+    //   data_item_word: item_word,
+    // })
     this.setData({
-      modalName: m,
-      data_item_word: item_word,
+      modalName: m, 
+      isloaditem: true
     })
 
     let wcellid = item_word.wcellid
     let dw_xcx = item_word.dw_xcx
     let wcell_type = item_word.wcell_type
     // console.log(item_word)
-    console.log({wcellid,dw_xcx,wcell_type})
+    // console.log({wcellid,dw_xcx,wcell_type})
 
     wx.request({
       url: app.globalData.url + '?act=global_item_word_shiyi',
@@ -528,16 +533,16 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-         console.log(res.data) 
-        // that.setData({
-        //   data_item_word: res.data.items,
-        // })
+        //  console.log(res.data) 
+        that.setData({
+          data_item_word: res.data.items,
+        })
       },
       complete(res) {
-        // that.setData({
+        that.setData({
 
-        //   isloaditem: false
-        // })
+          isloaditem: false
+        })
         
       }
     })
