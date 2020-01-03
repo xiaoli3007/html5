@@ -34,12 +34,26 @@ Page({
       success(res) {
 
         // let arr = res.data.items
-        // console.log(res.data)
+        //  console.log(res.data.author_book_recommend.length)
         // console.log(Object.keys(arr));
         // arr.forEach(function (value, i) {
         //   　　console.log('forEach遍历:' + i );
 
         // })
+        res.data.author_info = util.Decrypt(res.data.author_info)
+        if(res.data.author_book_recommend!=''){
+          res.data.author_book_recommend = util.Decrypt(res.data.author_book_recommend)
+        }
+        if(res.data.author_book_xu!='' ){
+          res.data.author_book_xu = util.Decrypt(res.data.author_book_xu)
+        }
+        if(res.data.list_ebooks!='' ){
+          res.data.list_ebooks = util.Decrypt(res.data.list_ebooks)
+        }
+         
+        // res.data.author_book_xu = util.Decrypt(res.data.author_book_xu)
+        // res.data.list_ebooks = util.Decrypt(res.data.list_ebooks)
+
         that.setData({
           author_info: res.data.author_info,
           author_book_recommend: res.data.author_book_recommend,

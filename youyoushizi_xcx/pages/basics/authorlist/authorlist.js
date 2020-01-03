@@ -88,7 +88,7 @@ Page({
         },
         success: function (res) {
           
-          console.log(res.data)
+          // console.log(res.data)
 
           // var str_aes_decode = that.Decrypt(res.data.items)
           // let tmp_set_canvasList = JSON.parse(str_aes_decode)
@@ -96,7 +96,7 @@ Page({
            
           res.data.items = util.Decrypt(res.data.items)
 
-          console.log(res.data.items)
+          // console.log(res.data.items)
 
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
