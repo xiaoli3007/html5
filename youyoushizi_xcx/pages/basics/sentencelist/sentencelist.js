@@ -38,6 +38,9 @@ Page({
         },
         success: function (res) {
           // console.log(res);
+
+          res.data.items = util.Decrypt(res.data.items)
+
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
@@ -98,7 +101,7 @@ Page({
       },
       success: function (res) {
         if (res.data.code === 20000) {
-
+          res.data.items = util.Decrypt(res.data.items)
           // console.log(res.data.items.length)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
@@ -178,6 +181,8 @@ Page({
       success: function (res) {
         console.log(res.data)
         if (res.data.code === 20000) {
+          
+          res.data.items = util.Decrypt(res.data.items)
           
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
