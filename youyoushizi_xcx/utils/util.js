@@ -1,3 +1,7 @@
+
+var fun_aes = require('./aes.js')
+const app = getApp()
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -51,10 +55,34 @@ function global_hilight_word(key, word) {
   return [{ key: false, str: word }];
 }
 
+ function Encrypt(word) {
+  var srcs = fun_aes.CryptoJS.enc.Utf8.parse(word);
+  var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
+  var encrypted = fun_aes.CryptoJS.AES.encrypt(srcs, key, {
+    mode: fun_aes.CryptoJS.mode.ECB,
+    padding: fun_aes.CryptoJS.pad.Pkcs7
+  });
+  //返回大写十六进制加密结果
+  return encrypted.toString();
+}
+
+function Decrypt(word) {
+  var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
+  //mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7
+  var decrypt = fun_aes.CryptoJS.AES.decrypt(word, key, {
+    mode: fun_aes.CryptoJS.mode.ECB,
+    padding: fun_aes.CryptoJS.pad.Pkcs7
+  });
+  var decryptedStr = decrypt.toString(fun_aes.CryptoJS.enc.Utf8);
+  return JSON.parse(decryptedStr.toString());
+}
+
 module.exports = {
   formatTime: formatTime,
   GetPercent: GetPercent,
   util_substring: util_substring,
   findKey: findKey,
   global_hilight_word: global_hilight_word,
+  Encrypt: Encrypt,
+  Decrypt: Decrypt,
 }

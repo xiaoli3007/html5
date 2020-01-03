@@ -1,4 +1,5 @@
 import { $wuxDialog } from '../../../dist/index'
+var util = require('../../../utils/util.js')
 const app = getApp()
 Page({
   data: {
@@ -184,6 +185,8 @@ Page({
           // })
 
         } else {
+
+          // res.data.items = util.Decrypt(res.data.items)
           that.setData({
             duwuList: res.data.items,
             keywords: res.data.return_q,
@@ -285,6 +288,7 @@ Page({
       success: function(res) {
         if (res.data.code === 20000) {
 
+          // res.data.items = util.Decrypt(res.data.items)
           // console.log(res.data.items)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             console.log(res.data.length)
@@ -369,6 +373,8 @@ Page({
       success: function(res) {
         // console.log(res.data)
         if (res.data.code === 20000) {
+
+          // res.data.items = util.Decrypt(res.data.items)
           
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
@@ -522,6 +528,7 @@ Page({
             
 
             }else{
+              // res.data.items = util.Decrypt(res.data.items)
               that.setData({
                 duwuList: res.data.items,
                 keywords: res.data.return_q,

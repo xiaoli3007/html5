@@ -1,5 +1,5 @@
-var fun_aes = require('../../../utils/aes.js')
-
+// var fun_aes = require('../../../utils/aes.js')
+var util = require('../../../utils/util.js')
 const app = getApp();
 Page({
   data: {
@@ -90,9 +90,13 @@ Page({
           
           console.log(res.data)
 
-          var str_aes_decode = that.Decrypt(res.data.aa)
-          let tmp_set_canvasList = JSON.parse(str_aes_decode)
-       console.log(tmp_set_canvasList)
+          // var str_aes_decode = that.Decrypt(res.data.items)
+          // let tmp_set_canvasList = JSON.parse(str_aes_decode)
+          
+           
+          res.data.items = util.Decrypt(res.data.items)
+
+          console.log(res.data.items)
 
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
@@ -126,26 +130,26 @@ Page({
     
 
   },
-  Encrypt: function(word) {
-    var srcs = fun_aes.CryptoJS.enc.Utf8.parse(word);
-    var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
-    var encrypted = fun_aes.CryptoJS.AES.encrypt(srcs, key, {
-      mode: fun_aes.CryptoJS.mode.ECB,
-      padding: fun_aes.CryptoJS.pad.Pkcs7
-    });
-    //返回大写十六进制加密结果
-    return encrypted.toString();
-  },
-  Decrypt: function(word) {
-    var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
-    //mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7
-    var decrypt = fun_aes.CryptoJS.AES.decrypt(word, key, {
-      mode: fun_aes.CryptoJS.mode.ECB,
-      padding: fun_aes.CryptoJS.pad.Pkcs7
-    });
-    var decryptedStr = decrypt.toString(fun_aes.CryptoJS.enc.Utf8);
-    return decryptedStr.toString();
-  },
+  // Encrypt: function(word) {
+  //   var srcs = fun_aes.CryptoJS.enc.Utf8.parse(word);
+  //   var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
+  //   var encrypted = fun_aes.CryptoJS.AES.encrypt(srcs, key, {
+  //     mode: fun_aes.CryptoJS.mode.ECB,
+  //     padding: fun_aes.CryptoJS.pad.Pkcs7
+  //   });
+  //   //返回大写十六进制加密结果
+  //   return encrypted.toString();
+  // },
+  // Decrypt: function(word) {
+  //   var key = fun_aes.CryptoJS.enc.Utf8.parse(app.globalData.jiamikey);
+  //   //mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7
+  //   var decrypt = fun_aes.CryptoJS.AES.decrypt(word, key, {
+  //     mode: fun_aes.CryptoJS.mode.ECB,
+  //     padding: fun_aes.CryptoJS.pad.Pkcs7
+  //   });
+  //   var decryptedStr = decrypt.toString(fun_aes.CryptoJS.enc.Utf8);
+  //   return decryptedStr.toString();
+  // },
   /**
  * 页面上拉触底事件的处理函数
  */
@@ -182,6 +186,7 @@ Page({
       success: function (res) {
         if (res.data.code === 20000) {
 
+          res.data.items = util.Decrypt(res.data.items)
           // console.log(res.data.items.length)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
@@ -255,7 +260,10 @@ Page({
       },
       success: function (res) {
         if (res.data.code === 20000) {
-          console.log(res.data.items.length)
+          // console.log(res.data.items.length)
+
+          res.data.items = util.Decrypt(res.data.items)
+
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
