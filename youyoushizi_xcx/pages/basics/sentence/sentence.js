@@ -29,7 +29,7 @@ Page({
       success(res) {
 
    
-        
+        res.data.sentence_info = util.Decrypt(res.data.sentence_info)
         if (options.dword){
           console.log(options.dword)
           res.data.sentence_info.lw_red = util.global_hilight_word(options.dword, res.data.sentence_info.lword)

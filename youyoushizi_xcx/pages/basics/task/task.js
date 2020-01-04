@@ -973,6 +973,8 @@ Page({
       },
       success(res) {
         //  console.log(res.data) 
+
+        res.data.items = util.Decrypt(res.data.items)
         that.setData({
           data_item_word: res.data.items,
         })
