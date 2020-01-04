@@ -1,3 +1,4 @@
+var util = require('../../../utils/util.js')
 const app = getApp()
 Page({
   data: {
@@ -42,6 +43,8 @@ Page({
         //   　　console.log('forEach遍历:' + i );
 
         // })
+        res.data.items = util.Decrypt(res.data.items)
+        res.data.program = util.Decrypt(res.data.program)
         that.setData({
 
           datalist: res.data.items,

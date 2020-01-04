@@ -29,14 +29,15 @@ Page({
       success(res) {
 
         // let arr = res.data.items
-        console.log(res.data)
+        // console.log(res.data)
         // console.log(Object.keys(arr));
         // arr.forEach(function (value, i) {
         //   　　console.log('forEach遍历:' + i );
 
         // })
 
-        console.log(res.data.program.thumb_big);
+        res.data.program = util.Decrypt(res.data.program)
+        // console.log(res.data.program.thumb_big);
         that.setData({
           program: res.data.program,
           ebookid: res.data.program.id,

@@ -1,3 +1,4 @@
+var util = require('../../../utils/util.js')
 const app = getApp()
 Page({
   data: {
@@ -38,6 +39,10 @@ Page({
       },
       success(res) {
         console.log(res.data)
+
+        res.data.items = util.Decrypt(res.data.items)
+        res.data.program = util.Decrypt(res.data.program)
+        
         let arr = res.data.datas_xcc_tab 
        
         // console.log(Object.keys(arr));
