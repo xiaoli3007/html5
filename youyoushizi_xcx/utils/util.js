@@ -88,7 +88,7 @@ function Md5Url(objecturl) {
   });
   console.log(objecturl)
   var tmp_objecturl = JSON.stringify(objecturl);
-  // console.log(tmp_objecturl+app.globalData.jiamikey)
+   console.log(tmp_objecturl+app.globalData.jiamikey)
   var returnurl = md5.md5(tmp_objecturl+app.globalData.jiamiUrlkey)
   //var returnurl = md5.md5(app.globalData.jiamikey)
   console.log(returnurl)

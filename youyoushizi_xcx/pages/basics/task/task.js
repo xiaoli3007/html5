@@ -145,10 +145,20 @@ Page({
           relation_id:  options.relation_id?parseInt(options.relation_id):0,
           gid:  options.gid?parseInt(options.gid):0,
           wcell_type: options.wcell_type?parseInt(options.wcell_type):0,
-          status:0
+          status:0,
+          sign:util.Md5Url({
+            userid: app.globalData.userid,
+            type: options.type?parseInt(options.type):0,
+            taskid: options.taskid?parseInt(options.taskid):0,
+            relation_type: options.relation_type?options.relation_type:'',
+            relation_id:  options.relation_id?parseInt(options.relation_id):0,
+            gid:  options.gid?parseInt(options.gid):0,
+            wcell_type: options.wcell_type?parseInt(options.wcell_type):0,
+            status:0            
+          })
         },
         success: function (res) {
-           console.log(res.data)
+          //  console.log(res.data)
           // res.data.word_data = util.Decrypt(res.data.word_data)
            //setTimeout(function () { 
           //进行状态中的进度跳转================================================

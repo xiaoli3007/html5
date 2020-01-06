@@ -153,7 +153,11 @@ Page({
         pagesize: that.data.pagesize,
         page: that.data.page,
         scan_code: temp_scan,
-
+        sign:util.Md5Url({
+            pagesize: that.data.pagesize,
+            page: that.data.page,
+            scan_code: temp_scan          
+          })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -280,6 +284,14 @@ Page({
         search_linkage_default_string: that.data.list_select_value.join(),
         slistorder: that.data.listorder,
         sorderby: that.data.orderby,
+        sign:util.Md5Url( {
+            pagesize: that.data.pagesize,
+            page: that.data.page,
+            keywords: that.data.keywords,
+            search_linkage_default_string: that.data.list_select_value.join(),
+            slistorder: that.data.listorder,
+            sorderby: that.data.orderby,
+          })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -365,6 +377,15 @@ Page({
         // scan_code: that.data.scan_code,
         slistorder: that.data.listorder,
         sorderby: that.data.orderby,
+        sign:util.Md5Url( {
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          search_linkage_default_string: that.data.list_select_value.join(),
+          // scan_code: that.data.scan_code,
+          slistorder: that.data.listorder,
+          sorderby: that.data.orderby
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -503,7 +524,7 @@ Page({
           
           loadModal: true
         })
-        let temp_scan = res.result
+        let temp_scan = res.result?res.result:''
         //加载列表
         wx.request({
           url: app.globalData.url + '?act=getbookrecommendlist',
@@ -511,6 +532,11 @@ Page({
             pagesize: that.data.pagesize,
             page: that.data.page,
             scan_code: temp_scan,
+            sign:util.Md5Url( {
+              pagesize: that.data.pagesize,
+              page: that.data.page,
+              scan_code: temp_scan
+            })
           },
           header: {
             'content-type': 'application/json', // 默认值
@@ -518,7 +544,7 @@ Page({
           },
           success(res) {
             console.log('扫码请求的结果')
-            console.log(res.data)
+            // console.log(res.data)
             if (res.data.code==20001){
 
               //直接跳转 
