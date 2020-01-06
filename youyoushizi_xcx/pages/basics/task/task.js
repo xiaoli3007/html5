@@ -109,7 +109,7 @@ Page({
 
    
 
-    // console.log(options.type)
+     console.log(options)
 
     var apiurl = ''
     var methd = 'POST'
@@ -139,11 +139,11 @@ Page({
         },
         data: {
           userid: app.globalData.userid,
-          type: parseInt(options.type),
-          taskid: parseInt(options.taskid),
-          relation_type: options.relation_type,
-          relation_id: parseInt(options.relation_id),
-          gid: options.gid?parseInt(options.gid):0,
+          type: options.type?parseInt(options.type):0,
+          taskid: options.taskid?parseInt(options.taskid):0,
+          relation_type: options.relation_type?options.relation_type:'',
+          relation_id:  options.relation_id?parseInt(options.relation_id):0,
+          gid:  options.gid?parseInt(options.gid):0,
           wcell_type: options.wcell_type?parseInt(options.wcell_type):0,
           status:0
         },
