@@ -83,7 +83,11 @@ Page({
         },
         data: {
           userid: app.globalData.userid,
-          nums: parseInt(nums)
+          nums: parseInt(nums),
+          sign:util.Md5Url({
+            userid: app.globalData.userid,
+            nums: parseInt(nums)
+          })
         },
         success: function(res) {
            console.log(res); 

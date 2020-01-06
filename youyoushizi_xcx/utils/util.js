@@ -1,5 +1,6 @@
 
 var fun_aes = require('./aes.js')
+var md5 = require('./MD5.js')
 const app = getApp()
 
 const formatTime = date => {
@@ -77,6 +78,23 @@ function Decrypt(word) {
   return JSON.parse(decryptedStr.toString());
 }
 
+function Md5Url(objecturl) {
+  // console.log(objecturl)
+  Object.keys(objecturl).forEach(function(key){
+
+    // console.log(key,objecturl[key]);
+    objecturl[key]=objecturl[key].toString()
+
+  });
+  console.log(objecturl)
+  var tmp_objecturl = JSON.stringify(objecturl);
+  // console.log(tmp_objecturl+app.globalData.jiamikey)
+  var returnurl = md5.md5(tmp_objecturl+app.globalData.jiamikey)
+  //var returnurl = md5.md5(app.globalData.jiamikey)
+  console.log(returnurl)
+  return returnurl;
+}
+
 module.exports = {
   formatTime: formatTime,
   GetPercent: GetPercent,
@@ -85,4 +103,5 @@ module.exports = {
   global_hilight_word: global_hilight_word,
   Encrypt: Encrypt,
   Decrypt: Decrypt,
+  Md5Url: Md5Url,
 }
