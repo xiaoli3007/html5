@@ -28,7 +28,7 @@ Page({
       },
       success(res) {
 
-   
+    
         res.data.sentence_info = util.Decrypt(res.data.sentence_info)
         if (options.dword){
           console.log(options.dword)

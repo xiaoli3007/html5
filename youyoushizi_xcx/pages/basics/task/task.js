@@ -126,7 +126,7 @@ Page({
     var that = this;
     wx.showLoading({
       title: '加载中',
-      mask:true
+      // mask:true
     })
     if (app.globalData.userid) {
 
@@ -148,7 +148,9 @@ Page({
           status:0
         },
         success: function (res) {
-           console.log(res);
+           console.log(res.data)
+          // res.data.word_data = util.Decrypt(res.data.word_data)
+           //setTimeout(function () { 
           //进行状态中的进度跳转================================================
           if (res.data.taskinfo.status=='1'){
             let temp_progress_wcellid = null
@@ -194,15 +196,9 @@ Page({
           var temp_taskdataword = [];
           res.data.word_data.word1.forEach(function (value, i) {
 
-            // let w_temp_taskdataword = value
-            // w_temp_taskdataword.lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
-            // temp_taskdataword.push(w_temp_taskdataword)
             res.data.word_data.word1[i].lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
           })
 
-          // console.log(res.data.word_data.word1);
-
-          // console.log(linktemp1);
 
           that.setData({
             error_list: temp_error_list,
@@ -227,6 +223,9 @@ Page({
           }
 
           that.auto_height(res.data.taskinfo.type)
+
+       //}, 500)
+
         }, complete(res) {
           that.setData({
 
@@ -698,8 +697,8 @@ Page({
 
     }
     
-    console.log(this.data.taskdata.word1[this.data.current])
-     console.log(item_lword_src)
+    // console.log(this.data.taskdata.word1[this.data.current])
+    //  console.log(item_lword_src)
     
 
     if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {
