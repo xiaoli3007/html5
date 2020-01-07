@@ -1,5 +1,5 @@
 
-
+var util = require('../../../utils/util.js')
 const app = getApp();
 Page({
   data: {
@@ -65,15 +65,21 @@ Page({
     if (app.globalData.userid) {
 
        wx.request({
-         url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+         url: app.globalData.url + '?act=tasklist' ,
         method: 'GET',
          header: {
            'content-type': 'application/json', // 默认值
            'X-Token': app.globalData.xtoken
          },
          data: {
+           userid: app.globalData.userid,
            type: stemptype,
            pagesize: that.data.pagesize,
+           sign:util.Md5Url( {
+            userid: app.globalData.userid,
+            type: stemptype,
+            pagesize: that.data.pagesize
+          })
          },
         success: function (res) {
           // console.log(res);
@@ -142,14 +148,24 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=tasklist',
       data: {
+        userid: app.globalData.userid,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
         type: that.data.type,
         relation_type: that.data.relation_type,
         relation_id: that.data.relation_id,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          type: that.data.type,
+          relation_type: that.data.relation_type,
+          relation_id: that.data.relation_id
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -205,12 +221,20 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=tasklist' ,
       data: {
+        userid: app.globalData.userid,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
         type: that.data.type,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          type: that.data.type
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -269,12 +293,21 @@ Page({
     })
     var that = this;
     wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=tasklist' ,
       data: {
+        userid: app.globalData.userid,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
         type: that.data.type,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          type: that.data.type
+        })
+        
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -392,9 +425,14 @@ Page({
             data: {
               userid: app.globalData.userid,
               taskid: ttaskid,
+              sign:util.Md5Url( {
+                userid: app.globalData.userid,
+                taskid: ttaskid
+              })
+              
             },
             success: function (res) {
-              console.log(res);
+              //console.log(res);
                
               that.data.task_list.splice(tindex, 1)
               that.setData({
@@ -436,8 +474,9 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=tasklist&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=tasklist' ,
       data: {
+        userid: app.globalData.userid,
         pagesize: that.data.pagesize,
         page: that.data.page,
         type: that.data.type,

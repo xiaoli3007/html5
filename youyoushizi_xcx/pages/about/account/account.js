@@ -74,11 +74,14 @@ Page({
     if (app.globalData.uid) {
 
        wx.request({
-         url: app.globalData.url2 + '?act=wx_get_wxmemberlist&uid=' + app.globalData.uid,
+         url: app.globalData.url2 + '?act=wx_get_wxmemberlist' ,
         method: 'POST',
         header: header,
         data: { 
           uid: app.globalData.uid,
+          sign:util.Md5Url( {
+            uid: app.globalData.uid ? app.globalData.uid : 0
+          })
         },
         success: function (res) {
           // console.log(res);

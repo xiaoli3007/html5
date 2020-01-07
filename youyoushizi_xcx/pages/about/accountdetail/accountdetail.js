@@ -61,11 +61,14 @@ Page({
     if (bd_userid) {
 
        wx.request({
-         url: app.globalData.url2 + '?act=wx_get_wxmember_detaul&userid=' + bd_userid,
+         url: app.globalData.url2 + '?act=wx_get_wxmember_detaul' ,
         method: 'POST',
         header: header,
         data: { 
           userid: bd_userid,
+          sign:util.Md5Url( {
+            userid: bd_userid
+          })
         },
         success: function (res) {
           // console.log(res);
@@ -618,6 +621,10 @@ Page({
       data: {
         wx_id: app.globalData.uid,
         userid: duserid,
+        sign:util.Md5Url( {
+          wx_id: app.globalData.uid,
+          userid: duserid
+        })
       },
       success: function (res) {
         console.log(res);
