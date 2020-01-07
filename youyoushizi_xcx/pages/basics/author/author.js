@@ -25,10 +25,10 @@ Page({
       url: app.globalData.url + '?act=author_show',
       data: {
         author_id: options.authorid,
-        userid: app.globalData.userid,
+        userid: app.globalData.userid ? app.globalData.userid : 0,
         sign:util.Md5Url( {
           author_id: options.authorid,
-          userid: app.globalData.userid
+          userid: app.globalData.userid ? app.globalData.userid : 0
         })
       },
       header: {

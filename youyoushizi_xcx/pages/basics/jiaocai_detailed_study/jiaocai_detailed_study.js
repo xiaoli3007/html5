@@ -26,6 +26,7 @@ Page({
     }
     console.log(default_wcelltype)
     let that = this;
+
     //加载列表
     wx.request({
       url: app.globalData.url + '?act=ebook_jiaocai_show_study',
@@ -42,7 +43,9 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-        console.log(res.data)
+        wx.showLoading({
+          title: '加载中',
+        })
 
         res.data.items = util.Decrypt(res.data.items)
         res.data.program = util.Decrypt(res.data.program)
@@ -80,6 +83,7 @@ Page({
 
           loadModal: false
         })
+        wx.hideLoading()
         //console.log(res.statusCode)
         if (res.statusCode == 500) {
 

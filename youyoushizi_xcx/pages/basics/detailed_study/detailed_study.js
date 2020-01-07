@@ -23,6 +23,10 @@ Page({
   onLoad(options) {
     console.log(options)
     let that = this;
+
+    wx.showLoading({
+      title: '加载中',
+    })
     //加载列表
     wx.request({
       url: app.globalData.url + '?act=ebook_show_study',
@@ -76,6 +80,7 @@ Page({
 
           loadModal: false
         })
+        wx.hideLoading()
         //console.log(res.statusCode)
         if (res.statusCode == 500) {
 
