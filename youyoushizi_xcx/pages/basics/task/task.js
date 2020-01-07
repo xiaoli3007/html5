@@ -348,6 +348,12 @@ Page({
         taskid: this.data.taskid,
         review: 0,
         duration: showTwo.data.timenum,
+        sign:util.Md5Url({
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          taskid: this.data.taskid,
+          review: 0,
+          duration: showTwo.data.timenum
+        })
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded',
@@ -738,6 +744,12 @@ Page({
         taskid: this.data.taskid,
         wcellid: tempwcellid,
         status: e.detail.value,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          taskid: this.data.taskid,
+          wcellid: tempwcellid,
+          status: e.detail.value
+        })
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded',

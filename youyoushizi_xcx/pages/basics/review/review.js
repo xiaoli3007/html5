@@ -249,6 +249,12 @@ Page({
         taskid: 0,
         review: 1,
         duration: showTwo.data.timenum,
+        sign:util.Md5Url({
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          taskid: 0,
+          review: 1,
+          duration: showTwo.data.timenum
+        })
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded',
@@ -407,6 +413,13 @@ Page({
         day: temp_fact.value,
         quality: temp_fact.quality,
         factor: temp_fact.factor,
+        sign:util.Md5Url({
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          task_wcell_id: tempwcellid,
+          day: temp_fact.value,
+          quality: temp_fact.quality,
+          factor: temp_fact.factor
+        })
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded',
