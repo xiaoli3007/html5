@@ -1,5 +1,5 @@
 
-
+var util = require('../../../utils/util.js')
 const app = getApp();
 Page({
   data: {
@@ -51,15 +51,21 @@ Page({
     if (app.globalData.userid) {
 
        wx.request({
-         url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+         url: app.globalData.url + '?act=collection',
         method: 'GET',
          header: {
            'content-type': 'application/json', // 默认值
            'X-Token': app.globalData.xtoken
          },
          data: {
+           userid: app.globalData.userid ? app.globalData.userid : 0,
            type: that.data.type,
            pagesize: that.data.pagesize,
+           sign:util.Md5Url( {
+            userid: app.globalData.userid ? app.globalData.userid : 0,
+            type: that.data.type,
+            pagesize: that.data.pagesize,
+          })
          },
         success: function (res) {
           // console.log(res);
@@ -122,13 +128,20 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=collection' ,
       data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
         type: that.data.type,
-
+        sign:util.Md5Url( {
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          type: that.data.type
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -183,12 +196,20 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=collection' ,
       data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
         type: that.data.type,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          type: that.data.type
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -235,12 +256,20 @@ Page({
 
     var that = this;
     wx.request({
-      url: app.globalData.url + '?act=collection&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=collection' ,
       data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
         type: that.data.type,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          type: that.data.type
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -318,9 +347,14 @@ Page({
               'X-Token': app.globalData.xtoken
             },
             data: {
-              userid: app.globalData.userid,
+              userid: app.globalData.userid ? app.globalData.userid : 0,
               collection_id: ttaskid,
               collection_type: ttype,
+              sign:util.Md5Url( {
+                userid: app.globalData.userid ? app.globalData.userid : 0,
+                collection_id: ttaskid,
+                collection_type: ttype,
+              })
             },
             success: function (res) {
               console.log(res);

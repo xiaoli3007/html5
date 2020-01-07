@@ -1,3 +1,4 @@
+var util = require('../../../utils/util.js')
 const app = getApp()
 Page({
   data: {
@@ -21,6 +22,9 @@ Page({
       url: app.globalData.url + '?act=taskone',
       data: {
         taskid: parseInt(options.taskid),
+        sign:util.Md5Url({
+          taskid: parseInt(options.taskid)
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -28,7 +32,7 @@ Page({
       },
       success(res) {
 
-        console.log(res.data)
+        // console.log(res.data)
         
 
         var linktemp1 = []; 
@@ -105,6 +109,10 @@ Page({
         taskid: parseInt(this.data.ctaskid),
         userid: app.globalData.userid,
         taskdata: str,
+        sign:util.Md5Url({
+          taskid: parseInt(this.data.ctaskid),
+          userid: app.globalData.userid
+        })
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded', // 默认值

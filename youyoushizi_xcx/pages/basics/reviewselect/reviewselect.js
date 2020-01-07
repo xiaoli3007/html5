@@ -1,3 +1,4 @@
+var util = require('../../../utils/util.js')
 const app = getApp()
 
 Page({
@@ -26,7 +27,10 @@ Page({
     wx.request({
       url: app.globalData.url + '?act=review_info', //
       data: {
-        userid: app.globalData.userid ? app.globalData.userid : 0
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        sign:util.Md5Url({
+          userid: app.globalData.userid ? app.globalData.userid : 0
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

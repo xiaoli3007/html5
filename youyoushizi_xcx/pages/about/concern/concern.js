@@ -1,4 +1,4 @@
-
+var util = require('../../../utils/util.js')
 
 const app = getApp();
 Page({
@@ -34,18 +34,23 @@ Page({
     if (app.globalData.userid) {
 
        wx.request({
-         url: app.globalData.url + '?act=member_author_list&userid=' + app.globalData.userid,
+         url: app.globalData.url + '?act=member_author_list',
         method: 'GET',
          header: {
            'content-type': 'application/json', // 默认值
            'X-Token': app.globalData.xtoken
          },
          data: {
+           userid: app.globalData.userid ? app.globalData.userid : 0,
            pagesize: that.data.pagesize,
+           sign:util.Md5Url({
+            userid: app.globalData.userid ? app.globalData.userid : 0,
+            pagesize: that.data.pagesize
+          })
          },
         success: function (res) {
-          console.log(res);
-          console.log(res.data.items.length)
+          // console.log(res);
+          // console.log(res.data.items.length)
           if (res.data.items.length < that.data.pagesize || res.data.items.length === 0) {
             that.setData({
               isLoad: true,
@@ -94,11 +99,18 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=member_author_list&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=member_author_list' ,
       data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
+        sign:util.Md5Url({
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -153,11 +165,18 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=member_author_list&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=member_author_list',
       data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
+        sign:util.Md5Url({
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -234,8 +253,12 @@ Page({
               'X-Token': app.globalData.xtoken
             },
             data: {
-              userid: app.globalData.userid,
+              userid: app.globalData.userid ? app.globalData.userid : 0,
               concern_id: ttaskid,
+              sign:util.Md5Url({
+                userid: app.globalData.userid ? app.globalData.userid : 0,
+                concern_id: ttaskid
+              })
             },
             success: function (res) {
               console.log(res);

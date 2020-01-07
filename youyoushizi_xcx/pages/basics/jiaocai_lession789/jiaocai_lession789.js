@@ -1,3 +1,4 @@
+var util = require('../../../utils/util.js')
 const app = getApp()
 Page({
   data: {
@@ -24,7 +25,10 @@ Page({
     wx.request({
       url: app.globalData.url2 + '?act=jiaocai_sub_lession789', 
       data: {
-        userid: app.globalData.userid,
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid ? app.globalData.userid : 0
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

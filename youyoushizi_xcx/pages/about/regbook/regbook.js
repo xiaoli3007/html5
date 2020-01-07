@@ -89,11 +89,7 @@ Page({
           contact: params.contact,
           isbn: params.isbn,
           sign:util.Md5Url( {
-            userid: app.globalData.userid ? app.globalData.userid : 0,
-            name: params.name,
-            content: params.content,
-            contact: params.contact,
-            isbn: params.isbn
+            userid: app.globalData.userid ? app.globalData.userid : 0
           })
         },
         success: function (res) {
@@ -139,11 +135,8 @@ Page({
           contact: params.contact,
           isbn: params.isbn,
           sign:util.Md5Url( {
-            userid: app.globalData.userid ? app.globalData.userid : 0,
-            name: params.name,
-            content: params.content,
-            contact: params.contact,
-            isbn: params.isbn
+            userid: app.globalData.userid ? app.globalData.userid : 0
+            
           })
         },
         success: function (res) {
