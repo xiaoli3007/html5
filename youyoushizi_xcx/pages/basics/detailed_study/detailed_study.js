@@ -203,7 +203,7 @@ Page({
         that.setData({
           data_item_word: res.data.items,
         })
-      },
+      }, 
       complete(res) {
         that.setData({
 

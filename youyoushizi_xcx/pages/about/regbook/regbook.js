@@ -1,5 +1,5 @@
 import WxValidate from '../../../utils/WxValidate.js'
-
+var util = require('../../../utils/util.js')
 const app = getApp();
 Page({
   data: {
@@ -87,7 +87,14 @@ Page({
           name: params.name,
           content: params.content,
           contact: params.contact,
-          isbn: params.isbn
+          isbn: params.isbn,
+          sign:util.Md5Url( {
+            userid: app.globalData.userid ? app.globalData.userid : 0,
+            name: params.name,
+            content: params.content,
+            contact: params.contact,
+            isbn: params.isbn
+          })
         },
         success: function (res) {
           const data = JSON.parse(res.data)
@@ -130,7 +137,14 @@ Page({
           name: params.name,
           content: params.content,
           contact: params.contact,
-          isbn: params.isbn
+          isbn: params.isbn,
+          sign:util.Md5Url( {
+            userid: app.globalData.userid ? app.globalData.userid : 0,
+            name: params.name,
+            content: params.content,
+            contact: params.contact,
+            isbn: params.isbn
+          })
         },
         success: function (res) {
           console.log(res)

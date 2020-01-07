@@ -3,7 +3,7 @@ import {
   $stopWuxRefresher,
   $stopWuxLoader
 } from '../../../dist/index'
-
+var util = require('../../../utils/util.js')
 var fun_aes = require('../../../utils/aes.js')
 
 const app = getApp()
@@ -178,6 +178,10 @@ Component({
                 data: {
                   userid: app.globalData.userid ? app.globalData.userid : 0,
                   token: t,
+                  sign:util.Md5Url( {
+                    userid: app.globalData.userid ? app.globalData.userid : 0,
+                    token: t
+                  })
                 },
                 header: {
                   'content-type': 'application/json', // 默认值
@@ -283,12 +287,15 @@ Component({
 
 
     },
-    update_data() {
+    update_data() { 
       var that = this 
       wx.request({
         url: app.globalData.url2 + '?act=index',
         data: {
-          userid: app.globalData.userid ? app.globalData.userid : 0
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          sign:util.Md5Url( {
+            userid: app.globalData.userid ? app.globalData.userid : 0
+          })
         },
         header: {
           'content-type': 'application/json', // 默认值
