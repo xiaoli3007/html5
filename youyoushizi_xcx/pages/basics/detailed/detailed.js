@@ -20,10 +20,10 @@ Page({
       url: app.globalData.url + '?act=ebook_show',
       data: {
         ebookid: options.ebookid,
-        userid: app.globalData.userid,
+        userid: app.globalData.userid?app.globalData.userid:0,
         sign:util.Md5Url( {
           ebookid: options.ebookid,
-          userid: app.globalData.userid
+          userid: app.globalData.userid?app.globalData.userid:0
         })
       },
       header: {
@@ -117,6 +117,11 @@ Page({
         ebookid: that.data.ebookid,
         userid: app.globalData.userid,
         type: t,
+        sign:util.Md5Url( {
+          ebookid: that.data.ebookid,
+          userid: app.globalData.userid,
+          type: t
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

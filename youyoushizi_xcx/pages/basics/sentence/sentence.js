@@ -20,12 +20,12 @@ Page({
         sentenceid: options.sentenceid ? options.sentenceid:0,
         firstdword: options.firstdword ? options.firstdword : '',
         dword: options.dword ? options.dword : '',
-        userid: app.globalData.userid,
+        userid: app.globalData.userid?app.globalData.userid:0,
         sign:util.Md5Url( {
           sentenceid: options.sentenceid ? options.sentenceid:0,
           firstdword: options.firstdword ? options.firstdword : '',
           dword: options.dword ? options.dword : '',
-          userid: app.globalData.userid
+          userid: app.globalData.userid?app.globalData.userid:0
         })
       },
       header: {

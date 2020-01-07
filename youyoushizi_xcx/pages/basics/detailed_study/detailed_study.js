@@ -28,10 +28,10 @@ Page({
       url: app.globalData.url + '?act=ebook_show_study',
       data: {
         ebookid: options.ebookid,
-        userid: app.globalData.userid,
+        userid: app.globalData.userid?app.globalData.userid:0,
         sign:util.Md5Url( {
           ebookid: options.ebookid,
-          userid: app.globalData.userid
+          userid: app.globalData.userid?app.globalData.userid:0
         })
       },
       header: {
@@ -187,10 +187,10 @@ Page({
       url: app.globalData.url + '?act=book_item_word_shiyi',
       data: {
         wcellid: wcellid,
-        userid: app.globalData.userid,
+        userid: app.globalData.userid?app.globalData.userid:0,
         sign:util.Md5Url( {
           wcellid: wcellid,
-          userid: app.globalData.userid
+          userid: app.globalData.userid?app.globalData.userid:0
         })
       },
       header: {

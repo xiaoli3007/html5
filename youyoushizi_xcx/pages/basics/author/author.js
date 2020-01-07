@@ -145,6 +145,10 @@ Page({
       data: {
         authorid: that.data.authorid,
         userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          authorid: that.data.authorid,
+          userid: app.globalData.userid
+        })
       },
       success(res) {
         console.log(res.data)
