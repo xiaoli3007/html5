@@ -26,6 +26,10 @@ Page({
       data: {
         author_id: options.authorid,
         userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          author_id: options.authorid,
+          userid: app.globalData.userid
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

@@ -32,6 +32,10 @@ Page({
       data: {
         ebookid: options.ebookid,
         userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          ebookid: options.ebookid,
+          userid: app.globalData.userid
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -178,6 +182,10 @@ Page({
       data: {
         wcellid: wcellid,
         userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          wcellid: wcellid,
+          userid: app.globalData.userid
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

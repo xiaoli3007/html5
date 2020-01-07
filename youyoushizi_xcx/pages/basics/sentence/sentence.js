@@ -21,6 +21,12 @@ Page({
         firstdword: options.firstdword ? options.firstdword : '',
         dword: options.dword ? options.dword : '',
         userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          sentenceid: options.sentenceid ? options.sentenceid:0,
+          firstdword: options.firstdword ? options.firstdword : '',
+          dword: options.dword ? options.dword : '',
+          userid: app.globalData.userid
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

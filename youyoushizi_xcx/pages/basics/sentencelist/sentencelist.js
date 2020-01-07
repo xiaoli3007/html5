@@ -27,7 +27,7 @@ Page({
     
 
       wx.request({
-        url: app.globalData.url + '?act=sentence_list&userid=' + app.globalData.userid,
+        url: app.globalData.url + '?act=sentence_list',
         method: 'GET',
         header: {
           'content-type': 'application/json', // 默认值
@@ -35,6 +35,9 @@ Page({
         },
         data: {
           pagesize: that.data.pagesize,
+          sign:util.Md5Url( {
+            pagesize: that.data.pagesize
+          })
         },
         success: function (res) {
           // console.log(res);
@@ -89,11 +92,16 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=sentence_list&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=sentence_list',
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
+        sign:util.Md5Url( {
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -168,11 +176,16 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=sentence_list&userid=' + app.globalData.userid,
+      url: app.globalData.url + '?act=sentence_list' ,
       data: {
         pagesize: that.data.pagesize,
         page: that.data.page,
         keywords: that.data.keywords,
+        sign:util.Md5Url( {
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

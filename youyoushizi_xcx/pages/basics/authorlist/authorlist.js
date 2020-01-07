@@ -85,6 +85,10 @@ Page({
         },
         data: {
           pagesize: that.data.pagesize,
+          sign:util.Md5Url( {
+            pagesize: that.data.pagesize
+           
+          })
         },
         success: function (res) {
           
@@ -178,6 +182,12 @@ Page({
         page: that.data.page,
         keywords: that.data.keywords,
         search_linkage_default_string: that.data.list_select_value.join(),
+        sign:util.Md5Url( {
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          search_linkage_default_string: that.data.list_select_value.join()
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
@@ -253,6 +263,12 @@ Page({
         page: that.data.page,
         keywords: that.data.keywords,
         search_linkage_default_string: that.data.list_select_value.join(),
+        sign:util.Md5Url( {
+          pagesize: that.data.pagesize,
+          page: that.data.page,
+          keywords: that.data.keywords,
+          search_linkage_default_string: that.data.list_select_value.join()
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值

@@ -531,6 +531,12 @@ Page({
         dw_xcx: dw_xcx,
         wcell_type: wcell_type,
         userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          wcellid: wcellid,
+          dw_xcx: dw_xcx,
+          wcell_type: wcell_type,
+          userid: app.globalData.userid
+        })
       },
       header: {
         'content-type': 'application/json', // 默认值
