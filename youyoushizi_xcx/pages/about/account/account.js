@@ -596,19 +596,19 @@ Page({
     }
     this.WxValidate3 = new WxValidate(ruleseditusername, messages3)
 
-    const chongzhi = {
+    // const chongzhi = {
      
-      price: {
-        required: true,
-      },
-    }
-    const messages4 = {
+    //   price: {
+    //     required: true,
+    //   },
+    // }
+    // const messages4 = {
       
-      price: {
-        required: '请填写充值金额',
-      }
-    }
-    this.WxValidate4 = new WxValidate(chongzhi, messages4)
+    //   price: {
+    //     required: '请填写充值金额',
+    //   }
+    // }
+    // this.WxValidate4 = new WxValidate(chongzhi, messages4)
 
     const guanxi = {
 
@@ -628,111 +628,111 @@ Page({
 
     
   },
-  userchongzhiformSubmit: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    const params = e.detail.value
+  // userchongzhiformSubmit: function (e) {
+  //   console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  //   const params = e.detail.value
 
-    //校验表单
-    if (!this.WxValidate4.checkForm(params)) {
-      const error = this.WxValidate4.errorList[0]
-      this.showFormModal(error)
-      return false
-    }
+  //   //校验表单
+  //   if (!this.WxValidate4.checkForm(params)) {
+  //     const error = this.WxValidate4.errorList[0]
+  //     this.showFormModal(error)
+  //     return false
+  //   }
 
-    // return false
-    var that = this;
-    wx.request({
-      url: app.globalData.url2 + '?act=wx_chongzhi',
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded', // 默认值
-        'X-Token': app.globalData.xtoken
-      },
-      data: {
-        wx_id: app.globalData.uid,
-        userid: that.data.chongzhiuserid,
-        username: params.username,
-        price: params.price,
-      },
-      success: function (res) {
+  //   // return false
+  //   var that = this;
+  //   wx.request({
+  //     url: app.globalData.url2 + '?act=wx_chongzhi',
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded', // 默认值
+  //       'X-Token': app.globalData.xtoken
+  //     },
+  //     data: {
+  //       wx_id: app.globalData.uid,
+  //       userid: that.data.chongzhiuserid,
+  //       username: params.username,
+  //       price: params.price,
+  //     },
+  //     success: function (res) {
         
-        var jsConfig = res.data.pr_info;
+  //       var jsConfig = res.data.pr_info;
 
-        console.log(jsConfig);
-        if (res.data.code == 20000) {
-          wx.requestPayment({
-            timeStamp: jsConfig.timeStamp,
-            nonceStr: jsConfig.nonceStr,
-            package: jsConfig.package,
-            signType: jsConfig.signType,
-            paySign: jsConfig.paySign,
-            success: function (res) {
-              wx.showToast({
-                title: '支付成功',
-                icon: 'success',
-                duration: 1000,
-              })
-              // that.setData({
-              //   now_money: parseFloat(that.data.now_money) + parseFloat(e.detail.value.number)
-              // });
+  //       console.log(jsConfig);
+  //       if (res.data.code == 20000) {
+  //         wx.requestPayment({
+  //           timeStamp: jsConfig.timeStamp,
+  //           nonceStr: jsConfig.nonceStr,
+  //           package: jsConfig.package,
+  //           signType: jsConfig.signType,
+  //           paySign: jsConfig.paySign,
+  //           success: function (res) {
+  //             wx.showToast({
+  //               title: '支付成功',
+  //               icon: 'success',
+  //               duration: 1000,
+  //             })
+  //             // that.setData({
+  //             //   now_money: parseFloat(that.data.now_money) + parseFloat(e.detail.value.number)
+  //             // });
 
-              // setTimeout(function () {
-              //   wx.navigateTo({
-              //     url: '/pages/main/main?now=' + that.data.now_money + '&uid=' + app.globalData.uid,
-              //   })
-              // }, 1200)
-            },
-            fail: function (res) {
-              wx.showToast({
-                title: '支付失败',
-                icon: 'success',
-                duration: 1000,
-              })
-            },
-            complete: function (res) {
-              if (res.errMsg == 'requestPayment:cancel') {
-                wx.showToast({
-                  title: '取消支付',
-                  icon: 'none',
-                  duration: 1000,
-                })
-              }
-            },
-          })
-        } else {
-          wx.showToast({
-            title: '支付失败',
-            icon: 'none',
-            duration: 1000,
-          })
-        }
-        // console.log(res);
+  //             // setTimeout(function () {
+  //             //   wx.navigateTo({
+  //             //     url: '/pages/main/main?now=' + that.data.now_money + '&uid=' + app.globalData.uid,
+  //             //   })
+  //             // }, 1200)
+  //           },
+  //           fail: function (res) {
+  //             wx.showToast({
+  //               title: '支付失败',
+  //               icon: 'success',
+  //               duration: 1000,
+  //             })
+  //           },
+  //           complete: function (res) {
+  //             if (res.errMsg == 'requestPayment:cancel') {
+  //               wx.showToast({
+  //                 title: '取消支付',
+  //                 icon: 'none',
+  //                 duration: 1000,
+  //               })
+  //             }
+  //           },
+  //         })
+  //       } else {
+  //         wx.showToast({
+  //           title: '支付失败',
+  //           icon: 'none',
+  //           duration: 1000,
+  //         })
+  //       }
+  //       // console.log(res);
 
-        // if (res.data.code === 20001) {
+  //       // if (res.data.code === 20001) {
 
-        //   that.showFormModal({
-        //     msg: res.data.message
-        //   })
+  //       //   that.showFormModal({
+  //       //     msg: res.data.message
+  //       //   })
 
-        // } else {
-        //   that.showFormModal({
-        //     msg: '提交成功'
-        //   })
-        //   that.onLoad()
-        // }
+  //       // } else {
+  //       //   that.showFormModal({
+  //       //     msg: '提交成功'
+  //       //   })
+  //       //   that.onLoad()
+  //       // }
 
-      }, 
-      complete(res) {
+  //     }, 
+  //     complete(res) {
 
-        that.setData({
-          modalName: null
-        })
+  //       that.setData({
+  //         modalName: null
+  //       })
     
-      }
-    });
+  //     }
+  //   });
 
 
-  },
+  // },
   userformSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
@@ -795,66 +795,66 @@ Page({
 
 
   },
-  formSubmiteditusername: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e.detail.value)
-    const params = e.detail.value
-    //校验表单
-    if (!this.WxValidate3.checkForm(params)) {
-      const error = this.WxValidate3.errorList[0]
-      this.showFormModal(error)
-      return false
-    }
-    // console.log(this.data.edituernameform)
-    // return false
-    var that = this;
-    wx.request({
-      url: app.globalData.url2 + '?act=wx_edit_username',
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded', // 默认值
-        'X-Token': app.globalData.xtoken
-      },
-      data: {
-        userid: that.data.edituernameform.userid,
-        wx_id: app.globalData.uid,
-        username: params.username,
-        // newusername: params.newusername,
-        realname: params.realname,
-        sex: that.data.pickersex[params.sex],
-        birthday: params.birthday,
-        nianji: that.data.pickernianji[params.nianji],
-      },
-      success: function (res) {
-        console.log(res);
+  // formSubmiteditusername: function (e) {
+  //   console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  //   const params = e.detail.value
+  //   //校验表单
+  //   if (!this.WxValidate3.checkForm(params)) {
+  //     const error = this.WxValidate3.errorList[0]
+  //     this.showFormModal(error)
+  //     return false
+  //   }
+  //   // console.log(this.data.edituernameform)
+  //   // return false
+  //   var that = this;
+  //   wx.request({
+  //     url: app.globalData.url2 + '?act=wx_edit_username',
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded', // 默认值
+  //       'X-Token': app.globalData.xtoken
+  //     },
+  //     data: {
+  //       userid: that.data.edituernameform.userid,
+  //       wx_id: app.globalData.uid,
+  //       username: params.username,
+  //       // newusername: params.newusername,
+  //       realname: params.realname,
+  //       sex: that.data.pickersex[params.sex],
+  //       birthday: params.birthday,
+  //       nianji: that.data.pickernianji[params.nianji],
+  //     },
+  //     success: function (res) {
+  //       console.log(res);
 
-        if (res.data.code === 20001) {
+  //       if (res.data.code === 20001) {
 
-          that.showFormModal({
-            msg: res.data.message
-          })
+  //         that.showFormModal({
+  //           msg: res.data.message
+  //         })
 
-        } else {
-          that.showFormModal({
-            msg: '提交成功',
-          })
-           that.setData({
-            modalName: null
-          })
-          that.onLoad()
-        }
+  //       } else {
+  //         that.showFormModal({
+  //           msg: '提交成功',
+  //         })
+  //          that.setData({
+  //           modalName: null
+  //         })
+  //         that.onLoad()
+  //       }
 
-      }, complete(res) {
+  //     }, complete(res) {
 
-        // that.setData({
-        //   modalName: null
-        // })
-        //console.log(res.statusCode)
+  //       // that.setData({
+  //       //   modalName: null
+  //       // })
+  //       //console.log(res.statusCode)
        
-      }
-    });
+  //     }
+  //   });
 
 
-  },
+  // },
   userguanxiformSubmit (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     // const params = e.detail.value

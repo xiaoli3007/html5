@@ -17,7 +17,7 @@ Page({
     isbn:''
   },
   onLoad: function (options) {
-
+    app.setUserInfo('about');
     let searchnot_code = options.searchnot_code ? options.searchnot_code : ''
     let searchnot_title = options.searchnot_title ? options.searchnot_title : ''
 
