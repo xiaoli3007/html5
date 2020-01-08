@@ -200,11 +200,11 @@ Page({
     let objsex = this.data.pickersex
     let nianjiobj = this.data.pickernianji
 
-    // console.log(util.findKey(obj,value))
+      // console.log(util.findKey(nianjiobj, u.nianji))
     this.setData({
       edit_birthday: u.birthday ? u.birthday:'',
       edit_sex: u.sex?util.findKey(objsex, u.sex):'',
-      edit_nianji: u.nianji ?util.findKey(nianjiobj, u.nianji):'',
+       edit_nianji: u.nianji ?util.findKey(nianjiobj, u.nianji):'',
     })
 
   },
@@ -241,6 +241,9 @@ Page({
         username: params.username,
         newpasswd: params.newpasswd,
         confimpasswd: params.confimpasswd,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid ? app.globalData.userid : 0
+        })
       },
       success: function (res) {
         // console.log(res);
@@ -495,6 +498,9 @@ Page({
         sex: that.data.pickersex[params.sex],
         birthday: params.birthday,
         nianji: that.data.pickernianji[params.nianji],
+        sign:util.Md5Url( {
+          userid: that.data.edituernameform.userid
+        })
       },
       success: function (res) {
         // console.log(res);

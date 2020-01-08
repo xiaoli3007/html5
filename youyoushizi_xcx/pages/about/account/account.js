@@ -377,6 +377,9 @@ Page({
           data: {
             wx_id: app.globalData.uid,
             userid: app.globalData.userid,
+            sign:util.Md5Url( {
+              wx_id: app.globalData.uid
+            })
           },
           success: function (res) {
             console.log(res.data.userinfo);
@@ -761,6 +764,9 @@ Page({
         sex: that.data.pickersex[params.sex],
         birthday: params.birthday,
         nianji: that.data.pickernianji[params.nianji],
+        sign:util.Md5Url( {
+          wx_id: app.globalData.uid
+        })
       },
       success: function (res) {
         console.log(res);
@@ -880,6 +886,10 @@ Page({
         wx_id: app.globalData.uid,
         relationship_id: that.data.guanxi_id,
         name: that.data.guanxi_name,
+        sign:util.Md5Url( {
+          wx_id: app.globalData.uid
+        })
+        
       },
       success: function (res) {
         console.log(res);
@@ -915,135 +925,123 @@ Page({
 
 
   },
-  uploadChooseImage(e) {
+  // uploadChooseImage(e) {
     
-    let tuserid =  e.currentTarget.dataset.userid
-    let index = e.currentTarget.dataset.index
-    var that = this 
-    // console.log({tuserid,index})
-    wx.chooseImage({
-      count: 1, //默认9
-      sizeType: [ 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], //从相册选择
-      success: (res) => {
-        const tempFilePaths = res.tempFilePaths
+  //   let tuserid =  e.currentTarget.dataset.userid
+  //   let index = e.currentTarget.dataset.index
+  //   var that = this 
+  //   // console.log({tuserid,index})
+  //   wx.chooseImage({
+  //     count: 1, //默认9
+  //     sizeType: [ 'compressed'], //可以指定是原图还是压缩图，默认二者都有
+  //     sourceType: ['album', 'camera'], //从相册选择
+  //     success: (res) => {
+  //       const tempFilePaths = res.tempFilePaths
 
-        that.setData({
-          avatarloadModal: true
-        })
+  //       that.setData({
+  //         avatarloadModal: true
+  //       })
         
-        wx.uploadFile({
-          url: app.globalData.url2 + '?act=wx_avatar',
-          filePath: tempFilePaths[0],
-          name: 'file',
-          header: {
-            'content-type': 'multipart/form-data'
-          },
-          formData: {
-            userid: tuserid,
-          }, 
-          success(res) {
-            // const data = res.data
-            // console.log(res)
-            const data = JSON.parse(res.data)
-            console.log(data)
-            if (data.response.success == 0){
-              wx.showToast({
-                title: data.response.msg,
-                icon: 'none',
-                duration: 1500,
-              })
-            }else{
-              var tprice = 'member_list[' + index + '].avatar'
-              that.setData({
-                [tprice]: data.response.avatar,
-              })
-              if (tuserid == app.globalData.userid){
-                app.globalData.avatar = data.response.avatar
-              }
-            }
-          },
-          fail(res) {
-            wx.showToast({
-              title: '上传失败',
-              icon: 'none',
-              duration: 1500,
-            })
-          },
-          complete(res) {
-            that.setData({
-              avatarloadModal: false
-            })
-          }
-        })
+  //       wx.uploadFile({
+  //         url: app.globalData.url2 + '?act=wx_avatar',
+  //         filePath: tempFilePaths[0],
+  //         name: 'file',
+  //         header: {
+  //           'content-type': 'multipart/form-data'
+  //         },
+  //         formData: {
+  //           userid: tuserid,
+  //         }, 
+  //         success(res) {
+  //           // const data = res.data
+  //           // console.log(res)
+  //           const data = JSON.parse(res.data)
+  //           console.log(data)
+  //           if (data.response.success == 0){
+  //             wx.showToast({
+  //               title: data.response.msg,
+  //               icon: 'none',
+  //               duration: 1500,
+  //             })
+  //           }else{
+  //             var tprice = 'member_list[' + index + '].avatar'
+  //             that.setData({
+  //               [tprice]: data.response.avatar,
+  //             })
+  //             if (tuserid == app.globalData.userid){
+  //               app.globalData.avatar = data.response.avatar
+  //             }
+  //           }
+  //         },
+  //         fail(res) {
+  //           wx.showToast({
+  //             title: '上传失败',
+  //             icon: 'none',
+  //             duration: 1500,
+  //           })
+  //         },
+  //         complete(res) {
+  //           that.setData({
+  //             avatarloadModal: false
+  //           })
+  //         }
+  //       })
         
-      }
-    });
-  },
+  //     }
+  //   });
+  // },
   ViewImage(e) {
     // wx.previewImage({
     //   urls: this.data.imgList,
     //   current: e.currentTarget.dataset.url
     // });
   },
-  delete_user(e) {
-    // console.log(e)
+  // delete_user(e) {
+  //   // console.log(e)
 
-    let duserid = this.data.duserid
-    let dusername = this.data.dusername
-    var that = this
-    console.log({ duserid, dusername})
+  //   let duserid = this.data.duserid
+  //   let dusername = this.data.dusername
+  //   var that = this
+  //   console.log({ duserid, dusername})
 
-    that.setData({
+  //   that.setData({
 
-      loadModal: true
-    })
-    //删除用户
-    wx.request({
-      url: app.globalData.url2 + '?act=wx_delete',
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded', // 默认值
-        'X-Token': app.globalData.xtoken
-      },
-      data: {
-        wx_id: app.globalData.uid,
-        userid: duserid,
-      },
-      success: function (res) {
-        console.log(res);
+  //     loadModal: true
+  //   })
+  //   //删除用户
+  //   wx.request({
+  //     url: app.globalData.url2 + '?act=wx_delete',
+  //     method: 'POST',
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded', // 默认值
+  //       'X-Token': app.globalData.xtoken
+  //     },
+  //     data: {
+  //       wx_id: app.globalData.uid,
+  //       userid: duserid,
+  //     },
+  //     success: function (res) {
+  //       console.log(res);
 
-        wx.showToast({
-          title: res.data.message,
-          icon: 'none',
-          duration: 1500,
-        })
-        that.onLoad()
-      },
-      complete(res) {
-        that.setData({
+  //       wx.showToast({
+  //         title: res.data.message,
+  //         icon: 'none',
+  //         duration: 1500,
+  //       })
+  //       that.onLoad()
+  //     },
+  //     complete(res) {
+  //       that.setData({
 
-          loadModal: false,
-          modalName: null
-        })
+  //         loadModal: false,
+  //         modalName: null
+  //       })
 
-      }
-    });
+  //     }
+  //   });
 
-    // wx.showModal({
-    //   title: '删除用户',
-    //   content: '确定要删除用户？',
-    //   cancelText: '取消',
-    //   confirmText: '确定',
-    //   success: res => {
-    //     if (res.confirm) {
-
-    //     }
-    //   }
-    // })
-
-
-  },
+   
+  // },
   goto_userdetail(e) {
 
     let userid = e.currentTarget.dataset.val
