@@ -45,7 +45,7 @@ Page({
       success(res) {
 
         // let arr = res.data.items
-        console.log(res.data)
+        
         // console.log(Object.keys(arr));
         // arr.forEach(function (value, i) {
         //   　　console.log('forEach遍历:' + i );
@@ -53,6 +53,10 @@ Page({
         // })
         res.data.items = util.Decrypt(res.data.items)
         res.data.program = util.Decrypt(res.data.program)
+
+        console.log(res.data.items)
+        console.log(res.data)
+
         that.setData({
 
           datalist: res.data.items,
@@ -123,14 +127,31 @@ Page({
         scrollLeft: (e.currentTarget.dataset.id - 1) * 60
       })
     }
+
+    let linkageid_gid = this.data.datatablist_k[e.currentTarget.dataset.id]['s'][0]
+    let wcell_type = e.currentTarget.dataset.wcell_type
+    let type = e.currentTarget.dataset.type
+    let ebook_id = this.data.program.id 
+
+    console.log({linkageid_gid,wcell_type,type,ebook_id})
     
 
   },
   tabSelect2(e) {
+
     this.setData({
       TabCursub: e.currentTarget.dataset.id,
       // scrollLefts: (e.currentTarget.dataset.iid - 1) * 60
     })
+
+     let linkageid_gid = e.currentTarget.dataset.id
+     let wcell_type = e.currentTarget.dataset.wcell_type
+     let type = e.currentTarget.dataset.type
+     let ebook_id = this.data.program.id 
+
+     console.log({linkageid_gid,wcell_type,type,ebook_id})
+
+
   },
   gotodeteil_task(e) {
 

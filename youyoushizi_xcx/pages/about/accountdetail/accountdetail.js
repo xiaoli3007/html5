@@ -559,12 +559,15 @@ Page({
           },
           formData: {
             userid: tuserid,
+            sign:util.Md5Url( {
+              userid: tuserid
+            })
           }, 
           success(res) {
             // const data = res.data
             // console.log(res)
             const data = JSON.parse(res.data)
-            console.log(data)
+            // console.log(data)
             if (data.response.success == 0){
               wx.showToast({
                 title: data.response.msg,

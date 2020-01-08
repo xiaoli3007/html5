@@ -4,7 +4,7 @@
   <view slot="content">读物详细页</view>
 </cu-custom>
 
-<view class="" style="padding-bottom:80rpx;">
+<view class="" style="padding-bottom:150rpx;">
 
   <view class="bg-white padding-sm margin-top  flex   align-start">
     <view class=""  style="flex: 1;"  bindtap="ViewImage" data-url="{{program.thumb_big}}">
