@@ -20,7 +20,7 @@
   <view class="action">
     <!-- <button class="cu-btn bg-green shadow-blur round" bindtap="search_keyword" disabled="{{Inputdisabled}}">搜索</button> -->
     
-    <text class="cuIcon-scan lg text-gray" bindtap="scanCode"></text>
+    <text style="font-size:50rpx;" class="cuIcon-scan lg text-gray" bindtap="scanCode"></text>
   </view>
 </view>
 

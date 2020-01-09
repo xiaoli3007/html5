@@ -135,7 +135,7 @@ Page({
     let type = e.currentTarget.dataset.type
     let ebook_id = this.data.program.id 
 
-    console.log({linkageid_gid,wcell_type,type,ebook_id})
+    // console.log({linkageid_gid,wcell_type,type,ebook_id})
     
     var that = this 
 
@@ -192,7 +192,7 @@ Page({
      let type = e.currentTarget.dataset.type
      let ebook_id = this.data.program.id 
 
-     console.log({linkageid_gid,wcell_type,type,ebook_id})
+    //  console.log({linkageid_gid,wcell_type,type,ebook_id})
     var that = this 
 
      that.setData({
