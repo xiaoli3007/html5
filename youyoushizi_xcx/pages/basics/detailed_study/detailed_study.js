@@ -164,7 +164,7 @@ Page({
        'X-Token': app.globalData.xtoken
      },
      success(res) {
-         console.log(res.data) 
+        //  console.log(res.data) 
        res.data.items = util.Decrypt(res.data.items)
        that.setData({
          default_word_data: res.data.items,
@@ -220,7 +220,7 @@ Page({
         'X-Token': app.globalData.xtoken
       },
       success(res) {
-         console.log(res.data) 
+        //  console.log(res.data) 
         res.data.items = util.Decrypt(res.data.items)
         that.setData({
           default_word_data: res.data.items,

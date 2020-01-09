@@ -69,7 +69,10 @@
 </block> -->
 
     <view class="padding-xs bg-white" style="padding-bottom:150rpx;">
-     <view class="cu-list grid col-3">
+
+    <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-1.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloadworditem}}"></image>
+
+     <view class="cu-list grid col-3" wx:if="{{!isloadworditem}}">
       <block wx:key wx:for='{{default_word_data.data}}' wx:for-index="mindex3">
       
         <view class="line-black padding-xs">
