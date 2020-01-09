@@ -16,6 +16,7 @@ Page({
     all_play_c: null,
     datalist: [], datatablist: [],
     isloaditem:false,
+    isloadworditem:false,
     data_item_word:null,
     toView: 'msg-1', 
     topscrollLeft: 0
@@ -54,13 +55,14 @@ Page({
         res.data.items = util.Decrypt(res.data.items)
         res.data.program = util.Decrypt(res.data.program)
 
-        console.log(res.data.items)
-        console.log(res.data)
+        // console.log(res.data.items)
+        // console.log(res.data)
 
         that.setData({
 
           datalist: res.data.items,
           program: res.data.program,
+          default_word_data: res.data.default_word_data,
           datatablist_k: res.data.datas_xcc_tab_key,
           datatablist: res.data.datas_xcc_tab,
           TabCur: res.data.datas_xcc_tab[0]['m'],
@@ -135,6 +137,47 @@ Page({
 
     console.log({linkageid_gid,wcell_type,type,ebook_id})
     
+    var that = this 
+
+    that.setData({
+
+     isloadworditem: true
+   })
+    wx.request({
+     url: app.globalData.url + '?act=book_item_word_list',
+     data: {
+       linkageid_gid: linkageid_gid,
+       wcell_type: wcell_type,
+       type: type,
+       ebook_id: ebook_id,
+       userid: app.globalData.userid?app.globalData.userid:0,
+       sign:util.Md5Url( {
+         linkageid_gid: linkageid_gid,
+         wcell_type: wcell_type,
+         type: type,
+         ebook_id: ebook_id,
+         userid: app.globalData.userid?app.globalData.userid:0
+       })
+     },
+     header: {
+       'content-type': 'application/json', // 默认值
+       'X-Token': app.globalData.xtoken
+     },
+     success(res) {
+         console.log(res.data) 
+       res.data.items = util.Decrypt(res.data.items)
+       that.setData({
+         default_word_data: res.data.items,
+       })
+     }, 
+     complete(res) {
+       that.setData({
+
+         isloadworditem: false
+       })
+       
+     }
+   })
 
   },
   tabSelect2(e) {
@@ -150,6 +193,47 @@ Page({
      let ebook_id = this.data.program.id 
 
      console.log({linkageid_gid,wcell_type,type,ebook_id})
+    var that = this 
+
+     that.setData({
+
+      isloadworditem: true
+    })
+     wx.request({
+      url: app.globalData.url + '?act=book_item_word_list',
+      data: {
+        linkageid_gid: linkageid_gid,
+        wcell_type: wcell_type,
+        type: type,
+        ebook_id: ebook_id,
+        userid: app.globalData.userid?app.globalData.userid:0,
+        sign:util.Md5Url( {
+          linkageid_gid: linkageid_gid,
+          wcell_type: wcell_type,
+          type: type,
+          ebook_id: ebook_id,
+          userid: app.globalData.userid?app.globalData.userid:0
+        })
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+         console.log(res.data) 
+        res.data.items = util.Decrypt(res.data.items)
+        that.setData({
+          default_word_data: res.data.items,
+        })
+      }, 
+      complete(res) {
+        that.setData({
+
+          isloadworditem: false
+        })
+        
+      }
+    })
 
 
   },

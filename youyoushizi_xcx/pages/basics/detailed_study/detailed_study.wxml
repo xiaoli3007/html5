@@ -38,7 +38,7 @@
 </block>
 
 
-<block wx:key wx:for='{{datalist}}' wx:for-index="mindex" wx:for-item="itemmain">
+<!-- <block wx:key wx:for='{{datalist}}' wx:for-index="mindex" wx:for-item="itemmain">
 
 <block wx:key wx:for='{{itemmain.wcell_list}}' wx:for-index="mindex2">
 
@@ -64,14 +64,30 @@
   <text>开始识字</text><text wx:if="{{item.shizi_taskid!=0}}">(已添加)</text></button>
 </view>
 
-
-
-
 </block>
-
 </block>
+</block> -->
 
-</block>
+    <view class="padding-xs bg-white" style="padding-bottom:150rpx;">
+     <view class="cu-list grid col-3">
+      <block wx:key wx:for='{{default_word_data.data}}' wx:for-index="mindex3">
+      
+        <view class="line-black padding-xs">
+         <view class="cu-tag radius margin-xs" data-wcell_type="{{item.wcell_type}}" data-wcellid="{{item.id}}" bindtap="showModal_word_shiyi"> 
+          {{item.word}}
+         </view>
+        </view>
+      </block>
+      </view>
+    </view>
+  
+
+  <view class="flex flex-direction cu-bar-sun foot">
+  <button class="cu-btn bg-orange lg" data-taskid="{{default_word_data.shizi_taskid}}" data-relation_id="{{default_word_data.ebookid}}" data-gid="{{default_word_data.gid}}" data-wcell_type="{{default_word_data.wcell_type}}" bindtap="gotodeteil_task">
+  <text>开始识字</text><text wx:if="{{default_word_data.shizi_taskid!=0}}">(已添加)</text></button>
+</view>
+
+
 
 
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" >
