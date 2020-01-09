@@ -700,7 +700,11 @@ Page({
 
       // item_lword_src = this.data.taskdata.word1[this.data.current].word_sound 
 
-      item_lword_src = this.data.taskdata.word1[this.data.current].ren_word_md5 ? this.data.taskdata.word1[this.data.current].ren_word_md5 : this.data.taskdata.word1[this.data.current].word_sound
+      // item_lword_src = this.data.taskdata.word1[this.data.current].ren_word_md5 ? this.data.taskdata.word1[this.data.current].ren_word_md5 : this.data.taskdata.word1[this.data.current].word_sound
+
+      item_lword_src = this.data.task_wcell_type == 25 ? this.data.taskdata.word1[this.data.current].word_sound : this.data.taskdata.word1[this.data.current].ren_word_md5
+
+      // console.log(this.data.taskdata.word1[this.data.current])
 
     } else if (this.data.subcurrent == 1){
 
