@@ -1077,7 +1077,7 @@ Page({
         if (res.data.code === 20000) {
 
           wx.showToast({
-            title: '报错成功！',
+            title: '此页面的内容错误已通知管理员，谢谢你的反馈！',
             icon: 'none',
             duration: 1500,
           })

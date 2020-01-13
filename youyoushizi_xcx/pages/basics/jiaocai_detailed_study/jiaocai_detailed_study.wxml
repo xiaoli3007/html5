@@ -45,7 +45,7 @@
   <block wx:if="{{TabCur==mindex && TabCursub==mindex2 }}">
 
 
-    <view class="padding-xs bg-white" style="padding-bottom:120rpx;">
+    <view class="padding-xs bg-white" style="padding-bottom:150rpx;">
      <view class="cu-list grid col-3">
       <block wx:key wx:for='{{item.data}}' wx:for-index="mindex3">
       

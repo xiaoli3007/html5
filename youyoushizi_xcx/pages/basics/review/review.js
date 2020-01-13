@@ -58,7 +58,8 @@ Page({
     swiperheight: 300,
     task_wcell_type: 0,
     max_subcurrent: 2,
-    middle_subcurrent: true
+    middle_subcurrent: true,
+    error_list: [],
   },
   onLoad: function(options) {
 
@@ -111,7 +112,7 @@ Page({
             var konw_currenttemplist = [];
             var konw_currenttemplist_title = [];
             var tempkonw_list_radios = [];
-
+            var temp_error_list = [];
             res.data.word_data.word1.forEach(function(value, i) {
              
 
@@ -139,6 +140,8 @@ Page({
               //关键字标红 
               res.data.word_data.word1[i].lw_red = util.global_hilight_word(value.dw_xcx, value.lw_xcx)
 
+              temp_error_list.push(false)
+
             })
 
  
@@ -152,6 +155,7 @@ Page({
             // console.log(linktemp1);
 
             that.setData({
+              error_list: temp_error_list,
               taskdata: res.data.word_data,
               konw_current: konw_currenttemp,
               konw_listinfo: konw_currenttemplist,
@@ -585,6 +589,54 @@ Page({
     this.data.all_play_c.src = src
     this.data.all_play_c.play()
     // console.log(this.innerAudioContext.duration);
+
+  },
+  post_word_error(e) {
+
+    var tprice = 'error_list[' + this.data.current + ']'
+    this.setData({
+      [tprice]: true,
+    })
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+    let bookcellid = item_word.bookcellid
+    //  console.log(item_word);
+
+    wx.request({
+      url: app.globalData.url + '?act=book_error',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        bookcellid: bookcellid,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        // console.log(res.data)
+        if (res.data.code === 20000) {
+
+          wx.showToast({
+            title: '此页面的内容错误已通知管理员，谢谢你的反馈！',
+            icon: 'none',
+            duration: 1500,
+          })
+
+        } else {
+         
+
+        }
+        
+
+      }
+    })
+ 
+    // this.setData({
+    //   modalName: m,
+    //   data_item_word: item_word,
+    // })
 
   },
 

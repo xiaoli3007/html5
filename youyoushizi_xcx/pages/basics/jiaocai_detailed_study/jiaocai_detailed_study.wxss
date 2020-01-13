@@ -13,3 +13,6 @@ box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
 .cu-modal.show{
    -webkit-overflow-scrolling: touch;
 }
+.cu-btn.lg{
+   height: 150rpx;
+ }
