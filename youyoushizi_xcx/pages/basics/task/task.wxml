@@ -322,9 +322,7 @@
 <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModal_miyu'?'show':''}}" bindtap="hideModal" >
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
-
-
-     谜语
+      <my-miyu dataArray="{{data_item_word_miyu}}" > </my-miyu>
     </scroll-view>
   </view>
 </view>

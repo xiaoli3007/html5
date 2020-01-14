@@ -99,7 +99,8 @@ Page({
     max_subcurrent: 2,
     middle_subcurrent: true,
     error_list: [],
-    taskdataword: []
+    taskdataword: [],
+    data_item_word_miyu:null
   },
   onLoad: function (options) {
    
@@ -784,55 +785,55 @@ Page({
     }
 
   },
-  onChangesegmented(e) {
-    // console.log(e.detail.key)
-    // console.log(this.data.current)
-    var tprice = 'konw_current['+this.data.current+']'
-    this.setData({
-      [tprice]: e.detail.key,
-    })
-    // console.log(this.data.konw_current)
+  // onChangesegmented(e) {
+  //   // console.log(e.detail.key)
+  //   // console.log(this.data.current)
+  //   var tprice = 'konw_current['+this.data.current+']'
+  //   this.setData({
+  //     [tprice]: e.detail.key,
+  //   })
+  //   // console.log(this.data.konw_current)
 
-    var tempwcellid = this.data.taskdata.word1[this.data.current].wcellid
-    //识字认识不认识 发送请求
-    wx.request({
-      url: app.globalData.url + '?act=taskinwcell', 
-      method: "POST",
-      data: {
-        userid: app.globalData.userid ? app.globalData.userid : 0,
-        taskid:this.data.taskid,
-        wcellid: tempwcellid,
-        status: e.detail.key==0?1:2,
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'X-Token': app.globalData.xtoken
-      },
-      success(res) {
+  //   var tempwcellid = this.data.taskdata.word1[this.data.current].wcellid
+  //   //识字认识不认识 发送请求
+  //   wx.request({
+  //     url: app.globalData.url + '?act=taskinwcell', 
+  //     method: "POST",
+  //     data: {
+  //       userid: app.globalData.userid ? app.globalData.userid : 0,
+  //       taskid:this.data.taskid,
+  //       wcellid: tempwcellid,
+  //       status: e.detail.key==0?1:2,
+  //     },
+  //     header: {
+  //       'content-type': 'application/x-www-form-urlencoded',
+  //       'X-Token': app.globalData.xtoken
+  //     },
+  //     success(res) {
 
-        // console.log(res.data)
+  //       // console.log(res.data)
       
-      }
-    })
+  //     }
+  //   })
 
-    var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length -1
-    var that = this 
-    setTimeout(function () {
-      that.setData({
-        current: nextitem,
-      })
-    }, 500)
+  //   var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length -1
+  //   var that = this 
+  //   setTimeout(function () {
+  //     that.setData({
+  //       current: nextitem,
+  //     })
+  //   }, 500)
 
-    if (this.data.current == this.data.taskdata.word1.length - 1){
-      // wx.showToast({
-      //   title: '本次识字已完成！',
-      //   icon: 'none',
-      //   duration: 1500,
-      // })
-      this.shizi_end_back()
-    }
+  //   if (this.data.current == this.data.taskdata.word1.length - 1){
+  //     // wx.showToast({
+  //     //   title: '本次识字已完成！',
+  //     //   icon: 'none',
+  //     //   duration: 1500,
+  //     // })
+  //     this.shizi_end_back()
+  //   }
 
-  },
+  // },
   onDownChange() {
 
     // console.log(this.data.max_subcurrent)
@@ -1166,6 +1167,58 @@ Page({
     // innerAudioContext.destroy()
     innerAudioContext.src = this.data.ceshisrc2
     innerAudioContext.play()
+
+  },
+  showModal_word_miyu(e) {
+
+    let that = this;
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+    this.setData({
+      modalName: e.currentTarget.dataset.target, 
+      // isloaditem: true
+    })
+    
+    let word =  this.data.subcurrent>0? item_word.dw_xcx:item_word.sw
+    if(item_word.wcell_type=="25"){
+      word =item_word.sw
+    }
+     console.log(item_word)
+     console.log({word})
+
+    wx.request({
+      url: app.globalData.url + '?act=global_item_word_miyu',
+      data: {
+        word: word,
+        userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          word: word,
+          userid: app.globalData.userid
+        })
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+        //  console.log(res.data) 
+        if(res.data.items!=''){
+          res.data.items = util.Decrypt(res.data.items)
+        }else{
+          res.data.items = null
+        }
+       
+        that.setData({
+          data_item_word_miyu: res.data.items,
+        })
+      },
+      complete(res) {
+        // that.setData({
+        //   isloaditem: false
+        // })
+        
+      }
+    })
 
   },
  

@@ -1,0 +1,34 @@
+<view class="itemcontent text-left">
+        <wux-white-space size="default" />
+        <wux-white-space size="default" />
+
+        <wux-white-space size="default" />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 谜底： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{dataArray.word}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 谜面： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{dataArray.mm}} </text>
+          </wux-col>
+        </wux-row>
+        <wux-divider show-text="{{ false }}" dashed />
+        <wux-row>
+          <wux-col span="3" offset="1">
+            <text> 解析： </text>
+          </wux-col>
+          <wux-col span="7">
+            <text> {{dataArray.jx}} </text>
+          </wux-col>
+        </wux-row>
+   
+        <wux-divider show-text="{{ false }}" dashed />
+      </view>
