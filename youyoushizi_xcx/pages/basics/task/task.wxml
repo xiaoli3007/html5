@@ -52,7 +52,7 @@
     <view class="bg-white text-orange  align-center ">
       <view class="padding-sm" id="main_hight_common_icon">
         <wux-row>
-          <wux-col span="4">
+          <wux-col span="2">
             <view class="text-left cz_icon">
               <!-- <text class="proIcon-iconico_bc"></text> -->
                <button wx:if="{{!error_list[current]}}" class="cu-btn round  line-grey" bindtap="post_word_error">报错</button>
@@ -62,7 +62,7 @@
             </view>
 
           </wux-col>
-          <wux-col span="4">
+          <wux-col span="8">
 
             <view wx:if="{{middle_subcurrent}}" bindtap="onDownChange" class="text-center cz_icon text-grey">
               <text class="proIcon-iconico_jt_s" style="font-size:30rpx;color: #ddd;"></text>
@@ -73,37 +73,47 @@
             </view>
 
           </wux-col>
-          <wux-col span="4">
+          <wux-col span="2">
             <view class="text-right cz_icon" bindtap="showModal_word_shiyi" data-target="DrawerModalL">
-              <text class="proIcon-iconico_bz"></text>
+              <!-- <text class="proIcon-iconico_bz"></text> -->
+
+               <button  class="cu-btn round  line-orange" >释义</button>
             </view>
           </wux-col>
         </wux-row>
         <wux-row>
-          <wux-col span="8" offset="2">
-            <wux-divider wx:if="{{button_loading_auto}}">
-              <view class="loadmore">
+
+           <wux-col span="2" >
+
+            <view bindtap="audioPlay_lword" class="text-left " wx:if="{{!tingxie_auto}}">
+              <!-- <text class="proIcon-iconico_yy"></text> -->
+              <button  class="cu-btn round  line-orange" style=" font-size:50rpx;"><text class="proIcon-iconico_sy"></text></button> 
+           </view>
+
+            <view class="text-left  text-grey" wx:if="{{tingxie_auto}}">
+              <text class="proIcon-iconico_yy"></text>
+            </view>
+         
+          </wux-col>
+
+          <wux-col span="8" >
+           
+              <view class="text-center" wx:if="{{button_loading_auto}}">
                 <text class="text">{{button_loading_text}}</text>
               </view>
-            </wux-divider>
+           
 
-            <wux-divider wx:if="{{tingxie_auto}}">
-              <view class="loadmore">
+           
+              <view class="text-center" wx:if="{{tingxie_auto}}">
                 <text class="text">{{tingxie_loading_text}}</text>
               </view>
-            </wux-divider>
+           
           </wux-col>
 
           <wux-col span="2">
-
-            <view bindtap="audioPlay_lword" class="text-right cz_icon" wx:if="{{!tingxie_auto}}">
-              <text class="proIcon-iconico_yy"></text>
-            </view>
-
-            <view class="text-right cz_icon text-grey" wx:if="{{tingxie_auto}}">
-              <text class="proIcon-iconico_yy"></text>
-            </view>
-
+               <view class="text-right" bindtap="showModal_word_miyu" data-target="DrawerModal_miyu">
+                <button  class="cu-btn round  line-orange" >谜语</button>
+                </view>
           </wux-col>
         </wux-row>
       </view>
@@ -305,6 +315,16 @@
      <my-dword dataArray="{{data_item_word.dword_show_detail}}" > </my-dword>
 
 
+    </scroll-view>
+  </view>
+</view>
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModal_miyu'?'show':''}}" bindtap="hideModal" >
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+
+
+     谜语
     </scroll-view>
   </view>
 </view>
