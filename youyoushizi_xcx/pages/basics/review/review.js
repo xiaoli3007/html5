@@ -60,6 +60,7 @@ Page({
     max_subcurrent: 2,
     middle_subcurrent: true,
     error_list: [],
+    data_item_word_miyu:null
   },
   onLoad: function(options) {
 
@@ -637,6 +638,58 @@ Page({
     //   modalName: m,
     //   data_item_word: item_word,
     // })
+
+  },
+  showModal_word_miyu(e) {
+
+    let that = this;
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+    this.setData({
+      modalName: e.currentTarget.dataset.target, 
+      // isloaditem: true
+    })
+    
+    let word =  this.data.subcurrent>0? item_word.dw_xcx:item_word.sw
+    if(item_word.wcell_type=="25"){
+      word =item_word.sw
+    }
+     console.log(item_word)
+     console.log({word})
+
+    wx.request({
+      url: app.globalData.url + '?act=global_item_word_miyu',
+      data: {
+        word: word,
+        userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          word: word,
+          userid: app.globalData.userid
+        })
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+        //  console.log(res.data) 
+        if(res.data.items!=''){
+          res.data.items = util.Decrypt(res.data.items)
+        }else{
+          res.data.items = null
+        }
+       
+        that.setData({
+          data_item_word_miyu: res.data.items,
+        })
+      },
+      complete(res) {
+        // that.setData({
+        //   isloaditem: false
+        // })
+        
+      }
+    })
 
   },
 

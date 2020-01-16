@@ -1,0 +1,885 @@
+import { $wuxDialog } from '../../../dist/index'
+
+var util = require('../../../utils/util.js')
+
+
+const app = getApp()
+
+Page({
+  data: {
+    tasjlisturl: '/pages/basics/tasklist/tasklist',
+    StatusBar: app.globalData.StatusBar,
+    CustomBar: app.globalData.CustomBar,
+    Custom: app.globalData.Custom,
+    toptitle:'听写任务',
+    taskdata: {
+      "id": "01",
+      "name": "第一课 燕子",
+      "word1": [
+        {
+          "sw": "燕",
+          "sw_sound": "voice/26/73/2673734f025fa484228e34212569c44a.wav",
+          "dw": "燕子",
+          "dw_sound": "voice/b7/b9/b7b9ff4e590029ef27b7b1aa0b225890.wav",
+          "lw": "一身乌黑光亮的羽毛，一对俊俏轻快的翅膀，加上剪刀似的尾巴，凑成了活泼机灵的小燕子。",
+          "lw_sound": "voice/9d/f4/9df48d5d68f9bd2cb9f649328a6c7f43.wav"
+        },
+        {
+          "sw": "聚",
+          "sw_sound": "voice/bb/e3/bbe314384b41246825a63ee0d592f028.wav",
+          "dw": "聚拢",
+          "dw_sound": "voice/28/f8/28f88368a520672c52800e89184b40e7.wav",
+          "lw": "青的草，绿的叶，各色鲜艳的花，都像赶集似的聚拢来，形成了光彩夺目的春天。",
+          "lw_sound": "voice/4d/cf/4dcf2e1b7484b6b137b04775c2cb976f.wav"
+        }
+      ]
+    },
+    indicatorDots: false,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000,
+    current: 0,
+    src: 'https://rmsp.youyoushizi.com/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
+    ceshisrc:'http://rmsp.youyoushizi.com/course_voice/2/96/ef/96efdd4349ebac426a83730767cbf808.mp4',
+    loadModal: true,
+    audiowordlist:[],
+    audiodwordlist: [],
+    audiolwordlist: [],
+    taskloading:'0%',
+    konw_current:[],
+    type:0,
+    subcurrent:0,
+    tabs: [
+      {
+        key: 'tab1',
+        title: '字',
+      },
+      {
+        key: 'tab2',
+        title: '词',
+      },
+      {
+        key: 'tab3',
+        title: '句',
+      },
+    ],
+    taskid:0,
+    tingxie_auto: false,
+    tingxie_text_hide:false,
+    tingxie_loop: 2,
+    tingxie_loop_time: 3,
+    tingxie_ready: false,
+    tingxie_ready_text: 'Ready',
+    all_play_c:null,
+    data_item_word: null,
+    data_item_dword: null,
+    audioword_object: null,
+    audiodword_object: null,
+    audiolword_object: null,
+    tingxie_loading_text: '',
+    button_loading_text: '',
+    button_loading_auto:false,
+    button_global_src: '',
+    button_global_currt:0,
+    konw_select_menu: [
+      {
+        value: '1',
+        isicon: true,
+        label: 'proIcon-iconico_rs',
+      },
+      {
+        value: '2',
+        isicon: true,
+        label: 'proIcon-iconico_brs',
+      },
+
+    ],
+    swiperheight:300,
+    task_wcell_type :0,
+    max_subcurrent: 2,
+    middle_subcurrent: true,
+    error_list: [],
+    taskdataword: [],
+    data_item_word_miyu:null
+  },
+  onLoad: function (options) {
+   
+    app.setUserInfo('about');
+    
+    // console.log(options.taskid)
+
+   
+
+     console.log(options)
+
+    var apiurl = ''
+    var methd = 'POST'
+    if (options.taskid ==0) {
+      console.log(options)
+      apiurl = app.globalData.url + '?act=taskin'
+    }else{
+      // console.log(options)
+      methd = 'GET'
+      apiurl = app.globalData.url + '?act=taskone'
+    }
+    // console.log(methd)
+    // console.log(apiurl)
+    var that = this;
+    wx.showLoading({
+      title: '加载中',
+      // mask:true
+    })
+    if (app.globalData.userid) {
+
+      wx.request({
+        url: apiurl,
+        method: methd,
+        header: {
+          'content-type': 'application/x-www-form-urlencoded', // 默认值
+          'X-Token': app.globalData.xtoken
+        },
+        data: {
+          userid: app.globalData.userid,
+          type: options.type?parseInt(options.type):0,
+          taskid: options.taskid?parseInt(options.taskid):0,
+          relation_type: options.relation_type?options.relation_type:'',
+          relation_id:  options.relation_id?parseInt(options.relation_id):0,
+          gid:  options.gid?parseInt(options.gid):0,
+          wcell_type: options.wcell_type?parseInt(options.wcell_type):0,
+          status:0,
+          sign:util.Md5Url({
+            userid: app.globalData.userid,
+            type: options.type?parseInt(options.type):0,
+            taskid: options.taskid?parseInt(options.taskid):0,
+            relation_type: options.relation_type?options.relation_type:'',
+            relation_id:  options.relation_id?parseInt(options.relation_id):0,
+            gid:  options.gid?parseInt(options.gid):0,
+            wcell_type: options.wcell_type?parseInt(options.wcell_type):0,
+            status:0            
+          })
+        },
+        success: function (res) {
+          //  console.log(res.data)
+          // res.data.word_data = util.Decrypt(res.data.word_data)
+           //setTimeout(function () { 
+          //进行状态中的进度跳转================================================
+          if (res.data.taskinfo.status=='1'){
+            let temp_progress_wcellid = null
+
+            if (res.data.word_data.survey) {
+               temp_progress_wcellid = res.data.word_data.survey.progress_wcellid 
+            }
+            // console.log(temp_progress_wcellid )
+            if (temp_progress_wcellid){
+              let temp_goto_index = 0
+              res.data.word_data.word1.forEach(function (value, i) {
+                if (value.wcellid === temp_progress_wcellid) {
+                  temp_goto_index = i+1
+                }
+              })
+              if (temp_goto_index>0) {
+                let c_go = temp_goto_index > res.data.word_data.word1.length - 1 ? res.data.word_data.word1.length - 1 : temp_goto_index
+                that.setData({
+                  current: c_go,
+                  taskloading: util.GetPercent(c_go, res.data.word_data.word1.length - 1)
+                })
+
+               
+
+              }
+            }
+          }
+          //进行状态中的进度跳转============end================================
+          var linktemp1 = []; var linktemp2 = []; var linktemp3 = []; 
+
+
+          var konw_currenttemp = []; var temp_error_list = [];
+          res.data.word_data.task_word_data_items.forEach(function (value, i) {
+            // console.log(value);
+            // let wstatus = value.status == '0'?20:value.status =='1'?0:1
+
+            let wstatus = value.status == '0' ? 20 : value.status
+            konw_currenttemp.push(wstatus)
+            //console.log( value);
+            temp_error_list.push(false)
+          })
+
+          var temp_taskdataword = [];
+          res.data.word_data.word1.forEach(function (value, i) {
+
+            res.data.word_data.word1[i].lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
+          })
+
+
+          that.setData({
+            error_list: temp_error_list,
+            taskdata: res.data.word_data,
+            audiowordlist: linktemp1,
+            audiodwordlist: linktemp2,
+            audiolwordlist: linktemp3,
+            type: parseInt(res.data.taskinfo.type),
+            konw_current: konw_currenttemp,
+            taskid: res.data.taskid,
+            toptitle: res.data.taskinfo.type=='1'?'听写任务':'识字任务',
+            tingxie_auto: parseInt(res.data.taskinfo.type)==1?true:false,
+            tingxie_text_hide: parseInt(res.data.taskinfo.type) == 1 ? true : false,
+            task_wcell_type: res.data.taskinfo.wcell_type,
+            max_subcurrent: parseInt(res.data.taskinfo.wcell_type) == 25 ? 1 : 2,
+          })
+          // console.log(res.data.taskinfo.wcell_type);
+          // console.log(that.data.type)
+          //听写模式开始
+          if (parseInt(res.data.taskinfo.type) == 1){
+              that.tingxie_start()
+          }
+
+          that.auto_height(res.data.taskinfo.type)
+
+       //}, 500)
+
+        }, complete(res) {
+          that.setData({
+
+            loadModal: false
+          })
+          wx.hideLoading()
+          //console.log(res.statusCode)
+          if (res.statusCode == 500) {
+            wx.showToast({
+              title: '请求失败！',
+              icon: 'none',
+              duration: 1500,
+            })
+          } else {
+
+          }
+
+        }
+      });
+    }
+
+    
+
+  },
+  onReady(e) {
+
+    // const query = wx.createSelectorQuery().in(this) 在组件中这样
+    var that = this
+
+    this.setData({
+
+      all_play_c: wx.createInnerAudioContext(),
+      audioword_object: wx.createInnerAudioContext(),
+      audiodword_object: wx.createInnerAudioContext(),
+      audiolword_object: wx.createInnerAudioContext(),
+
+    })
+    var that = this 
+
+  //============================================================
+  //==============================================================
+    this.data.audiolword_object.onError(() => {
+      that.setData({
+        button_loading_text: '加载语音失败！',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiolword_object.onWaiting(() => {
+      that.setData({
+        button_loading_text: '加载语音...',
+        button_loading_auto: true
+      })
+    })
+    this.data.audiolword_object.onPlay(() => {
+      // console.log(that.data.audiolword_object.src)
+      that.setData({
+        button_loading_text: '播放语音中...',
+        button_loading_auto: true,
+        button_global_src: that.data.audiolword_object.src,
+        button_global_currt: that.data.current,
+      })
+      
+    })
+    this.data.audiolword_object.onEnded(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false,
+        button_global_src: ''
+      })
+    })
+    this.data.audiolword_object.onStop(() => {
+      that.setData({
+        button_loading_text: '播放结束...',
+        button_loading_auto: false,
+        button_global_src: ''
+      })
+    })
+
+  },
+  onShow(e) {
+
+    // console.log(this.data.type)
+  },
+  onUnload(e) {
+    this.tingxie_stop()
+    var showTwo = this.selectComponent('#mytimes');
+    console.log(showTwo.data.timenum)
+
+    // 发送请求 统计学习时间
+    wx.request({
+      url: app.globalData.url + '?act=taskintime',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        taskid: this.data.taskid,
+        review: 0,
+        duration: showTwo.data.timenum,
+        sign:util.Md5Url({
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          taskid: this.data.taskid,
+          review: 0,
+          duration: showTwo.data.timenum
+        })
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        console.log(res.data)
+
+      }
+    })
+
+  },
+  auto_height(type) {
+    // console.log(type)
+    var that = this 
+    let main_hight_head = 0
+    let main_hight_common_icon_top = 0
+    let main_hight_common_icon = 0
+    let main_hight_shizi_know = 0
+    let main_hight_tingxie_play = 0
+    let main_hight_tingxie_setting = 0
+    // wx.createSelectorQuery().select('#main_hight_head').boundingClientRect(function (res) {
+    //   // 公共头部的高度
+    //   // console.log(res)
+    //   main_hight_head = res.height
+    //   console.log('公共头部的高度' + main_hight_head)
+    // }).exec()
+    wx.createSelectorQuery().select('#main_hight_common_icon').boundingClientRect(function (res) {
+      // 公共图标的高度
+      // console.log(res)
+      main_hight_common_icon_top = res.top
+      main_hight_common_icon = res.height
+      // console.log('公共图标的上边距度' + res.top)
+      // console.log('公共图标的高度' + res.height)
+
+    }).exec()
+    if (type == 2){
+      wx.createSelectorQuery().select('#main_hight_shizi_know').boundingClientRect(function (res) {
+        // 识字对错的高度
+        main_hight_shizi_know = res.height
+        // console.log('识字对错的高度' + res.height)
+
+        let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_shizi_know) 
+        // console.log('算出来的高度为' + tempswiperheight)
+       
+        that.setData({
+          swiperheight: tempswiperheight
+        })
+
+      }).exec()     
+    }
+
+  },
+
+  change: function (e) {
+    if ("touch" === e.detail.source) {  // 只在用户触发的情况下
+      this.setData({
+        current: e.detail.current
+      })
+    }
+    // this.setData({
+    //   current: e.detail.current
+    // })
+
+    this.setData({
+      taskloading: util.GetPercent(e.detail.current, this.data.taskdata.word1.length-1)
+    })
+  },
+  
+  audioStart(e) {
+    // console.log(11)
+    // console.log(this.data.current)
+    this.setData({
+      current: 0,
+     
+    })
+  },
+  audioend(e) {
+    // console.log(11)
+    // console.log(this.data.current)
+    this.setData({
+      current: this.data.taskdata.word1.length -1
+    })
+  },
+  prev(e) {
+    // console.log(11)
+    // console.log(this.data.current)
+    this.setData({
+      current: this.data.current > 0 ? this.data.current - 1 : this.data.current
+    })
+    console.log(this.data.current)
+  },
+  next(e) {
+    // console.log(11)
+    // console.log(this.data.current)
+      this.setData({
+        current: this.data.current  < this.data.taskdata.word1.length-1 ? this.data.current + 1 : this.data.taskdata.word1.length-1
+      })
+    // console.log(this.data.current)
+  },
+  changeIndicatorDots(e) {
+    this.setData({
+      indicatorDots: !this.data.indicatorDots
+    })
+  },
+  changeAutoplay(e) {
+    this.setData({
+      autoplay: !this.data.autoplay
+    })
+  },
+  intervalChange(e) {
+    this.setData({
+      interval: e.detail.value
+    })
+  },
+  durationChange(e) {
+    this.setData({
+      duration: e.detail.value
+    })
+  },
+
+  audioPlay_lword() {
+    if (this.data.tingxie_auto){
+        return false
+    }
+    // this.setData({
+    //   subcurrent: 2,
+    //   tabkey: this.data.tabs[2].key
+    // })
+    // console.log(this.data.button_global_src)
+    // console.log(this.data.subcurrent)
+
+    // this.data.audiolwordlist[this.data.current].play()
+    let item_lword_src = ''
+    if (this.data.subcurrent == 0){
+
+      // item_lword_src = this.data.taskdata.word1[this.data.current].word_sound 
+
+      // item_lword_src = this.data.taskdata.word1[this.data.current].ren_word_md5 ? this.data.taskdata.word1[this.data.current].ren_word_md5 : this.data.taskdata.word1[this.data.current].word_sound
+
+      item_lword_src = this.data.task_wcell_type == 25 ? this.data.taskdata.word1[this.data.current].word_sound : this.data.taskdata.word1[this.data.current].ren_word_md5
+
+      // console.log(this.data.taskdata.word1[this.data.current])
+
+    } else if (this.data.subcurrent == 1){
+
+      
+      item_lword_src = this.data.task_wcell_type == 25 ? this.data.taskdata.word1[this.data.current].lw_sound : this.data.taskdata.word1[this.data.current].dw_sound
+
+    } else if (this.data.subcurrent == 2) {
+
+       item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
+
+    }
+    
+    // console.log(this.data.taskdata.word1[this.data.current])
+    //  console.log(item_lword_src)
+    
+
+    if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {
+      this.data.audiolword_object.stop()
+    }else{
+      this.data.audiolword_object.stop()
+      this.data.audiolword_object.src = item_lword_src
+      this.data.audiolword_object.play()
+    }
+    
+  },
+  onChangeKnow(e) {
+    // console.log(e.detail)
+    // console.log(this.data.current)
+    var tprice = 'konw_current[' + this.data.current + ']'
+    this.setData({
+      [tprice]: e.detail.value,
+    })
+
+    var tempwcellid = this.data.taskdata.word1[this.data.current].wcellid
+    //识字认识不认识 发送请求
+    wx.request({
+      url: app.globalData.url + '?act=taskinwcell',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        taskid: this.data.taskid,
+        wcellid: tempwcellid,
+        status: e.detail.value,
+        sign:util.Md5Url( {
+          userid: app.globalData.userid ? app.globalData.userid : 0,
+          taskid: this.data.taskid,
+          wcellid: tempwcellid,
+          status: e.detail.value
+        })
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        // console.log(res.data)
+
+      }
+    })
+
+    var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
+    var that = this
+    setTimeout(function () {
+      that.setData({
+        current: nextitem,
+      })
+    }, 500)
+
+    if (this.data.current == this.data.taskdata.word1.length - 1) {
+      // wx.showToast({
+      //   title: '本次识字已完成！',
+      //   icon: 'none',
+      //   duration: 1500,
+      // })
+      this.shizi_end_back()
+    }
+
+  },
+
+  onDownChange() {
+
+    // console.log(this.data.max_subcurrent)
+    let tempsubc = this.data.subcurrent+1
+  
+     tempsubc = tempsubc > this.data.max_subcurrent ? this.data.max_subcurrent : tempsubc
+    // console.log(tempsubc)
+    if (tempsubc == this.data.max_subcurrent){
+      
+      this.setData({
+        middle_subcurrent: false ,
+      })
+    }
+    this.setData({
+      subcurrent: tempsubc,
+    })
+
+  },
+  onUpChange() {
+
+    // console.log(this.data.max_subcurrent)
+    let tempsubc = this.data.subcurrent-1
+    tempsubc = tempsubc < 0 ? 0 : tempsubc
+
+    // console.log(tempsubc)
+    if (tempsubc == 0) {
+
+      this.setData({
+        middle_subcurrent: true,
+      })
+    }
+    this.setData({
+      subcurrent: tempsubc,
+    })
+
+  },
+  onTabsChange(e) {
+    // console.log('onTabsChange', e)
+    const { key } = e.detail
+    // console.log(key)
+    const subcurrent = this.data.tabs.map((n) => n.key).indexOf(key)
+    // console.log(subcurrent)
+    this.setData({
+      tabkey: key,
+      subcurrent: subcurrent,
+    })
+  },
+  onSubSwiperChange(e) {
+    
+    // console.log('onSubSwiperChange', e)
+    const { current: index, source } = e.detail
+    // console.log(index)
+    // if (index == 0) {
+
+    //   this.setData({
+    //     middle_subcurrent: true,
+    //   })
+    // }
+    // if (index == this.data.max_subcurrent) {
+
+    //   this.setData({
+    //     middle_subcurrent: false,
+    //   })
+    // }
+    // const { key } = this.data.tabs[index]
+
+   
+    if (!!source) {
+      this.setData({
+        // tabkey: key,
+        subcurrent: index,
+      })
+    }
+  },
+  onMyEvent: function () {
+     // 自定义组件触发事件时提供的detail对象
+    // console.log(e)
+    var showTwo = this.selectComponent('#mytimes');
+    // console.log(showTwo.data.timenum)
+  }, 
+ 
+  showModal_word_shiyi(e) {
+
+    let that = this;
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+     
+    
+    let m = 'DrawerModalL_word'
+
+    if (this.data.subcurrent > 0 && this.data.subcurrent < this.data.max_subcurrent){
+      m = 'DrawerModalL_dword'
+    }
+    
+
+    // DrawerModalL_dword
+    // this.setData({
+    //   modalName: m,
+    //   data_item_word: item_word,
+    // })
+
+    this.setData({
+      modalName: m, 
+      isloaditem: true
+    })
+    let wcellid = item_word.wcellid
+    let dw_xcx = item_word.dw_xcx
+    let wcell_type = item_word.wcell_type
+    // console.log(item_word)
+    // console.log({wcellid,dw_xcx,wcell_type})
+
+    wx.request({
+      url: app.globalData.url + '?act=global_item_word_shiyi',
+      data: {
+        wcellid: wcellid,
+        dw_xcx: dw_xcx,
+        wcell_type: wcell_type,
+        userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          wcellid: wcellid,
+          dw_xcx: dw_xcx,
+          wcell_type: wcell_type,
+          userid: app.globalData.userid
+        })
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+        //  console.log(res.data) 
+
+        res.data.items = util.Decrypt(res.data.items)
+        that.setData({
+          data_item_word: res.data.items,
+        })
+      },
+      complete(res) {
+        that.setData({
+          isloaditem: false
+        })
+        
+      }
+    })
+
+  },
+
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+  play_any_src(e) {
+    let src = e.currentTarget.dataset.msrc
+
+    // console.log(src);
+    // let innerAudioContext = wx.createInnerAudioContext()
+    // this.data.all_play_c.stop()
+    this.data.all_play_c.src = src
+    this.data.all_play_c.play()
+    // console.log(this.innerAudioContext.duration);
+    
+  },
+  post_word_error(e) {
+
+    var tprice = 'error_list[' + this.data.current + ']'
+    this.setData({
+      [tprice]: true,
+    })
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+    let bookcellid = item_word.bookcellid
+    //  console.log(item_word);
+
+    wx.request({
+      url: app.globalData.url + '?act=book_error',
+      method: "POST",
+      data: {
+        userid: app.globalData.userid ? app.globalData.userid : 0,
+        bookcellid: bookcellid,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+
+        // console.log(res.data)
+        if (res.data.code === 20000) {
+
+          wx.showToast({
+            title: '此页面的内容错误已通知管理员，谢谢你的反馈！',
+            icon: 'none',
+            duration: 1500,
+          })
+
+        } else {
+         
+
+        }
+        
+
+      }
+    })
+ 
+    // this.setData({
+    //   modalName: m,
+    //   data_item_word: item_word,
+    // })
+
+  },
+  shizi_end_back() {
+
+    var that = this
+    $wuxDialog().open({
+      resetOnClose: true,
+      // title: '',
+      content: '您好！识字已结束',
+      buttons: [
+      {
+        text: '返回任务列表',
+        type: 'primary',
+        onTap(e) {
+          console.log('你选择了返回任务列表！')
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '/pages/basics/tasklist/tasklist',
+            })
+          }, 500)
+        },
+      },
+      {
+        text: '取消',
+      },
+      ],
+    })
+  },
+  ceshiyuyin(e){
+
+    let innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放startTime-' + innerAudioContext.startTime)
+      console.log('开始播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })
+    innerAudioContext.onEnded((res) => {
+      console.log('结束播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onWaiting((res) => {
+      console.log('onWaiting播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.onSeeking((res) => {
+      console.log('onSeeking播放currentTime-' + innerAudioContext.currentTime)
+    })
+    innerAudioContext.stop()
+    // innerAudioContext.destroy()
+    innerAudioContext.src = this.data.ceshisrc2
+    innerAudioContext.play()
+
+  },
+  showModal_word_miyu(e) {
+
+    let that = this;
+
+    let item_word = this.data.taskdata.word1[this.data.current]
+    this.setData({
+      modalName: e.currentTarget.dataset.target, 
+      // isloaditem: true
+    })
+    
+    let word =  this.data.subcurrent>0? item_word.dw_xcx:item_word.sw
+    if(item_word.wcell_type=="25"){
+      word =item_word.sw
+    }
+     console.log(item_word)
+     console.log({word})
+
+    wx.request({
+      url: app.globalData.url + '?act=global_item_word_miyu',
+      data: {
+        word: word,
+        userid: app.globalData.userid,
+        sign:util.Md5Url( {
+          word: word,
+          userid: app.globalData.userid
+        })
+      },
+      header: {
+        'content-type': 'application/json', // 默认值
+        'X-Token': app.globalData.xtoken
+      },
+      success(res) {
+        //  console.log(res.data) 
+        if(res.data.items!=''){
+          res.data.items = util.Decrypt(res.data.items)
+        }else{
+          res.data.items = null
+        }
+       
+        that.setData({
+          data_item_word_miyu: res.data.items,
+        })
+      },
+      complete(res) {
+        // that.setData({
+        //   isloaditem: false
+        // })
+        
+      }
+    })
+
+  },
+ 
+  
+
+})
