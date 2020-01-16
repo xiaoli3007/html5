@@ -159,7 +159,7 @@ Page({
           })
         },
         success: function (res) {
-          //  console.log(res.data)
+            console.log(res.data)
           // res.data.word_data = util.Decrypt(res.data.word_data)
            //setTimeout(function () { 
           //进行状态中的进度跳转================================================
