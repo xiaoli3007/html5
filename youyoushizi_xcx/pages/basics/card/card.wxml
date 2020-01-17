@@ -63,8 +63,8 @@
               <text class="proIcon-iconico_jt_x" style="font-size:30rpx;color: #ddd;"></text>
             </view> -->
 
-             <view  bindtap="onUpChange" class="text-center cz_icon text-grey">
-              <text class="proIcon-iconico_fz" style="font-size:30rpx;color: #ddd;"></text>
+             <view  bindtap="card_back" class="text-center cz_icon text-grey">
+              <text class="proIcon-iconico_fz" style="font-size:50rpx;color: #ddd;"></text>
             </view>
 
 
@@ -114,7 +114,10 @@
              <block wx:for="{{ itemmain }}" wx:key="key" wx:for-index="subindex" wx:for-item="itemsub">
               <swiper-item>
                 <view class="flex justify-center align-center  text-center sw_view">
-                      <view  class="text-center {{itemsub.class}}">{{itemsub.card}}</view>
+                      <view  wx:if="{{!card_back_show}}" class="text-center {{itemsub.class}}">{{itemsub.card}}</view>
+                      <view  class="text-center card_back" wx:if="{{itemsub.card_back && card_back_show}}">
+                         <image  src='{{itemsub.card_back}}'  mode="aspectFit"></image>
+                      </view> 
                  </view>
               </swiper-item>
               </block>

@@ -52,6 +52,7 @@ Page({
     data_item_chengyu: null,
     data_item_word_miyu:null,
     box_info:null,
+    card_back_show:false
   },
   onLoad: function (options) {
    
@@ -278,7 +279,8 @@ Page({
   change: function (e) {
 
     this.setData({
-      subcurrent: 0
+      subcurrent: 0,
+      card_back_show: false,
     })
     if ("touch" === e.detail.source) {  // 只在用户触发的情况下
       this.setData({
@@ -372,8 +374,26 @@ Page({
       this.setData({
         // tabkey: key,
         subcurrent: index,
+        card_back_show: false,
       })
     }
+  },
+  card_back(e) {
+
+    let item_word = this.data.taskdata[this.data.current][this.data.subcurrent]  
+    if(!this.data.card_back_show ==true && item_word.card_back==''){
+        
+      wx.showToast({
+        title: '无背面',
+        icon: 'none',
+        duration: 1500,
+      })
+       return
+    }
+      this.setData({
+        card_back_show: !this.data.card_back_show,
+      })
+    
   },
   onMyEvent: function () {
      // 自定义组件触发事件时提供的detail对象
