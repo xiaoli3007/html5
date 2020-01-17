@@ -116,11 +116,22 @@ Page({
           // }
           //进行状态中的进度跳转============end================================
           var konw_currenttemp = []; var temp_error_list = [];
+          var cardback_showlist = [] 
           res.data.word_data.forEach(function (value, i) {
             let wstatus = value.status == '0' ? 20 : value.status
             konw_currenttemp.push(wstatus)
             temp_error_list.push(false)
+
+            let temp_back_list= [] 
+            value.forEach(function (value2, i2) {
+              temp_back_list.push(false)
+            })
+            cardback_showlist.push(temp_back_list)
+
           })
+   
+          console.log(cardback_showlist)
+
           // res.data.word_data.word1.forEach(function (value, i) {
           //   res.data.word_data.word1[i].lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
           // })
