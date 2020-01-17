@@ -106,15 +106,19 @@
         </wux-row>
       </view>
       <swiper skip-hidden-item-layout="{{true}}" bindtap="audioPlay_lword" bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs  margin-left-sm  margin-right-sm" style="height:{{swiperheight}}px">
-        <block wx:for="{{taskdata}}" wx:key>
+        <block wx:for="{{taskdata}}" wx:key  wx:for-item="itemmain">
           <swiper-item>
 
             <swiper skip-hidden-item-layout="{{true}}" class="swiper_sub" vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
+
+             <block wx:for="{{ itemmain }}" wx:key="key" wx:for-index="subindex" wx:for-item="itemsub">
               <swiper-item>
                 <view class="flex justify-center align-center  text-center sw_view">
-                      <view  class="text-center task_sw">{{item.word}}</view>
+                      <view  class="text-center {{itemsub.class}}">{{itemsub.card}}</view>
                  </view>
               </swiper-item>
+              </block>
+
             </swiper>
           </swiper-item>
         </block>
@@ -147,12 +151,12 @@
 <wux-dialog id="wux-dialog" />
 
 
-<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type!='25'}}">
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal">
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
 
 <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
-    <my-word dataArray="{{data_item_word.word_show_detail}}" > </my-word>
+    <my-word dataArray="{{data_item_word}}" > </my-word>
 
      
     </scroll-view>
@@ -160,17 +164,17 @@
 </view>
 
 
-<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal" wx:if="{{data_item_word.wcell_type=='25'}}">
+<!-- <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_chengyu'?'show':''}}" bindtap="hideModal" >
   <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
 
 <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
-     <my-chengyu dataArray="{{data_item_word.word_show_detail}}" > </my-chengyu>
+     <my-chengyu dataArray="{{data_item_chengyu}}" > </my-chengyu>
 
     
     </scroll-view>
   </view>
-</view>
+</view> -->
 
 
 
@@ -180,7 +184,7 @@
     <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
 
 <image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
-     <my-dword dataArray="{{data_item_word.dword_show_detail}}" > </my-dword>
+     <my-dword dataArray="{{data_item_dword}}" > </my-dword>
 
 
     </scroll-view>

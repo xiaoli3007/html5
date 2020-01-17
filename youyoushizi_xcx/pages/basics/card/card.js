@@ -2,7 +2,6 @@ import { $wuxDialog } from '../../../dist/index'
 
 var util = require('../../../utils/util.js')
 
-
 const app = getApp()
 
 Page({
@@ -26,7 +25,6 @@ Page({
     taskid:0,
     boxid:0,
     all_play_c:null,
-    data_item_word: null,
     audiolword_object: null,
     button_loading_text: '',
     button_loading_auto:false,
@@ -46,10 +44,12 @@ Page({
 
     ],
     swiperheight:300,
-    task_wcell_type :0,
-    max_subcurrent: 2,
-    middle_subcurrent: true,
+    // max_subcurrent: 2,
+    // middle_subcurrent: true,
     error_list: [],
+    data_item_word: null,
+    data_item_dword: null,
+    data_item_chengyu: null,
     data_item_word_miyu:null,
     box_info:null,
   },
@@ -276,6 +276,10 @@ Page({
   },
 
   change: function (e) {
+
+    this.setData({
+      subcurrent: 0
+    })
     if ("touch" === e.detail.source) {  // 只在用户触发的情况下
       this.setData({
         current: e.detail.current
@@ -289,33 +293,25 @@ Page({
     })
   },
   audioPlay_lword() {
+    
+    console.log(this.data.current)
+    console.log(this.data.subcurrent)
 
     let item_lword_src = ''
-    if (this.data.subcurrent == 0){
+    
+    item_lword_src =  this.data.taskdata[this.data.current][this.data.subcurrent].sound 
 
-      item_lword_src =  this.data.taskdata[this.data.current].word_sound 
-
-      // console.log(this.data.taskdata[this.data.current])
-
-    } else if (this.data.subcurrent == 1){
-
+    console.log(item_lword_src)
+    if(item_lword_src!=''){
+      if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {
+        this.data.audiolword_object.stop()
+      }else{
+        this.data.audiolword_object.stop()
+        this.data.audiolword_object.src = item_lword_src
+        this.data.audiolword_object.play()
+      }
+    }
       
-      item_lword_src = this.data.taskdata[this.data.current].lw_sound 
-
-    } else if (this.data.subcurrent == 2) {
-
-       item_lword_src = this.data.taskdata[this.data.current].lw_sound
-
-    }
-    
-    if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {
-      this.data.audiolword_object.stop()
-    }else{
-      this.data.audiolword_object.stop()
-      this.data.audiolword_object.src = item_lword_src
-      this.data.audiolword_object.play()
-    }
-    
   },
 
   onChangeKnow(e) {
@@ -389,31 +385,25 @@ Page({
   showModal_word_shiyi(e) {
 
     let that = this;
-    let item_word = this.data.taskdata[this.data.current]  
-    let m = 'DrawerModalL_word'
-    if (this.data.subcurrent > 0 && this.data.subcurrent < this.data.max_subcurrent){
-      m = 'DrawerModalL_dword'
+    let item_word = this.data.taskdata[this.data.current][this.data.subcurrent]  
+   
+    if(item_word.type=='' || item_word.card==''){
+      return
     }
-    this.setData({
-      modalName: m, 
-      isloaditem: true
-    })
-    let wcellid = item_word.wcellid
-    let dw_xcx = item_word.dw_xcx
-    let wcell_type = item_word.wcell_type
-    // console.log(item_word)
-    // console.log({wcellid,dw_xcx,wcell_type})
+    let m = 'DrawerModalL_'+item_word.type
+    
+  
+    // let textcard = item_word.card
+    console.log(item_word) 
     wx.request({
-      url: app.globalData.url + '?act=global_item_word_shiyi',
+      url: app.globalData.url + '?act=global_item_card_shiyi',
       data: {
-        wcellid: wcellid,
-        dw_xcx: dw_xcx,
-        wcell_type: wcell_type,
+        textcard: item_word.card,
+        type: item_word.type,
         userid: app.globalData.userid,
         sign:util.Md5Url( {
-          wcellid: wcellid,
-          dw_xcx: dw_xcx,
-          wcell_type: wcell_type,
+          textcard: item_word.card,
+          type: item_word.type,
           userid: app.globalData.userid
         })
       },
@@ -423,11 +413,44 @@ Page({
       },
       success(res) {
         //  console.log(res.data) 
+        if(res.data.code==20000){
+          res.data.items = util.Decrypt(res.data.items)
+          
+          if(item_word.type=='word'){
+            that.setData({
+              data_item_word: res.data.items,
+            })
 
-        res.data.items = util.Decrypt(res.data.items)
-        that.setData({
-          data_item_word: res.data.items,
-        })
+          }
+          if(item_word.type=='dword'){
+            that.setData({
+              data_item_dword: res.data.items,
+            })
+
+          }
+     
+          // that.setData({
+          //   data_item_chengyu: res.data.items,
+          // })
+
+          
+
+          that.setData({
+            modalName: m, 
+            isloaditem: true
+          })
+        }else{
+
+          wx.showToast({
+            title: '暂无释义',
+            icon: 'none',
+            duration: 1500,
+          })
+
+
+        }
+        
+
       },
       complete(res) {
         that.setData({
@@ -516,26 +539,22 @@ Page({
 
     let that = this;
 
-    let item_word = this.data.taskdata[this.data.current]
+    let item_word = this.data.taskdata[this.data.current][this.data.subcurrent]
     this.setData({
       modalName: e.currentTarget.dataset.target, 
       // isloaditem: true
     })
     
-    let word =  this.data.subcurrent>0? item_word.dw_xcx:item_word.sw
-    if(item_word.wcell_type=="25"){
-      word =item_word.sw
-    }
+   
      console.log(item_word)
-     console.log({word})
-
+   
     wx.request({
       url: app.globalData.url + '?act=global_item_word_miyu',
       data: {
-        word: word,
+        word: item_word.card,
         userid: app.globalData.userid,
         sign:util.Md5Url( {
-          word: word,
+          word: item_word.card,
           userid: app.globalData.userid
         })
       },
