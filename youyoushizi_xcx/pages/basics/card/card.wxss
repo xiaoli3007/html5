@@ -6,7 +6,14 @@
 border: 1px dashed #aaa;font-family: KaiTi;
 
 }
+
+.swiper_sub_card{
+
+	margin: 0; padding: 0;
+}
+
 .swiper_sub{
+	width: 100%;
   height: 100%;
 }
 .cz_iconup text{
@@ -23,7 +30,7 @@ border: 1px dashed #aaa;font-family: KaiTi;
 .task_sw{
 font-size:11rem;  
 }
-.sw_view{ height: 100%;}
+.sw_view{ width: 100%;height: 100%;}
 .dw_view{ height: 100%;}
 .lw_view{ height: 100%;}
 .task_dw{
@@ -79,5 +86,5 @@ font-size:1.7rem;
 }
 
 .card_back image{
-	/* width:580rpx; */
+	margin: 0; padding: 0;
 }

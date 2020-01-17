@@ -52,7 +52,8 @@ Page({
     data_item_chengyu: null,
     data_item_word_miyu:null,
     box_info:null,
-    card_back_show:false
+    card_back_show:false,
+    card_back_show_list:[]
   },
   onLoad: function (options) {
    
@@ -141,6 +142,7 @@ Page({
             konw_current: konw_currenttemp,
             boxid: res.data.box_info.id,
             box_info: res.data.box_info,
+            card_back_show_list: cardback_showlist,
            // max_subcurrent: parseInt(res.data.taskinfo.wcell_type) == 25 ? 1 : 2,
           })
           that.auto_height()
@@ -307,14 +309,14 @@ Page({
   },
   audioPlay_lword() {
     
-    console.log(this.data.current)
-    console.log(this.data.subcurrent)
+    // console.log(this.data.current)
+    // console.log(this.data.subcurrent)
 
     let item_lword_src = ''
     
     item_lword_src =  this.data.taskdata[this.data.current][this.data.subcurrent].sound 
 
-    console.log(item_lword_src)
+    // console.log(item_lword_src)
     if(item_lword_src!=''){
       if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {
         this.data.audiolword_object.stop()
@@ -385,14 +387,14 @@ Page({
       this.setData({
         // tabkey: key,
         subcurrent: index,
-        card_back_show: false,
+        // card_back_show: false,
       })
     }
   },
   card_back(e) {
 
     let item_word = this.data.taskdata[this.data.current][this.data.subcurrent]  
-    if(!this.data.card_back_show ==true && item_word.card_back==''){
+    if(!this.data.card_back_show_list[this.data.current][this.data.subcurrent] ==true && item_word.card_back==''){
         
       wx.showToast({
         title: '无背面',
@@ -401,9 +403,18 @@ Page({
       })
        return
     }
-      this.setData({
-        card_back_show: !this.data.card_back_show,
-      })
+
+    // console.log(this.data.card_back_show_list)
+    // console.log(this.data.card_back_show_list[this.data.current][this.data.subcurrent])
+
+    var tprice = 'card_back_show_list[' + this.data.current + '][' + this.data.subcurrent + ']'
+    this.setData({
+      [tprice]: !this.data.card_back_show_list[this.data.current][this.data.subcurrent],
+    })
+
+      // this.setData({
+      //   card_back_show: !this.data.card_back_show,
+      // })
     
   },
   onMyEvent: function () {
