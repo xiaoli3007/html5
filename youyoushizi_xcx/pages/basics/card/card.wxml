@@ -105,7 +105,7 @@
           </wux-col>
         </wux-row>
       </view>
-      <swiper skip-hidden-item-layout="{{true}}" bindtap="audioPlay_lword" bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs  margin-left-sm  margin-right-sm" style="height:{{swiperheight}}px">
+      <swiper skip-hidden-item-layout="{{true}}"  bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs  margin-left-sm  margin-right-sm" style="height:{{swiperheight}}px">
         <block wx:for="{{taskdata}}" wx:key  wx:for-item="itemmain" wx:for-index="mainindex">
           <swiper-item>
 
@@ -114,8 +114,10 @@
              <block wx:for="{{ itemmain }}" wx:key="key" wx:for-index="subindex" wx:for-item="itemsub">
               <swiper-item>
                 <view class="flex justify-center align-center  text-center sw_view">
-                      <view  wx:if="{{!card_back_show_list[mainindex][subindex]}}" class="swiper_sub_card text-center {{itemsub.class}}">{{itemsub.card}}</view>
-                      <view  class="swiper_sub_card text-center card_back" wx:if="{{itemsub.card_back && card_back_show_list[mainindex][subindex]}}">
+
+                      <view catchtap="audioPlay_lword" wx:if="{{!card_back_show_list[mainindex][subindex]}}" class="swiper_sub_card text-center {{itemsub.class}}">{{itemsub.card}}</view>
+
+                      <view catchtap="ViewImage" data-url="{{itemsub.card_back}}" class="swiper_sub_card text-center card_back" wx:if="{{itemsub.card_back && card_back_show_list[mainindex][subindex]}}">
                          <image  src='{{itemsub.card_back}}'  mode="aspectFit"></image>
                       </view> 
                  </view>
