@@ -51,7 +51,7 @@
       </navigator>
     </view>
 
-    <view class="cu-item arrow">
+    <view class="cu-item arrow" wx:if="{{vip!=0}}">
       <navigator class="content" url="/pages/about/mycard/mycard" hover-class="none">
         <text class="proIcon-iconico_fz text-orange"></text>
         <text class="text-grey">我的卡片组</text>

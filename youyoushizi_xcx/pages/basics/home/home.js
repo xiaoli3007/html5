@@ -189,13 +189,16 @@ Component({
                 },
                 success(res) {
  
-                  // console.log(res.data)
+                   console.log(res.data)
                   if (res.data.userinfo) {
                     app.globalData.uid = res.data.userinfo.wx_id;
                     app.globalData.userid = res.data.userinfo.userid;
                     app.globalData.username = res.data.userinfo.username;
                     app.globalData.avatar = res.data.userinfo.avatar;
                     app.globalData.realname = res.data.userinfo.realname;
+                    app.globalData.isvip = parseInt(res.data.userinfo.vip)
+
+                    console.log(app.globalData.isvip )
                     that.setData({
                       realname: res.data.userinfo.realname                   
                     })

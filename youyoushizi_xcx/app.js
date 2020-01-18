@@ -108,6 +108,7 @@ App({
     username: null, 
     realname: null,
     avatar: null, 
+    isvip: 0, 
     openid: '',
     spid: 0,
     xtoken: 'sdsadwerer',

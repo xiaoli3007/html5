@@ -14,7 +14,8 @@ Component({
     username:null,
     avatar:null,
     realname: null,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    vip:0
   },
   pageLifetimes: {
     // 组件所在页面的生命周期函数
@@ -32,10 +33,11 @@ Component({
           avatar: app.globalData.avatar,
         })
       }
-      // console.log(app.globalData.realname)
+       console.log(app.globalData.isvip)
       if (app.globalData.realname) {
         this.setData({
           realname: app.globalData.realname,
+          vip:app.globalData.isvip
         })
       }
 
@@ -60,9 +62,11 @@ Component({
           avatar: app.globalData.avatar,
         })
       }
+      console.log(app.globalData.isvip)
       if (app.globalData.realname) {
         this.setData({
           realname: app.globalData.realname,
+          vip:app.globalData.isvip
         })
       }
       // console.log(app.globalData.realname)
