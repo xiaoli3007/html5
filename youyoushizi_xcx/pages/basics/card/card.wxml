@@ -118,7 +118,10 @@
                       <view catchtap="audioPlay_lword" wx:if="{{!card_back_show_list[mainindex][subindex]}}" class="swiper_sub_card text-center {{itemsub.class}}">{{itemsub.card}}</view>
 
                       <view catchtap="ViewImage" data-url="{{itemsub.card_back}}" class="swiper_sub_card text-center card_back" wx:if="{{itemsub.card_back && card_back_show_list[mainindex][subindex]}}">
-                         <image  src='{{itemsub.card_back}}'  mode="aspectFit"></image>
+
+                       <image src="/images/loading-1.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloadimg}}"></image>
+
+                         <image  src='{{itemsub.card_back}}' bindload="image_over" mode="aspectFit"></image>
                       </view> 
                  </view>
               </swiper-item>

@@ -221,7 +221,7 @@ Component({
                     [tprice3]: res.data.fuxi_nums,
                   })
 
-                },
+                }, 
                 complete(res) {
 
                   $stopWuxRefresher('#wux-refresher', that)

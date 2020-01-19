@@ -53,7 +53,8 @@ Page({
     data_item_word_miyu:null,
     box_info:null,
     card_back_show:false,
-    card_back_show_list:[]
+    card_back_show_list:[],
+    isloadimg:true
   },
   onLoad: function (options) {
    
@@ -410,6 +411,7 @@ Page({
     var tprice = 'card_back_show_list[' + this.data.current + '][' + this.data.subcurrent + ']'
     this.setData({
       [tprice]: !this.data.card_back_show_list[this.data.current][this.data.subcurrent],
+      isloadimg: true,
     })
 
       // this.setData({
@@ -631,7 +633,11 @@ Page({
       current: e.currentTarget.dataset.url
     });
   },
- 
+  image_over(e) {
+    this.setData({
+      isloadimg: false,
+    })
+  },
   
 
 })
