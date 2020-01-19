@@ -140,12 +140,14 @@ Component({
                 app.globalData.username = res.data.items.username;
                 app.globalData.avatar = res.data.items.avatar;
                 app.globalData.realname = res.data.items.realname;
+                app.globalData.isvip = parseInt(res.data.items.vip)
                 console.log(res);
                 that.setData({
                   userInfo: res.data.items,
                   username: res.data.items.username,
                   realname: res.data.items.realname,
                   avatar: res.data.items.avatar,
+                  vip: parseInt(res.data.items.vip),
                   loadModal: false,
                 })
                 console.log(res.data.items.token)
@@ -155,7 +157,7 @@ Component({
                     key: "usertoken",
                     data: res.data.items.token 
                   })
-                } 
+                }  
                   
               }
             })
