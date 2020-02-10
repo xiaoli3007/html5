@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "wux-refresher": "../../../dist/refresher/index"
+  }
+}

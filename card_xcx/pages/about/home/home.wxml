@@ -1,0 +1,70 @@
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+    <!-- <image src="{{userInfo.avatarUrl?userInfo.avatarUrl:'/images/logo.png'}}" class="png" mode="widthFix"></image> -->
+
+    <view wx:if="{{!realname}}" class="cu-avatar xl round" style="background-image:url({{avatar?avatar:'/images/logo.png'}});"></view>
+
+    <view wx:if="{{realname}}" bindtap="gotodeteil" class="cu-avatar xl round" style="background-image:url({{avatar?avatar:'/images/logo.png'}});"></view>
+ 
+
+    <view class="text-xl">
+      <text class="text-df"> {{realname?realname:'未登录'}}</text>
+    </view>
+<view class="text-xl">
+     <button wx:if="{{!realname}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="cu-btn"> 登录 </button>
+  </view>
+    <view class="margin-top-sm">
+      <text></text>
+    </view>
+    <!-- <image src="https://rmsp.youyoushizi.com/statics/images/wave.gif" mode="scaleToFill" class="gif-wave"></image> -->
+  </view>
+  
+ 
+ 
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+ 
+ <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/account/account" hover-class="none">
+        <text class="proIcon-iconico_me_zhgl text-orange"></text>
+        <text class="text-grey">账号管理</text>
+      </navigator>
+    </view>
+
+    <view class="cu-item arrow" >
+      <navigator class="content" url="/pages/about/mycard/mycard" hover-class="none">
+        <text class="proIcon-iconico_fz text-orange"></text>
+        <text class="text-grey">我的卡片组</text>
+      </navigator>
+    </view>
+
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="proIcon-iconico_me_yjfk text-orange"></text>
+        <text class="text-grey">意见反馈</text>
+      </button>
+    </view>
+
+      <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+        <text class="proIcon-iconico_me_gywm text-orange"></text>
+        <text class="text-grey">关于我们</text>
+      </navigator>
+    </view>
+    
+    <!-- <view class="cu-item arrow">
+      <navigator class="content" url="/pages/about/about/about" hover-class="none">
+        <image src="/images/logo.png" class="png" mode="aspectFit"></image>
+        <text class="text-grey">关于我们</text>
+      </navigator>
+    </view> -->
+  
+  </view>
+  <view class="cu-tabbar-height"></view>
+</scroll-view>
+
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <!-- <view class='cuIcon-emojifill text-orange'></view> -->
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>登录中...</view>
+</view>

@@ -1,0 +1,55 @@
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">我的卡片</view>
+</cu-custom>
+
+
+
+
+
+<!-- <view class="cu-bar search bg-white">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="关键词" confirm-type="search" bindinput="bindKeyInput" value='{{keywords}}' bindconfirm="search_keyword"></input>
+  </view>
+
+</view> -->
+
+
+
+  <view class="cu-list menu ">
+
+    <wux-swipe-action-group>
+      <block wx:for="{{collection_list}}" wx:key>
+        <view class="margin-top">
+          <wux-swipe-action autoClose right="{{ right }}" data="{{item.id+'-'+index}}" bind:click="delete_concern">
+            <!-- <view class="flex align-center" bindtap="gotask" data-taskid="{{item.id}}"   >
+    </view> -->
+            <view data-programid="{{item.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-start">
+              <view class="basis-xs text-center" style="flex-basis: 30%;">
+                 <view  class="proIcon-iconico_fz  text-grey" style="font-size:80rpx;"> </view>
+              </view>
+              <view class="basis-xl" style="flex-basis: 70%;">
+                <view class="text-left text-xl">
+                  <text class="text-black text-bold">{{item.name}}</text>
+                </view>
+                <view class="text-left padding-right text-grey text-df" style="text-overflow: ellipsis;height:120rpx;overflow: hidden;">描述：{{item.description}}
+                </view>
+              </view>
+            </view>
+          </wux-swipe-action>
+        </view>
+      </block>
+    </wux-swipe-action-group>
+  </view>
+
+
+
+<view class="cu-load bg-orange {{!isLoad?'loading':'over'}}"></view>
+
+
+<!-- <view class='cu-load load-modal' wx:if="{{loadModal}}">
+ 
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view> -->

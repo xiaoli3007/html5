@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "wux-row": "../../../dist/row/index",
+    "wux-col": "../../../dist/col/index",
+    "wux-tabs": "../../../dist/tabs/index",
+    "wux-tab": "../../../dist/tab/index",
+    "wux-white-space": "../../../dist/white-space/index",
+    "wux-segmented-control": "../../../dist/segmented-control/index",
+    "my-timer": "../../../myComponent/timer/timer",
+    "wux-divider": "../../../dist/divider/index",
+    "my-radio": "../../../myComponent/myradio/myradio",
+    "my-dword": "../../../myComponent/dword/dword",
+    "my-word": "../../../myComponent/word/word",
+    "my-miyu": "../../../myComponent/miyu/miyu",
+    "my-chengyu": "../../../myComponent/chengyu/chengyu"
+  }
+}

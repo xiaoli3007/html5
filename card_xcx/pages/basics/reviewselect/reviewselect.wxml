@@ -1,0 +1,52 @@
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">复习模式</view>
+  </cu-custom>
+
+  <form bindsubmit="formSubmit">
+    <view class="padding-sm">
+
+        
+       
+       <radio-group class="block" name="type">
+        <view class="cu-form-group margin-top">
+          <view class="title">识字</view>
+          <radio class="orange" checked></radio>
+        </view>
+      </radio-group>
+
+ 
+    <view class="cu-form-group margin-top  flex flex-wrap">
+          <view class="title basis-xs">数目</view>
+          <view class='basis-xl'> <slider  activeColor="#f37b1d" bindchange="slider4change" min="0" max="50" value="{{numsvalue}}"show-value/></view>
+        </view>
+
+        <view class="cu-form-group margin-top  flex flex-wrap">
+          <view class="title basis-sub">到期字数目</view>
+          <view class='basis-sub'>{{review_num}} </view>
+        </view>
+
+     
+    </view>
+   
+    <view class="padding flex flex-direction ">
+
+     <!-- <navigator  class="flex justify-center align-center" open-type="navigate" hover-class='none' url="/pages/basics/review/review?nums={{numsvalue}}">  </navigator> -->
+
+  <button class="cu-btn bg-orange lg" bindtap="goreview">开始复习</button>
+ 
+
+
+   
+</view>
+
+     </form>
+
+
+  <view class="text-left text-black padding-sm  margin-top-sm margin-bottom-sm bg-white">
+    <view class="text-left">复习介绍</view>
+    <view class="text-left margin-top-sm">识字、听写任务完成后，所有学习过的生字会加入到复习清单中复习。</view>
+    <view class="text-left margin-top-sm">复习基于著名的SuperMemo记忆曲线算法，该算法发展20多年，效果显著。</view>
+    <view class="text-left margin-top-sm">对字的掌握程度分为陌生、掌握、容易三档，下次复习时间间隔依次增加，这样保证陌生的字多出现，熟悉的字少出现。</view>
+  </view>
+
