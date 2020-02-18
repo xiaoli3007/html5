@@ -5,29 +5,22 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    author_info:null,
-    author_book_recommend: [], 
-    author_book_xu: [], 
-    list_ebooks: [],
+    cardbox_info:null,
     favorite:false,
-    authorid: 0,
+    boxid: 0,
     loadModal: true, 
-    TabCur: 0,
-    global_text:'',
-    global_title:'',
- 
   },
   onLoad(options) {
-    // console.log(options)
+     console.log(options)
     let that = this;
     //加载列表
     wx.request({
-      url: app.globalData.url + '?act=author_show',
+      url: app.globalData.url2 + '?act=carddetail',
       data: {
-        author_id: options.authorid,
+        boxid: options.boxid,
         userid: app.globalData.userid ? app.globalData.userid : 0,
         sign:util.Md5Url( {
-          author_id: options.authorid,
+          boxid: options.boxid,
           userid: app.globalData.userid ? app.globalData.userid : 0
         })
       },
@@ -44,33 +37,17 @@ Page({
         //   　　console.log('forEach遍历:' + i );
 
         // })
-        res.data.author_info = util.Decrypt(res.data.author_info)
-        if(res.data.author_book_recommend!=''){
-          res.data.author_book_recommend = util.Decrypt(res.data.author_book_recommend)
-        }
-        if(res.data.author_book_xu!='' ){
-          res.data.author_book_xu = util.Decrypt(res.data.author_book_xu)
-        }
-        if(res.data.list_ebooks!='' ){
-          res.data.list_ebooks = util.Decrypt(res.data.list_ebooks)
-        }
-         
-        // res.data.author_book_xu = util.Decrypt(res.data.author_book_xu)
-        // res.data.list_ebooks = util.Decrypt(res.data.list_ebooks)
-
-        that.setData({
-          author_info: res.data.author_info,
-          author_book_recommend: res.data.author_book_recommend,
-          author_book_xu: res.data.author_book_xu,
-          list_ebooks: res.data.list_ebooks,
-
-          authorid: options.authorid
+        res.data.cardbox_info = util.Decrypt(res.data.cardbox_info)
+     
+      that.setData({
+        cardbox_info: res.data.cardbox_info,
+          boxid: options.boxid
         }) 
-        if (res.data.author_info.is_exit_favorite){
-          that.setData({
-            favorite: true,
-          })
-        }
+        // if (res.data.author_info.is_exit_favorite){
+        //   that.setData({
+        //     favorite: true,
+        //   })
+        // }
    
       },
       complete(res) {
@@ -98,28 +75,12 @@ Page({
 
     this.setData({
       modalName: m,
-      global_title: t,
-      global_text: c
     })
   },
   hideModal(e) {
     this.setData({
       modalName: null
     })
-  },
-  tabSelect(e) {
-    // console.log(e.currentTarget.dataset.id);
-    // console.log(this.data.TabCur);
-    // console.log( this.data.datatablist);
-    // console.log(this.data.datatablist_k);
-    if (e.currentTarget.dataset.id != this.data.TabCur) {
-      this.setData({
-        TabCur: e.currentTarget.dataset.id,
-        scrollLeft: (e.currentTarget.dataset.id - 1) * 60
-      })
-    }
-
-
   },
   member_favorite_author(e) {
     if (!app.globalData.userid){

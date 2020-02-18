@@ -4,7 +4,7 @@
 
 	<view class="cu-form-group margin-top">
 		<view class="title">名称</view>
-		<input placeholder="请输入书籍名称" name='name' value='{{form.name}}'></input>
+		<input placeholder="请输入卡片组名称" name='name' value='{{form.name}}'></input>
 	</view>
 
   

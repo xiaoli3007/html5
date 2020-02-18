@@ -8,28 +8,14 @@ Page({
     ColorList: app.globalData.ColorList,
     imgList: [],
     form: {
-      name: '',
-      content: '',
-      isbn: '',
-      contact: ''
+      title: '',
     },
     avatarloadModal: false,
     isbn:''
   },
   onLoad: function (options) {
     app.setUserInfo('about');
-    let searchnot_code = options.searchnot_code ? options.searchnot_code : ''
-    let searchnot_title = options.searchnot_title ? options.searchnot_title : ''
 
-    this.setData({
-      isbn: searchnot_code,
-      form: {
-        name: searchnot_title,
-        isbn: searchnot_code,
-        content: '',
-        contact: ''
-      }
-    })
 
     this.initValidate()//验证规则函数
 
@@ -44,15 +30,15 @@ Page({
   //验证函数
   initValidate() {
     const rules = {
-      name: {
+      title: {
         required: true,
         minlength: 1
       }
     }
     const messages = {
-      name: {
-        required: '请填写书籍名称',
-        minlength: '请填写书籍名称'
+      title: {
+        required: '请填写正面文字',
+        minlength: '请填写正面文字'
       }
     }
     this.WxValidate = new WxValidate(rules, messages)
@@ -76,7 +62,7 @@ Page({
     if (that.data.imgList.length > 0 ){
 
       wx.uploadFile({
-        url: app.globalData.url2 + '?act=askbook',
+        url: app.globalData.url2 + '?act=add_card',
         filePath: that.data.imgList[0],
         name: 'file',
         header: {
@@ -84,10 +70,7 @@ Page({
         },
         formData: {
           userid: app.globalData.userid ? app.globalData.userid : 0,
-          name: params.name,
-          content: params.content,
-          contact: params.contact,
-          isbn: params.isbn,
+          title: params.title,
           sign:util.Md5Url( {
             userid: app.globalData.userid ? app.globalData.userid : 0
           })
@@ -97,12 +80,9 @@ Page({
           console.log(data)
 
           that.setData({
-            isbn: '',
+
             form: {
-              name: '',
-              content: '',
-              isbn: '',
-              contact: ''
+              title: '',
             }
           })
 
@@ -122,7 +102,7 @@ Page({
 
 
       wx.request({
-        url: app.globalData.url2 + '?act=askbook',
+        url: app.globalData.url2 + '?act=add_card',
         method: 'POST',
         header: {
           'content-type': 'application/x-www-form-urlencoded', // 默认值
@@ -130,10 +110,7 @@ Page({
         },
         data: {
           userid: app.globalData.userid ? app.globalData.userid : 0,
-          name: params.name,
-          content: params.content,
-          contact: params.contact,
-          isbn: params.isbn,
+          title: params.title,
           sign:util.Md5Url( {
             userid: app.globalData.userid ? app.globalData.userid : 0
             
@@ -142,15 +119,12 @@ Page({
         success: function (res) {
           console.log(res)
 
-          that.setData({
-            isbn: '',
-            form: {
-              name: '',
-              content: '',
-              isbn: '',
-              contact: ''
-            }
-          })
+          // that.setData({
+
+          //   form: {
+          //     title: '',
+          //   }
+          // })
           that.showFormModal({
             msg: res.data.message
           })

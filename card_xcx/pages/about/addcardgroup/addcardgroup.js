@@ -74,12 +74,15 @@ Page({
         success: function (res) {
           console.log(res)
 
+          // let taskid = e.currentTarget.dataset.taskid
+          // wx.navigateTo({
+          //   url: '/pages/basics/recommendduwu/recommendduwu',
+          // })
+
           that.setData({
-            isbn: '',
             form: {
               name: '',
               description: '',
-            
             }
           })
           that.showFormModal({

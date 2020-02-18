@@ -46,7 +46,7 @@
     <view class="bg-white " style="margin-top:0;">
       <view class="cu-list grid col-3  ">
         <view class="cu-item  justify-center align-center" wx:for="{{global_card}}" wx:key wx:if="{{index<3*2}}">
-          <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/carddetail/carddetail?ebookid={{item.id}}">
+          <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/carddetail/carddetail?boxid={{item.id}}">
 
             <image src='{{item.thumb_xcx}}' mode="widthFix" style="width:120rpx;">
             </image>
@@ -75,7 +75,7 @@
     <view class="bg-white " style="margin-top:0;">
       <view class="cu-list grid col-3  ">
         <view class="cu-item  justify-center align-center" wx:for="{{global_card}}" wx:key wx:if="{{index<3*2}}">
-          <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/carddetail/carddetail?ebookid={{item.id}}">
+          <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/carddetail/carddetail?boxid={{item.id}}">
    
             <image src='{{item.thumb_xcx}}' mode="widthFix" style="width:120rpx;">
             </image>

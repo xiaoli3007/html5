@@ -9,7 +9,7 @@
  
   <view class=" margin-left-xs margin-right-xs" style="flex: 3;">
     <view class="text-left text-lg text-black text-bold"> {{author_info.name}}</view>
-    <view class="text-left margin-top-xs"><text>{{author_info.country}} </text> </view>
+    <view class="text-left margin-top-xs"><text>{{author_info.description}} </text> </view>
     <view class="text-right margin-top-xs margin-right-xs">
 
       <view wx:if="{{!favorite}}" class="text-right margin-top-xs" bindtap="member_favorite_author">
@@ -30,13 +30,13 @@
 
   <view class="bg-white  margin-top">
   </view>
-  <block wx:for="{{list_ebooks}}" wx:key>
-    <view class="bg-white padding-xs  solid-bottom  flex   align-start" data-programid="{{item.program.id}}" bindtap="gotodeteil">
+  <block wx:for="{{cardbox_info.card_list}}" wx:key>
+    <view class="bg-white padding-xs  solid-bottom  flex   align-start" data-programid="{{item.id}}" bindtap="gotodeteil">
       <view class=" margin-xs radius">
-        <image wx:if="{{item.program.thumb_xcx!=''}}" src='{{item.program.thumb_xcx}}' style="width:180rpx;" mode="widthFix"></image>
+        <image wx:if="{{item.thumb_xcx!=''}}" src='{{item.thumb_xcx}}' style="width:180rpx;" mode="widthFix"></image>
       </view>
       <view class=" margin-xs radius">
-        <view class="text-left   text-grey text-sm margin-top-xs">{{common.util_substring2(item.program.description)}} </view>
+        <view class="text-left   text-grey text-sm margin-top-xs">{{item.common_title}} </view>
       </view>
     </view>
   </block>
