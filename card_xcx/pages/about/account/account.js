@@ -408,62 +408,7 @@ Page({
     }
 
   },
-  // formSubmit: function (e) {
-  //   console.log('form发生了submit事件，携带数据为：', e.detail.value)
-  //   const params = e.detail.value
-  //   //校验表单
-  //   if (!this.WxValidate.checkForm(params)) {
-  //     const error = this.WxValidate.errorList[0]
-  //     this.showFormModal(error)
-  //     return false
-  //   }
-  //   var that = this;
-  //   wx.request({
-  //     url: app.globalData.url2 + '?act=wx_edit_password',
-  //     method: 'POST',
-  //     header: {
-  //        'content-type': 'application/x-www-form-urlencoded', // 默认值
-  //       'X-Token': app.globalData.xtoken
-  //     },
-  //     data: {
-  //       userid: app.globalData.userid,
-  //       username: params.username,
-  //       newpasswd: params.newpasswd,
-  //       confimpasswd: params.confimpasswd,
-  //     },
-  //     success: function (res) {
-  //       console.log(res);
 
-  //       if (res.data.code === 20001) {
-
-  //         that.showFormModal({
-  //           msg: '提交失败'
-  //         }) 
-
-  //       } else {
-  //         that.showFormModal({
-  //           msg: '提交成功'
-  //         }) 
-
-  //       }
-
-  //     }, complete(res) {
-        
-  //       that.setData({
-  //         modalName: null
-  //       })
-  //       //console.log(res.statusCode)
-  //       if (res.statusCode == 500) {
-
-  //       } else {
-
-  //       }
-
-  //     }
-  //   });
-   
-    
-  // },
   //报错 
   showFormModal(error) {
     wx.showModal({
@@ -631,111 +576,7 @@ Page({
 
     
   },
-  // userchongzhiformSubmit: function (e) {
-  //   console.log('form发生了submit事件，携带数据为：', e.detail.value)
-  //   const params = e.detail.value
 
-  //   //校验表单
-  //   if (!this.WxValidate4.checkForm(params)) {
-  //     const error = this.WxValidate4.errorList[0]
-  //     this.showFormModal(error)
-  //     return false
-  //   }
-
-  //   // return false
-  //   var that = this;
-  //   wx.request({
-  //     url: app.globalData.url2 + '?act=wx_chongzhi',
-  //     method: 'POST',
-  //     header: {
-  //       'content-type': 'application/x-www-form-urlencoded', // 默认值
-  //       'X-Token': app.globalData.xtoken
-  //     },
-  //     data: {
-  //       wx_id: app.globalData.uid,
-  //       userid: that.data.chongzhiuserid,
-  //       username: params.username,
-  //       price: params.price,
-  //     },
-  //     success: function (res) {
-        
-  //       var jsConfig = res.data.pr_info;
-
-  //       console.log(jsConfig);
-  //       if (res.data.code == 20000) {
-  //         wx.requestPayment({
-  //           timeStamp: jsConfig.timeStamp,
-  //           nonceStr: jsConfig.nonceStr,
-  //           package: jsConfig.package,
-  //           signType: jsConfig.signType,
-  //           paySign: jsConfig.paySign,
-  //           success: function (res) {
-  //             wx.showToast({
-  //               title: '支付成功',
-  //               icon: 'success',
-  //               duration: 1000,
-  //             })
-  //             // that.setData({
-  //             //   now_money: parseFloat(that.data.now_money) + parseFloat(e.detail.value.number)
-  //             // });
-
-  //             // setTimeout(function () {
-  //             //   wx.navigateTo({
-  //             //     url: '/pages/main/main?now=' + that.data.now_money + '&uid=' + app.globalData.uid,
-  //             //   })
-  //             // }, 1200)
-  //           },
-  //           fail: function (res) {
-  //             wx.showToast({
-  //               title: '支付失败',
-  //               icon: 'success',
-  //               duration: 1000,
-  //             })
-  //           },
-  //           complete: function (res) {
-  //             if (res.errMsg == 'requestPayment:cancel') {
-  //               wx.showToast({
-  //                 title: '取消支付',
-  //                 icon: 'none',
-  //                 duration: 1000,
-  //               })
-  //             }
-  //           },
-  //         })
-  //       } else {
-  //         wx.showToast({
-  //           title: '支付失败',
-  //           icon: 'none',
-  //           duration: 1000,
-  //         })
-  //       }
-  //       // console.log(res);
-
-  //       // if (res.data.code === 20001) {
-
-  //       //   that.showFormModal({
-  //       //     msg: res.data.message
-  //       //   })
-
-  //       // } else {
-  //       //   that.showFormModal({
-  //       //     msg: '提交成功'
-  //       //   })
-  //       //   that.onLoad()
-  //       // }
-
-  //     }, 
-  //     complete(res) {
-
-  //       that.setData({
-  //         modalName: null
-  //       })
-    
-  //     }
-  //   });
-
-
-  // },
   userformSubmit: function (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     const params = e.detail.value
@@ -801,66 +642,7 @@ Page({
 
 
   },
-  // formSubmiteditusername: function (e) {
-  //   console.log('form发生了submit事件，携带数据为：', e.detail.value)
-  //   const params = e.detail.value
-  //   //校验表单
-  //   if (!this.WxValidate3.checkForm(params)) {
-  //     const error = this.WxValidate3.errorList[0]
-  //     this.showFormModal(error)
-  //     return false
-  //   }
-  //   // console.log(this.data.edituernameform)
-  //   // return false
-  //   var that = this;
-  //   wx.request({
-  //     url: app.globalData.url2 + '?act=wx_edit_username',
-  //     method: 'POST',
-  //     header: {
-  //       'content-type': 'application/x-www-form-urlencoded', // 默认值
-  //       'X-Token': app.globalData.xtoken
-  //     },
-  //     data: {
-  //       userid: that.data.edituernameform.userid,
-  //       wx_id: app.globalData.uid,
-  //       username: params.username,
-  //       // newusername: params.newusername,
-  //       realname: params.realname,
-  //       sex: that.data.pickersex[params.sex],
-  //       birthday: params.birthday,
-  //       nianji: that.data.pickernianji[params.nianji],
-  //     },
-  //     success: function (res) {
-  //       console.log(res);
 
-  //       if (res.data.code === 20001) {
-
-  //         that.showFormModal({
-  //           msg: res.data.message
-  //         })
-
-  //       } else {
-  //         that.showFormModal({
-  //           msg: '提交成功',
-  //         })
-  //          that.setData({
-  //           modalName: null
-  //         })
-  //         that.onLoad()
-  //       }
-
-  //     }, complete(res) {
-
-  //       // that.setData({
-  //       //   modalName: null
-  //       // })
-  //       //console.log(res.statusCode)
-       
-  //     }
-  //   });
-
-
-  // },
   userguanxiformSubmit (e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
     // const params = e.detail.value
@@ -925,123 +707,14 @@ Page({
 
 
   },
-  // uploadChooseImage(e) {
-    
-  //   let tuserid =  e.currentTarget.dataset.userid
-  //   let index = e.currentTarget.dataset.index
-  //   var that = this 
-  //   // console.log({tuserid,index})
-  //   wx.chooseImage({
-  //     count: 1, //默认9
-  //     sizeType: [ 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-  //     sourceType: ['album', 'camera'], //从相册选择
-  //     success: (res) => {
-  //       const tempFilePaths = res.tempFilePaths
 
-  //       that.setData({
-  //         avatarloadModal: true
-  //       })
-        
-  //       wx.uploadFile({
-  //         url: app.globalData.url2 + '?act=wx_avatar',
-  //         filePath: tempFilePaths[0],
-  //         name: 'file',
-  //         header: {
-  //           'content-type': 'multipart/form-data'
-  //         },
-  //         formData: {
-  //           userid: tuserid,
-  //         }, 
-  //         success(res) {
-  //           // const data = res.data
-  //           // console.log(res)
-  //           const data = JSON.parse(res.data)
-  //           console.log(data)
-  //           if (data.response.success == 0){
-  //             wx.showToast({
-  //               title: data.response.msg,
-  //               icon: 'none',
-  //               duration: 1500,
-  //             })
-  //           }else{
-  //             var tprice = 'member_list[' + index + '].avatar'
-  //             that.setData({
-  //               [tprice]: data.response.avatar,
-  //             })
-  //             if (tuserid == app.globalData.userid){
-  //               app.globalData.avatar = data.response.avatar
-  //             }
-  //           }
-  //         },
-  //         fail(res) {
-  //           wx.showToast({
-  //             title: '上传失败',
-  //             icon: 'none',
-  //             duration: 1500,
-  //           })
-  //         },
-  //         complete(res) {
-  //           that.setData({
-  //             avatarloadModal: false
-  //           })
-  //         }
-  //       })
-        
-  //     }
-  //   });
-  // },
   ViewImage(e) {
     // wx.previewImage({
     //   urls: this.data.imgList,
     //   current: e.currentTarget.dataset.url
     // });
   },
-  // delete_user(e) {
-  //   // console.log(e)
-
-  //   let duserid = this.data.duserid
-  //   let dusername = this.data.dusername
-  //   var that = this
-  //   console.log({ duserid, dusername})
-
-  //   that.setData({
-
-  //     loadModal: true
-  //   })
-  //   //删除用户
-  //   wx.request({
-  //     url: app.globalData.url2 + '?act=wx_delete',
-  //     method: 'POST',
-  //     header: {
-  //       'content-type': 'application/x-www-form-urlencoded', // 默认值
-  //       'X-Token': app.globalData.xtoken
-  //     },
-  //     data: {
-  //       wx_id: app.globalData.uid,
-  //       userid: duserid,
-  //     },
-  //     success: function (res) {
-  //       console.log(res);
-
-  //       wx.showToast({
-  //         title: res.data.message,
-  //         icon: 'none',
-  //         duration: 1500,
-  //       })
-  //       that.onLoad()
-  //     },
-  //     complete(res) {
-  //       that.setData({
-
-  //         loadModal: false,
-  //         modalName: null
-  //       })
-
-  //     }
-  //   });
-
-   
-  // },
+ 
   goto_userdetail(e) {
 
     let userid = e.currentTarget.dataset.val
