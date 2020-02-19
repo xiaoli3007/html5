@@ -212,7 +212,7 @@ Page({
     console.log(programid)
 
     wx.navigateTo({
-      url: '/pages/basics/card/card?boxid=' + programid,
+      url: '/pages/basics/carddetail/carddetail?boxid=' + programid,
     })  
   
   },

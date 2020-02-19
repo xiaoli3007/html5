@@ -2,9 +2,10 @@
   "pages": [
     "pages/index/index",
     "pages/basics/home/home",
-    "pages/basics/card/card",
     "pages/basics/carddetail/carddetail",
     "pages/basics/globalcard/globalcard",
+    "pages/basics/tasklist/tasklist",
+    "pages/basics/task/task",
     "pages/basics/review/review",
     "pages/basics/reviewselect/reviewselect",
     "pages/about/mycard/mycard",

@@ -24,7 +24,15 @@ Component({
       badge: 0,
       name: '添加卡片组',
       type: '2'
-    },  {
+    }, {
+      bg_image: 'https://rmsp.youyoushizi.com/statics/yysz/ico_sz.svg',
+      icon: 'iconico_wo_ghgl_yq',
+      color: 'yellow',
+      url: '/pages/basics/tasklist/tasklist',
+      badge: 0,
+      name: '最近学习',
+      type: '2'
+    }, {
       bg_image: 'https://rmsp.youyoushizi.com/statics/yysz/ico_fx.svg',
       icon: 'brand',
       color: 'yellow',
@@ -197,7 +205,7 @@ Component({
           userid: app.globalData.userid ? app.globalData.userid : 0,
           sign:util.Md5Url( {
             userid: app.globalData.userid ? app.globalData.userid : 0
-          })
+          }) 
         },
         header: {
           'content-type': 'application/json', // 默认值
@@ -210,7 +218,7 @@ Component({
           that.setData({
 
             global_card: res.data.items.global_card,
-            member_card: res.data.items.global_card,
+            member_card: res.data.items.member_card,
           })
 
         

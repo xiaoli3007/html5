@@ -10,8 +10,15 @@
 <wux-refresher id="wux-refresher" bind:pulling="onPulling" bind:refresh="onPullDownRefresh">
   <scroll-view scroll-y class="scrollPage" class="" style="">
 
-    
-    <view class="cu-list grid col-3" style="margin-top:0;">
+     <!-- <view class="cu-bar bg-white ">
+      <view class="action">
+        <text class=""> {{realname}}的任务</text>
+      </view>
+      <view class="action">
+      </view>
+    </view> -->
+
+    <view class="cu-list grid col-3 padding-top" style="">
       <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
 
         <navigator class="align-center" open-type="navigate" hover-class='none' url="{{item.url}}?type={{item.type}}">
@@ -45,7 +52,7 @@
     </view>
     <view class="bg-white " style="margin-top:0;">
       <view class="cu-list grid col-3  ">
-        <view class="cu-item  justify-center align-center" wx:for="{{global_card}}" wx:key wx:if="{{index<3*2}}">
+        <view class="cu-item  justify-center align-center" wx:for="{{member_card}}" wx:key wx:if="{{index<3*2}}">
           <navigator class="align-center" open-type="navigate" hover-class='none' url="/pages/basics/carddetail/carddetail?boxid={{item.id}}">
 
             <image src='{{item.thumb_xcx}}' mode="widthFix" style="width:120rpx;">

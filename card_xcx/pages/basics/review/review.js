@@ -1,81 +1,79 @@
+import { $wuxDialog } from '../../../dist/index'
+
 var util = require('../../../utils/util.js')
+
 const app = getApp()
 
 Page({
   data: {
+    tasjlisturl: '/pages/basics/tasklist/tasklist',
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     Custom: app.globalData.Custom,
-    toptitle: '复习',
-    chuchu:'',
-    taskdata: {
-      "id": "01",
-      "name": "第一课 燕子",
-      "word1": []
-    },
+    toptitle:'卡片任务',
+    taskdata: null,
     indicatorDots: false,
     autoplay: false,
     interval: 5000,
     duration: 1000,
     current: 0,
-    src: 'http://rms.youyoushizi.com:8088/course_voice/2/87/8a/878a9aaf0e242c3cdf61d4dc1a934fc0.mp4',
     loadModal: true,
-    audiowordlist: [],
-    audiodwordlist: [],
-    audiolwordlist: [],
-    taskloading: '0%',
-    konw_current: [],
-    konw_listinfo:[],
-    konw_listinfo_title:[],
-    type: 0,
-    subcurrent: 0,
-    tabs: [{
-        key: 'tab1',
-        title: '字',
-      },
-      {
-        key: 'tab2',
-        title: '词',
-      },
-      {
-        key: 'tab3',
-        title: '句',
-      },
-    ],
-    taskid: 0,
-    konw_list_radios: [],
-    tingxie_auto: false,
-    all_play_c: null,
-    data_item_word: null,
-    data_item_dword: null,
-    audioword_object: null,
-    audiodword_object: null,
+    taskloading:'0%',
+    konw_current:[],
+    type:0,
+    subcurrent:0,
+    taskid:0,
+    boxid:0,
+    all_play_c:null,
     audiolword_object: null,
     button_loading_text: '',
-    button_loading_auto: false,
+    button_loading_auto:false,
     button_global_src: '',
-    button_global_currt: 0,
-    swiperheight: 300,
-    task_wcell_type: 0,
-    max_subcurrent: 2,
-    middle_subcurrent: true,
+    button_global_currt:0,
+    konw_select_menu: [
+      {
+        value: '1',
+        isicon: true,
+        label: 'proIcon-iconico_rs',
+      },
+      {
+        value: '2',
+        isicon: true,
+        label: 'proIcon-iconico_brs',
+      },
+
+    ],
+    swiperheight:300,
+    // max_subcurrent: 2,
+    // middle_subcurrent: true,
     error_list: [],
-    data_item_word_miyu:null
+    data_item_word: null,
+    data_item_dword: null,
+    data_item_chengyu: null,
+    data_item_word_miyu:null,
+    box_info:null,
+    card_back_show:false,
+    card_back_show_list:[],
+    card_back_showimgload_list:[],
+    isloadimg:true
   },
-  onLoad: function(options) {
-
-    app.setUserInfo('about');
-
-    var nums = options.nums
+  onLoad: function (options) {
+   
+    app.setUserInfo('about');  
+    // console.log(options.taskid)
+     console.log(options)
     var methd = 'GET'
-    var apiurl = app.globalData.url + '?act=review_list'
-
+    var apiurl = app.globalData.url2 + '?act=taskbox'
+    
+    // console.log(methd)
+    // console.log(apiurl)
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+      // mask:true
+    })
     if (app.globalData.userid) {
-      wx.showLoading({
-        title: '加载中',
-        mask: true
-      })  
+
       wx.request({
         url: apiurl,
         method: methd,
@@ -85,100 +83,91 @@ Page({
         },
         data: {
           userid: app.globalData.userid,
-          nums: parseInt(nums),
+          boxid: options.boxid?parseInt(options.boxid):0,
           sign:util.Md5Url({
             userid: app.globalData.userid,
-            nums: parseInt(nums)
+            boxid: options.boxid?parseInt(options.boxid):0,          
           })
         },
-        success: function(res) {
-          //  console.log(res); 
+        success: function (res) {
+            // console.log(res.data)
+          // res.data.word_data = util.Decrypt(res.data.word_data)
+           //setTimeout(function () { 
+          //进行状态中的进度跳转================================================
+          // if (res.data.taskinfo.status=='1'){
+          //   let temp_progress_wcellid = null
 
-          if (res.data.code === 20001) {
+          //   if (res.data.word_data.survey) {
+          //      temp_progress_wcellid = res.data.word_data.survey.progress_wcellid 
+          //   }
+          //   // console.log(temp_progress_wcellid )
+          //   if (temp_progress_wcellid){
+          //     let temp_goto_index = 0
+          //     res.data.word_data.word1.forEach(function (value, i) {
+          //       if (value.wcellid === temp_progress_wcellid) {
+          //         temp_goto_index = i+1
+          //       }
+          //     })
+          //     if (temp_goto_index>0) {
+          //       let c_go = temp_goto_index > res.data.word_data.word1.length - 1 ? res.data.word_data.word1.length - 1 : temp_goto_index
+          //       that.setData({
+          //         current: c_go,
+          //         taskloading: util.GetPercent(c_go, res.data.word_data.word1.length - 1)
+          //       })
+          //     }
+          //   }
+          // }
+          //进行状态中的进度跳转============end================================
+          var konw_currenttemp = []; var temp_error_list = [];
+          var cardback_showlist = [] 
+          var cardback_showimgloadlist = [] 
+          res.data.word_data.forEach(function (value, i) {
+            let wstatus = value.status == '0' ? 20 : value.status
+            konw_currenttemp.push(wstatus)
+            temp_error_list.push(false)
 
-            wx.showToast({
-              title: '没有要复习的数据！',
-              icon: 'none',
-              duration: 1500,
+            let temp_back_list= [] 
+            value.forEach(function (value2, i2) {
+              temp_back_list.push(false)
             })
-            setTimeout(function() {
-              wx.navigateTo({
-                url: '/pages/index/index',
-              })
-            }, 1000)
+            cardback_showlist.push(temp_back_list)
 
-          } else {
-      
-            var konw_currenttemp = [];
-            var konw_currenttemplist = [];
-            var konw_currenttemplist_title = [];
-            var tempkonw_list_radios = [];
-            var temp_error_list = [];
-            res.data.word_data.word1.forEach(function(value, i) {
-             
+            cardback_showimgloadlist.push(temp_back_list)
 
-              konw_currenttemplist.push(value.review_select_days)
-              konw_currenttemp.push(20)
+          })
+   
+          // console.log(cardback_showlist)
 
-              var titletmep = [];
-              value.review_select_days.forEach(function (value2, i2) { 
-                titletmep.push(value2.name)
-              })
-              konw_currenttemplist_title.push(titletmep)
-              //console.log( value);
-              //新的单选按钮
-              let titletmepaaa = [];
-              value.review_select_days.forEach(function (value, i) { 
-                let titletmepaaasub = {};
-                titletmepaaasub = {
-                  value: i,
-                  isicon: false,
-                  label: value.name}
-                titletmepaaa.push(titletmepaaasub)
-              })
-              tempkonw_list_radios.push(titletmepaaa)
+          // res.data.word_data.word1.forEach(function (value, i) {
+          //   res.data.word_data.word1[i].lw_red = that.hilight_word(value.dw_xcx, value.lw_xcx)
+          // })
+          that.setData({
+            error_list: temp_error_list,
+            taskdata: res.data.word_data,
+            konw_current: konw_currenttemp,
+            boxid: res.data.box_info.id,
+            box_info: res.data.box_info,
+            card_back_show_list: cardback_showlist,
+            card_back_showimgload_list: cardback_showimgloadlist,
+           // max_subcurrent: parseInt(res.data.taskinfo.wcell_type) == 25 ? 1 : 2,
+          })
+          that.auto_height()
 
-              //关键字标红 
-              res.data.word_data.word1[i].lw_red = util.global_hilight_word(value.dw_xcx, value.lw_xcx)
+       //}, 500)
 
-              temp_error_list.push(false)
-
-            })
-
- 
-
-            // res.data.word_data.task_word_data_items.forEach(function(value, i) {
-            // })
-
-            // console.log(konw_currenttemplist_title);
-            // console.log(linktemp1);
-            // console.log(linktemp2);
-            // console.log(linktemp1);
-
-            that.setData({
-              error_list: temp_error_list,
-              taskdata: res.data.word_data,
-              konw_current: konw_currenttemp,
-              konw_listinfo: konw_currenttemplist,
-              konw_listinfo_title: konw_currenttemplist_title,
-              konw_list_radios: tempkonw_list_radios,
-              chuchu: res.data.word_data.word1[0].chuchu
-            })
-            // console.log(tempkonw_list_radios);
-
-            that.auto_height()
-          }
-
-        },
-        complete(res) {
+        }, complete(res) {
           that.setData({
 
             loadModal: false
           })
-           wx.hideLoading()
+          wx.hideLoading()
           //console.log(res.statusCode)
           if (res.statusCode == 500) {
-
+            wx.showToast({
+              title: '请求失败！',
+              icon: 'none',
+              duration: 1500,
+            })
           } else {
 
           }
@@ -187,21 +176,19 @@ Page({
       });
     }
 
+    
+
   },
   onReady(e) {
 
+    // const query = wx.createSelectorQuery().in(this) 在组件中这样
     var that = this
 
     this.setData({
-
       all_play_c: wx.createInnerAudioContext(),
-      audioword_object: wx.createInnerAudioContext(),
-      audiodword_object: wx.createInnerAudioContext(),
       audiolword_object: wx.createInnerAudioContext(),
-
     })
-    var that = this
-    //==============================================================
+    var that = this 
     this.data.audiolword_object.onError(() => {
       that.setData({
         button_loading_text: '加载语音失败！',
@@ -222,7 +209,7 @@ Page({
         button_global_src: that.data.audiolword_object.src,
         button_global_currt: that.data.current,
       })
-
+      
     })
     this.data.audiolword_object.onEnded(() => {
       that.setData({
@@ -240,54 +227,49 @@ Page({
     })
 
   },
-  onUnload(e) {
+  onShow(e) {
 
+    // console.log(this.data.type)
+  },
+  onUnload(e) {
     var showTwo = this.selectComponent('#mytimes');
     console.log(showTwo.data.timenum)
 
     // 发送请求 统计学习时间
-    wx.request({
-      url: app.globalData.url + '?act=taskintime',
-      method: "POST",
-      data: {
-        userid: app.globalData.userid ? app.globalData.userid : 0,
-        taskid: 0,
-        review: 1,
-        duration: showTwo.data.timenum,
-        sign:util.Md5Url({
-          userid: app.globalData.userid ? app.globalData.userid : 0,
-          taskid: 0,
-          review: 1,
-          duration: showTwo.data.timenum
-        })
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'X-Token': app.globalData.xtoken
-      },
-      success(res) {
+    // wx.request({
+    //   url: app.globalData.url + '?act=taskintime',
+    //   method: "POST",
+    //   data: {
+    //     userid: app.globalData.userid ? app.globalData.userid : 0,
+    //     taskid: this.data.taskid,
+    //     review: 0,
+    //     duration: showTwo.data.timenum,
+    //     sign:util.Md5Url({
+    //       userid: app.globalData.userid ? app.globalData.userid : 0,
+    //       taskid: this.data.taskid,
+    //       review: 0,
+    //       duration: showTwo.data.timenum
+    //     })
+    //   },
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'X-Token': app.globalData.xtoken
+    //   },
+    //   success(res) {
 
-        console.log(res.data)
+    //     console.log(res.data)
 
-      }
-    })
+    //   }
+    // })
 
   },
   auto_height() {
     // console.log(type)
-    var that = this
+    var that = this 
     let main_hight_head = 0
     let main_hight_common_icon_top = 0
     let main_hight_common_icon = 0
     let main_hight_shizi_know = 0
-    let main_hight_tingxie_play = 0
-    let main_hight_tingxie_setting = 0
-    // wx.createSelectorQuery().select('#main_hight_head').boundingClientRect(function (res) {
-    //   // 公共头部的高度
-    //   // console.log(res)
-    //   main_hight_head = res.height
-    //   console.log('公共头部的高度' + main_hight_head)
-    // }).exec()
     wx.createSelectorQuery().select('#main_hight_common_icon').boundingClientRect(function (res) {
       // 公共图标的高度
       // console.log(res)
@@ -297,147 +279,99 @@ Page({
       // console.log('公共图标的高度' + res.height)
 
     }).exec()
-  
-      wx.createSelectorQuery().select('#main_hight_shizi_know').boundingClientRect(function (res) {
-        // 识字对错的高度
-        main_hight_shizi_know = res.height
-        // console.log('识字对错的高度' + res.height)
+    wx.createSelectorQuery().select('#main_hight_shizi_know').boundingClientRect(function (res) {
+      // 识字对错的高度
+      main_hight_shizi_know = res.height
+      // console.log('识字对错的高度' + res.height)
 
-        let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_shizi_know)
-        // console.log('算出来的高度为' + tempswiperheight)
+      let tempswiperheight = app.globalData.windowHeight - (main_hight_common_icon_top + main_hight_common_icon + main_hight_shizi_know) 
+      // console.log('算出来的高度为' + tempswiperheight)
+      
+      that.setData({
+        swiperheight: tempswiperheight
+      })
 
-        that.setData({
-          swiperheight: tempswiperheight
-        })
-
-      }).exec()
+    }).exec()     
 
   },
 
-  change: function(e) {
+  change: function (e) {
+
     this.setData({
-      subcurrent: 0
+      subcurrent: 0,
+      card_back_show: false,
     })
-    if ("touch" === e.detail.source) { // 只在用户触发的情况下
+    if ("touch" === e.detail.source) {  // 只在用户触发的情况下
       this.setData({
         current: e.detail.current
       })
     }
-
+    // this.setData({
+    //   current: e.detail.current
+    // })
     this.setData({
-      chuchu: this.data.taskdata.word1[this.data.current].chuchu,
-      taskloading: util.GetPercent(e.detail.current, this.data.taskdata.word1.length - 1)
+      taskloading: util.GetPercent(e.detail.current, this.data.taskdata.length-1)
     })
-    
-    
-
-  },
-  audioStart(e) {
-    this.setData({
-      current: 0
-    })
-  },
-  audioend(e) {
-    this.setData({
-      current: this.data.taskdata.word1.length - 1
-    })
-  },
-  prev(e) {
-    this.setData({
-      current: this.data.current > 0 ? this.data.current - 1 : this.data.current
-    })
-    console.log(this.data.current)
-  },
-  next(e) {
-    this.setData({
-      current: this.data.current < this.data.taskdata.word1.length - 1 ? this.data.current + 1 : this.data.taskdata.word1.length - 1,
-    })
-    // console.log(this.data.current)
   },
   audioPlay_lword() {
+    
+    // console.log(this.data.current)
+    // console.log(this.data.subcurrent)
 
     let item_lword_src = ''
-    if (this.data.subcurrent == 0) {
+    
+    item_lword_src =  this.data.taskdata[this.data.current][this.data.subcurrent].sound 
 
-      if (this.data.taskdata.word1[this.data.current].wcell_type == '25'){
-        item_lword_src = this.data.taskdata.word1[this.data.current].dw_sound 
+    // console.log(item_lword_src)
+    if(item_lword_src!=''){
+      if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current ) {
+        this.data.audiolword_object.stop()
       }else{
-        item_lword_src = this.data.taskdata.word1[this.data.current].ren_word_md5 ? this.data.taskdata.word1[this.data.current].ren_word_md5 : this.data.taskdata.word1[this.data.current].word_sound
+        this.data.audiolword_object.stop()
+        this.data.audiolword_object.src = item_lword_src
+        this.data.audiolword_object.play()
       }
+    }
       
-
-    } else if (this.data.subcurrent == 1) {
-
-      if (this.data.taskdata.word1[this.data.current].wcell_type == '25') {
-
-        item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
-
-      } else {
-        item_lword_src = this.data.taskdata.word1[this.data.current].dw_sound
-      }
-     
-
-    } else if (this.data.subcurrent == 2) {
-
-      item_lword_src = this.data.taskdata.word1[this.data.current].lw_sound
-
-    }
-
-
-     console.log(item_lword_src)
-
-
-    if (this.data.button_global_src == item_lword_src && this.data.button_global_currt == this.data.current) {
-      this.data.audiolword_object.stop()
-    } else {
-      this.data.audiolword_object.stop()
-      this.data.audiolword_object.src = item_lword_src
-      this.data.audiolword_object.play()
-    }
-
   },
-  
+
   onChangeKnow(e) {
-    console.log(e.detail.value)
+    // console.log(e.detail)
     // console.log(this.data.current)
     var tprice = 'konw_current[' + this.data.current + ']'
     this.setData({
       [tprice]: e.detail.value,
     })
-    var tempwcellid = this.data.taskdata.word1[this.data.current].task_wcell_id
-    var temp_fact = this.data.konw_listinfo[this.data.current][e.detail.value]
-    // console.log(tempwcellid)
-    // console.log(temp_fact)
-    //发送请求 super 算法
-    wx.request({
-      url: app.globalData.url + '?act=taskinwcell_super',
-      method: "POST",
-      data: {
-        userid: app.globalData.userid ? app.globalData.userid : 0,
-        task_wcell_id: tempwcellid,
-        day: temp_fact.value,
-        quality: temp_fact.quality,
-        factor: temp_fact.factor,
-        sign:util.Md5Url({
-          userid: app.globalData.userid ? app.globalData.userid : 0,
-          task_wcell_id: tempwcellid,
-          day: temp_fact.value,
-          quality: temp_fact.quality,
-          factor: temp_fact.factor
-        })
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'X-Token': app.globalData.xtoken
-      },
-      success(res) {
 
-        console.log(res.data)
+    // var tempwcellid = this.data.taskdata[this.data.current].wcellid
+    // //识字认识不认识 发送请求
+    // wx.request({
+    //   url: app.globalData.url + '?act=taskinwcell',
+    //   method: "POST",
+    //   data: {
+    //     userid: app.globalData.userid ? app.globalData.userid : 0,
+    //     taskid: this.data.taskid,
+    //     wcellid: tempwcellid,
+    //     status: e.detail.value,
+    //     sign:util.Md5Url( {
+    //       userid: app.globalData.userid ? app.globalData.userid : 0,
+    //       taskid: this.data.taskid,
+    //       wcellid: tempwcellid,
+    //       status: e.detail.value
+    //     })
+    //   },
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'X-Token': app.globalData.xtoken
+    //   },
+    //   success(res) {
 
-      }
-    })
+    //     // console.log(res.data)
 
-    var nextitem = this.data.current + 1 < this.data.taskdata.word1.length ? this.data.current + 1 : this.data.taskdata.word1.length - 1
+    //   }
+    // })
+
+    var nextitem = this.data.current + 1 < this.data.taskdata.length ? this.data.current + 1 : this.data.taskdata.length - 1
     var that = this
     setTimeout(function () {
       that.setData({
@@ -445,114 +379,89 @@ Page({
       })
     }, 500)
 
-    if (this.data.current == this.data.taskdata.word1.length - 1) {
-      wx.showToast({
-        title: '本次识字已完成！',
-        icon: 'none',
-        duration: 1500,
-      })
+    if (this.data.current == this.data.taskdata.length - 1) {
+ 
+      this.shizi_end_back()
     }
 
-   },
-  onDownChange() {
-
-    // console.log(this.data.max_subcurrent)
-    let tempsubc = this.data.subcurrent + 1
-
-    tempsubc = tempsubc > this.data.max_subcurrent ? this.data.max_subcurrent : tempsubc
-    // console.log(tempsubc)
-    if (tempsubc == this.data.max_subcurrent) {
-
-      this.setData({
-        middle_subcurrent: false,
-      })
-    }
-    this.setData({
-      subcurrent: tempsubc,
-    })
-
-  },
-  onUpChange() {
-
-    // console.log(this.data.max_subcurrent)
-    let tempsubc = this.data.subcurrent - 1
-    tempsubc = tempsubc < 0 ? 0 : tempsubc
-
-    // console.log(tempsubc)
-    if (tempsubc == 0) {
-
-      this.setData({
-        middle_subcurrent: true,
-      })
-    }
-    this.setData({
-      subcurrent: tempsubc,
-    })
-
-  },
-  onTabsChange(e) {
-    // console.log('onTabsChange', e)
-    const {
-      key
-    } = e.detail
-    console.log(key)
-    const subcurrent = this.data.tabs.map((n) => n.key).indexOf(key)
-    console.log(subcurrent)
-    this.setData({
-      tabkey: key,
-      subcurrent: subcurrent,
-    })
   },
   onSubSwiperChange(e) {
-
+    
     // console.log('onSubSwiperChange', e)
-    const { current: index, source } = e.detail
-
+    const { current: index, source } = e.detail 
     if (!!source) {
       this.setData({
         // tabkey: key,
         subcurrent: index,
+        // card_back_show: false,
       })
     }
   },
+  card_back(e) {
+
+    let item_word = this.data.taskdata[this.data.current][this.data.subcurrent]  
+    if(!this.data.card_back_show_list[this.data.current][this.data.subcurrent] ==true && item_word.card_back==''){
+        
+      wx.showToast({
+        title: '无背面',
+        icon: 'none',
+        duration: 1500,
+      })
+       return
+    }
+
+    // console.log(this.data.card_back_show_list)
+    // console.log(this.data.card_back_show_list[this.data.current][this.data.subcurrent])
+
+    var tprice = 'card_back_show_list[' + this.data.current + '][' + this.data.subcurrent + ']'
+    this.setData({
+      [tprice]: !this.data.card_back_show_list[this.data.current][this.data.subcurrent],
+      // isloadimg: true,
+    })
+
+    // console.log(this.data.card_back_showimgload_list[this.data.current][this.data.subcurrent])
+    // if(!this.data.card_back_showimgload_list[this.data.current][this.data.subcurrent]){
+
+    //   var tprice = 'card_back_showimgload_list[' + this.data.current + '][' + this.data.subcurrent + ']'
+    //   this.setData({
+    //     [tprice]: false,
+    //   })
+    // }
+
+      // this.setData({
+      //   card_back_show: !this.data.card_back_show,
+      // })
+    
+  },
+  onMyEvent: function () {
+     // 自定义组件触发事件时提供的detail对象
+    // console.log(e)
+    var showTwo = this.selectComponent('#mytimes');
+    // console.log(showTwo.data.timenum)
+  }, 
+ 
   showModal_word_shiyi(e) {
 
     let that = this;
-    let item_word = this.data.taskdata.word1[this.data.current]
-    // console.log(item_word);
-
-    let m = 'DrawerModalL_word'
-
-    if (this.data.subcurrent > 0 && this.data.subcurrent < this.data.max_subcurrent) {
-      m = 'DrawerModalL_dword'
+    let item_word = this.data.taskdata[this.data.current][this.data.subcurrent]  
+   
+    if(item_word.type=='' || item_word.card==''){
+      return
     }
-    // DrawerModalL_dword
-    // this.setData({
-    //   modalName: m,
-    //   data_item_word: item_word,
-    // })
-    this.setData({
-      modalName: m, 
-      isloaditem: true
-    })
-
-    let wcellid = item_word.wcellid
-    let dw_xcx = item_word.dw_xcx
-    let wcell_type = item_word.wcell_type
-    // console.log(item_word)
-    // console.log({wcellid,dw_xcx,wcell_type})
-
+    let m = 'DrawerModalL_'+item_word.type
+    
+  
+    // let textcard = item_word.card
+    console.log(item_word) 
     wx.request({
-      url: app.globalData.url + '?act=global_item_word_shiyi',
+      url: app.globalData.url + '?act=global_item_card_shiyi',
       data: {
-        wcellid: wcellid,
-        dw_xcx: dw_xcx,
-        wcell_type: wcell_type,
+        textcard: item_word.card,
+        type: item_word.type,
         userid: app.globalData.userid,
         sign:util.Md5Url( {
-          wcellid: wcellid,
-          dw_xcx: dw_xcx,
-          wcell_type: wcell_type,
+          textcard: item_word.card,
+          type: item_word.type,
           userid: app.globalData.userid
         })
       },
@@ -562,35 +471,59 @@ Page({
       },
       success(res) {
         //  console.log(res.data) 
-        res.data.items = util.Decrypt(res.data.items)
-        that.setData({
-          data_item_word: res.data.items,
-        })
+        if(res.data.code==20000){
+          res.data.items = util.Decrypt(res.data.items)
+          
+          if(item_word.type=='word'){
+            that.setData({
+              data_item_word: res.data.items,
+            })
+
+          }
+          if(item_word.type=='dword'){
+            that.setData({
+              data_item_dword: res.data.items,
+            })
+
+          }
+     
+          // that.setData({
+          //   data_item_chengyu: res.data.items,
+          // })
+
+          
+
+          that.setData({
+            modalName: m, 
+            isloaditem: true
+          })
+        }else{
+
+          wx.showToast({
+            title: '暂无释义',
+            icon: 'none',
+            duration: 1500,
+          })
+
+
+        }
+        
+
       },
       complete(res) {
         that.setData({
-
           isloaditem: false
         })
         
       }
     })
+
   },
+
   hideModal(e) {
     this.setData({
       modalName: null
     })
-  },
-  play_any_src(e) {
-    let src = e.currentTarget.dataset.msrc
-
-    console.log(src);
-    // let innerAudioContext = wx.createInnerAudioContext()
-    // this.data.all_play_c.stop()
-    this.data.all_play_c.src = src
-    this.data.all_play_c.play()
-    // console.log(this.innerAudioContext.duration);
-
   },
   post_word_error(e) {
 
@@ -599,7 +532,7 @@ Page({
       [tprice]: true,
     })
 
-    let item_word = this.data.taskdata.word1[this.data.current]
+    let item_word = this.data.taskdata[this.data.current]
     let bookcellid = item_word.bookcellid
     //  console.log(item_word);
 
@@ -633,37 +566,53 @@ Page({
 
       }
     })
- 
-    // this.setData({
-    //   modalName: m,
-    //   data_item_word: item_word,
-    // })
+  },
+  shizi_end_back() {
 
+    var that = this
+    $wuxDialog().open({
+      resetOnClose: true,
+      // title: '',
+      content: '您好！识字已结束',
+      buttons: [
+      {
+        text: '返回任务列表',
+        type: 'primary',
+        onTap(e) {
+          console.log('你选择了返回任务列表！')
+          setTimeout(() => {
+            wx.redirectTo({
+              url: '/pages/basics/tasklist/tasklist',
+            })
+          }, 500)
+        },
+      },
+      {
+        text: '取消',
+      },
+      ],
+    })
   },
   showModal_word_miyu(e) {
 
     let that = this;
 
-    let item_word = this.data.taskdata.word1[this.data.current]
+    let item_word = this.data.taskdata[this.data.current][this.data.subcurrent]
     this.setData({
       modalName: e.currentTarget.dataset.target, 
       // isloaditem: true
     })
     
-    let word =  this.data.subcurrent>0? item_word.dw_xcx:item_word.sw
-    if(item_word.wcell_type=="25"){
-      word =item_word.sw
-    }
+   
      console.log(item_word)
-     console.log({word})
-
+   
     wx.request({
       url: app.globalData.url + '?act=global_item_word_miyu',
       data: {
-        word: word,
+        word: item_word.card,
         userid: app.globalData.userid,
         sign:util.Md5Url( {
-          word: word,
+          word: item_word.card,
           userid: app.globalData.userid
         })
       },
@@ -692,6 +641,23 @@ Page({
     })
 
   },
+  ViewImage(e) {
+    wx.previewImage({
+      urls: [e.currentTarget.dataset.url],
+      current: e.currentTarget.dataset.url
+    });
+  },
+  image_over(e) {
 
+    var tprice = 'card_back_showimgload_list[' + this.data.current + '][' + this.data.subcurrent + ']'
+      this.setData({
+        [tprice]: true,
+      })
+
+    // this.setData({
+    //   isloadimg: false,
+    // })
+  },
+  
 
 })

@@ -96,7 +96,7 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url2 + '?act=my_card' ,
+      url: app.globalData.url2 + '?act=global_card' ,
       data: {
         userid: app.globalData.userid ? app.globalData.userid : 0,
         pagesize: that.data.pagesize,
@@ -162,7 +162,7 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url2 + '?act=my_card',
+      url: app.globalData.url2 + '?act=global_card',
       data: {
         userid: app.globalData.userid ? app.globalData.userid : 0,
         pagesize: that.data.pagesize,
@@ -209,77 +209,11 @@ Page({
     console.log(programid)
 
     wx.navigateTo({
-      url: '/pages/basics/card/card?boxid=' + programid,
+      url: '/pages/basics/carddetail/carddetail?boxid=' + programid,
     })  
   
   },
 
-  // delete_concern(e) {
-  //   // console.log(e)
-
-  //   // let ttaskid = e.currentTarget.dataset.taskid
-  //   // let tindex = e.currentTarget.dataset.index
-
-  //   var strs = new Array()
-  //   strs = e.detail.data.split("-")
-  //   let ttaskid = strs[0]
-  //   let tindex = strs[1]
-
-  //   var that = this
-  //   console.log({ ttaskid, tindex})
-
-  //   // return
-  //   wx.showModal({
-  //     title: '删除',
-  //     content: '确定要删除么？',
-  //     cancelText: '取消',
-  //     confirmText: '确定',
-  //     success: res => {
-  //       if (res.confirm) {
-
-  //         that.setData({
-
-  //           loadModal: true
-  //         })
-  //         //删除任务
-  //         wx.request({
-  //           url: app.globalData.url + '?act=member_author_delete',
-  //           method: 'POST',
-  //           header: {
-  //             'content-type': 'application/x-www-form-urlencoded', // 默认值
-  //             'X-Token': app.globalData.xtoken
-  //           },
-  //           data: {
-  //             userid: app.globalData.userid ? app.globalData.userid : 0,
-  //             concern_id: ttaskid,
-  //             sign:util.Md5Url({
-  //               userid: app.globalData.userid ? app.globalData.userid : 0,
-  //               concern_id: ttaskid
-  //             })
-  //           },
-  //           success: function (res) {
-  //             console.log(res);
-               
-  //             that.data.collection_list.splice(tindex, 1)
-  //             that.setData({
-  //               collection_list: that.data.collection_list
-  //             })
-  //           },
-  //            complete(res) {
-  //             that.setData({
-
-  //               loadModal: false
-  //             })
-              
-  //           }
-  //         });
-          
-  //       }
-  //     }
-  //   })
-
-  // }
-  // ,
 
  
 });

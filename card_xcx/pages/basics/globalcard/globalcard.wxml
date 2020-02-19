@@ -27,7 +27,13 @@
     </view> -->
             <view data-programid="{{item.id}}" bindtap="gotodeteil" class="padding-sm bg-white flex flex-wrap justify-center align-start">
               <view class="basis-xs text-center" style="flex-basis: 30%;">
-                 <view  class="proIcon-iconico_fz  text-grey" style="font-size:80rpx;"> </view>
+                 
+                   <image wx:if="{{item.thumb_xcx}}" src='{{item.thumb_xcx}}' style="width:180rpx;" mode="widthFix">
+          </image>
+
+          <view wx:if="{{!item.thumb_xcx}}" class="proIcon-iconico_fz  text-grey" style="font-size:80rpx;"> </view>
+
+
               </view>
               <view class="basis-xl" style="flex-basis: 70%;">
                 <view class="text-left text-xl">

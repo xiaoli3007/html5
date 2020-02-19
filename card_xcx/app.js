@@ -73,7 +73,8 @@ App({
       //  url: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi.php',
       //  url2: 'https://rmsp.youyoushizi.com/appapi/app_youyoushizi_xcc.php',
     //  url: 'https://card.gfusoft.com/appapi/app_youyoushizi.php',
-     url2: 'https://card.gfusoft.com/appapi/app_youyoushizi_card.php',
+    //  url2: 'https://card.gfusoft.com/appapi/app_youyoushizi_card.php',
+     url2: 'https://cardtest.gfusoft.com/appapi/app_youyoushizi_card.php',
     ColorList: [{
       title: '嫣红',
       name: 'red',
