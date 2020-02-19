@@ -8,12 +8,12 @@
 
         
        
-       <radio-group class="block" name="type">
+       <!-- <radio-group class="block" name="type">
         <view class="cu-form-group margin-top">
           <view class="title">识字</view>
           <radio class="orange" checked></radio>
         </view>
-      </radio-group>
+      </radio-group> -->
 
  
     <view class="cu-form-group margin-top  flex flex-wrap">

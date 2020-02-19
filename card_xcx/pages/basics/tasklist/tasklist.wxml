@@ -22,8 +22,8 @@
   <wux-row>
     <wux-col span="12">
       <view class=" flex flex-direction">
-        <text class="text-center">任务可以在首页的"教材”选中课本，创建听写、识字任务；\n</text>
-         <text class="text-center">或者在课外读物中选中图书，“去学习“创建识字任务。</text>
+        <text class="text-center">任务可以在卡片组详情页添加；\n</text>
+   
       </view>
     </wux-col>
   </wux-row>
@@ -32,7 +32,7 @@
   <wux-row>
     <wux-col span="8" offset="2">
       <view class="padding flex flex-direction">
-        <button class="cu-btn round bg-orange lg" bindtap="gotojiaocai">前往教材</button>
+        <button class="cu-btn round bg-orange lg" bindtap="gotojiaocai">前往我的卡片组</button>
       </view>
 
        <view class="text-center  flex flex-direction">
@@ -40,7 +40,7 @@
       </view>
 
        <view class="padding flex flex-direction">
-        <button class="cu-btn round bg-orange lg" bindtap="gotoduwu">前往课外读物</button>
+        <button class="cu-btn round bg-orange lg" bindtap="gotoduwu">前往公共卡片组</button>
       </view>
 
     </wux-col>

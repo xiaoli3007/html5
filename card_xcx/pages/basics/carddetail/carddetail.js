@@ -123,13 +123,13 @@ Page({
     })
   },
   
-  gotodeteil(e) {
+  addcard(e) {
 
-    let programid = e.currentTarget.dataset.programid
+    let boxid = e.currentTarget.dataset.boxid
     // var that = this
     // console.log(programid)
     wx.navigateTo({
-      url: '/pages/basics/detailed/detailed?ebookid=' + programid,
+      url: '/pages/about/addcard/addcard?boxid=' + boxid,
     })
   },
    ViewImage(e) {

@@ -50,7 +50,7 @@ Page({
     if (app.globalData.userid) {
 
        wx.request({
-         url: app.globalData.url + '?act=tasklist' ,
+         url: app.globalData.url2 + '?act=tasklist' ,
         method: 'GET',
          header: {
            'content-type': 'application/json', // 默认值
@@ -133,7 +133,7 @@ Page({
       page: this.data.page + 1
     })
     wx.request({
-      url: app.globalData.url + '?act=tasklist',
+      url: app.globalData.url2 + '?act=tasklist',
       data: {
         userid: app.globalData.userid,
         pagesize: that.data.pagesize,
@@ -200,7 +200,7 @@ Page({
       page: 1
     })
     wx.request({
-      url: app.globalData.url + '?act=tasklist' ,
+      url: app.globalData.url2 + '?act=tasklist' ,
       data: {
         userid: app.globalData.userid,
         pagesize: that.data.pagesize,
@@ -321,7 +321,7 @@ Page({
           })
           //删除任务
           wx.request({
-            url: app.globalData.url + '?act=task_delete',
+            url: app.globalData.url2 + '?act=task_delete',
             method: 'POST',
             header: {
               'content-type': 'application/x-www-form-urlencoded', // 默认值

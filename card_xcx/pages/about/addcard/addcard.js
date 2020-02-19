@@ -11,7 +11,6 @@ Page({
       title: '',
     },
     avatarloadModal: false,
-    isbn:''
   },
   onLoad: function (options) {
     app.setUserInfo('about');

@@ -26,9 +26,17 @@
 </view>
 
 
+<view class="cu-bar bg-white margin-top">
+  <view class="action">
+    <text class="cuIcon-title text-orange "></text> 卡片列表
+  </view>
+  <view class="action">
+    <button class="cu-btn bg-orange shadow" bindtap="addcard" data-boxid="{{cardbox_info.id}}">添加卡片</button>
+  </view>
+</view>
 
 
-  <view class="bg-white  margin-top">
+  <view class="bg-white  padding-top">
   </view>
   <block wx:for="{{cardbox_info.card_list}}" wx:key>
     <view class="bg-white padding-xs  solid-bottom  flex   align-start" data-programid="{{item.id}}" bindtap="gotodeteil">

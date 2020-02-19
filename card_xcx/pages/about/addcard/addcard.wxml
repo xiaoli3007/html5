@@ -37,9 +37,6 @@
 		</view>
 	</view>
 
-
-
-
     <!-- <view class="cu-bar  bg-orange justify-center  foot" >
     
 
@@ -47,7 +44,7 @@
  
   </view> -->
 
-    <view class="flex flex-direction cu-bar-sun foot">
+    <view class="flex flex-direction cu-bar-sun margin-top">
   <button class="cu-btn lg bg-orange "  form-type="submit">提交</button>
 </view>
 
