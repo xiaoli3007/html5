@@ -1,0 +1,211 @@
+<cu-custom bgColor="bg-orange" isBack="{{true}}">
+<!-- <cu-custom bgColor="bg-orange" isurl="{{true}}" curl="{{tasjlisturl}}"> -->
+  <view slot="backText" bindchange="backquiet">返回</view>
+  <view slot="content">{{toptitle}}</view>
+</cu-custom>
+
+<view class="bg-white   padding-bottom-xs" id='main_hight_head'>
+
+  <wux-row>
+    <wux-col span="12">
+      <view class="text-center">
+        <text class="text-xl">{{box_info.name}}</text>
+        <text class="margin-left">({{current+1}}/{{taskdata.length}})</text>
+      </view>
+    </wux-col>
+  </wux-row>
+
+  <wux-row>
+    <wux-col span="8" offset="2">
+      <view class="text-center text-gray text-sm"> 已用时：
+        <my-timer id="mytimes"> </my-timer>
+      </view>
+    </wux-col>
+  </wux-row>
+
+  <wux-row>
+    <wux-col span="12">
+
+      <view class="flex">
+        <view class="cu-progress  ">
+          <view class="bg-green" style="width:{{taskloading}};"></view>
+        </view>
+        <!-- <text class="margin-left">{{current+1}}/{{taskdata.length}}</text> -->
+      </view>
+    </wux-col>
+
+  </wux-row>
+
+</view>
+
+
+
+<wux-row>
+
+  <wux-col span="12">
+    <view class="bg-white text-orange  align-center ">
+      <view class="padding-sm" id="main_hight_common_icon">
+        <wux-row>
+          <wux-col span="2">
+            <view class="text-left cz_icon">
+              <!-- <text class="proIcon-iconico_bc"></text> -->
+               <button wx:if="{{!error_list[current]}}" class="cu-btn round  line-grey" bindtap="post_word_error">报错</button>
+
+                <button wx:if="{{error_list[current]}}" class="cu-btn round  line-orange" >报错</button>
+
+            </view>
+
+          </wux-col>
+          <wux-col span="8">
+
+          
+            <!-- <view  bindtap="onUpChange" class="text-center cz_icon text-grey">
+              <text class="proIcon-iconico_jt_x" style="font-size:30rpx;color: #ddd;"></text>
+            </view> -->
+
+             <view  bindtap="card_back" class="text-center cz_icon text-grey">
+              <text class="proIcon-iconico_fz" style="font-size:50rpx;color: #ddd;"></text>
+            </view>
+
+
+          </wux-col>
+          <wux-col span="2">
+            <view class="text-right cz_icon" bindtap="showModal_word_shiyi" data-target="DrawerModalL">
+              <!-- <text class="proIcon-iconico_bz"></text> -->
+
+               <button  class="cu-btn round  line-orange" >释义</button>
+            </view>
+          </wux-col>
+        </wux-row>
+        <wux-row>
+
+           <wux-col span="2" >
+
+           
+            <view bindtap="audioPlay_lword" class="text-left ">
+              <button  class="cu-btn round  line-orange" style=" font-size:50rpx;"><text class="proIcon-iconico_sy"></text></button> 
+           </view>
+
+         
+          </wux-col>
+
+          <wux-col span="8" >
+           
+              <view class="text-center" wx:if="{{button_loading_auto}}">
+                <text class="text">{{button_loading_text}}</text>
+              </view>
+          
+           
+          </wux-col>
+
+          <wux-col span="2">
+               <view class="text-right" bindtap="showModal_word_miyu" data-target="DrawerModal_miyu">
+                <button  class="cu-btn round  line-orange" >谜语</button>
+                </view>
+          </wux-col>
+        </wux-row>
+      </view>
+      <swiper skip-hidden-item-layout="{{true}}"  bindchange="change" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" current="{{current}}" wx:if="{{!loadModal}}" class="swiper_big padding-xs  margin-left-sm  margin-right-sm" style="height:{{swiperheight}}px">
+        <block wx:for="{{taskdata}}" wx:key  wx:for-item="itemmain" wx:for-index="mainindex">
+          <swiper-item>
+
+            <swiper skip-hidden-item-layout="{{true}}" class="swiper_sub" vertical="{{true}}" current="{{subcurrent}}" bindchange="onSubSwiperChange">
+
+             <block wx:for="{{ itemmain }}" wx:key="key" wx:for-index="subindex" wx:for-item="itemsub">
+              <swiper-item>
+                <view class="flex justify-center align-center  text-center sw_view">
+
+                      <view catchtap="audioPlay_lword" wx:if="{{!card_back_show_list[mainindex][subindex]}}" class="swiper_sub_card text-center {{itemsub.class}}">{{itemsub.card}}</view>
+
+                      <view catchtap="audioPlay_lword"  class="swiper_sub_card  card_back" wx:if="{{itemsub.card_back && card_back_show_list[mainindex][subindex]}}">
+
+                       <image src="/images/loading-1.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{!card_back_showimgload_list[mainindex][subindex]}}"></image>
+
+                         <image  src='{{itemsub.card_back}}' bindload="image_over" mode="aspectFit"></image>
+
+                      <view  style="  font-size:50rpx;" catchtap="ViewImage" data-url="{{itemsub.card_back}}" class="cuIcon-full lg text-gray text-right"></view>
+
+                      </view> 
+                 </view>
+              </swiper-item>
+              </block>
+
+            </swiper>
+          </swiper-item>
+        </block>
+      </swiper>
+
+      <view class="padding-bottom-lg padding-top-lg" id="main_hight_shizi_know" >  
+        <wux-row>
+          <wux-col span="12">
+
+            <block wx:for="{{ taskdata }}" wx:key="key" wx:for-index="mindex" wx:if="{{current==mindex}}">
+              <my-radio current="{{konw_current[mindex]}}" dataArray="{{konw_select_menu}}" bind:myevent="onChangeKnow"> </my-radio>
+            </block>
+
+          </wux-col>
+        </wux-row>
+      </view>
+      <!-- <wux-white-space size="default" /> -->
+
+    </view>
+
+  </wux-col>
+</wux-row>
+
+
+<!-- <view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <image src='/images/logo.png' class='png' mode='aspectFit'></image>
+  <view class='gray-text'>加载中...</view>
+</view> -->
+
+<wux-dialog id="wux-dialog" />
+
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_word'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+
+<image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
+    <my-word dataArray="{{data_item_word}}" > </my-word>
+
+     
+    </scroll-view>
+  </view>
+</view>
+
+
+<!-- <view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_chengyu'?'show':''}}" bindtap="hideModal" >
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+
+<image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
+     <my-chengyu dataArray="{{data_item_chengyu}}" > </my-chengyu>
+
+    
+    </scroll-view>
+  </view>
+</view> -->
+
+
+
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL_dword'?'show':''}}" bindtap="hideModal">
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+
+<image src="https://rmsp.youyoushizi.com/statics/yysz/loading-white.gif" mode="aspectFit" class="gif-white response" style=""  wx:if="{{isloaditem}}"></image>
+     <my-dword dataArray="{{data_item_dword}}" > </my-dword>
+
+
+    </scroll-view>
+  </view>
+</view>
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModal_miyu'?'show':''}}" bindtap="hideModal" >
+  <view class="cu-dialog basis-lg" catchtap style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y style="height:calc(100vh - {{CustomBar}}px)">
+      <my-miyu dataArray="{{data_item_word_miyu}}" > </my-miyu>
+    </scroll-view>
+  </view>
+</view>
