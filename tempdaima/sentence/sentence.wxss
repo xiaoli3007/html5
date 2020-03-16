@@ -1,0 +1,20 @@
+.jiaocai-top{
+ margin-top: 64px; 
+}
+.cu-tag+.cu-tag{ margin-left: 0}
+.cu-bar-sun.foot {
+position: fixed;
+width: 100%;
+bottom: 0;
+z-index: 1024;
+box-shadow: 0 -1rpx 6rpx rgba(0, 0, 0, 0.1);
+
+}
+ 
+.basis-lg {
+  flex-basis: 70%;
+}
+ 
+.cu-modal.show{
+   -webkit-overflow-scrolling: touch;
+}
