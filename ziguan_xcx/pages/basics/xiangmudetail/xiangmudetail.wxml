@@ -1,0 +1,137 @@
+<wxs src="../../../utils/common.wxs" module="common" />
+<!-- <cu-custom bgColor="bg-orange" isBack="{{true}}"> -->
+<cu-custom bgColor="bg-orange" isurl="{{true}}" curl="{{basicsurl}}">
+	<view slot="backText">返回</view>
+	<view slot="content">卡片组详细页</view>
+</cu-custom>
+
+
+<view class="cu-bar bg-white margin-top">
+	<view class="action">
+		<text class="cuIcon-title text-orange "></text> 卡片组基本信息
+	</view>
+	<view class="action">
+		<button wx:if="{{userid!=0}}" class="cu-btn bg-orange shadow"  catchtap="showModal_edit" data-target="DialogModal1" data-boxid="{{cardbox_info.id}}">修改</button>
+	</view>
+</view>
+
+<view class="bg-white padding-sm   flex   align-start">
+
+	<view class=" margin-left-xs margin-right-xs" style="flex: 3;">
+		<view class="text-left text-lg text-black text-bold"> {{cardbox_info.name}}</view>
+		<view class="text-left margin-top-xs"><text>{{cardbox_info.description}} </text> </view>
+		<!-- <view class="text-right margin-top-xs margin-right-xs">
+
+      <view wx:if="{{!favorite}}" class="text-right margin-top-xs" bindtap="member_favorite_author">
+        <button class="cu-btn round  line-grey">收藏</button>
+      </view>
+
+      <view wx:if="{{favorite}}" class="text-right margin-top-xs">
+        <button class="cu-btn round  line-orange">收藏</button>
+      </view>
+
+    </view> -->
+
+			<view class="flex ">
+
+				<button class="basis-df cu-btn bg-green lg" data-taskid="{{cardbox_info.taskid}}" data-relation_id="{{cardbox_info.id}}" bindtap="add_deteil_task">
+					<text >添加任务</text>
+					<!-- <text wx:if="{{default_word_data.shizi_taskid!=0}}">已添加</text> -->
+					</button>
+
+				<button class="basis-df cu-btn bg-orange lg" data-taskid="{{cardbox_info.taskid}}" data-relation_id="{{cardbox_info.id}}"  bindtap="gotodeteil_task">
+					<text>开始任务</text>
+					</button>
+
+			</view>
+	</view>
+
+</view>
+
+
+<view class="cu-bar bg-white margin-top">
+	<view class="action">
+		<text class="cuIcon-title text-orange "></text> 卡片列表
+	</view>
+	<view class="action">
+		<button wx:if="{{userid!=0}}" class="cu-btn bg-orange shadow" bindtap="addcard" data-boxid="{{cardbox_info.id}}">添加卡片</button>
+	</view>
+</view>
+
+
+<!-- <view class="bg-white  padding-top">
+  </view> -->
+
+<wux-swipe-action-group>
+
+	<block wx:for="{{cardbox_info.card_list}}" wx:key>
+
+		<wux-swipe-action autoClose right="{{ right }}" data="{{item.id+'-'+index}}" bind:click="delete_card">
+			<view class="bg-white padding-xs  solid-bottom  flex   align-start  " data-programid="{{item.id}}" bindtap="gotodeteil">
+				<view class="flex-sub margin-xs radius">
+					<image wx:if="{{item.thumb_xcx!=''}}" src='{{item.thumb_xcx}}' style="width:180rpx;" mode="widthFix"></image>
+
+					<view wx:if="{{item.thumb_xcx==''}}" class="cuIcon-picfill  text-center  text-grey" style="width:180rpx;font-size:80rpx;"> </view>
+
+				</view>
+				<view class=" flex-treble margin-xs radius ">
+					<view class="flex text-center  align-center justify-center " style="height:100%;">
+
+						<view class="text-grey text-sm ">
+							{{item.common_title}}
+						</view>
+
+					</view>
+				</view>
+			</view>
+		</wux-swipe-action>
+
+	</block>
+</wux-swipe-action-group>
+
+
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+	<!-- <view class='cuIcon-emojifill text-orange'></view> -->
+	<image src='/images/logo.png' class='png' mode='aspectFit'></image>
+	<view class='gray-text'>加载中...</view>
+</view>
+
+
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-orange justify-end">
+			<view class="content">修改基本信息</view>
+			<view class="action" bindtap="hideModal">
+				<text class="proIcon-iconico_gb text-white"></text>
+			</view>
+		</view>
+	<form  bindsubmit="addformSubmit">
+			<view class="padding-sm bg-white">
+
+
+				<view class="cu-form-group margin-top">
+					<view class="title">名称</view>
+					<input  name='name' value='{{form.name}}'></input>
+				</view>
+
+				<view class="cu-form-group ">
+					<view class="title">描述</view>
+						<input  name='description' value='{{form.description}}'></input>
+          
+				</view>
+
+    
+
+
+
+			</view>
+			<view class="cu-bar bg-white justify-center padding-bottom">
+				<view class="action">
+					<button class="cu-btn round bg-orange lg" style="padding: 0 160rpx;" form-type="submit">确定</button>
+					<!-- <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+          <button class="cu-btn bg-green margin-left" form-type="submit">确定</button> -->
+				</view>
+			</view>
+		</form>
+	</view>
+</view>

@@ -1,0 +1,55 @@
+var util_substring = function (val) {
+
+  if (val){
+    return val.substring(0, 60) + "..."
+  }
+  
+}
+
+var util_substring2 = function (val) {
+
+  if (val) {
+    return val.substring(0, 50) + "..."
+  }
+
+}
+
+var util_stut_string = function (val,length) {
+
+  if (val) {
+    if (val.length <= length){
+        return val
+    }
+    return val.substring(0, length) + "..."
+  }
+
+}
+
+var util_perset = function (val) {
+ 
+  if (val) {
+    // console.log(typeof val)
+    // console.log()
+     return parseInt(100-parseFloat(val) * 100) + "%"
+  }
+}
+
+var util_perset_good = function (val) {
+
+  if (val) {
+    // console.log(typeof val)
+    // console.log(parseInt(100 - parseFloat(val) * 100))
+    if (parseInt(100 - parseFloat(val) * 100) >= 10 && parseInt(100 - parseFloat(val) * 100) <= 25) {
+      return true
+    }
+    return false
+  }
+}
+
+module.exports = {
+  util_substring: util_substring,
+  util_substring2: util_substring2,
+  util_stut_string: util_stut_string,
+  util_perset_good: util_perset_good,
+  util_perset: util_perset
+};
