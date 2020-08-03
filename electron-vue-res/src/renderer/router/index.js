@@ -53,10 +53,10 @@ export const constantRouterMap = [{
 		]
 	},
 	{
-		path: '/study',
+		path: '/model',
 		component: Layout,
-		redirect: '/study/task',
-		name: 'Study',
+		redirect: '/model/model_table_list',
+		name: 'Model',
 		meta: {
 			title: '模型数据',
 			icon: 'study'
@@ -68,25 +68,25 @@ export const constantRouterMap = [{
 				name: 'Model_table_list',
 				component: require('@/views/study/list/model_table_list').default,
 				meta: {
-					title: '表格模型列表',
+					title: '模型列表',
 					icon: 'book'
 				},
 			},
-			{
-				path: 'model_thumb_list',
-				name: 'Model_thumb_list',
-				component: require('@/views/study/list/model_thumb_list').default,
-				meta: {
-					title: '简图模型列表',
-					icon: 'book'
-				},
-			},
+			// {
+			// 	path: 'model_thumb_list',
+			// 	name: 'Model_thumb_list',
+			// 	component: require('@/views/study/list/model_thumb_list').default,
+			// 	meta: {
+			// 		title: '简图模型列表',
+			// 		icon: 'book'
+			// 	},
+			// },
 			{
 				path: 'model_show',
 				name: 'Model_show',
 				component: require('@/views/study/list/model_show').default,
 				meta: {
-					title: '课外读物'
+					title: '模型详细'
 				},
 				hidden: true
 			},

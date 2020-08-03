@@ -23,9 +23,9 @@ export function getbookrecommendlist(params) {
     params
   })
 }
-export function getjiaocaiList(params) {
+export function model_data_list(params) {
   return request({
-    url: 'vue_app_model_api.php?act=jiaocailist',
+    url: 'vue_app_model_api.php?act=model_data_list',
     method: 'get',
     params
   })

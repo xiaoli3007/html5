@@ -16,61 +16,73 @@
 			</el-form-item>
 		</el-form>
 
-
+	
+	<div class="booklist">
+	<el-row :gutter="20" v-loading.body="listLoading" element-loading-text="Loading" >
+		<el-col :span="4" v-for="(singe, index) in list" :key="index">
+			<div class="grid-content bg-purple" >
+				<el-row>
+					<el-col :span="20" :offset="2" justify="center" align="center" style="margin-bottom:0;">
+						<el-image style="width: 120px;cursor: pointer; " :src="singe.thumb_url" fit="fill" @click.native="gotoShow(singe.catid,singe.id)"></el-image>
+					</el-col>
+				</el-row>
+				<el-row style="margin-top: 0;">
+					<el-col :span="20" :offset="2" justify="center" align="center" style="margin-bottom:0;">
+						<p>
+							<el-link @click.native="gotoShow(singe.catid,singe.id)">{{singe.program.title}}</el-link>
+						</p>
+						
+							
+					</el-col>
+				</el-row>
+			</div>
+		</el-col>
+	
+	</el-row>
+	 </div>
+	 
+	 
+	 
 		<el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
-			
-			
-			
-			<el-table-column align="center" label='封面'>
+				<el-table-column align="center" label='封面'>
 				<template slot-scope="scope">
-					<el-image style="width: 80px;cursor: pointer; " :src="scope.row.thumb_zm" fit="fill">
+					<el-image style="width: 80px;cursor: pointer; " :src="scope.row.thumb_url" fit="fill"> 
 						
 					</el-image>
 				</template>
 			</el-table-column> 
 			
 			<el-table-column align="center" label='类别'>
+				
 				<template slot-scope="scope">
-					<el-tag> {{scope.row.catinfotext}}</el-tag>
+					<el-tag v-for="(slide, index) in scope.row.cat_array" :key="index">
+					{{slide.name}}  
+					</el-tag>
 				</template>
+				
 			</el-table-column>
 			<el-table-column label="标题">
 				<template slot-scope="scope">
-					{{scope.row.title}}
+					{{scope.row.program.title}}
 				</template>
 			</el-table-column>
-			<el-table-column label="字" align="center">
+			<el-table-column label="发布时间" align="center">
 				<template slot-scope="scope">
-					<span>{{scope.row.s}}</span>
+					<span>{{scope.row.program.inputtime}}</span>
 				</template>
 			</el-table-column>
-			<!-- <el-table-column label="zixing" width="110" align="center">
-        <template slot-scope="scope">
-          {{scope.row.zixing}}
-        </template>
-      </el-table-column> -->
+			
 
 			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
 
 					<el-col :span="12">
  
-						<el-button type="success" size="medium" v-if="scope.row.tingxie_taskid===0 && scope.row.iswrite!=0" v-on:click="read(1,scope.row.id,'lesson',0)">听写</el-button>
-						<el-button type="success" size="medium" v-if="scope.row.tingxie_taskid!=0 && scope.row.iswrite!=0" v-on:click="readtask(scope.row.tingxie_taskid)" plain>听写</el-button>
+						<el-button type="success" size="medium"  v-on:click="read(1,scope.row.id,'lesson',0)">详细</el-button>
+						
 					</el-col>
-					<!-- <el-col :span="8"><el-button type="success" size="medium" v-on:click="read(1,1,scope.row.id,'lesson',0)">自动听写</el-button> </el-col> -->
-					<el-col :span="12">
-
-						<el-button type="warning" v-if="scope.row.shizi_taskid===0 && scope.row.isread!=0" size="medium" v-on:click="read(2,scope.row.id,'lesson',0)">识字</el-button>
-						<el-button type="warning" size="medium" v-if="scope.row.shizi_taskid!=0 && scope.row.isread!=0" v-on:click="readtask(scope.row.shizi_taskid)" plain>识字</el-button>
-
- 
-					</el-col>
-
- 
-
-
-
+					
+			
 				</template>
 			</el-table-column>
 
@@ -89,7 +101,7 @@
 
 <script>
 	import {
-		getjiaocaiList,
+		model_data_list,
 		getjiaocai_cat_List
 	} from '@/api/table'
 	import _g from '@/utils/global.js'
@@ -111,6 +123,7 @@
 				multipleSelection: [],
 				pagesize: 12,
 				linkageid: 0,
+				catid:33,
 				options: [{
 					value: 'zhinan',
 					label: '指南',
@@ -160,23 +173,10 @@
 			handleChange(value) {
 				console.log(value);
 			},
-			read(b, c, d, e) {
+			gotoShow(catid,id) {
 				this.$router.replace({
-					name: 'Read',
-					query: {
-						type: b,
-						relation_id: c,
-						relation_type: d,
-						taskid: e
-					}
-				})
-			},
-			readtask(a) {
-				this.$router.replace({
-					name: 'Read',
-					query: {
-						taskid: a
-					}
+					name: 'Model_show',
+					query: { catid: catid,id: id}
 				})
 			},
 			search() {
@@ -203,35 +203,36 @@
 			fetchData() {
 				_g.openGlobalLoading()
 				// this.listLoading = true
-				const params = {
+				const params = { 
 
 					keywords: this.keywords,
 					page: this.currentPage,
 					pagesize: this.pagesize,
 					linkageid: this.linkageid,
+					catid: this.catid,
 					userid: this.$store.state.user.userid,
 				} 
-				getjiaocaiList(params).then(response => {
+				model_data_list(params).then(response => {
 					_g.closeGlobalLoading()
 					this.list = response.items
 					this.dataCount = parseInt(response.dataCount)
 					// this.listLoading = false
 						
-					var temp = this.list
-					_(temp).forEach(function(value, key) {
-						// console.log(value.word1);
-						var s = [] 
-						_(value.wcell_list).forEach(function(value2, key2) {
-							s.push(value2.word)
-						});
-						s = _.join(s, ',')
-						// console.log(typeof temp);
-						// console.log(temp[key].name);
-						// this.list['sss']=s  
-						_.set(temp, key + '.s', s);
-					});
-					this.list = temp 
-					console.log(temp);
+					// var temp = this.list
+					// _(temp).forEach(function(value, key) {
+					// 	// console.log(value.word1);
+					// 	var s = [] 
+					// 	_(value.wcell_list).forEach(function(value2, key2) {
+					// 		s.push(value2.word)
+					// 	});
+					// 	s = _.join(s, ',')
+					// 	// console.log(typeof temp);
+					// 	// console.log(temp[key].name);
+					// 	// this.list['sss']=s  
+					// 	_.set(temp, key + '.s', s);
+					// });
+					// this.list = temp 
+					// console.log(temp);   
 				})
 				this.listLoading = false
 			},
@@ -269,3 +270,51 @@
 		}
 	}
 </script>
+
+<style rel="stylesheet/scss" lang="scss">
+	.booklist{
+	p {
+		margin: 10px 0 0 0; font-size: 12px; 
+		  // line-height: 1.2;
+	}
+	.el-row {
+		margin: 10px 0 0;
+		padding: 0 15px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	.el-col {
+		border-radius: 4px;
+		margin-bottom: 10px;
+	}
+
+	.bg-purple-dark {
+		background: #99a9bf;
+	}
+
+	.bg-purple {
+		background: #eee; border: 1px solid #ccc;
+	}
+
+	.bg-purple-light {
+		background: #e5e9f2;
+	}
+
+	.grid-content {
+		border-radius: 4px; 
+		// min-height: 260px; max-height: 290px;  
+		 overflow: hidden;
+		 height: 290px;
+	}
+
+	.row-bg {
+		padding: 10px 0;
+		background-color: #f9fafc;
+	}
+
+	}
+</style>
+
