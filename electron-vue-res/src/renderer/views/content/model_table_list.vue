@@ -1,23 +1,50 @@
 <template>
 	<div class="app-container">
 
+		
+		<el-tabs type="border-card">
+		  <el-tab-pane label="栏目1">
+			  <el-form :inline="true" class="demo-form-inline">
+			  	<el-form-item>
+			  		<el-cascader placeholder="课程分类" v-model="linkageid" :options="options" :props="props" @change="handleChange"></el-cascader>
+			  	</el-form-item>
+			  
+			  	<el-form-item>
+			  		<el-input v-model="keywords" placeholder="关键词"></el-input>
+			  	</el-form-item>
+			  	<el-form-item>
+			  		<el-button type="primary" @click="search()">查询</el-button>
+			  	</el-form-item>
+			  </el-form>
+			  
+		  </el-tab-pane>
+		  <el-tab-pane label="栏目1">栏目1</el-tab-pane>
+		  <el-tab-pane label="栏目1">栏目1</el-tab-pane>
+		  <el-tab-pane label="栏目1">栏目1</el-tab-pane>
+		</el-tabs>
+		
 
-
-		<el-form :inline="true" class="demo-form-inline">
-			<el-form-item>
-				<el-cascader placeholder="课程分类" v-model="linkageid" :options="options" :props="props" @change="handleChange"></el-cascader>
-			</el-form-item>
-
-			<el-form-item>
-				<el-input v-model="keywords" placeholder="关键词"></el-input>
-			</el-form-item>
-			<el-form-item>
-				<el-button type="primary" @click="search()">查询</el-button>
-			</el-form-item>
-		</el-form>
-
-	
-	<div class="booklist">
+		
+<div class="booklist22" style="margin-top: 15px;">
+	<el-row  :gutter="20" v-loading.body="listLoading" element-loading-text="Loading" >
+	  <el-col  :span="4" v-for="(singe, index) in list" :key="index" >
+	    <el-card :body-style="{ padding: '0px' }">
+	      <img  :src="singe.thumb_url" class="image">
+	      <div style="padding: 14px;"> 
+	        <span>
+			{{singe.j_t}}
+			</span>
+	        <div class="bottom clearfix">
+	          <time class="time">{{singe.program.inputtime}}</time>
+	          <el-button type="text" class="button" @click.native="gotoShow(singe.catid,singe.id)">详细</el-button>
+	        </div>
+	      </div>
+	    </el-card>
+	  </el-col>
+	</el-row>
+	</div>
+	<!-- <div class="booklist">
+		
 	<el-row :gutter="20" v-loading.body="listLoading" element-loading-text="Loading" >
 		<el-col :span="4" v-for="(singe, index) in list" :key="index">
 			<div class="grid-content bg-purple" >
@@ -39,7 +66,7 @@
 		</el-col>
 	
 	</el-row>
-	 </div>
+	 </div> -->
 	 
 	 
 	 
@@ -78,7 +105,7 @@
 
 					<el-col :span="12">
  
-						<el-button type="success" size="medium"  v-on:click="read(1,scope.row.id,'lesson',0)">详细</el-button>
+						<el-button type="success" size="medium"  v-on:click="gotoShow(scope.row.catid,scope.row.id)">详细</el-button>
 						
 					</el-col>
 					
@@ -89,11 +116,13 @@
 		</el-table>
 
 
-		<div class="block pages">
+		 <div class="block pages">
 			<el-pagination @current-change="handleCurrentChange" background layout="prev, pager, next" :page-size="pagesize"
 			 :current-page="currentPage" :total="dataCount">
 			</el-pagination>
-		</div>
+		</div>  
+		 
+					
 
 
 	</div>
@@ -110,6 +139,7 @@
 		data() {
 			return {
 				props: {
+					multiple: true,
 					expandTrigger: 'hover',
 					emitPath: false,
 					checkStrictly: false
@@ -176,7 +206,7 @@
 			gotoShow(catid,id) {
 				this.$router.replace({
 					name: 'Model_show',
-					query: { catid: catid,id: id}
+					query: { catid: catid,news_id: id}
 				})
 			},
 			search() {
@@ -214,25 +244,23 @@
 				} 
 				model_data_list(params).then(response => {
 					_g.closeGlobalLoading()
-					this.list = response.items
+					this.list = response.items  
 					this.dataCount = parseInt(response.dataCount)
 					// this.listLoading = false
 						
-					// var temp = this.list
-					// _(temp).forEach(function(value, key) {
-					// 	// console.log(value.word1);
-					// 	var s = [] 
-					// 	_(value.wcell_list).forEach(function(value2, key2) {
-					// 		s.push(value2.word)
-					// 	});
-					// 	s = _.join(s, ',')
-					// 	// console.log(typeof temp);
-					// 	// console.log(temp[key].name);
-					// 	// this.list['sss']=s  
-					// 	_.set(temp, key + '.s', s);
-					// });
-					// this.list = temp 
-					// console.log(temp);   
+					var temp = this.list
+					_(temp).forEach(function(value, key) {
+						// console.log(value.word1);
+						var s = '' 
+						
+						s = _.truncate(value.program.title, {'length': 12,'separator': ' '})
+						// console.log(typeof temp);
+						// console.log(temp[key].name);
+						// this.list['sss']=s  
+						_.set(temp, key + '.j_t', s);
+					});
+					this.list = temp 
+					console.log(temp);   
 				})
 				this.listLoading = false
 			},
@@ -272,49 +300,87 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
-	.booklist{
-	p {
-		margin: 10px 0 0 0; font-size: 12px; 
-		  // line-height: 1.2;
-	}
-	.el-row {
-		margin: 10px 0 0;
-		padding: 0 15px;
+	
+	 .time {
+	    font-size: 13px;
+	    color: #999;
+	  }
+	  
+	  .bottom {
+	    margin-top: 13px;
+	    line-height: 12px;
+	  }
+	
+	  .button {
+	    padding: 0;
+	    float: right;
+	  }
+	
+	  .image {
+	    width: 100%;
+	    display: block;
+	  }
+	
+	  .clearfix:before,
+	  .clearfix:after {
+	      display: table;
+	      content: "";
+	  }
+	  
+	  .clearfix:after {
+	      clear: both
+	  }
+	  .booklist22{
+		  
+		  .el-col {
+		  	border-radius: 4px;
+		  	margin-bottom: 10px;
+		  }
+	  }
+	  
+	// .booklist{
+	// p {
+	// 	margin: 10px 0 0 0; font-size: 12px; 
+	// 	  // line-height: 1.2;
+	// }
+	// .el-row {
+	// 	margin: 10px 0 0;
+	// 	padding: 0 15px;
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+	// 	&:last-child {
+	// 		margin-bottom: 0;
+	// 	}
+	// }
 
-	.el-col {
-		border-radius: 4px;
-		margin-bottom: 10px;
-	}
+	// .el-col {
+	// 	border-radius: 4px;
+	// 	margin-bottom: 10px;
+	// }
 
-	.bg-purple-dark {
-		background: #99a9bf;
-	}
+	// .bg-purple-dark {
+	// 	background: #99a9bf;
+	// }
 
-	.bg-purple {
-		background: #eee; border: 1px solid #ccc;
-	}
+	// .bg-purple {
+	// 	background: #eee; border: 1px solid #ccc;
+	// }
 
-	.bg-purple-light {
-		background: #e5e9f2;
-	}
+	// .bg-purple-light {
+	// 	background: #e5e9f2;
+	// }
 
-	.grid-content {
-		border-radius: 4px; 
-		// min-height: 260px; max-height: 290px;  
-		 overflow: hidden;
-		 height: 290px;
-	}
+	// .grid-content {
+	// 	border-radius: 4px; 
+	// 	// min-height: 260px; max-height: 290px;  
+	// 	 overflow: hidden;
+	// 	 height: 290px;
+	// }
 
-	.row-bg {
-		padding: 10px 0;
-		background-color: #f9fafc;
-	}
+	// .row-bg {
+	// 	padding: 10px 0;
+	// 	background-color: #f9fafc;
+	// }
 
-	}
+	// }
 </style>
 

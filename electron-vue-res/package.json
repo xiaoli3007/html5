@@ -64,7 +64,7 @@
 	"dependencies": {
 		"axios": "^0.18.0",
 		"echarts": "4.1.0",
-		"element-ui": "2.11.0",
+		"element-ui": "2.13.2",
 		"js-cookie": "^2.2.0",
 		"lockr": "^0.8.4",
 		"lodash": "^4.17.2",

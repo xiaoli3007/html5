@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function getbookshow(params) {
+export function getshow(params) {
   return request({
-    url: 'vue_app_model_api.php?act=ebook_show',
+    url: 'vue_app_model_api.php?act=detail',
     method: 'get',
     params
   })

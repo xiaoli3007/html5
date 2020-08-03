@@ -66,16 +66,16 @@ export const constantRouterMap = [{
 			{
 				path: 'model_table_list',
 				name: 'Model_table_list',
-				component: require('@/views/study/list/model_table_list').default,
+				component: require('@/views/content/model_table_list').default,
 				meta: {
 					title: '模型列表',
-					icon: 'book'
+					icon: 'tasklist'
 				},
 			},
 			// {
 			// 	path: 'model_thumb_list',
 			// 	name: 'Model_thumb_list',
-			// 	component: require('@/views/study/list/model_thumb_list').default,
+			// 	component: require('@/views/content/model_thumb_list').default,
 			// 	meta: {
 			// 		title: '简图模型列表',
 			// 		icon: 'book'
@@ -84,7 +84,7 @@ export const constantRouterMap = [{
 			{
 				path: 'model_show',
 				name: 'Model_show',
-				component: require('@/views/study/list/model_show').default,
+				component: require('@/views/content/model_show').default,
 				meta: {
 					title: '模型详细'
 				},
@@ -100,7 +100,7 @@ export const constantRouterMap = [{
 			//       {
 			//         path: 'cat',
 			//         name: 'Cat',
-			//         component:  require('@/views/study/list/cat').default,
+			//         component:  require('@/views/content/cat').default,
 			//         meta: { title: '分类', icon: 'tree' }
 			//       }
 		]
@@ -128,7 +128,7 @@ export const constantRouterMap = [{
 		children: [{
 				path: 'search',
 				name: 'Search',
-				component: require('@/views/study/search').default,
+				component: require('@/views/content/search').default,
 				meta: {
 					title: '全局搜索',
 					icon: 'book'
