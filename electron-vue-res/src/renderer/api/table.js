@@ -31,6 +31,14 @@ export function model_data_list(params) {
   })
 }
 
+export function get_catlist_data(params) {
+  return request({
+    url: 'vue_app_model_api.php?act=get_catlist_data',
+    method: 'get',
+    params
+  })
+}
+
 export function getjiaocai_cat_List(params) {
   return request({
     url: 'vue_app_model_api.php?act=getjiaocai_cat_List',

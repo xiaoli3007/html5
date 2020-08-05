@@ -120,23 +120,23 @@ export const constantRouterMap = [{
 	//   ]
 	// }, 
 
-	{
-		path: '/r',
-		component: Layout,
-		redirect: '/r/search',
-		name: 'R',
-		children: [{
-				path: 'search',
-				name: 'Search',
-				component: require('@/views/content/search').default,
-				meta: {
-					title: '全局搜索',
-					icon: 'book'
-				}, 
+	// {
+	// 	path: '/r',
+	// 	component: Layout,
+	// 	redirect: '/r/search',
+	// 	name: 'R',
+	// 	children: [{
+	// 			path: 'search',
+	// 			name: 'Search',
+	// 			component: require('@/views/content/search').default,
+	// 			meta: {
+	// 				title: '全局搜索',
+	// 				icon: 'book'
+	// 			}, 
 
-			}
-		]
-	},
+	// 		}
+	// 	]
+	// },
 	{
 		path: '/serve',
 		component: Layout,
