@@ -1,5 +1,0 @@
-/* .task_sw_view{ width: 100%; text-align: center;} */
-.task_sw{
-font-size:8rem;  
-}
-swiper{ height:250px;}

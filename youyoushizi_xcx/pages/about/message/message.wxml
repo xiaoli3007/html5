@@ -1,1 +1,0 @@
-<cu-custom bgColor="bg-orange" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">系统消息</view></cu-custom>

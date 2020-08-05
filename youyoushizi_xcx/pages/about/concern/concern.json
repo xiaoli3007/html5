@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "wux-swipe-action-group": "../../../dist/swipe-action-group/index",
-    "wux-swipe-action": "../../../dist/swipe-action/index"
-  }
-}

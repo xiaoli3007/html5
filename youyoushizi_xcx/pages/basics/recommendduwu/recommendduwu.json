@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "wux-filterbar": "../../../dist/filterbar/index"
-  },
-  "enablePullDownRefresh": true
-}
