@@ -12,7 +12,7 @@
 								</el-col> -->
 							<el-col :span="24">
 								<el-form-item v-for="(from_linkage, linkage_index) in fromsinge.search_linkage_form">
-									<el-cascader :placeholder="from_linkage.name" v-model="linkageid" :options="from_linkage.data" :props="props"
+									<el-cascader :placeholder="from_linkage.name" v-model="search_text_form_data.linkage_data[index][linkage_index]"  :options="from_linkage.data" :props="props"
 									 @change="handleChange"></el-cascader>
 								</el-form-item>
 							</el-col>
@@ -25,7 +25,7 @@
 										<el-col :span="24">
 									
 											<el-form-item v-for="(from_zhu, zhu_index) in fromsinge.search_text_form_zhu">
-												<el-input v-model="keywords" :placeholder="from_zhu.name" :clearable="true"></el-input>
+												<el-input v-model="search_text_form_data.zhudata[index][zhu_index].value" @change="handlefuChange" :placeholder="from_zhu.name" :clearable="true"></el-input>
 											</el-form-item>
 										</el-col>
 									</el-row>
@@ -34,8 +34,8 @@
 										<!-- <el-col :span="4"><div class="form_title">副文本</div></el-col> -->
 										<el-col :span="24">
 									
-											<el-form-item v-for="(from_fu, fu_index) in fromsinge.search_text_form_fu">
-												<el-input v-model="keywords" :placeholder="from_fu.name" :clearable="true"></el-input>
+											<el-form-item v-for="(from_fu, fu_index) in fromsinge.search_text_form_fu" :key="fu_index"> 
+								 				<el-input v-model="search_text_form_data.fudata[index][fu_index].value" @change="handlefuChange" :placeholder="from_fu.name" :clearable="true"></el-input> 
 											</el-form-item>
 									
 										</el-col>
@@ -74,7 +74,7 @@
 
 
 
-		<div class="booklist22" style="margin-top: 15px;">
+		<div class="booklist22" style="margin-top: 15px; display: none;">
 			<el-row :gutter="20" v-loading.body="listLoading" element-loading-text="Loading">
 				<el-col :span="4" v-for="(singe, index) in list" :key="index">
 					<el-card :body-style="{ padding: '0px' }">
@@ -203,7 +203,13 @@
 						value: 'jiaohu',
 						label: '组件交互文档'
 					}]
-				}]
+				}],
+				search_linkage_form_data: [],
+				search_text_form_data: {
+					linkage_data: [],
+					zhudata: [],
+					fudata: [],
+				},
 			}
 		},
 		filters: {
@@ -227,12 +233,55 @@
 			get_catlist_data().then(response => {
 				this.from_options = response.items
 				console.log(this.from_options);
+				let temp = this.from_options
+				//表单model加载=================
+				const selfmain = this
+				let no_temp_linkage_data = []
+				let no_temp_zhu_data = []
+				let no_temp_fu_data = []
+				_(temp).forEach(function(value, key) {
+					
+					let temp_linkage = value.search_linkage_form
+					let temp_linkage_data = []
+					_(temp_linkage).forEach(function(value2, key2) {
+						_.set(temp_linkage_data, key2, "");
+					});
+					_.set(no_temp_linkage_data, key, temp_linkage_data);
+						
+					let temp_zhu = value.search_text_form_zhu
+					let temp_zhu_data = []
+					_(temp_zhu).forEach(function(value3, key3) {
+						_.set(temp_zhu_data, key3, {field:value3.field,value:""});
+					});
+					_.set(no_temp_zhu_data, key, temp_zhu_data);
+					
+					let temp_fu = value.search_text_form_fu
+					let temp_fu_data = []
+					_(temp_fu).forEach(function(value4, key4) {
+						 _.set(temp_fu_data, key4, {field:value4.field,value:""});
+					});
+					 _.set(no_temp_fu_data, key, temp_fu_data);
+				});
+				
+				selfmain.search_text_form_data.linkage_data =   no_temp_linkage_data
+				selfmain.search_text_form_data.zhudata =   no_temp_zhu_data
+				selfmain.search_text_form_data.fudata =   no_temp_fu_data
+				
+				// console.log(this.search_linkage_form_data);
+				// console.log(this.search_text_form_zhu_data);
+				// console.log(this.search_text_form_data);
+				
 			})
 
 		},
 		methods: {
 			handleChange(value) {
 				console.log(value);
+				console.log(this.search_text_form_data);
+			},
+			handlefuChange(value){
+				console.log(value);
+				console.log(this.search_text_form_data);
 			},
 			gotoShow(catid, id) {
 				this.$router.replace({
@@ -297,7 +346,7 @@
 						_.set(temp, key + '.j_t', s);
 					});
 					this.list = temp
-					console.log(temp);
+					// console.log(temp);
 				})
 				this.listLoading = false
 			},
