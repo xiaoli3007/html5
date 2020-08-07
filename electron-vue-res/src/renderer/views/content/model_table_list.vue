@@ -1,9 +1,9 @@
 <template>
 	<div class="app-container">
 
-		<el-tabs type="card">
+		<el-tabs type="card" v-model="activeName"  @tab-click="handleClick">
 			<template v-for="(fromsinge, index) in from_options">
-				<el-tab-pane :label="fromsinge.catname">
+				<el-tab-pane :label="fromsinge.catname" :name="fromsinge.catid">
 					<el-form :inline="true" class="demo-form-inline">
 
 						<el-row>
@@ -12,20 +12,20 @@
 								</el-col> -->
 							<el-col :span="24">
 								<el-form-item v-for="(from_linkage, linkage_index) in fromsinge.search_linkage_form">
-									<el-cascader :placeholder="from_linkage.name" v-model="search_text_form_data.linkage_data[index][linkage_index]"  :options="from_linkage.data" :props="props"
+									<el-cascader :placeholder="from_linkage.name" v-model="search_all_form_data.linkage_data[index][linkage_index]"  :options="from_linkage.data" :props="props"
 									 @change="handleChange"></el-cascader>
 								</el-form-item>
 							</el-col>
 						</el-row>
 						
 						 <el-tabs tab-position="left" style="">
-						    <el-tab-pane label="精准搜索">
+						    <el-tab-pane label="精准搜索"> 
 									<el-row>
 										<!-- <el-col :span="4"><div class="form_title">主文本</div></el-col> -->
 										<el-col :span="24">
 									
 											<el-form-item v-for="(from_zhu, zhu_index) in fromsinge.search_text_form_zhu">
-												<el-input v-model="search_text_form_data.zhudata[index][zhu_index].value" @change="handlefuChange" :placeholder="from_zhu.name" :clearable="true"></el-input>
+												<el-input v-model="search_all_form_data.zhudata[index][zhu_index].value" @change="handlefuChange" :placeholder="from_zhu.name" :clearable="true"></el-input>
 											</el-form-item>
 										</el-col>
 									</el-row>
@@ -35,7 +35,7 @@
 										<el-col :span="24">
 									
 											<el-form-item v-for="(from_fu, fu_index) in fromsinge.search_text_form_fu" :key="fu_index"> 
-								 				<el-input v-model="search_text_form_data.fudata[index][fu_index].value" @change="handlefuChange" :placeholder="from_fu.name" :clearable="true"></el-input> 
+								 				<el-input v-model="search_all_form_data.fudata[index][fu_index].value" @change="handlefuChange" :placeholder="from_fu.name" :clearable="true"></el-input> 
 											</el-form-item>
 									
 										</el-col>
@@ -178,7 +178,9 @@
 				multipleSelection: [],
 				pagesize: 12,
 				linkageid: 0,
-				catid: 33,
+				catid: 0,
+				activeName: '',
+				tab_index: 0,
 				from_options: [],
 				options: [{
 					value: 'zhinan',
@@ -205,11 +207,15 @@
 					}]
 				}],
 				search_linkage_form_data: [],
-				search_text_form_data: {
+				search_all_form_data: {
 					linkage_data: [],
 					zhudata: [],
 					fudata: [],
 				},
+				list_select_linkage: [],
+				search_linkage_default_string: '',
+				search_main_text: '',
+				search_fu_text: '',
 			}
 		},
 		filters: {
@@ -232,7 +238,10 @@
 
 			get_catlist_data().then(response => {
 				this.from_options = response.items
-				console.log(this.from_options);
+				// console.log(this.from_options);
+				this.catid = this.from_options[0].catid
+				this.activeName= this.from_options[0].catid
+				// console.log(this.catid);
 				let temp = this.from_options
 				//表单model加载=================
 				const selfmain = this
@@ -263,13 +272,13 @@
 					 _.set(no_temp_fu_data, key, temp_fu_data);
 				});
 				
-				selfmain.search_text_form_data.linkage_data =   no_temp_linkage_data
-				selfmain.search_text_form_data.zhudata =   no_temp_zhu_data
-				selfmain.search_text_form_data.fudata =   no_temp_fu_data
+				selfmain.search_all_form_data.linkage_data =   no_temp_linkage_data
+				selfmain.search_all_form_data.zhudata =   no_temp_zhu_data
+				selfmain.search_all_form_data.fudata =   no_temp_fu_data
 				
 				// console.log(this.search_linkage_form_data);
 				// console.log(this.search_text_form_zhu_data);
-				// console.log(this.search_text_form_data);
+				// console.log(this.search_all_form_data);
 				
 			})
 
@@ -277,12 +286,42 @@
 		methods: {
 			handleChange(value) {
 				console.log(value);
-				console.log(this.search_text_form_data);
+				console.log(this.search_all_form_data);
+				let linkage_data = this.search_all_form_data.linkage_data[this.tab_index]
+				//联动菜单拼接 ==================================
+				let list_select_linkage = []
+				_(linkage_data).forEach(function(value, key) {
+					_(value).forEach(function(value2, key2) {
+						// _.set(list_select_linkage, key, value2);
+						list_select_linkage.push(value2)
+					});
+				});
+				this.search_linkage_default_string = list_select_linkage.join()
 			},
 			handlefuChange(value){
 				console.log(value);
-				console.log(this.search_text_form_data);
+				  // let  main = [JSON.stringify(this.data.xm_type[this.data.TabCur])]
+				console.log(this.search_all_form_data);
 			},
+			handleClick(tab, event) {
+				 //切换tab  清空所有表单 model
+				 // console.log(tab, event);
+			        console.log(tab);
+				   // console.log(this.catid); 
+				   this.tab_index = tab.index 
+				   //.tab_index
+				   if(tab.name!=this.catid){
+					   this.search_linkage_default_string = ''
+						this.catid = tab.name
+						this.$router.push({
+							path: this.$route.path,
+							query: {
+								page: 1,
+								catid: tab.name
+							}
+						}) 
+				   }
+			 },
 			gotoShow(catid, id) {
 				this.$router.replace({
 					name: 'Model_show',
@@ -293,15 +332,24 @@
 				})
 			},
 			search() {
-
+				
+				// console.log(this.tab_index);
+				
+				// let zhudata = this.search_all_form_data.zhudata[this.tab_index]
+				// let fudata = this.search_all_form_data.fudata[this.tab_index]
+				
+				  // console.log(this.search_linkage_default_string);
+				  // return
 				this.$router.push({
 					path: this.$route.path,
 					query: {
 						keywords: this.keywords,
 						page: 1,
-						linkageid: this.linkageid
-					}
-				})
+						catid: this.catid,
+						// search_main:main,
+						 search_linkage_default_string: this.search_linkage_default_string,
+					} 
+				}) 
 			},
 			handleCurrentChange(page) {
 				this.$router.push({
@@ -309,7 +357,9 @@
 					query: {
 						keywords: this.keywords,
 						page: page,
-						linkageid: this.linkageid
+						catid: this.catid,
+						// search_main:main,
+						 search_linkage_default_string: this.search_linkage_default_string, 
 					}
 				})
 			},
@@ -321,10 +371,11 @@
 					keywords: this.keywords,
 					page: this.currentPage,
 					pagesize: this.pagesize,
-					linkageid: this.linkageid,
 					catid: this.catid,
+					// search_main:main,
+					search_linkage_default_string: this.search_linkage_default_string, 
 					userid: this.$store.state.user.userid,
-				}
+				} 
 				model_data_list(params).then(response => {
 					_g.closeGlobalLoading()
 					this.list = response.items
@@ -335,7 +386,7 @@
 					_(temp).forEach(function(value, key) {
 						// console.log(value.word1);
 						var s = ''
-
+    
 						s = _.truncate(value.program.title, {
 							'length': 12,
 							'separator': ' '
@@ -346,7 +397,7 @@
 						_.set(temp, key + '.j_t', s);
 					});
 					this.list = temp
-					// console.log(temp);
+					 // console.log(temp);
 				})
 				this.listLoading = false
 			},
@@ -357,6 +408,16 @@
 						this.currentPage = parseInt(data.page)
 					} else {
 						this.currentPage = 1
+					}
+				}
+			}, 
+			get_linkage_data() {
+				let data = this.$route.query
+				if (data) {
+					if (data.page) {
+						this.search_linkage_default_string = data.search_linkage_default_string
+					} else {
+						this.search_linkage_default_string = ""
 					}
 				}
 			},
@@ -371,7 +432,7 @@
 				}
 			},
 			init() {
-				this.getKeywords()
+				// this.getKeywords()
 				this.getCurrentPage()
 				this.fetchData()
 			},
