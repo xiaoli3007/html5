@@ -24,11 +24,23 @@ export function getbookrecommendlist(params) {
   })
 }
 export function model_data_list(params) {
-  return request({
-    url: 'vue_app_model_api.php?act=model_data_list',
-    method: 'get',
-    params
-  })
+	
+	if(params.keywords!=''){
+		console.log('切换全局')
+		return request({
+		  url: 'vue_app_model_api.php?act=search',
+		  method: 'get',
+		  params
+		})
+	}else{
+		return request({
+				url: 'vue_app_model_api.php?act=model_data_list',
+				method: 'get',
+				params
+		}) 
+		
+	}
+	 
 }
 
 export function get_catlist_data(params) {

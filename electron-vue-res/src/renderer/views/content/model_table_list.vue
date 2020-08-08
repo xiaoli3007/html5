@@ -18,14 +18,14 @@
 							</el-col>
 						</el-row>
 						
-						 <el-tabs tab-position="left" style="">
-						    <el-tab-pane label="精准搜索"> 
+						 <el-tabs tab-position="left" style=""  @tab-click="stypehandleClick">
+						    <el-tab-pane label="精准搜索" > 
 									<el-row>
 										<!-- <el-col :span="4"><div class="form_title">主文本</div></el-col> -->
 										<el-col :span="24">
 									
 											<el-form-item v-for="(from_zhu, zhu_index) in fromsinge.search_text_form_zhu">
-												<el-input v-model="search_all_form_data.zhudata[index][zhu_index].value" @change="handlefuChange" :placeholder="from_zhu.name" :clearable="true"></el-input>
+												<el-input v-model="search_all_form_data.zhudata[index][zhu_index].value" @change="handlesearchtextChange" :placeholder="from_zhu.name" :clearable="true"></el-input>
 											</el-form-item>
 										</el-col>
 									</el-row>
@@ -33,21 +33,21 @@
 									<el-row>
 										<!-- <el-col :span="4"><div class="form_title">副文本</div></el-col> -->
 										<el-col :span="24">
-									
+							    		
 											<el-form-item v-for="(from_fu, fu_index) in fromsinge.search_text_form_fu" :key="fu_index"> 
-								 				<el-input v-model="search_all_form_data.fudata[index][fu_index].value" @change="handlefuChange" :placeholder="from_fu.name" :clearable="true"></el-input> 
+								 				<el-input v-model="search_all_form_data.fudata[index][fu_index].value" @input="handlesearchfutextChange" :placeholder="from_fu.name" :clearable="true"></el-input> 
 											</el-form-item>
 									
 										</el-col>
 									</el-row>
 							</el-tab-pane>
-						    <el-tab-pane label="全文搜索">
+						    <el-tab-pane label="全文搜索"  >
 									<el-row>
 										<!-- <el-col :span="4"><div class="form_title">全文检索</div></el-col> -->
-										<el-col :span="24">
-											<el-form-item>
-												<el-input v-model="keywords" placeholder="全文" :clearable="true"></el-input>
-											</el-form-item>
+										<el-col :span="20">
+											<!-- <el-form-item></el-form-item> -->
+												<el-input v-model="keywords" placeholder="全文" :clearable="true" size="large"></el-input>
+											
 										</el-col>
 									</el-row>
 							</el-tab-pane>
@@ -155,7 +155,6 @@
 <script>
 	import {
 		model_data_list,
-		getjiaocai_cat_List,
 		get_catlist_data
 	} from '@/api/table'
 	import _g from '@/utils/global.js'
@@ -231,10 +230,10 @@
 		created() {
 			this.init()
 
-			getjiaocai_cat_List().then(response => {
-				this.options = response.items
-				// console.log(this.options);
-			})
+			// getjiaocai_cat_List().then(response => {
+			// 	this.options = response.items
+			// 	// console.log(this.options);
+			// })
 
 			get_catlist_data().then(response => {
 				this.from_options = response.items
@@ -298,22 +297,55 @@
 				});
 				this.search_linkage_default_string = list_select_linkage.join()
 			},
-			handlefuChange(value){
+			handlesearchtextChange(value){
 				console.log(value);
 				  // let  main = [JSON.stringify(this.data.xm_type[this.data.TabCur])]
-				console.log(this.search_all_form_data);
+				 let zhudata = this.search_all_form_data.zhudata[this.tab_index]
+				 this.search_main_text = JSON.stringify(zhudata)
+				
+			}, 
+			handlesearchfutextChange(value){
+				
+				 let fudata = this.search_all_form_data.fudata[this.tab_index]
+				 this.search_fu_text = JSON.stringify(fudata)
+				 console.log(this.search_fu_text)
+			}, 
+			stypehandleClick(tab, event) {
+				console.log(tab.label)
+				if(tab.label=='精准搜索'){
+					this.keywords = ''
+				}
 			},
 			handleClick(tab, event) {
 				 //切换tab  清空所有表单 model
 				 // console.log(tab, event);
-			        console.log(tab);
-				   // console.log(this.catid); 
-				   this.tab_index = tab.index 
+			        console.log(this.search_all_form_data);
+				   // console.log(this.catid);  
+				   	let linkage_data = this.search_all_form_data.linkage_data[this.tab_index]
+					let zhudata = this.search_all_form_data.zhudata[this.tab_index]
+					let fudata = this.search_all_form_data.fudata[this.tab_index]
+				   
 				   //.tab_index
 				   if(tab.name!=this.catid){
+					   _(linkage_data).forEach(function(value, key) {
+					   		_.set(linkage_data, key, []);
+					    });
+					    _(zhudata).forEach(function(value, key) {
+					   		_.set(zhudata,  key+"[value]", "");
+					    });
+					    _(fudata).forEach(function(value, key) {
+					    	_.set(fudata,  key+"[value]", "");
+					    });
+					   // console.log(this.search_all_form_data); 
+					   this.tab_index = tab.index 
+					   //所有form model 清空  传值清空
 					   this.search_linkage_default_string = ''
-						this.catid = tab.name
-						this.$router.push({
+					   this.search_main_text = ''
+					   this.search_fu_text = ''
+					   this.keywords = ''
+					    
+					   this.catid = tab.name
+					   this.$router.push({
 							path: this.$route.path,
 							query: {
 								page: 1,
@@ -333,20 +365,14 @@
 			},
 			search() {
 				
-				// console.log(this.tab_index);
-				
-				// let zhudata = this.search_all_form_data.zhudata[this.tab_index]
-				// let fudata = this.search_all_form_data.fudata[this.tab_index]
-				
-				  // console.log(this.search_linkage_default_string);
-				  // return
 				this.$router.push({
 					path: this.$route.path,
 					query: {
 						keywords: this.keywords,
 						page: 1,
 						catid: this.catid,
-						// search_main:main,
+						 search_main_text:this.search_main_text,
+						 search_fu_text:this.search_fu_text,
 						 search_linkage_default_string: this.search_linkage_default_string,
 					} 
 				}) 
@@ -358,11 +384,12 @@
 						keywords: this.keywords,
 						page: page,
 						catid: this.catid,
-						// search_main:main,
+						search_main_text:this.search_main_text,
+						search_fu_text:this.search_fu_text,
 						 search_linkage_default_string: this.search_linkage_default_string, 
 					}
 				})
-			},
+			},  
 			fetchData() {
 				_g.openGlobalLoading()
 				// this.listLoading = true
@@ -372,7 +399,8 @@
 					page: this.currentPage,
 					pagesize: this.pagesize,
 					catid: this.catid,
-					// search_main:main,
+					search_main_text:this.search_main_text,
+					search_fu_text:this.search_fu_text,
 					search_linkage_default_string: this.search_linkage_default_string, 
 					userid: this.$store.state.user.userid,
 				} 
