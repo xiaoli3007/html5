@@ -77,15 +77,7 @@ export const constantRouterMap = [{
 					icon: 'tasklist'
 				},
 			},
-			// {
-			// 	path: 'model_thumb_list',
-			// 	name: 'Model_thumb_list',
-			// 	component: require('@/views/content/model_thumb_list').default,
-			// 	meta: {
-			// 		title: '简图模型列表',
-			// 		icon: 'book'
-			// 	},
-			// },
+		
 			{
 				path: 'model_show',
 				name: 'Model_show',
@@ -174,25 +166,3 @@ export default new Router({
 	}),
 	routes: constantRouterMap
 })
-
-// export default new Router({
-//   routes: [
-//     {
-//       path: '/login',
-//       name: 'login',
-//       component: require('@/views/login/index').default
-//     },
-//    {
-//      path: '/',
-//      component: Layout,
-//      // redirect: '/dashboard',
-//      hidden: true,
-//      children: [{
-// 			 name: 'Dashboard',
-//        path: 'dashboard',
-//        component:  require('@/views/dashboard/index')
-//      }]
-//    },
-// 		
-//   ]
-// })

@@ -8,7 +8,7 @@ import { Message } from 'element-ui'
 
 
 const whiteList = ['/login'] // 不重定向白名单
-const blockList = ['Read','Review','ReadCheck'] // 必须加载个人信息的页面
+const blockList = ['Main','Model_table_list','Model_show'] // 必须加载个人信息的页面
 router.beforeEach((to, from, next) => {
   NProgress.start()
   // console.log(getAutoplay_time())
