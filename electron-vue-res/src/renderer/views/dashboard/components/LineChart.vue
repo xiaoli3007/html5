@@ -82,7 +82,7 @@ export default {
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
 				title:{
-        text: '学习时间（分钟）',
+        text: '访问量',
         textStyle:{
             color: '#666',
             fontSize: '12',

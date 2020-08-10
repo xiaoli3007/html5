@@ -20,7 +20,11 @@ export default {
     height: {
       type: String,
       default: '300px'
-    }
+    },
+	chartData: {
+	  type: Object,
+	  required: true
+	}
   },
   data() {
     return {
@@ -49,6 +53,10 @@ export default {
       this.chart = echarts.init(this.$el, 'macarons')
 
       this.chart.setOption({
+		  title: {
+		         text: '资源汇总',
+		         left: 10
+		     },
         tooltip: {
           trigger: 'item',
           formatter: '{a} <br/>{b} : {c} ({d}%)'
@@ -56,7 +64,7 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          data: this.chartData.catlist,
         },
         calculable: true,
         series: [
@@ -66,13 +74,7 @@ export default {
             roseType: 'radius',
             radius: [15, 95],
             center: ['50%', '38%'],
-            data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
-            ],
+            data:this.chartData.catresnums, 
             animationEasing: 'cubicInOut',
             animationDuration: 2600
           }

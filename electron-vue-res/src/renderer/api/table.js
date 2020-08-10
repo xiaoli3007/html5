@@ -8,21 +8,6 @@ export function getshow(params) {
   })
 }
 
-export function getList(params) {
-  return request({
-    url: 'vue_app_model_api.php?act=list',
-    method: 'get',
-    params
-  })
-}
-
-export function getbookrecommendlist(params) {
-  return request({
-    url: 'vue_app_model_api.php?act=getbookrecommendlist',
-    method: 'get',
-    params
-  })
-}
 export function model_data_list(params) {
 	
 	if(params.keywords!=''){
@@ -51,22 +36,7 @@ export function get_catlist_data(params) {
   })
 }
 
-export function getjiaocai_cat_List(params) {
-  return request({
-    url: 'vue_app_model_api.php?act=getjiaocai_cat_List',
-    method: 'get',
-    params
-  })
-}
-
-export function ebook_recommend_search_cat(params) {
-  return request({
-    url: 'vue_app_model_api.php?act=ebook_recommend_search_cat',
-    method: 'get', 
-    params
-  })
-}
-
+ 
 
 
 export function index_count(params) {
@@ -77,10 +47,3 @@ export function index_count(params) {
   })
 }
 
-export function setting_info(params) {
-  return request({
-    url: 'vue_app_common_api.php?act=setting_info',
-    method: 'get', 
-    params
-  })
-}

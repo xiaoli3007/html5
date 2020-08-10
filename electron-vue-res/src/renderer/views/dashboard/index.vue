@@ -3,9 +3,28 @@
 		
 		<panel-group :counttodata="counttodata" v-if="taskin"/>
 		
-		<el-row style="margin-bottom:32px;" v-if="taskin">
+		<!-- <el-row style="margin-bottom:32px;" v-if="taskin">
 		  <line-chart :chart-data="lineChartData"/>
-		</el-row>
+		</el-row> -->
+		
+		<el-row :gutter="32">
+		  <!-- <el-col :xs="24" :sm="24" :lg="8">
+		     <div class="chart-wrapper">
+		      <raddar-chart/>
+		    </div> 
+		  </el-col>
+		  <el-col :xs="24" :sm="24" :lg="8">
+		     <div class="chart-wrapper">
+		      <bar-chart/>
+		    </div> 
+		  </el-col> -->
+		  <el-col :xs="24" :sm="24" :lg="24">
+		    <div class="chart-wrapper" v-if="taskin">
+		      <pie-chart :chart-data="pieChartData" />
+		    </div>
+		  </el-col>
+		  
+		</el-row> 
 		
 		<el-row v-if="taskin">
 		 <div class="chart-wrapper">
@@ -13,30 +32,17 @@
 		 </div>
 		</el-row>
 		
-	<!-- 	<el-row :gutter="32">
-		  <el-col :xs="24" :sm="24" :lg="8">
-		    <div class="chart-wrapper">
-		      <raddar-chart/>
-		    </div>
-		  </el-col>
-		  <el-col :xs="24" :sm="24" :lg="8">
-		    <div class="chart-wrapper">
-		      <pie-chart/>
-		    </div>
-		  </el-col>
-		  <el-col :xs="24" :sm="24" :lg="8">
-		    <div class="chart-wrapper">
-		      <bar-chart/>
-		    </div>
-		  </el-col>
-		</el-row> -->
+		 
 		
 	</div>
 
 </template>
 
 <script>
-	
+	import {
+		getsiteid,
+		 
+	} from '@/utils/auth'
 	import { index_count} from '@/api/table'
 	import _g from '@/utils/global.js'
 	
@@ -64,7 +70,7 @@
 		mapGetters
 	} from 'vuex'
 
-	const localStorage = require('../../../main/localStorage').default
+	// const localStorage = require('../../../main/localStorage').default
 
 	export default {
 		 components: {
@@ -76,11 +82,13 @@
 		},
 		data () {
 		  return {
-		    voice: localStorage.getItem('voice'),
+		    // voice: localStorage.getItem('voice'),
 			lineChartData: lineChartData.newVisitis,
 			barChartData: barChartData.newVisitis,
 			counttodata:null,
+			pieChartData:barChartData.newVisitis,
 			taskin:false,
+			siteid:getsiteid()!='' ? getsiteid() :'1',
 		  }
 		},
 		created() {
@@ -103,13 +111,13 @@
 		      _g.openGlobalLoading()
 		    // this.listLoading = true
 		  		const params = {
-		  				
+		  				siteid:this.siteid,
 		  				userid: this.$store.state.user.userid,
-		  		}
+		  		}  
 		    index_count(params).then(response => {
 		  	     _g.closeGlobalLoading()
 		        this.counttodata = response.countto
-		        this.lineChartData = response.linetime
+		        this.pieChartData = response.Pie
 		        this.barChartData = response.bra
 		        // this.listLoading = false
 				this.taskin = true

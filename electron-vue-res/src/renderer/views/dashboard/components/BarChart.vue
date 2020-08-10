@@ -58,7 +58,7 @@ export default {
       this.chart.setOption({
 		  
 		   title: {
-		          text: '识字量',
+		          text: '使用汇总',
 		          left: 10
 		      },
         tooltip: {
@@ -68,18 +68,18 @@ export default {
           }
         },
 		legend: {
-		        data:['本周','上周']
+		        data:this.chartData.array_tongji_name,
 		    },
         grid: {
           // top: 10,
           left: '2%',
           right: '2%',
           bottom: '3%',
-          containLabel: true
+          containLabel: true  
         },
         xAxis: [{
           type: 'category',
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+          data: this.chartData.catlist,
           axisTick: {
             alignWithLabel: true
           }
@@ -90,31 +90,7 @@ export default {
             show: false
           }
         }],
-        series: [{
-          name: '本周',
-          type: 'bar',
-		  itemStyle: {
-		    normal: {
-		      color: '#FF005A',
-		    }
-		  },
-          stack: 'vistors',
-          barWidth: '60%',
-          data: this.chartData.expectedData,
-          animationDuration
-        }, {
-          name: '上周',
-          type: 'bar',
-		  itemStyle: {
-		    normal: {
-		      color: '#3888fa',
-		    }
-		  },
-          stack: 'vistors',
-          barWidth: '60%',
-          data: this.chartData.actualData,
-          animationDuration
-        }]
+        series: this.chartData.data,
       })
     }
   }

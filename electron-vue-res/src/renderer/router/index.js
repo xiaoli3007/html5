@@ -95,19 +95,7 @@ export const constantRouterMap = [{
 				},
 				hidden: true
 			},
-			// {
-			//   path: 'read',
-			//   name: 'Read',
-			// 	hidden: true,
-			//   component:  require('@/views/study/read').default,
-			//   meta: { title: '任务中'}
-			// },
-			//       {
-			//         path: 'cat',
-			//         name: 'Cat',
-			//         component:  require('@/views/content/cat').default,
-			//         meta: { title: '分类', icon: 'tree' }
-			//       }
+		
 		]
 	},
 	// {

@@ -3,59 +3,48 @@
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel">
         <div class="card-panel-icon-wrapper icon-people">
-			<svg-icon  icon-class="shijian" class-name="card-panel-icon"></svg-icon>
+			<svg-icon  icon-class="jiaocai" class-name="card-panel-icon"></svg-icon>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">学习时长(分钟)</div>
-          <count-to :start-val="0" :end-val="parseInt(counttodata.all_learntime_f)" :duration="2600" class="card-panel-num"/>
+          <div class="card-panel-text">资源总数</div>
+          <count-to :start-val="0" :end-val="parseInt(counttodata.res_num)" :duration="2600" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" >
         <div class="card-panel-icon-wrapper icon-message">
-			<svg-icon  icon-class="ting" class-name="card-panel-icon"></svg-icon>
+			<svg-icon  icon-class="tongji" class-name="card-panel-icon"></svg-icon>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">听写任务</div>
-          <count-to :start-val="0" :end-val="parseInt(counttodata.task_tingxie_nums)" :duration="3000" class="card-panel-num"/>
+          <div class="card-panel-text">访问量</div>
+          <count-to :start-val="0" :end-val="parseInt(counttodata.view_num)" :duration="3000" class="card-panel-num"/>
         </div>
       </div> 
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" >
         <div class="card-panel-icon-wrapper icon-money">
-			<svg-icon  icon-class="shizi" class-name="card-panel-icon"></svg-icon>
+			<svg-icon  icon-class="play" class-name="card-panel-icon"></svg-icon>
         </div>
         <div class="card-panel-description">
-          <div class="card-panel-text">识字任务</div>
-          <count-to :start-val="0" :end-val="parseInt(counttodata.task_shizi_nums)" :duration="3200" class="card-panel-num"/>
+          <div class="card-panel-text">点播量</div>
+          <count-to :start-val="0" :end-val="parseInt(counttodata.frequency)" :duration="3200" class="card-panel-num"/>
         </div>
       </div>
     </el-col>
     <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
       <div class="card-panel" >
         <div class="card-panel-icon-wrapper icon-shopping">
-			<svg-icon  icon-class="tongji" class-name="card-panel-icon"></svg-icon>
-        </div>
+			<svg-icon  icon-class="review" class-name="card-panel-icon"></svg-icon>
+        </div> 
         <div class="card-panel-description">
-          <div class="card-panel-text">识字量</div>
-          <count-to :start-val="0" :end-val="parseInt(counttodata.shizi_nums)" :duration="3600" class="card-panel-num"/>
+          <div class="card-panel-text">收藏量</div>
+          <count-to :start-val="0" :end-val="parseInt(counttodata.collect_num)" :duration="3600" class="card-panel-num"/>
         </div>
-      </div>
+      </div> 
     </el-col>
 	
-<!-- 	<el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-	  <div class="card-panel" >
-	    <div class="card-panel-icon-wrapper icon-shopping">
-			<svg-icon  icon-class="tongji" class-name="card-panel-icon"></svg-icon>
-	    </div>
-	    <div class="card-panel-description">
-	      <div class="card-panel-text">掌握成语</div>
-	      <count-to :start-val="0" :end-val="parseInt(counttodata.shizi_chengyu_nums)" :duration="3600" class="card-panel-num"/>
-	    </div>
-	  </div>
-	</el-col> -->
 	
 	
   </el-row>

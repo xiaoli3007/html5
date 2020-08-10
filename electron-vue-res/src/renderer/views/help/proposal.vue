@@ -16,7 +16,7 @@
 				</el-form>
 
 			</el-tab-pane>
-			<el-tab-pane label="求书" name="second">
+			<!-- <el-tab-pane label="求书" name="second">
 
 				<el-form :model="form_qiushu" :rules="rules_qiushu" ref="rules_qiushuForm" label-width="120px">
 					<el-form-item label="标题" prop="name">
@@ -31,7 +31,7 @@
 					</el-form-item>
 				</el-form>
 
-			</el-tab-pane>
+			</el-tab-pane> -->
 
 		</el-tabs>
 

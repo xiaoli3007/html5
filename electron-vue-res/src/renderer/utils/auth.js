@@ -7,10 +7,8 @@ const NameKey = 'Admin-Name'
 const AvatarKey = 'Admin-Avatar'
 const UseridKey = 'Admin-Userid'
 
-const voicetypeKey = 'voicetype-c'
-const autoplay_timeKey = 'autoplay_time-c'
-const autoplay_repeatKey = 'autoplay_repeat-c'
-const shiyi_isshowKey = 'shiyi_isshow-c'
+const siteid = 'adminsetting-siteid'
+
 
 export function getToken() {
   return Lockr.get(TokenKey)
@@ -62,34 +60,11 @@ export function removeAvatar() {
 
 
 
-export function getVoicetype() {
-  return Lockr.get(voicetypeKey)
+export function getsiteid() {
+  return Lockr.get(siteid)
 }
 
-export function setVoicetype(name) {
-  return Lockr.set(voicetypeKey, name)
+export function setsiteid(name) {
+  return Lockr.set(siteid, name)
 }
 
-export function getAutoplay_time() {
-  return Lockr.get(autoplay_timeKey)
-}
-
-export function setAutoplay_time(name) {
-  return Lockr.set(autoplay_timeKey, name)
-}
-
-export function getAutoplay_repeat() {
-  return Lockr.get(autoplay_repeatKey)
-}
-
-export function setAutoplay_repeat(name) {
-  return Lockr.set(autoplay_repeatKey, name)
-}
-
-export function getshiyi_isshow() {
-  return Lockr.get(shiyi_isshowKey)
-}
-
-export function setshiyi_isshow(name) {
-  return Lockr.set(shiyi_isshowKey, name)
-}

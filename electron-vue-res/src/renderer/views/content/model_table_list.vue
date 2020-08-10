@@ -153,6 +153,11 @@
 </template>
 
 <script>
+	
+	import {
+		getsiteid,
+		 
+	} from '@/utils/auth'
 	import {
 		model_data_list,
 		get_catlist_data
@@ -177,34 +182,12 @@
 				multipleSelection: [],
 				pagesize: 12,
 				linkageid: 0,
+				siteid:getsiteid()!='' ? getsiteid() :'1',
 				catid: 0,
 				activeName: '',
 				tab_index: 0,
 				from_options: [],
-				options: [{
-					value: 'zhinan',
-					label: '指南',
-					children: [{
-						value: 'shejiyuanze',
-						label: '设计原则',
-					}, {
-						value: 'daohang',
-						label: '导航',
-					}]
-				}, {
-					value: 'ziyuan',
-					label: '资源',
-					children: [{
-						value: 'axure',
-						label: 'Axure Components'
-					}, {
-						value: 'sketch',
-						label: 'Sketch Templates'
-					}, {
-						value: 'jiaohu',
-						label: '组件交互文档'
-					}]
-				}],
+				options: [],
 				search_linkage_form_data: [],
 				search_all_form_data: {
 					linkage_data: [],
@@ -234,8 +217,11 @@
 			// 	this.options = response.items
 			// 	// console.log(this.options);
 			// })
+			const params = {
+				siteid: this.siteid,
+			}
 
-			get_catlist_data().then(response => {
+			get_catlist_data(params).then(response => {
 				this.from_options = response.items
 				// console.log(this.from_options);
 				this.catid = this.from_options[0].catid
@@ -371,6 +357,7 @@
 						keywords: this.keywords,
 						page: 1,
 						catid: this.catid,
+						siteid: this.siteid,
 						 search_main_text:this.search_main_text,
 						 search_fu_text:this.search_fu_text,
 						 search_linkage_default_string: this.search_linkage_default_string,
@@ -384,6 +371,7 @@
 						keywords: this.keywords,
 						page: page,
 						catid: this.catid,
+						siteid: this.siteid,
 						search_main_text:this.search_main_text,
 						search_fu_text:this.search_fu_text,
 						 search_linkage_default_string: this.search_linkage_default_string, 
@@ -399,6 +387,7 @@
 					page: this.currentPage,
 					pagesize: this.pagesize,
 					catid: this.catid,
+					siteid: this.siteid,
 					search_main_text:this.search_main_text,
 					search_fu_text:this.search_fu_text,
 					search_linkage_default_string: this.search_linkage_default_string, 
@@ -428,7 +417,7 @@
 					 // console.log(temp);
 				})
 				this.listLoading = false
-			},
+			},   
 			getCurrentPage() {
 				let data = this.$route.query
 				if (data) {
