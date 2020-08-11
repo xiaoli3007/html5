@@ -41,7 +41,7 @@ export function get_catlist_data(params) {
 
 export function index_count(params) {
   return request({
-    url: 'vue_app_common_api.php?act=index_count',
+    url: 'vue_app_pc_api.php?act=index_count',
     method: 'get',
     params
   })
