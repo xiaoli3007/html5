@@ -1,7 +1,7 @@
 <template>
   <div class="list">
   <van-nav-bar
-    title="首页"
+    :title="$route.meta.title"
     left-text=""
     right-text=""
   />	
@@ -10,8 +10,8 @@
 	<van-tabbar v-model="active" @change="onChange" route>
     <van-tabbar-item name="home" icon="home-o" to="/home">首页</van-tabbar-item>
     <van-tabbar-item name="list" icon="search" to="/list">列表页</van-tabbar-item>
-    <van-tabbar-item name="my" icon="friends-o">我的</van-tabbar-item>
-    <van-tabbar-item name="setting" icon="setting-o">设置</van-tabbar-item>
+    <van-tabbar-item name="my" icon="friends-o" to="/my">我的</van-tabbar-item>
+    <!-- <van-tabbar-item name="setting" icon="setting-o">设置</van-tabbar-item> -->
   </van-tabbar>
   
   </div>
@@ -35,7 +35,7 @@ export default {
   },
    methods: {
     onChange(index) {
-      Notify({ type: 'primary', message: index });
+      // Notify({ type: 'primary', message: index });
     },
     },
 }

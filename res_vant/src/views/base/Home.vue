@@ -31,7 +31,7 @@
 <script>
 	
 	import { Toast } from 'vant';
-	
+	import {index_home} from '@/api/base'
 export default {
 	
   data () {
@@ -45,6 +45,9 @@ export default {
     
     }
   },
+  created() {
+	this.fetchData()		
+  },
    methods: {
       
   onSearch(val) {
@@ -53,7 +56,22 @@ export default {
   onCancel() {
         Toast('取消');
   },
-    },
+  fetchData() {
+     // this.$loading.show()  
+     
+	 const getparams = {
+		loading: true,
+	    params: {
+	      userid: 12345
+	    }
+	  }
+   
+   index_home(getparams).then(response => {
+      console.log(response)
+    })
+     
+  },
+ },
 }
 </script>
 

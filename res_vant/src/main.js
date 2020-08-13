@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import Loading from './components/loading'
+Vue.prototype.$loading = Loading
 // router.beforeEach((to, from, next) => {
 //   document.title = to.meta.title
 //   const userInfo = sessionStorage.getItem('userInfo') || null
@@ -10,7 +12,7 @@ import router from './router'
 //   } else {
 //     next()
 //   }
-// })
+// }) 
 
 import { Button } from 'vant';
 import { Tabbar, TabbarItem } from 'vant';
@@ -22,7 +24,16 @@ import { Grid, GridItem } from 'vant';
 import { List } from 'vant';
 import { PullRefresh } from 'vant';
 import { Cell, CellGroup } from 'vant';
+import { Col, Row } from 'vant';
+import { Image as VanImage } from 'vant';
+import { Form } from 'vant';
+import { Field } from 'vant';
 
+Vue.use(Field);
+Vue.use(Form);
+Vue.use(VanImage);
+Vue.use(Col);
+Vue.use(Row);
 Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.use(PullRefresh);
