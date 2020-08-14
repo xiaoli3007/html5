@@ -75,12 +75,20 @@ export default {
       onSubmit(values) {
         console.log('submit', values);
 		
-		  
-		login(values).then(response => {
-		   console.log(response)
-		   
-		   Toast(response.message);
+		 this.$store.dispatch('Login', values).then(() => {
+			 
+		   this.$router.push({ path: '/my' })
+		 }).catch(() => {
+			 
 		 })
+		  
+		// login(values).then(response => {
+		//    if(response.code == 20000){
+		//    	 console.log(response)
+		//    }else{
+		//    	 Toast(response.message);
+		//    }
+		//  })
 		 
       },
     },

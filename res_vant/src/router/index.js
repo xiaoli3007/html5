@@ -25,7 +25,7 @@ const routes = [
 			path: 'my',
 			name: 'My',
 			component: require('@/views/base/My').default,
-			meta: { title: '我的', keepAlive: false }
+			meta: { title: '我的', keepAlive: false },
 		}]
 	},{
 		path: '/show',
@@ -35,9 +35,16 @@ const routes = [
 	  },
 	  {
 		path: '/login',
-		name: 'login',
+		name: 'Login',
 		component: require('@/views/my/Login').default,
 		meta: { title: '登录', keepAlive: false }
+	  },
+	  {
+	  	path: '/user/favorite',
+		name: 'Favorite',
+		component: require('@/views/user/Favorite').default,
+		meta: { title: '我的收藏', keepAlive: false }
+	   
 	  },
   {
     path: '/about',

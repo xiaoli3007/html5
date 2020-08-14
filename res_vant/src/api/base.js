@@ -1,5 +1,4 @@
-// import { http, get, post } from '@/JS/ajax.js'
-import {  get } from '@/JS/ajax.js'
+import {  get } from '@/utils/ajax.js'
 
 export function index_home(params) {
   return get( 

@@ -3,19 +3,34 @@
   <div style="margin-top: 20px;"></div>
 	<van-row>
 	  
-	  <van-col span="8" offset="8"><van-image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" round/></van-col>
+	  <van-col span="8" offset="8">
+		  <van-image  v-if="!avatar" width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" round/>
+		  
+		   <van-image  v-if="avatar" width="100" height="100" :src="avatar" round/>
+		   
+		  </van-col>
 	  
 	  </van-row>
+	  
 	  <van-row>
-	  <van-col span="24" ><van-button size="large" type="info" to="login" >登录</van-button></van-col>
+	  <van-col span="24" >
+		  
+		 
+		<van-button v-if="!name" size="large" type="info" to="login" >登录</van-button>
+		<p v-if="name">您好！ {{name}}</p>
+		
+	</van-col>
 	  
 	</van-row>
  
   <div style="margin-top: 20px;"></div>
   
 	<van-cell-group>
-	  <van-cell title="我的收藏" value=""  icon="location-o" />
+	  <van-cell title="我的收藏" value="" to="/user/favorite" icon="location-o" />
 	  <van-cell title="我的点播" value=""  icon="location-o"  />
+	  
+	   <van-cell v-if="name" center title="退出" value=""  icon="" @click="logout" />
+	   
 	</van-cell-group>
 	
   
@@ -26,7 +41,7 @@
 </template>
 
 <script>
-	
+	import { mapGetters } from 'vuex'
 	import { Toast } from 'vant';
 export default {
   data() {
@@ -38,10 +53,31 @@ export default {
       refreshing: false,
     };
   },
+  computed: {
+    ...mapGetters([
+      'avatar',
+  	  'name'
+    ])
+  },
+  created() {
+  
+  	 
+  	  console.log(this.name);
+  	 
+  	
+  },
   methods: {
     onLoad() {
      
     },
+	
+	logout() {
+	  this.$store.dispatch('LogOut').then(() => {
+	     // location.reload() // 为了重新实例化vue-router对象 避免bug
+		
+		//this.$router.push({ path: '/my' })
+	  })
+	}
     
   },
 };
