@@ -7,7 +7,7 @@
   />	
   
    <app-main></app-main>
-	<van-tabbar v-model="active" @change="onChange" route>
+	<van-tabbar :placeholder="true" v-model="active" @change="onChange" route>
     <van-tabbar-item name="home" icon="home-o" to="/home">首页</van-tabbar-item>
     <van-tabbar-item name="list" icon="search" to="/list">列表页</van-tabbar-item>
     <van-tabbar-item name="my" icon="friends-o" to="/my">我的</van-tabbar-item>

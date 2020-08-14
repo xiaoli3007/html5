@@ -28,7 +28,12 @@ import { Col, Row } from 'vant';
 import { Image as VanImage } from 'vant';
 import { Form } from 'vant';
 import { Field } from 'vant';
+import { DropdownMenu, DropdownItem } from 'vant';
+import { Sticky } from 'vant';
 
+Vue.use(Sticky);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 Vue.use(Field);
 Vue.use(Form);
 Vue.use(VanImage);

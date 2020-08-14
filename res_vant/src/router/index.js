@@ -27,7 +27,12 @@ const routes = [
 			component: require('@/views/base/My').default,
 			meta: { title: '我的', keepAlive: false }
 		}]
-	},
+	},{
+		path: '/show',
+		name: 'Show',
+		component: require('@/views/base/Show').default,
+		meta: { title: '详细页', keepAlive: false }
+	  },
 	  {
 		path: '/login',
 		name: 'login',

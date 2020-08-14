@@ -25,7 +25,7 @@ http.interceptors.request.use(
       Loading.hide()
       Loading.show()
     }
-	console.log(config)
+	// console.log(config)
     return config
   },
   error => {
