@@ -29,9 +29,9 @@
 </template>
 
 <script>
-	
+	import { mapGetters } from 'vuex'
 	import { Toast } from 'vant';
-	import {login} from '@/api/login'
+	import {my_favorite_list} from '@/api/user'
 	
 export default {
    data() {
@@ -40,22 +40,40 @@ export default {
         password: '',
       };
     },
-	
+	computed: {
+	  ...mapGetters([
+		  'userid'
+	  ])
+	},
 	created() {
-	
-		 
-		 //console.log(this.ebookid);
-		 
-		
+		 console.log(this.userid)
+		console.log(this.$store.state.user.userid);
+		 this.init()
 	},
     methods: {
+		init() {
+			this.fetchData()
+		},
+		fetchData() {
+		 	
+			const getparams = {
+					 loading: false,
+				    params: {
+					userid: this.$store.state.user.userid,
+				    }
+				  }
+				  
+			my_favorite_list(getparams).then(response => {
+				// this.data = response.items
+				// this.program = response.program_info
+				// this.taskin = true
+			})
+			
+				
+		}, 
 	 onClickLeft() {
 		  this.$router.replace({
 		  	name: 'My',
-		  	// query: {
-		  	// 	catid: catid,
-		  	// 	news_id: id
-		  	// }
 		  })
 		  
 		},

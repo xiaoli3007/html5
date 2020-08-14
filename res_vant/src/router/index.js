@@ -3,6 +3,11 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 import layout from '../views/layout'
 const routes = [
 	{
@@ -15,23 +20,23 @@ const routes = [
 			path: 'home',
 			name: 'Home',
 			component: require('@/views/base/Home').default,
-			meta: { title: '首页', keepAlive: false }
+			meta: { title: '首页', keepAlive: false ,auth: false}
 		},{
 			path: 'list',
 			name: 'List',
 			component: require('@/views/base/List').default,
-			meta: { title: '列表页', keepAlive: false }
+			meta: { title: '列表页', keepAlive: false ,auth: false}
 		},{
 			path: 'my',
 			name: 'My',
 			component: require('@/views/base/My').default,
-			meta: { title: '我的', keepAlive: false },
+			meta: { title: '我的', keepAlive: false ,auth: false},
 		}]
 	},{
 		path: '/show',
 		name: 'Show',
 		component: require('@/views/base/Show').default,
-		meta: { title: '详细页', keepAlive: false }
+		meta: { title: '详细页', keepAlive: false ,auth: false}
 	  },
 	  {
 		path: '/login',
@@ -43,14 +48,14 @@ const routes = [
 	  	path: '/user/favorite',
 		name: 'Favorite',
 		component: require('@/views/user/Favorite').default,
-		meta: { title: '我的收藏', keepAlive: false }
+		meta: { title: '我的收藏', keepAlive: false ,auth: true}
 	   
 	  },
   {
     path: '/about',
     name: 'About',
     component: () => import('../views/base/About.vue'),
-    meta: { title: '其他', keepAlive: false }
+    meta: { title: '其他', keepAlive: false ,auth: false}
   }
 ]
 
