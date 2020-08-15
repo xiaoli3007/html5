@@ -54,14 +54,17 @@ export const constantRouterMap = [
 		component: Layout,
 		redirect: '/main/msub',
 		name: 'Main',
+		meta: {
+			title: '',
+		},
 		children: [{
 				path: 'msub',
 				name: 'Msub',
 				// component: require('@/views/dashboard/index').default,
 				component: () => import('@/views/dashboard/index'),
 				meta: {
-					title: '主页',
-					icon: 'zhuye'
+					title: '统计',
+					icon: 'tongji'
 				},
 	
 			}
@@ -105,21 +108,40 @@ export const constantRouterMap = [
 		component: Layout,
 		redirect: '/serve/setting',
 		name: 'Setting',
+		meta: {
+			title: '设置',
+			icon: 'setting'
+		},
 		children: [{
 			path: 'setting',
 			name: 'Setting',
 			// component: require('@/views/help/setting').default,
 			component: () => import('@/views/help/setting'),
 			meta: {
-				title: '设置',
+				title: '站点设置',
 				icon: 'setting'
 			}
-		}]
+		},{
+			path: 'setting2',
+			name: 'Setting2',
+			// component: require('@/views/help/setting').default,
+			component: () => import('@/views/help/setting'),
+			meta: {
+				title: '基本设置',
+				icon: 'setting'
+			},
+			
+		},
+		]
 	}, {
-		path: '/serve',
+		path: '/help',
 		component: Layout,
-		redirect: '/serve/proposal',
-		name: 'Serve',
+		redirect: '/help/proposal',
+		name: 'Help',
+		meta: {
+			title: '建议',
+			icon: 'proposal'
+		},
 		children: [{
 			path: 'proposal',
 			name: 'Proposal',
@@ -128,7 +150,7 @@ export const constantRouterMap = [
 			meta: {
 				title: '建议',
 				icon: 'proposal'
-			}
+			},
 		}]
 	},
     {
