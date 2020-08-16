@@ -59,9 +59,16 @@
 						
 
 						<el-row>
-							<el-col :span="4" :offset="20">
+							<el-col :span="4" :offset="4">
+							<el-form-item>
+								<el-button type="primary" @click="search()">查询</el-button> 			</el-form-item>
+							</el-col>
+							  
+							<el-col :span="2" :offset="14">
 						<el-form-item>
-							<el-button type="primary" @click="search()">查询</el-button> 			</el-form-item>
+							<el-button type="success" @click="add()">添加</el-button> 			</el-form-item>
+							
+							
 						</el-col>
 						</el-row>
 						
@@ -95,7 +102,14 @@
 		
 
 		<el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
-			<el-table-column align="center" label='封面'>
+			
+			<el-table-column label="标题">
+				<template slot-scope="scope" >
+					{{scope.row.program.title}}
+				</template>
+			</el-table-column>
+			
+			<el-table-column  align="center" label='封面' >
 				<template slot-scope="scope">
 					<el-image style="width: 80px;cursor: pointer; " :src="scope.row.thumb_url" fit="fill">
 
@@ -112,11 +126,7 @@
 				</template>
 
 			</el-table-column>
-			<el-table-column label="标题">
-				<template slot-scope="scope">
-					{{scope.row.program.title}}
-				</template>
-			</el-table-column>
+			
 			<el-table-column label="发布时间" align="center">
 				<template slot-scope="scope">
 					<span>{{scope.row.program.inputtime}}</span>
@@ -127,11 +137,18 @@
 			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
 
-					<el-col :span="12">
+					<el-col :span="24">
+						
+						  <el-button icon="el-icon-search"  v-on:click="gotoShow(scope.row.catid,scope.row.id)" circle></el-button> 
+						  <el-button   v-on:click="add(scope.row.catid,scope.row.id)" type="primary" icon="el-icon-edit" circle></el-button>
+						 
+						  <el-button  v-on:click="delete(scope.row.catid,scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
+						  
+						
 
-						<el-button type="success" size="medium" v-on:click="gotoShow(scope.row.catid,scope.row.id)">详细</el-button>
 
 					</el-col>
+					 
 
 
 				</template>
@@ -339,6 +356,18 @@
 							}
 						}) 
 				   }
+			 },
+			 add(catid=0, id=0) {
+				 if(catid==0){
+					 catid = this.catid
+				 }
+			 	this.$router.replace({
+			 		name: 'Content_add',
+			 		query: {
+			 			catid: catid,
+			 			news_id: id
+			 		}
+			 	})
 			 },
 			gotoShow(catid, id) {
 				this.$router.replace({

@@ -45,7 +45,7 @@ export const constantRouterMap = [
 		children: [{
 			path: 'dashboard',
 			// component: require('@/views/dashboard/index').default,
-			component: () => import('@/views/dashboard/index'),
+			component: () => import('@/views/content/index'),
 	
 		}]
 	},
@@ -100,6 +100,16 @@ export const constantRouterMap = [
 				},
 				hidden: true
 			},
+			{
+				path: 'content_add',
+				name: 'Content_add',
+				component: () => import('@/views/content/content_add'),
+				meta: {
+					title: '资源添加'
+				},
+				hidden: true
+			},
+		
 		
 		]
 	},
@@ -139,8 +149,8 @@ export const constantRouterMap = [
 		redirect: '/help/proposal',
 		name: 'Help',
 		meta: {
-			title: '建议',
-			icon: 'proposal'
+			title: '',
+			
 		},
 		children: [{
 			path: 'proposal',

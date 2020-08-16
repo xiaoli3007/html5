@@ -33,8 +33,8 @@ export default {
   },
   methods: {
     click() {
-			// console.log(1111)
-      if (!screenfull.enabled) {
+			 // console.log(screenfull)
+      if (!screenfull.isEnabled) {
         this.$message({
           message: 'you browser can not work',
           type: 'warning'
@@ -44,7 +44,9 @@ export default {
       screenfull.toggle()
     },
     init() {
-      if (screenfull.enabled) {
+		
+		// console.log(screenfull)
+      if (screenfull.isEnabled) {
         screenfull.on('change', () => {
           this.isFullscreen = screenfull.isFullscreen
         })
