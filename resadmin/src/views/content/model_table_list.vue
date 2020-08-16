@@ -101,21 +101,24 @@
 		</div>
 		
 
-		<el-table :data="list" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
-			
+		<el-table :data="list"  ref="multipleTable"  @selection-change="handleSelectionChange" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+			<el-table-column
+			      type="selection"
+			      width="55">
+			    </el-table-column>
 			<el-table-column label="标题">
 				<template slot-scope="scope" >
 					{{scope.row.program.title}}
 				</template>
 			</el-table-column>
 			
-			<el-table-column  align="center" label='封面' >
+			<!-- <el-table-column  align="center" label='封面' >
 				<template slot-scope="scope">
 					<el-image style="width: 80px;cursor: pointer; " :src="scope.row.thumb_url" fit="fill">
 
 					</el-image>
 				</template>
-			</el-table-column>
+			</el-table-column> -->
 
 			<el-table-column align="center" label='类别'>
 
@@ -143,11 +146,7 @@
 						  <el-button   v-on:click="add(scope.row.catid,scope.row.id)" type="primary" icon="el-icon-edit" circle></el-button>
 						 
 						  <el-button  v-on:click="delete(scope.row.catid,scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
-						  
-						
-
-
-					</el-col>
+					 </el-col>
 					 
 
 
@@ -155,13 +154,24 @@
 			</el-table-column>
 
 		</el-table>
-
-
-		<div class="block pages">
-			<el-pagination @current-change="handleCurrentChange" background layout="prev, pager, next" :page-size="pagesize"
-			 :current-page="currentPage" :total="dataCount">
-			</el-pagination>
-		</div>
+			
+			<el-row>
+				<el-col :span="12">
+						<div style="">
+						  <el-button @click="toggleSelection(list)">全选</el-button>
+						  <el-button @click="toggleSelection()">取消选择</el-button>
+						</div>
+				</el-col>
+				<el-col :span="12">
+						<div class="block pages">
+							<el-pagination @current-change="handleCurrentChange" background layout="prev, pager, next" :page-size="pagesize"
+							 :current-page="currentPage" :total="dataCount">
+							</el-pagination>
+						</div>
+				</el-col>
+			</el-row>		 
+	  
+		
 
 
 
@@ -286,6 +296,19 @@
 
 		},
 		methods: {
+			toggleSelection(rows) {
+			if (rows) {
+			  rows.forEach(row => {
+				this.$refs.multipleTable.toggleRowSelection(row);
+			  });
+			} else {
+			  this.$refs.multipleTable.clearSelection();
+			}
+		  },
+		  handleSelectionChange(val) {
+			this.multipleSelection = val;
+			console.log(this.multipleSelection)
+		  },
 			handleChange(value) {
 				console.log(value);
 				console.log(this.search_all_form_data);

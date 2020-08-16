@@ -1,6 +1,6 @@
 // vue.config.js
 const path = require('path')
-
+const CompressionPlugin = require('compression-webpack-plugin')// 引入gzip压缩插件
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
@@ -26,4 +26,49 @@ module.exports = {
   // 生产环境关闭 source map
   productionSourceMap: false,
   // lintOnSave: true,
+  
+  
+  // 是一个函数，会接收一个基于 webpack-chain 的 ChainableConfig 实例。允许对内部的 webpack 配置进行更细粒度的修改。
+  chainWebpack: config => {
+    // 配置别名
+    config.resolve.alias
+      .set('@', resolve('src'))
+      .set('assets', resolve('src/assets'))
+      .set('components', resolve('src/components'))
+      .set('views', resolve('src/views'))
+  
+    config.optimization.minimizer('terser').tap((args) => {
+      // 去除生产环境console
+      args[0].terserOptions.compress.drop_console = true
+      return args
+    })
+  
+  //   const svgRule = config.module.rule('svg')
+  //   svgRule.uses.clear()
+  //   svgRule.exclude.add(/node_modules/)
+  //   svgRule
+  //     .test(/\.svg$/)
+  //     .use('svg-sprite-loader')
+  //     .loader('svg-sprite-loader')
+  //     .options({
+  //       symbolId: 'icon-[name]'
+  //     })
+  
+  //   const imagesRule = config.module.rule('images')
+  //   imagesRule.exclude.add(resolve('src/icons'))
+  //   config.module.rule('images').test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+  },
+  
+  configureWebpack: (config) => {
+   
+    if (process.env.NODE_ENV === 'production') {
+      // config.plugins.push(new BundleAnalyzerPlugin())
+  
+      config.plugins.push(new CompressionPlugin({ // gzip压缩配置
+        test: /\.js$|\.html$|\.css/, // 匹配文件名
+        threshold: 10240, // 对超过10kb的数据进行压缩
+        deleteOriginalAssets: false // 是否删除原文件
+      }))
+    }
+  },
 }
