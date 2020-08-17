@@ -17,7 +17,13 @@ import { Form } from 'vant';
 import { Field } from 'vant';
 import { DropdownMenu, DropdownItem } from 'vant';
 import { Sticky } from 'vant';
+import { Icon } from 'vant';
+import { ShareSheet } from 'vant';
+import { Divider } from 'vant';
 
+Vue.use(Divider);
+Vue.use(ShareSheet);
+Vue.use(Icon);
 Vue.use(Sticky);
 Vue.use(DropdownMenu);
 Vue.use(DropdownItem);
