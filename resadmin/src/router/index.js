@@ -86,7 +86,7 @@ export const constantRouterMap = [
 				name: 'Model_table_list',
 				component: () => import('@/views/content/model_table_list'),
 				meta: {
-					title: '模型列表',
+					title: '数据列表',
 					icon: 'tasklist'
 				},
 			},
@@ -96,7 +96,7 @@ export const constantRouterMap = [
 				name: 'Model_show',
 				component: () => import('@/views/content/model_show'),
 				meta: {
-					title: '模型详细'
+					title: '数据详细'
 				},
 				hidden: true
 			},
@@ -114,6 +114,45 @@ export const constantRouterMap = [
 		]
 	},
 	{
+		path: '/modelfu',
+		component: Layout,
+		redirect: '/modelfu/cat',
+		name: 'Modelfu',
+		meta: {
+			title: '模型相关',
+			icon: 'setting'
+		},
+		children: [{
+			path: 'cat',
+			name: 'Cat',
+			// component: require('@/views/help/setting').default,
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '栏目',
+				icon: 'setting'
+			}
+		},{
+			path: 'linkage',
+			name: 'Linkage',
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '联动菜单',
+				icon: 'setting'
+			}
+			
+		},{
+			path: 'media',
+			name: 'Media',
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '媒体库',
+				icon: 'setting'
+			}
+			
+		},
+		]
+	}, 
+	{
 		path: '/serve',
 		component: Layout,
 		redirect: '/serve/setting',
@@ -128,16 +167,16 @@ export const constantRouterMap = [
 			// component: require('@/views/help/setting').default,
 			component: () => import('@/views/help/setting'),
 			meta: {
-				title: '站点设置',
+				title: '站点',
 				icon: 'setting'
 			}
 		},{
-			path: 'setting2',
-			name: 'Setting2',
+			path: 'setting_template',
+			name: 'setting_template',
 			// component: require('@/views/help/setting').default,
-			component: () => import('@/views/help/setting'),
+			component: () => import('@/views/help/setting_template'),
 			meta: {
-				title: '基本设置',
+				title: '基础设置',
 				icon: 'setting'
 			},
 			

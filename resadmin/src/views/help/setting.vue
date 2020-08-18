@@ -4,45 +4,92 @@
 
 		<el-form ref="form" :model="form" label-width="200px">
 
-
-			<!-- <el-drawer title="我嵌套了表格!" :visible.sync="table" direction="rtl" size="50%">
-				<el-table >
-					<el-table-column property="date" label="日期" width="150"></el-table-column>
-					<el-table-column property="name" label="姓名" width="200"></el-table-column>
-					<el-table-column property="address" label="地址"></el-table-column>
-				</el-table>
-			</el-drawer> -->
-
-			 <el-form-item label="站点">
+			<el-form-item label="站点">
 				<el-radio-group v-model="form.siteid">
 					<!-- <template   ></template> -->
 					<el-radio  v-for="(item, index) in siteidlist" :key="index" :label="item.siteid" border>{{item.name}}</el-radio>
 					
 				</el-radio-group>
 			</el-form-item> 
-			<!-- <el-form-item label="听写间隔时间(秒)">
-				<el-slider v-model="form.autoplay_time" :min="3" :max="20" show-input></el-slider>
-			</el-form-item>
-
-			<el-form-item label="自动听写重复播报次数">
-				<el-slider v-model="form.autoplay_repeat" :min="1" :max="5" show-input></el-slider>
-			</el-form-item> -->
-			
-			<!-- <el-form-item label="识字多音释义框默认是否显示">
-				<el-switch
-				    v-model="form.shiyi_isshow"
-				    active-color="#13ce66"
-				    inactive-color="#ff4949"
-				    active-value="1"
-				    inactive-value="2">
-				  </el-switch>
-			</el-form-item> -->
+		
 
 			<el-form-item>
 				<el-button type="primary" @click="onSubmit">保存</el-button>
 				<!-- <el-button>取消</el-button> -->
 			</el-form-item>
 		</el-form>
+		
+		<el-table
+		    :data="siteidlist"
+		    style="width: 100%">
+			
+			<el-table-column label="切换站点">
+			  <template slot-scope="scope">
+				  <el-radio   :label=" scope.row.siteid" border>缺省</el-radio>
+			  </template>
+			</el-table-column>
+			
+		    <el-table-column
+		      label="siteid"
+		      width="180">
+		      <template slot-scope="scope">
+		        <!-- <i class="el-icon-time"></i> -->
+		        <span style="margin-left: 10px">{{ scope.row.siteid }}</span>
+		      </template>
+		    </el-table-column>
+		    <el-table-column
+		      label="站点名称"
+		      width="180">
+		      <template slot-scope="scope">
+		          {{ scope.row.name }}
+		       
+		      </template>
+		    </el-table-column>
+			
+			<el-table-column
+			  label="域名"
+			  width="280">
+			  <template slot-scope="scope">
+			      {{ scope.row.domain }}
+			   
+			  </template>
+			</el-table-column>
+			
+			<el-table-column
+			  label="媒体目录"
+			  width="180">
+			  <template slot-scope="scope">
+			      {{ scope.row.media_dir }}
+			   
+			  </template>
+			</el-table-column>
+			
+			<el-table-column
+			  label="模板"
+			  width="100">
+			  <template slot-scope="scope">
+			      {{ scope.row.template }}
+			   
+			  </template>
+			</el-table-column>
+			
+			
+			
+		    <el-table-column label="操作">
+		      <template slot-scope="scope">
+				   
+				  
+		        <el-button
+		          size="mini"
+		          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+		        <el-button
+		          size="mini"
+		          type="danger"
+		          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+		      </template>
+		    </el-table-column>
+		  </el-table>
+		  
 
 	</div>
 </template>
@@ -70,6 +117,24 @@
 					siteid: getsiteid() ? getsiteid() : "1",
 				},
 				siteidlist:[],
+				   tableData: [{
+				          date: '2016-05-02',
+				          name: '王小虎',
+				          address: '上海市普陀区金沙江路 1518 弄'
+				        }, {
+				          date: '2016-05-04',
+				          name: '王小虎',
+				          address: '上海市普陀区金沙江路 1517 弄'
+				        }, {
+				          date: '2016-05-01',
+				          name: '王小虎',
+				          address: '上海市普陀区金沙江路 1519 弄'
+				        }, {
+				          date: '2016-05-03',
+				          name: '王小虎',
+				          address: '上海市普陀区金沙江路 1516 弄'
+				        }],
+				       
 			}
 		},
 		created() {
@@ -100,6 +165,12 @@
 
 
 			},
+			 handleEdit(index, row) {
+				console.log(index, row);
+			  },
+			  handleDelete(index, row) {
+				console.log(index, row);
+			  },
 			fetchData() {
 			    _g.openGlobalLoading()
 				
