@@ -20,7 +20,7 @@
 	<h2>{{item.name}}</h2> 
 	<van-grid :column-num="2">
 		
-		 <van-grid-item v-for="(item2, index2) in item.result" :key="index2" >
+		 <van-grid-item @click="gotoShow(item2.catid,item2.id)" v-for="(item2, index2) in item.result" :key="index2" >
 		    <van-image :src="item2.thumb" />
 			<p>{{item2.title}}</p>
 		  </van-grid-item>
@@ -58,7 +58,15 @@ export default {
 	this.fetchData()		
   },
    methods: {
-      
+      gotoShow(catid, id) {
+      	this.$router.replace({
+      		name: 'Show',
+      		query: {
+      			catid: catid,
+      			news_id: id
+      		}
+      	})
+      },
   onSearch(val) {
         Toast(val);
    },
