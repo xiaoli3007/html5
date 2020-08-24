@@ -12,8 +12,8 @@
   </form>
   
   <van-dropdown-menu>
-    <van-dropdown-item v-model="value1" :options="option1" />
-    <van-dropdown-item v-model="value2" :options="option2" />
+    <van-dropdown-item v-model="catid" @change="catchange" :options="catidlist" />
+    <van-dropdown-item v-model="slistorder" @change="orderchange" :options="paixu_option2" />
   </van-dropdown-menu>
   </van-sticky>
    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -52,30 +52,42 @@ export default {
   data() {
     return {
       keywords: '',
-	  
-	   value1: 0,
-	        value2: 'a',
-	        option1: [
-	          { text: '全部', value: 0 },
-	          { text: 'lanmu1', value: 1 },
-	          { text: 'lanmu2', value: 2 },
+	        slistorder: '',
+	        catidlist: [
+	         
 	        ],
-	        option2: [
-	          { text: '默认排序', value: 'a' },
-	          { text: 'dianji排序', value: 'b' },
-	          { text: 'shijian排序', value: 'c' },
+	        paixu_option2: [
+	          { text: '默认排序', value: '' },
+	          { text: '发布时间', value: 'inputtime' },
+	          { text: '浏览量', value: 'view_num' },
+			  { text: '点播量', value: 'frequency' },
+			  { text: '收藏量', value: 'collect_num' },
 	        ],
 			
 	  page: 1,
 	  pagesize: 8,
 	  linkageid: 0,
 	  siteid:1,
-	  catid: 42,
+	  catid: 0,
       list: [],
       loading: false,
       finished: false,
       refreshing: false,
     };
+  },
+  created() {
+  
+  	const params = {
+  		// siteid: this.siteid,
+  	}
+  
+  	get_catlist_data(params).then(response => {
+  		  // this.catidlist = response.vant_cat_list
+		  
+		   this.catidlist = [{ text: '全部', value: 0 }].concat(response.vant_cat_list)
+  		 console.log(this.catidlist);
+  	})
+  
   },
   methods: {
 	  
@@ -100,6 +112,7 @@ export default {
 				 loading: false,
 			    params: {
 				catid: this.catid,
+				slistorder: this.slistorder,
 			      siteid: this.siteid,
 				  page: this.page,
 				  pagesize: this.pagesize,
@@ -142,11 +155,29 @@ export default {
       this.onLoad();
     },
 	onSearch(val) {
-		Toast(val);
+		
+		this.keywords = val
+		this.refreshing = true
+		this.onRefresh()
+		// Toast(val);
     },
-	onCancel() {
-      Toast('取消');
+	orderchange(val) {
+		// this.slistorder = val
+		 this.refreshing = true
+		 this.onRefresh()
+		 
+		  // Toast(this.slistorder);
+	},catchange(val) {
+		 this.refreshing = true
+		 this.onRefresh()
+		 
+		   // Toast(this.catid);
 	},
+	onCancel() {
+		// this.keywords = val
+      // Toast('取消');
+	},
+	
   },
 };
 </script>
