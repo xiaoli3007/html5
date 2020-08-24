@@ -76,7 +76,9 @@ export default {
     };
   },
   created() {
-  
+	
+	this.keywords = this.$route.query.keywords
+	
   	const params = {
   		// siteid: this.siteid,
   	}

@@ -68,10 +68,18 @@ export default {
       	})
       },
   onSearch(val) {
-        Toast(val);
+	  
+	  this.$router.replace({
+	  	name: 'List',
+	  	query: {
+	  		keywords: val,
+	  	}
+	  })
+	  
+        // Toast(val);
    },
   onCancel() {
-        Toast('取消');
+        // Toast('取消');
   },
   fetchData() {
      // this.$loading.show()  
