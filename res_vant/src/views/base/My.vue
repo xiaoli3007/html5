@@ -4,7 +4,9 @@
 	<van-row>
 	  
 	  <van-col span="8" offset="8">
-		  <van-image  v-if="!avatar" width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" round/>
+		<!--  <van-image  v-if="!avatar" width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" round/> -->
+		  
+		  <van-icon size="150" v-if="!avatar" name="user-o" />
 		  
 		   <van-image  v-if="avatar" width="100" height="100" :src="avatar" round/>
 		   
@@ -32,7 +34,7 @@
 	   
 	</van-cell-group>
 	 <div style="margin-top: 20px;"></div>
-	<van-button  @click="logout" type="warning" block>退出</van-button>
+	<van-button v-if="name" @click="logout" type="warning" block>退出</van-button>
 	
   
   </div>
