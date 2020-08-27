@@ -184,6 +184,9 @@
 			prevSong(){
 			 let  currentIndex = this.mindex	
 			  currentIndex--;
+			  if(currentIndex<0){
+				  return
+			  }
 			  currentIndex = currentIndex>0?currentIndex:0;
 			  this.setCurIndex(currentIndex)
 			},
@@ -191,6 +194,9 @@
 			nextSong(){
 			   let  currentIndex =  this.mindex	
 			 currentIndex++;
+			 if(currentIndex>this.audioList.length-1){
+			 	 return
+			 }
 			 currentIndex = currentIndex>this.audioList.length?this.audioList.length-1:currentIndex;
 			  this.setCurIndex(currentIndex)
 			},
