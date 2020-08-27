@@ -11,17 +11,17 @@
 		</div>
 		<van-row>
 			<van-col span="8">
-				<van-icon size="80" name="arrow-left" />
+				<van-icon size="80" @click="prevSong"  name="arrow-left" />
 			</van-col>
 			<van-col span="8">
 
-				<van-icon size="80" name="pause-circle-o" />
-				<!-- <van-icon size="50" name="play-circle-o" /> -->
+				<van-icon size="80"  @click="play" v-if="isplay" name="pause-circle-o" />
+				 <van-icon size="80" @click="play"  v-if="!isplay" name="play-circle-o" /> 
 
 
 			</van-col>
 			<van-col span="8">
-				<van-icon size="80" name="arrow" />
+				<van-icon size="80" @click="nextSong"  name="arrow" />
 			</van-col>
 		</van-row>
 		
@@ -74,6 +74,7 @@
 				audioList: [],
 				audioinfoList: [],
 				mindex: 0,
+				isplay: false,
 			}
 		},
 		mounted() {
@@ -128,12 +129,13 @@
 				this.audioList[this.mindex].play()
 			}
 
-			console.log(this.durationtime[0])
+			// console.log(this.durationtime[0])
 
 			// this.duration = this.audioinfoList[this.mindex]
 			// this.durationtime = this.audioinfoList[this.mindex]
 			this.text = this.audioinfoList[this.mindex]
-
+			
+			this.isplay = !this.audioList[this.mindex].paused
 
 		},
 		watch: {
@@ -154,14 +156,43 @@
 				//         })
 
 				console.log(this.audioList[this.mindex])
-
 				if (this.audioList[this.mindex].paused) {
 					this.audioList[this.mindex].play()
+					this.isplay = true
 				} else {
 					this.audioList[this.mindex].pause()
+					this.isplay = false
 				}
 				// console.log(this.ended)
 				// this.$emit("passtoparenttabvlue", this.tabvalue)
+			},
+			
+			stop() {
+				console.log(this.audioList[this.mindex])
+				this.audioList[this.mindex].pause()
+				this.isplay = false
+				
+			},
+			// 修改索引
+			setCurIndex(index){
+			  this.stop()
+			  this.mindex = index;
+			  this.play()
+			  this.text = this.audioinfoList[this.mindex]
+			},
+			// 切换到上一首歌曲
+			prevSong(){
+			 let  currentIndex = this.mindex	
+			  currentIndex--;
+			  currentIndex = currentIndex>0?currentIndex:0;
+			  this.setCurIndex(currentIndex)
+			},
+			// 切换到下一首歌曲
+			nextSong(){
+			   let  currentIndex =  this.mindex	
+			 currentIndex++;
+			 currentIndex = currentIndex>this.audioList.length?this.audioList.length-1:currentIndex;
+			  this.setCurIndex(currentIndex)
 			},
 			format(s) {
 				var t = '';
