@@ -18,24 +18,32 @@
 					<!-- <van-button icon="star" type="primary"> </van-button> -->
 				</van-col>
 			</van-row>
+			
+			<div class="audio" v-if="program.template=='show_audio'">
+			 <m-audio :show-duration="true" :autoplay="false" :arraylistaudio="meidia_list" :block="false" ref="myaudio_zi" ></m-audio> 
+			 
+			
+			 
+			</div>	
+			
+			<div class="video" v-if="program.template=='show'">
+				<video-player class="vjs-custom-skin" ref="videoPlayer" :options="playerOptions" :playsinline="true" @play="onPlayerPlay($event)"
+				 @pause="onPlayerPause($event)" @ended="onPlayerEnded($event)" @loadeddata="onPlayerLoadeddata($event)" @waiting="onPlayerWaiting($event)"
+				 @playing="onPlayerPlaying($event)" @timeupdate="onPlayerTimeupdate($event)" @canplay="onPlayerCanplay($event)"
+				 @canplaythrough="onPlayerCanplaythrough($event)" @ready="playerReadied" @statechanged="playerStateChanged($event)">
+				</video-player>
 
+				<van-divider>节目单</van-divider>
 
+				<van-row v-for="(item2, index2) in meidia_list" :key="index2">
+					<van-col span="24">
+						<van-button plain hairline type="info" v-if="meidia_index!=index2" size="large" @click="changesrc(index2)">{{item2.title}}</van-button>
+						<van-button type="info" v-if="meidia_index==index2" size="large" @click="changesrc(index2)">{{item2.title}}</van-button>
 
-			<video-player class="vjs-custom-skin" ref="videoPlayer" :options="playerOptions" :playsinline="true" @play="onPlayerPlay($event)"
-			 @pause="onPlayerPause($event)" @ended="onPlayerEnded($event)" @loadeddata="onPlayerLoadeddata($event)" @waiting="onPlayerWaiting($event)"
-			 @playing="onPlayerPlaying($event)" @timeupdate="onPlayerTimeupdate($event)" @canplay="onPlayerCanplay($event)"
-			 @canplaythrough="onPlayerCanplaythrough($event)" @ready="playerReadied" @statechanged="playerStateChanged($event)">
-			</video-player>
-
-			<van-divider>节目单</van-divider>
-
-			<van-row v-for="(item2, index2) in meidia_list" :key="index2">
-				<van-col span="24">
-					<van-button plain hairline type="info" v-if="meidia_index!=index2" size="large" @click="changesrc(index2)">{{item2.title}}</van-button>
-					<van-button type="info" v-if="meidia_index==index2" size="large" @click="changesrc(index2)">{{item2.title}}</van-button>
-
-				</van-col>
-			</van-row>
+					</van-col>
+				</van-row>
+			</div>	
+			
 
 		</div>
 
@@ -201,10 +209,13 @@
  
 				getshow(getparams).then(response => {
 					// this.data = response.items
-					console.log(response)
+					
 					this.program = response.program_info
 					//this.activetablist = JSON.parse(JSON.stringify(response.datas_tab)); 
 					this.meidia_list = response.program_info.meidia_list
+					
+					console.log(this.meidia_list)
+					
 					//console.log(this.meidia_list[0].videourl)
 					if (response.program_info.meidia_list.length > 0 && response.program_info.meidia_list[0].videourl != '') {
 						this.playerOptions.sources[0].src = response.program_info.meidia_list[0].videourl;

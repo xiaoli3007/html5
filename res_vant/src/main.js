@@ -17,6 +17,8 @@ Vue.use(VueVideoPlayer, /* {
 
 import Loading from './components/loading'
 Vue.prototype.$loading = Loading
+import audio from './lib/audio'
+Vue.use(audio)
 
 import '@/permission'
 
