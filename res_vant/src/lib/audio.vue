@@ -1,12 +1,29 @@
 <template>
 	<div style="padding: 0 20px;">
+		
+		<div style="padding:0 0  30px 0;">
+		<van-row>
+			<van-col span="24">
+		
+		<van-slider @input="sliderinput" @change="sliderchange" v-model="jindu" :min="0" :max="100" bar-height="20"  >
+		  <!-- <template #button>
+		    <div class="custom-button">
+		       
+		    </div>
+		  </template> -->
+		</van-slider>
+		
+		</van-col>
+		</van-row>
+		</div>
+		
 		<div class="x-audio-wrap" :class="{inline:!block}" ref="wrap" @click="play">
 			<div class="x-sector" :class="{play:animate}">
 				<div class="x-dot"></div>
 			</div>
 			<div class="x-audio-du">
 				<div class="x-text">{{text}}</div>
-				<div class="x-time">xxxxxxxxxx</div>
+				<div class="x-time">{{duration}}</div>
 			</div>
 		</div>
 		<van-row>
@@ -25,12 +42,38 @@
 			</van-col>
 		</van-row>
 		
+		<van-row>
+				<van-col span="6">
+					<van-button @click="changestate(0)"  v-if="state!=0" plain type="primary">顺序</van-button>
+					<van-button v-if="state==0"  type="primary">顺序</van-button>
+					
+				</van-col>
+				<van-col span="6">
+					<van-button @click="changestate(1)" v-if="state!=1" plain type="primary">随机</van-button>
+					<van-button v-if="state==1" type="primary">随机</van-button>
+					
+				</van-col>
+				<van-col span="6">
+					<van-button @click="changestate(2)" v-if="state!=2" plain type="primary">单曲循环</van-button>
+					<van-button v-if="state==2" type="primary">单曲循环</van-button>
+					
+				</van-col>
+				<van-col span="6">
+					<van-button @click="changestate(3)" v-if="state!=3" plain type="primary">顺序循环</van-button>
+					<van-button v-if="state==3" type="primary">顺序循环</van-button>
+					
+				</van-col>
+		</van-row>
+		
+	
+		
+		
 		<van-divider>节目单</van-divider>
 		
 			 <van-row v-for="(item2, index2) in audioinfoList" :key="index2">
 				<van-col span="24">
-					<van-button plain hairline type="info" v-if="mindex!=index2" size="large" @click="changesrc(index2)">{{item2}}</van-button>
-					<van-button type="info" v-if="mindex==index2" size="large" @click="changesrc(index2)">{{item2}}</van-button>
+					<van-button plain hairline type="info" v-if="mindex!=index2" size="large" @click="setCurIndex(index2)">{{item2}}</van-button>
+					<van-button type="info" v-if="mindex==index2" size="large" >{{item2}}</van-button>
 			 
 				</van-col>
 			 </van-row>
@@ -67,52 +110,28 @@
 			return {
 				animate: false,
 				timer: null,
-				duration: [],
-				durationtime: [],
+				slidertimer: null,
+				duration: null,
+				durationtime: null,
 				text: '',
 				ended: false,
 				audioList: [],
 				audioinfoList: [],
 				mindex: 0,
 				isplay: false,
+				state:0,
+				jindu: 0,
+				ctime: null,
 			}
 		},
 		mounted() {
 
 
-			this.arraylistaudio.forEach(audiot => { //开始前先关闭所有可能正在运行的实例		
+			this.arraylistaudio.forEach(audiot => { 		
 
 				let tempaudio = new Audio()
 				tempaudio.src = audiot.videourl
-
-				tempaudio.onplay = () => {
-					this.animate = true
-					this.timer = setInterval(() => {
-						this.animate = false
-						setTimeout(() => {
-							this.animate = true
-						}, 50)
-					}, 1250);
-				}
-				tempaudio.onpause = () => {
-					this.animate = false
-					this.timer && clearInterval(this.timer)
-				}
-				tempaudio.onended = () => {
-					this.animate = false
-					this.timer && clearInterval(this.timer)
-					this.ended = true
-				}
 				this.audioList.push(tempaudio)
-
-				var duration = null
-				tempaudio.addEventListener('canplaythrough', () => {
-
-					this.duration.push(this.format(tempaudio.duration))
-					this.durationtime.push(tempaudio.duration)
-
-					// 
-				})
 				let title = audiot.title
 				this.audioinfoList.push(title)
 
@@ -125,37 +144,94 @@
 			//  });
 
 
-			if (this.autoplay) {
-				this.audioList[this.mindex].play()
-			}
-
-			// console.log(this.durationtime[0])
-
-			// this.duration = this.audioinfoList[this.mindex]
-			// this.durationtime = this.audioinfoList[this.mindex]
-			this.text = this.audioinfoList[this.mindex]
+			// if (this.autoplay) {
+			// 	this.audioList[this.mindex].play()
+			// }
 			
-			this.isplay = !this.audioList[this.mindex].paused
-
+		  	
+			this.initplay()	
 		},
 		watch: {
 			ended(newValue, oldValue) {
-				// console.log(oldValue)
-				//console.log(newValue)
-
+				//  console.log(oldValue)
+				// console.log(newValue)
+				if(newValue){
+					this.nextSong()
+				}
 				// this.$emit("passtoparent_ennd", newValue)
+			},
+			ctime(newValue, oldValue) {
+			
+				// console.log(newValue)
+				if(newValue){
+					this.duration =this.format(newValue)
+					let geValue = (newValue*100)/this.durationtime
+						// console.log(geValue)
+					this.jindu = geValue
+				}
 			}
 		},
 		methods: {
+			sliderinput(e){
+				// console.log(e)
+			},
+			sliderchange(e){
+				// console.log(e)
+				// console.log(this.durationtime)
+				let a = this.audioList[this.mindex]
+				let geValue = (e*this.durationtime)/100
+				// console.log(geValue)
+				this.stop()
+				this.audioList[this.mindex].currentTime = geValue
+				this.play()
+				// console.log(a.currentTime )
+			},
+			initplay(){
+				 let tmp = this.audioList[this.mindex]
+				 
+				 if(this.duration){
+					 this.duration =this.format(tmp.duration)
+					 this.durationtime =tmp.duration
+				 }else{
+					 tmp.addEventListener('canplaythrough', () => {
+					  	this.duration =this.format(tmp.duration)
+					  	this.durationtime =tmp.duration
+					  })
+				 }
+				 
+				  tmp.onplay = () => {
+					  this.ended = false
+				  	this.animate = true
+				  	this.timer = setInterval(() => {
+				  		this.animate = false
+				  		setTimeout(() => {
+				  			this.animate = true
+				  		}, 50)
+				  	}, 1250);
+					
+					this.slidertimer = setInterval(() => {
+						 this.ctime= tmp.currentTime 
+					}, 1000);
+					
+				  }
+				  tmp.onpause = () => {
+				  	this.animate = false
+				  	this.timer && clearInterval(this.timer)
+					this.slidertimer && clearInterval(this.slidertimer)
+				  }
+				  tmp.onended = () => {
+				  	this.animate = false
+				  	this.timer && clearInterval(this.timer)
+					this.slidertimer && clearInterval(this.slidertimer)
+				  	this.ended = true
+				  }
+				  // this.ctime= this.audioinfoList[this.mindex].currentTime 
+				  this.text = this.audioinfoList[this.mindex]
+				  this.isplay = !this.audioList[this.mindex].paused
+			},
 			play() {
-
-				//         this.audioList.forEach(audio=>{//开始前先关闭所有可能正在运行的实例
-				//             // audio.load()
-				// // audio.fastSeek(0)
-				// audio.pause()
-				//         })
-
-				console.log(this.audioList[this.mindex])
+ 
+				// console.log(this.audioList[this.mindex])
 				if (this.audioList[this.mindex].paused) {
 					this.audioList[this.mindex].play()
 					this.isplay = true
@@ -166,19 +242,22 @@
 				// console.log(this.ended)
 				// this.$emit("passtoparenttabvlue", this.tabvalue)
 			},
-			
+			changestate(state){
+				this.state = state
+				// console.log(Math.floor(Math.random()*this.audioList.length))
+			},
 			stop() {
-				console.log(this.audioList[this.mindex])
+				// console.log(this.audioList[this.mindex])
 				this.audioList[this.mindex].pause()
 				this.isplay = false
-				
 			},
 			// 修改索引
 			setCurIndex(index){
 			  this.stop()
 			  this.mindex = index;
+			  this.initplay()	//初始化新的音频
 			  this.play()
-			  this.text = this.audioinfoList[this.mindex]
+			  
 			},
 			// 切换到上一首歌曲
 			prevSong(){
@@ -193,11 +272,26 @@
 			// 切换到下一首歌曲
 			nextSong(){
 			   let  currentIndex =  this.mindex	
-			 currentIndex++;
-			 if(currentIndex>this.audioList.length-1){
-			 	 return
-			 }
-			 currentIndex = currentIndex>this.audioList.length?this.audioList.length-1:currentIndex;
+			   
+			   if(this.state==1){	//随机播放 
+			   
+			     currentIndex = Math.floor(Math.random()*this.audioList.length)
+				 console.log(currentIndex)
+			   }else if(this.state==3){	 //顺序循环
+					
+					currentIndex++;
+					
+					currentIndex = currentIndex>this.audioList.length-1?0:currentIndex;
+					
+			   }else if(this.state==2){	 //单曲循环
+			    
+			   }else if(this.state==0){	//顺序播放
+				   currentIndex++;
+				   if(currentIndex>this.audioList.length-1){
+				   	 return
+				   }
+			   }
+			 
 			  this.setCurIndex(currentIndex)
 			},
 			format(s) {
@@ -209,19 +303,29 @@
 					if (min < 10) {
 						t += "0";
 					}
-					t += min + "'";
+					t += min + ":";
 					if (sec < 10) {
 						t += "0";
 					}
 					t += sec.toFixed(2);
 				}
-				t = t.replace('.', '\"')
+				t = t.replace('.', '\:')
 				return t;
 			},
 		}
 	}
 </script>
 <style lang="scss" scoped>
+	 .custom-button {
+	    width: 26px;
+		height: 35px;
+	    color: #fff;
+	    font-size: 10px;
+	    line-height: 18px;
+	    text-align: center;
+	    background-color: #00FF00;
+	    border-radius: 100px;
+	  }
 	.x-audio-wrap {
 		height: 130px;
 		width: 100%;

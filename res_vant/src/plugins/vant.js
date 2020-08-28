@@ -20,7 +20,9 @@ import { Sticky } from 'vant';
 import { Icon } from 'vant';
 import { ShareSheet } from 'vant';
 import { Divider } from 'vant';
+import { Slider } from 'vant';
 
+Vue.use(Slider);
 Vue.use(Divider);
 Vue.use(ShareSheet);
 Vue.use(Icon);
