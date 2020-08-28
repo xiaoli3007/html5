@@ -154,8 +154,15 @@
 		watch: {
 			ended(newValue, oldValue) {
 				//  console.log(oldValue)
-				// console.log(newValue)
+				 console.log(newValue)
 				if(newValue){
+					
+					if(this.mindex==this.audioList.length-1){
+					   //播放结束
+						console.log('播放结束ended')
+						this.stop()
+						return
+					}
 					this.nextSong()
 				}
 				// this.$emit("passtoparent_ennd", newValue)
@@ -192,14 +199,22 @@
 			initplay(){
 				 let tmp = this.audioList[this.mindex]
 				 
-				 if(this.duration){
+				   
+				 if(this.mindex!=0){
 					 this.duration =this.format(tmp.duration)
 					 this.durationtime =tmp.duration
+					 console.log(this.mindex+"--11-"+this.durationtime)
 				 }else{
-					 tmp.addEventListener('canplaythrough', () => {
-					  	this.duration =this.format(tmp.duration)
-					  	this.durationtime =tmp.duration
-					  })
+					
+					    tmp.addEventListener('canplaythrough', () => {
+							 if(this.mindex==0){
+								this.duration =this.format(tmp.duration)
+								this.durationtime =tmp.duration
+								console.log(this.mindex+"-22--"+this.durationtime)							
+							}
+						  })
+					
+					 
 				 }
 				 
 				  tmp.onplay = () => {
@@ -259,8 +274,6 @@
 				// console.log(this.audioList[this.mindex])
 				this.audioList[this.mindex].load()
 				this.audioList[this.mindex].pause()
-				
-				
 			},
 			// 修改索引
 			setCurIndex(index){
@@ -300,8 +313,8 @@
 				   currentIndex++;
 				   if(currentIndex>this.audioList.length-1){
 					   //播放结束
-					   // console.log(111)
-					   this.stop()
+					    console.log('播放结束')
+					   // this.stop()
 				   	 return
 				   }
 			   }
