@@ -90,7 +90,7 @@
 			this.init()
 		},
 		mounted() {
-			console.log(this.meidia_list)
+			// console.log(this.meidia_list)
 		},
 		computed: {
 			// player() {

@@ -211,7 +211,7 @@
 					
 					this.slidertimer = setInterval(() => {
 						 this.ctime= tmp.currentTime 
-					}, 1000);
+					}, 10);
 					
 				  }
 				  tmp.onpause = () => {
@@ -249,6 +249,7 @@
 			stop() {
 				// console.log(this.audioList[this.mindex])
 				this.audioList[this.mindex].pause()
+				this.audioList[this.mindex].load()
 				this.isplay = false
 			},
 			// 修改索引
