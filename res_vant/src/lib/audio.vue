@@ -165,7 +165,8 @@
 				// console.log(newValue)
 				if(newValue){
 					this.duration =this.format(newValue)
-					let geValue = (newValue*100)/this.durationtime
+					let a = this.audioList[this.mindex]
+					let geValue = (newValue*100)/a.duration
 						// console.log(geValue)
 					this.jindu = geValue
 				}
@@ -177,13 +178,15 @@
 			},
 			sliderchange(e){
 				// console.log(e)
-				// console.log(this.durationtime)
+				
 				let a = this.audioList[this.mindex]
-				let geValue = (e*this.durationtime)/100
-				// console.log(geValue)
-				this.stop()
-				this.audioList[this.mindex].currentTime = geValue
-				this.play()
+				  console.log(a.duration)
+				let geValue = (e*a.duration)/100
+				
+				 console.log(geValue)
+				a.pause()
+				a.currentTime = geValue
+				a.play()
 				// console.log(a.currentTime )
 			},
 			initplay(){
@@ -218,12 +221,18 @@
 				  	this.animate = false
 				  	this.timer && clearInterval(this.timer)
 					this.slidertimer && clearInterval(this.slidertimer)
+					
+					console.log("onpause"+this.mindex)
 				  }
 				  tmp.onended = () => {
+					 
 				  	this.animate = false
 				  	this.timer && clearInterval(this.timer)
 					this.slidertimer && clearInterval(this.slidertimer)
 				  	this.ended = true
+					this.isplay = false
+					this.jindu = 0
+					console.log("onended"+this.mindex)
 				  }
 				  // this.ctime= this.audioinfoList[this.mindex].currentTime 
 				  this.text = this.audioinfoList[this.mindex]
@@ -231,7 +240,7 @@
 			},
 			play() {
  
-				// console.log(this.audioList[this.mindex])
+				 console.log(this.durationtime)
 				if (this.audioList[this.mindex].paused) {
 					this.audioList[this.mindex].play()
 					this.isplay = true
@@ -248,9 +257,10 @@
 			},
 			stop() {
 				// console.log(this.audioList[this.mindex])
-				this.audioList[this.mindex].pause()
 				this.audioList[this.mindex].load()
-				this.isplay = false
+				this.audioList[this.mindex].pause()
+				
+				
 			},
 			// 修改索引
 			setCurIndex(index){
@@ -289,6 +299,9 @@
 			   }else if(this.state==0){	//顺序播放
 				   currentIndex++;
 				   if(currentIndex>this.audioList.length-1){
+					   //播放结束
+					   // console.log(111)
+					   this.stop()
 				   	 return
 				   }
 			   }
