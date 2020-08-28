@@ -211,7 +211,7 @@
 					
 					this.slidertimer = setInterval(() => {
 						 this.ctime= tmp.currentTime 
-					}, 10);
+					}, 1000);
 					
 				  }
 				  tmp.onpause = () => {
@@ -308,7 +308,8 @@
 					if (sec < 10) {
 						t += "0";
 					}
-					t += sec.toFixed(2);
+					// t += sec.toFixed(2);
+					t += sec.toFixed(0);
 				}
 				t = t.replace('.', '\:')
 				return t;
