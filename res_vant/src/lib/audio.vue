@@ -169,7 +169,7 @@
 			},
 			ctime(newValue, oldValue) {
 			
-				// console.log(newValue)
+				 // console.log('watch'+newValue)
 				if(newValue){
 					this.duration =this.format(newValue)
 					let a = this.audioList[this.mindex]
@@ -187,27 +187,27 @@
 				// console.log(e)
 				
 				let a = this.audioList[this.mindex]
-				  console.log(a.duration)
+				   // console.log("sliderchange"+this.duration)
 				let geValue = (e*a.duration)/100
-				
-				 console.log(geValue)
+				 
 				a.pause()
 				a.currentTime = geValue
 				a.play()
+				this.isplay = true
 				// console.log(a.currentTime )
 			},
 			initplay(){
 				 let tmp = this.audioList[this.mindex]
 				 
 				   
-				 if(this.mindex!=0){
+				 if( this.duration){
 					 this.duration =this.format(tmp.duration)
 					 this.durationtime =tmp.duration
 					 console.log(this.mindex+"--11-"+this.durationtime)
 				 }else{
 					
 					    tmp.addEventListener('canplaythrough', () => {
-							 if(this.mindex==0){
+							 if(this.mindex==0 && !this.duration){
 								this.duration =this.format(tmp.duration)
 								this.durationtime =tmp.duration
 								console.log(this.mindex+"-22--"+this.durationtime)							
@@ -255,7 +255,7 @@
 			},
 			play() {
  
-				 console.log(this.durationtime)
+				 console.log("play"+this.durationtime)
 				if (this.audioList[this.mindex].paused) {
 					this.audioList[this.mindex].play()
 					this.isplay = true
