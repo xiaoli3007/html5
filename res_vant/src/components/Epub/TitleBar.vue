@@ -1,11 +1,15 @@
 <template>
  <transition name="slide-down">
         <div class="title-wrapper" v-show="isTitleAndMenuShow">
-                <div class="left">
+			
+			
+			
+                <div class="left" @click="onClickLeft">
                     <span class="icon-back icon"></span>
                 </div>
                 <div class="right">
-                    <div class="icon-wrapper">
+					<!-- <van-icon name="star-o" /> -->
+                    <!-- <div class="icon-wrapper">
                         <span class="icon-cart icon"></span>
                     </div>
                     <div class="icon-wrapper">
@@ -13,8 +17,8 @@
                     </div>
                     <div class="icon-wrapper">
                         <span class="icon-more icon"></span>
-                    </div>
-                </div>
+                    </div> --> 
+                </div> 
             </div>
     </transition>
 </template>
@@ -26,8 +30,27 @@ export default {
         isTitleAndMenuShow:{
             tpye:Boolean,
             default:false
-        }
-    }
+        },
+		catid: {
+            tpye:Number,
+            default:0
+        },
+		news_id: {
+            tpye:Number,
+            default:0
+        },
+    }, methods: {
+	 onClickLeft() {
+		  this.$router.replace({
+		  	name: 'Show',
+		  	query: {
+		  		catid: this.catid,
+		  		news_id: this.news_id
+		  	}
+		  })
+		  
+		},
+		}
 
 }
 </script>

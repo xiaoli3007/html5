@@ -21,7 +21,20 @@ import { Icon } from 'vant';
 import { ShareSheet } from 'vant';
 import { Divider } from 'vant';
 import { Slider } from 'vant';
+import { Pagination } from 'vant';
+import { ImagePreview } from 'vant';
+import { Collapse, CollapseItem } from 'vant';
 
+Vue.use(Collapse);
+Vue.use(CollapseItem);
+// 全局注册
+Vue.use(ImagePreview);
+// 注册时可以配置额外的选项
+Vue.use(Lazyload, {
+  lazyComponent: true,
+});
+
+Vue.use(Pagination);
 Vue.use(Slider);
 Vue.use(Divider);
 Vue.use(ShareSheet);

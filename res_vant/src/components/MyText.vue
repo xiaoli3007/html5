@@ -72,11 +72,21 @@ export default {
   methods: {
     changesrc(index) {
 		
+		let n =''
+		if(this.meidia_list[index].fileext=='pdf'){
+			n ='Pdf'
+		}else if(this.meidia_list[index].fileext=='epub'){
+			n ='Epub'
+		}else{
+			return
+		}
+		
 		this.$router.replace({
-			name: 'Epub',
+			name: n,
 			query: {
-				// catid: catid,
-				// news_id: id
+				catid: this.meidia_list[index].catid,
+				news_id: this.meidia_list[index].news_id,
+				playurl: this.meidia_list[index].videourl,
 			}
 		})
 		

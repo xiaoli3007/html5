@@ -1,7 +1,19 @@
 <template>
 	<div style="padding: 0 20px;">
 		
-		<div style="padding:0 0  30px 0;">
+		
+		
+		<div class="x-audio-wrap" :class="{inline:!block}" ref="wrap" @click="play">
+			<div class="x-sector" :class="{play:animate}">
+				<div class="x-dot"></div>
+			</div>
+			<div class="x-audio-du">
+				<div class="x-text">{{text}}</div>
+				<div class="x-time">{{duration}}</div>
+			</div>
+		</div>
+		
+		<div style="padding:20px 0  20px 0;">
 		<van-row>
 			<van-col span="24">
 		
@@ -17,15 +29,6 @@
 		</van-row>
 		</div>
 		
-		<div class="x-audio-wrap" :class="{inline:!block}" ref="wrap" @click="play">
-			<div class="x-sector" :class="{play:animate}">
-				<div class="x-dot"></div>
-			</div>
-			<div class="x-audio-du">
-				<div class="x-text">{{text}}</div>
-				<div class="x-time">{{duration}}</div>
-			</div>
-		</div>
 		<van-row>
 			<van-col span="8">
 				<van-icon size="80" @click="prevSong"  name="arrow-left" />

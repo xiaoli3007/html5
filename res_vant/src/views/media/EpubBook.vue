@@ -1,6 +1,6 @@
 <template>
   <div class="ebook">
-        <title-bar :isTitleAndMenuShow="isTitleAndMenuShow"/>
+        <title-bar :catid="catid"  :news_id="news_id" :isTitleAndMenuShow="isTitleAndMenuShow"/>
         <div class="read-wrapper">
             <div id='read'></div>
             <div class="mask" v-show="isShowMask">
@@ -110,10 +110,16 @@ export default {
              navigationList:[],
              isShowMask:true,
              currentprogress:'0',
-             
-             
+			 epub_url : '',
+             catid:0,
+             news_id:0,
         }
     },
+	created() {
+		this.catid = this.$route.query.catid
+		this.news_id = this.$route.query.news_id
+		this.epub_url = this.$route.query.playurl 
+	},
     mounted(){
         this.showEpub()
     },
@@ -122,7 +128,7 @@ export default {
         //电子书的解析和渲染
         showEpub(){
             //生产Book
-            this.book = new Epub(DOWNLOAD_URL)
+            this.book = new Epub(this.epub_url)
             //生成Rendition 第一个参数为dom id ，渲染的结果会挂载这个元素上
             this.rendition=this.book.renderTo('read',{
                 width:window.innerWidth,

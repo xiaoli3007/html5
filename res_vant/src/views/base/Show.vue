@@ -10,7 +10,7 @@
 					<van-button icon="share" type="primary" @click="showShare = true"> </van-button>
 				</van-col>
 				<van-col span="16">
-					<h2>{{program.title}}</h2>
+					<!-- <h2>{{program.title}}</h2> -->
 				</van-col>
 				<van-col span="4">
 					<!-- <van-icon name="star-o" /> -->
@@ -18,6 +18,37 @@
 					<!-- <van-button icon="star" type="primary"> </van-button> -->
 				</van-col>
 			</van-row>
+			
+			<van-collapse v-model="activeNames">
+			  <van-collapse-item :title="program.title" name="1">
+				  <van-row v-if="program.inputtime!=''">
+				  	<van-col span="4">
+				  						日期：
+				  </van-col>
+				  <van-col span="20">
+				  					  {{program.inputtime}}
+				  </van-col>
+				  </van-row>
+				  <div style="margin-top: 15px;"> </div>
+				  <van-row v-if="program.description!=''">
+				  	<van-col span="4">
+						简介：
+				  </van-col>
+				  <van-col span="20">
+					  {{program.description}}
+				  </van-col>
+				  </van-row>
+				  
+				  
+			  </van-collapse-item>
+			  
+			</van-collapse>
+			
+			
+			<div class="image" v-if="program.template=='show_image'">
+			 <my-image  :meidia_list="meidia_list"  ref="mytext" ></my-image> 
+			 
+			</div>	
 			
 			<div class="wendang" v-if="program.template=='show_text'">
 			 <my-text  :meidia_list="meidia_list"  ref="mytext" ></my-text> 
@@ -56,11 +87,12 @@
 	
 	import MyVideo from '@/components/MyVideo'
 	import MyText from '@/components/MyText'
-	 
+	import MyImage from '@/components/MyImage'
 	export default {
 		components: {
 			MyVideo,
-			MyText
+			MyText,
+			MyImage
 		},
 		data() {
 			return {
@@ -86,6 +118,7 @@
 					// { name: '分享海报', icon: 'poster' },
 					// { name: '二维码', icon: 'qrcode' },
 				],
+				activeNames: ['1'],
 			}
 		},
 		created() {
@@ -164,7 +197,7 @@
 					//this.activetablist = JSON.parse(JSON.stringify(response.datas_tab)); 
 					this.meidia_list = response.program_info.meidia_list
 					
-					 console.log(this.meidia_list)
+					 console.log(this.program)
 					  
 					this.taskin = true
 				})
