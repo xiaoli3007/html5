@@ -21,24 +21,13 @@
 			
 			<van-collapse v-model="activeNames">
 			  <van-collapse-item :title="program.title" name="1">
-				  <van-row v-if="program.inputtime!=''">
-				  	<van-col span="4">
-				  						日期：
-				  </van-col>
-				  <van-col span="20">
-				  					  {{program.inputtime}}
-				  </van-col>
-				  </van-row>
+				   <van-row  v-for="(itemfild, index3) in main_resource_fild" :key="index3" >
+				  	<van-col span="8"><div style="text-align: right;">{{itemfild.name}}： </div></van-col>
+				  <van-col span="16"><div style="text-align: left;">{{itemfild.value}}</div></van-col>
 				  <div style="margin-top: 15px;"> </div>
-				  <van-row v-if="program.description!=''">
-				  	<van-col span="4">
-						简介：
-				  </van-col>
-				  <van-col span="20">
-					  {{program.description}}
-				  </van-col>
 				  </van-row>
-				  
+				 
+				    
 				  
 			  </van-collapse-item>
 			  
@@ -100,6 +89,7 @@
 				news_id: 0,
 				program: null,
 				meidia_list: [],
+				main_resource_fild: [],
 				data: null,
 				taskin: false,
 				showShare: false,
@@ -197,8 +187,9 @@
 					//this.activetablist = JSON.parse(JSON.stringify(response.datas_tab)); 
 					this.meidia_list = response.program_info.meidia_list
 					
-					 console.log(this.program)
-					  
+					 console.log(response.main_resource_fild)
+					this.main_resource_fild = response.main_resource_fild
+					
 					this.taskin = true
 				})
 
