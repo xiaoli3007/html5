@@ -73,10 +73,14 @@ export default {
     changesrc(index) {
 		
 		let n =''
+		let p = this.meidia_list[index].videourl
 		if(this.meidia_list[index].fileext=='pdf'){
 			n ='Pdf'
 		}else if(this.meidia_list[index].fileext=='epub'){
 			n ='Epub'
+			if(this.meidia_list[index].epub_filepath){
+				p = this.meidia_list[index].epub_filepath
+			}
 		}else{
 			return
 		}
@@ -86,8 +90,7 @@ export default {
 			query: {
 				catid: this.meidia_list[index].catid,
 				news_id: this.meidia_list[index].news_id,
-				playurl: this.meidia_list[index].videourl,
-				//playurl: this.meidia_list[index].epub_filepath,
+				playurl: p,
 			}
 		})
 		
