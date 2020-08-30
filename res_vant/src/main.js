@@ -20,6 +20,10 @@ Vue.prototype.$loading = Loading
 import audio from './lib/audio'
 Vue.use(audio)
 
+import '@/assets/epub/css/global.scss'
+import '@/assets/epub/css/icon.css'
+
+
 import '@/permission'
 
 

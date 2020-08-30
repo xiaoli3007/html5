@@ -19,11 +19,13 @@
 				</van-col>
 			</van-row>
 			
+			<div class="wendang" v-if="program.template=='show_text'">
+			 <my-text  :meidia_list="meidia_list"  ref="mytext" ></my-text> 
+			 
+			</div>	
+			
 			<div class="audio" v-if="program.template=='show_audio'">
 			 <m-audio :show-duration="true" :autoplay="false" :arraylistaudio="meidia_list" :block="false" ref="myaudio_zi" ></m-audio> 
-			 
-			
-			 
 			</div>	
 			
 			<div class="video" v-if="program.template=='show'">
@@ -53,10 +55,12 @@
 	} from '@/api/user'
 	
 	import MyVideo from '@/components/MyVideo'
+	import MyText from '@/components/MyText'
 	 
 	export default {
 		components: {
-			MyVideo
+			MyVideo,
+			MyText
 		},
 		data() {
 			return {
@@ -160,7 +164,7 @@
 					//this.activetablist = JSON.parse(JSON.stringify(response.datas_tab)); 
 					this.meidia_list = response.program_info.meidia_list
 					
-					// console.log(this.meidia_list)
+					 console.log(this.meidia_list)
 					  
 					this.taskin = true
 				})

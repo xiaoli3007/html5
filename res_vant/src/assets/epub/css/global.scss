@@ -1,0 +1,48 @@
+@import './reset.scss';
+
+
+//定义全局字体大小
+//定义整个站点的公共样式、公告方法和参数
+//1rem = fontSize px
+//1px = (1 / fontSize )rem
+// n * 1px = n * (1/fontSize) rem = (n / fontSize )rem
+
+//px转化为rem 根元素设置为37.5px大小
+$fontSize: 37.5;
+@function px2rem($px) {
+    @return ($px / $fontSize) + rem;
+}
+
+//弹性布局
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon{
+    color: #333;
+    font-size: px2rem(20);
+	// font-size:30px;
+}
+
+
+.slide-up-enter, .slide-up-leave-to {
+    transform: translate3d(0,px2rem(108),0);
+}
+.slide-up-enter-active,.slide-up-leave-active,.slide-down-enter-active,.slide-down-leave-active,.nav-up-enter-active,.nav-up-leave-active{
+    transition: all .3s linear;
+}
+.slide-up-enter-to,.slide-up-leave,.slide-down-enter-to,.slide-down-leave{
+    transform: translate3d(0,0,0);
+}
+.slide-down-enter, .slide-down-leave-to {
+    transform: translate3d(0,-100%,0);
+}
+
+.nav-up-enter,.nav-up-leave-to{
+    opacity: 0;
+}
+.nav-up-enter-to,.nav-up-leave{
+    opacity: 1;
+}

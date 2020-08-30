@@ -43,6 +43,12 @@ const routes = [
 		meta: { title: '详细页', keepAlive: false ,auth: false}
 	  },
 	  {
+	  	path: 'epub',
+	  	name: 'Epub',
+	  	component: () => import('@/views/media/EpubBook'),
+	  	meta: { title: 'epub播放页', keepAlive: false ,auth: false}
+	  },
+	  {
 		path: '/login',
 		name: 'Login',
 		// component: require('@/views/my/Login').default,
