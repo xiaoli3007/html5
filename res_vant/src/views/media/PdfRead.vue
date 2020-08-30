@@ -20,7 +20,7 @@
 				:page="currentPage"
        		></pdf> -->
 			
-			<pdf ref="myPdfComponent" v-if="show"   style="" :src="pdf_url" :page="page" :rotate="rotate"  @progress="loadedRatio = $event" @error="error" @num-pages="numPages = $event" @link-clicked="page = $event"></pdf>
+			<pdf ref="myPdfComponent" v-if="show"   style="" :src="pdf_url" :page="page" :rotate="rotate" @loaded="loaded"  @progress="loadedRatio = $event" @error="error" @num-pages="numPages = $event" @link-clicked="page = $event"></pdf>
 			
 			
 			<van-pagination v-model="page" :page-count="numPages" mode="simple" @change="paginationchange" />
@@ -49,6 +49,9 @@ export default {
         }
     },
 	created() {
+		
+		this.$loading.show()  
+		
 		this.catid = this.$route.query.catid
 		this.news_id = this.$route.query.news_id
 		this.pdf_url = this.$route.query.playurl 
@@ -60,6 +63,10 @@ export default {
        error: function(err) {
        
        			console.log(err);
+       		},
+			loaded: function() {
+				this.$loading.hide()  
+       			console.log(111);
        		},
 		paginationchange(e) {
         		   

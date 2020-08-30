@@ -87,6 +87,7 @@ export default {
 				catid: this.meidia_list[index].catid,
 				news_id: this.meidia_list[index].news_id,
 				playurl: this.meidia_list[index].videourl,
+				//playurl: this.meidia_list[index].epub_filepath,
 			}
 		})
 		

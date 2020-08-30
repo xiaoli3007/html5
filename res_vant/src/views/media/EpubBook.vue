@@ -116,6 +116,7 @@ export default {
         }
     },
 	created() {
+		this.$loading.show()  
 		this.catid = this.$route.query.catid
 		this.news_id = this.$route.query.news_id
 		this.epub_url = this.$route.query.playurl 
@@ -158,6 +159,7 @@ export default {
                 // this.onProgressChange(20)
                 this.bookAvailable = true
             })
+			 this.$loading.hide()  
         },
         currentLocation(){
             const currentLocation = this.rendition.currentLocation()
