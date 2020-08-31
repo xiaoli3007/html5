@@ -96,7 +96,7 @@ export default {
                     desc:'淡黄',
                     style:{
                         body:{
-                            'color':'#000' ,'background':'rgb(241,236,226)'
+                            'color':'#000' ,'background':'#f9f4e9'
                         }
 
                         
@@ -158,8 +158,9 @@ export default {
                 // console.log(this.locations);
                 // this.onProgressChange(20)
                 this.bookAvailable = true
+				
             })
-			 this.$loading.hide()  
+			  this.$loading.hide() 
         },
         currentLocation(){
             const currentLocation = this.rendition.currentLocation()
@@ -188,11 +189,15 @@ export default {
             }
         },
         registerTheme(){
+				console.log(this.themesList)
             this.themesList.forEach(theme =>{
                 this.themes.register(theme.name,theme.style)
             })
         },
         setTheme(index){
+			console.log(index)
+			console.log(this.themesList[index].name)
+			console.log( this.themes)
             this.themes.select(this.themesList[index].name)
             this.defaulTheme = index
         },
