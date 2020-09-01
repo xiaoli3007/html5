@@ -1,5 +1,13 @@
 import request from '@/utils/request'
 
+export function get_model_field(params) {
+  return request({
+    url: 'vue_app_modelfield_api.php?act=get_model_field',
+    method: 'get',
+    params
+  })
+}
+
 export function getshow(params) {
   return request({
     url: 'vue_app_model_api.php?act=detail',

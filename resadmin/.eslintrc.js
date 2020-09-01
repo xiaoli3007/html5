@@ -22,5 +22,6 @@ module.exports = {
 	'no-self-assign': 0,
 	// 禁止在正则表达式中使用控制字符
 	'no-control-regex': 0,
+	'no-unreachable': 'off',
   }
 }

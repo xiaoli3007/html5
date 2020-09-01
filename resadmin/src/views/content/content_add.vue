@@ -8,52 +8,67 @@
 	</el-page-header> 
 	 
 	 <div style="padding-top: 20px;">
+		 <el-row>
+		 	
+		 	<el-col :span="24"   justify="left" align="left">
+				<el-form :inline="true" class="demo-form-inline">
+		 <el-form-item v-for="(item, linkage_index) in form_linkage" :key="linkage_index" >
+		 	<el-cascader :placeholder="item.name"   :options="item.data" v-model="all_form_data.form_linkage_data[linkage_index]" :props="props"
+		 	 @change="handleChange"></el-cascader>
+		 </el-form-item> 
+		 </el-form>
+		 </el-col>
+		 </el-row>
+			 
 		<el-row>
 			
 			<el-col :span="24"   justify="left" align="left">
 					<el-form :label-position="labelPosition" :model="ruleForm" :inline="false"  size="medium" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-					  <el-form-item label="活动名称" prop="name">
-					    <el-input v-model="ruleForm.name"></el-input>
+				
+				<el-row>		
+				<div v-for="(from_zhu, index) in all_form_field" :key="index">
+						<el-col :span="12"   justify="left" align="left">	
+					  <el-form-item v-if="from_zhu.formtype=='text'" :label="from_zhu.name" >
+					    <el-input  v-model="ruleForm.name"></el-input>
 					  </el-form-item>
-					  <el-form-item label="活动区域" prop="region">
+					  
+					  <el-form-item  v-if="from_zhu.formtype=='select'" :label="from_zhu.name" prop="region">
 					    <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-					      <el-option label="区域一" value="shanghai"></el-option>
-					      <el-option label="区域二" value="beijing"></el-option>
+					      <el-option v-for="(item, sindex) in from_zhu.dataarray" :key="sindex"  :label="item.label" :value="item.value"></el-option>
+					       
 					    </el-select>
 					  </el-form-item>
-					  <el-form-item label="活动时间" required>
-					    <el-col :span="11">
-					      <el-form-item prop="date1">
-					        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-					      </el-form-item>
-					    </el-col>
-					    <el-col class="line" :span="2">-</el-col>
-					    <el-col :span="11">
-					      <el-form-item prop="date2">
-					        <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-					      </el-form-item>
-					    </el-col>
-					  </el-form-item>
-					  <el-form-item label="即时配送" prop="delivery">
-					    <el-switch v-model="ruleForm.delivery"></el-switch>
-					  </el-form-item>
-					  <el-form-item label="活动性质" prop="type">
-					    <el-checkbox-group v-model="ruleForm.type">
-					      <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-					      <el-checkbox label="地推活动" name="type"></el-checkbox>
-					      <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-					      <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-					    </el-checkbox-group>
-					  </el-form-item>
-					  <el-form-item label="特殊资源" prop="resource">
+					  
+					  
+					  <el-form-item v-if="from_zhu.formtype=='radio'" :label="from_zhu.name">
 					    <el-radio-group v-model="ruleForm.resource">
-					      <el-radio label="线上品牌商赞助"></el-radio>
-					      <el-radio label="线下场地免费"></el-radio>
+					      <el-radio v-for="(item, sindex) in from_zhu.dataarray" :key="sindex"  :label="item.label">{{item.name}}</el-radio>
+					       
 					    </el-radio-group>
 					  </el-form-item>
-					  <el-form-item label="活动形式" prop="desc">
-					    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+					  
+					  <el-form-item v-if="from_zhu.formtype=='checkbox'" :label="from_zhu.name">
+					    <el-checkbox-group v-model="ruleForm.type">
+					      <el-checkbox v-for="(item, sindex) in from_zhu.dataarray" :key="sindex"  :label="item.label" >{{item.name}}</el-checkbox>
+					      
+					    </el-checkbox-group>
 					  </el-form-item>
+					  
+					  
+					  <el-form-item  v-if="from_zhu.formtype=='datetime'" :label="from_zhu.name">
+					        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+					     
+						 
+					  </el-form-item>
+					  
+					<!--  <el-form-item label="活动形式" prop="desc">
+					    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+					  </el-form-item> -->
+					   </el-col>
+					  </div>
+					  </el-row>
+					  	
+					  
 					  <el-form-item>
 					    <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
 					    <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -68,14 +83,21 @@
 </template>
 
 <script>
+	import _ from 'lodash'
 	import {
-		getshow
+		getshow,get_model_field
 	} from '@/api/table'
 	import _g from '@/utils/global.js'
 
 	export default {
 		data() {
 			return {
+				props: {
+					multiple: true,
+					expandTrigger: 'hover',
+					emitPath: false,
+					checkStrictly: false
+				},
 				catid: 0,
 				news_id: 0,
 				program: null,
@@ -87,61 +109,86 @@
 				 ruleForm: {
 				          name: '',
 				          region: '',
+						  type: [],
 				          date1: '',
-				          date2: '',
-				          delivery: false,
-				          type: [],
 				          resource: '',
 				          desc: ''
 				        },
 				        rules: {
 				          name: [
-				            { required: true, message: '请输入活动名称', trigger: 'blur' },
-				            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+				            { required: true, message: '请输入标题', trigger: 'blur' },
+				            { min: 3, max: 200, message: '长度在 3 到 200 个字符', trigger: 'blur' }
 				          ],
-				          region: [
-				            { required: true, message: '请选择活动区域', trigger: 'change' }
-				          ],
-				          date1: [
-				            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-				          ],
-				          date2: [
-				            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-				          ],
-				          type: [
-				            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-				          ],
-				          resource: [
-				            { required: true, message: '请选择活动资源', trigger: 'change' }
-				          ],
-				          desc: [
-				            { required: true, message: '请填写活动形式', trigger: 'blur' }
-				          ]
+				          
 				        },
+				
+				all_form_data: {
+					form_linkage_data: [],
+					 
+				},
+				all_form_field:[],
+				form_linkage:[],
+				search_linkage_default_string:'',
 			}
 		},
 		filters: {
 
 		},
 		created() {
-
+			
 			this.catid = this.$route.query.catid
 			this.news_id = this.$route.query.news_id
 			// this.ebookid = 446654
 			// console.log(this.ebookid);
+			this.fetchmodelfield()
 			if(this.news_id!=0){
 				this.init()
 			}else{
 				this.taskin = true
 			}
 			
-		 	
 		},
 		methods: {
+			handleChange(value) {
+				
+				let linkage_data = this.all_form_data.form_linkage_data
+				//联动菜单拼接 ==================================
+				let list_select_linkage = []
+				_(linkage_data).forEach(function(value, key) {
+						list_select_linkage.push(value)
+				});
+				this.search_linkage_default_string = list_select_linkage.join()
+				console.log(this.search_linkage_default_string);
+			},
+			fetchmodelfield() {
+				 
+				const params = {
+					catid: this.catid,
+					 
+				}
+				var selfmain = this 
+				get_model_field(params).then(response => {
+					
+					let  value = response.items
+					console.log(value);
+					let temp_linkage = value.form_linkage
+					let temp_linkage_data = []
+					_(temp_linkage).forEach(function(value2, key2) {
+						_.set(temp_linkage_data, key2, "");
+					});
+					
+					selfmain.all_form_field =  value.form_base
+					selfmain.form_linkage = value.form_linkage
+					selfmain.all_form_data.form_linkage_data =   temp_linkage_data
+					
+					
+				})
+			}, 
 		  submitForm(formName) {
 				this.$refs[formName].validate((valid) => {
 				  if (valid) {
-					alert('submit!');
+					// alert('submit!');
+					console.log(this.ruleForm)
 				  } else {
 					console.log('error submit!!');
 					return false;
@@ -151,10 +198,6 @@
 			  resetForm(formName) {
 				this.$refs[formName].resetFields();
 			  },
-			//  readtask(a) {
-			// 	 // console.log(a);
-			// 	this.$router.replace({ name: 'Read' , query:{  taskid: a }})
-			// },
 			
 			gotoback(a) {
 				// console.log(a);
@@ -169,7 +212,6 @@
 					spinner: 'el-icon-loading',
 					background: '#000'
 				});
-
 				const params = {
 					catid: this.catid,
 					news_id: this.news_id,
@@ -180,11 +222,8 @@
 					// this.data = response.items
 					this.program = response.program_info
 					this.taskin = true
-					//console.log(this.activetablist);
-					
+					console.log(this.program);
 				})
-				
-					
 			}, 
 
 			init() {

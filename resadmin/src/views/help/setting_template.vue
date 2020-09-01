@@ -2,11 +2,11 @@
 	<div class="app-container">
 		<el-tabs v-model="activeName" @tab-click="handleClick">
 			<el-tab-pane label="基本设置" name="first">基本设置</el-tab-pane>
-			<el-tab-pane label="邮箱设置" name="second">邮箱设置</el-tab-pane>
-			<el-tab-pane label="模板设置" name="third">模板设置</el-tab-pane>
-			<el-tab-pane label="播放器设置" name="fourth">播放器设置</el-tab-pane>
-			<el-tab-pane label="评论设置" name="fourth">评论设置</el-tab-pane>
-			<el-tab-pane label="搜索设置" name="fourth">搜索设置</el-tab-pane>
+			<el-tab-pane label="邮箱设置" name="email">邮箱设置</el-tab-pane>
+			<el-tab-pane label="模板设置" name="template">模板设置</el-tab-pane>
+			<el-tab-pane label="播放器设置" name="play">播放器设置</el-tab-pane>
+			<el-tab-pane label="评论设置" name="pl">评论设置</el-tab-pane>
+			<el-tab-pane label="搜索设置" name="search">搜索设置</el-tab-pane>
 			
 		</el-tabs>
 
