@@ -36,7 +36,7 @@
 									</el-form-item>
 
 									<el-form-item v-if="from_zhu.formtype=='image'">
-										<el-upload class="avatar-uploader" action="https://jsonplaceholder.typicode.com/posts/" :show-file-list="false"
+										<el-upload class="avatar-uploader" :action="from_zhu.uploadurl" :show-file-list="false"
 										 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
 											<img v-if="programForm[from_zhu.field]" :src="programForm[from_zhu.field]" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -180,7 +180,13 @@
 		},
 		methods: {
 			handleAvatarSuccess(res, file) {
-				this.imageUrl = URL.createObjectURL(file.raw);
+				console.log(res)
+				console.log(file)
+				// this.imageUrl = URL.createObjectURL(file.raw);
+				// this.programForm[res.field] = res.fileurl
+				
+				this.$set(this.programForm, res.field, res.fileurl)
+				
 			},
 			beforeAvatarUpload(file) {
 				// const isJPG = file.type === 'image/jpeg';
