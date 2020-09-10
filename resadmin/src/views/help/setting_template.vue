@@ -2,6 +2,7 @@
 	<div class="app-container">
 		<el-tabs v-model="activeName" @tab-click="handleClick">
 			<el-tab-pane label="基本设置" name="first">基本设置</el-tab-pane>
+			<el-tab-pane label="用户设置" name="first2">用户设置</el-tab-pane>
 			<el-tab-pane label="邮箱设置" name="email">邮箱设置</el-tab-pane>
 			<el-tab-pane label="模板设置" name="template">模板设置</el-tab-pane>
 			<el-tab-pane label="播放器设置" name="play">播放器设置</el-tab-pane>
@@ -62,7 +63,7 @@
 					siteid: getsiteid() ? getsiteid() : "1",
 				},
 				siteidlist: [],
-				activeName: 'second'
+				activeName: 'first'
 			}
 		},
 		created() {

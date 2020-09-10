@@ -152,6 +152,37 @@ export const constantRouterMap = [
 		},
 		]
 	}, 
+	
+	{
+		path: '/member',
+		component: Layout,
+		redirect: '/member/list',
+		name: 'Member',
+		meta: {
+			title: '用户管理',
+			icon: 'setting'
+		},
+		children: [{
+			path: 'list',
+			name: 'Memberlist',
+			// component: require('@/views/help/setting').default,
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '用户列表',
+				icon: 'setting'
+			}
+		},{
+			path: 'membergroup',
+			name: 'Membergroup',
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '用户组',
+				icon: 'setting'
+			}
+			
+		},
+		]
+	}, 
 	{
 		path: '/serve',
 		component: Layout,
