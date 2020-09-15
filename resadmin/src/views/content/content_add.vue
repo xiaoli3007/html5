@@ -279,6 +279,8 @@
 							 		catid: this.catid,
 							 	}
 							 })
+						}else{
+							 _g.toastMsg('error', '提交失败！', this)
 						}
 					})
 					
@@ -316,6 +318,7 @@
 					// this.data = response.items
 					this.program = response.program_info
 					this.taskin = true
+					this.title = '（资源）'+this.program.title +'（编辑）'
 					console.log(this.program);
 				})
 			},

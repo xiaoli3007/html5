@@ -116,10 +116,42 @@ export const constantRouterMap = [
 	{
 		path: '/modelfu',
 		component: Layout,
-		redirect: '/modelfu/cat',
+		redirect: '/modelfu/mlist',
 		name: 'Modelfu',
 		meta: {
 			title: '模型相关',
+			icon: 'setting'
+		},
+		children: [{
+			path: 'mlist',
+			name: 'MList',
+			// component: require('@/views/help/setting').default,
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '模型列表',
+				icon: 'setting'
+			}
+		},{
+			path: 'explode',
+			name: 'Explode',
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '数据导入',
+				icon: 'setting'
+			}
+			
+		},
+		]
+	}, 
+	
+ 
+	{
+		path: '/contentfu',
+		component: Layout,
+		redirect: '/contentfu/cat',
+		name: 'Contentfu',
+		meta: {
+			title: '内容相关',
 			icon: 'setting'
 		},
 		children: [{
@@ -152,7 +184,6 @@ export const constantRouterMap = [
 		},
 		]
 	}, 
-	
 	{
 		path: '/member',
 		component: Layout,
@@ -183,6 +214,36 @@ export const constantRouterMap = [
 		},
 		]
 	}, 
+	{
+		path: '/admin',
+		component: Layout,
+		redirect: '/admin/adminlist',
+		name: 'Admin',
+		meta: {
+			title: '管理员',
+			icon: 'setting'
+		},
+		children: [{
+			path: 'adminlist',
+			name: 'AdminList',
+			// component: require('@/views/help/setting').default,
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '管理员列表',
+				icon: 'setting'
+			}
+		},{
+			path: 'role',
+			name: 'Role',
+			component: () => import('@/views/content/cat'),
+			meta: {
+				title: '角色列表',
+				icon: 'setting'
+			}
+			
+		},
+		]
+	},
 	{
 		path: '/serve',
 		component: Layout,

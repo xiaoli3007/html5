@@ -16,6 +16,14 @@ export function getshow(params) {
   })
 }
 
+export function deleteContent(params) {
+  return request({
+    url: '/vue_app_model_api.php?act=deleteContent',
+    method: 'post',
+    data:params,
+  })
+}
+
 export function publish_res(params) {
 	return request({
 		url: 'vue_app_model_api.php?act=publish_res',

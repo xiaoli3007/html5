@@ -81,7 +81,7 @@
 
 
 
-		<div class="booklist22" style="margin-top: 15px; display: none;">
+	<!-- 	<div class="booklist22" style="margin-top: 15px; display: none;">
 			<el-row :gutter="20" v-loading.body="listLoading" element-loading-text="Loading">
 				<el-col :span="4" v-for="(singe, index) in list" :key="index">
 					<el-card :body-style="{ padding: '0px' }">
@@ -98,7 +98,7 @@
 					</el-card>
 				</el-col>
 			</el-row>
-		</div>
+		</div> -->
 		
 
 		<el-table :data="list"  ref="multipleTable"  @selection-change="handleSelectionChange" v-loading.body="listLoading" element-loading-text="Loading" border fit highlight-current-row>
@@ -145,7 +145,7 @@
 						  <el-button icon="el-icon-search"  v-on:click="gotoShow(scope.row.catid,scope.row.id)" circle></el-button> 
 						  <el-button   v-on:click="add(scope.row.catid,scope.row.id)" type="primary" icon="el-icon-edit" circle></el-button>
 						 
-						  <el-button  v-on:click="delete(scope.row.catid,scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
+						  <el-button  v-on:click="handleDelete(scope.row.catid,scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
 					 </el-col>
 					 
 
@@ -159,7 +159,7 @@
 				<el-col :span="12">
 						<div style="">
 						  <el-button @click="toggleSelection(list)">全选</el-button>
-						  <el-button @click="toggleSelection()">取消选择</el-button>
+						  <el-button @click="toggledelete()">删除</el-button>
 						</div>
 				</el-col>
 				<el-col :span="12">
@@ -187,7 +187,7 @@
 	} from '@/utils/auth'
 	import {
 		model_data_list,
-		get_catlist_data
+		get_catlist_data,deleteContent
 	} from '@/api/table'
 	import _g from '@/utils/global.js'
 
@@ -296,9 +296,53 @@
 
 		},
 		methods: {
+			handleDelete(catid, id) {
+				this.$confirm('确认删除该资源?', '提示', {
+				  confirmButtonText: '确定',
+				  cancelButtonText: '取消',
+				  type: 'warning'
+				}).then(() => {
+					
+					const params = {
+						catid: catid,
+						news_id: id
+					}
+					
+					_g.openGlobalLoading()
+					deleteContent(params).then(response => {
+						// console.log(response)
+						_g.closeGlobalLoading()
+						if (response.code == 20000) {
+							
+							_g.toastMsg('success', '删除成功',this)
+							 setTimeout(() => {
+							  _g.shallowRefresh(this.$route.name)
+							}, 500)
+							
+						}else{
+							_g.toastMsg('error', '删除错误',this)
+						}
+					})
+				  // console.log(row.id);
+				}).catch(() => {
+				  // catch error
+				})
+				
+				
+			},
+			toggledelete() {
+			 
+			 let deletres = []
+			 this.multipleSelection.forEach(row => {
+			 				  console.log(row)
+			 		deletres.push({catid:row.catid,news_id:row.id})	
+			 });
+			 console.log(deletres)
+		  },
 			toggleSelection(rows) {
 			if (rows) {
 			  rows.forEach(row => {
+				  console.log(row)
 				this.$refs.multipleTable.toggleRowSelection(row);
 			  });
 			} else {
@@ -307,7 +351,7 @@
 		  },
 		  handleSelectionChange(val) {
 			this.multipleSelection = val;
-			console.log(this.multipleSelection)
+			// console.log(this.multipleSelection)
 		  },
 			handleChange(value) {
 				console.log(value);
