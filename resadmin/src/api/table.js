@@ -16,6 +16,15 @@ export function getshow(params) {
   })
 }
 
+export function publish_res(params) {
+	return request({
+		url: 'vue_app_model_api.php?act=publish_res',
+		method: 'post',
+		data:params,
+		// params: { username ,password}
+	})
+}
+
 export function model_data_list(params) {
 	
 	if(params.keywords!=''){

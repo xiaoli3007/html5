@@ -21,7 +21,7 @@
 			<el-row>
 
 				<el-col :span="24" justify="left" align="left">
-					<el-form :label-position="labelPosition" :model="programForm" :inline="false" size="medium" ref="ruleForm"
+					<el-form :label-position="labelPosition" :model="programForm" :inline="false" size="medium" ref="ruleForm" :rules="rules"
 					 label-width="100px" class="demo-ruleForm" v-if="taskformin">
 
 						<el-row>
@@ -31,7 +31,7 @@
 								<el-col :span="12" justify="left" align="left">
 
 
-									<el-form-item v-if="from_zhu.formtype=='text'" :label="from_zhu.name">
+									<el-form-item v-if="from_zhu.formtype=='text'" :label="from_zhu.name"  :prop="from_zhu.field">
 										<el-input v-model="programForm[from_zhu.field]"></el-input>
 									</el-form-item>
 
@@ -44,12 +44,12 @@
 										</el-upload>
 									</el-form-item>
 
-									<el-form-item v-if="from_zhu.formtype=='textarea'" :label="from_zhu.name">
+									<el-form-item v-if="from_zhu.formtype=='textarea'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-input type="textarea" v-model="programForm[from_zhu.field]"></el-input>
 									</el-form-item>
 
 
-									<el-form-item v-if="from_zhu.formtype=='select'" :label="from_zhu.name" >
+									<el-form-item v-if="from_zhu.formtype=='select'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-select v-model="programForm[from_zhu.field]" placeholder="">
 											<el-option v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label" :value="item.value"></el-option>
 
@@ -57,14 +57,14 @@
 									</el-form-item>
 
 
-									<el-form-item v-if="from_zhu.formtype=='radio'" :label="from_zhu.name">
+									<el-form-item v-if="from_zhu.formtype=='radio'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-radio-group v-model="programForm[from_zhu.field]">
 											<el-radio v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label">{{item.name}}</el-radio>
 
 										</el-radio-group>
 									</el-form-item>
 
-									<el-form-item v-if="from_zhu.formtype=='checkbox'" :label="from_zhu.name">
+									<el-form-item v-if="from_zhu.formtype=='checkbox'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-checkbox-group v-model="programForm[from_zhu.field]">
 											<el-checkbox v-for="(item, sindex) in from_zhu.dataarray" :key="sindex"   :label="item.label">{{item.name}}</el-checkbox>
 
@@ -72,7 +72,7 @@
 									</el-form-item>
 
 
-									<el-form-item v-if="from_zhu.formtype=='datetime'" :label="from_zhu.name">
+									<el-form-item v-if="from_zhu.formtype=='datetime'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-date-picker type="date" placeholder="选择日期"  format="yyyy-MM-dd" value-format="yyyy-MM-dd" v-model="programForm[from_zhu.field]" style="width: 100%;"></el-date-picker>
 
 
@@ -86,7 +86,7 @@
 
 
 						<el-form-item>
-							<el-button type="primary" @click="submitForm('ruleForm')">立即创建1</el-button>
+							<el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
 							<el-button @click="resetForm('ruleForm')">重置</el-button>
 						</el-form-item>
 					</el-form>
@@ -102,7 +102,7 @@
 	import _ from 'lodash'
 	import {
 		getshow,
-		get_model_field
+		get_model_field,publish_res
 	} from '@/api/table'
 	import _g from '@/utils/global.js'
 
@@ -137,7 +137,7 @@
 					desc: ''
 				},
 				rules: {
-					name: [{
+					title: [{
 							required: true,
 							message: '请输入标题',
 							trigger: 'blur'
@@ -246,18 +246,48 @@
 				})
 			},
 			submitForm(formName) {
-				console.log(1111)
-				console.log(this.programForm)
-				console.log(this.all_form_data)
-				// this.$refs[formName].validate((valid) => {
-				//   if (valid) {
-				// 	// alert('submit!');
-				// 	console.log(this.ruleForm)
-				//   } else {
-				// 	console.log('error submit!!');
-				// 	return false;
-				//   }
-				// });
+			 
+				this.$refs[formName].validate((valid) => {
+				  if (valid) {
+					// alert('submit!');
+					// console.log(this.programForm)
+					// console.log(this.search_linkage_default_string)
+					
+					let resparams=JSON.stringify(this.programForm)
+					  console.log(resparams)
+						
+					 const params = {
+					 	catid: this.catid,
+					 	edit_id: this.news_id,
+						resparams: resparams,
+						search_linkage_default_string: this.search_linkage_default_string,
+						sysadd:1,
+					 	userid: this.$store.state.user.userid
+					 }
+					// console.log(this.form.content)
+					
+					publish_res(params).then(response => {
+						 console.log(response)
+					 	 
+						if (response.code == 20000) {
+							 
+							 _g.toastMsg('success', '提交成功！', this)
+							 
+							 this.$router.replace({
+							 	name: 'Model_table_list',
+							 	query: {
+							 		catid: this.catid,
+							 	}
+							 })
+						}
+					})
+					
+					
+				  } else {
+					console.log('error submit!!');
+					return false;
+				  }
+				});
 			},
 			resetForm(formName) {
 				this.$refs[formName].resetFields();
