@@ -247,17 +247,17 @@ export const constantRouterMap = [
 	{
 		path: '/serve',
 		component: Layout,
-		redirect: '/serve/setting',
+		redirect: '/serve/site',
 		name: 'Setting',
 		meta: {
 			title: '设置',
 			icon: 'setting'
 		},
 		children: [{
-			path: 'setting',
-			name: 'Setting',
+			path: 'site',
+			name: 'Site',
 			// component: require('@/views/help/setting').default,
-			component: () => import('@/views/help/setting'),
+			component: () => import('@/views/help/site'),
 			meta: {
 				title: '站点',
 				icon: 'setting'

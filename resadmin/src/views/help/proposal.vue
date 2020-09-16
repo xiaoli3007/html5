@@ -1,6 +1,6 @@
 <template>
 	<div class="app-container">
-
+	
 
 		<el-tabs v-model="activeName">
 			<el-tab-pane label="建议" name="first">
@@ -41,8 +41,8 @@
 
 <script>
 	import {
-		feedback,askbook
-	} from '@/api/help'
+		feedback
+	} from '@/api/setting'
 	import _g from '@/utils/global.js'
 
 	export default {
@@ -132,38 +132,38 @@
 				});
 			},
 			
-			submitForm_qiushu(formName) {
-				this.$refs[formName].validate((valid) => {
-					if (valid) {
+			// submitForm_qiushu(formName) {
+			// 	this.$refs[formName].validate((valid) => {
+			// 		if (valid) {
 			
-						const loading = this.$loading({
-							lock: true,
-							text: '提交中， 请稍等...',
-							spinner: 'el-icon-loading',
-							background: 'rgba(0, 0, 0, 0.7)'
-						});
+			// 			const loading = this.$loading({
+			// 				lock: true,
+			// 				text: '提交中， 请稍等...',
+			// 				spinner: 'el-icon-loading',
+			// 				background: 'rgba(0, 0, 0, 0.7)'
+			// 			});
 			
-						// console.log(this.form.content)
+			// 			// console.log(this.form.content)
 			
-						askbook(this.$store.state.user.userid, this.form_qiushu).then(response => {
-							console.log(response)
+			// 			askbook(this.$store.state.user.userid, this.form_qiushu).then(response => {
+			// 				console.log(response)
 			
-							loading.close();
+			// 				loading.close();
 			
-							if (response.code == 20000) {
-								this.form_qiushu.name = ''
-								this.form_qiushu.content = ''
-								_g.toastMsg('success', '提交成功！', this)
-							}
-						})
+			// 				if (response.code == 20000) {
+			// 					this.form_qiushu.name = ''
+			// 					this.form_qiushu.content = ''
+			// 					_g.toastMsg('success', '提交成功！', this)
+			// 				}
+			// 			})
 			
-					} else {
-						// alert('提交失败!!');
-						console.log('提交失败!!');
-						return false;
-					}
-				});
-			}
+			// 		} else {
+			// 			// alert('提交失败!!');
+			// 			console.log('提交失败!!');
+			// 			return false;
+			// 		}
+			// 	});
+			// }
 			
 		}
 	}

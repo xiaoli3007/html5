@@ -11,31 +11,14 @@
 			
 		</el-tabs>
 
-		<el-form ref="form" :model="form" label-width="200px">
+		<!-- <el-form ref="form" :model="form" label-width="200px">
 
-			<!-- <el-form-item label="听写间隔时间(秒)">
-				<el-slider v-model="form.autoplay_time" :min="3" :max="20" show-input></el-slider>
-			</el-form-item>
-
-			<el-form-item label="自动听写重复播报次数">
-				<el-slider v-model="form.autoplay_repeat" :min="1" :max="5" show-input></el-slider>
-			</el-form-item> -->
-
-			<!-- <el-form-item label="识字多音释义框默认是否显示">
-				<el-switch
-				    v-model="form.shiyi_isshow"
-				    active-color="#13ce66"
-				    inactive-color="#ff4949"
-				    active-value="1"
-				    inactive-value="2">
-				  </el-switch>
-			</el-form-item> -->
-
+			
 			<el-form-item>
 				<el-button type="primary" @click="onSubmit">保存</el-button>
-				<!-- <el-button>取消</el-button> -->
+			
 			</el-form-item>
-		</el-form>
+		</el-form> -->
 
 	</div>
 </template>
@@ -47,9 +30,8 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		setting,
-		setting_info
-	} from '@/api/help'
+		site_info,site_list
+	} from '@/api/setting'
 
 	export default {
 		data() {
@@ -58,17 +40,14 @@
 				setting_info: null,
 				table: false,
 				v: true,
-				form: {
-					// siteid: getsiteid() ? parseInt(getsiteid()) : 1,
-					siteid: getsiteid() ? getsiteid() : "1",
-				},
+				 form:{},
 				siteidlist: [],
 				activeName: 'first'
 			}
 		},
 		created() {
 			this.fetchData()
-			console.log(this.form);
+			 
 
 		},
 		methods: {
@@ -98,19 +77,19 @@
 			},
 			fetchData() {
 				_g.openGlobalLoading()
-
+_g.closeGlobalLoading()
 				const params = {
 					userid: this.$store.state.user.userid,
 				}
-				setting_info(params).then(response => {
-					_g.closeGlobalLoading()
-					// this.version_info = response.version_info
-					this.siteidlist = response.siteidlist
-					// console.log(this.version_info )
-					console.log(this.siteidlist)
+				// setting_info(params).then(response => {
+				// 	_g.closeGlobalLoading()
+				// 	// this.version_info = response.version_info
+				// 	this.siteidlist = response.siteidlist
+				// 	// console.log(this.version_info )
+				// 	console.log(this.siteidlist)
 
-					this.v = true
-				})
+				// 	this.v = true
+				// })
 				// this.listLoading = false
 			},
 		}

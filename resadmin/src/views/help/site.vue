@@ -1,7 +1,25 @@
 <template>
 	<div class="app-container">
 
-
+	<el-dialog title="站点信息" :visible.sync="dialogFormVisible">
+	  <el-form :model="siteform">
+	    <el-form-item label="站点名称" :label-width="formLabelWidth">
+	      <el-input v-model="siteform.name" autocomplete="off"></el-input>
+	    </el-form-item>
+		<el-form-item label="域名" :label-width="formLabelWidth">
+		  <el-input v-model="siteform.domain" autocomplete="off"></el-input>
+		</el-form-item>
+		<el-form-item label="媒体目录" :label-width="formLabelWidth">
+		  <el-input v-model="siteform.media_dir" autocomplete="off"></el-input>
+		</el-form-item>
+	    
+	  </el-form>
+	  <div slot="footer" class="dialog-footer">
+	    <el-button @click="dialogFormVisible = false">取 消</el-button>
+	    <el-button type="primary" @click="fromsiteinfo()">确 定</el-button>
+	  </div>
+	</el-dialog>
+	
 	<!-- 	<el-form ref="form" :model="form" label-width="200px">
 
 			<el-form-item label="站点">
@@ -101,12 +119,21 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		setting,setting_info
-	} from '@/api/help'
+		site_info,site_list
+	} from '@/api/setting'
 	
 	export default {
 		data() {
 			return {
+				 dialogFormVisible: false,
+				siteform: {
+				  name: '',
+				  domain: '',
+				  media_dir: '',
+				  template: '',
+				  logo: '',
+				},
+				formLabelWidth: '120px',
 				version_info:null,
 				setting_info:null,
 				table: false,
@@ -133,6 +160,12 @@
 			 
 			checksiteid(e) {
 				console.log(e);
+				
+				setsiteid(this.form.siteid)
+				 _g.toastMsg('success', '切换成功！', this)
+				
+			},
+			fromsiteinfo() {
 				// return
 				// const loading = this.$loading({
 				// 	lock: true,
@@ -140,19 +173,25 @@
 				// 	spinner: 'el-icon-loading',
 				// 	background: 'rgba(0, 0, 0, 0.7)'
 				// });
-
-				// console.log(this.form);
-				setsiteid(this.form.siteid)
-				 _g.toastMsg('success', '切换成功！', this)
-				// setting(this.$store.state.user.userid, this.form.siteid).then(
-				// 	response => {
-				// 		loading.close();
-				// 		console.log(response)
-				// 		_g.toastMsg('success', '保存成功！', this)
-				// 	})
+				let resparams=JSON.stringify(this.siteform)
+			  const params = {
+			  	resparams: resparams,
+			  	userid: this.$store.state.user.userid
+			  }
+				site_info(params).then(
+					response => {
+						// loading.close();
+						console.log(response)
+						_g.toastMsg('success', '编辑成功！', this)
+					})
 				 // loading.close();
+				 this.dialogFormVisible = false
 			},
 			 handleEdit(index, row) {
+				 
+				 this.dialogFormVisible = true
+				 let rowi = row
+				 this.siteform = rowi
 				console.log(index, row);
 			  },
 			  handleDelete(index, row) {
@@ -164,7 +203,7 @@
 					const params = {
 						userid: this.$store.state.user.userid,
 					}
-			  setting_info(params).then(response => {
+			  site_list(params).then(response => {
 				     _g.closeGlobalLoading()
 					 // this.version_info = response.version_info
 					 this.siteidlist = response.siteidlist

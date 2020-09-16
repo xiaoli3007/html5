@@ -338,6 +338,41 @@
 			 		deletres.push({catid:row.catid,news_id:row.id})	
 			 });
 			 console.log(deletres)
+			 if(deletres.length==0){
+				 _g.toastMsg('error', '请先勾选资源！',this)
+				 return
+			 }
+			 this.$confirm('确认删除该资源?', '提示', {
+			   confirmButtonText: '确定',
+			   cancelButtonText: '取消',
+			   type: 'warning'
+			 }).then(() => {
+			 	
+			 	const params = {
+			 		
+					resparams: JSON.stringify(deletres),
+			 	}
+			 	
+			 	_g.openGlobalLoading()
+			 	deleteContent(params).then(response => {
+			 		// console.log(response)
+			 		_g.closeGlobalLoading()
+			 		if (response.code == 20000) {
+			 			
+			 			_g.toastMsg('success', '删除成功',this)
+			 			 setTimeout(() => {
+			 			  _g.shallowRefresh(this.$route.name)
+			 			}, 500)
+			 			
+			 		}else{
+			 			_g.toastMsg('error', '删除错误',this)
+			 		}
+			 	})
+			   // console.log(row.id);
+			 }).catch(() => {
+			   // catch error
+			 })
+			 
 		  },
 			toggleSelection(rows) {
 			if (rows) {
