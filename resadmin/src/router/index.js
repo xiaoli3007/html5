@@ -87,7 +87,7 @@ export const constantRouterMap = [
 				component: () => import('@/views/content/model_table_list'),
 				meta: {
 					title: '数据列表',
-					icon: 'tasklist'
+					icon: 'search'
 				},
 			},
 		
@@ -120,16 +120,16 @@ export const constantRouterMap = [
 		name: 'Modelfu',
 		meta: {
 			title: '模型相关',
-			icon: 'setting'
+			icon: 'wendang'
 		},
 		children: [{
 			path: 'mlist',
 			name: 'MList',
-			// component: require('@/views/help/setting').default,
+			// component: require('@/views/setting/setting').default,
 			component: () => import('@/views/content/cat'),
 			meta: {
 				title: '模型列表',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 		},{
 			path: 'explode',
@@ -137,7 +137,7 @@ export const constantRouterMap = [
 			component: () => import('@/views/content/cat'),
 			meta: {
 				title: '数据导入',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 			
 		},
@@ -152,16 +152,16 @@ export const constantRouterMap = [
 		name: 'Contentfu',
 		meta: {
 			title: '内容相关',
-			icon: 'setting'
+			icon: 'yun'
 		},
 		children: [{
 			path: 'cat',
 			name: 'Cat',
-			// component: require('@/views/help/setting').default,
+			// component: require('@/views/setting/setting').default,
 			component: () => import('@/views/content/cat'),
 			meta: {
 				title: '栏目',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 		},{
 			path: 'linkage',
@@ -169,7 +169,7 @@ export const constantRouterMap = [
 			component: () => import('@/views/content/cat'),
 			meta: {
 				title: '联动菜单',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 			
 		},{
@@ -178,7 +178,7 @@ export const constantRouterMap = [
 			component: () => import('@/views/content/cat'),
 			meta: {
 				title: '媒体库',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 			
 		},
@@ -191,16 +191,16 @@ export const constantRouterMap = [
 		name: 'Member',
 		meta: {
 			title: '用户管理',
-			icon: 'setting'
+			icon: 'member'
 		},
 		children: [{
 			path: 'list',
 			name: 'Memberlist',
-			// component: require('@/views/help/setting').default,
+			// component: require('@/views/setting/setting').default,
 			component: () => import('@/views/content/cat'),
 			meta: {
 				title: '用户列表',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 		},{
 			path: 'membergroup',
@@ -208,7 +208,7 @@ export const constantRouterMap = [
 			component: () => import('@/views/content/cat'),
 			meta: {
 				title: '用户组',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 			
 		},
@@ -221,24 +221,24 @@ export const constantRouterMap = [
 		name: 'Admin',
 		meta: {
 			title: '管理员',
-			icon: 'setting'
+			icon: 'image'
 		},
 		children: [{
 			path: 'adminlist',
 			name: 'AdminList',
-			// component: require('@/views/help/setting').default,
-			component: () => import('@/views/content/cat'),
+			// component: require('@/views/setting/setting').default,
+			component: () => import('@/views/admin/adminlist'),
 			meta: {
 				title: '管理员列表',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 		},{
 			path: 'role',
 			name: 'Role',
-			component: () => import('@/views/content/cat'),
+			component: () => import('@/views/admin/role'),
 			meta: {
 				title: '角色列表',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 			
 		},
@@ -251,34 +251,34 @@ export const constantRouterMap = [
 		name: 'Setting',
 		meta: {
 			title: '设置',
-			icon: 'setting'
+			icon: 'newsetting'
 		},
 		children: [{
 			path: 'site',
 			name: 'Site',
-			// component: require('@/views/help/setting').default,
-			component: () => import('@/views/help/site'),
+			// component: require('@/views/setting/setting').default,
+			component: () => import('@/views/setting/site'),
 			meta: {
 				title: '站点',
-				icon: 'setting'
+				icon: 'faxian'
 			}
 		},{
 			path: 'setting_template',
 			name: 'setting_template',
-			// component: require('@/views/help/setting').default,
-			component: () => import('@/views/help/setting_template'),
+			// component: require('@/views/setting/setting').default,
+			component: () => import('@/views/setting/setting_template'),
 			meta: {
 				title: '基础设置',
-				icon: 'setting'
+				icon: 'faxian'
 			},
 			
 		},
 		]
 	}, {
-		path: '/help',
+		path: '/setting',
 		component: Layout,
-		redirect: '/help/proposal',
-		name: 'Help',
+		redirect: '/setting/proposal',
+		name: 'setting',
 		meta: {
 			title: '',
 			
@@ -286,11 +286,11 @@ export const constantRouterMap = [
 		children: [{
 			path: 'proposal',
 			name: 'Proposal',
-			// component: require('@/views/help/proposal').default,
-			component: () => import('@/views/help/proposal'),
+			// component: require('@/views/setting/proposal').default,
+			component: () => import('@/views/setting/proposal'),
 			meta: {
 				title: '建议',
-				icon: 'proposal'
+				icon: 'edit'
 			},
 		}]
 	},
