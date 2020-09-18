@@ -49,27 +49,7 @@ export const constantRouterMap = [
 	
 		}]
 	},
-	{
-		path: '/main',
-		component: Layout,
-		redirect: '/main/msub',
-		name: 'Main',
-		meta: {
-			title: '',
-		},
-		children: [{
-				path: 'msub',
-				name: 'Msub',
-				// component: require('@/views/dashboard/index').default,
-				component: () => import('@/views/dashboard/index'),
-				meta: {
-					title: '统计',
-					icon: 'tongji'
-				},
 	
-			}
-		]
-	},
 	{
 		path: '/model',
 		component: Layout,
@@ -184,6 +164,27 @@ export const constantRouterMap = [
 		},
 		]
 	}, 
+	{
+		path: '/main',
+		component: Layout,
+		redirect: '/main/msub',
+		name: 'Main',
+		meta: {
+			title: '',
+		},
+		children: [{
+				path: 'msub',
+				name: 'Msub',
+				// component: require('@/views/dashboard/index').default,
+				component: () => import('@/views/dashboard/index'),
+				meta: {
+					title: '统计',
+					icon: 'tongji'
+				},
+	
+			}
+		]
+	},
 	{
 		path: '/member',
 		component: Layout,

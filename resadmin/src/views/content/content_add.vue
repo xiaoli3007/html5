@@ -103,7 +103,7 @@
 	import {
 		getshow,
 		get_model_field,publish_res
-	} from '@/api/table'
+	} from '@/api/content'
 	import _g from '@/utils/global.js'
 
 	export default {

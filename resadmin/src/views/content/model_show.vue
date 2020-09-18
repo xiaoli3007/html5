@@ -44,7 +44,7 @@
 <script>
 	import {
 		getshow
-	} from '@/api/table'
+	} from '@/api/content'
 	import _g from '@/utils/global.js'
 
 	export default {

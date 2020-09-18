@@ -188,7 +188,7 @@
 	import {
 		model_data_list,
 		get_catlist_data,deleteContent
-	} from '@/api/table'
+	} from '@/api/content'
 	import _g from '@/utils/global.js'
 
 	export default {

@@ -25,7 +25,7 @@
 			<el-form-item label="站点">
 				<el-radio-group v-model="form.siteid">
 					
-					<el-radio  v-for="(item, index) in siteidlist" :key="index" :label="item.siteid" border>{{item.name}}</el-radio>
+					<el-radio  v-for="(item, index) in datalist" :key="index" :label="item.siteid" border>{{item.name}}</el-radio>
 					
 				</el-radio-group>
 			</el-form-item> 
@@ -37,7 +37,7 @@
 		</el-form> -->
 		
 		<el-table
-		    :data="siteidlist"
+		    :data="datalist"
 		    style="width: 100%">
 			
 			<el-table-column label="切换站点">
@@ -142,19 +142,14 @@
 					// siteid: getsiteid() ? parseInt(getsiteid()) : 1,
 					siteid: getsiteid() ? getsiteid() : "1",
 				},
-				siteidlist:[],
-				   tableData: [{
-				          date: '2016-05-02',
-				          name: '王小虎',
-				          address: '上海市普陀区金沙江路 1518 弄'
-				        },],
+				datalist:[],
+				
 				       
 			}
 		},
 		created() {
 			this.fetchData()
-			 console.log(this.form);
-				
+			 	
 		},
 		methods: {
 			 
@@ -205,11 +200,15 @@
 					}
 			  site_list(params).then(response => {
 				     _g.closeGlobalLoading()
+					 
+					   console.log(response.code)
 					 // this.version_info = response.version_info
-					 this.siteidlist = response.siteidlist
+					 this.datalist = response.items
 					 // console.log(this.version_info )
-					 console.log(this.siteidlist )
-					 // if(this.siteidlist){
+					  
+					  console.log(response.items)
+					 console.log(this.datalist)
+					 // if(this.datalist){
 						//  this.form.siteid  = parseInt(this.setting_info.siteid)
 						//  setsiteid(parseInt(this.setting_info.siteid))
 					 // }

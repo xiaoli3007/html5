@@ -1,17 +1,45 @@
 <template>
 	<div class="app-container">
 
-	<el-dialog title="站点信息" :visible.sync="dialogFormVisible">
+	<el-dialog title="角色信息" :visible.sync="dialogFormVisible"  v-if="v">
 	  <el-form :model="form">
-	    <el-form-item label="站点名称" :label-width="formLabelWidth">
-	      <el-input v-model="form.name" autocomplete="off"></el-input>
+	    <el-form-item label="名称" :label-width="formLabelWidth">
+	      <el-input v-model="form.rolename" autocomplete="off"></el-input>
 	    </el-form-item>
-		<el-form-item label="域名" :label-width="formLabelWidth">
-		  <el-input v-model="form.domain" autocomplete="off"></el-input>
+		<el-form-item label="描述" :label-width="formLabelWidth">
+		  <el-input v-model="form.description" autocomplete="off"></el-input>
 		</el-form-item>
-		<el-form-item label="媒体目录" :label-width="formLabelWidth">
-		  <el-input v-model="form.media_dir" autocomplete="off"></el-input>
+		<el-form-item label="站点" :label-width="formLabelWidth">
+			
+			 <el-radio v-for="(item, index) in sitelist" :key="index" @change="checksiteid(item.siteid)"  :label="item.siteid" v-model="form.siteid" border>{{item.name}}</el-radio>
+			 
 		</el-form-item>
+		
+		<el-form-item label="栏目权限" :label-width="formLabelWidth">
+			
+			
+			<el-checkbox-group v-model="form.catidpriv"  >
+			      
+			      <el-checkbox v-for="(item, index) in sitelist[form.siteid?form.siteid:1].catlist" :key="index"  :label="item.catid"  >{{item.catname}}</el-checkbox>
+				   
+			    </el-checkbox-group>
+				
+	 
+		</el-form-item>
+		
+		<el-form-item label="权限" :label-width="formLabelWidth">
+			 <el-tree
+			   :data="privlist"
+			   show-checkbox
+			   node-key="id"
+			   ref="tree"
+			   :default-expanded-keys="default_expanded"
+			   :default-checked-keys="default_keys"
+			   @check="treecheck"
+			   :props="defaultProps">
+			 </el-tree>
+		</el-form-item>
+		
 	    
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
@@ -22,13 +50,27 @@
 	
 	
 		
-					<el-button type="success" @click="add()">添加</el-button> 		
+					<el-button type="success" @click="handleAdd()">添加</el-button> 		
 					
 		<el-table
 		    :data="datalist"
 		    style="width: 100%">
 			
-		    <el-table-column
+			   <el-table-column type="expand">
+			      <template slot-scope="props">
+			        <el-form label-position="left" inline class="demo-table-expand">
+			          
+			          <el-form-item label="栏目权限">
+			            <span>{{ props.row.catidpriv }}</span>
+			          </el-form-item>
+			          <el-form-item label="权限">
+			            <span>{{ props.row.priv }}</span>
+			          </el-form-item>
+			        </el-form>
+			      </template>
+			    </el-table-column>
+				
+		    <el-table-column   
 		      label="roleid"
 		      width="180">
 		      <template slot-scope="scope">
@@ -63,17 +105,8 @@
 			  </template>
 			</el-table-column>
 			
-			<el-table-column
-			  label="栏目权限"
-			  width="100">
-			  <template slot-scope="scope">
-			      {{ scope.row.catidpriv }}
-			   
-			  </template>
-			</el-table-column>
-			
-			
-			
+			 
+			 
 		    <el-table-column label="操作">
 		      <template slot-scope="scope">
 				   
@@ -111,7 +144,7 @@
 </template>
 
 <script>
-	
+	import _ from 'lodash'
 	import {
 		getsiteid,
 		setsiteid,
@@ -120,29 +153,37 @@
 	import {
 		role_info,role_list
 	} from '@/api/admin'
-	
+	// import router from '@/router/index.js'
 	export default {
 		data() {
 			return {
 				 dialogFormVisible: false,
 				 dataCount: null,
 				 currentPage: null,
-				 pagesize: 2,
+				 pagesize: 12,
 				form: {
-				  name: '',
-				  domain: '',
-				  media_dir: '',
-				  template: '',
-				  logo: '',
+				  roleid: '',
+				  rolename: '',
+				  description: '',
+				  siteid: '',
+				  catidpriv: [],
+				  priv: [],
 				},
 				formLabelWidth: '120px',
 				  
 				table: false,
-				v: true,
+				v: false,
 				 
 				datalist:[],
-				  
-				       
+				sitelist:[],
+				catlist:[],
+				privlist:[],  
+				default_expanded:[],  
+				default_keys:[], 
+			  defaultProps: {
+					   children: 'children',
+					   label: 'label'
+					 }
 			}
 		},
 		created() {
@@ -156,8 +197,42 @@
 			}
 		},
 		methods: {
+			getrount() {
+				
+				let matched =JSON.parse(JSON.stringify(this.$router.options.routes))
+				   // console.log(this.$router.options.routes)
+				
+				let tempmath =[]
+				_(matched).forEach(function(value, key) {
+						  // console.log(value)
+						  if(value.meta!=null && !value.hidden){
+							  if(value.meta.title!=''){
+								  
+							  	 _.set(tempmath, key, {label:value.meta.title,id:value.name}); 
+								 let children =[]
+								 _( value.children).forEach(function(value2, key2) {								
+									 if(value2.meta!=null && !value2.hidden){
+									 	 if(value2.meta.title!=''){
+											  _.set(children, key2, {label:value2.meta.title,id:value2.name}); 
+										 }}
+									 
+								 })
+								 _.set(tempmath, key+"[children]", children); 
+							  }
+						  }
+						  
+				});
+				
+				 tempmath = _.compact(tempmath)
+				 this.privlist = tempmath
+				  console.log(tempmath)
+			},
+			checksiteid(siteid) {
+				console.log(siteid)
+				
+			},
 			init() {
-				// this.getKeywords()
+				this.getrount()
 				this.getCurrentPage()
 				this.fetchData()
 			},
@@ -180,9 +255,23 @@
 					}
 				})
 			}, 
+			treecheck(a,b){
+				// console.log(a)
+				console.log(b.checkedKeys)
+				
+				this.form.priv = b.checkedKeys
+			},
 			fromsiteinfo() {
 				
+				 
+				 
+				console.log(this.form)
+				// return
+				// this.form.priv =this.$refs.tree.getCheckedKeys()
 				let resparams=JSON.stringify(this.form)
+				
+				console.log(resparams)
+				  
 			  const params = {
 			  	resparams: resparams,
 			  	userid: this.$store.state.user.userid
@@ -190,16 +279,48 @@
 				role_info(params).then(
 					response => {
 						console.log(response)
+						this.init()
 						_g.toastMsg('success', '编辑成功！', this)
 					})
 				 this.dialogFormVisible = false
 			},
+			handleAdd() {
+							 
+				 this.dialogFormVisible = true
+				 let rowi = {
+				  roleid: '',
+				  rolename: '',
+				  description: '',
+				  siteid: '',
+				  catidpriv: [],
+				  priv: [],
+				}
+				 this.form = rowi
+			 },
 			 handleEdit(index, row) {
 				 
 				 this.dialogFormVisible = true
-				 let rowi = row
+				 
+				 let rowi = JSON.parse(JSON.stringify(row))
+				 console.log(rowi)
+				 rowi.catidpriv = rowi.catidpriv?rowi.catidpriv.split(','):[]
+				 // console.log(rowi)
+				 rowi.priv = rowi.priv?rowi.priv.split(','):[]
+				 
+				let selfmain =  this 
+				 setTimeout(function () {
+				     // console.log(selfmain.$refs.tree)
+					 // selfmain.default_keys = rowi.priv
+					 selfmain.$refs.tree.setCheckedKeys(rowi.priv);
+				 }, 100);
+				 
+				 
+				  // this.$refs.tree.setCheckedKeys([]);
+				 // this.$refs.tree.setCheckedKeys(rowi.priv);
+				 //this.$set(this.default_keys, rowi.priv)
+				  
 				 this.form = rowi
-				console.log(index, row);
+				// console.log(index, row);
 			  },
 			  handleDelete(index, row) {
 				console.log(index, row);
@@ -216,8 +337,10 @@
 				     _g.closeGlobalLoading()
 					 // this.version_info = response.version_info
 					 this.datalist = response.items
+					 this.sitelist = response.sitelist
+					 // this.catlist = response.catlist
 					 // console.log(this.version_info )
-					 console.log(this.datalist )
+					 console.log(this.sitelist[1] )
 					 this.dataCount = parseInt(response.dataCount)
 					 this.v = true
 			  })
@@ -226,3 +349,17 @@
 		}
 	}
 </script>
+<style>
+  .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+</style>
