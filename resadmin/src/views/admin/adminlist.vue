@@ -1,18 +1,31 @@
 <template>
 	<div class="app-container">
 
-	<el-dialog title="站点信息" :visible.sync="dialogFormVisible">
-	  <el-form :model="siteform">
-	    <el-form-item label="站点名称" :label-width="formLabelWidth">
-	      <el-input v-model="siteform.name" autocomplete="off"></el-input>
+	<el-dialog  title="管理员信息" :visible.sync="dialogFormVisible"  v-if="v">
+	  <el-form :model="form">
+	    <el-form-item label="用户名" :label-width="formLabelWidth">
+	      <el-input v-model="form.username" autocomplete="off"></el-input>
 	    </el-form-item>
-		<el-form-item label="域名" :label-width="formLabelWidth">
-		  <el-input v-model="siteform.domain" autocomplete="off"></el-input>
+		<el-form-item label="密码" :label-width="formLabelWidth">
+		  <el-input v-model="form.password" show-password></el-input>
 		</el-form-item>
-		<el-form-item label="媒体目录" :label-width="formLabelWidth">
-		  <el-input v-model="siteform.media_dir" autocomplete="off"></el-input>
+		
+		<el-form-item label="角色" :label-width="formLabelWidth">
+			<el-radio-group v-model="form.roleid">
+			        <el-radio v-for="(item, index) in role_list" :key="index" @change="checkroleid(item.roleid)"  :label="item.roleid"  >{{item.rolename}}</el-radio>
+			    </el-radio-group>
+				
+			
+			 
 		</el-form-item>
-	    
+		
+		<el-form-item label="姓名" :label-width="formLabelWidth">
+		  <el-input v-model="form.realname" autocomplete="off"></el-input>
+		</el-form-item>
+		<el-form-item label="邮箱" :label-width="formLabelWidth">
+		  <el-input v-model="form.email" autocomplete="off"></el-input>
+		</el-form-item>
+	     
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
 	    <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -20,58 +33,66 @@
 	  </div>
 	</el-dialog>
 	
-	
-		
+	<el-button type="success" @click="handleAdd()">添加</el-button> 		
+					
 		<el-table
-		    :data="siteidlist"
+		    :data="datalist"
 		    style="width: 100%">
 			
-		    <el-table-column
-		      label="siteid"
+				
+		    <el-table-column   
+		      label="userid"
 		      width="180">
 		      <template slot-scope="scope">
 		        <!-- <i class="el-icon-time"></i> -->
-		        <span style="margin-left: 10px">{{ scope.row.siteid }}</span>
+		        <span style="margin-left: 10px">{{ scope.row.userid }}</span>
 		      </template>
 		    </el-table-column>
 		    <el-table-column
-		      label="站点名称"
+		      label="用户名"
 		      width="180">
 		      <template slot-scope="scope">
-		          {{ scope.row.name }}
+		          {{ scope.row.username }}
 		       
 		      </template>
 		    </el-table-column>
 			
 			<el-table-column
-			  label="域名"
+			  label="姓名"
 			  width="280">
 			  <template slot-scope="scope">
-			      {{ scope.row.domain }}
+			      {{ scope.row.realname }}
 			   
 			  </template>
 			</el-table-column>
 			
 			<el-table-column
-			  label="媒体目录"
+			  label="角色"
 			  width="180">
 			  <template slot-scope="scope">
-			      {{ scope.row.media_dir }}
+			      {{ scope.row.role_info.rolename }}
 			   
 			  </template>
 			</el-table-column>
 			
 			<el-table-column
-			  label="模板"
-			  width="100">
+			  label="邮箱"
+			  width="180">
 			  <template slot-scope="scope">
-			      {{ scope.row.template }}
+			      {{ scope.row.email }}
 			   
 			  </template>
 			</el-table-column>
-			
-			
-			
+			<el-table-column
+			  label="最后登录"
+			  width="180">
+			  <template slot-scope="scope">
+			      {{ scope.row.lastlogintime }}
+			   
+			  </template>
+			</el-table-column>
+			 
+			 
 		    <el-table-column label="操作">
 		      <template slot-scope="scope">
 				   
@@ -87,112 +108,193 @@
 		    </el-table-column>
 		  </el-table>
 		  
+		  
+		  <el-row>
+		  	<el-col :span="12">
+		  			<!-- <div style="">
+		  			  <el-button @click="toggleSelection(list)">全选</el-button>
+		  			  <el-button @click="toggledelete()">删除</el-button>
+		  			</div> -->
+		  	</el-col>
+		  	<el-col :span="12">
+		  			<div class="block pages">
+		  				<el-pagination @current-change="handleCurrentChange" background layout="prev, pager, next" :page-size="pagesize"
+		  				 :current-page="currentPage" :total="dataCount">
+		  				</el-pagination>
+		  			</div>
+		  	</el-col>
+		  </el-row>	
+		  
 
 	</div>
 </template>
 
 <script>
-	
+	import _ from 'lodash'
 	import {
 		getsiteid,
 		setsiteid,
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		site_info,site_list
-	} from '@/api/setting'
-	
+		admin_info,admin_list,admin_delete
+	} from '@/api/admin'
+	// import router from '@/router/index.js'
 	export default {
 		data() {
 			return {
 				 dialogFormVisible: false,
-				siteform: {
-				  name: '',
-				  domain: '',
-				  media_dir: '',
-				  template: '',
-				  logo: '',
+				 dataCount: null,
+				 currentPage: null,
+				 pagesize: 12,
+				form: {
+				  username: '',
+				  realname: '',
+				  password:'',
+				  email: '',
+				  roleid: '',
 				},
 				formLabelWidth: '120px',
-				version_info:null,
-				setting_info:null,
+				  
 				table: false,
-				v: true,
-				form: {
-					// siteid: getsiteid() ? parseInt(getsiteid()) : 1,
-					siteid: getsiteid() ? getsiteid() : "1",
-				},
-				siteidlist:[],
-				   tableData: [{
-				          date: '2016-05-02',
-				          name: '王小虎',
-				          address: '上海市普陀区金沙江路 1518 弄'
-				        },],
-				       
+				v: false,
+				 
+				datalist:[],
+				role_list:[],
+				 
+				 
 			}
 		},
 		created() {
-			this.fetchData()
-			 console.log(this.form);
-				
+			this.init()
+		},
+		watch: {
+			'$route'(to, from) {
+				// console.log(to)
+				// console.log(from)
+				this.init()
+			}
 		},
 		methods: {
-			 
-			checksiteid(e) {
-				console.log(e);
-				
-				setsiteid(this.form.siteid)
-				 _g.toastMsg('success', '切换成功！', this)
+			checkroleid(id) {
+				console.log(id)
 				
 			},
+			init() {
+				 
+				this.getCurrentPage()
+				this.fetchData()
+			},
+			 getCurrentPage() {
+			 	let data = this.$route.query
+			 	if (data) {
+			 		if (data.page) {
+			 			this.currentPage = parseInt(data.page)
+			 		} else {
+			 			this.currentPage = 1
+			 		}
+			 	}
+			 }, 
+			handleCurrentChange(page) {
+				this.$router.push({
+					path: this.$route.path,
+					query: {
+						// keywords: this.keywords,
+						page: page,
+					}
+				})
+			}, 
+			 
 			fromsiteinfo() {
+				 	 
+				console.log(this.form)
 				// return
-				// const loading = this.$loading({
-				// 	lock: true,
-				// 	text: '提交中， 请稍等...',
-				// 	spinner: 'el-icon-loading',
-				// 	background: 'rgba(0, 0, 0, 0.7)'
-				// });
-				let resparams=JSON.stringify(this.siteform)
+				// this.form.priv =this.$refs.tree.getCheckedKeys()
+				let resparams=JSON.stringify(this.form)
+				
+				console.log(resparams)
+				  
 			  const params = {
 			  	resparams: resparams,
 			  	userid: this.$store.state.user.userid
 			  }
-				site_info(params).then(
+				admin_info(params).then(
 					response => {
-						// loading.close();
 						console.log(response)
+						this.init()
 						_g.toastMsg('success', '编辑成功！', this)
 					})
-				 // loading.close();
 				 this.dialogFormVisible = false
 			},
+			handleAdd() {
+							 
+				 this.dialogFormVisible = true
+				 let rowi =  {
+				  username: '',
+				  realname: '',
+				  password:'',
+				  email: '',
+				  roleid: '',
+				}
+				 this.form = rowi
+			 },
 			 handleEdit(index, row) {
 				 
 				 this.dialogFormVisible = true
-				 let rowi = row
-				 this.siteform = rowi
-				console.log(index, row);
+				 
+				 let rowi = JSON.parse(JSON.stringify(row))
+				 console.log(rowi)
+				 this.form.password =  ''
+				 this.form.userid = rowi.userid
+				 this.form.username = rowi.username
+				 this.form.realname = rowi.realname
+				 this.form.email = rowi.email
+				 this.form.roleid = rowi.roleid
+				// console.log(index, row);
 			  },
 			  handleDelete(index, row) {
-				console.log(index, row);
+				 this.$confirm('确认删除?', '提示', {
+				   confirmButtonText: '确定',
+				   cancelButtonText: '取消',
+				   type: 'warning'
+				 }).then(() => {
+				 	
+				 	const params = {
+				 		userid: this.$store.state.user.userid,
+				 		duserid: row.userid
+				 	}
+				 	_g.openGlobalLoading()
+				 	admin_delete(params).then(response => {
+				 		// console.log(response)
+				 		_g.closeGlobalLoading()
+				 		if (response.code == 20000) {
+				 			_g.toastMsg('success', '删除成功',this)
+				 			 setTimeout(() => {
+				 			  _g.shallowRefresh(this.$route.name)
+				 			}, 500)
+				 		}else{
+				 			_g.toastMsg('error', '删除错误',this)
+				 		}
+				 	})
+				   // console.log(row.id);
+				 }).catch(() => {
+				   // catch error
+				 })
 			  },
 			fetchData() {
 			    _g.openGlobalLoading()
 				
 					const params = {
+						page: this.currentPage,
+						pagesize: this.pagesize,
 						userid: this.$store.state.user.userid,
 					}
-			  site_list(params).then(response => {
+			  admin_list(params).then(response => {
 				     _g.closeGlobalLoading()
-					 // this.version_info = response.version_info
-					 this.siteidlist = response.siteidlist
-					 // console.log(this.version_info )
-					 console.log(this.siteidlist )
-					 // if(this.siteidlist){
-						//  this.form.siteid  = parseInt(this.setting_info.siteid)
-						//  setsiteid(parseInt(this.setting_info.siteid))
-					 // }
+					 this.datalist = response.items
+					 this.role_list = response.role_list
+					 
+					 this.dataCount = parseInt(response.dataCount)
 					 this.v = true
 			  })
 			    // this.listLoading = false
@@ -200,3 +302,17 @@
 		}
 	}
 </script>
+<style>
+  .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+</style>

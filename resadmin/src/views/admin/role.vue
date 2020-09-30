@@ -1,7 +1,7 @@
 <template>
 	<div class="app-container">
 
-	<el-dialog title="角色信息" :visible.sync="dialogFormVisible"  v-if="v">
+	<el-dialog :fullscreen="false" title="角色信息" :visible.sync="dialogFormVisible"  v-if="v">
 	  <el-form :model="form">
 	    <el-form-item label="名称" :label-width="formLabelWidth">
 	      <el-input v-model="form.rolename" autocomplete="off"></el-input>
@@ -151,7 +151,7 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		role_info,role_list
+		role_info,role_list,role_delete
 	} from '@/api/admin'
 	// import router from '@/router/index.js'
 	export default {
@@ -201,13 +201,14 @@
 				
 				let matched =JSON.parse(JSON.stringify(this.$router.options.routes))
 				   // console.log(this.$router.options.routes)
-				
+				let parentm =[]
 				let tempmath =[]
 				_(matched).forEach(function(value, key) {
 						  // console.log(value)
 						  if(value.meta!=null && !value.hidden){
 							  if(value.meta.title!=''){
 								  
+								 _.set(parentm, key, value.name); 
 							  	 _.set(tempmath, key, {label:value.meta.title,id:value.name}); 
 								 let children =[]
 								 _( value.children).forEach(function(value2, key2) {								
@@ -225,6 +226,8 @@
 				
 				 tempmath = _.compact(tempmath)
 				 this.privlist = tempmath
+				 
+				 // this.default_expanded  = parentm
 				  console.log(tempmath)
 			},
 			checksiteid(siteid) {
@@ -323,7 +326,33 @@
 				// console.log(index, row);
 			  },
 			  handleDelete(index, row) {
-				console.log(index, row);
+				  this.$confirm('确认删除?', '提示', {
+				    confirmButtonText: '确定',
+				    cancelButtonText: '取消',
+				    type: 'warning'
+				  }).then(() => {
+				  	
+				  	const params = {
+				  		userid: this.$store.state.user.userid,
+				  		roleid: row.roleid
+				  	}
+				  	_g.openGlobalLoading()
+				  	role_delete(params).then(response => {
+				  		// console.log(response)
+				  		_g.closeGlobalLoading()
+				  		if (response.code == 20000) {
+				  			_g.toastMsg('success', '删除成功',this)
+				  			 setTimeout(() => {
+				  			  _g.shallowRefresh(this.$route.name)
+				  			}, 500)
+				  		}else{
+				  			_g.toastMsg('error', '删除错误',this)
+				  		}
+				  	})
+				    // console.log(row.id);
+				  }).catch(() => {
+				    // catch error
+				  })
 			  },
 			fetchData() {
 			    _g.openGlobalLoading()

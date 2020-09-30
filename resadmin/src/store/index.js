@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // import { createPersistedState, createSharedMutations } from 'vuex-electron'
-
+import permission from './modules/permission'
 import app from './modules/app'
 import user from './modules/user'
 import modules from './modules'

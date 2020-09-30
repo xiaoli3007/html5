@@ -17,38 +17,37 @@ export const constantRouterMap = [
     //   name: 'landing-page',
     //   component: require('@/components/LandingPage').default
     // },
-	{
-		path: '/404',
-		// component: require('@/views/404').default,
-		component: () => import('@/views/404'),
-		hidden: true
-	},
-	{
-			path: '/refresh',
-			// component: require('@/components/refresh').default,
-			component: () => import('@/components/refresh'),
-			name: 'refresh',
-			hidden: true
-		},
-	{
-		path: '/login',
-		// component: require('@/views/login/index').default,
-		 component: () => import('@/views/login/index'),
-		hidden: true
-	},
-	{
-		path: '/',
-		component: Layout,
-		redirect: '/dashboard',
-		name: 'Dashboard',
-		 hidden: true,
-		children: [{
-			path: 'dashboard',
-			// component: require('@/views/dashboard/index').default,
-			component: () => import('@/views/content/index'),
+	// {
+	// 	path: '/404',
+	// 	// component: require('@/views/404').default,
+	// 	component: () => import('@/views/404'),
+	// 	hidden: true
+	// },
+	// {
+	// 		path: '/refresh',
+	// 		// component: require('@/components/refresh').default,
+	// 		component: () => import('@/components/refresh'),
+	// 		name: 'refresh',
+	// 		hidden: true
+	// 	},
+	// {
+	// 	path: '/login',
+	// 	// component: require('@/views/login/index').default,
+	// 	 component: () => import('@/views/login/index'),
+	// 	hidden: true
+	// },
+	// {
+	// 	path: '/',
+	// 	component: Layout,
+	// 	redirect: '/dashboard',
+	// 	name: 'Dashboard',
+	// 	 hidden: true,
+	// 	children: [{
+	// 		path: 'dashboard',
+	// 		component: () => import('@/views/content/index'),
 	
-		}]
-	},
+	// 	}]
+	// },
 	
 	{
 		path: '/model',
@@ -295,19 +294,58 @@ export const constantRouterMap = [
 			},
 		}]
 	},
-    {
-      path: '*',
-      redirect: '/404',
-      hidden: true
-    }
+   
+  ]
+
+
+export const baseRouterMap = [
+    
+	{
+		path: '/404',
+		// component: require('@/views/404').default,
+		component: () => import('@/views/404'),
+		hidden: true
+	},
+	{
+			path: '/refresh',
+			// component: require('@/components/refresh').default,
+			component: () => import('@/components/refresh'),
+			name: 'refresh',
+			hidden: true
+		},
+	{
+		path: '/login',
+		// component: require('@/views/login/index').default,
+		 component: () => import('@/views/login/index'),
+		hidden: true
+	},
+	{
+		path: '/',
+		component: Layout,
+		redirect: '/dashboard',
+		 hidden: true,
+		 name: 'Dashboard',
+		children: [{
+			// name: 'Index',
+			path: 'dashboard',
+			// component: require('@/views/dashboard/index').default,
+			component: () => import('@/views/content/index'),
+	
+		}]
+	},
+    // {
+    //   path: '*',
+    //   redirect: '/404',
+    //   hidden: true
+    // }
   ]
 
 
 export default new Router({
-	// mode: 'history', //后端支持可开
+	// mode: 'history', //后端支持可开 
 	scrollBehavior: () => ({
 		y: 0
 	}),
-	routes: constantRouterMap
+	routes: baseRouterMap
 })
 
