@@ -157,23 +157,23 @@
 								<span :class="havIndex == 0?'active':''" @click="touchToHav(0)">按时间</span>
 								<span :class="havIndex == 1?'active':''" @click="touchToHav(1)">按浏览量</span>
 							</div>
-							<el-pagination
-							  background
-							  layout="prev, pager, next,jumper"
-							  :total="100"
-							  page-size="30">
+							 
+							
+							<el-pagination @current-change="handleCurrentChange" background layout="prev, pager, next,jumper" :page-size="pagesize"
+							 :current-page="currentPage" :total="dataCount">
 							</el-pagination>
+							
 						</div>
 						<div class="rankList retrievalList2">
-							<div class="item" v-for="(item,index) in 6" :key="index">
+							<div class="item" v-for="(item,index) in list" :key="index">
 								<div class="item_cv">
 									<div class="imgView">
-										<img class="img" src="../../assets/images/02.png" alt="">
+										<img class="img" :src="item.thumb_url" alt="">
 									</div>
 									<div class="item_inv">
 										<div class="info_tv info_tvh">
 											<div class="name">书名: </div>
-											<div class='tt h2'>开明新编高级国文读本</div>
+											<div class='tt h2'>{{item.program.title}}</div>
 											<img src="../../assets/images/icon_hot.png" alt="">
 										</div>
 										<div class="item_ttv">
@@ -209,11 +209,8 @@
 							</div>
 						</div>
 						<div class="pageView">
-							<el-pagination
-							  background
-							  layout="prev, pager, next,jumper"
-							  :total="100"
-							  page-size="30">
+							<el-pagination @current-change="handleCurrentChange" background layout="prev, pager, next,jumper" :page-size="pagesize"
+							 :current-page="currentPage" :total="dataCount">
 							</el-pagination>
 						</div>
 					</div>
@@ -225,6 +222,8 @@
 </template>
 
 <script>
+	import {get_catlist_data ,model_data_list } from '@/api/base'
+	
 	export default{
 		data(){
 			return{
@@ -363,13 +362,96 @@
 						label: '国文2',
 					  }]
 					}
-				],                         
+				], 
+				slistorder: '',						
+				page: 1,
+				pagesize: 8,
+				linkageid: 0,
+				siteid:1,
+				catid: 3,
+				list: [],
+				dataCount: null,
+				currentPage: null,
+			}
+		},
+		watch: {
+			'$route'(to, from) {
+				// console.log(to)
+				// console.log(from)
+				this.init()
 			}
 		},
 		created:function(){
-			
+				
+				this.keywords = this.$route.query.keywords
+				
+				 this.init()  
+				 
 		},
 		methods:{
+			init() {
+				// this.getKeywords()
+				this.getCurrentPage()
+				this.onLoad()
+			},
+			getCurrentPage() {
+				let data = this.$route.query
+				if (data) {
+					if (data.page) {
+						this.currentPage = parseInt(data.page)
+					} else {
+						this.currentPage = 1
+					}
+				}
+			}, 
+			handleCurrentChange(page) {
+				this.$router.push({
+					path: this.$route.path,
+					query: {
+						keywords: this.keywords,
+						page: page,
+						catid: this.catid,
+						siteid: this.siteid,
+						 
+						 // search_linkage_default_string: this.search_linkage_default_string, 
+					}
+				})
+			}, 
+			onLoad() {
+			 
+				const getparams = {
+						 loading: true,
+					    params: {
+						catid: this.catid,
+						slistorder: this.slistorder,
+					      siteid: this.siteid,
+						  page: this.currentPage,
+						  pagesize: this.pagesize,
+						  keywords: this.keywords,
+					    }
+					  }
+					  var self = this 
+				model_data_list(getparams).then(response => {
+						// this.slideimages = response[0].slideimages
+						// this.home_cat_list = response[1].category
+						if(response.code == 20000){
+							 self.list = response.items
+							 this.dataCount = parseInt(response.dataCount)
+							//  response.items.forEach(function (value, i) {
+							// 	self.list.push(value)
+							// })
+							console.log(self.list)
+							// self.loading = false;
+							//  if(response.items.length<self.pagesize){
+							// 	  self.finished = true;
+							//  }else{
+							// 	 self.page+=1
+							//  }
+						}else{
+							 // self.finished = true;
+						}
+				 }) 	  
+			},
 			loadAll() {
 				return [{
 						"value": "三全鲜食（北新泾店）",
@@ -378,14 +460,6 @@
 					{
 						"value": "Hot honey 首尔炸鸡（仙霞路）",
 						"address": "上海市长宁区淞虹路661号"
-					},
-					{
-						"value": "新旺角茶餐厅",
-						"address": "上海市普陀区真北路988号创邑金沙谷6号楼113"
-					},
-					{
-						"value": "泷千家(天山西路店)",
-						"address": "天山西路438号"
 					},
 				];
 			},

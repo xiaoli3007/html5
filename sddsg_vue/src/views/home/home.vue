@@ -12,14 +12,17 @@
 					<div class="search_lv">
 						<div class="inputView">
 							<img src="../../assets/images/search.png" alt="">
-							<el-autocomplete v-model="state" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete>
+							<!-- <el-autocomplete v-model="state" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" @select="handleSelect"></el-autocomplete> -->
+							
+							<el-autocomplete v-model="keywords" :fetch-suggestions="querySearchAsync" placeholder="请输入内容" :trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+							
 						</div>
 						<div class="word_tj">
 							热词推荐：
 							<span v-for="(item,index) in searchList" :key="index">{{item}}</span>
 						</div>
 					</div>
-					<el-button class="btn">搜索</el-button>
+					<el-button class="btn" @click="onSearch()">搜索</el-button>
 				</div>
 			</div>
 			<div class="conteView">
@@ -53,7 +56,7 @@
 						<div id="banner" class="banner" >
 							<div class="swiper-container">
 							    <div class="swiper-wrapper">
-							        <div class="swiper-slide" v-for="(item,index) in zhanshiList.result"  :key="index">
+							        <div @click="gotoShow(item.catid,item.id)" class="swiper-slide" v-for="(item,index) in zhanshiList.result"  :key="index">
 								   <img :src="item.thumb" style=" width: 139px;" /> 
 										
 										 <!-- <img src="../../assets/images/01.png" /> -->
@@ -170,9 +173,13 @@
 				rankList:[],
 				dongtaiList:{},
 				loadingend:false,
+				keywords:'',
+				restaurants: [],
 			}
 		},
 		mounted: function() {
+			this.restaurants = this.loadAll();
+			
 			// 监听窗口大小
 			window.onresize = () => {
 			  return (() => {
@@ -220,6 +227,26 @@
 			this.fetchData()	
 		},
 		methods: {
+			onSearch() {
+				  let val = this.keywords
+				  this.$router.replace({
+				  	name: 'List',
+				  	query: {
+				  		keywords: val,
+				  	}
+				  })
+				  
+			      // Toast(val);
+			 },
+			gotoShow(catid, id) {
+				this.$router.replace({
+					name: 'Show',
+					query: {
+						catid: catid,
+						news_id: id
+					}
+				})
+			},
 			fetchData() {
 			   // this.$loading.show()  
 			   

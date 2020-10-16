@@ -44,13 +44,13 @@ const routes = [
 		component:Classic
 	},
 	{
-		name: 'Retrieval2',
-		path:'/Retrieval2',
+		name: 'List',
+		path:'/List',
 		component:Retrieval2
 	},
 	{
-		name: 'Retrieval3',
-		path:'/Retrieval3',
+		name: 'Show',
+		path:'/Show',
 		component:Retrieval3
 	}
 	
