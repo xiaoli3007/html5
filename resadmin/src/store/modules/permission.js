@@ -53,11 +53,12 @@ const permission = {
         const { roles } = data
         let accessedRouters
         if (roles.includes('admin')) {
+			 console.log(111)
           accessedRouters = constantRouterMap
         } else {
           accessedRouters = filterAsyncRouter(constantRouterMap, roles)
         }
-		// console.log(accessedRouters)
+		 console.log(accessedRouters)
 		// return
         commit('SET_ROUTERS', accessedRouters)
         resolve()

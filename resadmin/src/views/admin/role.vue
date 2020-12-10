@@ -199,8 +199,9 @@
 		methods: {
 			getrount() {
 				
-				let matched =JSON.parse(JSON.stringify(this.$router.options.routes))
-				   // console.log(this.$router.options.routes)
+				// let matched =JSON.parse(JSON.stringify(this.$router.options.routes))
+				let matched =JSON.parse(JSON.stringify(this.$store.state.permission.routers))
+				 // console.log(this.$store.state.permission.routers)
 				let parentm =[]
 				let tempmath =[]
 				_(matched).forEach(function(value, key) {
