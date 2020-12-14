@@ -105,15 +105,15 @@ export const constantRouterMap = [
 			path: 'mlist',
 			name: 'MList',
 			// component: require('@/views/setting/setting').default,
-			component: () => import('@/views/content/cat'),
+			component: () => import('@/views/content/model_list'),
 			meta: {
-				title: '模型列表',
+				title: '模型',
 				icon: 'faxian'
 			}
 		},{
 			path: 'explode',
 			name: 'Explode',
-			component: () => import('@/views/content/cat'),
+			component: () => import('@/views/content/model_export'),
 			meta: {
 				title: '数据导入',
 				icon: 'faxian'
@@ -154,7 +154,7 @@ export const constantRouterMap = [
 		},{
 			path: 'media',
 			name: 'Media',
-			component: () => import('@/views/content/cat'),
+			component: () => import('@/views/content/media_list'),
 			meta: {
 				title: '媒体库',
 				icon: 'faxian'
@@ -163,27 +163,7 @@ export const constantRouterMap = [
 		},
 		]
 	}, 
-	{
-		path: '/main',
-		component: Layout,
-		redirect: '/main/msub',
-		name: 'Main',
-		meta: {
-			title: '',
-		},
-		children: [{
-				path: 'msub',
-				name: 'Msub',
-				// component: require('@/views/dashboard/index').default,
-				component: () => import('@/views/dashboard/index'),
-				meta: {
-					title: '统计',
-					icon: 'tongji'
-				},
-	
-			}
-		]
-	},
+
 	{
 		path: '/member',
 		component: Layout,
@@ -197,7 +177,7 @@ export const constantRouterMap = [
 			path: 'list',
 			name: 'Memberlist',
 			// component: require('@/views/setting/setting').default,
-			component: () => import('@/views/content/cat'),
+			component: () => import('@/views/member/list'),
 			meta: {
 				title: '用户列表',
 				icon: 'faxian'
@@ -205,7 +185,7 @@ export const constantRouterMap = [
 		},{
 			path: 'membergroup',
 			name: 'Membergroup',
-			component: () => import('@/views/content/cat'),
+			component: () => import('@/views/member/group'),
 			meta: {
 				title: '用户组',
 				icon: 'faxian'
@@ -242,6 +222,27 @@ export const constantRouterMap = [
 			}
 			
 		},
+		]
+	},
+	{
+		path: '/main',
+		component: Layout,
+		redirect: '/main/msub',
+		name: 'Main',
+		meta: {
+			title: '',
+		},
+		children: [{
+				path: 'msub',
+				name: 'Msub',
+				// component: require('@/views/dashboard/index').default,
+				component: () => import('@/views/dashboard/index'),
+				meta: {
+					title: '统计',
+					icon: 'tongji'
+				},
+	
+			}
 		]
 	},
 	{
