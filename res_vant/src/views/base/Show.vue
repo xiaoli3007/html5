@@ -7,7 +7,7 @@
 			<van-row>
 				<van-col span="4">
 
-					<van-button icon="share" type="primary" @click="showShare = true"> </van-button>
+					<!-- <van-button icon="share" type="primary" @click="showShare = true"> </van-button> -->
 				</van-col>
 				<van-col span="16">
 					<!-- <h2>{{program.title}}</h2> -->
