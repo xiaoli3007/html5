@@ -145,7 +145,7 @@ export const constantRouterMap = [
 		},{
 			path: 'linkage',
 			name: 'Linkage',
-			component: () => import('@/views/content/cat'),
+			component: () => import('@/views/content/linkage'),
 			meta: {
 				title: '联动菜单',
 				icon: 'faxian'
