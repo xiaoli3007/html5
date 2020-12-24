@@ -10,6 +10,48 @@
 		  <el-input v-model="form.description" autocomplete="off"></el-input>
 		</el-form-item>
 	 
+	 <el-form-item label="模型" :label-width="formLabelWidth">
+	 	 
+		 <el-select v-model="form.modelid" placeholder="请选择">
+		     <el-option
+		       v-for="item in modellist"
+		       :key="item.modelid"
+		       :label="item.name"
+		       :value="item.modelid">
+		     </el-option>
+		   </el-select>
+		   
+	 </el-form-item>
+	 
+	 <el-form-item label="列表模板" :label-width="formLabelWidth">
+	 	 
+	 		 <el-select v-model="form.list_template" placeholder="请选择">
+	 		     <el-option
+	 		       
+				   v-for="(item, index) in list_template_data" :key="index"
+	 		        
+	 		       :label="item"
+	 		       :value="index">
+	 		     </el-option>
+	 		   </el-select>
+	 		   
+	 </el-form-item>
+	 
+	 <el-form-item label="模型" :label-width="formLabelWidth">
+	 	 
+	 		<el-select v-model="form.show_template" placeholder="请选择">
+	 		    <el-option
+	 		    v-for="(item, index) in show_template_data" :key="index"
+	 		       
+	 		      :label="item"
+	 		      :value="index">
+	 		    </el-option>
+	 		  </el-select>
+	 		   
+	 </el-form-item>
+	 
+	 
+	 
 		 
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
@@ -134,9 +176,13 @@
 				  catid: '',
 				  catname: '',
 				  description: '',
-				  siteid: '',
-				  catidpriv: [],
-				  priv: [],
+				  siteid: getsiteid()!='' ? getsiteid() :'1',
+				  modelid:'',
+				  list_template:'',
+				  show_template:''
+				  
+
+				  // priv: [],
 				},
 				formLabelWidth: '120px',
 				  
@@ -145,7 +191,11 @@
 				 	siteid:getsiteid()!='' ? getsiteid() :'1',
 				datalist:[],
 				sitelist:[],
-				catlist:[],
+				modellist:[],
+				list_template_data:[],
+				show_template_data:[],
+				
+				 
 				privlist:[],  
 				default_expanded:[],  
 				default_keys:[], 
@@ -223,9 +273,12 @@
 				  catid: '',
 				  catname: '',
 				  description: '',
-				  siteid: '',
-				  catidpriv: [],
-				  priv: [],
+				  siteid:  getsiteid()!='' ? getsiteid() :'1',
+				  modelid:'',
+				  list_template:'',
+				  show_template:'',
+
+				  // priv: [],
 				}
 				 this.form = rowi
 			 },
@@ -287,6 +340,11 @@
 				     _g.closeGlobalLoading()
 					 // this.version_info = response.version_info
 					 this.datalist = response.items
+					 this.modellist = response.modellist
+					
+					 this.show_template_data = response.show_template_list
+					 this.list_template_data = response.list_template_list
+					 
 					 // console.log(this.version_info )
 					 // console.log(this.sitelist[1] )
 					 this.v = true
