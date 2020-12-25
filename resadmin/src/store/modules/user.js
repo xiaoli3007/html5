@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken ,setName,removeName,getUserid,setUserid,removeUserid,getName,setAvatar,getAvatar} from '@/utils/auth'
+import { getToken, setToken, removeToken ,setName,removeName,getUserid,setUserid,removeUserid,getName,setAvatar,getAvatar,setsiteid} from '@/utils/auth'
 
 const user = {
   state: {
@@ -40,6 +40,7 @@ const user = {
 					setName(data.username)
 					setAvatar(data.avatar)
 					setUserid(data.userid)
+					setsiteid(data.siteid)
           commit('SET_TOKEN', data.token)
 					commit('SET_NAME', data.username)
 					commit('SET_USERID', data.userid)

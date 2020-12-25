@@ -176,6 +176,8 @@
 		},
 		created() {
 			this.init()
+			var aa = getsiteid()
+			console.log(aa)
 		},
 		watch: {
 			'$route'(to, from) {
