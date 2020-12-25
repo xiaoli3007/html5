@@ -32,6 +32,7 @@
 			   :data="privlist"
 			   show-checkbox
 			   node-key="id"
+			    
 			   ref="tree"
 			   :default-expanded-keys="default_expanded"
 			   :default-checked-keys="default_keys"
@@ -260,7 +261,7 @@
 				})
 			}, 
 			treecheck(a,b){
-				// console.log(a)
+				 console.log(a)
 				console.log(b.checkedKeys)
 				
 				this.form.priv = b.checkedKeys
