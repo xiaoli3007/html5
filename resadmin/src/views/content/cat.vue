@@ -10,9 +10,14 @@
 					<el-input v-model="form.description" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item label="模型" :label-width="formLabelWidth">
+				<el-form-item  label="模型" :label-width="formLabelWidth">
+					<el-select v-if="form.catid==''" v-model="form.modelid"  placeholder="请选择">
+						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
+						</el-option>
+					</el-select>
+					
 
-					<el-select v-model="form.modelid" placeholder="请选择">
+					<el-select  v-if="form.catid!=''" v-model="form.modelid" disabled placeholder="请选择">
 						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
 						</el-option>
 					</el-select>
@@ -150,7 +155,7 @@
 					catid: '',
 					catname: '',
 					description: '',
-					siteid: getsiteid() != '' ? getsiteid() : '1',
+					siteid: getsiteid()  ? getsiteid() : '1',
 					modelid: '',
 					list_template: '',
 					show_template: ''
@@ -159,7 +164,7 @@
 				formLabelWidth: '120px',
 				table: false,
 				v: false,
-				siteid: getsiteid() != '' ? getsiteid() : '1',
+				siteid: getsiteid()  ? getsiteid() : '1',
 				datalist: [],
 				sitelist: [],
 				modellist: [],
@@ -217,7 +222,7 @@
 				let resparams = JSON.stringify(this.form)
 
 				console.log(resparams)
-
+				// return
 				const params = {
 					resparams: resparams,
 					userid: this.$store.state.user.userid
@@ -225,8 +230,8 @@
 				cat_edit(params).then(
 					response => {
 						console.log(response)
-						// this.init()
-						_g.toastMsg('success', '编辑成功！', this)
+						 this.init()
+						_g.toastMsg('success', response.message, this)
 					})
 				this.dialogFormVisible = false
 			},
@@ -237,13 +242,14 @@
 					catid: '',
 					catname: '',
 					description: '',
-					siteid: getsiteid() != '' ? getsiteid() : '1',
+					siteid: getsiteid() ? getsiteid() : '1',
 					modelid: '',
 					list_template: '',
 					show_template: '',
 
 					// priv: [],
 				}
+				console.log(rowi)
 				this.form = rowi
 			},
 			handleEdit(index, row) {
@@ -271,7 +277,7 @@
 
 					const params = {
 						userid: this.$store.state.user.userid,
-						roleid: row.roleid
+						catid: row.catid
 					}
 					_g.openGlobalLoading()
 					cat_delete(params).then(response => {

@@ -27,7 +27,7 @@ export function cat_info(params) {
 
 export function cat_delete(params) {
   return request({
-    url: 'vue_app_linkage_api.php?act=cat_delete',
+    url: 'vue_app_cat_api.php?act=cat_delete',
     method: 'post',
     data:params,
   })
