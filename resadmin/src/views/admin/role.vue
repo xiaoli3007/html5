@@ -145,6 +145,9 @@
 </template>
 
 <script>
+	import  {
+		isallsubinarray
+	} from '@/utils/guolv'
 	import _ from 'lodash'
 	import {
 		getsiteid,
@@ -320,17 +323,31 @@
 				  priv: [],
 				}
 				 this.form = rowi
+				
+				 var selflet = this
+				 setTimeout(function () {
+				      selflet.$refs.tree.setCheckedKeys([])
+				 }, 100);
+				 // console.log(this.default_keys)
 			 },
 			 handleEdit(index, row) {
 				 
 				 this.dialogFormVisible = true
 				 
 				 let rowi = JSON.parse(JSON.stringify(row))
-				 console.log(rowi)
+				 
 				 rowi.catidpriv = rowi.catidpriv?rowi.catidpriv.split(','):[]
-				 // console.log(rowi)
+				 // 
 				 rowi.priv = rowi.priv?rowi.priv.split(','):[]
 				 
+				 
+				 let guolv_p_pri = isallsubinarray(rowi.priv,this.privlist)
+				 console.log(rowi.priv)
+				 console.log(guolv_p_pri)
+				 rowi.priv = guolv_p_pri
+				  
+				   
+				   
 				let selfmain =  this 
 				 setTimeout(function () {
 				     // console.log(selfmain.$refs.tree)
