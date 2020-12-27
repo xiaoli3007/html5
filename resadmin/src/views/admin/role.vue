@@ -32,7 +32,7 @@
 			   :data="privlist"
 			   show-checkbox
 			   node-key="id"
-			    
+			  
 			   ref="tree"
 			   :default-expanded-keys="default_expanded"
 			   :default-checked-keys="default_keys"
@@ -261,10 +261,29 @@
 				})
 			}, 
 			treecheck(a,b){
-				 console.log(a)
-				console.log(b.checkedKeys)
+				 // console.log(a)
+				// console.log(b.checkedKeys)
+				// console.log(this.privlist)
+				let tempparent =[]
+				_(this.privlist).forEach(function(value, key) {
+					// console.log(_.has(value, 'children'))
+					if(_.has(value, 'children')){
+						_(value.children).forEach(function(value2, key2) {
+							if(_.indexOf(b.checkedKeys, value2.id)!=-1){
+								 // console.log(value2.id)
+								tempparent = _.concat(tempparent, value.id); 
+							 }
+						})
+					}
+				})
 				
-				this.form.priv = b.checkedKeys
+				
+				let new_keys = _.uniq(_.concat(b.checkedKeys, tempparent))
+				
+				   console.log(new_keys)
+				 this.form.priv = new_keys
+				//this.form.priv = b.checkedKeys
+				
 			},
 			fromsiteinfo() {
 				
