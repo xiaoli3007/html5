@@ -191,6 +191,15 @@ export const constantRouterMap = [
 				icon: 'faxian'
 			}
 			
+		},{
+			path: 'membermodel',
+			name: 'Membermodel',
+			component: () => import('@/views/member/model'),
+			meta: {
+				title: '用户模型',
+				icon: 'faxian'
+			}
+			
 		},
 		]
 	}, 
