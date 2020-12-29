@@ -49,49 +49,49 @@ export const constantRouterMap = [
 	// 	}]
 	// },
 	
-	{
-		path: '/model',
-		component: Layout,
-		redirect: '/model/model_table_list',
-		name: 'Model',
-		meta: {
-			title: '模型数据',
-			icon: 'study'
-		},
-		children: [
+	// {
+	// 	path: '/model',
+	// 	component: Layout,
+	// 	redirect: '/model/model_table_list',
+	// 	name: 'Model',
+	// 	meta: {
+	// 		title: '模型数据',
+	// 		icon: 'study'
+	// 	},
+	// 	children: [
 	
-			{
-				path: 'model_table_list',
-				name: 'Model_table_list',
-				component: () => import('@/views/content/model_table_list'),
-				meta: {
-					title: '数据列表',
-					icon: 'search'
-				},
-			},
+	// 		{
+	// 			path: 'model_table_list',
+	// 			name: 'Model_table_list',
+	// 			component: () => import('@/views/content/model_table_list'),
+	// 			meta: {
+	// 				title: '数据列表',
+	// 				icon: 'search'
+	// 			},
+	// 		},
 		
-			{
-				path: 'model_show',
-				name: 'Model_show',
-				component: () => import('@/views/content/model_show'),
-				meta: {
-					title: '数据详细'
-				},
-				hidden: true
-			},
-			{
-				path: 'content_add',
-				name: 'Content_add',
-				component: () => import('@/views/content/content_add'),
-				meta: {
-					title: '资源添加'
-				},
-				hidden: true
-			},
+	// 		{
+	// 			path: 'model_show',
+	// 			name: 'Model_show',
+	// 			component: () => import('@/views/content/model_show'),
+	// 			meta: {
+	// 				title: '数据详细'
+	// 			},
+	// 			hidden: true
+	// 		},
+	// 		{
+	// 			path: 'content_add',
+	// 			name: 'Content_add',
+	// 			component: () => import('@/views/content/content_add'),
+	// 			meta: {
+	// 				title: '资源添加'
+	// 			},
+	// 			hidden: true
+	// 		},
 		
 		
-		]
-	},
+	// 	]
+	// },
 	{
 		path: '/modelfu',
 		component: Layout,
@@ -133,7 +133,36 @@ export const constantRouterMap = [
 			title: '内容相关',
 			icon: 'yun'
 		},
-		children: [{
+		children: [
+			{
+				path: 'model_table_list',
+				name: 'Model_table_list',
+				component: () => import('@/views/content/model_table_list'),
+				meta: {
+					title: '数据列表',
+					icon: 'search'
+				},
+			},
+					
+			{
+				path: 'model_show',
+				name: 'Model_show',
+				component: () => import('@/views/content/model_show'),
+				meta: {
+					title: '数据详细'
+				},
+				hidden: true
+			},
+			{
+				path: 'content_add',
+				name: 'Content_add',
+				component: () => import('@/views/content/content_add'),
+				meta: {
+					title: '资源添加'
+				},
+				hidden: true
+			},
+			{
 			path: 'cat',
 			name: 'Cat',
 			// component: require('@/views/setting/setting').default,
