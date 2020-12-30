@@ -9,7 +9,7 @@ export function index_home(params) {
 
 export function getshow(params) {
   return get(
-    'vue_app_model_api.php?act=detail',
+    'vue_app_content_api.php?act=detail',
     params
   )
 }
@@ -17,13 +17,13 @@ export function getshow(params) {
 export function model_data_list(params) {
 	
 	return get(
-			 'vue_app_model_api.php?act=model_data_list',
+			 'vue_app_content_api.php?act=model_data_list',
 			
 			params
 	) 
 	// console.log('切换全局')
 	// return request({
-	//   url: 'vue_app_model_api.php?act=search',
+	//   url: 'vue_app_content_api.php?act=search',
 	//   method: 'get',
 	//   params
 	// })
@@ -36,7 +36,7 @@ export function model_data_list(params) {
 
 export function get_catlist_data(params) {
   return get( 
-     'vue_app_model_api.php?act=get_catlist_data',
+     'vue_app_content_api.php?act=get_catlist_data',
     params
   )
 }
