@@ -42,7 +42,7 @@
 				
 		    <el-table-column   
 		      label="userid"
-		      width="180">
+		      >
 		      <template slot-scope="scope">
 		        <!-- <i class="el-icon-time"></i> -->
 		        <span style="margin-left: 10px">{{ scope.row.userid }}</span>
@@ -50,7 +50,7 @@
 		    </el-table-column>
 		    <el-table-column
 		      label="用户名"
-		      width="180">
+		      >
 		      <template slot-scope="scope">
 		          {{ scope.row.username }}
 		       
@@ -59,7 +59,7 @@
 			
 			<el-table-column
 			  label="姓名"
-			  width="280">
+			  >
 			  <template slot-scope="scope">
 			      {{ scope.row.realname }}
 			   
@@ -68,7 +68,7 @@
 			
 			<el-table-column
 			  label="角色"
-			  width="180">
+			 >
 			  <template slot-scope="scope">
 			      {{ scope.row.role_info.rolename }}
 			   
@@ -77,7 +77,7 @@
 			
 			<el-table-column
 			  label="邮箱"
-			  width="180">
+			 >
 			  <template slot-scope="scope">
 			      {{ scope.row.email }}
 			   
@@ -85,7 +85,7 @@
 			</el-table-column>
 			<el-table-column
 			  label="最后登录"
-			  width="180">
+			  >
 			  <template slot-scope="scope">
 			      {{ scope.row.lastlogintime }}
 			   

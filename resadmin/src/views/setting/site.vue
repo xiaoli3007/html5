@@ -48,15 +48,15 @@
 			
 		    <el-table-column
 		      label="siteid"
-		      width="180">
+		      >
 		      <template slot-scope="scope">
 		        <!-- <i class="el-icon-time"></i> -->
-		        <span style="margin-left: 10px">{{ scope.row.siteid }}</span>
+		        <span style="">{{ scope.row.siteid }}</span>
 		      </template>
 		    </el-table-column>
 		    <el-table-column
 		      label="站点名称"
-		      width="180">
+		     >
 		      <template slot-scope="scope">
 		          {{ scope.row.name }}
 		       
@@ -65,7 +65,7 @@
 			
 			<el-table-column
 			  label="域名"
-			  width="280">
+			 >
 			  <template slot-scope="scope">
 			      {{ scope.row.domain }}
 			   
@@ -74,7 +74,7 @@
 			
 			<el-table-column
 			  label="媒体目录"
-			  width="180">
+			  >
 			  <template slot-scope="scope">
 			      {{ scope.row.media_dir }}
 			   
@@ -83,7 +83,7 @@
 			
 			<el-table-column
 			  label="模板"
-			  width="100">
+			  >
 			  <template slot-scope="scope">
 			      {{ scope.row.template }}
 			   
