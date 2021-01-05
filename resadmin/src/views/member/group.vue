@@ -276,7 +276,7 @@
 					 this.datalist = response.items
 					  // this.site_list = response.site_list
 					 // console.log(this.site_list)
-					 // this.dataCount = parseInt(response.dataCount)
+					  this.dataCount = parseInt(response.dataCount)
 					 this.v = true
 			  })
 			    // this.listLoading = false

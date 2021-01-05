@@ -1,26 +1,45 @@
 <template>
 	<div class="app-container">
 
-	<el-dialog  title="模型信息" :visible.sync="dialogFormVisible"  v-if="v">
+	<el-dialog  title="导入信息" :visible.sync="dialogFormVisible"  v-if="v">
+		
+		
+		
 	  <el-form :model="form">
-	    <el-form-item label="模型名称" :label-width="formLabelWidth">
-	      <el-input v-model="form.name" autocomplete="off"></el-input>
-	    </el-form-item>
-	
-		
-	 	<el-form-item label="站点" :label-width="formLabelWidth" >
-			<el-radio-group v-model="form.siteid" disabled>
-			        <el-radio v-for="(item, index) in site_list" :key="index" @change="checksiteid(item.siteid)"  :label="item.siteid"  >{{item.name}}</el-radio>
-			    </el-radio-group>			 
-		</el-form-item> 
-		
-		<el-form-item label="表名" :label-width="formLabelWidth">
-		  <el-input v-model="form.tablename" autocomplete="off"></el-input>
+		  
+		  <el-form-item label="导入名" :label-width="formLabelWidth">
+		    <el-input v-model="form.username" autocomplete="off"></el-input>
+		  </el-form-item>
+		  <el-form-item label="模型" :label-width="formLabelWidth">
+		  	<el-radio-group v-model="form.modelid">
+		  	        <el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)"  :label="item.modelid"  >{{item.name}}</el-radio>
+		  	    </el-radio-group>
+		  	 
+		  </el-form-item>
+		  
+	  
+	 	
+		<el-form-item label="导入组" :label-width="formLabelWidth">
+			
+			
+			<el-checkbox-group v-model="form.groupid"  >
+			      
+			      <el-checkbox v-for="(item, index) in group_list" :key="index"  :label="item.groupid"  >{{item.name}}</el-checkbox>
+				   
+			    </el-checkbox-group>
+				
+			 
 		</el-form-item>
-		<el-form-item label="描述" :label-width="formLabelWidth">
-		  <el-input v-model="form.description" autocomplete="off"></el-input>
+		
+		<el-form-item label="邮箱" :label-width="formLabelWidth">
+		  <el-input v-model="form.email" autocomplete="off"></el-input>
 		</el-form-item>
-	     
+		
+		
+		 <!-- <el-form-item label="真实姓名" :label-width="formLabelWidth">
+		   <el-input v-model="form.realname" autocomplete="off"></el-input>
+		 </el-form-item> -->
+		
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
 	    <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -28,58 +47,60 @@
 	  </div>
 	</el-dialog>
 	
-	<el-button type="success" @click="handleAdd()">添加</el-button> 		
-					
+ 
+		  <el-form :inline="true" :model="formInline" class="demo-form-inline">
+		    <el-form-item label="导入名">
+		      <el-input v-model="formInline.user" placeholder="导入名"></el-input>
+		    </el-form-item>
+		    <el-form-item label="导入组">
+		      <el-select v-model="formInline.region" placeholder="导入组">
+		        <el-option label="区域一" value="shanghai"></el-option>
+		        <el-option label="区域二" value="beijing"></el-option>
+		      </el-select>
+		    </el-form-item>
+		    <el-form-item>
+		      <el-button type="primary" @click="onSubmit">查询</el-button>
+		    </el-form-item>
+		    
+		    <el-form-item>
+		      <el-button type="success" @click="handleAdd()">添加</el-button>
+		    </el-form-item>
+		    
+		  </el-form>
+		  
+				
 		<el-table
 		    :data="datalist"
 		    style="width: 100%">
 			
 				
 		    <el-table-column   
-		      label="modelid"
+		      label="catid"
 		      >
 		      <template slot-scope="scope">
 		        <!-- <i class="el-icon-time"></i> -->
-		        <span style="margin-left: 10px">{{ scope.row.modelid }}</span>
+		        <span style="margin-left: 10px">{{ scope.row.catid }}</span>
 		      </template>
 		    </el-table-column>
-		    <el-table-column
-		      label="表名"
-		     >
-		      <template slot-scope="scope">
-		          {{ scope.row.name }}
-		       
-		      </template>
-		    </el-table-column>
+		  
 			
 			<el-table-column
-			  label="模型名称"
+			  label="栏目"
 			  >
 			  <template slot-scope="scope">
-			      {{ scope.row.tablename }}
+			      {{ scope.row.catname }}
 			   
 			  </template>
 			</el-table-column>
 			
 			<el-table-column
-			  label="站点"
+			  label="模型"
 			  >
 			  <template slot-scope="scope">
-			      {{ scope.row.siteid }}
-			   
+			      {{ scope.row.modelid }}
 			  </template>
 			</el-table-column>
-			
-			<el-table-column
-			  label="描述"
-			 >
-			  <template slot-scope="scope">
-			      {{ scope.row.description }}
-			   
-			  </template>
-			</el-table-column>
-			 
-			 
+			  
 			 
 		    <el-table-column label="操作"  >
 		      <template slot-scope="scope">
@@ -125,8 +146,8 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		member_model_list,member_model_edit,member_model_delete
-	} from '@/api/admin_member'
+		content_excel_list,content_excel_edit,content_excel_delete
+	} from '@/api/content_import.js'
 	// import router from '@/router/index.js'
 	export default {
 		data() {
@@ -136,11 +157,11 @@
 				 currentPage: null,
 				 pagesize: 12,
 				form: {
-				  name: '',
-				  tablename: '',
-				  description:'',
-				  email: '',
-				  siteid: getsiteid()  ? getsiteid() : '1',
+				  username: '',
+				  password: '',
+				  confirmpassword:'',
+				  modelid: '',
+				  groupid:  [],
 				},
 				formLabelWidth: '120px',
 				  
@@ -149,7 +170,11 @@
 				 
 				datalist:[],
 				site_list:[],
-				 
+				model_list:[],
+				formInline: {
+				           user: '',
+				           region: ''
+				}
 				 
 			}
 		},
@@ -164,6 +189,9 @@
 			}
 		},
 		methods: {
+			 onSubmit() {
+			        console.log('submit!');
+			      },
 			checksiteid(id) {
 				console.log(id)
 				
@@ -206,7 +234,7 @@
 			  	resparams: resparams,
 			  	userid: this.$store.state.user.userid
 			  }
-				member_model_edit(params).then(
+				content_excel_edit(params).then(
 					response => {
 						console.log(response)
 						this.init()
@@ -218,11 +246,11 @@
 							 
 				 this.dialogFormVisible = true
 				 let rowi =  {
-				  name: '',
-				  tablename: '',
-				  description:'',
-				  
-				  siteid: getsiteid()  ? getsiteid() : '1',
+				  username: '',
+				  password: '',
+				  confirmpassword:'',
+				  modelid: '',
+				  groupid:  [],
 				}
 				 this.form = rowi
 			 },
@@ -232,12 +260,12 @@
 				 
 				 let rowi = JSON.parse(JSON.stringify(row))
 				 console.log(rowi)
-				 this.form.description =  ''
+				 this.form.password =  ''
+				 this.form.confirmpassword =  ''
+				 this.form.username = rowi.username
+				 this.form.groupid = rowi.groupid
 				 this.form.modelid = rowi.modelid
-				 this.form.name = rowi.name
-				 this.form.tablename = rowi.tablename
 			 
-				 this.form.siteid = rowi.siteid
 				// console.log(index, row);
 			  },
 			  handleDelete(index, row) {
@@ -252,7 +280,7 @@
 				 		modelid: row.modelid
 				 	}
 				 	_g.openGlobalLoading()
-				 	member_model_delete(params).then(response => {
+				 	content_excel_delete(params).then(response => {
 				 		// console.log(response)
 				 		_g.closeGlobalLoading()
 				 		if (response.code == 20000) {
@@ -277,12 +305,14 @@
 						pagesize: this.pagesize,
 						userid: this.$store.state.user.userid,
 					}
-			  member_model_list(params).then(response => {
+			  content_excel_list(params).then(response => {
 				     _g.closeGlobalLoading()
 					 
 					 this.datalist = response.items
-					  this.site_list = response.site_list
-					 console.log(this.site_list)
+					  // this.site_list = response.site_list
+					  this.group_list = response.group_list
+					  this.model_list = response.model_list
+					 // console.log(this.site_list)
 					  this.dataCount = parseInt(response.dataCount)
 					 this.v = true
 			  })

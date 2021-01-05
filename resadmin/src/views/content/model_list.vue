@@ -44,7 +44,7 @@
 		      </template>
 		    </el-table-column>
 		    <el-table-column
-		      label="表名"
+		      label="模型名称"
 		     >
 		      <template slot-scope="scope">
 		          {{ scope.row.name }}
@@ -53,7 +53,7 @@
 		    </el-table-column>
 			
 			<el-table-column
-			  label="模型名称"
+			  label="表名"
 			  >
 			  <template slot-scope="scope">
 			      {{ scope.row.tablename }}
@@ -81,10 +81,12 @@
 			 
 			 
 			 
-		    <el-table-column label="操作"  >
+		    <el-table-column label="操作"  width="280" >
 		      <template slot-scope="scope">
 				   
-				  
+				<el-button type="primary"
+				  size="mini"
+				  @click="handleEdit(scope.$index, scope.row)">字段管理</el-button> 
 		        <el-button
 		          size="mini"
 		          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>

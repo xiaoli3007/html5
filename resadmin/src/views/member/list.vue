@@ -54,8 +54,30 @@
 	  </div>
 	</el-dialog>
 	
-	<el-button type="success" @click="handleAdd()">添加</el-button> 		
-					
+	
+		
+		
+	<el-form :inline="true" :model="formInline" class="demo-form-inline">
+	  <el-form-item label="用户名">
+	    <el-input v-model="formInline.user" placeholder="用户名"></el-input>
+	  </el-form-item>
+	  <el-form-item label="用户组">
+	    <el-select v-model="formInline.region" placeholder="用户组">
+	      <el-option label="区域一" value="shanghai"></el-option>
+	      <el-option label="区域二" value="beijing"></el-option>
+	    </el-select>
+	  </el-form-item>
+	  <el-form-item>
+	    <el-button type="primary" @click="onSubmit">查询</el-button>
+	  </el-form-item>
+	  
+	  <el-form-item>
+	    <el-button type="success" @click="handleAdd()">添加</el-button>
+	  </el-form-item>
+	  
+	</el-form>
+	
+				
 		<el-table
 		    :data="datalist"
 		    style="width: 100%">
@@ -92,7 +114,7 @@
 			  label="用户组"
 			 >
 			  <template slot-scope="scope">
-			      {{ scope.row.description }}
+			      {{ scope.row.groups }}
 			   
 			  </template>
 			</el-table-column>
@@ -168,7 +190,10 @@
 				datalist:[],
 				site_list:[],
 				model_list:[],
-				 
+				formInline: {
+				           user: '',
+				           region: ''
+				}
 				 
 			}
 		},
@@ -183,6 +208,9 @@
 			}
 		},
 		methods: {
+			 onSubmit() {
+			        console.log('submit!');
+			      },
 			checksiteid(id) {
 				console.log(id)
 				
@@ -304,7 +332,7 @@
 					  this.group_list = response.group_list
 					  this.model_list = response.model_list
 					 // console.log(this.site_list)
-					 // this.dataCount = parseInt(response.dataCount)
+					  this.dataCount = parseInt(response.dataCount)
 					 this.v = true
 			  })
 			    // this.listLoading = false
