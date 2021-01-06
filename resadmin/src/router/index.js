@@ -109,8 +109,19 @@ export const constantRouterMap = [
 			meta: {
 				title: '模型',
 				icon: 'faxian'
-			}
+			},
+			 
 		},{
+				path: 'mfieldlist',
+				name: 'MfieldList',
+				// component: require('@/views/setting/setting').default,
+				component: () => import('@/views/content/model_field_list'),				
+				hidden: true,
+				meta: {
+					title: '模型字段',
+					icon: 'faxian'
+				}
+			},{
 			path: 'explode',
 			name: 'Explode',
 			component: () => import('@/views/content/model_export'),
@@ -119,7 +130,17 @@ export const constantRouterMap = [
 				icon: 'faxian'
 			}
 			
-		},
+		},{
+				path: 'export_excel',
+				name: 'Export_excel',
+				// component: require('@/views/setting/setting').default,
+				component: () => import('@/views/content/model_export_excel'),				
+				hidden: true,
+				meta: {
+					title: '导入文件列表',
+					icon: 'faxian'
+				}
+			},
 		]
 	}, 
 	

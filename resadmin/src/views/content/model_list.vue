@@ -86,7 +86,7 @@
 				   
 				<el-button type="primary"
 				  size="mini"
-				  @click="handleEdit(scope.$index, scope.row)">字段管理</el-button> 
+				  @click="gotofieldlist(scope.$index, scope.row)">字段管理</el-button> 
 		        <el-button
 		          size="mini"
 		          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -228,6 +228,18 @@
 				}
 				 this.form = rowi
 			 },
+			 gotofieldlist(index, row) {
+				 
+				  let modelid = row.modelid
+				 console.log(row);
+				 this.$router.replace({
+				 	name: 'MfieldList',
+				 	query: {
+				 		modelid: modelid,
+				 	}
+				 })
+				 
+			  },
 			 handleEdit(index, row) {
 				 
 				 this.dialogFormVisible = true

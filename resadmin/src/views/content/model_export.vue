@@ -38,8 +38,8 @@
 		    <el-table-column label="操作"  >
 		      <template slot-scope="scope">
 				    <el-button @click="checksiteid(scope.row)" type="text" size="small">模板导出</el-button>
-				  <el-button type="text" size="small">元数据导入</el-button>
-				  <el-button type="text" size="small">媒体数据导入</el-button> 
+				  <el-button type="text" size="small"  @click="gotoexcellist(scope.$index, scope.row)">元数据导入</el-button>
+				  <el-button type="text" size="small" >媒体数据导入</el-button> 
 		      </template>
 		    </el-table-column>
 		  </el-table>
@@ -90,7 +90,18 @@
 			}
 		},
 		methods: {
-			  
+			gotoexcellist(index, row) {
+							 
+			  let catid = row.catid
+			 console.log(row);
+			 this.$router.replace({
+				name: 'Export_excel',
+				query: {
+					catid: catid,
+				}
+			 })
+							 
+			 },  
 			checksiteid(id) {
 				console.log(id)
 				

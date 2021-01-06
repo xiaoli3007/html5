@@ -8,37 +8,24 @@
 	  <el-form :model="form">
 		  
 		  <el-form-item label="字段名" :label-width="formLabelWidth">
-		    <el-input v-model="form.username" autocomplete="off"></el-input>
+		    <el-input v-model="form.field" autocomplete="off"></el-input>
 		  </el-form-item>
+		  
+		  <el-form-item label="字段别名" :label-width="formLabelWidth">
+		    <el-input v-model="form.name" autocomplete="off"></el-input>
+		  </el-form-item>
+		  
 		  <el-form-item label="模型" :label-width="formLabelWidth">
-		  	<el-radio-group v-model="form.modelid">
+		  	<el-radio-group v-model="form.modelid" disabled>
 		  	        <el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)"  :label="item.modelid"  >{{item.name}}</el-radio>
 		  	    </el-radio-group>
 		  	 
 		  </el-form-item>
-		  
-	  
-	 	
-		<el-form-item label="字段组" :label-width="formLabelWidth">
-			
-			
-			<el-checkbox-group v-model="form.groupid"  >
-			      
-			      <el-checkbox v-for="(item, index) in group_list" :key="index"  :label="item.groupid"  >{{item.name}}</el-checkbox>
-				   
-			    </el-checkbox-group>
-				
-			 
-		</el-form-item>
+		 
 		
-		<el-form-item label="邮箱" :label-width="formLabelWidth">
-		  <el-input v-model="form.email" autocomplete="off"></el-input>
-		</el-form-item>
-		
-		
-		 <!-- <el-form-item label="真实姓名" :label-width="formLabelWidth">
-		   <el-input v-model="form.realname" autocomplete="off"></el-input>
-		 </el-form-item> -->
+		 <el-form-item label="类型" :label-width="formLabelWidth">
+		   <el-input v-model="form.formtype" autocomplete="off"></el-input>
+		 </el-form-item> 
 		
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
@@ -75,29 +62,53 @@
 			
 				
 		    <el-table-column   
-		      label="catid"
+		      label="fieldid"
 		      >
 		      <template slot-scope="scope">
 		        <!-- <i class="el-icon-time"></i> -->
-		        <span style="margin-left: 10px">{{ scope.row.catid }}</span>
+		        <span style="margin-left: 10px">{{ scope.row.fieldid }}</span>
 		      </template>
 		    </el-table-column>
 		  
-			
-			<el-table-column
-			  label="栏目"
-			  >
-			  <template slot-scope="scope">
-			      {{ scope.row.catname }}
-			   
-			  </template>
-			</el-table-column>
-			
 			<el-table-column
 			  label="模型"
 			  >
 			  <template slot-scope="scope">
 			      {{ scope.row.modelid }}
+			  </template>
+			</el-table-column>
+			<el-table-column
+			  label="field"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.field }}
+			   
+			  </template>
+			</el-table-column>
+			
+		
+			
+			<el-table-column
+			  label="字段名"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.name }}
+			  </template>
+			</el-table-column>
+			
+			<el-table-column
+			  label="类型"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.formtype }}
+			  </template>
+			</el-table-column>
+			
+			<el-table-column
+			  label="是否主表"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.issystem }}
 			  </template>
 			</el-table-column>
 			  
@@ -157,17 +168,16 @@
 				 currentPage: null,
 				 pagesize: 12,
 				form: {
-				  username: '',
-				  password: '',
-				  confirmpassword:'',
-				  modelid: '',
-				  groupid:  [],
+				  field: '',
+				  name: '',
+				  modelid:this.modelid,
+				  formtype: '',
 				},
 				formLabelWidth: '120px',
 				  
 				table: false,
 				v: false,
-				 
+				 modelid:0,
 				datalist:[],
 				site_list:[],
 				model_list:[],
@@ -179,7 +189,15 @@
 			}
 		},
 		created() {
-			this.init()
+			
+			this.modelid = this.$route.query.modelid
+			 
+			if (this.modelid != 0) {
+				this.init()
+			} else {
+				this.taskin = true
+			}
+			
 		},
 		watch: {
 			'$route'(to, from) {
@@ -246,11 +264,10 @@
 							 
 				 this.dialogFormVisible = true
 				 let rowi =  {
-				  username: '',
-				  password: '',
-				  confirmpassword:'',
-				  modelid: '',
-				  groupid:  [],
+				 field: '',
+				 name: '',
+				 modelid:this.modelid,
+				 formtype: '',
 				}
 				 this.form = rowi
 			 },
@@ -260,11 +277,10 @@
 				 
 				 let rowi = JSON.parse(JSON.stringify(row))
 				 console.log(rowi)
-				 this.form.password =  ''
-				 this.form.confirmpassword =  ''
-				 this.form.username = rowi.username
-				 this.form.groupid = rowi.groupid
-				 this.form.modelid = rowi.modelid
+				 
+				 this.form.field = rowi.field
+				 this.form.name = rowi.name
+				 this.form.formtype = rowi.formtype
 			 
 				// console.log(index, row);
 			  },
@@ -304,14 +320,15 @@
 						page: this.currentPage,
 						pagesize: this.pagesize,
 						userid: this.$store.state.user.userid,
+						modelid:this.modelid,
 					}
 			  model_field_list(params).then(response => {
 				     _g.closeGlobalLoading()
 					 
 					 this.datalist = response.items
 					  // this.site_list = response.site_list
-					  this.group_list = response.group_list
-					  this.model_list = response.model_list
+					  // this.group_list = response.group_list
+					   this.model_list = response.model_list
 					 // console.log(this.site_list)
 					  this.dataCount = parseInt(response.dataCount)
 					 this.v = true

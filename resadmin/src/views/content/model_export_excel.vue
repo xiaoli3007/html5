@@ -8,7 +8,7 @@
 	  <el-form :model="form">
 		  
 		  <el-form-item label="导入名" :label-width="formLabelWidth">
-		    <el-input v-model="form.username" autocomplete="off"></el-input>
+		    <el-input v-model="form.title" autocomplete="off"></el-input>
 		  </el-form-item>
 		  <el-form-item label="模型" :label-width="formLabelWidth">
 		  	<el-radio-group v-model="form.modelid">
@@ -17,28 +17,14 @@
 		  	 
 		  </el-form-item>
 		  
-	  
-	 	
-		<el-form-item label="导入组" :label-width="formLabelWidth">
-			
-			
-			<el-checkbox-group v-model="form.groupid"  >
-			      
-			      <el-checkbox v-for="(item, index) in group_list" :key="index"  :label="item.groupid"  >{{item.name}}</el-checkbox>
-				   
-			    </el-checkbox-group>
-				
-			 
+	   
+		<el-form-item label="文件" :label-width="formLabelWidth">
+		  <el-input v-model="form.filepath" autocomplete="off"></el-input>
 		</el-form-item>
-		
-		<el-form-item label="邮箱" :label-width="formLabelWidth">
-		  <el-input v-model="form.email" autocomplete="off"></el-input>
-		</el-form-item>
-		
-		
-		 <!-- <el-form-item label="真实姓名" :label-width="formLabelWidth">
-		   <el-input v-model="form.realname" autocomplete="off"></el-input>
-		 </el-form-item> -->
+		 
+		  <el-form-item label="唯一标识" :label-width="formLabelWidth">
+		   <el-input v-model="form.guid" autocomplete="off"></el-input>
+		 </el-form-item>  
 		
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
@@ -50,14 +36,9 @@
  
 		  <el-form :inline="true" :model="formInline" class="demo-form-inline">
 		    <el-form-item label="导入名">
-		      <el-input v-model="formInline.user" placeholder="导入名"></el-input>
+		      <el-input v-model="formInline.title" placeholder="导入名"></el-input>
 		    </el-form-item>
-		    <el-form-item label="导入组">
-		      <el-select v-model="formInline.region" placeholder="导入组">
-		        <el-option label="区域一" value="shanghai"></el-option>
-		        <el-option label="区域二" value="beijing"></el-option>
-		      </el-select>
-		    </el-form-item>
+		     
 		    <el-form-item>
 		      <el-button type="primary" @click="onSubmit">查询</el-button>
 		    </el-form-item>
@@ -75,14 +56,30 @@
 			
 				
 		    <el-table-column   
-		      label="catid"
+		      label="id"
 		      >
 		      <template slot-scope="scope">
 		        <!-- <i class="el-icon-time"></i> -->
-		        <span style="margin-left: 10px">{{ scope.row.catid }}</span>
+		        <span style="margin-left: 10px">{{ scope.row.id }}</span>
 		      </template>
 		    </el-table-column>
 		  
+			<el-table-column
+			  label="站点"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.siteid }}
+			  </template>
+			</el-table-column>
+			
+			
+			<el-table-column
+			  label="模型"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.modelid }}
+			  </template>
+			</el-table-column>
 			
 			<el-table-column
 			  label="栏目"
@@ -92,15 +89,23 @@
 			   
 			  </template>
 			</el-table-column>
-			
+		
 			<el-table-column
-			  label="模型"
+			  label="导入名"
 			  >
 			  <template slot-scope="scope">
-			      {{ scope.row.modelid }}
+			      {{ scope.row.title }}
+			   
 			  </template>
 			</el-table-column>
-			  
+			  <el-table-column
+			    label="导入用户组"
+			    >
+			    <template slot-scope="scope">
+			        {{ scope.row.groups }}
+			     
+			    </template>
+			  </el-table-column>
 			 
 		    <el-table-column label="操作"  >
 		      <template slot-scope="scope">
@@ -157,29 +162,35 @@
 				 currentPage: null,
 				 pagesize: 12,
 				form: {
-				  username: '',
-				  password: '',
-				  confirmpassword:'',
-				  modelid: '',
-				  groupid:  [],
+				  siteid: '',
+				  catid: '',
+				  modelid:'',
+				  title: '',
+				  filepath: '',
+				  guid:'',
 				},
 				formLabelWidth: '120px',
 				  
 				table: false,
 				v: false,
-				 
+				catid:0,
 				datalist:[],
 				site_list:[],
 				model_list:[],
 				formInline: {
-				           user: '',
-				           region: ''
-				}
+				    title: '',
+				 }
 				 
 			}
 		},
 		created() {
-			this.init()
+			this.catid = this.$route.query.catid
+			 
+			if (this.modelid != 0) {
+				this.init()
+			} else {
+				this.taskin = true
+			}
 		},
 		watch: {
 			'$route'(to, from) {
@@ -246,11 +257,12 @@
 							 
 				 this.dialogFormVisible = true
 				 let rowi =  {
-				  username: '',
-				  password: '',
-				  confirmpassword:'',
-				  modelid: '',
-				  groupid:  [],
+				  siteid: '',
+				  catid: '',
+				  modelid:'',
+				  title: '',
+				  filepath: '',
+				    guid:'',
 				}
 				 this.form = rowi
 			 },
@@ -260,11 +272,13 @@
 				 
 				 let rowi = JSON.parse(JSON.stringify(row))
 				 console.log(rowi)
-				 this.form.password =  ''
-				 this.form.confirmpassword =  ''
-				 this.form.username = rowi.username
-				 this.form.groupid = rowi.groupid
+				 
+				 this.form.siteid = rowi.siteid
 				 this.form.modelid = rowi.modelid
+				 this.form.catid = rowi.catid
+				 this.form.title = rowi.title
+				 this.form.filepath = rowi.filepath
+				 this.form.guid = rowi.guid
 			 
 				// console.log(index, row);
 			  },
@@ -304,6 +318,7 @@
 						page: this.currentPage,
 						pagesize: this.pagesize,
 						userid: this.$store.state.user.userid,
+						catid:this.catid
 					}
 			  content_excel_list(params).then(response => {
 				     _g.closeGlobalLoading()
