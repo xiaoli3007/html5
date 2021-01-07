@@ -1,11 +1,11 @@
 <template>
 	<div class="app-container">
-		<el-input placeholder="Filter keyword" v-model="filterText" style="margin-bottom:30px;"></el-input>
+		<el-input placeholder="关键词" v-model="filterText" style="margin-bottom:30px;"></el-input>
 
 		<el-tree class="filter-tree" :data="datalist" :props="defaultProps" accordion :filter-node-method="filterNode" ref="tree2">
 
 			<span class="custom-tree-node" slot-scope="{ node, data }">
-				<span>{{ node.data.value }} <label slot="label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>{{ node.label }}</span>
+				<span>{{ node.data.value }} <label v-html="kongge"></label>{{ node.label }}</span>
 				<span>
 					<el-button v-if="node.data.parentid==0" type="text" size="mini" @click="() => update(node)">
 						更新缓存
@@ -60,7 +60,8 @@
 					children: 'children',
 					label: 'label'
 				},
-				datalist: []
+				datalist: [],
+				kongge:'&nbsp;&nbsp;&nbsp;&nbsp;'
 
 			}
 		},
