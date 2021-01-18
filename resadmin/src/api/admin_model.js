@@ -7,6 +7,13 @@ export function model_list(params) {
     params
   })
 }
+export function model_tablename_isexit(params) {
+	return request({
+		url: 'vue_app_model_admin_api.php?act=model_tablename_isexit',
+		method: 'post',
+		data: params,
+	})
+}
 
 export function model_edit(params) {
 	return request({

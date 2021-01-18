@@ -473,7 +473,7 @@
 			 },
 			gotoShow(catid, id) {
 				this.$router.replace({
-					name: 'Model_show',
+					name: 'Content_show',
 					query: {
 						catid: catid,
 						news_id: id

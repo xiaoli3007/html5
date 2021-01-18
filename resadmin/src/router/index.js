@@ -156,9 +156,9 @@ export const constantRouterMap = [
 		},
 		children: [
 			{
-				path: 'model_table_list',
-				name: 'Model_table_list',
-				component: () => import('@/views/content/model_table_list'),
+				path: 'content_table_list',
+				name: 'Content_table_list',
+				component: () => import('@/views/content/content_table_list'),
 				meta: {
 					title: '数据列表',
 					icon: 'search'
@@ -166,9 +166,9 @@ export const constantRouterMap = [
 			},
 					
 			{
-				path: 'model_show',
-				name: 'Model_show',
-				component: () => import('@/views/content/model_show'),
+				path: 'content_show',
+				name: 'Content_show',
+				component: () => import('@/views/content/content_show'),
 				meta: {
 					title: '数据详细'
 				},

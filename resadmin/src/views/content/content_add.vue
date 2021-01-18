@@ -274,7 +274,7 @@
 							 _g.toastMsg('success', '提交成功！', this)
 							 
 							 this.$router.replace({
-							 	name: 'Model_table_list',
+							 	name: 'Content_table_list',
 							 	query: {
 							 		catid: this.catid,
 							 	}
@@ -298,7 +298,7 @@
 			gotoback(a) {
 				// console.log(a);
 				this.$router.replace({
-					name: 'Model_table_list'
+					name: 'Content_table_list'
 				})
 			},
 			fetchData() {

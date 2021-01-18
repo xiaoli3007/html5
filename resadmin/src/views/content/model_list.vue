@@ -2,8 +2,8 @@
 	<div class="app-container">
 
 	<el-dialog  title="模型信息" :visible.sync="dialogFormVisible"  v-if="v">
-	  <el-form :model="form">
-	    <el-form-item label="模型名称" :label-width="formLabelWidth">
+	  <el-form :model="form" :rules="rules" ref="ruleForm">
+	    <el-form-item prop="name" label="模型名称" :label-width="formLabelWidth">
 	      <el-input v-model="form.name" autocomplete="off"></el-input>
 	    </el-form-item>
 	
@@ -14,7 +14,7 @@
 			    </el-radio-group>			 
 		</el-form-item> 
 		
-		<el-form-item label="表名" :label-width="formLabelWidth">
+		<el-form-item prop="tablename" label="表名" :label-width="formLabelWidth">
 		  <el-input v-model="form.tablename" autocomplete="off"></el-input>
 		</el-form-item>
 		<el-form-item label="描述" :label-width="formLabelWidth">
@@ -24,7 +24,7 @@
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
 	    <el-button @click="dialogFormVisible = false">取 消</el-button>
-	    <el-button type="primary" @click="fromsiteinfo()">确 定</el-button>
+	    <el-button type="primary" @click="fromsiteinfo('ruleForm')">确 定</el-button>
 	  </div>
 	</el-dialog>
 	
@@ -127,11 +127,29 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		model_list,model_edit,model_delete
+		model_tablename_isexit,model_list,model_edit,model_delete
 	} from '@/api/admin_model'
 	// import router from '@/router/index.js'
 	export default {
 		data() {
+			 var isexit_name = (rule, value, callback) => {
+			        if (value === '') {
+			          callback(new Error('请输入表名'));
+			        } else {
+			           console.log(value)
+					  const params = {tablename: value}
+					  model_tablename_isexit(params).then(response => {
+					  	console.log(response)
+						if (response.code != 20000) {
+						    callback(new Error('表名重复!'));
+						} else {
+						    callback();
+						}
+						
+					  })
+					  
+			        }
+			      };
 			return {
 				 dialogFormVisible: false,
 				 dataCount: null,
@@ -141,9 +159,20 @@
 				  name: '',
 				  tablename: '',
 				  description:'',
-				  email: '',
 				  siteid: getsiteid()  ? getsiteid() : '1',
 				},
+				 rules: {
+				          name: [
+				            { required: true, message: '请输入模型名称', trigger: 'blur' },
+				            { min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur' }
+				          ],
+				         tablename: [
+				           { required: true, message: '请输入英文表名', trigger: 'blur' },
+				           { min: 3, max: 30, message: '长度在 3 到 5 个字符', trigger: 'blur' },
+						    {  pattern: /^([a-zA-Z0-9]|[_]){0,20}$/, message: '必须为英文或英文加数字', trigger: 'blur' },
+							{ validator: isexit_name, trigger: 'blur' }
+				         ]
+				        },
 				formLabelWidth: '120px',
 				  
 				table: false,
@@ -195,8 +224,18 @@
 				})
 			}, 
 			 
-			fromsiteinfo() {
-				 	 
+			fromsiteinfo(formName) {
+				
+				 this.$refs[formName].validate((valid) => {
+				  if (valid) {
+					alert('submit!');
+				  } else {
+					console.log('error submit!!');
+					return false;
+				  }
+				});	 
+				
+				return
 				console.log(this.form)
 				// return
 				// this.form.priv =this.$refs.tree.getCheckedKeys()

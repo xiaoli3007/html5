@@ -72,29 +72,36 @@
 			      </template>
 			    </el-table-column> -->
 
-			<el-table-column label="catid" width="180">
+			<el-table-column label="catid" width="">
 				<template slot-scope="scope">
 					<!-- <i class="el-icon-time"></i> -->
 					<span style="margin-left: 10px">{{ scope.row.catid }}</span>
 				</template>
 			</el-table-column>
-			<el-table-column label="名称" width="180">
+			<el-table-column label="名称" width="">
 				<template slot-scope="scope">
 					{{ scope.row.catname }}
 
 				</template>
 			</el-table-column>
 
-			<el-table-column label="描述" width="280">
+			<el-table-column label="描述" width="">
 				<template slot-scope="scope">
 					{{ scope.row.description }}
 
 				</template>
 			</el-table-column>
-
-			<el-table-column label="站点" width="180">
+			
+			<el-table-column label="模型" width="">
 				<template slot-scope="scope">
-					{{ scope.row.siteid }}
+					{{ scope.row.model_name }}
+			
+				</template>
+			</el-table-column>
+			
+			<el-table-column label="站点" width="">
+				<template slot-scope="scope">
+					{{ scope.row.site_name }}
 
 				</template>
 			</el-table-column>

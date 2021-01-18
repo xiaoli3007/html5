@@ -81,7 +81,7 @@
 			gotoback(a) {
 				// console.log(a);
 				this.$router.replace({
-					name: 'Model_table_list'
+					name: 'Content_table_list'
 				})
 			},
 			fetchData() {
