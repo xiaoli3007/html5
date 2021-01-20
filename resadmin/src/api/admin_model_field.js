@@ -15,6 +15,15 @@ export function model_field_edit(params) {
 		data: params,
 	})
 }
+
+export function model_field_disabled(params) {
+  return request({
+    url: 'vue_app_modelfield_admin_api.php?act=model_field_disabled',
+    method: 'post',
+    data:params,
+  })
+}
+
 export function model_field_delete(params) {
   return request({
     url: 'vue_app_modelfield_admin_api.php?act=model_field_delete',
