@@ -32,7 +32,23 @@
 				<el-form-item prop="name" label="字段别名" :label-width="formLabelWidth">
 					<el-input v-model="form.name" autocomplete="off"></el-input>
 				</el-form-item>
-
+				
+				<el-form-item prop="linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'" >
+					<el-select v-model="form.linkageid" placeholder="联动菜单">
+				
+						<el-option v-for="(item, index) in linkage_list" :key="item.linkageid" :label="item.name" :value="index"></el-option>
+				
+					</el-select>
+				
+				</el-form-item>
+				
+				<el-form-item prop="min" label="最小值" :label-width="formLabelWidth">
+					<el-input v-model="form.min" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item prop="max" label="最大值" :label-width="formLabelWidth">
+					<el-input v-model="form.max" autocomplete="off"></el-input>
+				</el-form-item>
+				
 
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -238,6 +254,23 @@
 							required: true,
 							message: '请选择类型',
 							trigger: 'blur'
+						},],
+					linkageid:[{
+							required: true,
+							message: '请选择联动菜单',
+							trigger: 'blur'
+						},],
+					min:[{
+						type: 'integer',
+							required: true,
+							message: '请选择数字',
+							trigger: 'blur'
+						},],
+					max:[{
+						type: 'integer',
+							required: true,
+							message: '请输入大于最小值的数字',
+							trigger: 'blur'
 						},]
 				},
 				form: {
@@ -245,15 +278,18 @@
 					name: '',
 					modelid: this.modelid,
 					formtype: '',
+					linkageid:'',
+					min:0,
+					max:0,
 				},
 				formLabelWidth: '120px',
-
 				table: false,
 				v: false,
 				modelid: 0,
 				datalist: [],
 				site_list: [],
 				model_list: [],
+				linkage_list: [],
 				searchform: {
 					name: '',
 					formtype: ''
@@ -382,6 +418,9 @@
 					name: '',
 					modelid: this.modelid,
 					formtype: '',
+					linkageid:'',
+					min:0,
+					max:0,
 				}
 				this.form = rowi
 			},
@@ -466,7 +505,7 @@
 
 					this.datalist = response.items
 					this.all_field_type = response.all_field
-					// this.group_list = response.group_list
+					this.linkage_list = response.linkage_list
 					this.model_list = response.model_list
 					// console.log(this.site_list)
 					this.dataCount = parseInt(response.dataCount)
