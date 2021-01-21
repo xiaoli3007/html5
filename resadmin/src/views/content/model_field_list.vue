@@ -5,32 +5,39 @@
 
 
 
-			<el-form :model="form">
-
-				<el-form-item label="字段名" :label-width="formLabelWidth">
-					<el-input v-model="form.field" autocomplete="off"></el-input>
-				</el-form-item>
-
-				<el-form-item label="字段别名" :label-width="formLabelWidth">
-					<el-input v-model="form.name" autocomplete="off"></el-input>
-				</el-form-item>
-
+			<el-form :model="form"  :rules="rules" ref="ruleForm">
+				
+				
 				<el-form-item label="模型" :label-width="formLabelWidth">
 					<el-radio-group v-model="form.modelid" disabled>
 						<el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)" :label="item.modelid">{{item.name}}</el-radio>
 					</el-radio-group>
-
+				
+				</el-form-item>
+				
+				
+				<el-form-item prop="formtype" label="类型" :label-width="formLabelWidth">
+					<el-select v-model="form.formtype" placeholder="类型">
+				
+						<el-option v-for="(item, index) in all_field_type" :key="index" :label="item" :value="index"></el-option>
+				
+					</el-select>
+				
+				</el-form-item>
+				
+				<el-form-item prop="field" label="字段名" :label-width="formLabelWidth">
+					<el-input v-model="form.field" autocomplete="off"></el-input>
 				</el-form-item>
 
-
-				<el-form-item label="类型" :label-width="formLabelWidth">
-					<el-input v-model="form.formtype" autocomplete="off"></el-input>
+				<el-form-item prop="name" label="字段别名" :label-width="formLabelWidth">
+					<el-input v-model="form.name" autocomplete="off"></el-input>
 				</el-form-item>
+
 
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button @click="dialogFormVisible = false">取 消</el-button>
-				<el-button type="primary" @click="fromsiteinfo()">确 定</el-button>
+				<el-button type="primary" @click="fromsiteinfo('ruleForm')">确 定</el-button>
 			</div>
 		</el-dialog>
 
@@ -161,16 +168,78 @@
 	import {
 		model_field_list,
 		model_field_edit,
-		model_field_delete,model_field_disabled
+		model_field_delete,
+		model_field_disabled,model_field_name_isexit
 	} from '@/api/admin_model_field.js'
 	// import router from '@/router/index.js'
 	export default {
 		data() {
+			var isexit_name = (rule, value, callback) => {
+				if (value === '') {
+					callback(new Error('请输入表名'));
+				} else {
+					console.log(value)
+					const params = {
+						field: value,
+						modelid: this.modelid
+					}
+					model_field_name_isexit(params).then(response => {
+						console.log(response)
+						if (response.code != 20000) {
+							callback(new Error('字段名重复!'));
+						} else {
+							callback();
+						}
+			
+					})
+			
+				}
+			};
 			return {
 				dialogFormVisible: false,
 				dataCount: null,
 				currentPage: null,
 				pagesize: 20,
+				rules: {
+					name: [{
+							required: true,
+							message: '请输入模型名称',
+							trigger: 'blur'
+						},
+						{
+							min: 2,
+							max: 50,
+							message: '长度在 2 到 50 个字符',
+							trigger: 'blur'
+						}
+					],
+					field: [{
+							required: true,
+							message: '请输入英文表名',
+							trigger: 'blur'
+						},
+						{
+							min: 3,
+							max: 30,
+							message: '长度在 3 到 5 个字符',
+							trigger: 'blur'
+						},
+						{
+							pattern: /^([a-zA-Z0-9]|[_]){0,20}$/,
+							message: '必须为英文或英文加数字',
+							trigger: 'blur'
+						},
+						{
+							validator: isexit_name,
+							trigger: 'blur'
+						}
+					],
+					formtype: [{
+							required: true,
+							message: '请选择类型',
+							trigger: 'blur'
+						},]
+				},
 				form: {
 					field: '',
 					name: '',
@@ -273,26 +342,37 @@
 				})
 			},
 
-			fromsiteinfo() {
-
-				console.log(this.form)
-				// return
-				// this.form.priv =this.$refs.tree.getCheckedKeys()
-				let resparams = JSON.stringify(this.form)
-
-				console.log(resparams)
-
-				const params = {
-					resparams: resparams,
-					userid: this.$store.state.user.userid
-				}
-				model_field_edit(params).then(
-					response => {
-						console.log(response)
-						this.init()
-						_g.toastMsg('success', '编辑成功！', this)
-					})
-				this.dialogFormVisible = false
+			fromsiteinfo(formName) {
+				
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						// this.form.priv =this.$refs.tree.getCheckedKeys()				
+						console.log(this.form)
+						 return
+						 
+						let resparams = JSON.stringify(this.form)
+						
+						console.log(resparams)
+						
+						const params = {
+							resparams: resparams,
+							userid: this.$store.state.user.userid
+						}
+						model_field_edit(params).then(
+							response => {
+								console.log(response)
+								this.init()
+								_g.toastMsg('success', '编辑成功！', this)
+							})
+						this.dialogFormVisible = false
+						
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
+				});
+				
+				
 			},
 			handleAdd() {
 
@@ -318,32 +398,32 @@
 
 				// console.log(index, row);
 			},
-			handlejinyong(index, row,disabled) {
+			handlejinyong(index, row, disabled) {
 				console.log(row)
 				const params = {
 					userid: this.$store.state.user.userid,
 					fieldid: row.fieldid,
-					disabled:disabled
+					disabled: disabled
 				}
 				let text = '启用'
-				if(disabled==1){
+				if (disabled == 1) {
 					text = '禁用'
 				}
-				
+
 				_g.openGlobalLoading()
 				model_field_disabled(params).then(response => {
 					// console.log(response)
 					_g.closeGlobalLoading()
 					if (response.code == 20000) {
-						_g.toastMsg('success', text+'成功', this)
+						_g.toastMsg('success', text + '成功', this)
 						this.init()
 					} else {
-						_g.toastMsg('error', text+'错误', this)
+						_g.toastMsg('error', text + '错误', this)
 					}
 				})
-				
+
 			},
-			 
+
 			handleDelete(index, row) {
 				this.$confirm('确认删除?', '提示', {
 					confirmButtonText: '确定',
