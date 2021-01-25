@@ -2,53 +2,76 @@
 	<div class="app-container">
 
 		<el-dialog title="字段信息" :visible.sync="dialogFormVisible" v-if="v">
+			<el-form :model="form" :rules="rules" ref="ruleForm">
 
-
-
-			<el-form :model="form"  :rules="rules" ref="ruleForm">
-				
-				
 				<el-form-item label="模型" :label-width="formLabelWidth">
 					<el-radio-group v-model="form.modelid" disabled>
 						<el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)" :label="item.modelid">{{item.name}}</el-radio>
 					</el-radio-group>
-				
+
 				</el-form-item>
-				
-				
-				<el-form-item prop="formtype" label="类型" :label-width="formLabelWidth">
+
+
+				<el-form-item v-if=" !is_edit" prop="formtype" label="类型" :label-width="formLabelWidth">
 					<el-select v-model="form.formtype" placeholder="类型">
-				
-						<el-option v-for="(item, index) in all_field_type" :key="index" :label="item" :value="index"></el-option>
-				
+
+						<el-option v-for="(item, index) in add_field_type" :key="index" :label="item" :value="index"></el-option>
+
 					</el-select>
-				
+
 				</el-form-item>
-				
-				<el-form-item prop="field" label="字段名" :label-width="formLabelWidth">
+
+				<el-form-item v-if="form.formtype!='' && is_edit" label="类型" :label-width="formLabelWidth">
+					<el-select disabled v-model="form.formtype" placeholder="类型">
+
+						<el-option v-for="(item, index) in all_field_type" :key="index" :label="item" :value="index"></el-option>
+
+					</el-select>
+
+				</el-form-item>
+
+
+				<el-form-item v-if="!is_edit" prop="field" label="字段名" :label-width="formLabelWidth">
 					<el-input v-model="form.field" autocomplete="off"></el-input>
 				</el-form-item>
+
+				<el-form-item v-if="form.field!='' && is_edit" label="字段名" :label-width="formLabelWidth">
+					<el-input v-model="form.field" autocomplete="off" :disabled="true"></el-input>
+				</el-form-item>
+
 
 				<el-form-item prop="name" label="字段别名" :label-width="formLabelWidth">
 					<el-input v-model="form.name" autocomplete="off"></el-input>
 				</el-form-item>
-				
-				<el-form-item prop="linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'" >
+
+				<el-form-item prop="linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'">
 					<el-select v-model="form.linkageid" placeholder="联动菜单">
-				
+
 						<el-option v-for="(item, index) in linkage_list" :key="item.linkageid" :label="item.name" :value="index"></el-option>
-				
+
 					</el-select>
-				
+
 				</el-form-item>
-				
-				<el-form-item prop="min" label="最小值" :label-width="formLabelWidth">
-					<el-input v-model="form.min" autocomplete="off"></el-input>
+
+				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
+					<el-input v-model="form.gs_min" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="max" label="最大值" :label-width="formLabelWidth">
-					<el-input v-model="form.max" autocomplete="off"></el-input>
+				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
+					<el-input v-model="form.gs_max" autocomplete="off"></el-input>
 				</el-form-item>
-				
+
+				<el-form-item v-if="form.formtype=='box'" label="选项类型" :label-width="formLabelWidth">
+					<el-radio-group v-model="form.boxtype">
+						<el-radio v-for="(item, index) in boxtype_list" :key="index" :label="index">{{item}}</el-radio>
+					</el-radio-group>
+
+				</el-form-item>
+
+				<el-form-item prop="setting_options" v-if="form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
+					<el-input type="textarea" v-model="form.setting_options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
+				</el-form-item>
+
+
 
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -57,6 +80,72 @@
 			</div>
 		</el-dialog>
 
+<el-dialog title="字段信息编辑---" :visible.sync="dialogFormVisible_edit" v-if="v">
+			<el-form :model="edit_form" :rules="rules" ref="ruleForm">
+
+				<el-form-item label="模型" :label-width="formLabelWidth">
+					<el-radio-group v-model="edit_form.modelid" disabled>
+						<el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)" :label="item.modelid">{{item.name}}</el-radio>
+					</el-radio-group>
+
+				</el-form-item>
+
+				<el-form-item  label="类型" :label-width="formLabelWidth">
+					<el-select disabled v-model="edit_form.formtype" placeholder="类型">
+
+						<el-option v-for="(item, index) in all_field_type" :key="index" :label="item" :value="index"></el-option>
+
+					</el-select>
+
+				</el-form-item>
+
+
+				<el-form-item  label="字段名" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.field" autocomplete="off" :disabled="true"></el-input>
+				</el-form-item>
+
+
+				<el-form-item prop="name" label="字段别名" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.name" autocomplete="off"></el-input>
+				</el-form-item>
+
+				<el-form-item prop="linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="edit_form.formtype=='linkage'">
+					<el-select v-model="edit_form.linkageid" placeholder="联动菜单">
+
+						<el-option v-for="(item, index) in linkage_list" :key="item.linkageid" :label="item.name" :value="index"></el-option>
+
+					</el-select>
+
+				</el-form-item>
+
+				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.gs_min" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.gs_max" autocomplete="off"></el-input>
+				</el-form-item>
+
+				<el-form-item v-if="edit_form.formtype=='box'" label="选项类型" :label-width="formLabelWidth">
+					<el-radio-group v-model="edit_form.boxtype">
+						<el-radio v-for="(item, index) in boxtype_list" :key="index" :label="index">{{item}}</el-radio>
+					</el-radio-group>
+
+				</el-form-item>
+
+				<el-form-item prop="setting_options" v-if="edit_form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
+					<el-input type="textarea" v-model="edit_form.setting_options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
+				</el-form-item>
+
+
+
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button @click="dialogFormVisible_edit = false">取 消</el-button>
+				<el-button type="primary" @click="fromsiteinfo('ruleForm')">确 定</el-button>
+			</div>
+		</el-dialog>
+		
+		
 		<el-row>
 			<el-col :span="2">
 
@@ -185,11 +274,24 @@
 		model_field_list,
 		model_field_edit,
 		model_field_delete,
-		model_field_disabled,model_field_name_isexit
+		model_field_disabled,
+		model_field_name_isexit
 	} from '@/api/admin_model_field.js'
 	// import router from '@/router/index.js'
 	export default {
 		data() {
+			var gs_max_fuc = (rule, value, callback) => {
+				console.log(rule)
+				if (this.form.gs_min == 0 && value == 0) {
+					callback();
+				}
+				if (value <= this.form.gs_min) {
+					callback(new Error('请输入大于最小值的数字值'));
+					console.log('----')
+				} else {
+					callback();
+				}
+			};
 			var isexit_name = (rule, value, callback) => {
 				if (value === '') {
 					callback(new Error('请输入表名'));
@@ -206,29 +308,23 @@
 						} else {
 							callback();
 						}
-			
+
 					})
-			
+
 				}
 			};
 			return {
 				dialogFormVisible: false,
+				dialogFormVisible_edit: false,
 				dataCount: null,
 				currentPage: null,
 				pagesize: 20,
 				rules: {
-					name: [{
-							required: true,
-							message: '请输入模型名称',
-							trigger: 'blur'
-						},
-						{
-							min: 2,
-							max: 50,
-							message: '长度在 2 到 50 个字符',
-							trigger: 'blur'
-						}
-					],
+					formtype: [{
+						required: true,
+						message: '请选择类型',
+						trigger: 'blur'
+					}, ],
 					field: [{
 							required: true,
 							message: '请输入英文表名',
@@ -250,51 +346,75 @@
 							trigger: 'blur'
 						}
 					],
-					formtype: [{
+					name: [{
 							required: true,
-							message: '请选择类型',
+							message: '请输入字段别名',
 							trigger: 'blur'
-						},],
-					linkageid:[{
-							required: true,
-							message: '请选择联动菜单',
+						},
+						{
+							min: 2,
+							max: 50,
+							message: '长度在 2 到 50 个字符',
 							trigger: 'blur'
-						},],
-					min:[{
-						type: 'integer',
-							required: true,
-							message: '请选择数字',
+						}
+					],
+					
+					linkageid: [{
+						required: true,
+						message: '请选择联动菜单',
+						trigger: 'blur'
+					}, ],
+					gs_min: [{
+						pattern: /^([0-9]+)$/,
+						message: '必须为数字',
+						trigger: 'blur'
+					}, ],
+					gs_max: [{
+							pattern: /^([0-9]+)$/,
+							message: '必须为数字',
 							trigger: 'blur'
-						},],
-					max:[{
-						type: 'integer',
-							required: true,
-							message: '请输入大于最小值的数字',
+						},
+						{
+							validator: gs_max_fuc,
 							trigger: 'blur'
-						},]
+						},
+					],
+					setting_options: [{
+						required: true,
+						message: '请填入选项列表',
+						trigger: 'blur'
+					}],
 				},
 				form: {
 					field: '',
 					name: '',
 					modelid: this.modelid,
 					formtype: '',
-					linkageid:'',
-					min:0,
-					max:0,
+					linkageid: '',
+					gs_min: 0,
+					gs_max: 0,
+					boxtype: 'radio',
+					setting_options: '选项名称1|选项值1',
 				},
+				edit_form: {
+					 
+					},
 				formLabelWidth: '120px',
 				table: false,
 				v: false,
+				is_edit: false, //是否为编辑
 				modelid: 0,
 				datalist: [],
 				site_list: [],
 				model_list: [],
 				linkage_list: [],
+				boxtype_list: [],
 				searchform: {
 					name: '',
 					formtype: ''
 				},
 				all_field_type: {},
+				add_field_type: {},
 				title: '',
 			}
 		},
@@ -379,17 +499,21 @@
 			},
 
 			fromsiteinfo(formName) {
-				
+
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
-						// this.form.priv =this.$refs.tree.getCheckedKeys()				
-						console.log(this.form)
-						 return
-						 
-						let resparams = JSON.stringify(this.form)
-						
+						// this.form.priv =this.$refs.tree.getCheckedKeys()				 
+						let resparams = ''
+						if(this.is_edit){
+							console.log(this.edit_form)
+							 resparams = JSON.stringify(this.edit_form)
+						}else{
+							console.log(this.form)
+							 resparams = JSON.stringify(this.form)
+						}
 						console.log(resparams)
-						
+						return
+
 						const params = {
 							resparams: resparams,
 							userid: this.$store.state.user.userid
@@ -401,41 +525,55 @@
 								_g.toastMsg('success', '编辑成功！', this)
 							})
 						this.dialogFormVisible = false
-						
+
 					} else {
 						console.log('error submit!!');
 						return false;
 					}
 				});
-				
-				
+
+
 			},
 			handleAdd() {
 
-				this.dialogFormVisible = true
+
 				let rowi = {
 					field: '',
 					name: '',
 					modelid: this.modelid,
 					formtype: '',
-					linkageid:'',
-					min:0,
-					max:0,
+					linkageid: '',
+					gs_min: 0,
+					gs_max: 0,
+					boxtype: 'radio',
+					setting_options: '选项名称1|选项值1',
 				}
 				this.form = rowi
+				this.is_edit = false
+
+				setTimeout(() => {
+					this.dialogFormVisible = true
+				}, 200);
 			},
 			handleEdit(index, row) {
 
-				this.dialogFormVisible = true
 
 				let rowi = JSON.parse(JSON.stringify(row))
-				console.log(rowi)
-
-				this.form.field = rowi.field
-				this.form.name = rowi.name
-				this.form.formtype = rowi.formtype
-
-				// console.log(index, row);
+				// console.log(rowi)
+console.log(this.edit_form)
+				this.edit_form.field = rowi.field
+				this.edit_form.name = rowi.name
+				this.edit_form.formtype = rowi.formtype
+				this.edit_form.linkageid = rowi.linkageid
+				this.edit_form.gs_min = rowi.gs_min
+				this.edit_form.gs_max = rowi.gs_max
+				this.edit_form.boxtype = rowi.boxtype
+				this.edit_form.setting_options = rowi.setting_options
+				this.is_edit = true
+				 console.log('ssssss');
+				setTimeout(() => {
+					this.dialogFormVisible_edit = true
+				}, 200);
 			},
 			handlejinyong(index, row, disabled) {
 				console.log(row)
@@ -505,8 +643,10 @@
 
 					this.datalist = response.items
 					this.all_field_type = response.all_field
+					this.add_field_type = response.add_field
 					this.linkage_list = response.linkage_list
 					this.model_list = response.model_list
+					this.boxtype_list = response.boxtype_list
 					// console.log(this.site_list)
 					this.dataCount = parseInt(response.dataCount)
 					this.v = true
