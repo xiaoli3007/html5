@@ -1,6 +1,6 @@
 <template>
 	<div class="app-container">
-
+<!-- 字段添加-------------------------- -->
 		<el-dialog title="字段信息" :visible.sync="dialogFormVisible" v-if="v">
 			<el-form :model="form" :rules="rules" ref="ruleForm">
 
@@ -21,25 +21,12 @@
 
 				</el-form-item>
 
-				<el-form-item v-if="form.formtype!='' && is_edit" label="类型" :label-width="formLabelWidth">
-					<el-select disabled v-model="form.formtype" placeholder="类型">
-
-						<el-option v-for="(item, index) in all_field_type" :key="index" :label="item" :value="index"></el-option>
-
-					</el-select>
-
-				</el-form-item>
-
-
+				
 				<el-form-item v-if="!is_edit" prop="field" label="字段名" :label-width="formLabelWidth">
 					<el-input v-model="form.field" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item v-if="form.field!='' && is_edit" label="字段名" :label-width="formLabelWidth">
-					<el-input v-model="form.field" autocomplete="off" :disabled="true"></el-input>
-				</el-form-item>
-
-
+				
 				<el-form-item prop="name" label="字段别名" :label-width="formLabelWidth">
 					<el-input v-model="form.name" autocomplete="off"></el-input>
 				</el-form-item>
@@ -52,14 +39,11 @@
 					</el-select>
 
 				</el-form-item>
-
-				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
-					<el-input v-model="form.gs_min" autocomplete="off"></el-input>
+				
+				<el-form-item  v-if="!no_default.includes(form.formtype)" label="默认值" :label-width="formLabelWidth">
+					<el-input v-model="form.setting_defaultvalue" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
-					<el-input v-model="form.gs_max" autocomplete="off"></el-input>
-				</el-form-item>
-
+				
 				<el-form-item v-if="form.formtype=='box'" label="选项类型" :label-width="formLabelWidth">
 					<el-radio-group v-model="form.boxtype">
 						<el-radio v-for="(item, index) in boxtype_list" :key="index" :label="index">{{item}}</el-radio>
@@ -70,8 +54,19 @@
 				<el-form-item prop="setting_options" v-if="form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
 					<el-input type="textarea" v-model="form.setting_options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
 				</el-form-item>
-
-
+				
+				<el-form-item  v-if="form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
+					<el-radio-group v-model="form.setting_fieldtype"><el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
+					</el-radio-group>
+					
+				</el-form-item>
+				
+				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
+					<el-input v-model="form.gs_min" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
+					<el-input v-model="form.gs_max" autocomplete="off"></el-input>
+				</el-form-item>
 
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -80,6 +75,7 @@
 			</div>
 		</el-dialog>
 
+<!-- 字段编辑-------------------------- -->
 <el-dialog title="字段信息编辑---" :visible.sync="dialogFormVisible_edit" v-if="v">
 			<el-form :model="edit_form" :rules="rules" ref="ruleForm">
 
@@ -117,13 +113,12 @@
 					</el-select>
 
 				</el-form-item>
-
-				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
-					<el-input v-model="edit_form.gs_min" autocomplete="off"></el-input>
+				
+				<el-form-item v-if="!no_default.includes(edit_form.formtype)" label="默认值" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.setting_defaultvalue" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
-					<el-input v-model="edit_form.gs_max" autocomplete="off"></el-input>
-				</el-form-item>
+				
+				
 
 				<el-form-item v-if="edit_form.formtype=='box'" label="选项类型" :label-width="formLabelWidth">
 					<el-radio-group v-model="edit_form.boxtype">
@@ -135,8 +130,19 @@
 				<el-form-item prop="setting_options" v-if="edit_form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
 					<el-input type="textarea" v-model="edit_form.setting_options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
 				</el-form-item>
-
-
+				
+				<el-form-item  v-if="edit_form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
+					<el-radio-group v-model="edit_form.setting_fieldtype"><el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
+					</el-radio-group>
+					
+				</el-form-item>
+				
+				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.gs_min" autocomplete="off"></el-input>
+				</el-form-item>
+				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.gs_max" autocomplete="off"></el-input>
+				</el-form-item>
 
 			</el-form>
 			<div slot="footer" class="dialog-footer">
@@ -145,7 +151,7 @@
 			</div>
 		</el-dialog>
 		
-		
+		<!-- 字段搜索-------------------------- -->
 		<el-row>
 			<el-col :span="2">
 
@@ -181,7 +187,7 @@
 
 
 
-
+<!-- 字段列表-------------------------- -->
 
 		<el-table :data="datalist" style="width: 100%">
 
@@ -395,10 +401,13 @@
 					gs_max: 0,
 					boxtype: 'radio',
 					setting_options: '选项名称1|选项值1',
+					setting_fieldtype:'date',
+					setting_defaultvalue:'',
 				},
 				edit_form: {
 					 
 					},
+				no_default:["datetime", "linkage"],
 				formLabelWidth: '120px',
 				table: false,
 				v: false,
@@ -409,6 +418,7 @@
 				model_list: [],
 				linkage_list: [],
 				boxtype_list: [],
+				date_fieldtype_list: [],
 				searchform: {
 					name: '',
 					formtype: ''
@@ -547,6 +557,8 @@
 					gs_max: 0,
 					boxtype: 'radio',
 					setting_options: '选项名称1|选项值1',
+					setting_fieldtype:'date',
+					setting_defaultvalue:'',
 				}
 				this.form = rowi
 				this.is_edit = false
@@ -561,6 +573,7 @@
 				let rowi = JSON.parse(JSON.stringify(row))
 				// console.log(rowi)
 console.log(this.edit_form)
+				this.edit_form.fieldid = rowi.fieldid
 				this.edit_form.field = rowi.field
 				this.edit_form.name = rowi.name
 				this.edit_form.formtype = rowi.formtype
@@ -569,6 +582,8 @@ console.log(this.edit_form)
 				this.edit_form.gs_max = rowi.gs_max
 				this.edit_form.boxtype = rowi.boxtype
 				this.edit_form.setting_options = rowi.setting_options
+				this.edit_form.setting_fieldtype = rowi.setting_fieldtype
+				this.edit_form.setting_defaultvalue = rowi.setting_defaultvalue
 				this.is_edit = true
 				 console.log('ssssss');
 				setTimeout(() => {
@@ -647,6 +662,7 @@ console.log(this.edit_form)
 					this.linkage_list = response.linkage_list
 					this.model_list = response.model_list
 					this.boxtype_list = response.boxtype_list
+					this.date_fieldtype_list = response.date_fieldtype_list
 					// console.log(this.site_list)
 					this.dataCount = parseInt(response.dataCount)
 					this.v = true
