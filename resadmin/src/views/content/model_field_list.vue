@@ -31,8 +31,8 @@
 					<el-input v-model="form.name" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item prop="linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'">
-					<el-select v-model="form.linkageid" placeholder="联动菜单">
+				<el-form-item prop="setting_linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'">
+					<el-select v-model="form.setting.linkageid" placeholder="联动菜单">
 
 						<el-option v-for="(item, index) in linkage_list" :key="item.linkageid" :label="item.name" :value="index"></el-option>
 
@@ -40,32 +40,32 @@
 
 				</el-form-item>
 				
-				<el-form-item  v-if="!no_default.includes(form.formtype)" label="默认值" :label-width="formLabelWidth">
-					<el-input v-model="form.setting_defaultvalue" autocomplete="off"></el-input>
-				</el-form-item>
+				 <el-form-item  v-if="!no_default.includes(form.formtype)" label="默认值" :label-width="formLabelWidth">
+					<el-input v-model="form.setting.defaultvalue" autocomplete="off"></el-input>
+				</el-form-item> 
 				
 				<el-form-item v-if="form.formtype=='box'" label="选项类型" :label-width="formLabelWidth">
-					<el-radio-group v-model="form.boxtype">
+					<el-radio-group v-model="form.setting.boxtype">
 						<el-radio v-for="(item, index) in boxtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 
 				</el-form-item>
 
 				<el-form-item prop="setting_options" v-if="form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
-					<el-input type="textarea" v-model="form.setting_options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
+					<el-input type="textarea" v-model="form.setting.options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
 				</el-form-item>
 				
 				<el-form-item  v-if="form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
-					<el-radio-group v-model="form.setting_fieldtype"><el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
+					<el-radio-group v-model="form.setting.fieldtype"><el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 					
 				</el-form-item>
 				
-				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
-					<el-input v-model="form.gs_min" autocomplete="off"></el-input>
+				<el-form-item prop="minlength" label="最小值" :label-width="formLabelWidth">
+					<el-input v-model="form.minlength" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
-					<el-input v-model="form.gs_max" autocomplete="off"></el-input>
+				<el-form-item prop="maxlength" label="最大值" :label-width="formLabelWidth">
+					<el-input v-model="form.maxlength" autocomplete="off"></el-input>
 				</el-form-item>
 
 			</el-form>
@@ -105,8 +105,8 @@
 					<el-input v-model="edit_form.name" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item prop="linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="edit_form.formtype=='linkage'">
-					<el-select v-model="edit_form.linkageid" placeholder="联动菜单">
+				<el-form-item prop="setting_linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="edit_form.formtype=='linkage'">
+					<el-select v-model="edit_form.setting.linkageid" placeholder="联动菜单">
 
 						<el-option v-for="(item, index) in linkage_list" :key="item.linkageid" :label="item.name" :value="index"></el-option>
 
@@ -115,33 +115,33 @@
 				</el-form-item>
 				
 				<el-form-item v-if="!no_default.includes(edit_form.formtype)" label="默认值" :label-width="formLabelWidth">
-					<el-input v-model="edit_form.setting_defaultvalue" autocomplete="off"></el-input>
+					<el-input v-model="edit_form.setting.defaultvalue" autocomplete="off"></el-input>
 				</el-form-item>
 				
 				
 
 				<el-form-item v-if="edit_form.formtype=='box'" label="选项类型" :label-width="formLabelWidth">
-					<el-radio-group v-model="edit_form.boxtype">
+					<el-radio-group v-model="edit_form.setting.boxtype">
 						<el-radio v-for="(item, index) in boxtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 
 				</el-form-item>
 
 				<el-form-item prop="setting_options" v-if="edit_form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
-					<el-input type="textarea" v-model="edit_form.setting_options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
+					<el-input type="textarea" v-model="edit_form.setting.options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
 				</el-form-item>
 				
 				<el-form-item  v-if="edit_form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
-					<el-radio-group v-model="edit_form.setting_fieldtype"><el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
+					<el-radio-group v-model="edit_form.setting.fieldtype"><el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 					
 				</el-form-item>
 				
-				<el-form-item prop="gs_min" label="最小值" :label-width="formLabelWidth">
-					<el-input v-model="edit_form.gs_min" autocomplete="off"></el-input>
+				<el-form-item prop="minlength" label="最小值" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.minlength" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="gs_max" label="最大值" :label-width="formLabelWidth">
-					<el-input v-model="edit_form.gs_max" autocomplete="off"></el-input>
+				<el-form-item prop="maxlength" label="最大值" :label-width="formLabelWidth">
+					<el-input v-model="edit_form.maxlength" autocomplete="off"></el-input>
 				</el-form-item>
 
 			</el-form>
@@ -286,12 +286,12 @@
 	// import router from '@/router/index.js'
 	export default {
 		data() {
-			var gs_max_fuc = (rule, value, callback) => {
+			var maxlength_fuc = (rule, value, callback) => {
 				console.log(rule)
-				if (this.form.gs_min == 0 && value == 0) {
+				if (this.form.minlength == 0 && value == 0) {
 					callback();
 				}
-				if (value <= this.form.gs_min) {
+				if (value <= this.form.minlength) {
 					callback(new Error('请输入大于最小值的数字值'));
 					console.log('----')
 				} else {
@@ -365,23 +365,23 @@
 						}
 					],
 					
-					linkageid: [{
+					setting_linkageid: [{
 						required: true,
 						message: '请选择联动菜单',
 						trigger: 'blur'
 					}, ],
-					gs_min: [{
+					minlength: [{
 						pattern: /^([0-9]+)$/,
 						message: '必须为数字',
 						trigger: 'blur'
 					}, ],
-					gs_max: [{
+					maxlength: [{
 							pattern: /^([0-9]+)$/,
 							message: '必须为数字',
 							trigger: 'blur'
 						},
 						{
-							validator: gs_max_fuc,
+							validator: maxlength_fuc,
 							trigger: 'blur'
 						},
 					],
@@ -396,16 +396,35 @@
 					name: '',
 					modelid: this.modelid,
 					formtype: '',
-					linkageid: '',
-					gs_min: 0,
-					gs_max: 0,
-					boxtype: 'radio',
-					setting_options: '选项名称1|选项值1',
-					setting_fieldtype:'date',
-					setting_defaultvalue:'',
+					minlength: 0,
+					maxlength: 0,
+					setting:{
+						linkageid: '',
+						boxtype: 'radio',
+						options: '选项名称1|选项值1',
+						fieldtype:'date',
+						defaultvalue:'',
+					},
+					// setting_linkageid: '',
+					// setting_boxtype: 'radio',
+					// setting_options: '选项名称1|选项值1',
+					// setting_fieldtype:'date',
+					 //setting_defaultvalue:'',
 				},
 				edit_form: {
-					 
+					 field: '',
+					 name: '',
+					 modelid: this.modelid,
+					 formtype: '',
+					 minlength: 0,
+					 maxlength: 0,
+					 setting:{
+					 	linkageid: '',
+					 	boxtype: 'radio',
+					 	options: '选项名称1|选项值1',
+					 	fieldtype:'date',
+					 	defaultvalue:'',
+					 },
 					},
 				no_default:["datetime", "linkage"],
 				formLabelWidth: '120px',
@@ -521,9 +540,7 @@
 							console.log(this.form)
 							 resparams = JSON.stringify(this.form)
 						}
-						console.log(resparams)
-						return
-
+						 
 						const params = {
 							resparams: resparams,
 							userid: this.$store.state.user.userid
@@ -534,7 +551,13 @@
 								this.init()
 								_g.toastMsg('success', '编辑成功！', this)
 							})
-						this.dialogFormVisible = false
+							
+							if(this.is_edit){
+								this.dialogFormVisible_edit = false
+							}else{
+								this.dialogFormVisible = false
+							}
+						
 
 					} else {
 						console.log('error submit!!');
@@ -552,13 +575,16 @@
 					name: '',
 					modelid: this.modelid,
 					formtype: '',
-					linkageid: '',
-					gs_min: 0,
-					gs_max: 0,
-					boxtype: 'radio',
-					setting_options: '选项名称1|选项值1',
-					setting_fieldtype:'date',
-					setting_defaultvalue:'',
+					minlength: 0,
+					maxlength: 0,
+					setting:{
+						linkageid: '',
+						boxtype: 'radio',
+						options: '选项名称1|选项值1',
+						fieldtype:'date',
+						defaultvalue:'',
+					},
+					
 				}
 				this.form = rowi
 				this.is_edit = false
@@ -577,13 +603,14 @@ console.log(this.edit_form)
 				this.edit_form.field = rowi.field
 				this.edit_form.name = rowi.name
 				this.edit_form.formtype = rowi.formtype
-				this.edit_form.linkageid = rowi.linkageid
-				this.edit_form.gs_min = rowi.gs_min
-				this.edit_form.gs_max = rowi.gs_max
-				this.edit_form.boxtype = rowi.boxtype
-				this.edit_form.setting_options = rowi.setting_options
-				this.edit_form.setting_fieldtype = rowi.setting_fieldtype
-				this.edit_form.setting_defaultvalue = rowi.setting_defaultvalue
+				
+				this.edit_form.minlength = rowi.minlength
+				this.edit_form.maxlength = rowi.maxlength
+				this.edit_form.setting.boxtype = rowi.setting.boxtype
+				this.edit_form.setting.linkageid = rowi.setting.linkageid
+				this.edit_form.setting.options = rowi.setting.options
+				this.edit_form.setting.fieldtype = rowi.setting.fieldtype
+				this.edit_form.setting.defaultvalue = rowi.setting.defaultvalue
 				this.is_edit = true
 				 console.log('ssssss');
 				setTimeout(() => {
@@ -663,7 +690,7 @@ console.log(this.edit_form)
 					this.model_list = response.model_list
 					this.boxtype_list = response.boxtype_list
 					this.date_fieldtype_list = response.date_fieldtype_list
-					// console.log(this.site_list)
+					 console.log(111)
 					this.dataCount = parseInt(response.dataCount)
 					this.v = true
 				})
