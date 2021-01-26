@@ -23,6 +23,13 @@ export function model_field_disabled(params) {
     data:params,
   })
 }
+export function model_field_linkageid_isexit(params) {
+	return request({
+		url: 'vue_app_modelfield_admin_api.php?act=model_field_linkageid_isexit',
+		method: 'post',
+		data: params,
+	})
+}
 export function model_field_name_isexit(params) {
 	return request({
 		url: 'vue_app_modelfield_admin_api.php?act=model_field_name_isexit',
