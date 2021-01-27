@@ -2,7 +2,7 @@
 	<div class="app-container">
 		<!-- 字段添加-------------------------- -->
 		<el-dialog title="字段信息" :visible.sync="dialogFormVisible" v-if="v">
-			<el-form :model="form" :rules="rules" ref="ruleForm">
+			<el-form :model="form" :rules="rules" ref="ruleFormadd">
 
 				<el-form-item label="模型" :label-width="formLabelWidth">
 					<el-radio-group v-model="form.modelid" disabled>
@@ -12,8 +12,8 @@
 				</el-form-item>
 
 
-				<el-form-item v-if=" !is_edit" prop="formtype" label="类型" :label-width="formLabelWidth">
-					<el-select v-model="form.formtype" placeholder="类型">
+				<el-form-item  prop="formtype" label="类型" :label-width="formLabelWidth" >
+					<el-select @change="form_type_change" v-model="form.formtype" placeholder="类型">
 
 						<el-option v-for="(item, index) in add_field_type" :key="index" :label="item" :value="index"></el-option>
 
@@ -38,14 +38,14 @@
 					</el-radio-group>
 				</el-form-item>
 
-
-				<el-form-item prop="setting_linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'">
+				  
+			 <el-form-item prop="setting.linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'"  key="setting.linkageid">
 					<el-select v-model="form.setting.linkageid" placeholder="联动菜单">
 						<el-option v-for="(item, index) in linkage_list" :key="index" :label="item.name" :value="item.linkageid"></el-option>
 
 					</el-select>
 
-				</el-form-item>
+				</el-form-item> 
 
 				<el-form-item v-if="!no_default.includes(form.formtype)" label="默认值" :label-width="formLabelWidth">
 					<el-input v-model="form.setting.defaultvalue" autocomplete="off"></el-input>
@@ -58,7 +58,7 @@
 
 				</el-form-item>
 
-				<el-form-item prop="setting_options" v-if="form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
+				<el-form-item prop="setting.options" v-if="form.formtype=='box'" label="选项列表" :label-width="formLabelWidth" key="setting.options">
 					<el-input type="textarea" v-model="form.setting.options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
 				</el-form-item>
 
@@ -79,7 +79,7 @@
 			</el-form>
 			<div slot="footer" class="dialog-footer">
 				<el-button @click="dialogFormVisible = false">取 消</el-button>
-				<el-button type="primary" @click="fromsiteinfo('ruleForm')">确 定</el-button>
+				<el-button type="primary" @click="fromsiteinfo('ruleFormadd')">确 定</el-button>
 			</div>
 		</el-dialog>
 
@@ -121,7 +121,7 @@
 				</el-form-item>
 
 
-				<el-form-item prop="setting_linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="edit_form.formtype=='linkage'">
+				<el-form-item prop="setting.linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="edit_form.formtype=='linkage'" key="setting.linkageid">
 					<el-select v-model="edit_form.setting.linkageid" placeholder="联动菜单">
 
 						<el-option v-for="(item, index) in linkage_list" :key="index" :label="item.name" :value="item.linkageid"></el-option>
@@ -143,7 +143,7 @@
 
 				</el-form-item>
 
-				<el-form-item prop="setting_options" v-if="edit_form.formtype=='box'" label="选项列表" :label-width="formLabelWidth">
+				<el-form-item prop="setting.options" v-if="edit_form.formtype=='box'" label="选项列表" :label-width="formLabelWidth" key="setting.options">
 					<el-input type="textarea" v-model="edit_form.setting.options" :autosize="{ minRows: 5, maxRows: 10}"></el-input>
 				</el-form-item>
 
@@ -328,7 +328,7 @@
 					model_field_name_isexit(params).then(response => {
 						console.log(response)
 						if (response.code != 20000) {
-							callback(new Error('字段名重复!'));
+							callback(new Error(response.message));
 						} else {
 							callback();
 						}
@@ -350,7 +350,7 @@
 						modelid: this.modelid,
 						fieldid: this.is_edit ? this.edit_form.setting.linkageid : '',
 					}
-					model_field_name_isexit(params).then(response => {
+					model_field_linkageid_isexit(params).then(response => {
 						console.log(response)
 						if (response.code != 20000) {
 							callback(new Error(response.message));
@@ -407,17 +407,24 @@
 							trigger: 'blur'
 						}
 					],
-
-					setting_linkageid: [{
+					setting: {
+						linkageid: [{
+								required: true,
+								message: '请选择联动菜单',
+								trigger: 'change'
+							},
+							{
+								validator: isexit_linkageid,
+								trigger: 'change'
+							}
+						],
+						options: [{
 							required: true,
-							message: '请选择联动菜单',
-							trigger: 'change'
-						},
-						{
-							validator: isexit_linkageid,
-							trigger: 'change'
-						}
-					],
+							message: '请填入选项列表',
+							trigger: 'blur'
+						}],
+					}
+					,
 					minlength: [{
 						pattern: /^([0-9]+)$/,
 						message: '必须为数字',
@@ -433,11 +440,7 @@
 							trigger: 'blur'
 						},
 					],
-					setting_options: [{
-						required: true,
-						message: '请填入选项列表',
-						trigger: 'blur'
-					}],
+					
 				},
 				form: {
 					field: '',
@@ -454,7 +457,7 @@
 						defaultvalue: '',
 					},
 					issearch: '0',
-					// setting_linkageid: '',
+					 setting_linkageid: '',
 					// setting_boxtype: 'radio',
 					// setting_options: '选项名称1|选项值1',
 					// setting_fieldtype:'date',
@@ -517,6 +520,16 @@
 			}
 		},
 		methods: {
+			form_type_change(item){
+				if(item=='linkage'){
+					console.log(11)
+					
+					 // this.$refs['ruleFormadd'].clearValidate();
+					// this.rules.
+				}
+				console.log(item)
+				console.log(11)
+			},
 			gotoback() {
 				// console.log(a);
 				this.$router.replace({
@@ -612,6 +625,7 @@
 
 
 					} else {
+						console.log(this.form)
 						console.log('error submit!!');
 						return false;
 					}
@@ -629,6 +643,7 @@
 					formtype: '',
 					minlength: 0,
 					maxlength: 0,
+					setting_linkageid:'',
 					setting: {
 						linkageid: '',
 						boxtype: 'radio',
