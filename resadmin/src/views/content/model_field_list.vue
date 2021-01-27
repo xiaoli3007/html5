@@ -22,7 +22,7 @@
 				</el-form-item>
 
 
-				<el-form-item v-if="!is_edit" prop="field" label="字段名" :label-width="formLabelWidth">
+				<el-form-item  prop="field" label="字段名" :label-width="formLabelWidth">
 					<el-input v-model="form.field" autocomplete="off"></el-input>
 				</el-form-item>
 
@@ -522,13 +522,11 @@
 		methods: {
 			form_type_change(item){
 				if(item=='linkage'){
-					console.log(11)
-					
+					console.log(item)
 					 // this.$refs['ruleFormadd'].clearValidate();
 					// this.rules.
 				}
-				console.log(item)
-				console.log(11)
+				
 			},
 			gotoback() {
 				// console.log(a);
