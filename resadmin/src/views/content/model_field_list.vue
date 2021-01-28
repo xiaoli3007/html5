@@ -63,16 +63,26 @@
 				</el-form-item>
 
 				<el-form-item v-if="form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
-					<el-radio-group v-model="form.setting.fieldtype">
+					<el-radio-group v-model="form.setting.format">
 						<el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 
 				</el-form-item>
+				
+				<el-form-item v-if="form.formtype=='number'" label="小数位数" :label-width="formLabelWidth">
+					<el-radio-group v-model="form.setting.decimaldigits">
+						<el-radio v-for="(item, index) in 5" :key="index" :label="index">{{index}}</el-radio>
+						 <!-- <el-radio label="1">是</el-radio> -->
+						 
+					</el-radio-group>
+				
+				</el-form-item>
+				
 
-				<el-form-item prop="minlength" label="最小值" :label-width="formLabelWidth">
+				<el-form-item prop="minlength" label="验证最小值" :label-width="formLabelWidth">
 					<el-input v-model="form.minlength" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="maxlength" label="最大值" :label-width="formLabelWidth">
+				<el-form-item prop="maxlength" label="验证最大值" :label-width="formLabelWidth">
 					<el-input v-model="form.maxlength" autocomplete="off"></el-input>
 				</el-form-item>
 
@@ -148,16 +158,25 @@
 				</el-form-item>
 
 				<el-form-item v-if="edit_form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
-					<el-radio-group v-model="edit_form.setting.fieldtype">
+					<el-radio-group v-model="edit_form.setting.format">
 						<el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 
 				</el-form-item>
-
-				<el-form-item prop="minlength" label="最小值" :label-width="formLabelWidth">
+				
+				<el-form-item v-if="edit_form.formtype=='number'" label="小数位数" :label-width="formLabelWidth">
+					<el-radio-group v-model="edit_form.setting.decimaldigits" disabled>
+						<el-radio v-for="(item, index) in 5" :key="index" :label="index">{{index}}</el-radio>
+						 <!-- <el-radio label="1">是</el-radio> -->
+						 
+					</el-radio-group>
+				
+				</el-form-item>
+				
+				<el-form-item prop="minlength" label="验证最小值" :label-width="formLabelWidth">
 					<el-input v-model="edit_form.minlength" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="maxlength" label="最大值" :label-width="formLabelWidth">
+				<el-form-item prop="maxlength" label="验证最大值" :label-width="formLabelWidth">
 					<el-input v-model="edit_form.maxlength" autocomplete="off"></el-input>
 				</el-form-item>
 
@@ -453,8 +472,10 @@
 						linkageid: '',
 						boxtype: 'radio',
 						options: '选项名称1|选项值1',
-						fieldtype: 'date',
+						// fieldtype: '',
 						defaultvalue: '',
+						format: '',
+						decimaldigits:0,
 					},
 					issearch: '0',
 					 setting_linkageid: '',
@@ -474,8 +495,10 @@
 						linkageid: '',
 						boxtype: 'radio',
 						options: '选项名称1|选项值1',
-						fieldtype: 'date',
+						// fieldtype: '',
 						defaultvalue: '',
+						format: '',
+						decimaldigits:0,
 					},
 					issearch: 0,
 				},
@@ -494,7 +517,8 @@
 				date_fieldtype_list: [],
 				searchform: {
 					name: '',
-					formtype: ''
+					formtype: '',
+					
 				},
 				all_field_type: {},
 				add_field_type: {},
@@ -646,8 +670,10 @@
 						linkageid: '',
 						boxtype: 'radio',
 						options: '选项名称1|选项值1',
-						fieldtype: 'date',
+						// fieldtype: '',
 						defaultvalue: '',
+						format: '',
+						decimaldigits:0,
 					},
 					issearch: '0',
 				}
@@ -664,6 +690,7 @@
 				let rowi = JSON.parse(JSON.stringify(row))
 				// console.log(rowi)
 				console.log(this.edit_form)
+				this.edit_form.modelid = rowi.modelid
 				this.edit_form.fieldid = rowi.fieldid
 				this.edit_form.field = rowi.field
 				this.edit_form.name = rowi.name
@@ -675,8 +702,10 @@
 				this.edit_form.setting.boxtype = rowi.setting.boxtype
 				this.edit_form.setting.linkageid = rowi.setting.linkageid
 				this.edit_form.setting.options = rowi.setting.options
-				this.edit_form.setting.fieldtype = rowi.setting.fieldtype
+				//this.edit_form.setting.fieldtype = rowi.setting.fieldtype
 				this.edit_form.setting.defaultvalue = rowi.setting.defaultvalue
+				this.edit_form.setting.format = rowi.setting.format
+				this.edit_form.setting.decimaldigits = rowi.setting.decimaldigits
 				this.is_edit = true
 				console.log('ssssss');
 				setTimeout(() => {
