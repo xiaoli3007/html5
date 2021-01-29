@@ -20,7 +20,14 @@
 					</el-select>
 
 				</el-form-item>
-
+				
+				<el-form-item  label="作为主表字段" :label-width="formLabelWidth">
+					<el-radio-group v-model="form.issystem">
+						<el-radio label="1">是</el-radio>
+						<el-radio label="0">否</el-radio>
+					</el-radio-group>
+				</el-form-item>
+				
 
 				<el-form-item  prop="field" label="字段名" :label-width="formLabelWidth">
 					<el-input v-model="form.field" autocomplete="off"></el-input>
@@ -79,10 +86,10 @@
 				</el-form-item>
 				
 
-				<el-form-item prop="minlength" label="验证最小值" :label-width="formLabelWidth">
+				<el-form-item  v-if="yes_text.includes(form.formtype)" prop="minlength" key="minlength" label="验证最小值" :label-width="formLabelWidth">
 					<el-input v-model="form.minlength" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="maxlength" label="验证最大值" :label-width="formLabelWidth">
+				<el-form-item  v-if="yes_text.includes(form.formtype)" prop="maxlength" key="maxlength" label="验证最大值" :label-width="formLabelWidth">
 					<el-input v-model="form.maxlength" autocomplete="off"></el-input>
 				</el-form-item>
 
@@ -112,7 +119,14 @@
 					</el-select>
 
 				</el-form-item>
-
+				
+				<el-form-item  label="作为主表字段" :label-width="formLabelWidth">
+					<el-radio-group disabled v-model="edit_form.issystem">
+						<el-radio label="1">是</el-radio>
+						<el-radio label="0">否</el-radio>
+					</el-radio-group>
+				</el-form-item>
+				
 
 				<el-form-item label="字段名" :label-width="formLabelWidth">
 					<el-input v-model="edit_form.field" autocomplete="off" :disabled="true"></el-input>
@@ -173,10 +187,10 @@
 				
 				</el-form-item>
 				
-				<el-form-item prop="minlength" label="验证最小值" :label-width="formLabelWidth">
+				<el-form-item  v-if="yes_text.includes(edit_form.formtype)" prop="minlength" key="minlength" label="验证最小值" :label-width="formLabelWidth">
 					<el-input v-model="edit_form.minlength" autocomplete="off"></el-input>
 				</el-form-item>
-				<el-form-item prop="maxlength" label="验证最大值" :label-width="formLabelWidth">
+				<el-form-item  v-if="yes_text.includes(edit_form.formtype)" prop="maxlength" key="maxlength" label="验证最大值" :label-width="formLabelWidth">
 					<el-input v-model="edit_form.maxlength" autocomplete="off"></el-input>
 				</el-form-item>
 
@@ -478,7 +492,8 @@
 						decimaldigits:0,
 					},
 					issearch: '0',
-					 setting_linkageid: '',
+					issystem:'1',
+					 // setting_linkageid: '',
 					// setting_boxtype: 'radio',
 					// setting_options: '选项名称1|选项值1',
 					// setting_fieldtype:'date',
@@ -501,8 +516,10 @@
 						decimaldigits:0,
 					},
 					issearch: 0,
+					issystem:'1',
 				},
 				no_default: ["datetime", "linkage"],
+				yes_text: ["text", "textarea", "editor", "title","keyword"],
 				no_issearch: ["image"],
 				formLabelWidth: '130px',
 				table: false,
@@ -630,7 +647,8 @@
 
 						const params = {
 							resparams: resparams,
-							userid: this.$store.state.user.userid
+							userid: this.$store.state.user.userid,
+							modelid: this.modelid,
 						}
 						model_field_edit(params).then(
 							response => {
@@ -647,7 +665,7 @@
 
 
 					} else {
-						console.log(this.form)
+						// console.log(this.form)
 						console.log('error submit!!');
 						return false;
 					}
@@ -665,7 +683,7 @@
 					formtype: '',
 					minlength: 0,
 					maxlength: 0,
-					setting_linkageid:'',
+					// setting_linkageid:'',
 					setting: {
 						linkageid: '',
 						boxtype: 'radio',
@@ -675,7 +693,8 @@
 						format: '',
 						decimaldigits:0,
 					},
-					issearch: '0',
+					issearch:'0',
+					issystem:'1',
 				}
 				this.form = rowi
 				this.is_edit = false
@@ -690,6 +709,7 @@
 				let rowi = JSON.parse(JSON.stringify(row))
 				// console.log(rowi)
 				console.log(this.edit_form)
+				this.edit_form.issystem = rowi.issystem
 				this.edit_form.modelid = rowi.modelid
 				this.edit_form.fieldid = rowi.fieldid
 				this.edit_form.field = rowi.field
