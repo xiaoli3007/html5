@@ -381,7 +381,7 @@
 					const params = {
 						linkageid: value,
 						modelid: this.modelid,
-						fieldid: this.is_edit ? this.edit_form.setting.linkageid : '',
+						fieldid: this.is_edit ? this.edit_form.fieldid : '',
 					}
 					model_field_linkageid_isexit(params).then(response => {
 						console.log(response)
@@ -707,8 +707,8 @@
 
 
 				let rowi = JSON.parse(JSON.stringify(row))
-				// console.log(rowi)
-				console.log(this.edit_form)
+				 console.log(rowi)
+				// console.log(this.edit_form)
 				this.edit_form.issystem = rowi.issystem
 				this.edit_form.modelid = rowi.modelid
 				this.edit_form.fieldid = rowi.fieldid
