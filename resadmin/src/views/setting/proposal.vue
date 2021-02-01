@@ -42,7 +42,7 @@
 <script>
 	import {
 		feedback
-	} from '@/api/setting'
+	} from '@/api/site'
 	import _g from '@/utils/global.js'
 
 	export default {

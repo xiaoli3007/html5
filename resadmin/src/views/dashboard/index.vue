@@ -43,7 +43,7 @@
 		getsiteid,
 		 
 	} from '@/utils/auth'
-	import { index_count} from '@/api/content'
+	import { index_count} from '@/api/count'
 	import _g from '@/utils/global.js'
 	
 	import PanelGroup from './components/PanelGroup'

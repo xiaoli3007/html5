@@ -120,7 +120,7 @@
 	import _g from '@/utils/global.js'
 	import {
 		site_info,site_list
-	} from '@/api/setting'
+	} from '@/api/site'
 	
 	export default {
 		data() {
