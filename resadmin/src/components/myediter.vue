@@ -1,10 +1,11 @@
 <template>
-<div id="wangeditor">
+<div id="wangeditor" style="">
 	
 	
 	<span for="duohang" class="el-form-item__label" style=" float: none; ">{{v_model_name}}</span>
 	
     <div ref="editorElem" style="text-align:left;"></div>
+	<br>
   </div>
 </template>
 

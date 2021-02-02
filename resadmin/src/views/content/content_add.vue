@@ -1,12 +1,12 @@
 <template>
 
 	<div class="app-container" v-if="taskin">
- 								
+
 		<el-page-header @back="gotoback" :content="title">
 		</el-page-header>
-		
-			
-			
+
+
+
 		<div style="padding-top: 20px;">
 			<el-row>
 
@@ -20,7 +20,7 @@
 				</el-col>
 			</el-row>
 
-								
+
 			<el-row>
 
 				<el-col :span="24" justify="left" align="left">
@@ -31,16 +31,16 @@
 
 
 							<div v-for="(from_zhu, index) in all_form_field" :key="index">
-								<el-col :span="24" justify="left" align="left">
+								<el-col :span="12" justify="left" align="left">
 
 
-									<el-form-item v-if="from_zhu.formtype=='text'" :label="from_zhu.name"  :prop="from_zhu.field">
+									<el-form-item v-if="from_zhu.formtype=='text'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-input v-model="programForm[from_zhu.field]"></el-input>
 									</el-form-item>
 
 									<el-form-item v-if="from_zhu.formtype=='image'">
-										<el-upload class="avatar-uploader" :action="from_zhu.uploadurl" :show-file-list="false"
-										 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+										<el-upload class="avatar-uploader" :action="from_zhu.uploadurl" :show-file-list="false" :on-success="handleAvatarSuccess"
+										 :before-upload="beforeAvatarUpload">
 											<img v-if="programForm[from_zhu.field]" :src="programForm[from_zhu.field]" class="avatar">
 											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 											<div class="el-upload__tip" slot="tip">{{from_zhu.name}}</div>
@@ -48,11 +48,10 @@
 									</el-form-item>
 
 									<el-form-item v-if="from_zhu.formtype=='textarea'" :label="from_zhu.name" :prop="from_zhu.field">
-										<el-input type="textarea" v-model="programForm[from_zhu.field]" :maxlength="from_zhu.maxlength" :minlength="from_zhu.minlength" show-word-limit></el-input>
+										<el-input type="textarea" v-model="programForm[from_zhu.field]" :maxlength="from_zhu.maxlength" :minlength="from_zhu.minlength"
+										 show-word-limit></el-input>
 									</el-form-item>
-										
-										<myediter  v-if="from_zhu.formtype=='editor'"  :v_model_name="from_zhu.name" :v_model_field="from_zhu.field" v-on:passtoparent="catchDatahtml"></myediter>
-									
+ 
 									<el-form-item v-if="from_zhu.formtype=='select'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-select v-model="programForm[from_zhu.field]" placeholder="">
 											<el-option v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label" :value="item.value"></el-option>
@@ -70,14 +69,15 @@
 
 									<el-form-item v-if="from_zhu.formtype=='checkbox'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-checkbox-group v-model="programForm[from_zhu.field]">
-											<el-checkbox v-for="(item, sindex) in from_zhu.dataarray" :key="sindex"   :label="item.label">{{item.name}}</el-checkbox>
+											<el-checkbox v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label">{{item.name}}</el-checkbox>
 
 										</el-checkbox-group>
 									</el-form-item>
 
 
 									<el-form-item v-if="from_zhu.formtype=='datetime'" :label="from_zhu.name" :prop="from_zhu.field">
-										<el-date-picker  placeholder="选择日期" :type="from_zhu.date_form_type" :format="from_zhu.element_format"  value-format="timestamp" v-model="programForm[from_zhu.field]"   style="width: 100%;"></el-date-picker>
+										<el-date-picker placeholder="选择日期" :type="from_zhu.date_form_type" :format="from_zhu.element_format"
+										 value-format="timestamp" v-model="programForm[from_zhu.field]" style="width: 100%;"></el-date-picker>
 
 
 									</el-form-item>
@@ -87,6 +87,23 @@
 
 
 						</el-row>
+
+
+
+						<el-row>
+							<div v-for="(from_zhu, index) in all_form_field" :key="index">
+								<el-col :span="24" justify="left" align="left">
+
+									<myediter v-if="from_zhu.formtype=='editor'" :v_model_name="from_zhu.name" :v_model_field="from_zhu.field"
+									 v-on:passtoparent="catchDatahtml"></myediter>
+
+								</el-col>
+							</div>
+
+
+
+						</el-row>
+
 
 
 						<el-form-item>
@@ -108,7 +125,8 @@
 	import _ from 'lodash'
 	import {
 		getshow,
-		get_model_field,publish_res
+		get_model_field,
+		publish_res
 	} from '@/api/content'
 	import _g from '@/utils/global.js'
 	// import myediter from './components'
@@ -116,7 +134,7 @@
 
 	export default {
 		components: {
-		  myediter	  
+			myediter
 		},
 		data() {
 			return {
@@ -137,7 +155,7 @@
 				activetablist: null,
 				labelPosition: 'right',
 				programForm: {
-					 
+
 				},
 				ruleForm: {
 					name: '',
@@ -177,22 +195,22 @@
 		filters: {
 
 		},
-		 mounted() {
-			 
-			 setTimeout(() => {
-			 	 const editor = new wangEditor(`#demo1`)
-			 	 // 配置 onchange 回调函数，将数据同步到 vue 中
-			 	 editor.config.onchange = (newHtml) => {
-			 	    this.editorData = newHtml
-			 	 }
-			 	 // 创建编辑器
-			 	 editor.create()
-			 	 this.editor = editor
-				 
-			 }, 1000);
-			 
-		    
-		  },
+		mounted() {
+
+			setTimeout(() => {
+				const editor = new wangEditor(`#demo1`)
+				// 配置 onchange 回调函数，将数据同步到 vue 中
+				editor.config.onchange = (newHtml) => {
+					this.editorData = newHtml
+				}
+				// 创建编辑器
+				editor.create()
+				this.editor = editor
+
+			}, 1000);
+
+
+		},
 		created() {
 
 			this.catid = this.$route.query.catid
@@ -209,26 +227,26 @@
 		},
 		methods: {
 			catchDatahtml(data) {
-			      // 通过代码获取编辑器内容
-			       console.log(data)
-				   
-				   this.$set(this.programForm, data.name, data.value)
-				    console.log(this.programForm)
-				   
-			    },
-			 getEditorData() {
-			      // 通过代码获取编辑器内容
-			      let data = this.editor.txt.html()
-			      alert(data)
-			    },
+				// 通过代码获取编辑器内容
+				console.log(data)
+
+				this.$set(this.programForm, data.name, data.value)
+				console.log(this.programForm)
+
+			},
+			getEditorData() {
+				// 通过代码获取编辑器内容
+				let data = this.editor.txt.html()
+				alert(data)
+			},
 			handleAvatarSuccess(res, file) {
 				console.log(res)
 				console.log(file)
 				// this.imageUrl = URL.createObjectURL(file.raw);
 				// this.programForm[res.field] = res.fileurl
-				
+
 				this.$set(this.programForm, res.field, res.fileurl)
-				
+
 			},
 			beforeAvatarUpload(file) {
 				// const isJPG = file.type === 'image/jpeg';
@@ -273,64 +291,64 @@
 					_(value.form_base).forEach(function(value2, key2) {
 
 						// selfmain.programForm[value2.field] = value2.value
-						
+
 						selfmain.$set(selfmain.programForm, value2.field, value2.value)
-						
+
 					});
 					console.log(selfmain.programForm)
 
 					selfmain.all_form_field = value.form_base
 					selfmain.form_linkage = value.form_linkage
 					selfmain.all_form_data.form_linkage_data = temp_linkage_data
-					
+
 					this.taskformin = true
 
 				})
 			},
 			submitForm(formName) {
-			 
+
 				this.$refs[formName].validate((valid) => {
-				  if (valid) {
-					// alert('submit!');
-					// console.log(this.programForm)
-					// console.log(this.search_linkage_default_string)
-					
-					let resparams=JSON.stringify(this.programForm)
-					  console.log(resparams)
+					if (valid) {
+						// alert('submit!');
+						// console.log(this.programForm)
+						// console.log(this.search_linkage_default_string)
+
+						let resparams = JSON.stringify(this.programForm)
+						console.log(resparams)
 						return
-					 const params = {
-					 	catid: this.catid,
-					 	edit_id: this.news_id,
-						resparams: resparams,
-						search_linkage_default_string: this.search_linkage_default_string,
-						sysadd:1,
-					 	userid: this.$store.state.user.userid
-					 }
-					// console.log(this.form.content)
-					
-					publish_res(params).then(response => {
-						 console.log(response)
-					 	 
-						if (response.code == 20000) {
-							 
-							 _g.toastMsg('success', '提交成功！', this)
-							 
-							 this.$router.replace({
-							 	name: 'Content_table_list',
-							 	query: {
-							 		catid: this.catid,
-							 	}
-							 })
-						}else{
-							 _g.toastMsg('error', '提交失败！', this)
+						const params = {
+							catid: this.catid,
+							edit_id: this.news_id,
+							resparams: resparams,
+							search_linkage_default_string: this.search_linkage_default_string,
+							sysadd: 1,
+							userid: this.$store.state.user.userid
 						}
-					})
-					
-					
-				  } else {
-					console.log('error submit!!');
-					return false;
-				  }
+						// console.log(this.form.content)
+
+						publish_res(params).then(response => {
+							console.log(response)
+
+							if (response.code == 20000) {
+
+								_g.toastMsg('success', '提交成功！', this)
+
+								this.$router.replace({
+									name: 'Content_table_list',
+									query: {
+										catid: this.catid,
+									}
+								})
+							} else {
+								_g.toastMsg('error', '提交失败！', this)
+							}
+						})
+
+
+					} else {
+						console.log('error submit!!');
+						return false;
+					}
 				});
 			},
 			resetForm(formName) {
@@ -360,7 +378,7 @@
 					// this.data = response.items
 					this.program = response.program_info
 					this.taskin = true
-					this.title = '（资源）'+this.program.title +'（编辑）'
+					this.title = '（资源）' + this.program.title + '（编辑）'
 					console.log(this.program);
 				})
 			},
