@@ -70,7 +70,7 @@
 				</el-form-item>
 
 				<el-form-item v-if="form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
-					<el-radio-group v-model="form.setting.format">
+					<el-radio-group v-model="form.setting.element_format">
 						<el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 
@@ -172,7 +172,7 @@
 				</el-form-item>
 
 				<el-form-item v-if="edit_form.formtype=='datetime'" label="时间格式" :label-width="formLabelWidth">
-					<el-radio-group v-model="edit_form.setting.format">
+					<el-radio-group v-model="edit_form.setting.element_format">
 						<el-radio v-for="(item, index) in date_fieldtype_list" :key="index" :label="index">{{item}}</el-radio>
 					</el-radio-group>
 
@@ -488,7 +488,7 @@
 						options: '选项名称1|选项值1',
 						// fieldtype: '',
 						defaultvalue: '',
-						format: '',
+						element_format: '',
 						decimaldigits:0,
 					},
 					issearch: '0',
@@ -512,7 +512,7 @@
 						options: '选项名称1|选项值1',
 						// fieldtype: '',
 						defaultvalue: '',
-						format: '',
+						element_format: '',
 						decimaldigits:0,
 					},
 					issearch: 0,
@@ -690,7 +690,7 @@
 						options: '选项名称1|选项值1',
 						// fieldtype: '',
 						defaultvalue: '',
-						format: '',
+						element_format: '',
 						decimaldigits:0,
 					},
 					issearch:'0',
@@ -724,7 +724,7 @@
 				this.edit_form.setting.options = rowi.setting.options
 				//this.edit_form.setting.fieldtype = rowi.setting.fieldtype
 				this.edit_form.setting.defaultvalue = rowi.setting.defaultvalue
-				this.edit_form.setting.format = rowi.setting.format
+				this.edit_form.setting.element_format = rowi.setting.element_format
 				this.edit_form.setting.decimaldigits = rowi.setting.decimaldigits
 				this.is_edit = true
 				console.log('ssssss');

@@ -73,7 +73,7 @@
 
 
 									<el-form-item v-if="from_zhu.formtype=='datetime'" :label="from_zhu.name" :prop="from_zhu.field">
-										<el-date-picker type="date" placeholder="选择日期"  format="yyyy-MM-dd" value-format="yyyy-MM-dd" v-model="programForm[from_zhu.field]" style="width: 100%;"></el-date-picker>
+										<el-date-picker  placeholder="选择日期" :type="from_zhu.date_form_type" :format="from_zhu.element_format"  value-format="timestamp" v-model="programForm[from_zhu.field]"   style="width: 100%;"></el-date-picker>
 
 
 									</el-form-item>
@@ -255,7 +255,7 @@
 					
 					let resparams=JSON.stringify(this.programForm)
 					  console.log(resparams)
-						
+						return
 					 const params = {
 					 	catid: this.catid,
 					 	edit_id: this.news_id,
