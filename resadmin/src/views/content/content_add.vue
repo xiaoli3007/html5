@@ -1,10 +1,12 @@
 <template>
 
 	<div class="app-container" v-if="taskin">
-
+ 								
 		<el-page-header @back="gotoback" :content="title">
 		</el-page-header>
-
+		
+			
+			
 		<div style="padding-top: 20px;">
 			<el-row>
 
@@ -18,6 +20,7 @@
 				</el-col>
 			</el-row>
 
+								
 			<el-row>
 
 				<el-col :span="24" justify="left" align="left">
@@ -28,7 +31,7 @@
 
 
 							<div v-for="(from_zhu, index) in all_form_field" :key="index">
-								<el-col :span="12" justify="left" align="left">
+								<el-col :span="24" justify="left" align="left">
 
 
 									<el-form-item v-if="from_zhu.formtype=='text'" :label="from_zhu.name"  :prop="from_zhu.field">
@@ -45,10 +48,11 @@
 									</el-form-item>
 
 									<el-form-item v-if="from_zhu.formtype=='textarea'" :label="from_zhu.name" :prop="from_zhu.field">
-										<el-input type="textarea" v-model="programForm[from_zhu.field]"></el-input>
+										<el-input type="textarea" v-model="programForm[from_zhu.field]" :maxlength="from_zhu.maxlength" :minlength="from_zhu.minlength" show-word-limit></el-input>
 									</el-form-item>
-
-
+										
+										<myediter  v-if="from_zhu.formtype=='editor'"  :v_model_name="from_zhu.name" :v_model_field="from_zhu.field" v-on:passtoparent="catchDatahtml"></myediter>
+									
 									<el-form-item v-if="from_zhu.formtype=='select'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-select v-model="programForm[from_zhu.field]" placeholder="">
 											<el-option v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label" :value="item.value"></el-option>
@@ -99,14 +103,21 @@
 </template>
 
 <script>
+	// 引入 wangEditor
+	import wangEditor from 'wangeditor'
 	import _ from 'lodash'
 	import {
 		getshow,
 		get_model_field,publish_res
 	} from '@/api/content'
 	import _g from '@/utils/global.js'
+	// import myediter from './components'
+	import myediter from '@/components/myediter'
 
 	export default {
+		components: {
+		  myediter	  
+		},
 		data() {
 			return {
 				imageUrl: '',
@@ -159,11 +170,29 @@
 				all_form_field: [],
 				form_linkage: [],
 				search_linkage_default_string: '',
+				editor: null,
+				editorData: '',
 			}
 		},
 		filters: {
 
 		},
+		 mounted() {
+			 
+			 setTimeout(() => {
+			 	 const editor = new wangEditor(`#demo1`)
+			 	 // 配置 onchange 回调函数，将数据同步到 vue 中
+			 	 editor.config.onchange = (newHtml) => {
+			 	    this.editorData = newHtml
+			 	 }
+			 	 // 创建编辑器
+			 	 editor.create()
+			 	 this.editor = editor
+				 
+			 }, 1000);
+			 
+		    
+		  },
 		created() {
 
 			this.catid = this.$route.query.catid
@@ -179,6 +208,19 @@
 
 		},
 		methods: {
+			catchDatahtml(data) {
+			      // 通过代码获取编辑器内容
+			       console.log(data)
+				   
+				   this.$set(this.programForm, data.name, data.value)
+				    console.log(this.programForm)
+				   
+			    },
+			 getEditorData() {
+			      // 通过代码获取编辑器内容
+			      let data = this.editor.txt.html()
+			      alert(data)
+			    },
 			handleAvatarSuccess(res, file) {
 				console.log(res)
 				console.log(file)
