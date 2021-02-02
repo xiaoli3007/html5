@@ -4,7 +4,7 @@
 	
 	<span for="duohang" class="el-form-item__label" style=" float: none; ">{{v_model_name}}</span>
 	
-    <div ref="editorElem" style="text-align:left;"></div>
+    <div ref="editorElem" style="position: relative;    text-align:left;z-index: 100;"></div>
 	<br>
   </div>
 </template>

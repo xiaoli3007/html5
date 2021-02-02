@@ -392,6 +392,9 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss">
+	.el-scrollbar{
+		z-index: 10000000;
+	}
 	.avatar-uploader .el-upload {
 		border: 1px dashed #d9d9d9;
 		border-radius: 6px;
