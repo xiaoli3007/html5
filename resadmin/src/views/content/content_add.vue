@@ -94,8 +94,7 @@
 							<div v-for="(from_zhu, index) in all_form_field" :key="index">
 								<el-col :span="24" justify="left" align="left">
 
-									<myediter v-if="from_zhu.formtype=='editor'" :v_model_name="from_zhu.name" :v_model_field="from_zhu.field"
-									 v-on:passtoparent="catchDatahtml"></myediter>
+									<myediter v-if="from_zhu.formtype=='editor'" :v_model_name="from_zhu.name" :v_model_field="from_zhu.field" :v_model_val="programForm[from_zhu.field]" v-on:passtoparent="catchDatahtml"></myediter>
 
 								</el-col>
 							</div>
@@ -157,14 +156,14 @@
 				programForm: {
 
 				},
-				ruleForm: {
-					name: '',
-					region: '',
-					type: [],
-					date1: '',
-					resource: '',
-					desc: ''
-				},
+				// ruleForm: {
+				// 	name: '',
+				// 	region: '',
+				// 	type: [],
+				// 	date1: '',
+				// 	resource: '',
+				// 	desc: ''
+				// },
 				rules: {
 					title: [{
 							required: true,
@@ -197,19 +196,6 @@
 		},
 		mounted() {
 
-			setTimeout(() => {
-				const editor = new wangEditor(`#demo1`)
-				// 配置 onchange 回调函数，将数据同步到 vue 中
-				editor.config.onchange = (newHtml) => {
-					this.editorData = newHtml
-				}
-				// 创建编辑器
-				editor.create()
-				this.editor = editor
-
-			}, 1000);
-
-
 		},
 		created() {
 
@@ -218,27 +204,25 @@
 			// this.ebookid = 446654
 			// console.log(this.ebookid);
 			this.fetchmodelfield()
-			if (this.news_id != 0) {
-				this.init()
-			} else {
-				this.taskin = true
-			}
-
+			
+			// if (this.news_id != 0) {
+			// 	// this.init()
+				
+			// } else {
+			// 	this.taskin = true
+			// }
+	
 		},
 		methods: {
 			catchDatahtml(data) {
 				// 通过代码获取编辑器内容
-				console.log(data)
+				// console.log(data)
 
 				this.$set(this.programForm, data.name, data.value)
-				console.log(this.programForm)
+				// console.log(this.programForm)
 
 			},
-			getEditorData() {
-				// 通过代码获取编辑器内容
-				let data = this.editor.txt.html()
-				alert(data)
-			},
+			
 			handleAvatarSuccess(res, file) {
 				console.log(res)
 				console.log(file)
@@ -302,6 +286,7 @@
 					selfmain.all_form_data.form_linkage_data = temp_linkage_data
 
 					this.taskformin = true
+					this.taskin = true
 
 				})
 			},

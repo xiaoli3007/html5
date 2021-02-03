@@ -48,7 +48,7 @@ router.beforeEach((to, from, next) => {
 		     })
 		   })
 		 } else {
-			 console.log(to.matched)
+			 // console.log(to.matched)
 			  if (to.matched.length === 0) {
 			       next({ path: '/404', replace: true}) // 判断此跳转路由的来源路由是否存在，存在的情况跳转到来源路由，否则跳转到404页面
 			  }else{

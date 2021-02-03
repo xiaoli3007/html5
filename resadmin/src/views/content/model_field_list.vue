@@ -690,7 +690,7 @@
 						options: '选项名称1|选项值1',
 						// fieldtype: '',
 						defaultvalue: '',
-						element_format: '',
+						element_format: 'yyyy-MM-dd',
 						decimaldigits:0,
 					},
 					issearch:'0',

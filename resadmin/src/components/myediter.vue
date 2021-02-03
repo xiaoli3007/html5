@@ -4,7 +4,7 @@
 	
 	<span for="duohang" class="el-form-item__label" style=" float: none; ">{{v_model_name}}</span>
 	
-    <div ref="editorElem" style="position: relative;    text-align:left;z-index: 100;"></div>
+    <div ref="editorElem" style="   text-align:left;"></div>
 	<br>
   </div>
 </template>
@@ -28,17 +28,27 @@
 			type: String,
 			default: ''
 		},
+		v_model_val: {
+			type: String,
+			default: ''
+		},
 	   },
 	  mounted() {
+		// console.log(this.v_model_val)
+		this.editorContent = this.v_model_val;
 	    this.editor = new E(this.$refs.editorElem);
 	    // 编辑器的事件，每次改变会获取其html内容
 	    this.editor.config.onchange = html => {
+			// console.log(111)
+			// console.log(this.v_model_val)
+			
 	      this.editorContent = html;
 	      // this.catchData(this.editorContent); // 把这个html通过catchData的方法传入父组件
 		  let v={'name':this.v_model_field,'value':this.editorContent}
 		  this.$emit("passtoparent", v)
 		  
 	    };
+		this.editor.config.zIndex = 500
 	    this.editor.config.menus = [
 	      // 菜单配置
 	      'head', // 标题
@@ -62,6 +72,7 @@
 	      'redo' // 重复
 	    ];
 	    this.editor.create(); // 创建富文本实例
-		}
-		}
+		this.editor.txt.html(this.v_model_val)
+	}
+}
 </script>
