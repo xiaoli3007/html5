@@ -216,7 +216,7 @@
 						<el-input v-model="searchform.name" placeholder="字段名"></el-input>
 					</el-form-item>
 					<el-form-item label="类型">
-						<el-select v-model="searchform.formtype" placeholder="类型">
+						<el-select clearable v-model="searchform.formtype" placeholder="类型">
 
 							<el-option v-for="(item, index) in all_field_type" :key="index" :label="item" :value="index"></el-option>
 

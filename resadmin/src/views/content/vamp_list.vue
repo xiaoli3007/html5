@@ -157,7 +157,7 @@
 	import _g from '@/utils/global.js'
 	import {
 		media_list,media_edit,media_delete
-	} from '@/api/admin_media'
+	} from '@/api/vamp'
 	// import router from '@/router/index.js'
 	export default {
 		data() {

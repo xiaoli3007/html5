@@ -183,7 +183,26 @@ export const constantRouterMap = [
 				},
 				hidden: true
 			},
-			{
+		// 	{
+		// 	path: 'content_media',
+		// 	name: 'Content_media',
+		// 	component: () => import('@/views/content/content_media_list'),
+		// 	meta: {
+		// 		title: '数据媒体库',
+		// 		icon: 'faxian'
+		// 	}
+			
+		// },
+		{
+			path: 'vamp',
+			name: 'Vamp',
+			component: () => import('@/views/content/vamp_list'),
+			meta: {
+				title: '媒体库',
+				icon: 'faxian'
+			}
+			
+		},{
 			path: 'cat',
 			name: 'Cat',
 			// component: require('@/views/setting/setting').default,
@@ -198,15 +217,6 @@ export const constantRouterMap = [
 			component: () => import('@/views/content/linkage'),
 			meta: {
 				title: '联动菜单',
-				icon: 'faxian'
-			}
-			
-		},{
-			path: 'media',
-			name: 'Media',
-			component: () => import('@/views/content/media_list'),
-			meta: {
-				title: '媒体库',
 				icon: 'faxian'
 			}
 			
