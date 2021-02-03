@@ -33,11 +33,18 @@
 							<div v-for="(from_zhu, index) in all_form_field" :key="index">
 								<el-col :span="12" justify="left" align="left">
 
-
+<!-- 此处为单行文本 -->
 									<el-form-item v-if="from_zhu.formtype=='text'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-input v-model="programForm[from_zhu.field]"></el-input>
 									</el-form-item>
+									
+	<!-- 此处为数字，整数和小数 -->
+																		<el-form-item v-if="from_zhu.formtype=='number'" :label="from_zhu.name" :prop="from_zhu.field">
+																			<el-input v-model="programForm[from_zhu.field]"></el-input>
+																		</el-form-item>
+																		
 
+<!-- 此处为图片上传 -->
 									<el-form-item v-if="from_zhu.formtype=='image'">
 										<el-upload class="avatar-uploader" :action="from_zhu.uploadurl" :show-file-list="false" :on-success="handleAvatarSuccess"
 										 :before-upload="beforeAvatarUpload">
@@ -46,12 +53,12 @@
 											<div class="el-upload__tip" slot="tip">{{from_zhu.name}}</div>
 										</el-upload>
 									</el-form-item>
-
+<!-- 此处为多行文本 -->
 									<el-form-item v-if="from_zhu.formtype=='textarea'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-input type="textarea" v-model="programForm[from_zhu.field]" :maxlength="from_zhu.maxlength" :minlength="from_zhu.minlength"
 										 show-word-limit></el-input>
 									</el-form-item>
- 
+ <!-- 此处为下拉框 -->
 									<el-form-item v-if="from_zhu.formtype=='select'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-select v-model="programForm[from_zhu.field]" placeholder="">
 											<el-option v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label" :value="item.value"></el-option>
@@ -59,14 +66,14 @@
 										</el-select>
 									</el-form-item>
 
-
+<!-- 此处为单选 -->
 									<el-form-item v-if="from_zhu.formtype=='radio'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-radio-group v-model="programForm[from_zhu.field]">
 											<el-radio v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label">{{item.name}}</el-radio>
 
 										</el-radio-group>
 									</el-form-item>
-
+<!-- 此处为多选 -->
 									<el-form-item v-if="from_zhu.formtype=='checkbox'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-checkbox-group v-model="programForm[from_zhu.field]">
 											<el-checkbox v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label">{{item.name}}</el-checkbox>
@@ -74,7 +81,7 @@
 										</el-checkbox-group>
 									</el-form-item>
 
-
+<!-- 此处为时间字段 -->
 									<el-form-item v-if="from_zhu.formtype=='datetime'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-date-picker placeholder="选择日期" :type="from_zhu.date_form_type" :format="from_zhu.element_format"
 										 value-format="yyyy-MM-dd hh:mm:ss" v-model="programForm[from_zhu.field]" style="width: 100%;"></el-date-picker>
@@ -93,7 +100,7 @@
 						<el-row>
 							<div v-for="(from_zhu, index) in all_form_field" :key="index">
 								<el-col :span="24" justify="left" align="left">
-
+<!-- 此处为编辑器 -->
 									<myediter v-if="from_zhu.formtype=='editor'" :v_model_name="from_zhu.name" :v_model_field="from_zhu.field" :v_model_val="programForm[from_zhu.field]" v-on:passtoparent="catchDatahtml"></myediter>
 
 								</el-col>
@@ -156,28 +163,21 @@
 				programForm: {
 
 				},
-				// ruleForm: {
-				// 	name: '',
-				// 	region: '',
-				// 	type: [],
-				// 	date1: '',
-				// 	resource: '',
-				// 	desc: ''
-				// },
+				yes_text: ["text", "textarea","title","keyword","number"],
 				rules: {
-					title: [{
-							required: true,
-							message: '请输入标题',
-							trigger: 'blur'
-						},
-						{
-							min: 3,
-							max: 200,
-							message: '长度在 3 到 200 个字符',
-							trigger: 'blur'
-						}
-					],
-
+					// title: [
+					// 	{
+					// 		required: true,
+					// 		message: '请输入标题',
+					// 		trigger: 'blur'
+					// 	},
+					// 	{
+					// 		min: 3,
+					// 		max: 200,
+					// 		message: '长度在 3 到 200 个字符',
+					// 		trigger: 'blur'
+					// 	}
+					// ],
 				},
 
 				all_form_data: {
@@ -277,8 +277,60 @@
 						// selfmain.programForm[value2.field] = value2.value
 
 						selfmain.$set(selfmain.programForm, value2.field, value2.value)
+						if(selfmain.yes_text.includes(value2.formtype)){
+							
+							let rule_singe=[]
+							console.log(value2)
+							if(value2.minlength>0){
+								rule_singe.push(
+								{
+								required: true,
+								message: '请输入'+value2.name,
+								trigger: 'blur'
+						        }
+					            )
+							}
+							if(value2.maxlength>0){
+								rule_singe.push(
+								{
+										min: value2.minlength,
+										max: value2.maxlength,
+										message: '长度在 '+value2.minlength+' 到 '+value2.maxlength+' 个字符',
+										trigger: 'blur'
+								}
+							    )
+							}
+							if(value2.formtype=='number'){
+								if(value2.decimaldigits==0){
+									rule_singe.push(
+									{
+										pattern: /^([0-9]+)$/,
+										message: '必须为数字',
+										trigger: 'blur'
+									}
+									)
+								}else{
+									
+									rule_singe.push(
+									{
+										pattern: /^[0-9]+\.[0-9]{1,5}$/,
+										message: '必须为小数',
+										trigger: 'blur'
+									}
+									)
+								}							
+							}
+							if(rule_singe.length>0){
+							   selfmain.rules[value2.field]=rule_singe
+							}
+							
+							
+						}
+						
 
 					});
+					
+					console.log(selfmain.rules)
 					console.log(selfmain.programForm)
 
 					selfmain.all_form_field = value.form_base

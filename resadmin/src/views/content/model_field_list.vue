@@ -463,7 +463,8 @@
 						message: '必须为数字',
 						trigger: 'blur'
 					}, ],
-					maxlength: [{
+					maxlength: [
+						{
 							pattern: /^([0-9]+)$/,
 							message: '必须为数字',
 							trigger: 'blur'
