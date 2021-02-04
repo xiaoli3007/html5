@@ -61,7 +61,7 @@
  <!-- 此处为下拉框 -->
 									<el-form-item v-if="from_zhu.formtype=='select'" :label="from_zhu.name" :prop="from_zhu.field">
 										<el-select v-model="programForm[from_zhu.field]" placeholder="">
-											<el-option v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.label" :value="item.value"></el-option>
+											<el-option v-for="(item, sindex) in from_zhu.dataarray" :key="sindex" :label="item.name" :value="item.value"></el-option>
 
 										</el-select>
 									</el-form-item>
@@ -280,7 +280,7 @@
 						if(selfmain.yes_text.includes(value2.formtype)){
 							
 							let rule_singe=[]
-							console.log(value2)
+							// console.log(value2)
 							if(value2.minlength>0){
 								rule_singe.push(
 								{
@@ -330,7 +330,7 @@
 
 					});
 					
-					console.log(selfmain.rules)
+					// console.log(selfmain.rules)
 					console.log(selfmain.programForm)
 
 					selfmain.all_form_field = value.form_base
@@ -352,7 +352,7 @@
 
 						let resparams = JSON.stringify(this.programForm)
 						console.log(resparams)
-						 // return
+						  return
 						const params = {
 							catid: this.catid,
 							edit_id: this.news_id,
