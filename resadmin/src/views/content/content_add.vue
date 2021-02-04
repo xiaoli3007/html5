@@ -352,7 +352,7 @@
 
 						let resparams = JSON.stringify(this.programForm)
 						console.log(resparams)
-						  return
+						  // return
 						const params = {
 							catid: this.catid,
 							edit_id: this.news_id,
