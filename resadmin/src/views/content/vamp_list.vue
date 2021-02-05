@@ -43,7 +43,8 @@
 		 
 				<!-- <myediter  :v_model_name="from_zhu.name"  v-on:passtoparent="catchDatahtml"></myediter> -->
 			
-			<myuploadeasy></myuploadeasy>
+			<!-- <myuploadeasy></myuploadeasy> -->
+			<myupload></myupload>
 			 
 			  </el-col>
 		   
@@ -187,11 +188,12 @@
 		vamp_list,vamp_edit,vamp_delete
 	} from '@/api/vamp'
 	// import router from '@/router/index.js'
-	import myuploadeasy from '@/components/myuploadeasy'
+	// import myuploadeasy from '@/components/myuploadeasy'
+	import myupload from '@/components/myupload'
 	
 	export default {
 		components: {
-			myuploadeasy
+			myupload
 		},
 		data() {
 			

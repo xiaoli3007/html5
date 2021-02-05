@@ -49,7 +49,9 @@
 	  name: "myuploadeasy",
 	  data() {
 		return {
-			
+			 siteid:1,
+			 username:'master',
+			 miyao:'38408956',
 			 progressBar : null,
 			 oldTimestamp : 0,
 			 oldLoadsize : 0,
@@ -142,6 +144,7 @@
 		   }
 		 };
 	   
+	   // console.log(md5('11111'))
 	},
 	methods:{
 	   
@@ -189,13 +192,13 @@
 	   	fd.append("callback", "");
 	   	fd.append("uploadway", "ajax");
 		
-	   	fd.append("siteid", "1");
-	   	fd.append("username", "master");
+	   	fd.append("siteid", this.siteid);
+	   	fd.append("username", this.username);
+		let temptime = Date.parse(new Date())/1000
+		fd.append("addtime", temptime);
 		
-		
-	   	fd.append("addtime", Date.parse(new Date())/1000);
-		
-	   	let magic ="38408956";
+	   	let magic =md5(this.siteid+'_'+this.username+'_'+temptime+'_'+'38408956').toLowerCase();
+		console.log('密钥为'+magic)
 	   	fd.append("magic", magic);
 		
 	      // fd.append("fileToUpload", document.getElementById('fileToUpload').files[0]); //
