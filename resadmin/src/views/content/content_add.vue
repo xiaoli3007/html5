@@ -127,7 +127,7 @@
 
 <script>
 	// 引入 wangEditor
-	import wangEditor from 'wangeditor'
+	// import wangEditor from 'wangeditor'
 	import _ from 'lodash'
 	import {
 		getshow,

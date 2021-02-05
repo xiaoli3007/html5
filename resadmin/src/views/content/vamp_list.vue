@@ -30,6 +30,27 @@
 	</el-dialog>
 	
 	
+	<el-drawer
+	  title="我是上传"
+	  size="90%"
+	  :visible.sync="drawer"
+	  :direction="direction"
+	  :before-close="handleClose">
+	    
+		<el-row :gutter="20">
+		  <el-col :span="2"> &nbsp;</el-col>
+		  <el-col :span="20">
+		 
+				<!-- <myediter  :v_model_name="from_zhu.name"  v-on:passtoparent="catchDatahtml"></myediter> -->
+			
+			<myuploadeasy></myuploadeasy>
+			 
+			  </el-col>
+		   
+		  <el-col :span="2"></el-col>
+		</el-row>
+		
+	</el-drawer>
 		
 		
 	<el-form :inline="true" :model="formInline" class="demo-form-inline">
@@ -47,8 +68,15 @@
 	  </el-form-item>
 	  
 	  <el-form-item>
-	    <el-button type="success" @click="handleAdd()">添加</el-button>
+	    <el-button type="warning" @click="handleAdd()">手动添加</el-button>
 	  </el-form-item>
+	  
+	  <el-form-item>
+	     
+		<el-button type="success" @click="handleupload()">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+		
+	  </el-form-item>
+	  
 	  
 	</el-form>
 	
@@ -59,7 +87,7 @@
 			
 				
 		    <el-table-column   
-		      label="media_id"
+		      label="id"
 		      >
 		      <template slot-scope="scope">
 		        <!-- <i class="el-icon-time"></i> -->
@@ -156,11 +184,17 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		media_list,media_edit,media_delete
+		vamp_list,vamp_edit,vamp_delete
 	} from '@/api/vamp'
 	// import router from '@/router/index.js'
+	import myuploadeasy from '@/components/myuploadeasy'
+	
 	export default {
+		components: {
+			myuploadeasy
+		},
 		data() {
+			
 			return {
 				 dialogFormVisible: false,
 				 dataCount: null,
@@ -184,7 +218,9 @@
 				formInline: {
 				           user: '',
 				           region: ''
-				}
+				},
+				drawer: false,
+				direction: 'ttb',
 				 
 			}
 		},
@@ -199,6 +235,18 @@
 			}
 		},
 		methods: {
+			handleupload() {
+							 
+				  this.drawer = true
+				  
+			 },
+			handleClose(done) {
+			        this.$confirm('确认关闭？')
+			          .then(_ => {
+			            done();
+			          })
+			          .catch(_ => {});
+			 },
 			 onSubmit() {
 			        console.log('submit!');
 			      },
@@ -244,7 +292,7 @@
 			  	resparams: resparams,
 			  	userid: this.$store.state.user.userid
 			  }
-				media_edit(params).then(
+				vamp_edit(params).then(
 					response => {
 						console.log(response)
 						this.init()
@@ -252,6 +300,7 @@
 					})
 				 this.dialogFormVisible = false
 			},
+			
 			handleAdd() {
 							 
 				 this.dialogFormVisible = true
@@ -288,7 +337,7 @@
 				 		modelid: row.modelid
 				 	}
 				 	_g.openGlobalLoading()
-				 	media_delete(params).then(response => {
+				 	vamp_delete(params).then(response => {
 				 		// console.log(response)
 				 		_g.closeGlobalLoading()
 				 		if (response.code == 20000) {
@@ -313,7 +362,7 @@
 						pagesize: this.pagesize,
 						userid: this.$store.state.user.userid,
 					}
-			  media_list(params).then(response => {
+			  vamp_list(params).then(response => {
 				     _g.closeGlobalLoading()
 					 
 					 this.datalist = response.items
