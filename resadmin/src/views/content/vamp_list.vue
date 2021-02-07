@@ -30,28 +30,26 @@
 	</el-dialog>
 	
 	
-	<el-drawer
+	<el-dialog title="我是上传" :visible.sync="drawer">
+	  
+	  <myupload  :v_model_siteid="siteid"  v-on:passtoparent="updatelist"></myupload>
+	  
+	</el-dialog>
+	
+<!-- 	<el-drawer
 	  title="我是上传"
 	  size="90%"
-	  :visible.sync="drawer"
+	  :visible.sync="false"
 	  :direction="direction"
 	  :before-close="handleClose">
 	    
 		<el-row :gutter="20">
-		  <el-col :span="2"> &nbsp;</el-col>
-		  <el-col :span="20">
-		 
-				<!-- <myediter  :v_model_name="from_zhu.name"  v-on:passtoparent="catchDatahtml"></myediter> -->
-			
-			<!-- <myuploadeasy></myuploadeasy> -->
-			<myupload></myupload>
-			 
-			  </el-col>
-		   
-		  <el-col :span="2"></el-col>
+		
+		  <el-col :span="24">
+		   </el-col>
 		</el-row>
 		
-	</el-drawer>
+	</el-drawer> -->
 		
 		
 	<el-form :inline="true" :model="formInline" class="demo-form-inline">
@@ -115,7 +113,23 @@
 			</el-table-column>
 			
 			<el-table-column
-			  label="媒体类型"
+			  label="服务器地址"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.servername }}
+			  </template>
+			</el-table-column>
+			
+			<el-table-column
+			  label="下载地址"
+			  >
+			  <template slot-scope="scope">
+			      {{ scope.row.down_url }}
+			  </template>
+			</el-table-column>
+			
+			<el-table-column
+			  label="类型"
 			 >
 			  <template slot-scope="scope">
 			      {{ scope.row.mediaformat }}
@@ -143,7 +157,7 @@
 			   </template>
 			 </el-table-column>
 			  
-		    <el-table-column label="操作"  >
+		    <el-table-column label="操作"  width="200" >
 		      <template slot-scope="scope">
 				    <el-button
 		          size="mini"
@@ -223,6 +237,7 @@
 				},
 				drawer: false,
 				direction: 'ttb',
+				siteid:'',
 				 
 			}
 		},
@@ -237,6 +252,9 @@
 			}
 		},
 		methods: {
+			updatelist(data){
+				console.log(data)
+			},
 			handleupload() {
 							 
 				  this.drawer = true

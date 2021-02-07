@@ -1,28 +1,45 @@
 <template>
-	<div id="" style=" margin:0 auto; width: 100%; text-align: center;">
+	<div id="" style=" margin:0 auto;   text-align: center; ">
 
-		<el-upload class="upload-demo" name="fileToUpload" drag :action="upload_url" :on-change="handleChange" :on-progress="handleprogress"
-		 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :data="updateuserdata" multiple>
+		<el-upload ref="upload" class="upload-demo" name="fileToUpload" drag :action="upload_url"  :on-preview="handlePreview" :on-remove="handleRemove" :auto-upload="autoupload"
+		 :on-change="handleChange" :on-progress="handleprogress" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload"
+		 :data="updateuserdata" list-type="picture"  multiple>
 			<i class="el-icon-upload"></i>
-			<div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-			<div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+			<div class="el-upload__text">将文件拖到此处，或<em>选取文件</em></div>
+			
+			<div class="el-upload__tip" slot="tip">
+				添加文件后点击右侧按钮进行上传
+				<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+				</div>
+
 		</el-upload>
+		
+		
+		
+		
 
 
 	</div>
 </template>
 
 <script>
-	// import E from "wangeditor";
+	import {
+		getsiteid
+		 
+	} from '@/utils/auth'
+	import { baseApi } from '@/config'
 	import {
 		md5
 	} from '@/utils/md5'
+	import {
+		vamp_insert 
+	} from '@/api/vamp'
 	export default {
 		name: "myupload",
 		data() {
 			return {
-				siteid: 1,
-				username: 'master',
+				siteid: getsiteid() ? getsiteid() : "1",
+				username: this.$store.state.user.name,
 				miyao: '38408956',
 				updateuserdata: {},
 				//文件上传服务器地址，如果在别的Web服务器里，请用绝对地址，例如：
@@ -31,6 +48,16 @@
 				uploadsrv_url: "http://8.131.245.14:8021/upload/document",
 				resume_info_url: 'http://8.131.245.14:8021/resume/',
 				upload_file_url: 'http://8.131.245.14:8021/upload/video',
+				autoupload:false,
+				globalimage: baseApi+'/image/file.png',
+				 myfileList: [],
+				// fileList: [{
+				// 	name: 'food.jpeg',
+				// 	url: baseApi+'/image/file.png'
+				// }, {
+				// 	name: 'food2.jpeg',
+				// 	url: baseApi+'/image/file.png'
+				// } ],
 
 			};
 		},
@@ -71,7 +98,6 @@
 		},
 		methods: {
 			handleChange(file, fileList) {
-				// this.fileList = fileList.slice(-3);
 				console.log('handleChange----')
 				console.log(file)
 				let fid = this.getFileId(file.raw);
@@ -82,17 +108,53 @@
 			},
 
 			handleprogress(event, file, fileList) {
-				// this.fileList = fileList.slice(-3);
 				console.log('handleprogress----')
 				console.log(file)
 				console.log('handleprogress---')
 			},
-			handleAvatarSuccess(res, file) {
-				console.log(res)
-				console.log(file)
-				// this.imageUrl = URL.createObjectURL(file.raw);
-				// this.programForm[res.field] = res.fileurl
-
+			submitUpload() {
+				this.$refs.upload.submit();
+			},
+			handleRemove(file, fileList) {
+				console.log(file, fileList);
+			},
+			handlePreview(file) {
+				console.log(file);
+			},
+			handleAvatarSuccess(res, file,fileList) {
+					console.log('handleAvatarSuccess----')
+				
+				 console.log(res)
+				 
+				//  let imageitem = {"name":res.files[0].name,"url":this.globalimage}
+				// console.log(imageitem)
+				//  this.myfileList.push(imageitem)
+				if(res.result == "success"){
+					
+					
+					let uploaditem = JSON.stringify(res.files[0])
+					const params = {
+						resparams: uploaditem,
+						userid: this.$store.state.user.userid,
+						siteid: this.siteid
+					}
+					
+					vamp_insert(params).then(
+						response => {
+							console.log(response)
+							
+							// _g.toastMsg('success', '编辑成功！', this)
+						})
+						
+				}else{
+					console.log(res)
+				}
+				
+				
+				let v={'value':'update'}
+				this.$emit("passtoparent", v)
+				console.log('handleAvatarSuccess----')
+				
 			},
 			beforeAvatarUpload(file) {
 				// const isJPG = file.type === 'image/jpeg';
@@ -154,4 +216,7 @@
 	.row {
 		margin-bottom: 10px;
 	}
+	// .el-upload-list{
+	// 	overflow: auto;
+	// }
 </style>

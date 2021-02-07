@@ -7,6 +7,13 @@ export function vamp_list(params) {
     params
   })
 }
+export function vamp_insert(params) {
+	return request({
+		url: 'vue_app_vamp_admin_api.php?act=vamp_insert',
+		method: 'post',
+		data: params,
+	})
+}
 
 export function vamp_edit(params) {
 	return request({
