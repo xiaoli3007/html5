@@ -16,10 +16,14 @@
 		</el-form-item>
 		
 		 <el-form-item label="媒体类型"  :label-width="formLabelWidth">
-		   <el-select v-model="form.mediaformat" placeholder="媒体类型">
-		     <el-option label="视频" value="shanghai"></el-option>
-		     <el-option label="音频" value="beijing"></el-option>
+		   
+		   <el-select clearable v-model="form.mediaformat" placeholder="媒体类型">
+		   
+		   	<el-option v-for="(item, index) in media_format_list" :key="index" :label="item.description" :value="item.id"></el-option>
+		   
 		   </el-select>
+		   
+		   
 		 </el-form-item>
 		
 	  </el-form>
@@ -52,18 +56,22 @@
 	</el-drawer> -->
 		
 		
-	<el-form :inline="true" :model="formInline" class="demo-form-inline">
+	<el-form :inline="true" :model="searchform" class="demo-form-inline">
 	  <el-form-item label="名称">
-	    <el-input v-model="formInline.user" placeholder="名称"></el-input>
+	    <el-input v-model="searchform.title" placeholder="名称"></el-input>
 	  </el-form-item>
 	  <el-form-item label="媒体类型">
-	    <el-select v-model="formInline.region" placeholder="媒体类型">
-	      <el-option label="视频" value="shanghai"></el-option>
-	      <el-option label="音频" value="beijing"></el-option>
-	    </el-select>
+		  
+		  <el-select clearable v-model="searchform.mediaformat" placeholder="媒体类型">
+		  
+		  	<el-option v-for="(item, index) in media_format_list" :key="index" :label="item.description" :value="item.id"></el-option>
+		  
+		  </el-select>
+		  
+	    
 	  </el-form-item>
 	  <el-form-item>
-	    <el-button type="primary" @click="onSubmit">查询</el-button>
+	    <el-button type="primary" @click="searchonSubmit">查询</el-button>
 	  </el-form-item>
 	  
 	  <el-form-item>
@@ -132,7 +140,7 @@
 			  label="类型"
 			 >
 			  <template slot-scope="scope">
-			      {{ scope.row.mediaformat }}
+			      {{ scope.row.leixing }}
 			   
 			  </template>
 			</el-table-column>
@@ -219,7 +227,6 @@
 				form: {
 				  title: '',
 				  filepath: '',
-				  
 				  mediaformat: '',
 				 
 				},
@@ -230,14 +237,14 @@
 				 
 				datalist:[],
 				site_list:[],
-				model_list:[],
-				formInline: {
-				           user: '',
-				           region: ''
+				media_format_list:[],
+				searchform: {
+				  title: '',
+				  mediaformat: ''
 				},
 				drawer: false,
 				direction: 'ttb',
-				siteid:'',
+				siteid:getsiteid() ? getsiteid() : "1",
 				 
 			}
 		},
@@ -267,9 +274,19 @@
 			          })
 			          .catch(_ => {});
 			 },
-			 onSubmit() {
-			        console.log('submit!');
-			      },
+			 searchonSubmit() {
+				 
+				 let resparams = JSON.stringify(this.searchform)
+				 
+				 this.$router.push({
+				 	path: this.$route.path,
+				 	query: {
+				 		page: 1,
+				 		searchform: resparams,
+				 	}
+				 })
+				 console.log('submit!');
+			},
 			checksiteid(id) {
 				console.log(id)
 				
@@ -287,14 +304,23 @@
 			 		} else {
 			 			this.currentPage = 1
 			 		}
+					if (data.searchform) {
+						this.searchform = JSON.parse(data.searchform)
+					} else {
+						this.searchform = {
+							title: '',
+							mediaformat: ''
+						}
+					}
 			 	}
 			 }, 
 			handleCurrentChange(page) {
 				this.$router.push({
 					path: this.$route.path,
 					query: {
-						// keywords: this.keywords,
+						pagesize: this.pagesize,
 						page: page,
+						searchform: JSON.stringify(this.searchform)
 					}
 				})
 			}, 
@@ -327,7 +353,6 @@
 				 let rowi =  {
 				 title: '',
 				 filepath: '',
-				 
 				 mediaformat: '',
 				}
 				 this.form = rowi
@@ -354,7 +379,7 @@
 				 	
 				 	const params = {
 				 		userid: this.$store.state.user.userid,
-				 		modelid: row.modelid
+				 		media_id: row.id
 				 	}
 				 	_g.openGlobalLoading()
 				 	vamp_delete(params).then(response => {
@@ -381,15 +406,17 @@
 						page: this.currentPage,
 						pagesize: this.pagesize,
 						userid: this.$store.state.user.userid,
+						siteid: this.siteid,
+						searchform: JSON.stringify(this.searchform)
 					}
 			  vamp_list(params).then(response => {
 				     _g.closeGlobalLoading()
 					 
 					 this.datalist = response.items
 					  // this.site_list = response.site_list
-					  this.group_list = response.group_list
-					  this.model_list = response.model_list
-					 // console.log(this.site_list)
+					  this.media_format_list = response.media_format_list
+					  // this.model_list = response.model_list
+					  console.log(this.media_format_list)
 					  this.dataCount = parseInt(response.dataCount)
 					 this.v = true
 			  })
