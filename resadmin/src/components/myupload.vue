@@ -1,7 +1,7 @@
 <template>
 	<div id="" style=" margin:0 auto;   text-align: center; ">
 
-		<el-upload ref="upload" class="upload-demo" name="fileToUpload" drag :action="upload_url"  :on-preview="handlePreview" :on-remove="handleRemove" :auto-upload="autoupload"
+		<el-upload ref="upload"  class="upload-demo" name="fileToUpload" drag :action="upload_url"  :on-preview="handlePreview" :on-remove="handleRemove" :auto-upload="autoupload"
 		 :on-change="handleChange" :on-progress="handleprogress" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload"
 		 :data="updateuserdata" list-type="picture"  multiple>
 			<i class="el-icon-upload"></i>
@@ -97,6 +97,12 @@
 			// fileid
 		},
 		methods: {
+			
+			my_http_request(file){
+				console.log('my_http_request----')
+				console.log(file)
+				console.log('my_http_request----')
+			},
 			handleChange(file, fileList) {
 				console.log('handleChange----')
 				console.log(file)
@@ -109,6 +115,7 @@
 
 			handleprogress(event, file, fileList) {
 				console.log('handleprogress----')
+				console.log(event)
 				console.log(file)
 				console.log('handleprogress---')
 			},

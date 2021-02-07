@@ -416,7 +416,7 @@
 					  // this.site_list = response.site_list
 					  this.media_format_list = response.media_format_list
 					  // this.model_list = response.model_list
-					  console.log(this.media_format_list)
+					  // console.log(this.media_format_list)
 					  this.dataCount = parseInt(response.dataCount)
 					 this.v = true
 			  })
