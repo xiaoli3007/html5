@@ -17,7 +17,7 @@
 		
 		 <el-form-item label="媒体类型"  :label-width="formLabelWidth">
 		   
-		   <el-select clearable v-model="form.mediaformat" placeholder="媒体类型">
+		   <el-select  v-model="form.mediaformat" placeholder="媒体类型">
 		   
 		   	<el-option v-for="(item, index) in media_format_list" :key="index" :label="item.description" :value="item.id"></el-option>
 		   
@@ -25,6 +25,20 @@
 		   
 		   
 		 </el-form-item>
+		 
+		 <el-form-item label="服务器地址" :label-width="formLabelWidth">
+		   <el-input v-model="form.servername" autocomplete="off"></el-input>
+		 </el-form-item>
+		 <el-form-item label="下载URL" :label-width="formLabelWidth">
+		   <el-input v-model="form.down_url" autocomplete="off"></el-input>
+		 </el-form-item>
+		 
+		 <el-form-item label="描述" :label-width="formLabelWidth">
+		  
+		    <el-input type="textarea" v-model="form.desc"></el-input>
+			
+		 </el-form-item>
+		 
 		
 	  </el-form>
 	  <div slot="footer" class="dialog-footer">
@@ -228,6 +242,9 @@
 				  title: '',
 				  filepath: '',
 				  mediaformat: '',
+				  servername: '',
+				  down_url: '',
+				  desc: '',
 				 
 				},
 				formLabelWidth: '120px',
@@ -336,7 +353,8 @@
 				  
 			  const params = {
 			  	resparams: resparams,
-			  	userid: this.$store.state.user.userid
+			  	userid: this.$store.state.user.userid,
+				siteid:this.siteid
 			  }
 				vamp_edit(params).then(
 					response => {
@@ -351,9 +369,12 @@
 							 
 				 this.dialogFormVisible = true
 				 let rowi =  {
-				 title: '',
-				 filepath: '',
-				 mediaformat: '',
+					 title: '',
+					 filepath: '',
+					 mediaformat: '',
+					 servername: '',
+					 down_url: '',
+					 desc: '',
 				}
 				 this.form = rowi
 			 },
@@ -367,6 +388,9 @@
 				 this.form.title = rowi.title
 				 this.form.filepath = rowi.filepath
 				 this.form.mediaformat = rowi.mediaformat
+				 this.form.servername = rowi.servername
+				 this.form.down_url = rowi.down_url
+				 this.form.desc = rowi.desc
 			 
 				// console.log(index, row);
 			  },
@@ -379,7 +403,7 @@
 				 	
 				 	const params = {
 				 		userid: this.$store.state.user.userid,
-				 		media_id: row.id
+				 		vamp_id: row.id
 				 	}
 				 	_g.openGlobalLoading()
 				 	vamp_delete(params).then(response => {
