@@ -142,7 +142,8 @@
 
 					<el-col :span="24">
 						
-						<!-- <el-button size="mini" type="primary" icon="el-icon-search">添加媒体</el-button> -->
+						<el-button circle type="info" icon="el-icon-circle-plus-outline"  v-on:click="addContentMedia(scope.row.catid,scope.row.id,scope.row.program.title)" ></el-button>
+						
 						<el-button circle type="success" icon="el-icon-document-copy"  v-on:click="gotoContentMedia(scope.row.catid,scope.row.id,scope.row.program.title)" ></el-button>
 						
 						  <el-button icon="el-icon-search"  v-on:click="gotoShow(scope.row.catid,scope.row.id)" circle></el-button> 
@@ -182,7 +183,11 @@
 	  
 	</el-dialog>
 	
-
+	<el-dialog  width="70%" :title="now_title" :visible.sync="addContentMediadialog">
+	  
+	 <select_vamp_list  :v_model_catid="now_catid"  :v_model_news_id="now_news_id"></select_vamp_list>
+	  
+	</el-dialog>
 
 
 	</div>
@@ -200,13 +205,15 @@
 	} from '@/api/content'
 	import _g from '@/utils/global.js'
 	import content_media_list from '@/components/content_media_list'
+	import select_vamp_list from '@/components/select_vamp_list'
 
 	export default {
 		components: {
-			content_media_list
+			content_media_list,select_vamp_list
 		},
 		data() {
 			return {
+				addContentMediadialog:false,
 				contentmediadialog:false,
 				props: {
 					multiple: true,
@@ -489,7 +496,13 @@
 			 		}
 			 	})
 			 },
-			 
+			 addContentMedia(catid, id,title) {
+			 	 console.log(title)
+			 	 this.now_catid = parseInt(catid)
+			 	 this.now_news_id =parseInt(id)
+			 	 this.now_title =title
+			 	 this.addContentMediadialog = true
+			 },
 			 gotoContentMedia(catid, id,title) {
 				 console.log(title)
 				 this.now_catid = parseInt(catid)
