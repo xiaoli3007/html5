@@ -24,7 +24,7 @@ export function vamp_edit(params) {
 }
 export function vamp_delete(params) {
   return request({
-    url: 'vue_app_vamp_admin_api?act=vamp_delete',
+    url: 'vue_app_vamp_admin_api.php?act=vamp_delete',
     method: 'post',
     data:params,
   })

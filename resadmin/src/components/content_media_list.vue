@@ -1,7 +1,7 @@
 <template>
-	<div class="app-container">
+	<div class="">
 
-	<el-dialog  title="媒体信息" :visible.sync="dialogFormVisible"  v-if="v">
+	<el-dialog :modal="false" title="媒体信息" :visible.sync="dialogFormVisible"  v-if="v">
 		
 		
 	  <el-form :model="form">
@@ -47,30 +47,9 @@
 	  </div>
 	</el-dialog>
 	
-	
-	<el-dialog title="我是上传" :visible.sync="drawer">
-	  
-	  <myupload  :v_model_siteid="siteid"  v-on:passtoparent="updatelist"></myupload>
-	  
-	</el-dialog>
-	
-<!-- 	<el-drawer
-	  title="我是上传"
-	  size="90%"
-	  :visible.sync="false"
-	  :direction="direction"
-	  :before-close="handleClose">
-	    
-		<el-row :gutter="20">
-		
-		  <el-col :span="24">
-		   </el-col>
-		</el-row>
-		
-	</el-drawer> -->
 		
 		
-	<el-form :inline="true" :model="searchform" class="demo-form-inline">
+<!-- 	<el-form :inline="true" :model="searchform" class="demo-form-inline">
 	  <el-form-item label="名称">
 	    <el-input v-model="searchform.title" placeholder="名称"></el-input>
 	  </el-form-item>
@@ -88,18 +67,11 @@
 	    <el-button type="primary" @click="searchonSubmit">查询</el-button>
 	  </el-form-item>
 	  
-	  <el-form-item>
+	 <el-form-item>
 	    <el-button type="warning" @click="handleAdd()">手动添加</el-button>
-	  </el-form-item>
+	  </el-form-item>  
 	  
-	  <el-form-item>
-	     
-		<el-button type="success" @click="handleupload()">上传<i class="el-icon-upload el-icon--right"></i></el-button>
-		
-	  </el-form-item>
-	  
-	  
-	</el-form>
+	</el-form> -->
 	
 				
 		<el-table
@@ -127,30 +99,6 @@
 			</el-table-column>
 			
 			<el-table-column
-			  label="路径"
-			  >
-			  <template slot-scope="scope">
-			      {{ scope.row.filepath }}
-			  </template>
-			</el-table-column>
-			
-			<el-table-column
-			  label="服务器地址"
-			  >
-			  <template slot-scope="scope">
-			      {{ scope.row.servername }}
-			  </template>
-			</el-table-column>
-			
-			<el-table-column
-			  label="下载地址"
-			  >
-			  <template slot-scope="scope">
-			      {{ scope.row.down_url }}
-			  </template>
-			</el-table-column>
-			
-			<el-table-column
 			  label="类型"
 			 >
 			  <template slot-scope="scope">
@@ -167,17 +115,6 @@
 			   
 			  </template>
 			</el-table-column>
-			
-			
-			 
-			 <el-table-column
-			   label="转码状态"
-			  >
-			   <template slot-scope="scope">
-			       {{ scope.row.convertstate }}
-			    
-			   </template>
-			 </el-table-column>
 			  
 		    <el-table-column label="操作"  width="200" >
 		      <template slot-scope="scope">
@@ -220,19 +157,32 @@
 		setsiteid,
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
+	
 	import {
-		vamp_list,vamp_edit,vamp_delete
-	} from '@/api/vamp'
+		media_list,media_edit,media_delete
+	} from '@/api/content_media'
 	// import router from '@/router/index.js'
 	// import myuploadeasy from '@/components/myuploadeasy'
-	import myupload from '@/components/myupload'
 	
 	export default {
 		components: {
-			myupload
+			 
+		},
+		props: {
+			v_model_title: {
+				type: String,
+				default: ''
+			},
+			v_model_catid: {
+				type: Number,
+				default: 0
+			},
+			v_model_news_id: {
+				type: Number,
+				default: 0
+			},
 		},
 		data() {
-			
 			return {
 				 dialogFormVisible: false,
 				 dataCount: null,
@@ -245,13 +195,10 @@
 				  servername: '',
 				  down_url: '',
 				  desc: '',
-				 
 				},
 				formLabelWidth: '120px',
-				  
 				table: false,
 				v: false,
-				 
 				datalist:[],
 				site_list:[],
 				media_format_list:[],
@@ -266,42 +213,50 @@
 			}
 		},
 		created() {
+			// this.catid = this.$route.query.catid
+			// this.news_id = this.$route.query.news_id
 			this.init()
 		},
 		watch: {
-			'$route'(to, from) {
-				// console.log(to)
-				// console.log(from)
-				this.init()
-			}
+			'v_model_catid': {
+			  deep: true,
+			  handler: function(val, oldVal) {
+			    var vm = this
+			     // console.log(val)
+			     // console.log(oldVal)
+				 if(val!=oldVal){
+					 this.init()
+				 }
+			  }
+			},
+			'v_model_news_id': {
+			  deep: true,
+			  handler: function(val, oldVal) {
+			    var vm = this
+			     // console.log(val)
+			     // console.log(oldVal)
+				 if(val!=oldVal){
+					 this.init()
+				 }
+			  }
+			},
+			// '$route'(to, from) {
+			// 	// console.log(to)
+			// 	// console.log(from)
+			// 	this.init()
+			// },
 		},
 		methods: {
 			updatelist(data){
 				console.log(data)
 			},
-			handleupload() {
-							 
-				  this.drawer = true
-				  
-			 },
-			handleClose(done) {
-			        this.$confirm('确认关闭？')
-			          .then(_ => {
-			            done();
-			          })
-			          .catch(_ => {});
-			 },
+			
 			 searchonSubmit() {
 				 
-				 let resparams = JSON.stringify(this.searchform)
+				 // let resparams = JSON.stringify(this.searchform)
 				 
-				 this.$router.push({
-				 	path: this.$route.path,
-				 	query: {
-				 		page: 1,
-				 		searchform: resparams,
-				 	}
-				 })
+				 this.currentPage = 1
+				 this.init()
 				 console.log('submit!');
 			},
 			checksiteid(id) {
@@ -309,37 +264,12 @@
 				
 			},
 			init() {
-				 
-				this.getCurrentPage()
 				this.fetchData()
 			},
-			 getCurrentPage() {
-			 	let data = this.$route.query
-			 	if (data) {
-			 		if (data.page) {
-			 			this.currentPage = parseInt(data.page)
-			 		} else {
-			 			this.currentPage = 1
-			 		}
-					if (data.searchform) {
-						this.searchform = JSON.parse(data.searchform)
-					} else {
-						this.searchform = {
-							title: '',
-							mediaformat: ''
-						}
-					}
-			 	}
-			 }, 
+			 
 			handleCurrentChange(page) {
-				this.$router.push({
-					path: this.$route.path,
-					query: {
-						pagesize: this.pagesize,
-						page: page,
-						searchform: JSON.stringify(this.searchform)
-					}
-				})
+				this.currentPage = page
+				this.init()
 			}, 
 			 
 			fromsiteinfo() {
@@ -356,7 +286,7 @@
 			  	userid: this.$store.state.user.userid,
 				siteid:this.siteid
 			  }
-				vamp_edit(params).then(
+				media_edit(params).then(
 					response => {
 						console.log(response)
 						this.init()
@@ -407,14 +337,15 @@
 				 		vamp_id: row.id
 				 	}
 				 	_g.openGlobalLoading()
-				 	vamp_delete(params).then(response => {
+				 	media_delete(params).then(response => {
 				 		// console.log(response)
 				 		_g.closeGlobalLoading()
 				 		if (response.code == 20000) {
 				 			_g.toastMsg('success', '删除成功',this)
-				 			 setTimeout(() => {
-				 			  _g.shallowRefresh(this.$route.name)
-				 			}, 500)
+				 			//  setTimeout(() => {
+				 			//   _g.shallowRefresh(this.$route.name)
+				 			// }, 500)
+							this.init()
 				 		}else{
 				 			_g.toastMsg('error', '删除错误',this)
 				 		}
@@ -432,9 +363,11 @@
 						pagesize: this.pagesize,
 						userid: this.$store.state.user.userid,
 						siteid: this.siteid,
+						catid: this.v_model_catid,
+						news_id: this.v_model_news_id,
 						searchform: JSON.stringify(this.searchform)
 					}
-			  vamp_list(params).then(response => {
+			  media_list(params).then(response => {
 				     _g.closeGlobalLoading()
 					 
 					 this.datalist = response.items

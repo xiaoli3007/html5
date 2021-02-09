@@ -137,10 +137,13 @@
 			</el-table-column>
 
 
-			<el-table-column label="操作" align="center">
+			<el-table-column label="操作" align="center" width="300">
 				<template slot-scope="scope">
 
 					<el-col :span="24">
+						
+						<!-- <el-button size="mini" type="primary" icon="el-icon-search">添加媒体</el-button> -->
+						<el-button circle type="success" icon="el-icon-document-copy"  v-on:click="gotoContentMedia(scope.row.catid,scope.row.id,scope.row.program.title)" ></el-button>
 						
 						  <el-button icon="el-icon-search"  v-on:click="gotoShow(scope.row.catid,scope.row.id)" circle></el-button> 
 						  <el-button   v-on:click="add(scope.row.catid,scope.row.id)" type="primary" icon="el-icon-edit" circle></el-button>
@@ -173,6 +176,12 @@
 	  
 		
 
+	<el-dialog  width="70%" :title="now_title" :visible.sync="contentmediadialog">
+	  
+	 <content_media_list  :v_model_catid="now_catid"  :v_model_news_id="now_news_id"></content_media_list>
+	  
+	</el-dialog>
+	
 
 
 
@@ -190,10 +199,15 @@
 		get_catlist_data,deleteContent
 	} from '@/api/content'
 	import _g from '@/utils/global.js'
+	import content_media_list from '@/components/content_media_list'
 
 	export default {
+		components: {
+			content_media_list
+		},
 		data() {
 			return {
+				contentmediadialog:false,
 				props: {
 					multiple: true,
 					expandTrigger: 'hover',
@@ -225,6 +239,10 @@
 				search_linkage_default_string: '',
 				search_main_text: '',
 				search_fu_text: '',
+				
+				now_catid: 0,
+				now_news_id: 0,
+				now_title: '',
 			}
 		},
 		filters: {
@@ -471,6 +489,14 @@
 			 		}
 			 	})
 			 },
+			 
+			 gotoContentMedia(catid, id,title) {
+				 console.log(title)
+				 this.now_catid = parseInt(catid)
+				 this.now_news_id =parseInt(id)
+				 this.now_title =title
+				 this.contentmediadialog = true
+			},
 			gotoShow(catid, id) {
 				this.$router.replace({
 					name: 'Content_show',
