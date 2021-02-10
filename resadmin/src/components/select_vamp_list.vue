@@ -23,7 +23,7 @@
 		</el-form>
 
 
-		<el-table :data="datalist"  ref="multipleTable"  @selection-change="handleSelectionChange" style="width: 100%">
+		<el-table :data="datalist"  ref="multipleTable"  @selection-change="handleSelectionChange"  max-height="300" style="width: 100%">
 
 			<el-table-column type="expand">
 				<template slot-scope="props">
@@ -72,6 +72,14 @@
 				</template>
 			</el-table-column>
 
+	
+			<el-table-column label="大小">
+				<template slot-scope="scope">
+					{{ scope.row.filesize }}
+			
+				</template>
+			</el-table-column>
+			
 			<el-table-column label="格式">
 				<template slot-scope="scope">
 					{{ scope.row.fileext }}
@@ -95,7 +103,7 @@
 		<el-row>
 			<el-col :span="12">
 				<div style="">
-					<el-button @click="toggleSelection(list)">全选</el-button>
+					<el-button @click="toggleSelection(datalist)">全选</el-button>
 					<el-button @click="toggleadd()">添加</el-button>
 				</div>
 			</el-col>
