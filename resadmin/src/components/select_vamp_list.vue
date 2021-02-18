@@ -226,8 +226,10 @@
 					_g.toastMsg('error', '请先勾选资源！', this)
 					return
 				}
-				return
-				this.$confirm('确认添加该资源?', '提示', {
+					console.log(this.v_model_catid)
+					console.log(this.v_model_news_id)
+				 // return
+				this.$confirm('确认添加到该资源?', '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
 					type: 'warning'
@@ -236,18 +238,21 @@
 					const params = {
 						userid: this.$store.state.user.userid,
 						siteid:this.siteid,
-						catid:this.catid,
-						news_id:this.news_id,
+						catid:this.v_model_catid,
+						news_id:this.v_model_news_id,
 						resparams: JSON.stringify(addres),
 					}
 
 					_g.openGlobalLoading()
 					vamp_content_media_insert(params).then(response => {
-						// console.log(response)
+						console.log(response)
 						_g.closeGlobalLoading()
 						if (response.code == 20000) {
 
 							_g.toastMsg('success', '成功', this)
+							this.$refs.multipleTable.clearSelection();
+							this.$emit("passtoparent", {})
+							
 							setTimeout(() => {
 								// _g.shallowRefresh(this.$route.name)
 							}, 500)

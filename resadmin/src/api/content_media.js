@@ -17,7 +17,7 @@ export function media_edit(params) {
 }
 export function media_delete(params) {
   return request({
-    url: 'vue_app_content_media_admin_api?act=media_delete',
+    url: 'vue_app_content_media_admin_api.php?act=media_delete',
     method: 'post',
     data:params,
   })

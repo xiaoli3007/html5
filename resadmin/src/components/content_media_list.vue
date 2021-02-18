@@ -76,7 +76,21 @@
 		<el-button type="warning" @click="handleAddMedia()">到媒体库添加</el-button>
 
 		<el-table :data="datalist" style="width: 100%">
-
+			
+			<el-table-column type="expand">
+				<template slot-scope="props">
+					<el-form label-position="left" inline class="demo-table-expand">
+						<el-form-item label="服务器地址">
+							<span>{{ props.row.servername }}</span>
+						</el-form-item>
+						<el-form-item label="下载地址">
+							<span>{{ props.row.down_url }}</span>
+						</el-form-item>
+			
+					</el-form>
+				</template>
+			</el-table-column>
+			
 
 			<el-table-column label="id">
 				<template slot-scope="scope">
@@ -102,7 +116,7 @@
 			
 			<el-table-column label="大小">
 				<template slot-scope="scope">
-					{{ scope.row.filesize }}
+					{{ scope.row.filesize_text }}
 			
 				</template>
 			</el-table-column>
@@ -116,7 +130,7 @@
 
 			<el-table-column label="操作" width="200">
 				<template slot-scope="scope">
-					<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					<!-- <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
 					<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
 				</template>
 			</el-table-column>
@@ -144,7 +158,7 @@
 		 :with-header="true" :before-close="handleClose">
 
 
-			<select_vamp_list :v_model_catid="now_catid" :v_model_news_id="now_news_id"></select_vamp_list>
+			<select_vamp_list :v_model_catid="v_model_catid" :v_model_news_id="v_model_news_id"  v-on:passtoparent="updatelist"></select_vamp_list>
 
 		</el-drawer>
 
@@ -258,9 +272,15 @@
 			// },
 		},
 		methods: {
+			
+			updatelist(data){
+				console.log(data)
+				this.addContentMediaopen = false
+				this.fetchData()
+			},
 			handleClose(done) {
 				
-				console.log(done)
+				// console.log(done)
 				done();
 				// this.$confirm('确认关闭？')
 				//   .then(_ => {
@@ -271,10 +291,7 @@
 			handleAddMedia() {
 				this.addContentMediaopen = true
 			},
-			updatelist(data) {
-				console.log(data)
-			},
-
+			
 			searchonSubmit() {
 
 				// let resparams = JSON.stringify(this.searchform)
@@ -358,7 +375,7 @@
 
 					const params = {
 						userid: this.$store.state.user.userid,
-						vamp_id: row.id
+						media_id: row.id
 					}
 					_g.openGlobalLoading()
 					media_delete(params).then(response => {
