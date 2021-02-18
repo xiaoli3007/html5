@@ -128,7 +128,7 @@
 	import _g from '@/utils/global.js'
 	import {
 		member_group_list,member_group_edit,member_group_delete
-	} from '@/api/admin_member'
+	} from '@/api/member'
 	// import router from '@/router/index.js'
 	export default {
 		data() {

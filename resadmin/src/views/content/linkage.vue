@@ -77,7 +77,7 @@
 	import _g from '@/utils/global.js'
 	import {
 		linkage_list,linkage_delete,linkage_edit
-	} from '@/api/admin_linkage.js'
+	} from '@/api/linkage.js'
 	 let id = 1000;
 	export default {
 

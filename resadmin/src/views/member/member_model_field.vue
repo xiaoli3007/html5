@@ -327,13 +327,13 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		model_field_list,
-		model_field_edit,
-		model_field_delete,
-		model_field_disabled,
-		model_field_name_isexit,
-		model_field_linkageid_isexit,
-	} from '@/api/content_model_field.js' 
+		member_model_field_list,
+		member_model_field_edit,
+		member_model_field_delete,
+		member_model_field_disabled,
+		member_model_field_name_isexit,
+		member_model_field_linkageid_isexit,
+	} from '@/api/member_model_field.js'
 	// import router from '@/router/index.js'
 	export default {
 		data() {
@@ -358,7 +358,7 @@
 						field: value,
 						modelid: this.modelid
 					}
-					model_field_name_isexit(params).then(response => {
+					member_model_field_name_isexit(params).then(response => {
 						console.log(response)
 						if (response.code != 20000) {
 							callback(new Error(response.message));
@@ -383,7 +383,7 @@
 						modelid: this.modelid,
 						fieldid: this.is_edit ? this.edit_form.fieldid : '',
 					}
-					model_field_linkageid_isexit(params).then(response => {
+					member_model_field_linkageid_isexit(params).then(response => {
 						console.log(response)
 						if (response.code != 20000) {
 							callback(new Error(response.message));
@@ -651,7 +651,7 @@
 							userid: this.$store.state.user.userid,
 							modelid: this.modelid,
 						}
-						model_field_edit(params).then(
+						member_model_field_edit(params).then(
 							response => {
 								console.log(response)
 								this.init()
@@ -746,7 +746,7 @@
 				}
 
 				_g.openGlobalLoading()
-				model_field_disabled(params).then(response => {
+				member_model_field_disabled(params).then(response => {
 					// console.log(response)
 					_g.closeGlobalLoading()
 					if (response.code == 20000) {
@@ -771,7 +771,7 @@
 						fieldid: row.fieldid
 					}
 					_g.openGlobalLoading()
-					model_field_delete(params).then(response => {
+					member_model_field_delete(params).then(response => {
 						// console.log(response)
 						_g.closeGlobalLoading()
 						if (response.code == 20000) {
@@ -796,7 +796,7 @@
 					modelid: this.modelid,
 					searchform: JSON.stringify(this.searchform)
 				}
-				model_field_list(params).then(response => {
+				member_model_field_list(params).then(response => {
 					_g.closeGlobalLoading()
 
 					this.datalist = response.items

@@ -23,7 +23,7 @@
 		</el-form>
 
 
-		<el-table :data="datalist"  ref="multipleTable"  @selection-change="handleSelectionChange"  max-height="300" style="width: 100%">
+		<el-table :data="datalist"  ref="multipleTable"  @selection-change="handleSelectionChange"  max-height="300" style="width: 100%;  ">
 
 			<el-table-column type="expand">
 				<template slot-scope="props">
@@ -75,7 +75,7 @@
 	
 			<el-table-column label="大小">
 				<template slot-scope="scope">
-					{{ scope.row.filesize }}
+					{{ scope.row.filesize_text }}
 			
 				</template>
 			</el-table-column>

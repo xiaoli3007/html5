@@ -168,7 +168,12 @@
 			  </template>
 			</el-table-column>
 			
+			<el-table-column label="大小">
+				<template slot-scope="scope">
+					{{ scope.row.filesize_text }}
 			
+				</template>
+			</el-table-column>
 			 
 			 <el-table-column
 			   label="转码状态"

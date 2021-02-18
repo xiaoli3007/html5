@@ -254,13 +254,23 @@ export const constantRouterMap = [
 		},{
 			path: 'membermodel',
 			name: 'Membermodel',
-			component: () => import('@/views/member/model'),
+			component: () => import('@/views/member/member_model'),
 			meta: {
 				title: '用户模型',
 				icon: 'faxian'
 			}
 			
-		},
+		},{
+				path: 'memberfield',
+				name: 'Memberfield',
+				// component: require('@/views/setting/setting').default,
+				component: () => import('@/views/member/member_model_field'),				
+				hidden: true,
+				meta: {
+					title: '用户模型字段',
+					icon: 'faxian'
+				}
+			},
 		]
 	}, 
 	{

@@ -118,7 +118,7 @@
 		model_list,
 		model_edit,
 		model_delete
-	} from '@/api/admin_model'
+	} from '@/api/content_model'
 	// import router from '@/router/index.js'
 	export default {
 		data() {
