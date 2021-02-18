@@ -80,11 +80,15 @@
 			<el-table-column type="expand">
 				<template slot-scope="props">
 					<el-form label-position="left" inline class="demo-table-expand">
+						<el-form-item label="路径">
+							<span>{{ props.row.vmap_info.filepath }}</span>
+						</el-form-item>
+						
 						<el-form-item label="服务器地址">
-							<span>{{ props.row.servername }}</span>
+							<span>{{ props.row.vmap_info.servername }}</span>
 						</el-form-item>
 						<el-form-item label="下载地址">
-							<span>{{ props.row.down_url }}</span>
+							<span>{{ props.row.vmap_info.down_url }}</span>
 						</el-form-item>
 			
 					</el-form>
@@ -102,28 +106,28 @@
 
 			<el-table-column label="名称">
 				<template slot-scope="scope">
-					{{ scope.row.title }}
+					{{ scope.row.vmap_info.title }}
 
 				</template>
 			</el-table-column>
 
 			<el-table-column label="类型">
 				<template slot-scope="scope">
-					{{ scope.row.leixing }}
+					{{ scope.row.vmap_info.leixing }}
 
 				</template>
 			</el-table-column>
 			
 			<el-table-column label="大小">
 				<template slot-scope="scope">
-					{{ scope.row.filesize_text }}
+					{{ scope.row.vmap_info.filesize_text }}
 			
 				</template>
 			</el-table-column>
 			
 			<el-table-column label="格式">
 				<template slot-scope="scope">
-					{{ scope.row.fileext }}
+					{{ scope.row.vmap_info.fileext }}
 
 				</template>
 			</el-table-column>

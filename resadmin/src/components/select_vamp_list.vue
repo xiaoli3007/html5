@@ -218,7 +218,7 @@
 				this.multipleSelection.forEach(row => {
 					console.log(row)
 					addres.push({
-						vamp_id: row.id
+						vmap_id: row.id
 					})
 				});
 				console.log(addres)
