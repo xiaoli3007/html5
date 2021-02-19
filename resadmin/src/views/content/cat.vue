@@ -3,26 +3,35 @@
 
 		<el-dialog :fullscreen="false" title="栏目信息" :visible.sync="dialogFormVisible" v-if="v">
 			<el-form :model="form">
+				
+				<el-form-item label="模型" :label-width="formLabelWidth">
+					<el-select v-if="form.catid==''" v-model="form.modelid" placeholder="请选择">
+						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
+						</el-option>
+					</el-select>
+				
+				
+					<el-select v-if="form.catid!=''" v-model="form.modelid" disabled placeholder="请选择">
+						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
+						</el-option>
+					</el-select>
+				
+				</el-form-item>
+				
 				<el-form-item label="名称" :label-width="formLabelWidth">
 					<el-input v-model="form.catname" autocomplete="off"></el-input>
 				</el-form-item>
+				
+				<el-form-item label="排序" :label-width="formLabelWidth">
+					<el-input v-model="form.listorder" autocomplete="off"></el-input>
+				</el-form-item>
+				
+				
 				<el-form-item label="描述" :label-width="formLabelWidth">
-					<el-input v-model="form.description" autocomplete="off"></el-input>
+					<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
 				</el-form-item>
 
-				<el-form-item  label="模型" :label-width="formLabelWidth">
-					<el-select v-if="form.catid==''" v-model="form.modelid"  placeholder="请选择">
-						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
-						</el-option>
-					</el-select>
-					
-
-					<el-select  v-if="form.catid!=''" v-model="form.modelid" disabled placeholder="请选择">
-						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
-						</el-option>
-					</el-select>
-
-				</el-form-item>
+			
 
 				<el-form-item label="列表模板" :label-width="formLabelWidth">
 
@@ -55,6 +64,7 @@
 
 
 		<el-button type="success" @click="handleAdd()">添加</el-button>
+		<el-button type="info" >更新缓存和数据统计</el-button>
 
 		<el-table :data="datalist" style="width: 100%">
 
@@ -72,6 +82,13 @@
 			      </template>
 			    </el-table-column> -->
 
+			<el-table-column label="排序" width="">
+				<template slot-scope="scope">
+					{{ scope.row.listorder }}
+
+				</template>
+			</el-table-column>
+
 			<el-table-column label="catid" width="">
 				<template slot-scope="scope">
 					<!-- <i class="el-icon-time"></i> -->
@@ -84,6 +101,13 @@
 
 				</template>
 			</el-table-column>
+			<el-table-column label="数据量" width="">
+				<template slot-scope="scope">
+					{{ scope.row.items }}
+
+				</template>
+			</el-table-column>
+
 
 			<el-table-column label="描述" width="">
 				<template slot-scope="scope">
@@ -91,14 +115,14 @@
 
 				</template>
 			</el-table-column>
-			
+
 			<el-table-column label="模型" width="">
 				<template slot-scope="scope">
 					{{ scope.row.model_name }}
-			
+
 				</template>
 			</el-table-column>
-			
+
 			<el-table-column label="站点" width="">
 				<template slot-scope="scope">
 					{{ scope.row.site_name }}
@@ -144,7 +168,8 @@
 	import _g from '@/utils/global.js'
 	import {
 		cat_info,
-		cat_list,cat_edit,
+		cat_list,
+		cat_edit,
 		cat_delete
 	} from '@/api/category'
 
@@ -162,7 +187,7 @@
 					catid: '',
 					catname: '',
 					description: '',
-					siteid: getsiteid()  ? getsiteid() : '1',
+					siteid: getsiteid() ? getsiteid() : '1',
 					modelid: '',
 					list_template: '',
 					show_template: ''
@@ -171,14 +196,14 @@
 				formLabelWidth: '120px',
 				table: false,
 				v: false,
-				siteid: getsiteid()  ? getsiteid() : '1',
+				siteid: getsiteid() ? getsiteid() : '1',
 				datalist: [],
 				sitelist: [],
 				modellist: [],
 				list_template_data: [],
 				show_template_data: [],
 				privlist: [],
-				 
+
 			}
 		},
 		created() {
@@ -239,7 +264,7 @@
 				cat_edit(params).then(
 					response => {
 						console.log(response)
-						 this.init()
+						this.init()
 						_g.toastMsg('success', response.message, this)
 					})
 				this.dialogFormVisible = false

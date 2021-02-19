@@ -2,10 +2,15 @@
 	<div class="app-container">
 
 	<el-dialog  title="用户组信息" :visible.sync="dialogFormVisible"  v-if="v">
-	  <el-form :model="form">
-	    <el-form-item label="用户组名称" :label-width="formLabelWidth">
+	  <el-form :model="form" :rules="rules">
+	    <el-form-item  prop="name" label="用户组名称" :label-width="formLabelWidth">
 	      <el-input v-model="form.name" autocomplete="off"></el-input>
 	    </el-form-item>
+		
+		<el-form-item  prop="sort" label="排序" :label-width="formLabelWidth">
+		  <el-input v-model="form.sort" autocomplete="off"></el-input>
+		</el-form-item>
+		
 	
 		
 	<!-- 	<el-form-item label="站点" :label-width="formLabelWidth" >
@@ -15,8 +20,8 @@
 		</el-form-item> -->
 		
 		
-		<el-form-item label="描述" :label-width="formLabelWidth">
-		  <el-input v-model="form.description" autocomplete="off"></el-input>
+		<el-form-item  prop="description" label="描述" :label-width="formLabelWidth">
+		  <el-input type="textarea"  v-model="form.description" autocomplete="off"></el-input>
 		</el-form-item>
 	     
 	  </el-form>
@@ -41,6 +46,17 @@
 		        <span style="margin-left: 10px">{{ scope.row.groupid }}</span>
 		      </template>
 		    </el-table-column>
+			
+			<el-table-column
+			  label="排序"
+			 >
+			  <template slot-scope="scope">
+			      {{ scope.row.sort }}
+			   
+			  </template>
+			</el-table-column>
+			
+			
 		    <el-table-column
 		      label="用户组名称"
 		     >
@@ -54,7 +70,7 @@
 			  label="是否为系统组"
 			 >
 			  <template slot-scope="scope">
-			      {{ scope.row.issystem }}
+			      {{ scope.row.issystem==1?'是':'否' }}
 			   
 			  </template>
 			</el-table-column>
@@ -85,12 +101,12 @@
 				   
 				<el-button type="primary"
 				  size="mini"
-				  @click="handleEdit(scope.$index, scope.row)">下载</el-button>
+				  @click="handledownload(scope.$index, scope.row)">下载</el-button>
 					
 		        <el-button
 		          size="mini"
 		          @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-		        <el-button
+		        <el-button v-if="scope.row.issystem==0"
 		          size="mini"
 		          type="danger"
 		          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
@@ -127,11 +143,35 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		member_group_list,member_group_edit,member_group_delete
+		member_group_name_isexit,member_group_list,member_group_edit,member_group_delete
 	} from '@/api/member'
 	// import router from '@/router/index.js'
 	export default {
 		data() {
+			var isexit_name = (rule, value, callback) => {
+			
+				console.log('名称验证')
+			
+				if (value === '') {
+					callback(new Error('请填写名称'));
+				} else {
+			
+					const params = {
+						name: value,
+						groupid:  this.form.groupid?this.form.groupid:'',
+					}
+					member_group_name_isexit(params).then(response => {
+						console.log(response)
+						if (response.code != 20000) {
+							callback(new Error(response.message));
+						} else {
+							callback();
+						}
+			
+					})
+			
+				}
+			};
 			return {
 				 dialogFormVisible: false,
 				 dataCount: null,
@@ -140,6 +180,34 @@
 				form: {
 				  name: '',
 				  description:'',
+				  sort:0,
+				},
+				rules: {
+					 
+					name: [{
+							required: true,
+							message: '请输入名称',
+							trigger: 'blur'
+						},
+						{
+							min: 2,
+							max: 30,
+							message: '长度在 2到 30 个字符',
+							trigger: 'blur'
+						},
+					
+						{
+							validator: isexit_name,
+							trigger: 'blur'
+						}
+					],
+					sort: [{
+							pattern: /^([0-9]+)$/,
+							message: '请输入数字',
+							trigger: 'blur'
+						},
+					],
+						
 				},
 				formLabelWidth: '120px',
 				  
@@ -163,6 +231,11 @@
 			}
 		},
 		methods: {
+			handledownload(index, row){
+				
+				console.log(row)
+			},
+			
 			checksiteid(id) {
 				console.log(id)
 				
@@ -219,6 +292,7 @@
 				 let rowi =  {
 				  name: '',
 				  description:'',
+				   sort:0,
 				}
 				 this.form = rowi
 			 },
@@ -228,9 +302,10 @@
 				 
 				 let rowi = JSON.parse(JSON.stringify(row))
 				 console.log(rowi)
-				 this.form.description =  ''
+				 this.form.description = rowi.description
 				 this.form.groupid = rowi.groupid
 				 this.form.name = rowi.name
+				 this.form.sort = rowi.sort
 				// console.log(index, row);
 			  },
 			  handleDelete(index, row) {

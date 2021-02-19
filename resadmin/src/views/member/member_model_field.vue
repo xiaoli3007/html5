@@ -4,12 +4,12 @@
 		<el-dialog title="字段信息" :visible.sync="dialogFormVisible" v-if="v">
 			<el-form :model="form" :rules="rules" ref="ruleFormadd">
 
-				<el-form-item label="模型" :label-width="formLabelWidth">
+				<!-- <el-form-item label="模型" :label-width="formLabelWidth">
 					<el-radio-group v-model="form.modelid" disabled>
 						<el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)" :label="item.modelid">{{item.name}}</el-radio>
 					</el-radio-group>
 
-				</el-form-item>
+				</el-form-item> -->
 
 
 				<el-form-item  prop="formtype" label="类型" :label-width="formLabelWidth" >
@@ -98,12 +98,12 @@
 		<el-dialog title="字段信息编辑---" :visible.sync="dialogFormVisible_edit" v-if="v">
 			<el-form :model="edit_form" :rules="rules" ref="ruleForm">
 
-				<el-form-item label="模型" :label-width="formLabelWidth">
+				<!-- <el-form-item label="模型" :label-width="formLabelWidth">
 					<el-radio-group v-model="edit_form.modelid" disabled>
 						<el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)" :label="item.modelid">{{item.name}}</el-radio>
 					</el-radio-group>
 
-				</el-form-item>
+				</el-form-item> -->
 
 				<el-form-item label="类型" :label-width="formLabelWidth">
 					<el-select disabled v-model="edit_form.formtype" placeholder="类型">
@@ -463,7 +463,7 @@
 				form: {
 					field: '',
 					name: '',
-					modelid: this.modelid,
+					modelid: 10,
 					formtype: '',
 					minlength: 0,
 					maxlength: 0,
@@ -487,7 +487,7 @@
 				edit_form: {
 					field: '',
 					name: '',
-					modelid: this.modelid,
+					modelid: 10,
 					formtype: '',
 					minlength: 0,
 					maxlength: 0,
@@ -510,7 +510,7 @@
 				table: false,
 				v: false,
 				is_edit: false, //是否为编辑
-				modelid: 0,
+				modelid: 10,
 				datalist: [],
 				site_list: [],
 				model_list: [],
@@ -529,7 +529,7 @@
 		},
 		created() {
 
-			this.modelid = this.$route.query.modelid
+			// this.modelid = this.$route.query.modelid
 
 			if (this.modelid != 0) {
 				this.init()
@@ -664,7 +664,7 @@
 				let rowi = {
 					field: '',
 					name: '',
-					modelid: this.modelid,
+					modelid: 10,
 					formtype: '',
 					minlength: 0,
 					maxlength: 0,

@@ -7,12 +7,12 @@
 		
 	  <el-form :model="form">
 		  
-		  <el-form-item label="模型" :label-width="formLabelWidth">
+		<!--  <el-form-item label="模型" :label-width="formLabelWidth">
 		  	<el-radio-group v-model="form.modelid">
 		  	        <el-radio v-for="(item, index) in model_list" :key="index" @change="checkmodelid(item.modelid)"  :label="item.modelid"  >{{item.name}}</el-radio>
 		  	    </el-radio-group>
 		  	 
-		  </el-form-item>
+		  </el-form-item> -->
 		  
 	    <el-form-item label="用户名" :label-width="formLabelWidth">
 	      <el-input v-model="form.username" autocomplete="off"></el-input>
@@ -179,7 +179,7 @@
 				  username: '',
 				  password: '',
 				  confirmpassword:'',
-				  modelid: '',
+				  modelid: 10,
 				  groupid:  [],
 				},
 				formLabelWidth: '120px',
@@ -268,7 +268,7 @@
 				  username: '',
 				  password: '',
 				  confirmpassword:'',
-				  modelid: '',
+				  modelid: 10,
 				  groupid:  [],
 				}
 				 this.form = rowi

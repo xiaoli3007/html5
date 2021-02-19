@@ -25,7 +25,7 @@ export function member_delete(params) {
 /* 用户组相关 */
 export function member_group_list(params) {
   return request({
-    url: 'vue_app_member_admin_api.php?act=member_group_list',
+    url: 'vue_app_member_group_admin_api.php?act=member_group_list',
     method: 'get', 
     params
   })
@@ -33,18 +33,27 @@ export function member_group_list(params) {
 
 export function member_group_edit(params) {
 	return request({
-		url: 'vue_app_member_admin_api.php?act=member_group_edit',
+		url: 'vue_app_member_group_admin_api.php?act=member_group_edit',
 		method: 'post',
 		data: params,
 	})
 }
 export function member_group_delete(params) {
   return request({
-    url: 'vue_app_member_admin_api.php?act=member_group_delete',
+    url: 'vue_app_member_group_admin_api.php?act=member_group_delete',
     method: 'post',
     data:params,
   })
 }
+
+export function member_group_name_isexit(params) {
+  return request({
+    url: 'vue_app_member_group_admin_api.php?act=member_group_name_isexit',
+    method: 'post',
+    data:params,
+  })
+}
+
 /* 用户模型相关 */
 
 export function member_model_list(params) {
