@@ -69,3 +69,11 @@ export function member_model_delete(params) {
     data:params,
   })
 }
+
+export function member_model_tablename_isexit(params) {
+  return request({
+    url: 'vue_app_member_admin_api.php?act=member_model_tablename_isexit',
+    method: 'post',
+    data:params,
+  })
+}

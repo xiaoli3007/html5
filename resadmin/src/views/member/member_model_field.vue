@@ -20,13 +20,7 @@
 					</el-select>
 
 				</el-form-item>
-				
-				<el-form-item  label="作为主表字段" :label-width="formLabelWidth">
-					<el-radio-group v-model="form.issystem">
-						<el-radio label="1">是</el-radio>
-						<el-radio label="0">否</el-radio>
-					</el-radio-group>
-				</el-form-item>
+			
 				
 
 				<el-form-item  prop="field" label="字段名" :label-width="formLabelWidth">
@@ -46,7 +40,7 @@
 				</el-form-item>
 
 				  
-			 <el-form-item prop="setting.linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='linkage'"  key="setting.linkageid">
+			 <el-form-item prop="setting.linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="form.formtype=='singlelinkage'"  key="setting.linkageid">
 					<el-select v-model="form.setting.linkageid" placeholder="联动菜单">
 						<el-option v-for="(item, index) in linkage_list" :key="index" :label="item.name" :value="item.linkageid"></el-option>
 
@@ -120,12 +114,6 @@
 
 				</el-form-item>
 				
-				<el-form-item  label="作为主表字段" :label-width="formLabelWidth">
-					<el-radio-group disabled v-model="edit_form.issystem">
-						<el-radio label="1">是</el-radio>
-						<el-radio label="0">否</el-radio>
-					</el-radio-group>
-				</el-form-item>
 				
 
 				<el-form-item label="字段名" :label-width="formLabelWidth">
@@ -145,7 +133,7 @@
 				</el-form-item>
 
 
-				<el-form-item prop="setting.linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="edit_form.formtype=='linkage'" key="setting.linkageid">
+				<el-form-item prop="setting.linkageid" label="联动菜单" :label-width="formLabelWidth" v-if="edit_form.formtype=='singlelinkage'" key="setting.linkageid">
 					<el-select v-model="edit_form.setting.linkageid" placeholder="联动菜单">
 
 						<el-option v-for="(item, index) in linkage_list" :key="index" :label="item.name" :value="item.linkageid"></el-option>
@@ -276,11 +264,7 @@
 				</template>
 			</el-table-column>
 
-			<el-table-column label="是否主表">
-				<template slot-scope="scope">
-					{{ scope.row.issystem==1?'是':'否' }}
-				</template>
-			</el-table-column>
+		
 
 
 			<el-table-column label="操作" width="300">
@@ -493,7 +477,7 @@
 						decimaldigits:0,
 					},
 					issearch: '0',
-					issystem:'1',
+				
 					 // setting_linkageid: '',
 					// setting_boxtype: 'radio',
 					// setting_options: '选项名称1|选项值1',
@@ -517,9 +501,9 @@
 						decimaldigits:0,
 					},
 					issearch: 0,
-					issystem:'1',
+				
 				},
-				no_default: ["datetime", "linkage"],
+				no_default: ["datetime", "singlelinkage"],
 				yes_text: ["text", "textarea", "editor", "title","keyword"],
 				no_issearch: ["image"],
 				formLabelWidth: '130px',
@@ -563,7 +547,7 @@
 		},
 		methods: {
 			form_type_change(item){
-				if(item=='linkage'){
+				if(item=='singlelinkage'){
 					console.log(item)
 					 // this.$refs['ruleFormadd'].clearValidate();
 					// this.rules.
@@ -573,7 +557,7 @@
 			gotoback() {
 				// console.log(a);
 				this.$router.replace({
-					name: 'MList'
+					name: 'Membermodel'
 				})
 			},
 			onSubmit() {
@@ -695,7 +679,7 @@
 						decimaldigits:0,
 					},
 					issearch:'0',
-					issystem:'1',
+				
 				}
 				this.form = rowi
 				this.is_edit = false
@@ -710,7 +694,7 @@
 				let rowi = JSON.parse(JSON.stringify(row))
 				 console.log(rowi)
 				// console.log(this.edit_form)
-				this.edit_form.issystem = rowi.issystem
+		
 				this.edit_form.modelid = rowi.modelid
 				this.edit_form.fieldid = rowi.fieldid
 				this.edit_form.field = rowi.field
