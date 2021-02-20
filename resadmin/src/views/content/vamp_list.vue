@@ -48,7 +48,7 @@
 	</el-dialog>
 	
 	
-	<el-dialog title="我是上传" :visible.sync="drawer">
+	<el-dialog title="我是上传" :visible.sync="drawer" :before-close="uploadclose">
 	  
 	  <myupload  :v_model_siteid="siteid"  v-on:passtoparent="updatelist"></myupload>
 	  
@@ -281,6 +281,12 @@
 			}
 		},
 		methods: {
+			uploadclose(done){
+				console.log('cloase')
+				 
+				done();
+				this.init()
+			},
 			updatelist(data){
 				console.log(data)
 			},

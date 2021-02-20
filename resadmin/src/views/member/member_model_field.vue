@@ -193,8 +193,7 @@
 		<el-row>
 			<el-col :span="2">
 
-				<el-page-header @back="gotoback" :content="title">
-				</el-page-header>
+				
 			</el-col>
 			<el-col :span="22">
 
