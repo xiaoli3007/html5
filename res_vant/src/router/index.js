@@ -36,6 +36,12 @@ const routes = [
 			meta: { title: '我的', keepAlive: false ,auth: false},
 		}]
 	},{
+		path: '/demo3d',
+		name: 'Demo3d',
+		// component: require('@/views/base/Show').default,
+		component: () => import('@/views/base/demo3d'),
+		meta: { title: '3d页', keepAlive: false ,auth: false}
+	  },{
 		path: '/show',
 		name: 'Show',
 		// component: require('@/views/base/Show').default,

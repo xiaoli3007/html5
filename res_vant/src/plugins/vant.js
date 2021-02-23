@@ -24,7 +24,9 @@ import { Slider } from 'vant';
 import { Pagination } from 'vant';
 import { ImagePreview } from 'vant';
 import { Collapse, CollapseItem } from 'vant';
+import { Progress } from 'vant';
 
+Vue.use(Progress);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
 // 全局注册
