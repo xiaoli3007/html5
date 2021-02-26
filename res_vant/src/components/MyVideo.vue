@@ -66,8 +66,8 @@ export default {
 			
 			this.playerOptions.autoplay = this.autoStart
 			
-			if (this.meidia_list.length > 0 && this.meidia_list[0].videourl != '') {
-				this.playerOptions.sources[0].src = this.meidia_list[0].videourl;
+			if (this.meidia_list.length > 0 && this.meidia_list[0].playurl != '') {
+				this.playerOptions.sources[0].src = this.meidia_list[0].playurl;
 			}
 			
 			setTimeout(() => {
@@ -100,9 +100,9 @@ export default {
   components: {},
   methods: {
     changesrc(index) {
-    	if (this.meidia_list.length > 0 && this.meidia_list[index].videourl != '') {
+    	if (this.meidia_list.length > 0 && this.meidia_list[index].playurl != '') {
     
-    		this.playerOptions.sources[0].src = this.meidia_list[index].videourl;
+    		this.playerOptions.sources[0].src = this.meidia_list[index].playurl;
     		this.meidia_index = index
 			this.playerOptions.muted = false
     	}

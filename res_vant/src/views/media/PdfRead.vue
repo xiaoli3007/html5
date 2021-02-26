@@ -42,9 +42,11 @@ export default {
 			page: 1,
 			numPages: 0,
 			rotate: 0,
-			 pdf_url : 'http://192.168.1.195:80/course_def/res_url/RDovd25tcC9tZWRpYS9pc2FkbWluL21hc3Rlci80NC8yMDIwLzA4LTI5L+WPkeaWr+iSguiKrC8=@/hjhj.pdf',
+			pdf_url : '',
+			 // pdf_url : 'http://192.168.1.195:80/course_def/res_url/RDovd25tcC9tZWRpYS9pc2FkbWluL21hc3Rlci80NC8yMDIwLzA4LTI5L+WPkeaWr+iSguiKrC8=@/hjhj.pdf',
              catid:0,
              news_id:0,
+             media_id:0,
 			 show: true,
         }
     },
@@ -54,6 +56,7 @@ export default {
 		
 		this.catid = this.$route.query.catid
 		this.news_id = this.$route.query.news_id
+		this.media_id = this.$route.query.media_id
 		this.pdf_url = this.$route.query.playurl 
 	},
     mounted(){

@@ -73,14 +73,14 @@ export default {
     changesrc(index) {
 		
 		let n =''
-		let p = this.meidia_list[index].videourl
+		let p = this.meidia_list[index].playurl
 		if(this.meidia_list[index].fileext=='pdf'){
 			n ='Pdf'
 		}else if(this.meidia_list[index].fileext=='epub'){
 			n ='Epub'
-			if(this.meidia_list[index].epub_filepath){
-				p = this.meidia_list[index].epub_filepath
-			}
+			// if(this.meidia_list[index].epub_filepath){
+			// 	p = this.meidia_list[index].epub_filepath
+			// }
 		}else{
 			return
 		}
@@ -90,13 +90,14 @@ export default {
 			query: {
 				catid: this.meidia_list[index].catid,
 				news_id: this.meidia_list[index].news_id,
+				media_id: this.meidia_list[index].id,
 				playurl: p,
 			}
 		})
 		
-   //  	if (this.meidia_list.length > 0 && this.meidia_list[index].videourl != '') {
+   //  	if (this.meidia_list.length > 0 && this.meidia_list[index].playurl != '') {
     
-   //  		 this.meidia_list[index].videourl;
+   //  		 this.meidia_list[index].playurl;
    //  		this.meidia_index = index
 			
    //  	}

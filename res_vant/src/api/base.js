@@ -1,4 +1,4 @@
-import {  get } from '@/utils/ajax.js'
+import {  get ,post} from '@/utils/ajax.js'
 
 export function index_home(params) {
   return get( 
@@ -13,6 +13,24 @@ export function getshow(params) {
     params
   )
 }
+
+export function media_detail(params) {
+	return post(
+   'vue_app_content_api.php?act=media_detail',
+    params,
+	true
+ )
+}
+
+export function media_frequency(params) {
+	return post(
+   'vue_app_content_api.php?act=media_frequency',
+    params,
+	true
+ )
+}
+
+
 
 export function model_data_list(params) {
 	

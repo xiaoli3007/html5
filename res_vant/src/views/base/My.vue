@@ -29,7 +29,8 @@
   
 	<van-cell-group>
 	  <van-cell title="我的收藏" value="" to="/user/favorite" icon="star-o" />
-	   <van-cell title="我的点播" value=""  icon="play-circle-o"  /> 
+	   <van-cell title="我的浏览" value="" to="/user/look" icon="orders-o"  /> 
+	   <van-cell title="我的点播" value="" to="/user/frequency" icon="play-circle-o"  /> 
 	  <!-- <van-cell v-if="name" center title="退出" value=""  icon="" @click="logout" /> -->
 	   
 	</van-cell-group>

@@ -177,6 +177,7 @@
 					params: {
 						catid: this.catid,
 						news_id: this.news_id,
+						userid: this.$store.state.user.userid,
 					}
 				}
  

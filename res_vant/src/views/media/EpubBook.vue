@@ -113,12 +113,14 @@ export default {
 			 epub_url : '',
              catid:0,
              news_id:0,
+			 media_id:0,
         }
     },
 	created() {
 		this.$loading.show()  
 		this.catid = this.$route.query.catid
 		this.news_id = this.$route.query.news_id
+		this.media_id = this.$route.query.media_id
 		this.epub_url = this.$route.query.playurl 
 	},
     mounted(){
