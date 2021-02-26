@@ -7,13 +7,13 @@
 	  <van-row>
 	  <van-col span="24">
 		  
-	    	 <!-- <img v-for="(item, index2) in meidia_list" :key="index2" v-lazy="item.videourl" /> -->
+	    	 <!-- <img v-for="(item, index2) in meidia_list" :key="index2" v-lazy="item.playurl" /> -->
 			 <div v-for="(item, index2) in meidia_list" :key="index2">
 			 <van-image
 			 @click="changesrc(index2)"
 			    fit="contain"
 			   lazy-load
-			   :src="item.videourl"
+			   :src="item.playurl"
 			 />
 			 </div>
 			 
@@ -61,7 +61,7 @@ export default {
 		let temp = []
 		this.meidia_list.forEach(function(value,index){
 			 // console.log(value)
-			temp.push(value.videourl)
+			temp.push(value.playurl)
 		 });
 		this.imagelist = temp
   },

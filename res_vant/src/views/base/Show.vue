@@ -53,6 +53,12 @@
 				
 			</div>	
 			
+			<div class="three" v-if="program.template=='show_three'">
+			 <my-three  :meidia_list="meidia_list"  ref="mytext" ></my-three> 
+			 
+			</div>	
+			
+			
 
 		</div>
 
@@ -76,12 +82,14 @@
 	
 	import MyVideo from '@/components/MyVideo'
 	import MyText from '@/components/MyText'
+	import MyThree from '@/components/MyThree'
 	import MyImage from '@/components/MyImage'
 	export default {
 		components: {
 			MyVideo,
 			MyText,
-			MyImage
+			MyImage,
+			MyThree
 		},
 		data() {
 			return {

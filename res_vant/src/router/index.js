@@ -47,16 +47,6 @@ const routes = [{
 			},
 		}]
 	}, {
-		path: '/demo3d',
-		name: 'Demo3d',
-		// component: require('@/views/base/Show').default,
-		component: () => import('@/views/base/demo3d'),
-		meta: {
-			title: '3d页',
-			keepAlive: false,
-			auth: false
-		}
-	}, {
 		path: '/show',
 		name: 'Show',
 		// component: require('@/views/base/Show').default,
@@ -83,6 +73,17 @@ const routes = [{
 		component: () => import('@/views/media/PdfRead'),
 		meta: {
 			title: 'pdf播放页',
+			keepAlive: false,
+			auth: false
+		}
+	},
+	{
+		path: '/threed',
+		name: 'Threed',
+		// component: require('@/views/base/Show').default,
+		component: () => import('@/views/media/threed'),
+		meta: {
+			title: '3d页',
 			keepAlive: false,
 			auth: false
 		}

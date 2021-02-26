@@ -1,6 +1,6 @@
 <template>
 	<div class="list">
-			<van-button @click="goto3d()" type="primary" size="large">大号按钮</van-button>
+			<!-- <van-button @click="goto3d()" type="primary" size="large">大号按钮</van-button> -->
 			
 		<form action="/">
 			<van-search v-model="value" show-action placeholder="请输入搜索关键词" @search="onSearch" @cancel="onCancel" />
@@ -68,7 +68,7 @@
 		methods: {
 			goto3d() {
 				this.$router.replace({
-					name: 'Demo3d',
+					name: 'Threed',
 					query: {
 						 
 					}

@@ -19,6 +19,11 @@
   </div>
 </template>
 <script>
+	
+	import {
+		media_frequency
+	} from '@/api/base'
+	
 export default {
 	name: 'my-video',
   data() {
@@ -96,6 +101,9 @@ export default {
   },
   created: function() {
     console.log('created')
+	
+
+	
   },
   components: {},
   methods: {
@@ -119,6 +127,21 @@ export default {
     },
     onPlayerLoadeddata(player) {
     	console.log('player Loadeddata!', player)
+		
+		// console.log(this.meidia_index)
+		
+		
+			let params = {
+				catid: this.meidia_list[this.meidia_index].catid,
+				news_id: this.meidia_list[this.meidia_index].news_id,
+				media_id: this.meidia_list[this.meidia_index].id,
+				userid: this.$store.state.user.userid,
+			}
+		console.log(params)
+		media_frequency(params).then(response => {
+			console.log(response)
+		})
+		
     },
     onPlayerWaiting(player) {
     	// console.log('player Waiting!', player)

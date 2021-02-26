@@ -13,6 +13,11 @@
 </template>
 
 <script>
+	
+	import {
+		media_frequency,media_detail
+	} from '@/api/base'
+	
 	import * as Three from 'three'
 	import {
 		MeshPhysicalMaterial,
@@ -35,8 +40,13 @@
 
 		data() {
 			return {
+				playurl:"static/3d/SimpleSkinning.gltf",
+				catid:0,
+				news_id:0,
+				media_id:0,
 				jindu:0,
 				jindu_show:true,
+				loadurl:false,
 				mesh: null,
 				camera: null,
 				scene: null,
@@ -49,28 +59,27 @@
 			}
 		},
 		created() {
-
+			this.$loading.show()
+			this.catid = this.$route.query.catid
+			this.news_id = this.$route.query.news_id
+			this.media_id = this.$route.query.media_id
+			
 		},
 		mounted() {
+			
+			this.onPlayerLoadeddata()
 			// this.init()
 			// this.render()
-
-			this.initScene()
-
-			this.initModelContainer()
-
-			this.loadModel()
-
-			this.initCamera()
-			this.createLight()
-
-			this.initRenderer()
-
-			this.initControls()
-
-
-
-			this.render2()
+			  
+				// this.initScene()
+				// this.initModelContainer()
+				// this.loadModel()
+				// this.initCamera()
+				// this.createLight()
+				// this.initRenderer()
+				// this.initControls()
+				// this.render2()
+			 
 			// this.$nextTick(() => {
 			//   document.getElementById('id').addEventListener('your event', () => {
 
@@ -81,6 +90,51 @@
 
 		},
 		methods: {
+			onPlayer_media_frequency() {
+				console.log(' onPlayer_media_frequency!')
+
+					let params = {
+						catid: this.catid,
+						news_id: this.news_id,
+						media_id: this.media_id,
+						userid: this.$store.state.user.userid,
+					}
+				console.log(params)
+				media_frequency(params).then(response => {
+					console.log(response)
+				})
+				
+			},
+			onPlayerLoadeddata() {
+				console.log('onPlayerLoadeddata!')
+			 
+					let params = {
+						catid: this.catid,
+						news_id: this.news_id,
+						media_id: this.media_id,
+						userid: this.$store.state.user.userid,
+					}
+				
+				media_detail(params).then(response => {
+					console.log(response.meidia_info['playurl'])
+					this.playurl = response.meidia_info['playurl']
+					// this.loadurl = true
+					 this.$loading.hide() 
+					 this.initload()
+					 this.onPlayer_media_frequency()
+				})
+				
+			},
+			initload(){
+				this.initScene()
+				this.initModelContainer()
+				this.loadModel()
+				this.initCamera()
+				this.createLight()
+				this.initRenderer()
+				this.initControls()
+				this.render2()
+			},
 			onWindowResize() {
 
 				this.camera.aspect = window.innerWidth / window.innerHeight;
@@ -105,7 +159,7 @@
 
 						// 模型在 /public/static/building/文件夹下
 
-						"static/3d/陶器1.gltf",
+						that.playurl,
 						//"static/3d/SimpleSkinning.gltf",
 
 						gltf => {
@@ -154,6 +208,7 @@
 							that.jindu = Math.ceil(xhr.loaded / xhr.total * 100)
 							if(that.jindu==100){
 								that.jindu_show = false
+								
 							}
 
 						},
@@ -242,7 +297,7 @@
 				// if (this.mesh) {
 				//   this.mesh.rotation.z += 0.006
 				// }
-				// console.log(1111)
+				 // console.log(1111)
 				this.renderer.render(this.scene, this.camera)
 				requestAnimationFrame(this.render2)
 			},

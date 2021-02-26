@@ -21,7 +21,7 @@ export function media_detail(params) {
 	return post(
 		'vue_app_media_api.php?act=media_detail',
 		params,
-		true
+		
 	)
 }
 
@@ -29,7 +29,7 @@ export function media_frequency(params) {
 	return post(
 		'vue_app_media_api.php?act=media_frequency',
 		params,
-		true
+		
 	)
 }
 
