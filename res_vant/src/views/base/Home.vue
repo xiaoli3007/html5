@@ -1,7 +1,14 @@
 <template>
 	<div class="list">
-			<!-- <van-button @click="goto3d()" type="primary" size="large">大号按钮</van-button> -->
-			
+
+		<van-button type="success">{{appGlobalText.text_look}}</van-button>
+		<van-button type="success">{{appGlobalText.text_test}}</van-button>
+
+		<van-button @click="goto3d()" type="primary" size="large">转化语种</van-button>
+		<van-button @click="goto3d2()" type="primary" size="large">当前语种</van-button>
+
+		<Footer id="foot"></Footer>
+
 		<form action="/">
 			<van-search v-model="value" show-action placeholder="请输入搜索关键词" @search="onSearch" @cancel="onCancel" />
 		</form>
@@ -33,6 +40,7 @@
 
 <script>
 	import * as Three from 'three'
+ 
 	
 	import {
 		Toast
@@ -48,6 +56,7 @@
 		data() {
 			return {
 				value: '',
+				appGlobalText:this.en_text(this.$appGlobalText),
 				active: 'home',
 				slideimages: [
 
@@ -55,26 +64,41 @@
 				home_cat_list: [
 
 				],
-			
+
 			}
 		},
 		created() {
 			this.fetchData()
-			 
+
 		},
-		 mounted () {
-		     
-		    },
-		methods: {
-			goto3d() {
-				this.$router.replace({
-					name: 'Threed',
-					query: {
-						 
-					}
-				})
-			},
+		mounted() {
 			
+			// let yuzhong = this.$store.state.app.yuzhong
+			
+			// console.log(this.$store.state.app.global_fanyi_object)
+			// if(yuzhong=='en'){
+				
+			// 	this.appGlobalText = this.en_text(this.appGlobalText)
+			// }
+		},
+		methods: {
+			goto3d2() {
+
+				console.log(this.$store.state.app.yuzhong)
+				console.log(this.$store.state.app.global_fanyi_object)
+
+			},
+			goto3d() {
+
+
+				let yuzhong = this.$store.state.app.yuzhong == 'zn' ? 'en' : 'zn'
+				console.log(yuzhong)
+				this.$store.dispatch('showYuzhong', yuzhong).then(() => {
+					location.reload() // 
+				})
+
+			},
+
 			gotoShow(catid, id) {
 				this.$router.replace({
 					name: 'Show',
@@ -109,14 +133,14 @@
 				}
 
 				index_home(getparams).then(response => {
-					console.log(response)
+					// console.log(response)
 
 					this.slideimages = response[0].slideimages
 					this.home_cat_list = response[1].category
 				})
-				
+
 				template_home(getparams).then(response => {
-					console.log(response)
+					// console.log(response)
 				})
 
 			},

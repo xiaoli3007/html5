@@ -25,9 +25,17 @@ import '@/assets/epub/css/icon.css'
 
 
 import '@/permission'
+import HeaderFooter from './user.js'
+import Text from './text.js'
+Vue.use(HeaderFooter)
+
+import globalfun from '@/utils/text.js'
+Vue.use(globalfun)
 
 
 Vue.config.productionTip = false
+
+Vue.prototype.$appGlobalText = Text
 
 new Vue({
   router,

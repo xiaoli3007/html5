@@ -1,5 +1,8 @@
 <template>
   <div class="list">
+	  
+	  	<Footer id="foot"></Footer>
+		
 	<van-sticky>
   <form action="/">
     <van-search
@@ -76,7 +79,7 @@ export default {
     };
   },
   created() {
-	
+	console.log(this.$store.state.app.yuzhong)
 	this.keywords = this.$route.query.keywords
 	
   	const params = {

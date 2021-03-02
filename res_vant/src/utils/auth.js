@@ -8,6 +8,8 @@ const AvatarKey = 'User-Avatar'
 const UseridKey = 'User-Userid'
 
 const siteid = 'vant-siteid'
+const yuzhong = 'vant-yuzhong'
+const global_fanyi_object = 'vant-global_fanyi_object'
 
 
 export function getToken() {
@@ -67,4 +69,22 @@ export function getsiteid() {
 export function setsiteid(name) {
   return Lockr.set(siteid, name)
 }
+
+export function getyuzhong() {
+  return Lockr.get(yuzhong)? Lockr.get(yuzhong):'zn'
+}
+
+export function setyuzhong(value) {
+  return Lockr.set(yuzhong, value)
+}
+
+export function getglobal_fanyi_object() {
+  return Lockr.get(global_fanyi_object)? Lockr.get(global_fanyi_object):{}
+}
+
+export function setglobal_fanyi_object(value) {
+  return Lockr.set(global_fanyi_object, value)
+}
+
+
 

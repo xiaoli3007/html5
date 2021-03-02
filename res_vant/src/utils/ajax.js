@@ -3,6 +3,7 @@ import axios from 'axios'
 import Loading from '../components/loading'
 import { baseApi } from '../config'
 import qs from 'qs'
+import store from '../store'
 /* 全局默认配置 */
 var http = axios.create({
   baseURL: baseApi,
@@ -21,6 +22,13 @@ http.interceptors.request.use(
     // config.headers.timestamp = Math.floor(new Date().getTime() / 1000)
     // config.headers.token = sessionStorage.getItem('token') || ''
     // 接口没返回时显示loadin
+	
+	if (store.getters.token) {
+		// console.log(store.getters.token)
+	   config.headers['X-Token'] = store.getters.token// 
+	}
+	  config.headers['X-Yuzhong'] = store.getters.yuzhong// 
+	
     if (config.loading === true) {
       Loading.hide()
       Loading.show()
