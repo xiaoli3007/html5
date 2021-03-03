@@ -1,5 +1,28 @@
 <template>
 	<div class="list">
+<div class="content"  v-for="(muneItemaa,indexs) in div_list" :key="'afsf'+indexs">
+				<div class="title">
+					{{muneItemaa.name}}--{{indexs}}
+				</div>
+			
+			</div>
+			
+		<template  v-for="(muneItem,indexs) in div_list" >
+			<div class="content" :key="'ss'+indexs">
+				<div class="title">
+					{{muneItem.name}}--{{indexs}}
+				</div>
+				<div class="clearFlex home_row">
+					<div class="el-col-6">
+						<a href="">
+							<div class="title">乾隆款古铜彩描金圆盒</div>
+							<div class="time">2021-02-02 14:34:23</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</template>
+		
 
 		<van-button type="success">{{appGlobalText.text_look}}</van-button>
 		<van-button type="success">{{appGlobalText.text_test}}</van-button>
@@ -40,8 +63,8 @@
 
 <script>
 	import * as Three from 'three'
- 
-	
+
+
 	import {
 		Toast
 	} from 'vant';
@@ -49,19 +72,23 @@
 		index_home
 	} from '@/api/base'
 	import {
-		template_home
+		template_home,
+		template_category
 	} from '@/api/template'
 	export default {
 
 		data() {
 			return {
 				value: '',
-				appGlobalText:this.en_text(this.$appGlobalText),
+				appGlobalText: this.en_text(this.$appGlobalText),
 				active: 'home',
 				slideimages: [
 
 				],
 				home_cat_list: [
+
+				],
+				div_list: [
 
 				],
 
@@ -72,12 +99,12 @@
 
 		},
 		mounted() {
-			
+
 			// let yuzhong = this.$store.state.app.yuzhong
-			
+
 			// console.log(this.$store.state.app.global_fanyi_object)
 			// if(yuzhong=='en'){
-				
+
 			// 	this.appGlobalText = this.en_text(this.appGlobalText)
 			// }
 		},
@@ -140,7 +167,21 @@
 				})
 
 				template_home(getparams).then(response => {
-					// console.log(response)
+					 console.log(response)
+				})
+
+				const getparams2 = {
+					loading: false,
+					params: {
+						catid: 33
+					}
+				}
+
+				template_category(getparams2).then(response => {
+
+					this.div_list = response.items
+
+					console.log(this.div_list)
 				})
 
 			},
