@@ -3,10 +3,10 @@
 		<div class="clearFlex container">
 			<a class="logo" href=""><img src="../assets/logo.png" alt=""></a>
 			<div class="navView" v-show="showNav" ref="menu">
-				<div class="nav" :class="navIndex == index?'active':''" v-for="(item,index) in navList" >
+				<div class="nav" :class="navIndex == index?'active':''" v-for="(item,index) in navList" :key="'menu_p'+index">
 					<a class="navLine"  @click="touchNav(item.path)">{{item.name}}</a>
 					<div class="muen_cv" v-if="item.mune.length > 0">
-						<div class="item-mune" v-for="(muneItem,muneIndex) in item.mune">
+						<div class="item-mune" v-for="(muneItem,muneIndex) in item.mune"  :key="'menu_p'+muneIndex">
 							<a  @click="touchNav(muneItem.path)">{{muneItem.name}}</a>
 						</div>
 					</div>
@@ -47,14 +47,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="item">
+			<!-- 	<div class="item">
 					<a class="item_ha" href="">
 						<img class="u1" src="../assets/icon_search.png" alt="">
 						<img class="u2" src="../assets/icon_search_hover.png" alt="">
 						<img class="icon" src="../assets/icon_sj.png" alt="">
 						<img class="icon2" src="../assets/icon_sj_up_hove.png" alt="">
 					</a>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<div class="menu-button"  :class="showMune?'active':''" @click="touchMune">

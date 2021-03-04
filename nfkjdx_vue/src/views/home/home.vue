@@ -50,9 +50,9 @@
 								<img class="icon2" src="../../assets/title_img2.png" alt="">
 							</div>
 							<span>Digital Archaeology</span>
-							<div class="title_dvc">
+						<!-- 	<div class="title_dvc">
 								绘画（painting）在艺术层面上，是一个以表面作为支撑面，再在其之上加上颜色的行为，那些表面的例子有纸张、油画布（canvas）、木材、玻璃、漆器或混凝土等。在艺术用语的层面上，绘画的意义亦包含利用此艺术行为再加上图形（drawing）、构图及其他美学方法去达到表现出从事者希望表达的概念及意思。
-							</div>
+							</div> -->
 						</div>
 						<div class="more_rv">
 							查看更多
@@ -80,9 +80,9 @@
 								<img class="icon2" src="../../assets/title_img2.png" alt="">
 							</div>
 							<span>Readers Voice</span>
-							<div class="title_dvc">
+						<!-- 	<div class="title_dvc">
 								绘画（painting）在艺术层面上，是一个以表面作为支撑面，再在其之上加上颜色的行为，那些表面的例子有纸张、油画布（canvas）、木材、玻璃、漆器或混凝土等。在艺术用语的层面上，绘画的意义亦包含利用此艺术行为再加上图形（drawing）、构图及其他美学方法去达到表现出从事者希望表达的概念及意思。
-							</div>
+							</div> -->
 						</div>
 						<div class="more_rv">
 							查看更多
@@ -130,9 +130,9 @@
 								<img class="icon2" src="../../assets/title_img2.png" alt="">
 							</div>
 							<span>Readers Voice</span>
-							<div class="title_dvc">
+							<!-- <div class="title_dvc">
 								绘画（painting）在艺术层面上，是一个以表面作为支撑面，再在其之上加上颜色的行为，那些表面的例子有纸张、油画布（canvas）、木材、玻璃、漆器或混凝土等。在艺术用语的层面上，绘画的意义亦包含利用此艺术行为再加上图形（drawing）、构图及其他美学方法去达到表现出从事者希望表达的概念及意思。
-							</div>
+							</div> -->
 						</div>
 						<div class="more_rv">
 							查看更多
@@ -163,9 +163,9 @@
 								<img class="icon2" src="../../assets/title_img2.png" alt="">
 							</div>
 							<span>Trainings Videos</span>
-							<div class="title_dvc">
+						<!-- 	<div class="title_dvc">
 								绘画（painting）在艺术层面上，是一个以表面作为支撑面，再在其之上加上颜色的行为，那些表面的例子有纸张、油画布（canvas）、木材、玻璃、漆器或混凝土等。在艺术用语的层面上，绘画的意义亦包含利用此艺术行为再加上图形（drawing）、构图及其他美学方法去达到表现出从事者希望表达的概念及意思。
-							</div>
+							</div> -->
 						</div>
 						<div class="more_rv">
 							查看更多
@@ -229,9 +229,9 @@
 								<img class="icon2" src="../../assets/title_img2.png" alt="">
 							</div>
 							<span>SUSTech Periodicals</span>
-							<div class="title_dvc">
+						<!-- 	<div class="title_dvc">
 								绘画（painting）在艺术层面上，是一个以表面作为支撑面，再在其之上加上颜色的行为，那些表面的例子有纸张、油画布（canvas）、木材、玻璃、漆器或混凝土等。在艺术用语的层面上，绘画的意义亦包含利用此艺术行为再加上图形（drawing）、构图及其他美学方法去达到表现出从事者希望表达的概念及意思。
-							</div>
+							</div> -->
 						</div>
 						<div class="more_rv">
 							查看更多
