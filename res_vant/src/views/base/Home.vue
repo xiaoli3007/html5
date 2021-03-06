@@ -73,10 +73,16 @@
 	} from '@/api/base'
 	import {
 		template_home,
-		template_category
+		template_category,template_head
 	} from '@/api/template'
 	export default {
-
+		metaInfo: {
+		    title: "页面标题",
+		    meta: [
+		      { name: "keywords", content: "页面关键字" },
+		      { name: "description", content: "页面描述" },
+		    ],
+		  },
 		data() {
 			return {
 				value: '',
@@ -182,6 +188,11 @@
 					this.div_list = response.items
 
 					console.log(this.div_list)
+				})
+				
+				template_head(getparams2).then(response => {
+ 
+					console.log(response)
 				})
 
 			},

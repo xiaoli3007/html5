@@ -28,6 +28,7 @@
   <div style="margin-top: 20px;"></div>
   
 	<van-cell-group>
+		 <van-cell title="我的资料" value="" to="/user/info" icon="star-o" />
 	  <van-cell title="我的收藏" value="" to="/user/favorite" icon="star-o" />
 	   <van-cell title="我的浏览" value="" to="/user/look" icon="orders-o"  /> 
 	   <van-cell title="我的点播" value="" to="/user/frequency" icon="play-circle-o"  /> 

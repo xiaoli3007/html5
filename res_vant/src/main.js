@@ -32,6 +32,10 @@ Vue.use(HeaderFooter)
 import globalfun from '@/utils/text.js'
 Vue.use(globalfun)
 
+// 使用 vue-meta
+import Meta from "vue-meta";
+Vue.use(Meta);
+
 
 Vue.config.productionTip = false
 

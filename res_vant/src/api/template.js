@@ -1,5 +1,12 @@
 import {  get } from '@/utils/ajax.js'
 
+export function template_head(params) {
+  return get( 
+     'template/nanfangkeda.php?act=head',
+      params
+   )
+}
+
 export function template_foot(params) {
   return get( 
      'template/nanfangkeda.php?act=foot',

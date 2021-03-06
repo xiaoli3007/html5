@@ -134,6 +134,20 @@ const routes = [{
 		}
 
 	},
+
+	{
+		path: '/user/info',
+		name: 'my_info',
+		// component: require('@/views/user/Favorite').default,
+		component: () => import('@/views/user/info'),
+		meta: {
+			title: '我的资料',
+			keepAlive: false,
+			auth: true
+		}
+
+	},
+
 	{
 		path: '/about',
 		name: 'About',

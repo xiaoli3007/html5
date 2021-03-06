@@ -1,4 +1,20 @@
-import {  get } from '@/utils/ajax.js'
+import {  get,
+	post } from '@/utils/ajax.js'
+
+ 
+export function edit_member_modelinfo(params) {
+  return post( 
+     'vue_app_member_api.php?act=edit_member_modelinfo',
+      params
+   )
+} 
+
+export function get_member_model_field(params) {
+  return get( 
+     'vue_app_member_api.php?act=get_member_model_field',
+      params
+   )
+} 
 
 export function my_favorite_list(params) {
   return get( 
