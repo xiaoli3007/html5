@@ -18,8 +18,8 @@
 	  <van-col span="24" >
 		  
 		 
-		<van-button v-if="!name" size="large" type="info" to="login" >登录</van-button>
-		<p v-if="name">您好！ {{name}}</p>
+		<van-button v-if="!username" size="large" type="info" to="login" >登录</van-button>
+		<p v-if="username">您好！ {{username}}</p>
 		
 	</van-col>
 	  
@@ -32,11 +32,11 @@
 	  <van-cell title="我的收藏" value="" to="/user/favorite" icon="star-o" />
 	   <van-cell title="我的浏览" value="" to="/user/look" icon="orders-o"  /> 
 	   <van-cell title="我的点播" value="" to="/user/frequency" icon="play-circle-o"  /> 
-	  <!-- <van-cell v-if="name" center title="退出" value=""  icon="" @click="logout" /> -->
+	 
 	   
 	</van-cell-group>
 	 <div style="margin-top: 20px;"></div>
-	<van-button v-if="name" @click="logout" type="warning" block>退出</van-button>
+	<van-button v-if="username" @click="logout" type="warning" block>退出</van-button>
 	
   
   </div>
@@ -61,13 +61,13 @@ export default {
   computed: {
     ...mapGetters([
       'avatar',
-  	  'name'
+  	  'username'
     ])
   },
   created() {
   
   	 
-  	  console.log(this.name);
+  	  console.log(this.username);
   	 
   	
   },

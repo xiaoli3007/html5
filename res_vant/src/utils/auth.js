@@ -3,7 +3,7 @@ import Lockr from 'lockr'
 
 
 const TokenKey = 'User-Token'
-const NameKey = 'User-Name'
+const UserNameKey = 'User-Name'
 const AvatarKey = 'User-Avatar'
 const UseridKey = 'User-Userid'
 
@@ -24,16 +24,16 @@ export function removeToken() {
   return Lockr.rm(TokenKey)
 }
 
-export function getName() {
-  return Lockr.get(NameKey)
+export function getUserName() {
+  return Lockr.get(UserNameKey)
 }
 
-export function setName(name) {
-  return Lockr.set(NameKey, name)
+export function setUserName(name) {
+  return Lockr.set(UserNameKey, name)
 }
 
-export function removeName() {
-  return Lockr.rm(NameKey)
+export function removeUserName() {
+  return Lockr.rm(UserNameKey)
 }
 
 export function getUserid() {
