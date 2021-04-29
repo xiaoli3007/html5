@@ -1,5 +1,10 @@
 <template>
 	<div class="list">
+		
+		
+		<van-button @click="goto3dddddd()" type="primary" size="large">3d</van-button>
+		
+		
 <div class="content"  v-for="(muneItemaa,indexs) in div_list" :key="'afsf'+indexs">
 				<div class="title">
 					{{muneItemaa.name}}--{{indexs}}
@@ -115,6 +120,15 @@
 			// }
 		},
 		methods: {
+			
+			goto3dddddd() {
+			
+			 this.$router.replace({
+			 	name: 'demo3d',
+			 	 
+			 })
+			
+			},
 			goto3d2() {
 
 				console.log(this.$store.state.app.yuzhong)

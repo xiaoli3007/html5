@@ -89,6 +89,17 @@ const routes = [{
 		}
 	},
 	{
+		path: '/demo3d',
+		name: 'demo3d',
+		// component: require('@/views/base/Show').default,
+		component: () => import('@/views/media/demo3d'),
+		meta: {
+			title: '3d页',
+			keepAlive: false,
+			auth: false
+		}
+	},
+	{
 		path: '/login',
 		name: 'Login',
 		// component: require('@/views/my/Login').default,
