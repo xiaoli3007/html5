@@ -3,40 +3,43 @@
 
 		<el-dialog :fullscreen="false" title="栏目信息" :visible.sync="dialogFormVisible" v-if="v">
 			<el-form :model="form">
-				
+
 				<el-form-item label="模型" :label-width="formLabelWidth">
 					<el-select v-if="form.catid==''" v-model="form.modelid" placeholder="请选择">
-						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
+						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name"
+							:value="item.modelid">
 						</el-option>
 					</el-select>
-				
-				
+
+
 					<el-select v-if="form.catid!=''" v-model="form.modelid" disabled placeholder="请选择">
-						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name" :value="item.modelid">
+						<el-option v-for="item in modellist" :key="item.modelid" :label="item.name"
+							:value="item.modelid">
 						</el-option>
 					</el-select>
-				
+
 				</el-form-item>
-				
+
 				<el-form-item label="名称" :label-width="formLabelWidth">
 					<el-input v-model="form.catname" autocomplete="off"></el-input>
 				</el-form-item>
-				
+
 				<el-form-item label="排序" :label-width="formLabelWidth">
 					<el-input v-model="form.listorder" autocomplete="off"></el-input>
 				</el-form-item>
-				
-				
+
+
 				<el-form-item label="描述" :label-width="formLabelWidth">
 					<el-input type="textarea" v-model="form.description" autocomplete="off"></el-input>
 				</el-form-item>
 
-			
+
 
 				<el-form-item label="列表模板" :label-width="formLabelWidth">
 
-					<el-select v-model="form.list_template" placeholder="请选择">
-						<el-option v-for="(item, index) in list_template_data" :key="index" :label="item" :value="index">
+					<el-select v-model="form.setting.list_template" placeholder="请选择">
+						<el-option v-for="(item, index) in list_template_data" :key="index" :label="item"
+							:value="index">
 						</el-option>
 					</el-select>
 
@@ -44,14 +47,33 @@
 
 				<el-form-item label="详情模板" :label-width="formLabelWidth">
 
-					<el-select v-model="form.show_template" placeholder="请选择">
-						<el-option v-for="(item, index) in show_template_data" :key="index" :label="item" :value="index">
+					<el-select v-model="form.setting.show_template" placeholder="请选择">
+						<el-option v-for="(item, index) in show_template_data" :key="index" :label="item"
+							:value="index">
 						</el-option>
 					</el-select>
 
 				</el-form-item>
 
 
+				<!-- 此处为图片上传 -->
+				<el-form-item label="栏目图片" :label-width="formLabelWidth">
+					<el-upload class="avatar-uploader" :action="global_uploadurl+'&field=image'" :show-file-list="false"
+						:on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+						<img v-if="form.image" :src="form.image" class="avatar">
+						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+
+					</el-upload>
+				</el-form-item>
+
+				<el-form-item label="默认海报" :label-width="formLabelWidth">
+					<el-upload class="avatar-uploader" :action="global_uploadurl+'&field=default_thumb'" :show-file-list="false"
+						:on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+						<img v-if="form.default_thumb" :src="form.default_thumb" class="avatar">
+						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+
+					</el-upload>
+				</el-form-item>
 
 
 			</el-form>
@@ -64,7 +86,7 @@
 
 
 		<el-button type="success" @click="handleAdd()">添加</el-button>
-		<el-button type="info" >更新缓存和数据统计</el-button>
+		<el-button type="info">更新缓存和数据统计</el-button>
 
 		<el-table :data="datalist" style="width: 100%">
 
@@ -187,10 +209,15 @@
 					catid: '',
 					catname: '',
 					description: '',
+					image: '',
+					default_thumb: '',
 					siteid: getsiteid() ? getsiteid() : '1',
 					modelid: '',
-					list_template: '',
-					show_template: ''
+					setting:{
+						list_template: '',
+						show_template: ''
+					}
+					
 					// priv: [],
 				},
 				formLabelWidth: '120px',
@@ -203,7 +230,7 @@
 				list_template_data: [],
 				show_template_data: [],
 				privlist: [],
-
+				global_uploadurl: '',
 			}
 		},
 		created() {
@@ -220,6 +247,28 @@
 		},
 		methods: {
 
+			handleAvatarSuccess(res, file) {
+				console.log(res)
+				console.log(file)
+				// this.imageUrl = URL.createObjectURL(file.raw);
+				// this.programForm[res.field] = res.fileurl
+
+				this.$set(this.form, res.field, res.fileurl)
+
+			},
+			beforeAvatarUpload(file) {
+				console.log(file)
+				// const isJPG = file.type === 'image/jpeg';
+				const isLt2M = file.size / 1024 / 1024 < 2;
+
+				// if (!isJPG) {
+				//   this.$message.error('上传头像图片只能是 JPG 格式!');
+				// }
+				if (!isLt2M) {
+					this.$message.error('上传头像图片大小不能超过 2MB!');
+				}
+				return isLt2M;
+			},
 			checksiteid(siteid) {
 				console.log(siteid)
 
@@ -251,12 +300,12 @@
 			fromsiteinfo() {
 
 				console.log(this.form)
-				// return
+				 // return
 				// this.form.priv =this.$refs.tree.getCheckedKeys()
 				let resparams = JSON.stringify(this.form)
 
 				console.log(resparams)
-				// return
+				 // return
 				const params = {
 					resparams: resparams,
 					userid: this.$store.state.user.userid
@@ -276,10 +325,14 @@
 					catid: '',
 					catname: '',
 					description: '',
+					image: '',
+					default_thumb: '',
 					siteid: getsiteid() ? getsiteid() : '1',
 					modelid: '',
-					list_template: '',
-					show_template: '',
+					setting:{
+						list_template: '',
+						show_template: ''
+					}
 
 					// priv: [],
 				}
@@ -348,6 +401,7 @@
 
 					this.show_template_data = response.show_template_list
 					this.list_template_data = response.list_template_list
+					this.global_uploadurl = response.global_uploadurl
 
 					// console.log(this.version_info )
 					// console.log(this.sitelist[1] )
@@ -358,7 +412,7 @@
 		}
 	}
 </script>
-<style>
+<style rel="stylesheet/scss" lang="scss">
 	.demo-table-expand {
 		font-size: 0;
 	}
@@ -372,5 +426,32 @@
 		margin-right: 0;
 		margin-bottom: 0;
 		width: 50%;
+	}
+
+	.avatar-uploader .el-upload {
+		border: 1px dashed #d9d9d9;
+		border-radius: 6px;
+		cursor: pointer;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.avatar-uploader .el-upload:hover {
+		border-color: #409EFF;
+	}
+
+	.avatar-uploader-icon {
+		font-size: 28px;
+		color: #8c939d;
+		width: 178px;
+		height: 178px;
+		line-height: 178px;
+		text-align: center;
+	}
+
+	.avatar {
+		width: 178px;
+		height: 178px;
+		display: block;
 	}
 </style>
