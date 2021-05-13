@@ -35,7 +35,7 @@
 		  </el-col>
 		  <el-col :span="22">
 			  
-			  	<!-- <el-input placeholder="关键词" v-model="filterText" style="margin-bottom:30px;"></el-input> -->
+			  	<el-input placeholder="关键词" v-model="filterText" style="margin-bottom:30px;"></el-input>
 		  </el-col>
 		</el-row>
 		
@@ -47,9 +47,7 @@
 			<span class="custom-tree-node" slot-scope="{ node, data }">
 				<span>{{ node.data.value }} <label v-html="kongge"></label>{{ node.label }}</span>
 				<span>
-					<el-button v-if="node.data.parentid==0" type="text" size="mini" @click="() => update(node)">
-						更新缓存
-					</el-button>
+					 
 					
 					<el-button type="text" size="mini" @click="() => append(data,node)">
 增加子菜单

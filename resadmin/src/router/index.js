@@ -221,6 +221,15 @@ export const constantRouterMap = [
 			}
 			
 		},
+		{
+			path: 'linkage_sub',
+			name: 'Linkage_sub',
+			component: () => import('@/views/content/linkage_sub'),
+			meta: {
+				title: '联动菜单(子菜单)'
+			},
+			hidden: true
+		},
 		]
 	}, 
 

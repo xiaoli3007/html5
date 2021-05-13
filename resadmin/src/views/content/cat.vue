@@ -1,7 +1,7 @@
 <template>
 	<div class="app-container">
 
-		<el-dialog :fullscreen="false" title="栏目信息" :visible.sync="dialogFormVisible" v-if="v">
+		<el-dialog :fullscreen="true" title="栏目信息" :visible.sync="dialogFormVisible" v-if="v">
 			<el-form :model="form">
 
 				<el-form-item label="模型" :label-width="formLabelWidth">
@@ -67,13 +67,43 @@
 				</el-form-item>
 
 				<el-form-item label="默认海报" :label-width="formLabelWidth">
-					<el-upload class="avatar-uploader" :action="global_uploadurl+'&field=default_thumb'" :show-file-list="false"
-						:on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+					<el-upload class="avatar-uploader" :action="global_uploadurl+'&field=default_thumb'"
+						:show-file-list="false" :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
 						<img v-if="form.default_thumb" :src="form.default_thumb" class="avatar">
 						<i v-else class="el-icon-plus avatar-uploader-icon"></i>
 
 					</el-upload>
 				</el-form-item>
+
+				<!-- 此处为多选 -->
+				<el-form-item label="阅读权限" :label-width="formLabelWidth">
+					<el-checkbox-group v-model="form.priv_groupid_view">
+						<el-checkbox v-for="(item, sindex) in group_list" :key="sindex" :label="item.label">
+							{{item.name}}
+						</el-checkbox>
+
+					</el-checkbox-group>
+				</el-form-item>
+
+				<el-form-item label="点播权限" :label-width="formLabelWidth">
+					<el-checkbox-group v-model="form.priv_groupid_frequency">
+						<el-checkbox v-for="(item, sindex) in group_list" :key="sindex" :label="item.label">
+							{{item.name}}
+						</el-checkbox>
+
+					</el-checkbox-group>
+				</el-form-item>
+
+				<el-form-item label="下载权限" :label-width="formLabelWidth">
+					<el-checkbox-group v-model="form.priv_groupid_download">
+						<el-checkbox v-for="(item, sindex) in group_list" :key="sindex" :label="item.label">
+							{{item.name}}
+						</el-checkbox>
+
+					</el-checkbox-group>
+				</el-form-item>
+
+
 
 
 			</el-form>
@@ -82,11 +112,18 @@
 				<el-button type="primary" @click="fromsiteinfo()">确 定</el-button>
 			</div>
 		</el-dialog>
+<div style="clear: both;">
+		<el-row>
 
+			<el-col :span="24">
+				
+					<el-button type="success" @click="handleAdd()">添加</el-button> 
+					<el-button type="info"  @click="fcat_cache()">更新缓存和数据统计</el-button>
+				
+			</el-col>
 
-
-		<el-button type="success" @click="handleAdd()">添加</el-button>
-		<el-button type="info">更新缓存和数据统计</el-button>
+		</el-row>
+</div>
 
 		<el-table :data="datalist" style="width: 100%">
 
@@ -154,7 +191,7 @@
 
 
 
-			<el-table-column label="操作">
+			<el-table-column label="操作"  width="150" fixed="right">
 				<template slot-scope="scope">
 
 
@@ -192,7 +229,7 @@
 		cat_info,
 		cat_list,
 		cat_edit,
-		cat_delete
+		cat_delete,cat_cache
 	} from '@/api/category'
 
 
@@ -213,11 +250,14 @@
 					default_thumb: '',
 					siteid: getsiteid() ? getsiteid() : '1',
 					modelid: '',
-					setting:{
+					setting: {
 						list_template: '',
 						show_template: ''
-					}
-					
+					},
+					priv_groupid_view: [],
+					priv_groupid_frequency: [],
+					priv_groupid_download: [],
+
 					// priv: [],
 				},
 				formLabelWidth: '120px',
@@ -229,6 +269,7 @@
 				modellist: [],
 				list_template_data: [],
 				show_template_data: [],
+				group_list: [],
 				privlist: [],
 				global_uploadurl: '',
 			}
@@ -246,7 +287,22 @@
 			}
 		},
 		methods: {
-
+			fcat_cache() {
+				_g.openGlobalLoading()
+			
+				const params = {
+					 
+					userid: this.$store.state.user.userid,
+					siteid: this.siteid,
+				}
+				cat_cache(params).then(response => {
+					 _g.closeGlobalLoading()
+					 
+				  console.log(response)
+				   this.init()
+				})
+				 
+			},
 			handleAvatarSuccess(res, file) {
 				console.log(res)
 				console.log(file)
@@ -300,12 +356,12 @@
 			fromsiteinfo() {
 
 				console.log(this.form)
-				 // return
+				// return
 				// this.form.priv =this.$refs.tree.getCheckedKeys()
 				let resparams = JSON.stringify(this.form)
 
 				console.log(resparams)
-				 // return
+				// return
 				const params = {
 					resparams: resparams,
 					userid: this.$store.state.user.userid
@@ -329,12 +385,14 @@
 					default_thumb: '',
 					siteid: getsiteid() ? getsiteid() : '1',
 					modelid: '',
-					setting:{
+					setting: {
 						list_template: '',
 						show_template: ''
-					}
+					},
+					priv_groupid_view: [],
+					priv_groupid_frequency: [],
+					priv_groupid_download: [],
 
-					// priv: [],
 				}
 				console.log(rowi)
 				this.form = rowi
@@ -398,6 +456,7 @@
 					// this.version_info = response.version_info
 					this.datalist = response.items
 					this.modellist = response.modellist
+					this.group_list = response.grouplist
 
 					this.show_template_data = response.show_template_list
 					this.list_template_data = response.list_template_list

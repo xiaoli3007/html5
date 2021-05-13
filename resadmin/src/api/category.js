@@ -34,3 +34,13 @@ export function cat_delete(params) {
 }
 
  
+
+export function cat_cache(params) {
+  return request({
+    url: 'vue_app_cat_admin_api.php?act=cat_cache',
+    method: 'get', 
+    params
+  })
+}
+
+ 
