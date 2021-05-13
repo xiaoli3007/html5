@@ -1,5 +1,12 @@
 import request from '@/utils/request'
 
+export function linkage_sub_list(params) {
+  return request({
+    url: 'vue_app_linkage_admin_api.php?act=linkage_sub_list',
+    method: 'get', 
+    params
+  })
+}
 
 export function linkage_list(params) {
   return request({

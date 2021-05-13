@@ -74,7 +74,7 @@
 	} from '@/utils/auth'
 	import _g from '@/utils/global.js'
 	import {
-		linkage_list,linkage_delete,linkage_edit
+		linkage_sub_list,linkage_delete,linkage_edit
 	} from '@/api/linkage.js'
 	 let id = 1000;
 	export default {
@@ -82,6 +82,7 @@
 
 		data() {
 			return {
+				keyid:1,
 				dialogFormVisible: false,
 				v: false,
 				form: {
@@ -136,9 +137,10 @@
 				const params = {
 					page: this.currentPage,
 					pagesize: this.pagesize,
+					keyid: this.keyid,
 					userid: this.$store.state.user.userid,
 				}
-				linkage_list(params).then(response => {
+				linkage_sub_list(params).then(response => {
 					_g.closeGlobalLoading()
 					// this.version_info = response.version_info
 					this.datalist = response.items

@@ -39,32 +39,49 @@
 		  </el-col>
 		</el-row>
 		
+		<el-table :data="datalist" style="width: 100%">
+		
+		
+			<el-table-column label="排序" width="">
+				<template slot-scope="scope">
+					{{ scope.row.listorder }}
+		
+				</template>
+			</el-table-column>
+		
+			<el-table-column label="keyid" width="">
+				<template slot-scope="scope">
+					<!-- <i class="el-icon-time"></i> -->
+					<span style="margin-left: 10px">{{ scope.row.linkageid }}</span>
+				</template>
+			</el-table-column>
+			<el-table-column label="名称" width="">
+				<template slot-scope="scope">
+					{{ scope.row.name }}
+		
+				</template>
+			</el-table-column>
+			
+		
+			<el-table-column label="描述" width="">
+				<template slot-scope="scope">
+					{{ scope.row.description }}
+		
+				</template>
+			</el-table-column>
+			
+		
+			<el-table-column label="操作"  width="250" fixed="right">
+				<template slot-scope="scope">
+		
+		<el-button size="mini" @click="handleSub(scope.$index, scope.row)">管理子菜单</el-button>
+					<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+					<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+				</template>
+			</el-table-column>
+		</el-table>
 	
 		
-
-		<el-tree class="filter-tree" :data="datalist" :props="defaultProps" accordion :filter-node-method="filterNode" ref="tree2">
-
-			<span class="custom-tree-node" slot-scope="{ node, data }">
-				<span>{{ node.data.value }} <label v-html="kongge"></label>{{ node.label }}</span>
-				<span>
-					<el-button v-if="node.data.parentid==0" type="text" size="mini" @click="() => update(node)">
-						更新缓存
-					</el-button>
-					
-					<el-button type="text" size="mini" @click="() => append(data,node)">
-增加子菜单
-					</el-button>
-					
-					<el-button type="text" size="mini" @click="() => edit(node)">
-						修改
-					</el-button>
-					<el-button type="text" size="mini" @click="() => remove(node, data)">
-						删除
-					</el-button>
-				</span>
-			</span>
-
-		</el-tree>
 
 	</div>
 </template>
@@ -94,25 +111,7 @@
 				},
 				formLabelWidth: '120px',
 				filterText: '',
-				data2: [{
-					id: 1,
-					label: 'Level one 1',
-					children: [{
-						id: 4,
-						label: 'Level two 1-1',
-						children: [{
-							id: 9,
-							label: 'Level three 1-1-1'
-						}, {
-							id: 10,
-							label: 'Level three 1-1-2'
-						}]
-					}]
-				}],
-				defaultProps: {
-					children: 'children',
-					label: 'label'
-				},
+				 
 				datalist: [],
 				kongge:'&nbsp;&nbsp;&nbsp;&nbsp;'
 
@@ -153,58 +152,7 @@
 				})
 				// this.listLoading = false
 			},
-			filterNode(value, data) {
-				if (!value) return true
-				return data.label.indexOf(value) !== -1
-			},
-			append(data,node) {
-				 console.log(data)
-				console.log(node.data)
-				const newChild = {
-					id: 200000,
-					label: 'testtest',
-					value: 20000,
-					children: []
-				};
-				if (!data.children) {
-					this.$set(data, 'children', []);
-				}
-				data.children.unshift(newChild);
-				// data.children.push(newChild);
-			},
-			update(node) {
-				console.log(node)
-				console.log(node.data)
-				// const newChild = {
-				// 	id: id++,
-				// 	label: 'testtest',
-				// 	children: []
-				// };
-				// if (!data.children) {
-				// 	this.$set(data, 'children', []);
-				// }
-				// data.children.push(newChild);
-			},
-			edit(node) {
-				console.log(node)
-				console.log(node.data)
-				// const newChild = {
-				// 	id: id++,
-				// 	label: 'testtest',
-				// 	children: []
-				// };
-				// if (!data.children) {
-				// 	this.$set(data, 'children', []);
-				// }
-				// data.children.push(newChild);
-			},
-
-			remove(node, data) {
-				// const parent = node.parent;
-				// const children = parent.data.children || parent.data;
-				// const index = children.findIndex(d => d.id === data.id);
-				// children.splice(index, 1);
-			},
+		
 			frominfo() {
 				console.log(this.form)
 			 let resparams=JSON.stringify(this.form)
